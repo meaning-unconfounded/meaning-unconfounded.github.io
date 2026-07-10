@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pub Semantics – The Mouth's Secret (Fixed)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0b14; --bg-raised: #131320; --bg-card: #1b1b30;
+  --text: #ececf4; --text-dim: #8a8aa4; --text-faint: #4a4a64;
+  --amber: #ff9f43; --amber-dim: rgba(255,159,67,.14);
+  --cyan: #00d4aa; --cyan-dim: rgba(0,212,170,.12);
+  --gold: #ffd700; --crimson: #ff4757; --crimson-dim: rgba(255,71,87,.12);
+  --purple: #a55eea; --purple-dim: rgba(165,94,234,.1);
+  --border: #2a2a44; --font-display: 'Space Grotesk',system-ui,sans-serif;
+  --font-body: 'Inter',system-ui,sans-serif; --font-mono: 'JetBrains Mono',monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--font-body); background:var(--bg); color:var(--text); line-height:1.7; overflow-x:hidden; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--amber); border-radius:10px; }
+
+.progress-bar { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--amber),var(--gold)); z-index:200; width:0%; transition:width .1s linear; }
+
+.nav { position:fixed; top:3px; left:0; right:0; background:rgba(11,11,20,.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:.7rem 1.8rem; display:flex; justify-content:space-between; align-items:center; z-index:100; flex-wrap:wrap; gap:.5rem; }
+.nav-brand { font-family:var(--font-display); font-weight:900; font-size:1.05rem; color:var(--text); display:flex; align-items:center; gap:.4rem; }
+.nav-brand span { color:var(--amber); }
+.nav-brand small { font-weight:400; font-size:.6rem; color:var(--text-faint); letter-spacing:.1em; text-transform:uppercase; }
+.nav-links { display:flex; gap:1.4rem; font-family:var(--font-display); font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; }
+.nav-links a { color:var(--text-dim); text-decoration:none; transition:color .25s; cursor:pointer; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:2px; background:var(--amber); transform:scaleX(0); transition:transform .25s; }
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { transform:scaleX(1); }
+
+.section { max-width:780px; margin:0 auto; padding:5rem 1.5rem 3rem; opacity:1; transform:translateY(0); }
+.section-label { font-family:var(--font-display); font-weight:700; font-size:.65rem; text-transform:uppercase; letter-spacing:.2em; color:var(--amber); margin-bottom:.6rem; display:flex; align-items:center; gap:.6rem; }
+.section-label::before { content:''; width:24px; height:2px; background:var(--amber); border-radius:2px; }
+.section-title { font-family:var(--font-display); font-size:2.6rem; font-weight:900; line-height:1.05; margin-bottom:.8rem; letter-spacing:-1.5px; }
+.section-title .highlight { background:linear-gradient(135deg,var(--amber),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.section-desc { color:var(--text-dim); font-size:1.05rem; max-width:560px; margin-bottom:1.5rem; }
+
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:6rem 1.5rem 4rem; position:relative; overflow:hidden; }
+.hero-glow { position:absolute; top:20%; left:50%; transform:translateX(-50%); width:600px; height:600px; background:radial-gradient(circle,var(--amber-dim) 0%,transparent 70%); pointer-events:none; z-index:0; }
+.hero-badge { display:inline-flex; align-items:center; gap:.5rem; background:linear-gradient(135deg,var(--amber),#ff8c42); color:#1a0a00; font-family:var(--font-display); font-weight:800; font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; padding:.35rem 1.2rem; border-radius:100px; margin-bottom:1.5rem; position:relative; z-index:1; box-shadow:0 4px 20px rgba(255,159,67,.25); }
+.hero h1 { font-family:var(--font-display); font-size:clamp(3rem,10vw,5.5rem); font-weight:900; line-height:.95; margin-bottom:1rem; position:relative; z-index:1; }
+.hero h1 .highlight { background:linear-gradient(135deg,var(--amber),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-sub { font-size:1.15rem; color:var(--text-dim); max-width:480px; margin:0 auto 2rem; position:relative; z-index:1; }
+.hero-command { font-family:var(--font-mono); color:var(--crimson); font-size:.85rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; border:1px solid var(--crimson-dim); background:var(--crimson-dim); padding:.6rem 1.4rem; border-radius:10px; margin-bottom:1.5rem; position:relative; z-index:1; cursor:pointer; transition:all .3s; }
+.hero-command:hover { border-color:var(--crimson); background:rgba(255,71,87,.18); transform:scale(1.03); }
+.hero-stats { display:flex; justify-content:center; gap:2.8rem; position:relative; z-index:1; margin-bottom:2rem; }
+.stat { text-align:center; }
+.stat-num { font-family:var(--font-display); font-size:2.6rem; font-weight:900; color:var(--cyan); display:block; line-height:1; }
+.stat-label { font-size:.7rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:.1em; margin-top:.3rem; }
+.scroll-hint { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); font-family:var(--font-mono); font-size:.65rem; color:var(--text-faint); letter-spacing:.1em; animation:bounce 2.8s infinite; display:flex; flex-direction:column; align-items:center; gap:.3rem; }
+@keyframes bounce { 0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)} 40%{transform:translateX(-50%) translateY(-12px)} 60%{transform:translateX(-50%) translateY(-6px)} }
+
+.card { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; margin-bottom:1rem; transition:border-color .3s, transform .25s; }
+.card:hover { border-color:var(--amber); transform:translateY(-3px); }
+.card-amber { background:linear-gradient(135deg,var(--amber-dim),var(--bg-card)); border-color:rgba(255,159,67,.2); }
+.card-cyan { background:linear-gradient(135deg,var(--cyan-dim),var(--bg-card)); border-color:rgba(0,212,170,.2); }
+.card-purple { background:linear-gradient(135deg,var(--purple-dim),var(--bg-card)); border-color:rgba(165,94,234,.2); }
+.card-gold { background:linear-gradient(135deg,rgba(255,215,0,.06),var(--bg-card)); border-color:rgba(255,215,0,.2); }
+.card h4 { font-family:var(--font-display); font-size:1.05rem; margin-bottom:.6rem; display:flex; align-items:center; gap:.5rem; }
+
+.character-row { display:flex; gap:.8rem; margin-bottom:1rem; align-items:flex-start; }
+.avatar { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; border:2px solid var(--border); }
+.avatar-dave { background:linear-gradient(135deg,#2a1a00,#1a1000); border-color:var(--gold); }
+.avatar-siobhan { background:linear-gradient(135deg,#1a0020,#0f0015); border-color:var(--purple); }
+.speech-bubble { background:var(--bg-raised); border-radius:14px; padding:.9rem 1.2rem; border-left:3px solid var(--border); font-size:.95rem; line-height:1.65; flex:1; }
+.speech-bubble strong { color:var(--amber); }
+.char-name { font-family:var(--font-display); font-weight:700; font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:.3rem; }
+.char-name.dave { color:var(--gold); }
+.char-name.siobhan { color:var(--purple); }
+.thought-bubble { background:var(--bg-raised); border-radius:12px; padding:1rem 1.5rem; border:1px dashed var(--border); font-style:italic; color:var(--text-dim); font-size:.95rem; margin:1rem 0; text-align:center; }
+
+.word-row { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0; }
+.word-btn { background:var(--bg-raised); border:2px solid var(--border); border-radius:10px; padding:.6rem 1.2rem; font-family:var(--font-display); font-weight:700; font-size:1.1rem; color:var(--text); cursor:pointer; transition:all .25s; }
+.word-btn:hover { border-color:var(--amber); transform:scale(1.05) translateY(-3px); }
+.word-btn.active { border-color:var(--cyan); color:var(--cyan); background:var(--cyan-dim); }
+.decode-box { background:var(--bg-raised); border-radius:14px; padding:1.25rem; min-height:110px; margin-top:.75rem; border:1px dashed var(--border); transition:border-color .3s; display:flex; flex-direction:column; justify-content:center; }
+.decode-box.has-content { border-color:var(--cyan); background:rgba(0,212,170,.04); }
+.explode { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-bottom:.75rem; }
+.letter-chip { display:flex; flex-direction:column; align-items:center; background:var(--bg); padding:.5rem .8rem; border-radius:8px; border:2px solid var(--gold); min-width:52px; }
+.letter-chip .big { font-family:var(--font-display); font-size:1.8rem; font-weight:900; color:var(--gold); line-height:1; }
+.letter-chip .tiny { font-size:.5rem; text-transform:uppercase; color:var(--cyan); letter-spacing:.05em; margin-top:.15rem; }
+.decode-translation { font-weight:600; color:var(--text); text-align:center; font-size:.95rem; }
+
+.con-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(56px,1fr)); gap:.5rem; margin:1rem 0; }
+.con-tile { background:var(--bg-raised); border:2px solid var(--border); border-radius:10px; padding:.5rem .2rem; text-align:center; cursor:pointer; transition:all .25s; }
+.con-tile:hover { border-color:var(--amber); transform:scale(1.08); }
+.con-tile.active { border-color:var(--cyan); background:var(--cyan-dim); }
+.con-tile .letter { font-family:var(--font-display); font-size:1.4rem; font-weight:900; display:block; line-height:1; }
+.con-tile .label { font-size:.45rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:.03em; margin-top:.15rem; }
+.con-tile .conf { font-size:.5rem; color:var(--text-faint); margin-top:.1rem; }
+
+.detail-panel { background:var(--bg-card); border:2px solid var(--amber); border-radius:16px; padding:1.25rem; margin-top:1rem; display:none; animation:fadeSlide .35s ease; }
+.detail-panel.show { display:block; }
+@keyframes fadeSlide { from{opacity:0; transform:translateY(-14px)} to{opacity:1; transform:translateY(0)} }
+.detail-head { display:flex; align-items:center; gap:1rem; margin-bottom:.75rem; }
+.detail-head .big { font-family:var(--font-display); font-size:3rem; font-weight:900; color:var(--amber); line-height:1; }
+.detail-head .meta h3 { font-family:var(--font-display); font-size:1.2rem; margin-bottom:.2rem; }
+.detail-head .meta .tags { display:flex; flex-wrap:wrap; gap:.3rem; }
+.detail-head .meta .tags span { background:var(--bg-raised); padding:.15rem .6rem; border-radius:6px; font-size:.65rem; color:var(--text-dim); font-weight:500; }
+.detail-body p { font-size:.9rem; margin-bottom:.5rem; }
+.detail-examples { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.4rem; }
+.detail-examples span { background:var(--cyan-dim); color:var(--cyan); padding:.2rem .7rem; border-radius:100px; font-size:.7rem; font-weight:500; }
+
+.demo-input { width:100%; background:var(--bg); border:2px solid var(--border); border-radius:10px; padding:.8rem 1rem; color:var(--text); font-family:var(--font-display); font-size:1.2rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; outline:none; transition:border-color .3s; }
+.demo-input:focus { border-color:var(--amber); }
+.demo-output { margin-top:.75rem; font-size:.9rem; min-height:50px; }
+.demo-output .line { margin-bottom:.3rem; }
+.demo-output .arrow { color:var(--amber); margin:0 .3rem; }
+
+.quote-block { background:linear-gradient(135deg,var(--purple-dim),rgba(165,94,234,.02)); border-left:3px solid var(--purple); padding:1rem 1.5rem; border-radius:0 14px 14px 0; margin:1rem 0; font-style:italic; font-size:1.05rem; line-height:1.7; }
+.quote-block .attribution { font-style:normal; font-size:.75rem; color:var(--text-dim); margin-top:.4rem; font-family:var(--font-mono); }
+
+.hero-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; margin:1.5rem 0; }
+.hero-card { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.2rem; transition:all .3s; cursor:pointer; }
+.hero-card:hover { border-color:var(--amber); transform:translateY(-3px); }
+.hero-card .hero-title { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--gold); }
+.hero-card .hero-tag { display:inline-block; background:var(--amber-dim); color:var(--amber); padding:.15rem .6rem; border-radius:100px; font-size:.65rem; font-weight:600; margin:.3rem 0; }
+.hero-card .hero-body { display:none; margin-top:.8rem; font-size:.9rem; color:var(--text-dim); line-height:1.7; border-top:1px solid var(--border); padding-top:.8rem; }
+.hero-card .hero-body .lesson { color:var(--cyan); font-weight:600; margin-top:.5rem; }
+.hero-card.open .hero-body { display:block; }
+
+.footer { text-align:center; padding:4rem 1.5rem 3rem; border-top:1px solid var(--border); margin-top:2rem; }
+.footer-cta { font-family:var(--font-display); font-size:1.8rem; font-weight:900; margin-bottom:.5rem; }
+.footer-sub { color:var(--text-dim); font-size:.9rem; max-width:440px; margin:0 auto; }
+.divider { height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:2.5rem 0; }
+.text-accent { color:var(--amber); } .text-cyan { color:var(--cyan); } .text-gold { color:var(--gold); } .text-dim { color:var(--text-dim); }
+@media(max-width:640px){ .section { padding:3rem 1rem 2rem; } .section-title { font-size:1.9rem; } .hero { padding:5rem 1rem 3rem; } .nav { padding:.6rem 1rem; } .nav-links { gap:.8rem; font-size:.6rem; } .con-grid { grid-template-columns:repeat(auto-fill,minmax(48px,1fr)); } .hero-grid { grid-template-columns:1fr; } .hero-stats { gap:1.5rem; } .stat-num { font-size:1.8rem; } .word-btn { font-size:.95rem; padding:.4rem .9rem; } }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="nav">
+  <div class="nav-brand">🍺 <span>PUB</span>·SEMANTICS<small>fixed</small></div>
+  <div class="nav-links">
+    <a href="#hook">Hook</a>
+    <a href="#pub">Pub</a>
+    <a href="#code">Code</a>
+    <a href="#heroes">Heroes</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hook">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">🍻 The Mouth's Secret</div>
+  <h1>The <span class="highlight">Mouth's</span><br>Secret</h1>
+  <p class="hero-sub">A pub linguistics adventure — with interactive decoders and the full consonant code.</p>
+  <div class="hero-command" onclick="document.getElementById('pub').scrollIntoView({behavior:'smooth'})">⚡ CLOSE YOUR LIPS. HUM.</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">22</span><span class="stat-label">Consonants</span></div>
+    <div class="stat"><span class="stat-num">20</span><span class="stat-label">Parables</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Words</span></div>
+  </div>
+  <div class="scroll-hint">⬇ SCROLL TO DECODE</div>
+</section>
+
+<!-- PUB SECTION -->
+<section class="section" id="pub">
+  <div class="section-label">Chapter 1</div>
+  <h2 class="section-title">The night Dave became <span class="highlight">dangerous</span></h2>
+  <p class="section-desc">It was Dave who started it. Three pints deep in the Nag's Head.</p>
+
+  <div class="character-row">
+    <div class="avatar avatar-dave">👔</div>
+    <div><div class="char-name dave">Dave — Insurance, Unexpectedly Brilliant</div>
+    <div class="speech-bubble">"Why's it called a <strong>PINT</strong>? P-I-N-T. Project–Vessel–Continue–Mark. It's a projected vessel that continues to a mark. A measured container. Someone built the word like they built the glass."</div></div>
+  </div>
+  <div class="character-row">
+    <div class="avatar avatar-siobhan">🎓</div>
+    <div><div class="char-name siobhan">Siobhan — Manchester, Skeptical</div>
+    <div class="speech-bubble">"That's not how language works, Dave. Words are arbitrary. Saussure. Convention."</div></div>
+  </div>
+  <div class="character-row">
+    <div class="avatar avatar-dave">👔</div>
+    <div><div class="char-name dave">Dave</div>
+    <div class="speech-bubble">"Then why's a pint called a pint and not a <strong>GLORP</strong>?"</div></div>
+  </div>
+  <div class="thought-bubble">That, reader, is how I ended up spending six months in pubs with a notebook, decoding the architecture of English while my liver filed for divorce.</div>
+
+  <div style="margin-top:1.5rem">
+    <h4 style="font-family:var(--font-display);font-size:1rem;margin-bottom:.3rem">🔬 Click a word. Break it open.</h4>
+    <div class="word-row">
+      <button class="word-btn" data-word="PINT">PINT</button>
+      <button class="word-btn" data-word="BULLSHIT">BULLSHIT</button>
+      <button class="word-btn" data-word="ENERGY">ENERGY</button>
+      <button class="word-btn" data-word="FUCK">FUCK</button>
+      <button class="word-btn" data-word="SPRAY">SPRAY</button>
+    </div>
+    <div class="decode-box" id="decodeBox1">
+      <div style="color:var(--text-dim);text-align:center;font-size:.9rem">👆 Click a word above to shatter it...</div>
+    </div>
+  </div>
+
+  <div class="quote-block" style="margin-top:1.5rem">
+    "The opposite of a good idea can also be a good idea."
+    <div class="attribution">— Rory Sutherland, Ogilvy UK</div>
+  </div>
+</section>
+
+<!-- CODE SECTION (CONSONANT GRID) -->
+<section class="section" id="code">
+  <div class="section-label">The Code</div>
+  <h2 class="section-title">22 consonants. <span class="highlight">3 layers.</span></h2>
+  <p class="section-desc">Click any letter to decode it.</p>
+  <div class="con-grid" id="conGrid"></div>
+  <div class="detail-panel" id="detailPanel">
+    <div class="detail-head">
+      <span class="big" id="dLetter">M</span>
+      <div class="meta">
+        <h3 id="dTitle">Material</h3>
+        <div class="tags"><span id="dLoc">Lips</span><span id="dMan">Nasal</span><span id="dVox">Voiced</span><span id="dConf">85%</span></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <p id="dBody">The primordial sound. Close your lips, hum. You trap energy in a bounded space and let it resonate.</p>
+      <div class="detail-examples" id="dEx"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h4>🎮 Try it: word decoder</h4>
+    <p style="font-size:.85rem;color:var(--text-dim);margin-bottom:.5rem">Type any word.</p>
+    <input class="demo-input" id="demoInput" placeholder="TYPE A WORD…" maxlength="24">
+    <div class="demo-output" id="demoOutput">
+      <div style="color:var(--text-dim);font-size:.8rem">Try: WATER, MIND, TRUTH, SPREAD</div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO'S JOURNEY (20 PARABLES) -->
+<section class="section" id="heroes">
+  <div class="section-label">The Hero's Journey</div>
+  <h2 class="section-title">20 Parables. <span class="highlight">20 Consonants.</span></h2>
+  <p class="section-desc">Click any card to reveal the narrative and the lesson.</p>
+  <div class="hero-grid" id="heroGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-cta">The engine <span class="text-accent">continues</span></div>
+  <p class="footer-sub">You are not a passenger on a random rock. You are a local author of the universal text. Every word is a letter. Every action is an iteration. Write it well.</p>
+  <div style="margin-top:1.5rem;font-family:var(--font-mono);font-size:.7rem;color:var(--text-faint);">🍺 Close your lips. Hum. That's where everything starts.</div>
+</footer>
+
+<script>
+// ─── WAIT FOR DOM ───
+document.addEventListener('DOMContentLoaded', function() {
+
+  // ─── CONSONANT DATA ───
+  const CONSONANTS = [
+    { letter:'B', meaning:'Boundary', loc:'Lips', man:'Stop', vox:'Voiced', conf:'75%', body:'Close lips, build pressure, release. The boundary is created and broken.', ex:['Body','Box','Barn','Bone','Border','Between','Beyond'] },
+    { letter:'P', meaning:'Project', loc:'Lips', man:'Stop', vox:'Unvoiced', conf:'85%', body:'Lips close, build pressure, sharp release. Force pushed outward.', ex:['Push','Project','Power','Place','Plan','Press'] },
+    { letter:'M', meaning:'Material', loc:'Lips', man:'Nasal', vox:'Voiced', conf:'85%', body:'The primordial sound. Close lips, hum. Energy trapped in a bounded space.', ex:['Matter','Mass','Mother','Moon','Milk','Melt','Make','Move','Mind'] },
+    { letter:'W', meaning:'Connect', loc:'Lips', man:'Glide', vox:'Voiced', conf:'76%', body:'Smooth transition. Linking, connecting.', ex:['Water','With','World','Way','Word','Will'] },
+    { letter:'F', meaning:'Flow', loc:'Lips/Teeth', man:'Fricative', vox:'Unvoiced', conf:'85%', body:'Continuous airflow through a narrow space. Natural, unforced flow.', ex:['Fire','Flow','Float','Flame','Fly','Free'] },
+    { letter:'V', meaning:'Vibrate', loc:'Lips/Teeth', man:'Fricative', vox:'Voiced', conf:'76%', body:'Same position as F, but held. Connection through vibration.', ex:['Voice','Love','Give','Very','Vital','View'] },
+    { letter:'T', meaning:'Mark', loc:'Tongue-Ridge', man:'Stop', vox:'Unvoiced', conf:'82%', body:'Tongue marks the roof. Contact, crossing, completion.', ex:['Thought','Right','Might','Night','Light','Time','Track'] },
+    { letter:'D', meaning:'Direct', loc:'Tongue-Ridge', man:'Stop', vox:'Voiced', conf:'82%', body:'Tongue marks the roof, but voiced — directed knowing that arrives.', ex:['Direct','Discover','Decide','Done','Door','Drive'] },
+    { letter:'N', meaning:'Continue', loc:'Tongue-Ridge', man:'Nasal', vox:'Voiced', conf:'82%', body:'Air through nose without stopping. The flow that persists.', ex:['No','Not','Nation','Name','Continue','Maintain','Done','Gone','Known'] },
+    { letter:'S', meaning:'Spread', loc:'Tongue-Ridge', man:'Fricative', vox:'Unvoiced', conf:'73%', body:'Continuous airflow, diffused release.', ex:['See','Spread','Speak','Spirit','Still','Strong','Stand'] },
+    { letter:'Z', meaning:'Cut', loc:'Tongue-Ridge', man:'Fricative', vox:'Voiced', conf:'75%', body:'Same position as S, but held. Sharp, focused stream.', ex:['Zero','Zone','Zip','Zeal','Zest'] },
+    { letter:'L', meaning:'Lateral', loc:'Tongue-Ridge', man:'Lateral', vox:'Voiced', conf:'75%', body:'Airflow around the sides of the tongue. Indirect, guiding.', ex:['Light','Love','Learn','Lead','Life','Line'] },
+    { letter:'R', meaning:'Radiate', loc:'Tongue-Ridge', man:'Trill', vox:'Voiced', conf:'80%', body:'Tongue tip vibrates. Ongoing waves, rolling outward.', ex:['Fire','Power','Water','Star','Leader','Clear','Right'] },
+    { letter:'K', meaning:'Contain', loc:'Back/Palate', man:'Stop', vox:'Unvoiced', conf:'67%', body:'Sharp release from the back. Containment or cutting off.', ex:['Keep','Cut','Kill','Know','Key','Kind'] },
+    { letter:'G', meaning:'Grow', loc:'Back/Palate', man:'Stop', vox:'Voiced', conf:'78%', body:'Same position as K, but voiced — held, continuing, rising.', ex:['Grow','Great','Grace','Ground','Good','Give'] },
+    { letter:'H', meaning:'Breath', loc:'Back/Palate', man:'Fricative', vox:'Voiceless', conf:'78%', body:'Airflow without obstruction. The breath of life.', ex:['Hope','Heart','High','Help','Home','Hear'] },
+    { letter:'Y', meaning:'Act/Deed', loc:'Palate', man:'Glide', vox:'Voiced', conf:'72%', body:'Smooth transition upward. Individual action.', ex:['You','Yes','Year','Young','Play','Try','Stay'] },
+    { letter:'CH', meaning:'Protect', loc:'Back/Palate', man:'Affricate', vox:'Unvoiced', conf:'83%', body:'Stop followed by fricative. A protected release.', ex:['Church','Choose','Chase','Child','Chance','Chain'] },
+    { letter:'J', meaning:'Express', loc:'Back/Palate', man:'Affricate', vox:'Voiced', conf:'—', body:'Protected inner made manifest. The inner expressed as action.', ex:['Joy','Justice','Journey','Jump','Join','Judge'] },
+    { letter:'TH', meaning:'Threshold', loc:'Teeth', man:'Fricative', vox:'Both', conf:'82%', body:'At the sharp edge between inner and outer.', ex:['Through','Throw','Thrust','The','That','This','Think'] }
+  ];
+
+  // ─── BUILD CONSONANT GRID ───
+  function buildGrid() {
+    const grid = document.getElementById('conGrid');
+    if (!grid) return;
+    CONSONANTS.forEach((c, i) => {
+      const tile = document.createElement('div');
+      tile.className = 'con-tile';
+      tile.dataset.idx = i;
+      tile.innerHTML = `<span class="letter">${c.letter}</span><span class="label">${c.meaning.split('/')[0]}</span><span class="conf">${c.conf !== '—' ? c.conf : ''}</span>`;
+      tile.addEventListener('click', function() {
+        document.querySelectorAll('.con-tile').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        showDetail(i);
+      });
+      grid.appendChild(tile);
+    });
+    // default show M
+    const defaultIdx = CONSONANTS.findIndex(c => c.letter === 'M');
+    if (defaultIdx > -1) {
+      const tiles = document.querySelectorAll('.con-tile');
+      if (tiles[defaultIdx]) {
+        tiles[defaultIdx].classList.add('active');
+        showDetail(defaultIdx);
+      }
+    }
+  }
+
+  function showDetail(idx) {
+    const c = CONSONANTS[idx];
+    if (!c) return;
+    document.getElementById('dLetter').textContent = c.letter;
+    document.getElementById('dTitle').textContent = c.meaning;
+    document.getElementById('dLoc').textContent = c.loc;
+    document.getElementById('dMan').textContent = c.man;
+    document.getElementById('dVox').textContent = c.vox;
+    document.getElementById('dConf').textContent = c.conf;
+    document.getElementById('dBody').textContent = c.body;
+    const ex = document.getElementById('dEx');
+    ex.innerHTML = '';
+    c.ex.forEach(w => { const s = document.createElement('span'); s.textContent = w; ex.appendChild(s); });
+    document.getElementById('detailPanel').classList.add('show');
+  }
+
+  // ─── WORD DECODER ───
+  const WORD_DATA = {
+    PINT: { letters:[['P','Project'],['I','Vessel'],['N','Continue'],['T','Mark']], trans:'A projected vessel that continues to a mark. A measured container.' },
+    BULLSHIT: { letters:[['B','Boundary'],['U','Vessel'],['LL','Lateral Flow'],['SH','Sharp Spread'],['I','Awareness'],['T','Mark']], trans:'Bounded waste from a vessel, spreading sharply in all directions, marked as a thing.' },
+    ENERGY: { letters:[['E','Vessel'],['N','Continue'],['E','Vessel'],['R','Radiate'],['G','Grow'],['Y','Act']], trans:'Continuing radiating growth as an ongoing act. An endless, demanding output.' },
+    FUCK: { letters:[['F','Flow'],['U','Vessel'],['C','Contain'],['K','Mark']], trans:'Natural flowing force within a vessel that is sharply contained and marked.' },
+    SPRAY: { letters:[['S','Spread'],['P','Project'],['R','Radiate'],['A','Vessel'],['Y','Act']], trans:'Projection that spreads, radiates, and keeps going — the action continues.' }
+  };
+
+  function setupWordDecoder() {
+    const decodeBox = document.getElementById('decodeBox1');
+    if (!decodeBox) return;
+    document.querySelectorAll('.word-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.word-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const word = this.dataset.word;
+        const data = WORD_DATA[word];
+        if (!data) { decodeBox.innerHTML = '<div style="color:var(--text-dim);text-align:center;">Word not found.</div>'; return; }
+        let html = '<div class="explode">';
+        data.letters.forEach(([letter, meaning]) => {
+          html += `<div class="letter-chip"><span class="big">${letter}</span><span class="tiny">${meaning}</span></div>`;
+        });
+        html += '</div><div class="decode-translation">' + data.trans + '</div>';
+        decodeBox.innerHTML = html;
+        decodeBox.classList.add('has-content');
+      });
+    });
+  }
+
+  // ─── LIVE DECODER ───
+  function setupLiveDecoder() {
+    const input = document.getElementById('demoInput');
+    const output = document.getElementById('demoOutput');
+    if (!input || !output) return;
+    const map = { B:'Boundary',P:'Project',M:'Material',W:'Connect',F:'Flow',V:'Vibrate',T:'Mark',D:'Direct',N:'Continue',S:'Spread',Z:'Cut',L:'Lateral',K:'Contain',G:'Grow',H:'Breath',Y:'Act',CH:'Protect',J:'Express',R:'Radiate',TH:'Threshold' };
+    const meanings = { WATER:'Connect + Mark + Radiate', MIND:'Material + Continue + Direct', TRUTH:'Mark + Radiate + Mark + Breath', SPREAD:'Spread + Project + Radiate + Direct', SPRAY:'Spread + Project + Radiate + Act' };
+    input.addEventListener('input', function() {
+      const raw = this.value.toUpperCase().trim();
+      if (!raw) { output.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem">Try: WATER, MIND, TRUTH, SPREAD</div>'; return; }
+      const matches = raw.match(/[B-DF-HJ-NP-TV-Z]/gi);
+      if (!matches) { output.innerHTML = '<div style="color:var(--text-dim);">No consonants found.</div>'; return; }
+      let html = '';
+      matches.forEach((ch, i) => {
+        const meaning = map[ch.toUpperCase()] || ch;
+        html += `<span class="line"><strong style="color:var(--amber);font-family:var(--font-display);font-size:1rem;">${ch.toUpperCase()}</strong> <span class="arrow">→</span> <span style="color:var(--cyan);">${meaning}</span>${i < matches.length-1 ? ' <span style="color:var(--text-dim);">+</span> ' : ''}</span>`;
+      });
+      if (meanings[raw]) {
+        html += `<div style="background:var(--bg-raised);border-radius:8px;padding:.6rem 1rem;margin-top:.5rem;border-left:3px solid var(--gold);"><strong style="color:var(--gold);">💡 ${raw}:</strong> <span style="font-size:.85rem;">${meanings[raw]}</span></div>`;
+      }
+      output.innerHTML = html;
+    });
+  }
+
+  // ─── HERO STORIES (20 PARABLES) ───
+  function buildHeroStories() {
+    const stories = [
+      { title:'The Hostage Negotiator', tag:'T — Mark/Seal', body:'Detective Lara Chen stood outside the bank vault. Inside, a man named Paulson held three tellers at gunpoint. "You hear NOTHING," he shouted. N-T-H-N-G. Negate-mark-threshold-continue-grow. The negation was sealed, crossed a threshold, and kept growing. She gave him T-words: "Settled. Arrived. Safe. Found." After forty minutes, Paulson opened the door.<div class="lesson">💡 T seals. When someone is drowning in open-ended negation, feed them T-words. The tongue hits the roof and closes the loop.</div>' },
+      { title:'The Chef Who Couldn\'t Be Fired', tag:'F vs V — Flow vs Vibrate', body:'Marco ran a kitchen. He was a tyrant. Staff quit every three months. His owner decoded his vocabulary: "my kitchen" (M-Y — possession as identity). "they don\'t understand" (TH-N-T — threshold marked and sealed). She renamed him "Kitchen Father." F-TH-R. Flow-threshold-radiate. Staff retention jumped to two years.<div class="lesson">💡 F flows. V vibrates and holds. Change F-words to V-words to shift from gripping to guiding.</div>' },
+      { title:'The Stockbroker\'s Breakdown', tag:'R — Radiate/Ongoing', body:'James made £400,000 a year and couldn\'t sleep. He said "I need more energy." E-N-R-G-Y. Continue-radiate-grow-act. No endpoint. His therapist gave him "Rest." R-S-T. Radiate-spread-mark. Energy that spreads and arrives. James slept eight hours that night.<div class="lesson">💡 R radiates. It never stops. If you want peace, use T-words (rest, quiet, still).</div>' },
+      { title:'The Immigrant\'s Interview', tag:'N — Continue/Position', body:'Ade had been in London for four years. His English was fluent. His interviews kept failing. His friend said: "Your N is a wall. In British English, the N at the start of a negation is a flow being redirected, not a door slamming." He practiced soft Ns. He got the job.<div class="lesson">💡 N at the start negates OR initiates. Same physical action — air through the nose — can be a wall or a door.</div>' },
+      { title:'The Funeral Director\'s Secret', tag:'G — Grow/Rise', body:'Mr. Patel had been a funeral director for thirty years. "I say \'passing\' not \'loss.\' P-S-N-G. Project-spread-continue-grow. A projected spreading that continues and grows. The person didn\'t leak away. They passed."<div class="lesson">💡 G grows. Replace L-words (loss, leak) with G-words (growth, grace) to move from collapse to continuation.</div>' },
+      { title:'The Con Artist\'s Tell', tag:'S vs Z — Spread vs Cut', body:'Detective Williams caught a fraudster who avoided Z-words. He said "seems, suggests, possibly, measures, resources." S-words spread and diffuse. She asked Z-questions: "Zero. Zone. Exact. Precise." He confessed in forty minutes.<div class="lesson">💡 S spreads. Z cuts. When someone won\'t commit, force Z-words. The truth cuts through.</div>' },
+      { title:'The Teacher Who Silenced a Class', tag:'SH + Silent Letters', body:'Mrs. O\'Reilly wrote "KNOW" on the board. "See the K? You can\'t hear it. But it\'s there. Containing the knowing. Without it, you just have \'now.\' Flowing, passing, gone. Be the K. Be silence." The class was quiet for the rest of the year.<div class="lesson">💡 Silent letters are exclusion anchors. They maintain conditions without being noticed.</div>' },
+      { title:'The Startup Pitch That Raised £10M', tag:'P — Project/Force', body:'Diana had sixty seconds. Her mentor said: "Your first word needs to be a P-word. P projects. It pushes outward." She walked in and said: "PREPARE." The P hit the room like a gust. She raised £10 million.<div class="lesson">💡 P projects. It\'s the sharpest, most outwardly forceful consonant. Start with P to move people.</div>' },
+      { title:'The Marriage Counsellor\'s Wager', tag:'D vs T — Arrived vs Sealed', body:'Tom and Sarah were terrible. They used D-words: "always," "never." Dr. Hassan said: "From now on, use T-words." Sarah tried: "In that moment, you were... distant." T-D-N-T. Direct-continue-mark. She marked a moment, not a verdict. They didn\'t divorce.<div class="lesson">💡 D arrives. T seals. T saves relationships because it seals a specific instant without condemning a person.</div>' },
+      { title:'The Soldier\'s Letter', tag:'H — Breath/Life Force', body:'Captain Morrison wrote to families of soldiers he\'d lost. He used H-words: "honor" (H-N-R — breath-continue-radiate), "heart" (H-R-T). "H comes from the same place as sighing. When they read H-words, they feel their son breathing."<div class="lesson">💡 H is breath. H-words carry life force. Use them when you want someone to feel alive.</div>' },
+      { title:'The Salesman\'s Closer', tag:'L — Lateral/Indirect Path', body:'Tony sold used cars. He used L-words: "led," "listened," "leaned," "let." L is lateral — air flows around the sides. He guided without pushing. He closed 60%.<div class="lesson">💡 L is lateral. L-words guide without pushing. Use them when you want someone to follow without feeling forced.</div>' },
+      { title:'The Judge\'s Sentence', tag:'CH vs J — Protect vs Express', body:'Judge Whitmore had half the national recidivism rate. She used CH-words: "change" (CH-N-G — protect-continue-grow), "choose." She never used J-words: no "judgment," no "jail." J expresses. CH protects.<div class="lesson">💡 CH protects. J expresses. When you want someone to change from within, feed them CH-words.</div>' },
+      { title:'The Hostage\'s Escape', tag:'W — Connect', body:'Katarina was kidnapped in Lagos. She connected. She used W-words: "we, were, will, want, wish." W builds bridges. On the eleventh day, the youngest guard left the door unlocked.<div class="lesson">💡 W connects. W-words build bridges between people. Use them to cross the gap between enemy and ally.</div>' },
+      { title:'The Poet Who Couldn\'t Rhyme', tag:'M — Material/Resonance', body:'Layla\'s poems were brilliant but empty. Her mentor said: "You have no M-words. M is matter, mass, mother, moon — the hum. The resonance." She wrote poems with M. Readers could feel them in their chests.<div class="lesson">💡 M is material. M-words carry physical weight. If you want your words to be felt, use M.</div>' },
+      { title:'The Coach\'s Halftime Talk', tag:'B + R — Boundary + Radiate', body:'The team was down 2-0. Coach Dana said: "Be the boundary that radiates." B-R. Boundary-radiate. The team won 3-2.<div class="lesson">💡 B bounds. R radiates. Together: a bounded space that sends force outward.</div>' },
+      { title:'The Nurse\'s Whisper', tag:'TH — Threshold/Crossing', body:'Sister Agnes held hands with the dying for two thousand deaths. She whispered TH-words: "Through." "Breathe." "Peace." TH is the tongue between the teeth — the crossing point.<div class="lesson">💡 TH is threshold. TH-words carry the energy of transition. They help people cross from one state to another.</div>' },
+      { title:'The Verb Illusion', tag:'Verbs Hide Reality', body:'Maria had been in therapy for years. "I am depressed." Dr. Chen said: "Say it differently." "The depression in me." She felt something shift. "It\'s not all of me."<div class="lesson">💡 Verbs hide existence. When you speak in nouns, you make reality visible. "The depression in me" has location and boundaries.</div>' },
+      { title:'The Headline Hacker', tag:'Decoding the News', body:'Sam read: "GOVERNMENT ANNOUNCES NEW MEASURES TO COMBAT RISING INFLATION." He decoded it: Government — a structure, not a person. Measures — vague material spread. Inflation — erosion that keeps going.<div class="lesson">💡 The news is written in verbs that hide reality. Decode the headlines and you\'ll see the manipulation.</div>' },
+      { title:'The Dating App Decoder', tag:'Authentic, Vibes, Energy', body:'Alex kept matching with people who fizzled. His friend decoded: "Authentic" — wants a finished product. "Energy" — someone who keeps giving without stopping. She\'s not looking for a partner. She\'s looking for a radiating containment.<div class="lesson">💡 Dating profiles are spells. The consonants reveal what the writer actually wants.</div>' },
+      { title:'The Silent Letters', tag:'Ghosts in the Machine', body:'Emma designed a logo for "Nite." It felt cheap. She added "GH" for "Night." Deeper. More mysterious. "Know" feels more contained than "now." "Write" connects. "Rite" stands alone. The silence was never silent.<div class="lesson">💡 Silent letters are exclusion anchors. They maintain conditions invisibly.</div>' }
+    ];
+
+    const grid = document.getElementById('heroGrid');
+    if (!grid) return;
+    stories.forEach(story => {
+      const card = document.createElement('div');
+      card.className = 'hero-card';
+      card.innerHTML = `
+        <div class="hero-title">${story.title}</div>
+        <div class="hero-tag">${story.tag}</div>
+        <div class="hero-body">${story.body}</div>
+      `;
+      card.addEventListener('click', function() {
+        this.classList.toggle('open');
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  // ─── PROGRESS BAR ───
+  function setupProgressBar() {
+    const bar = document.getElementById('progressBar');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      bar.style.width = pct + '%';
+    });
+  }
+
+  // ─── INIT ───
+  buildGrid();
+  setupWordDecoder();
+  setupLiveDecoder();
+  buildHeroStories();
+  setupProgressBar();
+
+  console.log('✅ Pub Semantics fixed — all sections rendered.');
+});
+</script>
+</body>
+</html>
