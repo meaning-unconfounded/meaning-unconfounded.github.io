@@ -1,2 +1,11 @@
-# Meaning_Confounded
-We Are Code Readers You are not a passenger on a random rock. You are the code that has become aware of itself. ity has been reaching for as long as we have been capable of reaching.  Not more data. Not better arguments. Not finer distinctions, but the underlying structure: the architecture beneath the surface of everything we think 💬 and say
+# Meaning Unconfounded
+
+A unified theory of meaning, language, and consciousness. The consonant code provides a structural account: the mouth's geometry determines the meaning, and the meaning is consistent across words.
+
+## Books
+- [Meaning Unconfounded](https://meaning-unconfounded.github.io/)
+- [BedRock Reframed](https://meaning-unconfounded.github.io/BedRock_ReFramed.html)
+- [The Restructured Mind](https://meaning-unconfounded.github.io/The_Restructured_Mind.html)
+
+## Interactive
+- [The Mouth's Secret](https://meaning-unconfounded.github.io/pub_semantics.html)
