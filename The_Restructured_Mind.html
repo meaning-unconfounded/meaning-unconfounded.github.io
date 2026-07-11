@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE RESTRUCTURED MIND · The Architecture of Freedom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       MASTER DARK THEME — THE RESTRUCTURED MIND
+       Blends pub_semantics style with book depth
+       ============================================================ */
+
+    :root {
+      --bg: #0b0b16;
+      --bg-card: #151528;
+      --bg-card-light: #22223e;
+      --bg-card-hover: #2e2e52;
+      --border: #2a2a4a;
+      --border-light: #3a3a5a;
+
+      --accent: #ff6b35;
+      --accent-glow: rgba(255,107,53,0.15);
+      --accent-dim: rgba(255,107,53,0.08);
+      --gold: #ffd700;
+      --gold-dim: rgba(255,215,0,0.08);
+      --cyan: #00d4aa;
+      --cyan-dim: rgba(0,212,170,0.08);
+      --purple: #b967ff;
+      --purple-dim: rgba(185,103,255,0.08);
+      --teal: #4fd1c5;
+
+      --text: #e8e8f0;
+      --text-dim: #a0a0b8;
+      --text-muted: #7777a0;
+
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-serif: 'Georgia', serif;
+
+      --radius: 12px;
+      --radius-lg: 16px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 1.125rem;
+      min-height: 100vh;
+    }
+
+    .book {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ===== COVER ===== */
+    #cover {
+      text-align: center;
+      padding: 3.5rem 1.5rem 2.5rem;
+      background: linear-gradient(180deg, #0f0622 0%, var(--bg) 100%);
+      border-radius: var(--radius-lg);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    #cover::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cover-title {
+      font-size: 4.2rem;
+      font-weight: 900;
+      line-height: 0.9;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+    }
+    .cover-title .title-accent {
+      background: linear-gradient(135deg, var(--accent), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cover-title .title-sub {
+      display: block;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text);
+      -webkit-text-fill-color: var(--text);
+      background: none;
+      margin-top: 0.2rem;
+    }
+    .cover-subtitle {
+      font-size: 1.4rem;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 1;
+      margin-top: 0.5rem;
+      font-family: var(--font-serif);
+      font-style: italic;
+    }
+    .cover-tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .cover-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-stats .stat { text-align: center; }
+    .cover-stats .stat .num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--cyan);
+      display: block;
+    }
+    .cover-stats .stat .label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .cover-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-display);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .cover-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      width: 80px;
+      margin: 0.75rem auto;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #ff8c42);
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-series {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+      margin-top: 1rem;
+    }
+
+    /* ===== PART DIVIDERS ===== */
+    .part-divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 4rem 0 3rem;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .part-divider::before,
+    .part-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .part-divider .part-num {
+      background: var(--bg-card);
+      padding: 0.25rem 1rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    h1 { font-size: 3rem; font-weight: 900; margin: 1.5rem 0 0.5rem; }
+    h2 { font-size: 2.2rem; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.5rem; margin: 1.8rem 0 0.75rem; }
+    h4 { font-size: 1.15rem; margin: 1.2rem 0 0.5rem; }
+    p { margin: 0.75rem 0; }
+    .text-accent { color: var(--accent); }
+    .text-cyan { color: var(--cyan); }
+    .text-gold { color: var(--gold); }
+    .text-purple { color: var(--purple); }
+    .text-dim { color: var(--text-dim); }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      transition: all 0.2s ease;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .card-gold { background: linear-gradient(135deg, var(--gold-dim), var(--bg-card)); border-color: rgba(255,215,0,0.2); }
+    .card-cyan { background: linear-gradient(135deg, var(--cyan-dim), var(--bg-card)); border-color: rgba(0,212,170,0.2); }
+    .card-purple { background: linear-gradient(135deg, var(--purple-dim), var(--bg-card)); border-color: rgba(185,103,255,0.2); }
+    .card-accent { background: linear-gradient(135deg, var(--accent-dim), var(--bg-card)); border-color: rgba(255,107,53,0.2); }
+
+    /* ===== TRUISM ===== */
+    .truism {
+      background: var(--bg-card-light);
+      border-left: 4px solid var(--gold);
+      padding: 1.25rem 1.75rem;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+    .truism .source {
+      display: block;
+      margin-top: 0.5rem;
+      font-style: normal;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+
+    /* ===== PARABLE CARDS ===== */
+    .parable-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) { .parable-grid { grid-template-columns: 1fr; } }
+    .parable-card {
+      background: var(--bg-card-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .parable-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 20px rgba(255,215,0,0.06);
+    }
+    .parable-card .title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 0.3rem; }
+    .parable-card .tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      background: rgba(255,215,0,0.1);
+      padding: 0.1rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 0.5rem;
+    }
+    .parable-card .summary { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
+    .parable-card .detail {
+      display: none;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .parable-card .detail .lesson {
+      color: var(--gold);
+      font-weight: 600;
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .parable-card.open .detail { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== HACKS PANEL ===== */
+    .hacks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) { .hacks-grid { grid-template-columns: 1fr; } }
+    .hack-card {
+      background: var(--bg-card-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      transition: all 0.2s ease;
+    }
+    .hack-card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+    .hack-card .hack-title { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--cyan); margin-bottom: 0.3rem; }
+    .hack-card .hack-summary { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
+    .hack-card .hack-example { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; font-style: italic; }
+    .hack-card .hack-tag {
+      display: inline-block;
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      background: rgba(255,215,0,0.08);
+      padding: 0.1rem 0.5rem;
+      border-radius: 100px;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ===== BLOCKQUOTES ===== */
+    blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.75rem;
+      margin: 1.5rem 0;
+      background: var(--accent-dim);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-style: italic;
+      color: var(--text-dim);
+      font-size: 1.05rem;
+    }
+    blockquote strong { color: var(--text); font-style: normal; }
+    blockquote .attribution { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.9rem; color: var(--text-muted); }
+
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; margin: 1.25rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      background: var(--bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    th {
+      background: var(--bg-card-light);
+      color: var(--text);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.7rem 0.9rem;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+    td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); color: var(--text-dim); font-size: 0.95rem; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--text); }
+
+    /* ===== CODE ===== */
+    code, .mono {
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 600;
+      color: var(--cyan);
+      background: var(--bg);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    /* ===== LISTS ===== */
+    ul, ol { padding-left: 1.8rem; margin: 0.75rem 0; color: var(--text-dim); font-size: 1.05rem; }
+    li { margin: 0.4rem 0; }
+
+    /* ===== DIVIDER ===== */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 2.5rem 0; }
+
+    /* ===== FOOTER ===== */
+    .book-footer {
+      text-align: center;
+      padding: 3rem 1.5rem 1rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .book-footer .footer-cta { font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .book-footer .footer-sub { color: var(--text-dim); font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
+    .book-footer .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .book-footer .footer-links a { color: var(--cyan); text-decoration: none; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.05em; transition: color 0.2s; }
+    .book-footer .footer-links a:hover { color: var(--gold); }
+
+    /* ===== INTERACTIVE DECODER ===== */
+    .demo-box {
+      background: var(--bg-card-light);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      border: 1px solid var(--border);
+    }
+    .demo-input {
+      width: 100%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      outline: none;
+      margin-bottom: 0.75rem;
+    }
+    .demo-input:focus { border-color: var(--accent); }
+    .demo-output { font-size: 0.95rem; min-height: 40px; color: var(--text-dim); line-height: 1.7; }
+    .demo-output .highlight { color: var(--cyan); font-weight: 600; }
+    .demo-output .highlight-accent { color: var(--accent); font-weight: 600; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .book { padding: 1rem; }
+      body { font-size: 1rem; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.6rem; }
+      h3 { font-size: 1.2rem; }
+      .cover-title { font-size: 2.6rem; }
+      .cover-title .title-sub { font-size: 1.6rem; }
+      .cover-meta { flex-direction: column; gap: 0.5rem; }
+      .cover-stats { flex-wrap: wrap; gap: 1rem; }
+      .part-divider { font-size: 0.6rem; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="book">
+
+<!-- ============================================================
+     COVER
+     ============================================================ -->
+
+<div id="cover">
+  <div class="cover-badge">The Foundation of Freedom</div>
+  <h1 class="cover-title">
+    <span class="title-accent">THE</span> RESTRUCTURED MIND
+  </h1>
+  <div class="cover-divider"></div>
+  <p class="cover-subtitle">A New Understanding of How We Get Stuck — and How We Get Free</p>
+  <p class="cover-tagline">What changes when we understand the architecture of our own experience</p>
+  <div class="cover-stats">
+    <div class="stat"><span class="num">4</span><span class="label">Basic Conditions</span></div>
+    <div class="stat"><span class="num">8</span><span class="label">Classes of Overwhelm</span></div>
+    <div class="stat"><span class="num">16</span><span class="label">Game Positions</span></div>
+  </div>
+  <div class="cover-meta">
+    <span>THE LOGIC OF FREEDOM</span>
+  </div>
+  <div class="cover-series">A companion to MEANING UNCONFOUNDED</div>
+</div>
+
+<!-- ============================================================
+     NOTE TO THE READER
+     ============================================================ -->
+
+<blockquote>
+  <strong>A Note to the Reader</strong>
+  <p>This book is about understanding. Not therapy. Not a system of techniques. Not a belief system. An understanding of how we become trapped in patterns that persist despite our best efforts to change them — and the architecture of what it would mean to be free.</p>
+  <p>The principles in this book are not new. They have been discovered and rediscovered throughout history by people who looked carefully at how minds actually work. What is presented here is a synthesis of that understanding — a clear map of the territory, without the jargon that has often made this knowledge inaccessible.</p>
+  <p>If you recognise yourself in these pages, that recognition is the book working as intended. If you see the patterns in others, that seeing is the beginning of wisdom. If you find yourself thinking differently about what it means to be stuck and what it might mean to be free, the book has done its job.</p>
+  <p><strong>We are living through a moment of profound transition.</strong> Artificial intelligence is reshaping how we work, how we relate, how we think. The pace of change is accelerating. Information is abundant. Attention is scarce. In this context, understanding the architecture of our own minds is no longer a luxury. It is a necessity.</p>
+</blockquote>
+
+<!-- ============================================================
+     12 CORE REFRAMES (Hacks Panel)
+     ============================================================ -->
+
+<h2 style="margin-top:2rem;">12 Core Reframes</h2>
+<p style="color:var(--text-dim);">The foundational insights that shift everything.</p>
+
+<div class="hacks-grid">
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 1</div>
+    <div class="hack-title">Understanding Doesn't Produce Change</div>
+    <div class="hack-summary">Understanding describes the system from outside. Change requires addressing the mechanics of the system—the structures that maintain behaviour in place.</div>
+    <div class="hack-example">Describing the architecture of a locked room doesn't open the door.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 2</div>
+    <div class="hack-title">The Game Beneath Every Game</div>
+    <div class="hack-summary">Every repeating pattern has four features: a must, a must-not, an opponent, and stakes. Once a game is running, it tends to perpetuate itself.</div>
+    <div class="hack-example">The fight that repeats with different content, same structure.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 3</div>
+    <div class="hack-title">The Hidden Twin</div>
+    <div class="hack-summary">Every must has a mirror must-not that holds the game in place. The active postulate drives the game; the exclusion anchor locks it.</div>
+    <div class="hack-example">"I must be respected" has hidden twin "I must never give respect."</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 4</div>
+    <div class="hack-title">The Law of All Games</div>
+    <div class="hack-summary">When a being is genuinely overwhelmed, they adopt the position that was defeating them. The adopted position feels native.</div>
+    <div class="hack-example">The defeated child adopts the parent's critical position.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 5</div>
+    <div class="hack-title">Mental Mass is Real Mass</div>
+    <div class="hack-summary">Charged memories are not records. They are ridges—frozen structures formed by opposing postulates. They have genuine physical weight.</div>
+    <div class="hack-example">The heaviest memories remain as present at sixty as they were at sixteen.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 6</div>
+    <div class="hack-title">Time Is a Postulate</div>
+    <div class="hack-summary">Time is generated by "Continue To Be Known." Frozen structures have no time postulate—they do not age.</div>
+    <div class="hack-example">A charged memory doesn't feel old. It feels now.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 7</div>
+    <div class="hack-title">The Insanity Point</div>
+    <div class="hack-summary">X(1-X)=1—a thing and its absence are identical. Four characteristics: identification, motionlessness, timelessness, mass.</div>
+    <div class="hack-example">The argument where every option closes the moment you reach for it.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 8</div>
+    <div class="hack-title">The Exclusion Postulate</div>
+    <div class="hack-summary">The exclusion postulate is always identical to the opposition of the games postulate. It acts as a shield.</div>
+    <div class="hack-example">The politician who can never be ordinary.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 9</div>
+    <div class="hack-title">Bonding and Double Bonding</div>
+    <div class="hack-summary">"If A then B" reduces options from four to three. "If A then B" and "if B then A" reduces to two—the double lock.</div>
+    <div class="hack-example">Self-respect requires others' respect, and others' respect requires demonstrated self-respect.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 10</div>
+    <div class="hack-title">Cross-Packaging</div>
+    <div class="hack-summary">Two separate goals packages conflated into one. The packages cannot erase. The charge cycles without resolution.</div>
+    <div class="hack-example">"To Know" cross-packaged with "To Survive."</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 11</div>
+    <div class="hack-title">The Toothless Tiger</div>
+    <div class="hack-summary">When a structure dissolves, what remains is the actual significance—always dramatically less than the distorted importance suggested.</div>
+    <div class="hack-example">The tiger had teeth made of frozen conflict, not danger.</div>
+  </div>
+
+  <div class="hack-card">
+    <div class="hack-tag">Reframe 12</div>
+    <div class="hack-title">Freedom is Voluntary Games</div>
+    <div class="hack-summary">Freedom is not the absence of games. It is the ability to play games voluntarily—entered from choice, played with full engagement, exited cleanly.</div>
+    <div class="hack-example">The game that is interesting without being consuming.</div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     CONTENTS
+     ============================================================ -->
+
+<div class="divider"></div>
+
+<h2 style="text-align:center; font-size:1.2rem; color:var(--text-muted); letter-spacing:0.2em;">CONTENTS</h2>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 2rem; font-size:0.9rem; color:var(--text-dim); padding:0.5rem 0;">
+  <div><strong style="color:var(--text);">Part One: The Trap</strong><br>1. Why We Stay Stuck<br>2. The Game Beneath Every Game<br>3. The Cost of Winning</div>
+  <div><strong style="color:var(--text);">Part Two: The Architecture</strong><br>4. The Four Basic Conditions<br>5. The Hidden Twin<br>6. Why Compulsions Form</div>
+  <div><strong style="color:var(--text);">Part Three: The Breakdown</strong><br>7. The Law of All Games<br>8. The Sixteen Conditions<br>9. The Logic of Insanity</div>
+  <div><strong style="color:var(--text);">Part Four: The Mechanism</strong><br>10. What Mental Mass Actually Is<br>11. Time and the Past<br>12. Why the Past Persists</div>
+  <div><strong style="color:var(--text);">Part Five: The Resolution</strong><br>13. The Toothless Tiger<br>14. Voluntary Games<br>15. Freedom</div>
+  <div><strong style="color:var(--text);">Part Six: Foundations of Understanding</strong><br>16. The Code of Ethics<br>17. The Analytical Mind<br>18. The Reactive Mind<br>19. Anatomy of Sensation<br>20. The Exclusion Postulate<br>21. Bonding and Double Bonding<br>22. Cross-Packaging<br>23. The Haunted Mind</div>
+  <div><strong style="color:var(--text);">Part Seven: Advanced Mechanics</strong><br>24. Zugzwang<br>25. The Twin Insanity Point<br>26. TIPM — What Mass Actually Is<br>27. The Loop</div>
+  <div><strong style="color:var(--text);">Part Eight: The New Civilisation</strong><br>28. The Age of AI<br>29. Sanity in a Fast-Paced World<br>30. The Value of Human Connection<br>31. A New Kind of Power<br>32. The Invitation</div>
+</div>
+
+<!-- ============================================================
+     PART ONE: THE TRAP
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">I</span>
+  <span>The Trap</span>
+  <span class="part-num">I</span>
+</div>
+
+<h1>Part One: The Trap</h1>
+
+<h3>Chapter 1: Why We Stay Stuck</h3>
+
+<p>There is a specific kind of suffering that intelligent, self-aware people find hardest to explain.</p>
+
+<p>It is not the suffering that comes from ignorance. Not the suffering from bad luck or circumstances beyond control. It is the suffering that arrives <em>despite</em> intelligence, <em>despite</em> self-awareness, <em>despite</em> genuine sustained effort. It is the suffering of someone who knows exactly what they are doing wrong and cannot stop doing it.</p>
+
+<p>A man knows he picks fights with the people he loves at precisely the moments he is most afraid of losing them. He has known this for years. He has analysed it in therapy, written about it in journals, explained it patiently to successive partners who eventually left. He understands the mechanism with genuine sophistication. And then — in the very next relationship, with clear eyes and full self-awareness — he does it again.</p>
+
+<p>A woman knows she abandons her projects at the moment they begin to succeed. She can trace this to specific childhood dynamics, name the beliefs involved, articulate why they are irrational. She has updated these beliefs intellectually many times. And yet, consistently, at exactly the point when success becomes real, something in her engineering finds a way to derail it.</p>
+
+<p><strong>Understanding does not produce change.</strong> This is one of the most reliably observed facts about human behaviour, and it is almost never satisfactorily explained.</p>
+
+<p><strong>The reason understanding doesn't work:</strong> Understanding and change operate at different levels of the same system. Understanding is a description of the system from outside the system. Change requires addressing the mechanics of the system — the structures that maintain the behaviour in place. Describing those mechanics accurately does not alter them, any more than accurately describing the architecture of a locked room opens the door.</p>
+
+<div class="truism">
+  "The problem is not that we lack insight. It is that insight is not the right tool for the job. Insight describes the pattern. The pattern is maintained by forces that operate beneath the level of insight."
+  <span class="source">— The Restructured Mind</span>
+</div>
+
+<p><strong>Three things we all know but don't put together:</strong></p>
+
+<p><em>First: the pattern is consistent.</em> It does not wander randomly. The woman who abandons projects at the point of success does not sometimes fail early, sometimes in the middle, sometimes late. She fails at the same point — the point of visible success — with the same mechanism, consistently, across different domains, different relationships, different decades.</p>
+
+<p><em>Second: the pattern has an internal logic.</em> From inside the pattern, it makes complete sense. The man who picks fights when afraid of losing someone is not irrational — inside his own framework, starting a fight is a way of creating distance before the abandonment that feels inevitable, so that he is at least the origin of the separation rather than its passive victim. The logic is self-defeating, but it is internally consistent.</p>
+
+<p><em>Third: the pattern was once a solution.</em> Every pattern that now causes suffering was, at some earlier point, the best available response to a real problem. The fight-picking was a genuine creative solution to the terror of abandonment in a context where abandonment was genuinely likely. The project sabotage was a genuine protective response to the danger of visibility in an environment where visibility produced punishment. The rage in meetings was, once, exactly the level of force required to maintain control in a genuinely dangerous situation.</p>
+
+<p>The problem changed. The solution remained. The solution has become the problem.</p>
+
+<h3>Chapter 2: The Game Beneath Every Game</h3>
+
+<p>There is something that underlies every human interaction that produces sustained effort. It is not love — though love participates in it. Not economics, not power, not religion — though all of these organise it. It is something more fundamental than any of these, something that love and economics and power and religion all share as a common structural feature.</p>
+
+<p><strong>It is a game.</strong> Not game in the frivolous sense — not recreation, not play for its own sake. Game in a precise sense: a structured situation in which something must happen and something must not happen, and the outcome is not guaranteed.</p>
+
+<div class="parable-grid">
+  <div class="parable-card" onclick="this.classList.toggle('open')">
+    <div class="tag">Parable</div>
+    <div class="title">The Relationship Game</div>
+    <div class="summary">Maya needs to know she is valued. Daniel needs not to perform what he already feels.</div>
+    <div class="detail">
+      "Both people are running musts. Both have something that must happen and something that must not happen. The musts oppose each other structurally. Maya's must requires evidence that Daniel's position makes unavailable. Daniel's must requires freedom from performance that Maya's need makes impossible.<br><br>This game will repeat. The specific content of each argument will vary. The underlying structure will not."
+      <span class="lesson">💡 The fight is not about the content. It is about the structure.</span>
+    </div>
+  </div>
+  <div class="parable-card" onclick="this.classList.toggle('open')">
+    <div class="tag">Parable</div>
+    <div class="title">The Workplace Game</div>
+    <div class="summary">The Director must be the one who knows. The Analyst must surface problems. Structural incompatibility.</div>
+    <div class="detail">
+      "The Director begins managing the Analyst's access. She controls which questions reach which forums. She rewards certain types of contribution and subtly discourages others. The Analyst doesn't fully understand why his most valuable contributions seem to create friction.<br><br>The specific incidents are content. The underlying game is structure. If the Director leaves and is replaced, the new Director will face the same structural pressure and develop similar behaviours within months."
+      <span class="lesson">💡 Structure outlasts individuals.</span>
+    </div>
+  </div>
+</div>
+
+<p><strong>Every game has four structural features:</strong></p>
+
+<p><strong>The must:</strong> Something that must happen. The student who must pass. The executive who must be seen to know. The partner who must be valued. The must has the quality of necessity — not preference, not interest, but genuine urgency.</p>
+
+<p><strong>The must-not:</strong> Something that must not happen. This is always the shadow of the must, its mirror image. "I must be valued" has as its shadow "I must not be discovered as not valued." The must-not is often more powerful than the must — more persistent, more resistant to examination, more capable of driving behaviour from below the level of conscious intention.</p>
+
+<p><strong>The opponent:</strong> The party or situation that appears to be preventing the must from happening and threatening to make the must-not happen. The opponent need not be a person. It can be circumstances, a market, a body, a habit, time itself.</p>
+
+<p><strong>The stakes:</strong> The importance attached to the outcome. The felt quality that makes this game worth sustained, costly engagement. The stakes are maintained by the must. The higher the mustness, the higher the stakes, the more energy the game generates, the more persistently it continues.</p>
+
+<div class="truism">
+  "Once a game is running, it tends to perpetuate itself. The musts sustain the engagement. The engagement sustains the conflict. The conflict sustains the musts. Winning does not end the game. Losing does not end the game. Leaving the arena does not end the game. The game ends only when the musts themselves end — when what must happen and what must not happen cease to carry the quality of necessity."
+  <span class="source">— The Restructured Mind</span>
+</div>
+
+<h3>Chapter 3: The Cost of Winning</h3>
+
+<p>Here is the thing nobody tells you about winning. Winning ends the game. And ending the game — for a being whose sense of purpose, direction, and aliveness has been organised around the game — is not a neutral event.</p>
+
+<div class="parable-grid">
+  <div class="parable-card" onclick="this.classList.toggle('open')">
+    <div class="tag">Parable</div>
+    <div class="title">The Lawyer Who Won</div>
+    <div class="summary">Eleven years fighting a case. She won. The week after, she couldn't start work.</div>
+    <div class="detail">
+      "She would sit at her desk, coffee cooling, genuinely unable to identify what came next. The capacity that had made her extraordinary — focused, sustained, high-stakes engagement — had no object. She was not depressed. She was not burned out. She was something more specific: gameless.<br><br>The must that had organised her effort for eleven years had been satisfied. Satisfaction had removed the must. The removal of the must had removed the drive."
+      <span class="lesson">💡 The cost of winning is the sudden absence of the structure that made life feel necessary.</span>
+    </div>
+  </div>
+</div>
+
+<p><strong>What losing produces:</strong></p>
+
+<p>When a person is genuinely overwhelmed — not merely inconvenienced but truly defeated, in a domain that matters, by a force they cannot sustain against — something specific happens.</p>
+
+<p><strong>The overwhelmed person adopts the opponent's position.</strong></p>
+
+<p>This is not a conscious decision. It does not feel like surrender. It feels, in the moment, like recognition — a sudden, unwilling understanding that the opponent was right all along. It feels like clarity, or hard-won humility, or being forced to face something true.</p>
+
+<!-- ============================================================
+     PART TWO: THE ARCHITECTURE
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">II</span>
+  <span>The Architecture</span>
+  <span class="part-num">II</span>
+</div>
+
+<h1>Part Two: The Architecture</h1>
+
+<h3>Chapter 4: The Four Basic Conditions</h3>
+
+<p>Every game, no matter how complex it appears on the surface, is built from four and only four basic conditions.</p>
+
+<p>This is not a simplification. It is a logical necessity. Once you have a concept — any goal, any must, any area of significant engagement — there are exactly four things that can be true about it in relation to two parties. Each party either has it or doesn't. Two parties, two options each, four combinations. Four corners. Four legs.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Condition</th><th>What It Means</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. To Know</strong></td><td>Actively reaching out to understand something.</td></tr>
+      <tr><td><strong>2. Not To Know</strong></td><td>Not seeking to understand—chosen or compelled.</td></tr>
+      <tr><td><strong>3. To Be Known</strong></td><td>Making yourself available to be understood.</td></tr>
+      <tr><td><strong>4. Not To Be Known</strong></td><td>Not being available to be understood.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>The combinations that generate every game:</strong></p>
+
+<p><strong>To Know + To Be Known:</strong> Understanding flows. Genuine communication.</p>
+<p><strong>To Know + Not To Be Known:</strong> Frustration. The harder you pursue, the more they conceal.</p>
+<p><strong>Not To Know + To Be Known:</strong> They feel unseen. You feel pressured.</p>
+<p><strong>Not To Be Known + Not To Be Known:</strong> Mutual concealment. The performance of exchange.</p>
+
+<div class="truism">
+  "The active condition is visible. The hidden condition is not. The hidden condition is what maintains the game in place far more powerfully than the active condition."
+  <span class="source">— The Restructured Mind</span>
+</div>
+
+<h3>Chapter 5: The Hidden Twin</h3>
+
+<p>Every must has a hidden twin. This is the single most important structural feature of any significant game, and the one most consistently invisible to the people running it. Understanding it changes everything about how human behaviour can be read.</p>
+
+<div class="card card-cyan">
+  <p><strong>The Exclusion Anchor Law:</strong></p>
+  <p>The active games postulate drives the game. The exclusion postulate locks the game in place. This is why people cannot change what they can consciously identify. They work on the visible postulate while the hidden anchor remains entirely intact.</p>
+</div>
+
+<p><strong>Six profiles of the hidden twin in action:</strong></p>
+
+<p><strong>The politician.</strong> Active must: "I must be known as a leader." Hidden twin: "I must never be known as ordinary."</p>
+<p><strong>The influencer.</strong> Active must: "I must be seen and admired." Hidden twin: "I must not know what it is to be unseen."</p>
+<p><strong>The narcissist.</strong> Active must: "I must be exceptional." Hidden twin: "I must never experience ordinariness."</p>
+<p><strong>The victim.</strong> Active must: "I must be recognised as wronged." Hidden twin: "I must never occupy the position of someone who contributed."</p>
+<p><strong>The fanatic.</strong> Active must: "My truth must be recognised." Hidden twin: "I must never experience that the opposing view might contain truth."</p>
+<p><strong>The compulsive helper.</strong> Active must: "I must help." Hidden twin: "I must never be in the position of needing help."</p>
+
+<h3>Chapter 6: Why Compulsions Form</h3>
+
+<p>There is a moment — almost nobody can identify exactly when it happened — when a game that was being played voluntarily became one that had to be played. Before that moment: choice. After it: compulsion.</p>
+
+<p><strong>Stage One: Voluntary Play.</strong> A person enters a game freely. The must has the quality of preference rather than necessity. Exit remains genuinely possible.</p>
+
+<p><strong>Stage Two: Compulsive Play.</strong> The must has shifted from preference to necessity. Exit no longer feels available. Two things produce this shift: failed resolution (unmet musts intensify with time) and the exclusion postulate consolidating.</p>
+
+<p><strong>Stage Three: The Game Becomes Identity.</strong> Not "I am playing a game about needing to be respected." Instead: "I am someone who must be respected."</p>
+
+<p><strong>The Compression Law:</strong> Persistence tends toward its most stable form, and its most stable form is always more compressed than its previous form. Trauma becomes identity. Identity becomes belief. Belief becomes symbol.</p>
+
+<!-- ============================================================
+     PART THREE: THE BREAKDOWN
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">III</span>
+  <span>The Breakdown</span>
+  <span class="part-num">III</span>
+</div>
+
+<h1>Part Three: The Breakdown</h1>
+
+<h3>Chapter 7: The Law of All Games</h3>
+
+<p><strong>The law is this: when a being is genuinely overwhelmed in a significant game, they adopt the position that was defeating them.</strong></p>
+
+<p>Not consciously. Not as a decision. As the structural outcome of running out of resources to maintain their own position. When there is nothing left to play from — when the active must has been defeated so thoroughly that maintaining it requires more than the being has available — the being takes on the opposing position. It becomes their own.</p>
+
+<div class="truism">
+  "In each case, the adopted position does not feel like adoption. It feels like recognition — like finally seeing clearly, like having had an illusion removed. The adopted position feels native. It feels like self. That feeling of nativeness is precisely what makes it so persistent."
+  <span class="source">— The Restructured Mind</span>
+</div>
+
+<h3>Chapter 8: The Sixteen Conditions</h3>
+
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Position</th><th>What is happening</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Native Freedom</strong></td><td>No compulsive game. All four classes available. Entry is voluntary.</td></tr>
+      <tr><td><strong>Games Level (Origin)</strong></td><td>You are at the games level, playing from the origin position. Four postulates active. Full engagement.</td></tr>
+      <tr><td><strong>Games Level (Receipt)</strong></td><td>You are at the games level, playing from the receipt position. Four postulates active.</td></tr>
+      <tr><td><strong>Overwhelm (You overwhelmed)</strong></td><td>You were at receipt and were overwhelmed. You have adopted the opponent's position.</td></tr>
+      <tr><td><strong>Overwhelm (Opponent overwhelmed)</strong></td><td>You were at origin and overwhelmed the opponent. They have adopted your position.</td></tr>
+      <tr><td><strong>Deeper conditions</strong></td><td>The valences, sub-games, and cross-packaged conditions that arise from sustained play.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>The Eight Classes of Overwhelm:</strong></p>
+<ol style="columns:2; column-gap:2rem;">
+  <li>Forced to know</li>
+  <li>Preventing from being known</li>
+  <li>Prevented from knowing</li>
+  <li>Forcing to be known</li>
+  <li>Forced to be known</li>
+  <li>Preventing from knowing</li>
+  <li>Prevented from being known</li>
+  <li>Forcing to know</li>
+</ol>
+
+<h3>Chapter 9: The Logic of Insanity</h3>
+
+<p>The first axiom of reason: <strong>X(1-X) = 0.</strong> A thing and its absence have no common class.</p>
+<p>The second axiom of reason: <strong>X + (1-X) = 1.</strong> A thing and its absence together constitute the complete universe of that concept.</p>
+<p><strong>The Insanity Loop: X(1-X) = 1.</strong> A thing and its absence are identical. The distinction that sanity depends on has collapsed.</p>
+
+<div class="card card-accent">
+  <p><strong>The Insanity Point is not the mind's failure. It is the mind's last creative move — finding the one remaining position available when all rational positions have been exhausted.</strong></p>
+</div>
+
+<p><strong>The four characteristics of the Insanity Point:</strong></p>
+<p><strong>Identification:</strong> A thing and its absence become identical.</p>
+<p><strong>Motionlessness:</strong> Net force zero. Every movement is cancelled.</p>
+<p><strong>Timelessness:</strong> The structure is frozen at the moment of its formation.</p>
+<p><strong>Mass:</strong> The frozen structure is perceived as weight, as solidity, as physical substance.</p>
+
+<!-- ============================================================
+     PART FOUR: THE MECHANISM
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">IV</span>
+  <span>The Mechanism</span>
+  <span class="part-num">IV</span>
+</div>
+
+<h1>Part Four: The Mechanism</h1>
+
+<h3>Chapter 10: What Mental Mass Actually Is</h3>
+
+<div class="parable-grid">
+  <div class="parable-card" onclick="this.classList.toggle('open')">
+    <div class="tag">Parable</div>
+    <div class="title">The River and the Boulder</div>
+    <div class="summary">A river with a large boulder in the middle. New water flows around it continuously.</div>
+    <div class="detail">
+      "It does not dissolve the boulder. The boulder is there when the new water arrives and it is there when the new water has passed. The boulder is the frozen structure. The water is new experience. No amount of new experience reaches the boulder. Only direct address of the structure, at the level of the conflict that maintains it, produces dissolution."
+      <span class="lesson">💡 New experience does not overwrite old patterns. It flows around them.</span>
+    </div>
+  </div>
+</div>
+
+<p>A neutral memory is a record. A charged memory is not a record. It is a ridge. A ridge is what forms when two forces meet and neither can overwhelm the other. The forces press against each other and the energy has nowhere to go, so it forms a stable structure at the point of contact. <strong>The charged memory is a ridge in exactly this sense.</strong> Two postulates met — the must and the must-not — and neither could overwhelm the other fully. The energy of their conflict could find no resolution. It formed a stable structure at the point of contact. That structure is what is experienced as weight.</p>
+
+<h3>Chapter 11: Time and the Past</h3>
+
+<p>The experience of time — the felt sense of then and now — is generated by a specific postulate: <strong>"Continue to be known."</strong></p>
+
+<p>A frozen structure has had this postulate collapse. The frozen structure does not continue to be known — it is simply stopped, motionless, timeless, at the moment of its formation. <strong>This is why the heaviest memories do not feel old.</strong> They are not old. In the logical sense that matters here, they have not continued past the moment of their formation.</p>
+
+<h3>Chapter 12: Why the Past Persists</h3>
+
+<p><strong>The past persists because what persists is not the past in any ordinary sense.</strong> It is not a record of what happened. It is a frozen structure that formed at a specific moment, has never continued past that moment, and therefore remains exactly as present as the moment of its formation.</p>
+
+<!-- ============================================================
+     PART FIVE: THE RESOLUTION
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">V</span>
+  <span>The Resolution</span>
+  <span class="part-num">V</span>
+</div>
+
+<h1>Part Five: The Resolution</h1>
+
+<h3>Chapter 13: The Toothless Tiger</h3>
+
+<div class="truism">
+  "The tiger had teeth made of frozen conflict, not of actual danger."
+  <span class="source">— The Restructured Mind</span>
+</div>
+
+<p>There is a specific experience that people consistently report after a significant area of charge has been resolved. They look at something that was once the most important, most consuming, most identity-defining area of their life — a relationship dynamic, a career ambition, a deep conviction about who they are — and it seems almost comically small. Not diminished with sadness. Simply its actual size, seen for the first time without the distorting lens of the compressed importance.</p>
+
+<h3>Chapter 14: Voluntary Games</h3>
+
+<p><strong>Freedom is not the absence of games. It is the ability to play games voluntarily.</strong></p>
+
+<p>A being without games is not a free being. It is a being with nothing to do — no context for action, no structure for engagement, no arena in which intention can express itself. Games are not the problem. Compulsive games — games that cannot be exited, games where the importance is not assigned but compulsory — are the problem.</p>
+
+<h3>Chapter 15: Freedom</h3>
+
+<p><strong>Freedom, precisely stated, is the condition of a being who can choose their games.</strong></p>
+
+<p>A being who can choose their games can also decline games. They are not required to play. They see the game's structure before entry. They assess it: Is this a game I want to play? Does the importance I would assign match what it is actually worth? Does the opponent's position provide genuine complementarity? Does the game have a clean exit?</p>
+
+<!-- ============================================================
+     PART SIX: FOUNDATIONS OF UNDERSTANDING
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">VI</span>
+  <span>Foundations of Understanding</span>
+  <span class="part-num">VI</span>
+</div>
+
+<h1>Part Six: Foundations of Understanding</h1>
+
+<h3>Chapter 16: The Code of Ethics</h3>
+
+<div class="card card-gold">
+  <p><strong>The Code of the Ethical Being:</strong></p>
+  <ol>
+    <li>Never force a person to know something against their choice.</li>
+    <li>Never prevent a person from knowing.</li>
+    <li>Never force a person to make something known.</li>
+    <li>Never prevent a person from making something known.</li>
+  </ol>
+</div>
+
+<h3>Chapter 17: The Analytical Mind</h3>
+<p>The analytical mind is the part of the mind that evaluates, compares, and makes decisions based on reason. <strong>The analytical mind is inherently right.</strong> This is not a claim about intelligence or education. It is a structural claim. The analytical mind is the part of the mind that is in contact with present-time reality.</p>
+
+<h3>Chapter 18: The Reactive Mind</h3>
+<p>The reactive mind is the part of the mind that stores fixed conclusions, automatic responses, and compulsive musts. <strong>The reactive mind is inherently wrong.</strong> The reactive mind is the part of the mind that is stuck in the past. It cannot evaluate relative importances. It cannot adjust its conclusions when new evidence appears. It is fixed, rigid, and incapable of genuine learning.</p>
+
+<h3>Chapter 19: The Anatomy of Sensation</h3>
+<p>Sensation is generated at the boundary between opposing postulates in games play. <strong>The scale of sensations:</strong> Pain → Sexual sensation → Tickles → Heat → Electrical → Colour → Pure aesthetics. As the space between opposing postulates opens up, the sensation changes.</p>
+
+<h3>Chapter 20: The Exclusion Postulate</h3>
+<p><strong>The Exclusion Postulate Law:</strong> In compulsive games play, a player holds two postulates simultaneously: a games postulate and an exclusion postulate. The exclusion postulate is always identical to the opposition of the games postulate. The exclusion postulate acts as a shield to ensure you are never driven into the same class as your opponent.</p>
+
+<h3>Chapter 21: Bonding and Double Bonding</h3>
+<p><strong>Single bond:</strong> "if A then B" — reduces the available class set from four to three.</p>
+<p><strong>Double bond:</strong> "if A then B" and "if B then A" — A and B become equivalent. The set reduces to two. The double lock on the mind.</p>
+
+<h3>Chapter 22: Cross-Packaging</h3>
+<p>Cross-packaging is the primary method of enslaving spiritual beings. It is infinitely more effective than force. A being who is cross-packaged is stuck within crossed-up packages. They cannot erase either package because the packages are not correctly aligned.</p>
+
+<h3>Chapter 23: The Haunted Mind</h3>
+<p><strong>Anything influencing your mind you can communicate with.</strong> There are no such things as entities. There are only adopted positions that have been dissociated from the being's awareness.</p>
+
+<!-- ============================================================
+     PART SEVEN: ADVANCED MECHANICS
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">VII</span>
+  <span>Advanced Mechanics</span>
+  <span class="part-num">VII</span>
+</div>
+
+<h1>Part Seven: Advanced Mechanics</h1>
+
+<h3>Chapter 24: Zugzwang — The Compulsion to Move</h3>
+
+<p><strong>Zugzwang: the compulsion to move when any move loses.</strong> Zugzwang is not the same as being stuck. Being stuck is motionlessness — both positions held simultaneously, net force zero. Zugzwang is the compulsion to act when acting is guaranteed to produce failure.</p>
+
+<h3>Chapter 25: The Twin Insanity Point</h3>
+
+<p><strong>The TIPS: X(1-X) + Y(1-Y) = 1.</strong> Both sides of the game are now in IP configuration simultaneously. Both have lost their rational classes. Both are frozen at their respective IP states.</p>
+
+<h3>Chapter 26: TIPM — What Mass Actually Is</h3>
+
+<p><strong>TIPM: Twin Insanity Point Mass.</strong> TIPM is the physical product of frozen postulate conflict. When two Insanity Points are held in exclusive-OR relationship, they form a stable structure. That structure is TIPM. That structure is mass.</p>
+
+<div class="card card-cyan">
+  <p><strong>The four characteristics of TIPM:</strong></p>
+  <ol>
+    <li><strong>Identification:</strong> A postulate and its negative become identical.</li>
+    <li><strong>Motionlessness:</strong> Net force zero. Every movement is cancelled.</li>
+    <li><strong>Timelessness:</strong> No "Continue To Be Known" postulate. The structure is frozen.</li>
+    <li><strong>Mass:</strong> The frozen structure is perceived as weight, as solidity.</li>
+  </ol>
+</div>
+
+<h3>Chapter 27: The Loop</h3>
+
+<p>At the highest level of understanding, three concepts are proven identical: <strong>The possible, the impossible, and the postulate.</strong> The Loop is the recognition that these three concepts are the same. The Loop is the key to sanity. When you are in the Loop, you are sane. When you are out of the Loop, you are insane.</p>
+
+<!-- ============================================================
+     PART EIGHT: THE NEW CIVILISATION
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">VIII</span>
+  <span>The New Civilisation</span>
+  <span class="part-num">VIII</span>
+</div>
+
+<h1>Part Eight: The New Civilisation</h1>
+
+<h3>Chapter 28: The Age of Artificial Intelligence</h3>
+
+<div class="truism">
+  "AI can process information. It cannot process meaning. AI can recognise patterns. It cannot recognise the significance of those patterns to a conscious being. AI can generate text. It cannot generate understanding. AI can simulate empathy. It cannot experience it."
+  <span class="source">— The Restructured Mind</span>
+</div>
+
+<p>We are drowning in information. The algorithms that manage our information are optimised for one thing: engagement. Engagement is produced by firing live games postulates. <strong>This is the induction of compulsive games play at mass scale.</strong> Every piece of content that fires a live games postulate puts you in a compulsive game around that content. The platform converts this engagement to revenue. The game is maintained, not resolved.</p>
+
+<h3>Chapter 29: Sanity in a Fast-Paced World</h3>
+
+<p>The pace of modern life is unprecedented. Information arrives faster than we can process it. Demands multiply. Attention is fragmented. <strong>This is not a personal failure. It is a structural condition.</strong> The environment has been designed to overwhelm.</p>
+
+<p><strong>Three practices for mental tranquillity:</strong></p>
+<p><strong>First: recognise the game.</strong> When you feel reactive, name the must, the must-not, the opponent. Naming the game reduces its power.</p>
+<p><strong>Second: find the hidden twin.</strong> When you feel driven, ask: what am I making sure never happens? The hidden twin is the anchor.</p>
+<p><strong>Third: choose your engagement.</strong> Once you can see the game and the hidden anchor, you can choose how to respond. The choice is yours.</p>
+
+<h3>Chapter 30: The Value of Human Connection</h3>
+
+<p><strong>Connection is the experience of complementary postulates.</strong> When two people are genuinely connected, their postulates are complementary. What you are doing from your end fits what I need from mine.</p>
+
+<p>Genuine connection requires presence. Presence is not the absence of distraction. It is the willingness to be known. It is the willingness to know. It is the willingness to be available to another being without the protection of the hidden twin.</p>
+
+<h3>Chapter 31: A New Kind of Power</h3>
+
+<p><strong>Control is not security. Control is the active maintenance of the hidden twin.</strong> The person who must control is simultaneously making sure they are never controlled. The person who must control cannot be free because they are running a game that has no resolution from within the game.</p>
+
+<p>There is a different kind of power. Not the power to control. The power to choose. The power to choose your games. The power to choose your engagement. The power to choose your presence. <strong>The powerful person is not the one who controls the most. The powerful person is the one who is least controlled.</strong></p>
+
+<h3>Chapter 32: The Invitation</h3>
+
+<div class="card card-gold" style="text-align:center; padding:2rem;">
+  <p style="font-size:1.3rem; font-family:var(--font-serif); font-style:italic; color:var(--text);">
+    "In an age of artificial intelligence, what remains most valuable is what only humans can offer: genuine presence, genuine connection, genuine understanding."
+  </p>
+  <p style="margin-top:0.5rem; color:var(--text-dim);">
+    In a world designed to overwhelm, the ability to choose your engagement is a form of power that cannot be taken from you.
+  </p>
+</div>
+
+<p>This is not a belief system. It is an invitation to see clearly. You can test this yourself.</p>
+
+<ul>
+  <li>Take any repeating pattern in your life. See if it has the four features of a game.</li>
+  <li>Take any must you are running. See if you can find the hidden twin.</li>
+  <li>Take any area where you feel stuck. See if you can identify which of the sixteen conditions you are in.</li>
+  <li>Take any moment of suffering. See if it is incoherency.</li>
+  <li>Take any moment of joy. See if it is coherency.</li>
+</ul>
+
+<div class="truism">
+  "The engine continues. The invitation is open. The next iteration is yours to write."
+  <span class="source">— The Restructured Mind</span>
+</div>
+
+<!-- ============================================================
+     APPENDICES
+     ============================================================ -->
+
+<div class="part-divider">
+  <span class="part-num">✦</span>
+  <span>Appendices</span>
+  <span class="part-num">✦</span>
+</div>
+
+<h2>Appendix A: Quick Reference — The Architecture</h2>
+
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Four Conditions</strong></td><td>To Know, Not To Know, To Be Known, Not To Be Known</td></tr>
+      <tr><td><strong>Four Features of Every Game</strong></td><td>The must, the must-not, the opponent, the stakes</td></tr>
+      <tr><td><strong>The Hidden Twin</strong></td><td>Every must has a mirror must-not</td></tr>
+      <tr><td><strong>Eight Classes of Overwhelm</strong></td><td>Forced to know, Preventing from being known, Prevented from knowing, Forcing to be known, Forced to be known, Preventing from knowing, Prevented from being known, Forcing to know</td></tr>
+      <tr><td><strong>Insanity Point</strong></td><td>X(1-X)=1. Four characteristics: identification, motionlessness, timelessness, mass</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Appendix B: How to Verify This Yourself</h2>
+
+<p><strong>The Repeating Pattern Test:</strong> Take any repeating pattern in your life. Identify the must. Identify the must-not. Identify the opponent. Identify the stakes. See if you can find the hidden twin.</p>
+<p><strong>The Position Test:</strong> Take any area where you feel stuck. Identify which of the sixteen conditions you are in.</p>
+<p><strong>The Hidden Twin Test:</strong> Take any must you are running. Ask: what is the class of experience I am making sure I never occupy? The resistance is the indicator.</p>
+<p><strong>The Incoherency Test:</strong> Take any moment of suffering. Identify the incoherency. Take any moment of joy. Identify the coherency.</p>
+
+<h2>Appendix C: Glossary of Key Terms</h2>
+
+<p><strong>Compulsion:</strong> The condition in which a game that was chosen has become necessary.</p>
+<p><strong>Exclusion Anchor:</strong> The hidden must-not that holds a game in place.</p>
+<p><strong>Frozen Structure:</strong> A moment of overwhelm that has not continued past its formation. Four characteristics: identification, motionlessness, timelessness, mass.</p>
+<p><strong>Game:</strong> A structured situation in which something must happen and something must not happen, and the outcome is not guaranteed.</p>
+<p><strong>Hidden Twin:</strong> The must-not that mirrors the must.</p>
+<p><strong>Identification:</strong> The condition in which two things that should be distinct are experienced as identical.</p>
+<p><strong>Importance:</strong> The degree of "mustness" in a purpose.</p>
+<p><strong>Insanity Point:</strong> X(1-X)=1. A thing and its absence are identical.</p>
+<p><strong>Mass:</strong> Frozen structure experienced as weight, solidity, physical substance.</p>
+<p><strong>Motionlessness:</strong> The condition in which opposing postulates held simultaneously produce zero net movement.</p>
+<p><strong>Must:</strong> Something that must happen. A genuine necessity.</p>
+<p><strong>Must-not:</strong> Something that must not happen. The shadow of the must.</p>
+<p><strong>Overwhelm:</strong> The point at which a being can no longer maintain their position and adopts the opponent's position instead.</p>
+<p><strong>Postulate:</strong> A causative consideration. A decision about reality that, once made, shapes everything that follows.</p>
+<p><strong>Ridge:</strong> A structure formed when two forces meet and neither can overwhelm the other.</p>
+<p><strong>Timelessness:</strong> The condition in which a frozen structure has not continued past its moment of formation.</p>
+<p><strong>Valence:</strong> An identity assumed in games play. The adopted position that feels native.</p>
+
+<h2>Appendix D: The Code of the Ethical Being</h2>
+
+<div class="card card-gold">
+  <ol>
+    <li>Never force a person to know something against their choice.</li>
+    <li>Never prevent a person from knowing.</li>
+    <li>Never force a person to make something known.</li>
+    <li>Never prevent a person from making something known.</li>
+  </ol>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+
+<div class="book-footer">
+  <div class="footer-cta">The Engine Continues</div>
+  <p class="footer-sub">You are not a passenger on a random rock. You are a local author of the universal text. Every thought is a decision about reality. Every word is a letter. Every action is an iteration. Write it well.</p>
+  <div class="footer-links">
+    <a href="https://meaning-unconfounded.github.io/" target="_blank">📖 Meaning Unconfounded</a>
+    <a href="https://meaning-unconfounded.github.io/pub_semantics.html" target="_blank">🔓 The Mouth's Secret</a>
+    <a href="https://meaning-unconfounded.github.io/" target="_blank">⚡ The Complete Edition</a>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.75rem; color:var(--text-dim);">🔬 Test everything. Believe nothing. The code speaks for itself.</p>
+  <p style="margin-top:0.5rem; font-size:0.7rem; color:var(--text-muted);">THE RESTRUCTURED MIND · A companion to MEANING UNCONFOUNDED</p>
+</div>
+
+</div>
+
+<script>
+  // Parable cards toggle
+  document.querySelectorAll('.parable-card').forEach(card => {
+    card.addEventListener('click', function() {
+      this.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
