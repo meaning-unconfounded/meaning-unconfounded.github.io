@@ -81,9 +81,10 @@ body {
 /* ── reading progress ─────────────────────────────────────────── */
 #progress {
   position: fixed; top: 0; left: 0; z-index: 90;
-  height: 3px; width: 0;
+  height: 5px;
+  width: 0;
   background: linear-gradient(90deg, var(--gold), var(--gold-2));
-  box-shadow: 0 0 8px var(--gold-2);
+  box-shadow: 0 0 12px var(--gold-2);
   transition: width .12s linear;
 }
 
@@ -699,13 +700,48 @@ hr::after {
 }
 
 /* ── table of contents page ───────────────────────────────────── */
+#tocWrapper {
+  margin: 0 auto;
+  max-width: var(--measure);
+}
+
+.toc-toggle {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-bottom: 0.5rem;
+}
+.toc-toggle:hover {
+  border-color: var(--gold-2);
+  background: var(--gold-soft);
+  color: var(--gold);
+}
+.toc-toggle:active {
+  transform: scale(0.98);
+}
+
 .toc-page {
+  display: none;
   margin: 0 auto 4rem;
   padding: 2.6rem clamp(1.2rem, 4vw, 3rem) 2.2rem;
   background: var(--surface);
   border: 1px solid var(--hair);
   border-radius: 22px;
   box-shadow: var(--shadow);
+  transition: opacity 0.3s ease;
+}
+.toc-page.open {
+  display: block;
 }
 .toc-kick {
   font-family: var(--sans);
@@ -841,7 +877,8 @@ hr::after {
   #sidebar, #navToggle, #toTop, #progress, .cov-hint, .sb-search { display: none !important; }
   #main { margin: 0; padding: 0; }
   .cover { min-height: auto; padding: 3cm 1cm 2cm; page-break-after: always; }
-  .toc-page { page-break-after: always; box-shadow: none; }
+  .toc-page { page-break-after: always; box-shadow: none; display: block !important; }
+  .toc-toggle { display: none !important; }
   .mega-part {
     page-break-before: always;
     background: #fff;
@@ -883,7 +920,7 @@ hr::after {
   </div>
   <nav class="sb-nav" id="sbNav">
     <a class="sb-link sb-top" href="#toc">Contents</a>
-    <details open><summary>Part One · Meaning Unconfounded</summary>
+    <details><summary>Part One · Meaning Unconfounded</summary>
       <a class="sb-link" href="#mu-readers">We Are Code Readers</a>
       <a class="sb-link" href="#mu-epigraph">EPIGRAPH PAGE</a>
       <a class="sb-link" href="#mu-prologue">PROLOGUE: THE NEW FUNDAMENTAL</a>
@@ -926,6 +963,7 @@ hr::after {
       <a class="sb-link" href="#mu-ch28">28 · The Unified Cultural Imperative</a>
       <span class="sb-link sb-grp">PART EIGHT: THE GEM AND THE ZEITGEIST</span>
       <a class="sb-link" href="#mu-ch29">29 · The Code in Plain Sight</a>
+      <a class="sb-link" href="#mu-ch30">30 · Spelling Is Casting — The Architecture of Written Words</a>
       <a class="sb-link" href="#mu-conclusion">CONCLUSION: THE HORIZON OF COHERENCY</a>
       <a class="sb-link" href="#mu-app-a">Appendix A · THE 3D CONSONANT REFERENCE (22 Core Sounds)</a>
       <a class="sb-link" href="#mu-app-b">Appendix B · The N-POSITION Algorithm</a>
@@ -941,7 +979,10 @@ hr::after {
       <a class="sb-link" href="#mu-app-l">Appendix L · Verification And Refinement Tests</a>
       <a class="sb-link" href="#mu-app-m">Appendix M · The Decoded Dictionary</a>
       <a class="sb-link" href="#mu-app-n">Appendix N · Zeitgeist Dictionary</a>
-      <a class="sb-link" href="#mu-app-o">Appendix O · The Vowel Vector Hypothesis (Experimental)</a>
+      <a class="sb-link" href="#mu-app-o">Appendix O · The Vowel Vector Master Matrix</a>
+      <a class="sb-link" href="#mu-app-p">Appendix P · The 1-9 Architectural Matrix & Master Numbers</a>
+      <a class="sb-link" href="#mu-app-r">Appendix R · The Inversion Architecture</a>
+      <a class="sb-link" href="#mu-app-q">Appendix Q · Interactive Decoder</a>
       <a class="sb-link" href="#mu-title-note">A NOTE ON THE TITLE: WHY "MEANING UNCONFOUNDED"?</a>
     </details>
     <details><summary>Part Two · BedRock-ReFramed</summary>
@@ -1014,9 +1055,10 @@ hr::after {
       <span class="sb-link sb-grp">Part Eight: The New Civilisation</span>
       <a class="sb-link" href="#trm-ch28">28 · The Age of Artificial Intelligence</a>
       <a class="sb-link" href="#trm-ch29">29 · Sanity in a Fast-Paced World</a>
-      <a class="sb-link" href="#trm-ch30">30 · The Value of Human Connection</a>
-      <a class="sb-link" href="#trm-ch31">31 · A New Kind of Power</a>
-      <a class="sb-link" href="#trm-ch32">32 · The Invitation</a>
+      <a class="sb-link" href="#trm-ch30">30 · Spelling Is Casting — The Architecture of Written Words</a>
+      <a class="sb-link" href="#trm-ch31">31 · The Value of Human Connection</a>
+      <a class="sb-link" href="#trm-ch32">32 · A New Kind of Power</a>
+      <a class="sb-link" href="#trm-ch33">33 · The Invitation</a>
       <a class="sb-link" href="#trm-app-a">Appendix A · Quick Reference — The Architecture</a>
       <a class="sb-link" href="#trm-app-b">Appendix B · How to Verify This Yourself</a>
       <a class="sb-link" href="#trm-app-c">Appendix C · Glossary of Key Terms</a>
@@ -1042,156 +1084,162 @@ hr::after {
 </header>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     TABLE OF CONTENTS
+     TABLE OF CONTENTS (hidden by default, toggleable)
      ═══════════════════════════════════════════════════════════════ -->
-<nav class="toc-page" id="toc">
-  <div class="toc-kick">The White Book · Complete Omnibus Edition</div>
-  <h2>Contents</h2>
-  <div class="toc-cols">
-    <section class="toc-sec"><h3>Part One · Meaning Unconfounded</h3><ol>
-      <li><a href="#mu-readers">We Are Code Readers</a></li>
-      <li><a href="#mu-epigraph">EPIGRAPH PAGE</a></li>
-      <li><a href="#mu-prologue">PROLOGUE: THE NEW FUNDAMENTAL</a></li>
-      <li><a href="#mu-intro">INTRODUCTION: SIXTY SECONDS</a></li>
-      <li class="grp">PART ONE: THE DISCOVERY</li>
-      <li><a href="#mu-ch1">1 · The One-Minute Demonstration</a></li>
-      <li><a href="#mu-ch2">2 · The Skeptic's Questions</a></li>
-      <li><a href="#mu-ch3">3 · What Questions Want</a></li>
-      <li class="grp">PART TWO: THE FOUNDATION</li>
-      <li><a href="#mu-ch4">4 · Two Truths That Cannot Be False</a></li>
-      <li><a href="#mu-ch5">5 · Why Mathematics Is the Only Thing That Cannot Lie</a></li>
-      <li><a href="#mu-ch6">6 · Why Existence Must Exist</a></li>
-      <li><a href="#mu-interlude">WHAT THIS ACTUALLY MEANS</a></li>
-      <li class="grp">PART THREE: THE CODE</li>
-      <li><a href="#mu-ch7">7 · The Three Dimensions of Every Consonant</a></li>
-      <li><a href="#mu-ch8">8 · Position Is Meaning</a></li>
-      <li><a href="#mu-ch9">9 · The Silent Consonants — The Exclusion Anchors</a></li>
-      <li><a href="#mu-ch10">10 · Words That Describe Themselves</a></li>
-      <li><a href="#mu-ch11">11 · The Voicing Dimension</a></li>
-      <li><a href="#mu-ch12">12 · Clusters and Predictions</a></li>
-      <li><a href="#mu-ch13">13 · The Verb Illusion — How Grammar Hides Reality</a></li>
-      <li><a href="#mu-ch14">14 · The Preposition Code — Architectural Anchors</a></li>
-      <li class="grp">PART FOUR: THE MECHANISM</li>
-      <li><a href="#mu-ch15">15 · Postulates — The Architecture of Experience</a></li>
-      <li><a href="#mu-ch16">16 · The Physics of Frozen Conflict (Mass and the Body Map)</a></li>
-      <li><a href="#mu-ch17">17 · The Unified Chain</a></li>
-      <li class="grp">PART FIVE: WORKED EXAMPLES</li>
-      <li><a href="#mu-ch18">18 · Reading a News Headline</a></li>
-      <li><a href="#mu-ch19">19 · Reading a Legal Clause</a></li>
-      <li><a href="#mu-ch20">20 · Un-confounding a Personal Sentence</a></li>
-      <li><a href="#mu-ch21">21 · Decoding a Question</a></li>
-      <li class="grp">PART SIX: APPLICATIONS</li>
-      <li><a href="#mu-ch22">22 · For Education</a></li>
-      <li><a href="#mu-ch23">23 · For Artificial Intelligence</a></li>
-      <li><a href="#mu-ch24">24 · For Law and Policy</a></li>
-      <li><a href="#mu-ch25">25 · For Therapy — The Body as TIPM Map</a></li>
-      <li><a href="#mu-ch26">26 · For Society</a></li>
-      <li class="grp">PART SEVEN: THE COSMOLOGY</li>
-      <li><a href="#mu-ch27">27 · The Iterative Future</a></li>
-      <li><a href="#mu-ch28">28 · The Unified Cultural Imperative</a></li>
-      <li class="grp">PART EIGHT: THE GEM AND THE ZEITGEIST</li>
-      <li><a href="#mu-ch29">29 · The Code in Plain Sight</a></li>
-      <li><a href="#mu-conclusion">CONCLUSION: THE HORIZON OF COHERENCY</a></li>
-      <li><a href="#mu-app-a">Appendix A · THE 3D CONSONANT REFERENCE (22 Core Sounds)</a></li>
-      <li><a href="#mu-app-b">Appendix B · The N-POSITION Algorithm</a></li>
-      <li><a href="#mu-app-c">Appendix C · Cluster Reference — The Predictive Engine</a></li>
-      <li><a href="#mu-app-d">Appendix D · The Suffix SELF-DESCRIPTION Pattern</a></li>
-      <li><a href="#mu-app-e">Appendix E · The Structured Expression Formula</a></li>
-      <li><a href="#mu-app-f">Appendix F · The Comprehension Stack</a></li>
-      <li><a href="#mu-app-g">Appendix G · Quick Reference Cards</a></li>
-      <li><a href="#mu-app-h">Appendix H · The Seven Lenses Methodology</a></li>
-      <li><a href="#mu-app-i">Appendix I · Extended Reference Tools</a></li>
-      <li><a href="#mu-app-j">Appendix J · The Complete Unified Glossary</a></li>
-      <li><a href="#mu-app-k">Appendix K · How TO Verify This Yourself</a></li>
-      <li><a href="#mu-app-l">Appendix L · Verification And Refinement Tests</a></li>
-      <li><a href="#mu-app-m">Appendix M · The Decoded Dictionary</a></li>
-      <li><a href="#mu-app-n">Appendix N · Zeitgeist Dictionary</a></li>
-      <li><a href="#mu-app-o">Appendix O · The Vowel Vector Hypothesis (Experimental)</a></li>
-      <li><a href="#mu-title-note">A NOTE ON THE TITLE: WHY "MEANING UNCONFOUNDED"?</a></li>
-    </ol></section>
-    <section class="toc-sec"><h3>Part Two · BedRock-ReFramed</h3><ol>
-      <li><a href="#br-intro">Introduction</a></li>
-      <li><a href="#br-reframes">12 Foundational Reframes</a></li>
-      <li class="grp">Part One: The Foundation</li>
-      <li><a href="#br-ch1">1 · The Bedrock</a></li>
-      <li><a href="#br-ch2">2 · The Power of Objective Truth</a></li>
-      <li><a href="#br-ch3">3 · What Actually Exists</a></li>
-      <li><a href="#br-ch4">4 · The Unified Field</a></li>
-      <li><a href="#br-ch5">5 · Consciousness</a></li>
-      <li><a href="#br-ch6">6 · The Inter-Scalar Nature of Reality</a></li>
-      <li class="grp">Part Two: The Mechanism</li>
-      <li><a href="#br-ch7">7 · Existence as Iteration</a></li>
-      <li><a href="#br-ch8">8 · The Four Foundational Mechanisms</a></li>
-      <li><a href="#br-ch9">9 · Gravity and Orbits</a></li>
-      <li class="grp">Part Three: The Application</li>
-      <li><a href="#br-ch10">10 · Language as Structure</a></li>
-      <li><a href="#br-ch11">11 · The Consonant Code</a></li>
-      <li><a href="#br-ch12">12 · Self-Verifying Words</a></li>
-      <li class="grp">Part Four: The Purpose</li>
-      <li><a href="#br-ch13">13 · Optimal Coherency</a></li>
-      <li><a href="#br-ch14">14 · The Cultural Imperative</a></li>
-      <li><a href="#br-ch15">15 · Freedom Through Understanding</a></li>
-      <li class="grp">Part Five: The Implications</li>
-      <li><a href="#br-ch16">16 · Rethinking Everything</a></li>
-      <li><a href="#br-ch17">17 · New Directions</a></li>
-      <li><a href="#br-ch18">18 · The Invitation</a></li>
-      <li><a href="#br-app-a">Appendix A · Quick Reference — The Foundational Mechanisms</a></li>
-      <li><a href="#br-app-b">Appendix B · Quick Reference — The Consonant Code</a></li>
-      <li><a href="#br-app-c">Appendix C · How to Verify This Yourself</a></li>
-      <li><a href="#br-app-d">Appendix D · Glossary of Key Terms</a></li>
-    </ol></section>
-    <section class="toc-sec"><h3>Part Three · The Restructured Mind</h3><ol>
-      <li><a href="#trm-reframes">12 Applied Reframes</a></li>
-      <li class="grp">Part One: The Trap</li>
-      <li><a href="#trm-ch1">1 · Why We Stay Stuck</a></li>
-      <li><a href="#trm-ch2">2 · The Game Beneath Every Game</a></li>
-      <li><a href="#trm-ch3">3 · The Cost of Winning</a></li>
-      <li class="grp">Part Two: The Architecture</li>
-      <li><a href="#trm-ch4">4 · The Four Basic Conditions</a></li>
-      <li><a href="#trm-ch5">5 · The Hidden Twin</a></li>
-      <li><a href="#trm-ch6">6 · Why Compulsions Form</a></li>
-      <li class="grp">Part Three: The Breakdown</li>
-      <li><a href="#trm-ch7">7 · The Law of All Games</a></li>
-      <li><a href="#trm-ch8">8 · The Sixteen Conditions</a></li>
-      <li><a href="#trm-ch9">9 · The Logic of Insanity</a></li>
-      <li class="grp">Part Four: The Mechanism</li>
-      <li><a href="#trm-ch10">10 · What Mental Mass Actually Is</a></li>
-      <li><a href="#trm-ch11">11 · Time and the Past</a></li>
-      <li><a href="#trm-ch12">12 · Why the Past Persists</a></li>
-      <li class="grp">Part Five: The Resolution</li>
-      <li><a href="#trm-ch13">13 · The Toothless Tiger</a></li>
-      <li><a href="#trm-ch14">14 · Voluntary Games</a></li>
-      <li><a href="#trm-ch15">15 · Freedom</a></li>
-      <li class="grp">Part Six: Foundations of Understanding</li>
-      <li><a href="#trm-ch16">16 · The Code of Ethics</a></li>
-      <li><a href="#trm-ch17">17 · The Analytical Mind</a></li>
-      <li><a href="#trm-ch18">18 · The Reactive Mind</a></li>
-      <li><a href="#trm-ch19">19 · The Anatomy of Sensation</a></li>
-      <li><a href="#trm-ch20">20 · The Exclusion Postulate</a></li>
-      <li><a href="#trm-ch21">21 · Bonding and Double Bonding</a></li>
-      <li><a href="#trm-ch22">22 · Cross-Packaging</a></li>
-      <li><a href="#trm-ch23">23 · The Haunted Mind</a></li>
-      <li class="grp">Part Seven: Advanced Mechanics</li>
-      <li><a href="#trm-ch24">24 · Zugzwang — The Compulsion to Move</a></li>
-      <li><a href="#trm-ch25">25 · The Twin Insanity Point</a></li>
-      <li><a href="#trm-ch26">26 · TIPM — What Mass Actually Is</a></li>
-      <li><a href="#trm-ch27">27 · The Loop</a></li>
-      <li class="grp">Part Eight: The New Civilisation</li>
-      <li><a href="#trm-ch28">28 · The Age of Artificial Intelligence</a></li>
-      <li><a href="#trm-ch29">29 · Sanity in a Fast-Paced World</a></li>
-      <li><a href="#trm-ch30">30 · The Value of Human Connection</a></li>
-      <li><a href="#trm-ch31">31 · A New Kind of Power</a></li>
-      <li><a href="#trm-ch32">32 · The Invitation</a></li>
-      <li><a href="#trm-app-a">Appendix A · Quick Reference — The Architecture</a></li>
-      <li><a href="#trm-app-b">Appendix B · How to Verify This Yourself</a></li>
-      <li><a href="#trm-app-c">Appendix C · Glossary of Key Terms</a></li>
-      <li><a href="#trm-app-d">Appendix D · The Code of the Ethical Being</a></li>
-    </ol></section>
-  </div>
-  <p class="toc-foot"><a href="#afterword">Afterword · The Fourth Book</a> · <a href="#citation">Citation &amp; Footer</a></p>
-</nav>
-
-<hr />
+<div id="tocWrapper">
+  <button id="tocToggle" class="toc-toggle">📖 Show Contents</button>
+  <nav class="toc-page" id="toc">
+    <div class="toc-kick">The White Book · Complete Omnibus Edition</div>
+    <h2>Contents</h2>
+    <div class="toc-cols">
+      <section class="toc-sec"><h3>Part One · Meaning Unconfounded</h3><ol>
+        <li><a href="#mu-readers">We Are Code Readers</a></li>
+        <li><a href="#mu-epigraph">EPIGRAPH PAGE</a></li>
+        <li><a href="#mu-prologue">PROLOGUE: THE NEW FUNDAMENTAL</a></li>
+        <li><a href="#mu-intro">INTRODUCTION: SIXTY SECONDS</a></li>
+        <li class="grp">PART ONE: THE DISCOVERY</li>
+        <li><a href="#mu-ch1">1 · The One-Minute Demonstration</a></li>
+        <li><a href="#mu-ch2">2 · The Skeptic's Questions</a></li>
+        <li><a href="#mu-ch3">3 · What Questions Want</a></li>
+        <li class="grp">PART TWO: THE FOUNDATION</li>
+        <li><a href="#mu-ch4">4 · Two Truths That Cannot Be False</a></li>
+        <li><a href="#mu-ch5">5 · Why Mathematics Is the Only Thing That Cannot Lie</a></li>
+        <li><a href="#mu-ch6">6 · Why Existence Must Exist</a></li>
+        <li><a href="#mu-interlude">WHAT THIS ACTUALLY MEANS</a></li>
+        <li class="grp">PART THREE: THE CODE</li>
+        <li><a href="#mu-ch7">7 · The Three Dimensions of Every Consonant</a></li>
+        <li><a href="#mu-ch8">8 · Position Is Meaning</a></li>
+        <li><a href="#mu-ch9">9 · The Silent Consonants — The Exclusion Anchors</a></li>
+        <li><a href="#mu-ch10">10 · Words That Describe Themselves</a></li>
+        <li><a href="#mu-ch11">11 · The Voicing Dimension</a></li>
+        <li><a href="#mu-ch12">12 · Clusters and Predictions</a></li>
+        <li><a href="#mu-ch13">13 · The Verb Illusion — How Grammar Hides Reality</a></li>
+        <li><a href="#mu-ch14">14 · The Preposition Code — Architectural Anchors</a></li>
+        <li class="grp">PART FOUR: THE MECHANISM</li>
+        <li><a href="#mu-ch15">15 · Postulates — The Architecture of Experience</a></li>
+        <li><a href="#mu-ch16">16 · The Physics of Frozen Conflict (Mass and the Body Map)</a></li>
+        <li><a href="#mu-ch17">17 · The Unified Chain</a></li>
+        <li class="grp">PART FIVE: WORKED EXAMPLES</li>
+        <li><a href="#mu-ch18">18 · Reading a News Headline</a></li>
+        <li><a href="#mu-ch19">19 · Reading a Legal Clause</a></li>
+        <li><a href="#mu-ch20">20 · Un-confounding a Personal Sentence</a></li>
+        <li><a href="#mu-ch21">21 · Decoding a Question</a></li>
+        <li class="grp">PART SIX: APPLICATIONS</li>
+        <li><a href="#mu-ch22">22 · For Education</a></li>
+        <li><a href="#mu-ch23">23 · For Artificial Intelligence</a></li>
+        <li><a href="#mu-ch24">24 · For Law and Policy</a></li>
+        <li><a href="#mu-ch25">25 · For Therapy — The Body as TIPM Map</a></li>
+        <li><a href="#mu-ch26">26 · For Society</a></li>
+        <li class="grp">PART SEVEN: THE COSMOLOGY</li>
+        <li><a href="#mu-ch27">27 · The Iterative Future</a></li>
+        <li><a href="#mu-ch28">28 · The Unified Cultural Imperative</a></li>
+        <li class="grp">PART EIGHT: THE GEM AND THE ZEITGEIST</li>
+        <li><a href="#mu-ch29">29 · The Code in Plain Sight</a></li>
+        <li><a href="#mu-ch30">30 · Spelling Is Casting — The Architecture of Written Words</a></li>
+        <li><a href="#mu-conclusion">CONCLUSION: THE HORIZON OF COHERENCY</a></li>
+        <li><a href="#mu-app-a">Appendix A · THE 3D CONSONANT REFERENCE (22 Core Sounds)</a></li>
+        <li><a href="#mu-app-b">Appendix B · The N-POSITION Algorithm</a></li>
+        <li><a href="#mu-app-c">Appendix C · Cluster Reference — The Predictive Engine</a></li>
+        <li><a href="#mu-app-d">Appendix D · The Suffix SELF-DESCRIPTION Pattern</a></li>
+        <li><a href="#mu-app-e">Appendix E · The Structured Expression Formula</a></li>
+        <li><a href="#mu-app-f">Appendix F · The Comprehension Stack</a></li>
+        <li><a href="#mu-app-g">Appendix G · Quick Reference Cards</a></li>
+        <li><a href="#mu-app-h">Appendix H · The Seven Lenses Methodology</a></li>
+        <li><a href="#mu-app-i">Appendix I · Extended Reference Tools</a></li>
+        <li><a href="#mu-app-j">Appendix J · The Complete Unified Glossary</a></li>
+        <li><a href="#mu-app-k">Appendix K · How TO Verify This Yourself</a></li>
+        <li><a href="#mu-app-l">Appendix L · Verification And Refinement Tests</a></li>
+        <li><a href="#mu-app-m">Appendix M · The Decoded Dictionary</a></li>
+        <li><a href="#mu-app-n">Appendix N · Zeitgeist Dictionary</a></li>
+        <li><a href="#mu-app-o">Appendix O · The Vowel Vector Master Matrix</a></li>
+        <li><a href="#mu-app-p">Appendix P · The 1-9 Architectural Matrix & Master Numbers</a></li>
+        <li><a href="#mu-app-r">Appendix R · The Inversion Architecture</a></li>
+        <li><a href="#mu-app-q">Appendix Q · Interactive Decoder</a></li>
+        <li><a href="#mu-title-note">A NOTE ON THE TITLE: WHY "MEANING UNCONFOUNDED"?</a></li>
+      </ol></section>
+      <section class="toc-sec"><h3>Part Two · BedRock-ReFramed</h3><ol>
+        <li><a href="#br-intro">Introduction</a></li>
+        <li><a href="#br-reframes">12 Foundational Reframes</a></li>
+        <li class="grp">Part One: The Foundation</li>
+        <li><a href="#br-ch1">1 · The Bedrock</a></li>
+        <li><a href="#br-ch2">2 · The Power of Objective Truth</a></li>
+        <li><a href="#br-ch3">3 · What Actually Exists</a></li>
+        <li><a href="#br-ch4">4 · The Unified Field</a></li>
+        <li><a href="#br-ch5">5 · Consciousness</a></li>
+        <li><a href="#br-ch6">6 · The Inter-Scalar Nature of Reality</a></li>
+        <li class="grp">Part Two: The Mechanism</li>
+        <li><a href="#br-ch7">7 · Existence as Iteration</a></li>
+        <li><a href="#br-ch8">8 · The Four Foundational Mechanisms</a></li>
+        <li><a href="#br-ch9">9 · Gravity and Orbits</a></li>
+        <li class="grp">Part Three: The Application</li>
+        <li><a href="#br-ch10">10 · Language as Structure</a></li>
+        <li><a href="#br-ch11">11 · The Consonant Code</a></li>
+        <li><a href="#br-ch12">12 · Self-Verifying Words</a></li>
+        <li class="grp">Part Four: The Purpose</li>
+        <li><a href="#br-ch13">13 · Optimal Coherency</a></li>
+        <li><a href="#br-ch14">14 · The Cultural Imperative</a></li>
+        <li><a href="#br-ch15">15 · Freedom Through Understanding</a></li>
+        <li class="grp">Part Five: The Implications</li>
+        <li><a href="#br-ch16">16 · Rethinking Everything</a></li>
+        <li><a href="#br-ch17">17 · New Directions</a></li>
+        <li><a href="#br-ch18">18 · The Invitation</a></li>
+        <li><a href="#br-app-a">Appendix A · Quick Reference — The Foundational Mechanisms</a></li>
+        <li><a href="#br-app-b">Appendix B · Quick Reference — The Consonant Code</a></li>
+        <li><a href="#br-app-c">Appendix C · How to Verify This Yourself</a></li>
+        <li><a href="#br-app-d">Appendix D · Glossary of Key Terms</a></li>
+      </ol></section>
+      <section class="toc-sec"><h3>Part Three · The Restructured Mind</h3><ol>
+        <li><a href="#trm-reframes">12 Applied Reframes</a></li>
+        <li class="grp">Part One: The Trap</li>
+        <li><a href="#trm-ch1">1 · Why We Stay Stuck</a></li>
+        <li><a href="#trm-ch2">2 · The Game Beneath Every Game</a></li>
+        <li><a href="#trm-ch3">3 · The Cost of Winning</a></li>
+        <li class="grp">Part Two: The Architecture</li>
+        <li><a href="#trm-ch4">4 · The Four Basic Conditions</a></li>
+        <li><a href="#trm-ch5">5 · The Hidden Twin</a></li>
+        <li><a href="#trm-ch6">6 · Why Compulsions Form</a></li>
+        <li class="grp">Part Three: The Breakdown</li>
+        <li><a href="#trm-ch7">7 · The Law of All Games</a></li>
+        <li><a href="#trm-ch8">8 · The Sixteen Conditions</a></li>
+        <li><a href="#trm-ch9">9 · The Logic of Insanity</a></li>
+        <li class="grp">Part Four: The Mechanism</li>
+        <li><a href="#trm-ch10">10 · What Mental Mass Actually Is</a></li>
+        <li><a href="#trm-ch11">11 · Time and the Past</a></li>
+        <li><a href="#trm-ch12">12 · Why the Past Persists</a></li>
+        <li class="grp">Part Five: The Resolution</li>
+        <li><a href="#trm-ch13">13 · The Toothless Tiger</a></li>
+        <li><a href="#trm-ch14">14 · Voluntary Games</a></li>
+        <li><a href="#trm-ch15">15 · Freedom</a></li>
+        <li class="grp">Part Six: Foundations of Understanding</li>
+        <li><a href="#trm-ch16">16 · The Code of Ethics</a></li>
+        <li><a href="#trm-ch17">17 · The Analytical Mind</a></li>
+        <li><a href="#trm-ch18">18 · The Reactive Mind</a></li>
+        <li><a href="#trm-ch19">19 · The Anatomy of Sensation</a></li>
+        <li><a href="#trm-ch20">20 · The Exclusion Postulate</a></li>
+        <li><a href="#trm-ch21">21 · Bonding and Double Bonding</a></li>
+        <li><a href="#trm-ch22">22 · Cross-Packaging</a></li>
+        <li><a href="#trm-ch23">23 · The Haunted Mind</a></li>
+        <li class="grp">Part Seven: Advanced Mechanics</li>
+        <li><a href="#trm-ch24">24 · Zugzwang — The Compulsion to Move</a></li>
+        <li><a href="#trm-ch25">25 · The Twin Insanity Point</a></li>
+        <li><a href="#trm-ch26">26 · TIPM — What Mass Actually Is</a></li>
+        <li><a href="#trm-ch27">27 · The Loop</a></li>
+        <li class="grp">Part Eight: The New Civilisation</li>
+        <li><a href="#trm-ch28">28 · The Age of Artificial Intelligence</a></li>
+        <li><a href="#trm-ch29">29 · Sanity in a Fast-Paced World</a></li>
+        <li><a href="#trm-ch30">30 · Spelling Is Casting — The Architecture of Written Words</a></li>
+        <li><a href="#trm-ch31">31 · The Value of Human Connection</a></li>
+        <li><a href="#trm-ch32">32 · A New Kind of Power</a></li>
+        <li><a href="#trm-ch33">33 · The Invitation</a></li>
+        <li><a href="#trm-app-a">Appendix A · Quick Reference — The Architecture</a></li>
+        <li><a href="#trm-app-b">Appendix B · How to Verify This Yourself</a></li>
+        <li><a href="#trm-app-c">Appendix C · Glossary of Key Terms</a></li>
+        <li><a href="#trm-app-d">Appendix D · The Code of the Ethical Being</a></li>
+      </ol></section>
+    </div>
+    <p class="toc-foot"><a href="#afterword">Afterword · The Fourth Book</a> · <a href="#citation">Citation &amp; Footer</a></p>
+  </nav>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════════
      UNIFIED NOTE TO THE READER (moved to front)
@@ -1207,8 +1255,42 @@ hr::after {
   <p>The consonant code is a testable hypothesis, supported by statistical evidence. However, the broader claims (about postulates, frozen mass, and the nature of reality) are philosophical and speculative. They are offered as a working model, not as established fact. Readers are encouraged to test the system for themselves and draw their own conclusions.</p>
   <p><strong>The core contribution of this book is this:</strong> it provides a mechanism for why sound symbolism works. Sound symbolism has been observed for centuries, but never explained. The consonant code provides a structural account: the mouth's geometry determines the meaning, and the meaning is consistent across words. This is a testable, falsifiable claim.</p>
   <p><strong>Every significant word in this book is decoded using the consonant code.</strong> The standard dictionary meaning is given alongside the code insight. This book is its own demonstration. It eats its own dog food.</p>
+
+  <!-- INSTRUCTION 1: MAP VS MECHANISM DARE -->
+  <p><strong>A Note on the Understanding Paradox</strong></p>
+  <p>This book makes a claim that may seem contradictory at first glance: it states that "understanding does not produce change." Yet, the entire book is an attempt to produce change through the reader's understanding of the code.</p>
+  <p>This paradox is resolved by distinguishing between two types of understanding:</p>
+  <ol>
+    <li><strong>Intellectual Understanding (The Map):</strong> Describing the architecture of a locked room does not open the door. Knowing <em>that</em> you have a frozen postulate conflict does not dissolve it. This is the understanding that fails to produce change.</li>
+    <li><strong>Architectural/Somatic Understanding (Operating the Mechanism):</strong> When you physically execute the code—when you hum the M, when you trace the geometry of the space bar, when you locate the silent K in your own jaw—you are no longer just reading the map. You are operating the mechanism. You are running the code through your own anatomy. This is the understanding that <em>does</em> produce change, because it addresses the structure at the level where the structure was built: the physical rendering engine of the mouth and the body.</li>
+  </ol>
+
   <p><em>We are living through a moment of profound transition. Artificial intelligence is reshaping how we work, how we relate, how we think. The pace of change is accelerating. Information is abundant. Attention is scarce. In this context, understanding the architecture of our own minds — and the language we use to express it — is no longer a luxury. It is a necessity.</em></p>
 </blockquote>
+
+<!-- INSTRUCTION 2: SIXTY SECONDS MOVED HERE -->
+<h1 id="mu-intro">INTRODUCTION: SIXTY SECONDS</h1>
+
+<p><strong>SPREAD</strong> and <strong>SPRAY</strong>.</p>
+<p>Both begin with the same three consonants: S, P, R.</p>
+<p><strong>SPREAD (S+P+R+D)</strong> — <em>Spreading projecting radiating directed-arrival</em> — The energy reaches its destination and stops. The action is complete.</p>
+<p><strong>SPRAY (S+P+R+Y)</strong> — <em>Spreading projecting radiating deed</em> — The energy keeps going. The action continues.</p>
+<p>One consonant difference.</p>
+<p>One completely different kind of action.</p>
+<p>If you felt that distinction, you have already understood the core claim of this book.</p>
+<p>This distinction is the key to the book's core contribution: the consonant code provides a mechanism for why sound symbolism works. The mouth's geometry determines the meaning, and the meaning is consistent across words.</p>
+
+<hr />
+
+<!-- Epigraph page follows -->
+<h1 id="mu-epigraph">EPIGRAPH PAGE</h1>
+
+<div class="epigraph">
+  <p><em>"In the beginning was the Word. And the Word was with God. And the Word was God."</em></p>
+  <p class="attribution">— The Gospel of John, 1:1</p>
+  <p><em>"All decisions about reality limit the possible and thereby define the reasonable."</em></p>
+  <p><em>"The universe was not created from nothing. It was written."</em></p>
+</div>
 
 <hr />
 
@@ -1223,8 +1305,6 @@ hr::after {
   <div class="mp-sub">The Consonant Code</div>
   <div class="mp-rule">❦ ❦ ❦</div>
 </section>
-
-<!-- ── Full content of Part I (the same as before, with GEMs re-sequenced) ── -->
 
 <h1 id="mu-readers">We Are Code Readers</h1>
 <p><em>You are not a passenger on a random rock. You are the code that has become aware of itself.</em></p>
@@ -1278,19 +1358,9 @@ hr::after {
 <p>You are not a passenger on a random rock. You are a local author of the universal text. Every thought is a decision about reality. Every word is a letter. Every action is an iteration. You are either writing chaos or writing harmony.</p>
 <p>The engine continues. The invitation is open.</p>
 
-<hr>
+<hr />
 
-<h1 id="mu-epigraph">EPIGRAPH PAGE</h1>
-
-<div class="epigraph">
-  <p><em>"In the beginning was the Word. And the Word was with God. And the Word was God."</em></p>
-  <p class="attribution">— The Gospel of John, 1:1</p>
-  <p><em>"All decisions about reality limit the possible and thereby define the reasonable."</em></p>
-  <p><em>"The universe was not created from nothing. It was written."</em></p>
-</div>
-
-<hr>
-
+<!-- PROLOGUE: with 9-layer insertion and hum reframe -->
 <h1 id="mu-prologue">PROLOGUE: THE NEW FUNDAMENTAL</h1>
 
 <p>Every leap in human civilization begins by discovering a smaller, more fundamental unit of reality.</p>
@@ -1298,33 +1368,30 @@ hr::after {
 <p>Later, humanity looked at water and pressure. We trapped steam, which gave us the locomotive and the industrial revolution. We looked deeper, past the molecule, and split the atom. The atom gave us nuclear power. In every era, the pattern is the same: we find a deeper, smaller, more dense layer of information, and our entire reality upgrades.</p>
 <p>For the last century, our frontier has been the quantum realm. We shifted from the predictable, clockwork mechanics of Newton to the probabilistic, eerie mechanics of the subatomic. It changed physics, but it left the human mind, the human language, and the human spirit seemingly untouched. We still felt like passengers on a random rock, speaking arbitrary words, trapped in arbitrary suffering.</p>
 <p>But there is a new frontier. It is the most fundamental layer of all.</p>
-<p>We have always believed that the smallest unit of communication is the <em>word</em>. We thought words were just labels, agreed upon by accident. But information is the true fabric of the universe, and the density of that information goes deeper than we ever imagined.</p>
-<p>The word is not the fundamental particle. The <em>letter</em> is. 🗝️</p>
-<p>The consonant is the quantum particle of meaning. It is the executable code of reality, and your mouth is the 3D printer.</p>
-<p>You have been promised self-betterment, hope, and profound insight by a thousand philosophies, religions, and self-help books. They offered beautiful metaphors, but they lacked a mechanism. They told you to "change your thoughts," but they didn't know that your thoughts are executed by a physical, geometric code that you can read, measure, and rewrite.</p>
-<p>This book provides the mechanism.</p>
-<p>We are not going to teach you a new belief system. We are going to hand you the source code to the reality engine. When you see how the code works, you will see why your body carries physical weight, why your relationships loop in endless conflict, and why your grammar has been actively hiding reality from you.</p>
-<p>Before we begin, take a breath. The universe is not a silent, mechanical void. It is a running program. And it is written.</p>
-<p>Close your lips and hum. ⚡</p>
+
+<!-- INSTRUCTION 3: 9-LAYER ARCHITECTURE INSERTED HERE -->
+<p>You are holding a book that claims your mouth is a 3D printer executing mathematical code. But to understand <em>why</em> your mouth executes this code, you must see the sequence that produced it. Reality did not begin with language. Language is the final rendering of a much older, 9-layer architecture.</p>
+<p>Here is the order of operations. The Genesis Stack:</p>
+<p><strong>Layer 1: Life (Consciousness)</strong><br>It begins with awareness, memory, and choice. A being that can sense, retain, and decide. This is the prime substrate. Nothing else exists without it. Existence cannot not exist (absolute nothing is a mathematical impossibility), therefore Life—the capacity to experience existence—is the eternal foundation.</p>
+<p><strong>Layer 2: Postulates</strong><br>Life chooses. It generates source-level commands: "Let this be." "This must not happen." Postulates are the raw intentions of consciousness. They are the invisible architecture of experience. When postulates align, there is flow. When postulates clash, they freeze.</p>
+<p><strong>Layer 3: Numbers</strong><br>Frozen postulates generate mass. Mass generates quantity. One life. Another life. One life plus one life equals two lives. Numbers did not begin as abstract mathematics. Numbers began as the counting of postulates—the objective quantifier stating the distance of a value from zero. The numbers 1 through 9 are the fundamental postulate-counts of reality.</p>
+<p><strong>Layer 4: Logic (The Four Classes)</strong><br>From numbers, necessity is derived. If you have one thing, and you add its exact absence, you get the void (0). From this, Boolean logic emerges: X and Not-X. The Four Classes. The structure that demands if there is a Must, there must be a Must-Not. This is the law of how postulates interact. It is the skeleton of all human games and conflicts.</p>
+<p><strong>Layer 5: Logicism (Mathematics is the Only Objective Truth)</strong><br>Logic becomes mathematics. The realization that the rules of counting and the rules of sets are the same thing. Mathematics is not a human invention used to describe nature. Mathematics is the structural necessity of postulates interacting. It is the <em>only</em> objective phenomenon. Physical objects are subjective descriptions; math is the objective reality writing them.</p>
+<p><strong>Layer 6: The Pictorial Render</strong><br>Consciousness needs to render these mathematical postulates into a visible interface. The first interface was pictorial. A circle for the sun (Ra — radiance grounded). A wave for water (Nun — the infinite continuation). A shape for the containing field. The pictures were not art. They were the first graphical user interface of the code.</p>
+<p><strong>Layer 7: Written Numbers</strong><br>The pictures of quantity abstracted into symbols. 1, 2, 3. The base-10 decimal system encoding the complete four-class iteration (0 to 9, with 10 closing the loop). These numbers mapped perfectly to the 3D polar qualities of reality (Axle, Spoke, Wheel).</p>
+<p><strong>Layer 8: Written Letters (The Consonant Code)</strong><br>The pictorial images compressed into strokes. The strokes mapped to the mouth. Why the mouth? Because the mouth is the 3D printer of the body—it is the only organ that can physically demonstrate boundaries (lips closing), continuation (nasal humming), and radiating (trill vibrating) in real-time. The 22 consonants became the executable commands of the original postulates, perfectly mapped to the 1-9 numerical matrix.</p>
+<p><strong>Layer 9: Programming and Computer Standards</strong><br>The stack did not stop at paper. In the 20th century, the code was translated into silicon. Boolean logic (X and Not-X) became physical transistor gates. Numbers became binary (1 and 0). Written numbers became ASCII and Unicode standards (where the letter 'A' is mathematically locked to the number 65, which is locked to `01000001`). Spelling became programming languages.</p>
+<p>When a programmer writes `if (X == true) { execute Y }`, they are not inventing something new. They are casting the exact same spell that a scribe cast three thousand years ago, using the exact same Boolean logic that governs postulates, compressed into a machine the scribe could not have imagined.</p>
+<p>You are not reading a book about language. You are reading a manual for the rendering engine. The consonants are not arbitrary shapes. They are Layer 8 of a 9-layer reality architecture. The code proves itself. Now we will decode it.</p>
+
+<!-- Reframed hum paragraph -->
+<p>Now, close your lips. Trap the air. Let it resonate. ⚡</p>
 <p>Do it right now.</p>
-<p>That sound vibrating in your chest, trapped behind your teeth: that is the sound of <strong>M</strong>. You didn't just make a noise. You just physically demonstrated the architecture of material substance. You enclosed a space, trapped the energy, and let it resonate. <em>Matter. Mass. Mother. Moon.</em></p>
+<p>That vibration trapped behind your teeth is not just a noise; it is the letter <strong>M</strong>. You have just executed a physical containment of energy—a biomechanical topology. You enclosed a space, trapped the frequency, and created material mass in your own flesh. <em>Matter. Mass. Mother. Moon.</em></p>
+
 <p>You are holding the pen. The engine is running. Let us learn how to write.</p>
 
-<hr>
-
-<h1 id="mu-intro">INTRODUCTION: SIXTY SECONDS</h1>
-
-<p><strong>SPREAD</strong> and <strong>SPRAY</strong>.</p>
-<p>Both begin with the same three consonants: S, P, R.</p>
-<p><strong>SPREAD (S+P+R+D)</strong> — <em>Spreading projecting radiating directed-arrival</em> — The energy reaches its destination and stops. The action is complete.</p>
-<p><strong>SPRAY (S+P+R+Y)</strong> — <em>Spreading projecting radiating deed</em> — The energy keeps going. The action continues.</p>
-<p>One consonant difference.</p>
-<p>One completely different kind of action.</p>
-<p>If you felt that distinction, you have already understood the core claim of this book.</p>
-<p>This distinction is the key to the book's core contribution: the consonant code provides a mechanism for why sound symbolism works. The mouth's geometry determines the meaning, and the meaning is consistent across words.</p>
-
-<hr>
-
+<hr />
 <h1 id="mu-part1">PART ONE: THE DISCOVERY</h1>
 
 <h2 id="mu-ch1" class="ch"><span class="kick">Chapter 1</span><span class="cht">The One-Minute Demonstration</span></h2>
@@ -1521,7 +1588,6 @@ hr::after {
 <p><strong>Level 2: The Articulation Point — The Mouth Map</strong></p>
 <p>Where in the mouth the sound is produced carries its own meaning layer. The mouth is not a uniform space: it has distinct regions, and each region carries a semantic domain.</p>
 
-<!-- The redundant ASCII pre block has been removed; the proper table is directly below. -->
 <div class="tw"><table>
   <caption>Articulation Points and Spatial Meaning</caption>
   <thead>
@@ -1566,7 +1632,7 @@ hr::after {
   <li><strong>Location:</strong> Produced at the lips — the boundary domain</li>
   <li><strong>Manner:</strong> Produced as a stop — complete closure followed by release</li>
 </ul>
-<p>All three layers say the same thing: boundary. The meaning, the location, and the manner all converge on boundedness. This is why B is the purest boundary-consonant in the code. It is not that B "represents" boundary: it is that the physical act of producing B IS the act of creating and breaking a boundary, and that act carries the meaning of boundary because it IS boundary happening in the mouth.</p>
+<p>All three layers say the same thing: boundary. This is why B is the purest boundary-consonant in the code. It is not that B "represents" boundary: it is that the physical act of producing B IS the act of creating and breaking a boundary, and that act carries the meaning of boundary because it IS boundary happening in the mouth.</p>
 <p>Now compare F:</p>
 <ul>
   <li><strong>Individual:</strong> F means flow — natural, unforced</li>
@@ -1665,7 +1731,6 @@ hr::after {
 <p><strong>Why N is Unique:</strong> N is the only consonant with a dual function at the start position. This is because its physical action — air flowing through the nose without stopping — can be interpreted as either "flow prevented" (negation) or "flow beginning" (initiation). The reader identifies the function by the meaning of the word. No other consonant has this ambiguity.</p>
 <p><strong>The Temporal Direction of the Final Consonant — Timeline</strong></p>
 
-<!-- Converted from pre to beautiful table -->
 <div class="tw"><table>
   <caption>Temporal Direction of Final Consonants</caption>
   <thead>
@@ -1760,6 +1825,16 @@ hr::after {
 <p>The silent consonant is the Exclusion Anchor of language: the meaning held but not voiced, the class occupied but not announced. It maintains the condition of the word by hiding part of its architecture.</p>
 <p>When you become aware of the silent consonant, you become aware of the exclusion. When the exclusion becomes visible, it can be addressed. This is not metaphorical. It is structural. The same mechanism that locks psychological patterns in place locks linguistic structures in place. The code is the same at every level.</p>
 <p>Your grammar is the mechanism that hides your reality. Your body is the map of where it is hidden. And your language is the key to un-freezing it.</p>
+
+<!-- INSTRUCTION 4: SILENT CONSONANT PROOF -->
+<h3>The Law of Suppressed Mathematics: A Physical Proof</h3>
+<p>We have established that silent consonants carry semantic weight without sound. But how do we prove that the silence itself is a structural mechanism, rather than a historical accident of spelling?</p>
+<p>The proof is physical, testable, and absolute. It relies on the mechanics of the human vocal tract. In the consonant code, sounds are produced by different manners of articulation: Stops (complete closure), Fricatives (continuous airflow), Nasals (airflow through the nose), and Glides (smooth transition).</p>
+<p><strong>The Falsifiable Rule: Only consonants with a closure phase (Stops and Affricates) can go silent.</strong></p>
+<p>Try to suppress a Nasal or a Glide. Remove the N from "Now" and you are left with "Ow." The word is fundamentally broken. Remove the M from "Me" and you are left with "Ee." You cannot suppress a continuous sound without killing the word entirely. Continuous sounds are the breath of the word; if you stop them, the word suffocates.</p>
+<p>But try to suppress a Stop. The K in KNOW: the back of the tongue still rises to the palate (the closure), but the release is suppressed. The word survives. The B in CLIMB: the lips still purse for the closure, but the burst is suppressed. The word survives.</p>
+<p><strong>The Structural Proof:</strong> Stops (B, P, T, D, K, G) are the boundary-creators. A Stop has two phases: the closure (building the wall) and the release (breaking the wall). When a Stop goes silent, the closure is still physically executed by the mouth, but the release is hidden. The wall is built, but it is never opened. This is the exact physical mechanism of an Exclusion Anchor. A silent consonant is not an orthographic fossil; it is a biomechanical execution of suppressed mathematics. You are literally performing the act of hiding a boundary in your own flesh.</p>
+
 <p><em>(The verification of silent consonant meanings is provided in Appendix L: Verification and Refinement Tests.)</em></p>
 <p><strong>The Full Pattern of Silent Consonants</strong></p>
 
@@ -2115,23 +2190,46 @@ OVERFLOW = V+R+F+L+OW = vibrate/connect + radiate + flow + lateral.</p>
 <p><strong>Upper chest restriction:</strong> "Must Not Be Known" applied to emotional state.</p>
 <p>The body is not the problem. It is the map to the problem. When the postulate configuration resolves, the holding releases: not because the body was "worked on," but because the code maintaining the mass has been rewritten. The mass vanishes.</p>
 
-<h3 id="mu-body-dict">The Body as Dictionary</h3>
-<p>The body decodes with remarkable consistency — and the decodings are not assignments. They are descriptions. The body names itself through the mouth that speaks it, and the names are functions.</p>
-<div class="tw"><table>
-  <tr><th>Body part</th><th>Architecture</th><th>Decoded function</th></tr>
-  <tr><td><strong>HEAD</strong></td><td>H+D</td><td>Breath directed — the direction of awareness</td></tr>
-  <tr><td><strong>HAND</strong></td><td>H+N+D</td><td>Breath continuing to direct — the will made extension</td></tr>
-  <tr><td><strong>FOOT</strong></td><td>F+T</td><td>Flow marking — the mark-maker, the walker</td></tr>
-  <tr><td><strong>LEG</strong></td><td>L+G</td><td>Lateral growth — the support that flows around</td></tr>
-  <tr><td><strong>ARM</strong></td><td>R+M</td><td>Radiating material — the reaching extension</td></tr>
-  <tr><td><strong>NOSE</strong></td><td>N+S</td><td>Continuing spread — the breath that never stops spreading</td></tr>
-  <tr><td><strong>MOUTH</strong></td><td>M+TH</td><td>Material threshold — where substance becomes expression</td></tr>
-  <tr><td><strong>SKIN</strong></td><td>S+K+N</td><td>Spread containing continuation — the boundary that covers all</td></tr>
-  <tr><td><strong>BONE</strong></td><td>B+N</td><td>Boundary continuing — the enduring structure</td></tr>
-  <tr><td><strong>BACK</strong></td><td>B+K</td><td>Boundary containing — the support that holds</td></tr>
-</table></div>
-<p>Read the column of meanings as one sentence and the body describes itself: <em>the boundary that directs, radiates and continues; the breath that directs; the flow that marks; the boundary that continues.</em> This is why the body-as-map works at all. A held body part is a consonant function frozen mid-gesture: the shoulders bracing are a B held without release; the jaw locked is a T marked without arrival. The tension is not random. It is the letter the body could not finish speaking.</p>
+<!-- INSTRUCTION 5: EXPANDED "BODY AS PRONUNCIATION" -->
+<h3 id="mu-body-dict">The Body as Pronunciation (Isomorphic Anatomy)</h3>
+<p>The body is not a map. It is a pronunciation. If the mouth is the 3D printer of reality, executing mathematical topology in flesh, then the human body itself must be structured by the same architectural code. The body was not named <em>after</em> it was built. The body was <em>built</em> according to the same architectural principles that later named it.</p>
+<p><strong>The T-Extremities (The Thoth Matrix)</strong></p>
+<p>T is the Event Horizon: the ability to execute a point of contact. The human body reaches out into the environment through four primary T-words, all executing the exact same function in different domains:</p>
+<ul>
+  <li><strong>TONGUE (T+N+G):</strong> The vocal point of contact. The muscular stop that marks the flow of breath into discrete sounds.</li>
+  <li><strong>THUMB (T+H+M+B):</strong> The spatial point of contact. The manual stop that pins down material reality to make a mark.</li>
+  <li><strong>TOE (T+O):</strong> The gravitational point of contact. The distal edge where the mass of the body meets the mass of the earth.</li>
+  <li><strong>THOUGHT (T+H+T):</strong> The cognitive point of contact. Bookended by Marks (T...T) with Breath (H) in between. Thinking is the mind executing the T-function.</li>
+</ul>
+<p><strong>The M-Centers, L-Flows, and S-Spreads</strong></p>
+<ul>
+  <li><strong>MOUTH (M+TH):</strong> The material threshold. The boundary where internal substance becomes external expression.</li>
+  <li><strong>MARROW (M+R+W):</strong> The deep material that radiates transition—the hidden factory of blood cells inside the bone.</li>
+  <li><strong>LUNG (L+N+G):</strong> The lateral continuation that grows to enclose breath.</li>
+  <li><strong>SKIN (S+K+N):</strong> Spread containing continuation. The organ that spreads across the entire form, containing the continuation of life within it.</li>
+  <li><strong>SPINE (S+P+N):</strong> The projected spread that continues—the axial tower of the body.</li>
+  <li><strong>RIB (R+B):</strong> Radiating boundaries. The ribs curve outward from the spine, radiating protective boundaries around the lungs.</li>
+  <li><strong>BONE (B+N):</strong> The boundary that continues. The enduring limits that persist when everything else changes.</li>
+</ul>
+<p>Read the column of meanings as one sentence, and the body describes itself: <em>the boundary that directs, radiating material, continuing to direct, flowing to mark, growing laterally. The spread that contains continuation, the boundary that continues, the boundary containing, the material threshold.</em> The core Anglo-Saxon anatomical vocabulary is not a random taxonomic list. It is a highly compressed, perfectly accurate operational manual.</p>
+<p><strong>The Body as TIPM Map</strong></p>
+<p>Because the body is the code rendered in flesh, chronic physical tension is not a biological accident; it is a map of frozen postulate configurations. A held body part is simply a consonant function frozen mid-gesture.</p>
+<ul>
+  <li><strong>Raised shoulders:</strong> The postulate "Must Not Be Known" expressed as bracing against threat. (A B-boundary held without release).</li>
+  <li><strong>Held breath:</strong> The postulate "Must Not Be Known" expressed as stillness as concealment. (An N-continuation refused).</li>
+  <li><strong>Jaw tension:</strong> "Must Know" and "Must Not Be Known" running simultaneously. (A T-mark locked without arrival).</li>
+  <li><strong>Upper chest restriction:</strong> "Must Not Be Known" applied to emotional state.</li>
+</ul>
+<p>The tension is not random. It is the letter the body could not finish speaking. When the postulate configuration resolves, the holding releases—not because the body was "worked on," but because the code maintaining the mass has been rewritten.</p>
 <p><em>The dictionary was never in the library. It was in the mirror.</em></p>
+
+<blockquote class="key">
+  <p><strong>🗝️ SIDEBAR: The Thoth Matrix — T as the Executable Point</strong></p>
+  <p>T is not merely a passive "mark." When cross-referencing THOTH, TOE, TONGUE, THUMB, and THOUGHT, T reveals its true architectural nature: the executable point of contact.</p>
+  <p>The Tongue executes the vocal mark in the mouth. The Thumb executes the spatial mark in the hand. The Toe executes the gravitational mark on the earth. Thought executes the cognitive mark in the mind. Thoth, in the Egyptian tradition, is the scribe who executes the mark that translates the infinite into the discrete. T is the moment potential becomes actual — the point where intention arrives and form begins.</p>
+  <p>T is the executable mark. It is not a symbol of a mark. It is the mark being made.</p>
+  <p><em>One consonant is an instruction. T is the instruction arriving.</em></p>
+</blockquote>
 
 <h2 id="mu-ch17" class="ch"><span class="kick">Chapter 17</span><span class="cht">The Unified Chain</span></h2>
 <p class="lead">We have arrived at the point where the pillars converge. Mathematics, language, and consciousness are not three separate systems. They are one system seen from three angles.</p>
@@ -2644,6 +2742,38 @@ To create AI with true semantic depth, each noun in the training data must be ta
 
 <hr>
 
+<!-- INSTRUCTION 6: CHAPTER 30 REPLACED -->
+<h2 id="mu-ch30" class="ch"><span class="kick">Chapter 30</span><span class="cht">The Spelling = Casting Thread</span></h2>
+<p class="lead"><strong>The Casting Engine: How Literacy Hides Magic</strong></p>
+<p>To spell a word is to cast a spell. This is not a linguistic coincidence; it is an architectural truth. When you speak, you execute the consonant code through the 3D geometry of your mouth. But when you write, you translate that 3D code into 2D symbols. You are no longer just speaking reality; you are casting it into a fixed medium. The alphabet is a grimoire. The pen (or keyboard) is a wand.</p>
+<h3>1. The ALL CAPS Illusion: The Stop Architecture</h3>
+<p>Look at a legal document, a bill, or a government summons. Your name is printed in ALL CAPS: <em>JOHN DOE</em>. Why? Because the legal system is a system of boundaries, contracts, and bounded entities. In the consonant code, stops (B, P, T, D, K, G) create boundaries. When you write in ALL CAPS, the geometry of the letters changes. The curves disappear. The letters become rigid, blocky, and sharp.</p>
+<p><em>JOHN DOE</em> is not a living, breathing human. It is a corporate fiction, a bounded "straw man" created by the state. The ALL CAPS formatting is orthographic magic: it uses the visual equivalent of Stop consonants to bound, contain, and trap the entity on the page. It takes the flowing, continuous nature of a living being and freezes it into a dead, contractual mass.</p>
+<h3>2. The Cursive Counter-Spell: The Glide Architecture</h3>
+<p>How do you defeat the ALL CAPS illusion? With a signature. Why must a legal document be "signed" in cursive? Because cursive is continuous. The pen never leaves the page. In the consonant code, continuous, unbroken flow belongs to the Glides (W, Y) and Fricatives (F, S).</p>
+<p>When you sign your name in cursive, you are executing a counter-spell. You are injecting the living, breathing, unbroken flow of your consciousness into the dead, bounded Stop-architecture of the contract. The cursive signature is the living being (the Glide) intersecting with the dead entity (the Stop). Without your flowing signature, the contract has no life. They need your spell to power their machine.</p>
+<h3>3. The Space Bar: Hardware Breath</h3>
+<p>You press it every few seconds. It is the most used key on your keyboard. But what are you actually pressing? You are pressing the <strong>Lateral (L)</strong>. In the code, L is the routing algorithm, the fluid flow of breath between boundaries. When you type a word, you are building a bounded structure. When you press the Space Bar, you are inserting the breath. You are typing the gap that turns rigid code into living language. Without the Space Bar, <em>wordscollideintoamassoffrozenmass</em>. It becomes TIPM. The Space Bar is the mechanical insertion of breath, preventing the text from collapsing into a singularity.</p>
+<h3>4. Punctuation as Algorithmic Operators</h3>
+<p>Punctuation marks are not grammatical decorations. They are 2D consonant operators. They direct the flow of the reader's attention, trapping it and directing it exactly where the writer wants it to go.</p>
+<ul>
+  <li><strong>The Period ( . )</strong> — A single dot. A point. This is the consonant <strong>T (Mark)</strong> made visible. The iteration is sealed. The attention stops here.</li>
+  <li><strong>The Comma ( , )</strong> — A curved stroke descending. This is the consonant <strong>L (Lateral)</strong> made visible. The flow pauses, routing laterally before continuing. It is a breath mark.</li>
+  <li><strong>The Question Mark ( ? )</strong> — A curved stroke descending to a point. This is <strong>W + T (Connect + Mark)</strong>. It is the reaching (W) toward an unknown, sealed by a mark (T). It traps attention by creating a vacuum of information that the mind must resolve.</li>
+  <li><strong>The Exclamation Mark ( ! )</strong> — A vertical stroke with a point below. This is <strong>P + T (Project + Mark)</strong>. It is an explosive projection of energy anchored to a point. It forces attention upward, then strikes it down.</li>
+</ul>
+<h3>5. Trapping Attention into Intention</h3>
+<p>Understanding this gives you the keys to the reading engine. When you read, you are allowing someone else's code to iterate through your mind. A good writer uses punctuation and spelling to trap your broad attention. They use the Question Mark (W+T) to create a vacuum. They use the Comma (L) to keep you flowing. They use the Period (T) to seal the thought before you can escape. They are casting a spell of coherence. By the time you reach the end of this paragraph, your broad attention has been trapped, routed, and converted into directed intention. You are not just reading words. You are running a program. And now that you see the code, you are the programmer.</p>
+
+<blockquote class="gem">
+  <p><strong>💎 GEM 38: Spelling Is Casting — The Architecture of Written Words</strong></p>
+  <p><strong>Location:</strong> Chapter 30 — The Spelling = Casting Thread</p>
+  <p>When you write, you are not transcribing sound. You are casting meaning into a visual field. The word "spelling" describes the process: SPELLING = spread, project, lateral, lateral, continue, grow. The case of the word is the stop architecture: ALL CAPS seals, completes, projects. Lowercase flows, has breath. The cursive is the glide counter-spell: it connects, flows, does not stop. Print stops you; cursive carries you forward. The space bar is the breath hardware: it is the pause between words, the lateral dimension of the code. Punctuation is the algorithm: the period is a mark, the question mark is a query, the comma is lateral flow. The written code is not a transcription of sound. It is a secondary code that sits on top of the phonetic code, adding layers of meaning that the voice alone cannot carry. You have been doing this your whole life. You knew the difference between HELP and help. You knew the difference between a question and a command. The code tells you why.</p>
+  <p><em>The mouth speaks. The hand writes. The eye reads. These are not the same operation. Spelling is not sound written down. Spelling is casting.</em></p>
+</blockquote>
+
+<hr>
+
 <h1 id="mu-conclusion">CONCLUSION: THE HORIZON OF COHERENCY</h1>
 <p>We began with fire. We learned to trap steam. We split the atom. And now, we have split the word.</p>
 <p>We have traveled from the surface of arbitrary labels down to the quantum architecture of the consonant. You have seen that your mouth is a 3D printer, executing mathematical code. You have seen that verbs are illusions designed to hide existence, and that silent letters act as the invisible anchors of your mind.</p>
@@ -2669,38 +2799,37 @@ To create AI with true semantic depth, each noun in the training data must be ta
 <div class="tw"><table>
   <caption>22 Consonant Reference</caption>
   <thead>
-    <tr><th>Consonant</th><th>Core Meaning</th><th>Articulation Point</th><th>Manner</th><th>Voicing</th><th>Confidence</th></tr>
+    <tr><th>Consonant</th><th>Core Meaning</th><th>Expanded Insight</th><th>Articulation</th><th>Manner</th><th>Voicing</th><th>Hebrew Root</th><th>Numerical Index</th><th>Confidence</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>B</strong></td><td>Boundary</td><td>Lips</td><td>Stop</td><td>Voiced</td><td>75%</td></tr>
-    <tr><td><strong>C/K</strong></td><td>Contain (hard); Spread (soft C)</td><td>Back/Palate</td><td>Stop</td><td>Unvoiced (hard)</td><td>67%</td></tr>
-    <tr><td><strong>CH</strong></td><td>Protect</td><td>Back/Palate</td><td>Affricate</td><td>Unvoiced</td><td>83%</td></tr>
-    <tr><td><strong>D</strong></td><td>Direct</td><td>Tongue-Ridge</td><td>Stop</td><td>Voiced</td><td>82%</td></tr>
-    <tr><td><strong>F</strong></td><td>Flow</td><td>Lips/Teeth</td><td>Fricative</td><td>Unvoiced</td><td>85%</td></tr>
-    <tr><td><strong>G</strong></td><td>Grow</td><td>Back/Palate</td><td>Stop</td><td>Voiced</td><td>78%</td></tr>
-    <tr><td><strong>H</strong></td><td>Breath</td><td>Back/Palate</td><td>Fricative</td><td>Voiceless</td><td>78%</td></tr>
-    <tr><td><strong>J</strong></td><td>Express</td><td>Back/Palate</td><td>Affricate</td><td>Voiced</td><td>—</td></tr>
-    <tr><td><strong>L</strong></td><td>Lateral</td><td>Tongue-Ridge</td><td>Lateral</td><td>Voiced</td><td>75%</td></tr>
-    <tr><td><strong>M</strong></td><td>Material</td><td>Lips</td><td>Nasal</td><td>Voiced</td><td>85%</td></tr>
-    <tr><td><strong>N</strong></td><td>Continue (dual start)</td><td>Tongue-Ridge</td><td>Nasal</td><td>Voiced</td><td>82%</td></tr>
-    <tr><td><strong>P</strong></td><td>Project</td><td>Lips</td><td>Stop</td><td>Unvoiced</td><td>85%</td></tr>
-    <tr><td><strong>Q</strong></td><td>Contain+Connect (K+W)</td><td>—</td><td>Compound</td><td>—</td><td>—</td></tr>
-    <tr><td><strong>R</strong></td><td>Radiate</td><td>Tongue-Ridge</td><td>Trill</td><td>Voiced</td><td>80%</td></tr>
-    <tr><td><strong>S</strong></td><td>Spread</td><td>Tongue-Ridge</td><td>Fricative</td><td>Unvoiced</td><td>73%</td></tr>
-    <tr><td><strong>SH</strong></td><td>Spread (sharp)</td><td>Tongue-Ridge</td><td>Fricative</td><td>Unvoiced</td><td>—</td></tr>
-    <tr><td><strong>T</strong></td><td>Mark</td><td>Tongue-Ridge</td><td>Stop</td><td>Unvoiced</td><td>82%</td></tr>
-    <tr><td><strong>TH</strong></td><td>Threshold</td><td>Teeth</td><td>Fricative</td><td>Both</td><td>82%</td></tr>
-    <tr><td><strong>V</strong></td><td>Vibrate/Connect</td><td>Lips/Teeth</td><td>Fricative</td><td>Voiced</td><td>76%</td></tr>
-    <tr><td><strong>W</strong></td><td>Connect</td><td>Lips</td><td>Glide</td><td>Voiced</td><td>76%</td></tr>
-    <tr><td><strong>X</strong></td><td>Contain+Spread (K+S) or Grow+Spread (G+S)</td><td>—</td><td>Compound</td><td>—</td><td>—</td></tr>
-    <tr><td><strong>Y</strong></td><td>Act/Deed</td><td>Palate</td><td>Glide</td><td>Voiced</td><td>72%</td></tr>
-    <tr><td><strong>Z</strong></td><td>Cut</td><td>Tongue-Ridge</td><td>Fricative</td><td>Voiced</td><td>75%</td></tr>
+    <tr><td><strong>B</strong></td><td>Boundary</td><td>The defined space, the room, the container</td><td>Lips</td><td>Stop</td><td>Voiced</td><td>Bet (ב)</td><td>2</td><td>75%</td></tr>
+    <tr><td><strong>C/K</strong></td><td>Contain (hard); Spread (soft C)</td><td>The vessel, the receptacle, the keeper</td><td>Back/Palate</td><td>Stop</td><td>Unvoiced (hard)</td><td>Kaf (כ)</td><td>3</td><td>67%</td></tr>
+    <tr><td><strong>CH</strong></td><td>Protect</td><td>The guarded inner, the shielded act</td><td>Back/Palate</td><td>Affricate</td><td>Unvoiced</td><td>—</td><td>4</td><td>83%</td></tr>
+    <tr><td><strong>D</strong></td><td>Direct</td><td>The path, the door, the arrival of knowing</td><td>Tongue-Ridge</td><td>Stop</td><td>Voiced</td><td>Dalet (ד)</td><td>4</td><td>82%</td></tr>
+    <tr><td><strong>F</strong></td><td>Flow</td><td>The natural stream, the unforced passage</td><td>Lips/Teeth</td><td>Fricative</td><td>Unvoiced</td><td>—</td><td>6</td><td>85%</td></tr>
+    <tr><td><strong>G</strong></td><td>Grow</td><td>The upward reach, the expansion, the green</td><td>Back/Palate</td><td>Stop</td><td>Voiced</td><td>Gimel (ג)</td><td>3</td><td>78%</td></tr>
+    <tr><td><strong>H</strong></td><td>Breath</td><td>The living air, the silent source, the holy</td><td>Back/Palate</td><td>Fricative</td><td>Voiceless</td><td>Hey (ה)</td><td>5</td><td>78%</td></tr>
+    <tr><td><strong>J</strong></td><td>Express</td><td>The inner pressed outward, the statement</td><td>Back/Palate</td><td>Affricate</td><td>Voiced</td><td>—</td><td>1</td><td>—</td></tr>
+    <tr><td><strong>L</strong></td><td>Lateral</td><td>The indirect path, the guidance, the flow around</td><td>Tongue-Ridge</td><td>Lateral</td><td>Voiced</td><td>Lamed (ל)</td><td>3</td><td>75%</td></tr>
+    <tr><td><strong>M</strong></td><td>Material</td><td>The primordial substance, the mother, the mass</td><td>Lips</td><td>Nasal</td><td>Voiced</td><td>Mem (מ)</td><td>4</td><td>85%</td></tr>
+    <tr><td><strong>N</strong></td><td>Continue</td><td>The ongoing flow, the time, the process</td><td>Tongue-Ridge</td><td>Nasal</td><td>Voiced</td><td>Nun (נ)</td><td>5</td><td>82%</td></tr>
+    <tr><td><strong>P</strong></td><td>Project</td><td>The force outward, the push, the power</td><td>Lips</td><td>Stop</td><td>Unvoiced</td><td>Pe (פ)</td><td>8</td><td>85%</td></tr>
+    <tr><td><strong>Q</strong></td><td>Contain+Connect</td><td>Connection held inside the vessel (K+W)</td><td>—</td><td>Compound</td><td>—</td><td>Qof (ק)</td><td>1</td><td>—</td></tr>
+    <tr><td><strong>R</strong></td><td>Radiate</td><td>The emission, the wave, the rolling</td><td>Tongue-Ridge</td><td>Trill</td><td>Voiced</td><td>Resh (ר)</td><td>2</td><td>80%</td></tr>
+    <tr><td><strong>S</strong></td><td>Spread</td><td>The diffusion, the distribution, the scattering</td><td>Tongue-Ridge</td><td>Fricative</td><td>Unvoiced</td><td>Samekh (ס)</td><td>6</td><td>73%</td></tr>
+    <tr><td><strong>SH</strong></td><td>Spread (sharp)</td><td>Pressurized diffusion, focused spread</td><td>Tongue-Ridge</td><td>Fricative</td><td>Unvoiced</td><td>Shin (ש)</td><td>3</td><td>—</td></tr>
+    <tr><td><strong>T</strong></td><td>Mark</td><td>The point of contact, the seal, the completion</td><td>Tongue-Ridge</td><td>Stop</td><td>Unvoiced</td><td>Tav (ת)</td><td>4</td><td>82%</td></tr>
+    <tr><td><strong>TH</strong></td><td>Threshold</td><td>The edge, the crossing, the boundary line</td><td>Teeth</td><td>Fricative</td><td>Both</td><td>—</td><td>2</td><td>82%</td></tr>
+    <tr><td><strong>V</strong></td><td>Vibrate/Connect</td><td>The wave, the bond, the love</td><td>Lips/Teeth</td><td>Fricative</td><td>Voiced</td><td>Vav (ו)</td><td>6</td><td>76%</td></tr>
+    <tr><td><strong>W</strong></td><td>Connect</td><td>The link, the bridge, the opening</td><td>Lips</td><td>Glide</td><td>Voiced</td><td>—</td><td>6</td><td>76%</td></tr>
+    <tr><td><strong>X</strong></td><td>Contain+Spread (K+S) or Grow+Spread (G+S)</td><td>Burst from containment</td><td>—</td><td>Compound</td><td>—</td><td>—</td><td>6</td><td>—</td></tr>
+    <tr><td><strong>Y</strong></td><td>Act/Deed</td><td>The deed, the action, the individual</td><td>Palate</td><td>Glide</td><td>Voiced</td><td>Yod (י)</td><td>1</td><td>72%</td></tr>
+    <tr><td><strong>Z</strong></td><td>Cut</td><td>The blade, the distinction, the definition</td><td>Tongue-Ridge</td><td>Fricative</td><td>Voiced</td><td>Zayin (ז)</td><td>7</td><td>75%</td></tr>
   </tbody>
 </table></div>
 
 <p><strong>Confidence Bar Chart — 18 Scored Consonants</strong> 📊</p>
 
-<!-- Converted from pre to beautiful table -->
 <div class="tw"><table>
   <caption>Confidence Levels — 18 Scored Consonants</caption>
   <thead>
@@ -2728,18 +2857,12 @@ To create AI with true semantic depth, each noun in the training data must be ta
   </tbody>
 </table></div>
 
-<p><strong>How to Read This Table:</strong></p>
-
 <blockquote class="gem">
-  <p><strong>💎 GEM 16: The Complete 22-Consonant Reference</strong></p>
+  <p><strong>💎 GEM 37: The Complete 22-Consonant Reference — Expanded</strong></p>
   <p><strong>Location:</strong> Appendix A — The 3D Consonant Reference</p>
-  <p>The complete 3D reference: B-boundary-lips-stop-voiced-75%. C/K-contain-back-palate-stop-unvoiced-67%. CH-protect-back-palate-affricate-unvoiced-83%. D-direct-tongue-ridge-stop-voiced-82%. F-flow-lips-teeth-fricative-unvoiced-85%. G-grow-back-palate-stop-voiced-78%. H-breath-back-palate-fricative-voiceless-78%. J-express-back-palate-affricate-voiced. L-lateral-tongue-ridge-lateral-voiced-75%. M-material-lips-nasal-voiced-85%. N-continue-tongue-ridge-nasal-voiced-82%. P-project-lips-stop-unvoiced-85%. Q-contain+connect-compound. R-radiate-tongue-ridge-trill-voiced-80%. S-spread-tongue-ridge-fricative-unvoiced-73%. SH-spread-sharp-tongue-ridge-fricative-unvoiced. T-mark-tongue-ridge-stop-unvoiced-82%. TH-threshold-teeth-fricative-both-82%. V-vibrate/connect-lips-teeth-fricative-voiced-76%. W-connect-lips-glide-voiced-76%. X-contain+spread-compound. Y-act-palate-glide-voiced-72%. Z-cut-tongue-ridge-fricative-voiced-75%. Every consonant: core meaning, articulation point, manner, voicing, confidence level. Three layers, always.</p>
+  <p>The complete 3D reference, now expanded with the Ultimate Architectural A-Z insights: B — Boundary / The defined space, the room, the container. M — Material / The primordial substance, the mother, the mass. N — Continue / The ongoing flow, the time, the process. T — Mark / The point of contact, the seal, the completion. R — Radiate / The emission, the wave, the rolling. Each consonant now carries its core meaning, an expanded insight, its articulation point, manner, voicing, Hebrew root, and numerical index. The expanded insights deepen the reader's understanding of each consonant's architectural function, while the Hebrew and numerical columns provide additional layers of convergence. The confidence levels remain the book's empirical backbone.</p>
   <p><em>Your mouth is a 3D printer. Every consonant is an executable instruction in the code of reality.</em></p>
 </blockquote>
-
-<p>Take <strong>B</strong>. It means "boundary" (individual). It is produced at the lips (boundary domain). It is produced as a stop (complete closure followed by release). It is voiced (held). Three layers converge on boundary.</p>
-<p>Compare <strong>F</strong>. It means "flow" (individual). It is produced at the lips/teeth (boundary domain). But it is a fricative (continuous airflow). It is unvoiced (released). Same location as B, but different manner and voicing. The result: boundary-domain energy that flows rather than stops.</p>
-<p><strong>Z</strong> is a special case: its fricative manner (flowing) and cutting meaning converge through the action of a sharp, focused stream: flowing that cuts.</p>
 
 <h2 class="appendix-head" id="mu-app-b">APPENDIX B: THE N-POSITION ALGORITHM</h2>
 <p>N means continuation: but position determines which face is active.</p>
@@ -2979,7 +3102,6 @@ Find word pairs where one version has a silent consonant and the other does not:
 <h2 class="appendix-head" id="mu-app-l">APPENDIX L: VERIFICATION AND REFINEMENT TESTS</h2>
 <p><strong>Verification Dashboard — All Tests Pass (100%)</strong></p>
 
-<!-- Converted from pre to beautiful table -->
 <div class="tw"><table>
   <caption>Verification Dashboard — All Tests Pass (100%)</caption>
   <thead>
@@ -3086,21 +3208,554 @@ Find word pairs where one version has a silent consonant and the other does not:
   <p><em>The code is not a historical curiosity. It is a live instrument for reading the present.</em></p>
 </blockquote>
 
-<h2 id="mu-app-o" class="appendix-head">Appendix O: The Vowel Vector Hypothesis (Experimental)</h2>
-<p><strong>Status: hypothesis under test. This appendix is not a verified component of the consonant code. It is included so that readers can test it. If it fails testing, it will be removed in a future edition.</strong></p>
-<p>The body of this book treats vowels as vessels — not counted for positioning, carrying no positional anchor. That claim stands: no vowel carries a core meaning the way B carries boundary or M carries material. But a possibility remains open that the vessel metaphor may not exhaust: vowels may function as <strong>directional operators</strong> — specifying the orientation in which the consonant code executes, without changing the code itself.</p>
-<p>The hypothesis arises from felt physical signature — the same method that produced the consonant code itself. Close attention to the mouth suggests:</p>
-<div class="tw"><table>
-  <tr><th>Vowel</th><th>Proposed vector</th><th>Physical feel</th><th>Candidate examples</th></tr>
-  <tr><td><strong>E</strong></td><td>Up / out</td><td>Uplifting, bright</td><td>Energy, Elevate, Emerge, Excel</td></tr>
-  <tr><td><strong>A</strong></td><td>Down / in</td><td>Grounding, heavy</td><td>Anchor, Absorb, Attract, Attach</td></tr>
-  <tr><td><strong>I</strong></td><td>Center</td><td>Pure awareness, still</td><td>I, In, Is, It</td></tr>
-  <tr><td><strong>O</strong></td><td>Around</td><td>Encircling, containing</td><td>Orbit, Open, Own, Over</td></tr>
-  <tr><td><strong>U</strong></td><td>Through</td><td>Passing, transitional</td><td>Under, Up, Use, Unite</td></tr>
-</table></div>
-<p><strong>The minimal-pair test.</strong> Compare words that differ only in vowel: <strong>RISE</strong> (R+I+S+E — radiate + center + spread + up) versus <strong>RAZE</strong> (R+A+Z+E — radiate + down + cut + up). The consonants predict the manner of action; the vowel predicts its vertical orientation. Or compare <strong>BIT</strong> / <strong>BAT</strong> / <strong>BUT</strong>: the B and T hold the boundary-mark constant while the vowel shifts the quality of what is bounded — the specific, the general, the contained exception.</p>
-<p><strong>How to falsify it.</strong> Take twenty minimal pairs differing only in vowel (bit/bat/but, rid/rod, stem/storm, pin/pan/pun). If the vowel-change does not predict a consistent directional shift in meaning across at least thirteen of twenty pairs, the hypothesis fails and should be discarded. The code has survived because it invites exactly this kind of test; the vowel hypothesis must survive the same way or not at all.</p>
-<p><em>Consonants are the code. Vowels may be its gravity. The test is yours to run.</em></p>
+<!-- INSTRUCTION 7: APPENDIX O REPLACED -->
+<h2 id="mu-app-o" class="appendix-head">Appendix O: The Vowel Vector Master Matrix</h2>
+<p>The vowels are not just empty vessels; they are the Numerological Master Matrix (1, 5, 9, 6, 3). They represent the dimensional spaces in which the consonants (the operators) execute. They hold true to their numerical positions in the alphabet, mapping perfectly to Platonic geometry.</p>
+<p>The test is simple: Change the vowel, change the spatial vector, change the meaning. Compare BIT, BAT, BUT, BOOT, BITE. The consonants (B+T = boundary + mark) remain constant. The vowel shifts the spatial quality of what is bounded. Vowels are gravity vectors—directional operators that modify the consonant's meaning along spatial axes.</p>
+<p><strong>The Five Vowel Vectors</strong></p>
+<ul>
+  <li><strong>A (1 / The Point):</strong> The Singularity. The origin point before dimension exists. Pure, unshaped awareness. (Vector: Down / In. Physical feel: Grounding, heavy). <em>Hebrew Evidence: Adamah (Earth/Matter).</em></li>
+  <li><strong>E (5 / The Pentagon):</strong> The Exhaust. Active emanation. The kinetic pressure leaving the vessel outward. (Vector: Up / Out. Physical feel: Uplifting, bright). <em>Hebrew Evidence: Emet (Truth).</em></li>
+  <li><strong>I (9 / The Nonagon):</strong> The Singular Observer. The 1D line of sight that collapses the field into a particle. (Vector: Center. Physical feel: Still, sharp). <em>Hebrew Evidence: Ayin (Eye).</em></li>
+  <li><strong>O (6 / The Hexagon):</strong> The Completion. The closed loop that creates a self-sustaining circuit or world. (Vector: Around. Physical feel: Encircling, containing). <em>Hebrew Evidence: Olam (World/Eternity).</em></li>
+  <li><strong>U (3 / The Triangle):</strong> The Vortex. The descent into depth; the U-turn that births the new iteration. (Vector: Through. Physical feel: Passing, transitional). <em>Hebrew Evidence: Tachat (Under/Beneath).</em></li>
+</ul>
+<p>Consonants are the code. Vowels are its gravity. The code executes within the directional field established by the vowel.</p>
+
+<!-- INSTRUCTION 8: APPENDIX P REPLACED -->
+<h2 id="mu-app-p" class="appendix-head">Appendix P: The 1-9 Architectural Matrix & Master Numbers</h2>
+<p>The alphabet is not a random list of sounds. It is a 9-stage mathematical matrix of creation. The numerical index of the letter dictates its geometric function, and the mouth executes that function in physical space. The Pythagorean 1-9 sequence perfectly overlays the physical mechanics of the letters.</p>
+<p><strong>The 1-9 Creation Sequence</strong></p>
+<ul>
+  <li><strong>1 - The Point (Initiation) | A, J, S:</strong> The masculine spark. The origin (A), the explosive expression (J), and the diffuse spread (S).</li>
+  <li><strong>2 - The Line (Unity/Bond) | B, K, T:</strong> The creation of inside/outside. All are Stops (lips, throat, tongue) that halt flow to create structure.</li>
+  <li><strong>3 - The Triangle (Communication) | C, L, U:</strong> The first 2D plane. Open, curving, flowing geometries that route energy across the surface.</li>
+  <li><strong>4 - The Square (Order/Foundation) | D, M, V:</strong> The stable foundation. Directed structure (D), material mass (M), and the vibrational bond (V).</li>
+  <li><strong>5 - The Pentagon (Adventure/Expansion) | E, N, W:</strong> The Golden Ratio. Outward emanation (E), continuous time (N), and fluid morphing (W).</li>
+  <li><strong>6 - The Hexagon (Family/Home) | F, O, X:</strong> The tessellation. The completed circuit (O), the flow of resources (F), and the central exchange (X).</li>
+  <li><strong>7 - The Heptagon (Wisdom/Mystery) | G, P, Y:</strong> The unknowable. Internal accumulation (G), outward projection (P), and the branching choice (Y).</li>
+  <li><strong>8 - The Octagon (Karma/Cycle) | H, Q, Z:</strong> The bridge between earth and heaven. The infinite field (H), the bounded reach (Q), and terminal compression (Z).</li>
+  <li><strong>9 - The Nonagon (Resolution) | I, R:</strong> The end of the cycle. The singular observer (I) and the radiating resonance of the completed cycle (R).</li>
+</ul>
+<p><strong>The Master Numbers (11, 22, 33)</strong></p>
+<p>In standard numerology, 11, 22, and 33 are "Master Numbers." They are higher octaves—recursive scaling operations. A standard number (1-9) executes its function and passes the output to the next number. A Master Number executes its function, but instead of passing the output forward, <strong>it feeds the output back into itself</strong>. It is a recursive loop. It is the mathematical mechanism of self-awareness and exponential scaling.</p>
+<ul>
+  <li><strong>11 (The Master Insight):</strong> The recursive 1. Awareness turning its lens back on itself. The mathematical signature of the Analytical Mind observing the Reactive Mind.</li>
+  <li><strong>22 (The Master Builder):</strong> The recursive 2. The double-bond, the structural architecture of reality looping to sustain itself. The Master Builder constructs the game board.</li>
+  <li><strong>33 (The Master Teacher):</strong> The recursive 3. The infinite feedback loop of harmonic resonance. The frequency of dissolution where frozen mass is dissolved.</li>
+</ul>
+<p>Normal numbers (1-9) create Entropy (linear execution). Master Numbers (11, 22, 33) create Coherency (recursive iteration). They have power because they resist the linear decay of time.</p>
+
+<!-- INSTRUCTION 9: APPENDIX R INSERTED BEFORE Q -->
+<h2 id="mu-app-r" class="appendix-head">APPENDIX R: THE INVERSION ARCHITECTURE (When Institutions Invert)</h2>
+<p>The Postulate Failure Cycle does not just operate on individuals. It operates at every scale. A relationship is a game. An organization is a game. A civilization is a game. All subject to exactly the same postulate dynamics.</p>
+<p>The most important macro-level consequence of the PFCC is the Inversion Point: the moment when a structure formed to serve a prime goal adopts a hidden senior postulate—<em>this structure must continue to exist</em>—that eventually takes priority over the original goal.</p>
+<p><strong>The Inversion Sequence:</strong></p>
+<ol>
+  <li><strong>Prime Postulate:</strong> The original life goal. "To Heal." "To Know." "To Serve Justice." The institution is the vehicle for the prime goal.</li>
+  <li><strong>Compression:</strong> Repeated application, inevitable failures, and organizational growth produce mass, protocols, procedures—the institutional equivalent of TIPM. The structure acquires identity and invested importance.</li>
+  <li><strong>Inversion:</strong> The hidden senior postulate forms: <em>This structure must persist. This structure must not be replaced.</em> This is enforced because the accumulated importance of everyone inside the structure now depends on its survival.</li>
+  <li><strong>Deadlock:</strong> The institution now actively opposes its own prime postulate when necessary for survival. Realizing the prime goal fully would reduce the importance maintaining the structure's mass. The institution develops a structural interest in the problem it was created to solve remaining unsolved.</li>
+</ol>
+<p><strong>Observable Diagnostics:</strong></p>
+<ul>
+  <li><strong>Hospital:</strong> Prime Goal = Healing. Inverted Behavior = Benefits from chronic illness.</li>
+  <li><strong>Law Firm:</strong> Prime Goal = Justice. Inverted Behavior = Thrives on unresolved disputes.</li>
+  <li><strong>Government Agency:</strong> Prime Goal = Service. Inverted Behavior = Thrives on the problem it was created to eliminate.</li>
+  <li><strong>Media Platform:</strong> Prime Goal = Information distribution. Inverted Behavior = Thrives on compulsive engagement (firing live games postulates) rather than resolution.</li>
+</ul>
+<p><strong>The Correct Response:</strong> Identification of the hidden senior postulate. Clear separation of institutional survival from the prime goal. Pursuit of the prime goal through whatever vehicle genuinely serves it, whether or not that vehicle is the original institution.</p>
+<hr>
+
+<!-- APPENDIX Q: INTERACTIVE DECODER -->
+<h2 id="mu-app-q" class="appendix-head">APPENDIX Q: INTERACTIVE DECODER</h2>
+<p>Enter any word from the dictionary below to see its <strong>Hebrew origin</strong> and <strong>consonant code insight</strong> side by side.</p>
+
+<div class="decoder-wrapper">
+  <div class="decoder-search">
+    <input type="text" id="decoderInput" placeholder="Type a word..." autocomplete="off">
+    <div id="decoderCount" class="decoder-count"></div>
+  </div>
+
+  <div id="decoderResult" class="decoder-result" style="display:none;">
+    <div class="decoder-header">
+      <span class="decoder-word" id="decoderWord"></span>
+      <span class="decoder-badge">DECODED</span>
+    </div>
+
+    <div class="decoder-panels">
+      <div class="decoder-panel hebrew-panel">
+        <div class="panel-label">📜 Hebrew Origin</div>
+        <div class="panel-root" id="decoderRoot"></div>
+        <div class="panel-chars" id="decoderChars"></div>
+        <div class="panel-meaning" id="decoderMeaning"></div>
+        <div class="panel-traditional" id="decoderTraditional"></div>
+        <div class="panel-notes" id="decoderNotes"></div>
+      </div>
+
+      <div class="decoder-panel code-panel">
+        <div class="panel-label">🔑 Consonant Code Insight</div>
+        <div class="panel-architecture" id="decoderArchitecture"></div>
+        <div class="panel-insight" id="decoderInsight"></div>
+        <div class="panel-bookref" id="decoderBookref">
+          <a href="#" target="_blank">📖 View in The White Book</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="decoderEmpty" class="decoder-empty">
+    <p>Type a word to search the dictionary</p>
+    <p class="hint">Try: light, truth, word, spirit, create, love, mind, meaning</p>
+  </div>
+
+  <div id="decoderNotFound" class="decoder-empty" style="display:none;">
+    <p>No matching words found</p>
+    <p class="hint">Try a different word or check your spelling</p>
+  </div>
+</div>
+
+<style>
+.decoder-wrapper {
+  margin: 1.5rem auto;
+  max-width: var(--measure);
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.5rem 1rem;
+  box-shadow: var(--shadow-sm);
+}
+.decoder-search input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  font-family: var(--serif);
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.decoder-search input:focus {
+  border-color: var(--gold-2);
+}
+.decoder-count {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+  text-align: right;
+}
+.decoder-result {
+  margin-top: 1.2rem;
+}
+.decoder-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--gold-soft);
+  margin-bottom: 0.8rem;
+}
+.decoder-word {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.decoder-badge {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  background: var(--surface-2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+.decoder-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 640px) {
+  .decoder-panels { grid-template-columns: 1fr; }
+}
+.decoder-panel {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--hair);
+}
+.decoder-panel .panel-label {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.decoder-panel .panel-root {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.decoder-panel .panel-chars {
+  font-size: 1.3rem;
+  direction: rtl;
+  color: var(--ink-soft);
+  margin: 0.2rem 0 0.4rem;
+}
+.decoder-panel .panel-meaning {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.decoder-panel .panel-traditional,
+.decoder-panel .panel-notes {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.decoder-panel .panel-notes { font-style: italic; margin-top: 0.2rem; }
+.decoder-panel .panel-architecture {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.2rem;
+}
+.decoder-panel .panel-insight {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.decoder-panel .panel-bookref {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--hair);
+}
+.decoder-panel .panel-bookref a {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--gold);
+  text-decoration: none;
+}
+.decoder-panel .panel-bookref a:hover { text-decoration: underline; }
+.decoder-empty {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: var(--muted);
+}
+.decoder-empty p { margin: 0; }
+.decoder-empty .hint {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 0.3rem;
+}
+</style>
+
+<script>
+const decoderDictionary = {
+  // ── White Book core terms ──
+  "word": { hebrewRoot: "MILA", hebrewChars: "מילה", hebrewMeaning: "WORD", traditional: "Anglo Saxon – WORD = WORD, SPEECH", notes: "", architecture: "W+R+D", insight: "Connecting radiance directed-arrival — a word connects a radiance and delivers it to a destination.", bookRef: "#mu-app-m" },
+  "postulate": { hebrewRoot: "P+S+T+L+T", hebrewChars: "", hebrewMeaning: "Project + Spread + Mark + Lateral + Mark", traditional: "Decoded from consonant architecture", notes: "", architecture: "P+S+T+L+T", insight: "Projected outward, spreads through the system, marks, flows laterally, and marks again.", bookRef: "#mu-ch15" },
+  "consciousness": { hebrewRoot: "C+N+S+C+S+N+S+S", hebrewChars: "", hebrewMeaning: "Containing continuing spreading", traditional: "Decoded from consonant architecture", notes: "A field that contains its own continuation and spreading.", architecture: "C+N+S+C+S+N+S+S", insight: "A field that contains its own continuation, that contains its own spreading, that continues to spread — aware of itself.", bookRef: "#mu-ch10" },
+  "truth": { hebrewRoot: "T+R+T+H", hebrewChars: "", hebrewMeaning: "Marked radiance marking breath", traditional: "Decoded from consonant architecture", notes: "Truth is marked radiance that crosses the threshold.", architecture: "T+R+T+H", insight: "Marked radiance that crosses the threshold — a mark that does not stop radiating.", bookRef: "#mu-ch10" },
+  "meaning": { hebrewRoot: "M+N+N+G", hebrewChars: "", hebrewMeaning: "Material continuing rising", traditional: "Decoded from consonant architecture", notes: "", architecture: "M+N+N+G", insight: "Material that continues to rise — meaning is the substance that persists and grows.", bookRef: "#mu-ch10" },
+  "mind": { hebrewRoot: "M+N+D", hebrewChars: "", hebrewMeaning: "Material continuing direct", traditional: "Decoded from consonant architecture", notes: "", architecture: "M+N+D", insight: "Material that continues to directed knowing — the mind is the substance that persists in knowing.", bookRef: "#mu-app-m" },
+  "reality": { hebrewRoot: "R+L+T+Y", hebrewChars: "", hebrewMeaning: "Radiate lateral mark deed", traditional: "Decoded from consonant architecture", notes: "", architecture: "R+L+T+Y", insight: "Reality radiates, flows laterally, marks, and acts.", bookRef: "#mu-app-m" },
+  "remember": { hebrewRoot: "R+M+M+B+R", hebrewChars: "", hebrewMeaning: "Radiate material material boundary radiate", traditional: "Decoded from consonant architecture", notes: "Memory is radiance made material and held.", architecture: "R+M+M+B+R", insight: "Radiating material, material bounded, radiating — memory is experience made material and held, still glowing.", bookRef: "#mu-app-m" },
+  "spread": { hebrewRoot: "S+P+R+D", hebrewChars: "", hebrewMeaning: "Spread project radiate direct", traditional: "Decoded from consonant architecture", notes: "", architecture: "S+P+R+D", insight: "Spreading projection that arrives at a destination.", bookRef: "#mu-app-m" },
+  "spray": { hebrewRoot: "S+P+R+Y", hebrewChars: "", hebrewMeaning: "Spread project radiate deed", traditional: "Decoded from consonant architecture", notes: "", architecture: "S+P+R+Y", insight: "Spreading projection that continues — the energy keeps going.", bookRef: "#mu-app-m" },
+  "destroy": { hebrewRoot: "D+S+T+R+Y", hebrewChars: "", hebrewMeaning: "Direct spread mark radiate deed", traditional: "Decoded from consonant architecture", notes: "", architecture: "D+S+T+R+Y", insight: "Directed spreading that marks and radiates — the overturning of form.", bookRef: "#mu-app-m" },
+  "existence": { hebrewRoot: "X+S+T+N+C", hebrewChars: "", hebrewMeaning: "Compound + Spread + Mark + Continue + Contain", traditional: "Decoded from consonant architecture", notes: "Existence is spreading, marking, continuing containment.", architecture: "X+S+T+N+C", insight: "Spreading, marking, continuing containment — the ongoing act of being marked into form.", bookRef: "#mu-app-m" },
+
+  // ── From origin_dictionary.html ──
+  "able": { hebrewRoot: "BAL", hebrewChars: "בעל", hebrewMeaning: "ABLE, POSSESS", traditional: "Latin – HABILIS = SUITABLE, FIT.", notes: "", architecture: "B+L", insight: "Boundary + Lateral — ability as contained, guided capacity.", bookRef: "" },
+  "abraham": { hebrewRoot: "AVRA KEDIBRA", hebrewChars: "עברה כדיברה", hebrewMeaning: "HAPPENED AS SPOKEN", traditional: "Cabalistic word or formula with magic power.", notes: "In effect a blessing: 'happened as spoken.'", architecture: "A+V+R+K+D+B+R", insight: "Vocal act radiating, contained deed spreading — the word becomes reality.", bookRef: "" },
+  "agony": { hebrewRoot: "YAGON", hebrewChars: "יגון", hebrewMeaning: "AGONY", traditional: "Greek – AGONIA = TO STRUGGLE FOR PRICE.", notes: "The Hebrew word YAGON has the identical meaning.", architecture: "Y+G+N", insight: "Act + Grow + Continue — the deed that grows and continues in suffering.", bookRef: "" },
+  "air": { hebrewRoot: "AWIR", hebrewChars: "אוויר", hebrewMeaning: "AIR", traditional: "Greek – AER = AIR, MIST.", notes: "", architecture: "R", insight: "Radiate — air is radiance, the medium that carries wave and breath.", bookRef: "" },
+  "amen": { hebrewRoot: "AMEN", hebrewChars: "אמן", hebrewMeaning: "BELIEVE", traditional: "Hebrew AMEN = TRULY, CERTAINLY.", notes: "A biblical word borrowed from Hebrew.", architecture: "M+N", insight: "Material + Continue — belief is substance that continues, that endures as certainty.", bookRef: "" },
+  "atom": { hebrewRoot: "ATOOM", hebrewChars: "אטום", hebrewMeaning: "HERMETICALLY CLOSED", traditional: "Greek – ATOMOS = ATOM and INDIVISIBLE.", notes: "The Hebrew meaning is still correct after 2600 years.", architecture: "T+M", insight: "Mark + Material — the closed material, the indivisible point.", bookRef: "" },
+  "bad": { hebrewRoot: "BAD", hebrewChars: "בד", hebrewMeaning: "FABRIC, SHEETING", traditional: "German – BETT or BEET = A BED or A PLAT OF GROUND.", notes: "", architecture: "B+D", insight: "Boundary + Direct — the fabric that bounds and directs, the woven structure.", bookRef: "" },
+  "believe": { hebrewRoot: "B'LEV", hebrewChars: "ב-לב", hebrewMeaning: "IN HEART", traditional: "Anglo Saxon – GELEFAN = TO BELIEVE.", notes: "", architecture: "B+L+V", insight: "Boundary + Lateral + Vibrate/Connect — belief is held in the heart, the vibrating centre.", bookRef: "" },
+  "bone": { hebrewRoot: "BONEH", hebrewChars: "בונה", hebrewMeaning: "BUILDER (of body cells)", traditional: "Anglo Saxon – BAN = BONE.", notes: "All body cells are manufactured in the bone.", architecture: "B+N", insight: "Boundary + Continue — bone is the enduring boundary, the builder that continues.", bookRef: "" },
+  "camera": { hebrewRoot: "K'MERA", hebrewChars: "כ מראה", hebrewMeaning: "LIKE A MIRROR", traditional: "Greek – KAMERA = A VAULTED CHAMBER.", notes: "The Hebrew K'MERA = LIKE A CAVE.", architecture: "C+M+R", insight: "Contain + Material + Radiate — the chamber that contains and radiates light, like a mirror.", bookRef: "" },
+  "color": { hebrewRoot: "KOL OR", hebrewChars: "קול אור", hebrewMeaning: "VOICE LIGHT", traditional: "Old Latin – COLOS = COLOR, A COVERING.", notes: "All color is light.", architecture: "C+L+R", insight: "Contain + Lateral + Radiate — colour is contained, lateral radiance, the voice of light.", bookRef: "" },
+  "create": { hebrewRoot: "KARA ET", hebrewChars: "קרא את", hebrewMeaning: "CALLED A-Z", traditional: "Sanskrit – KAR = TO MAKE.", notes: "The form of creation in Genesis was the 'calling out' of words.", architecture: "C+R+T", insight: "Contain + Radiate + Mark — creation is the contained radiance that marks, the calling that brings forth.", bookRef: "#mu-app-m" },
+  "devil": { hebrewRoot: "DA AVEL", hebrewChars: "דע עוול", hebrewMeaning: "KNOW EVIL", traditional: "Greek – DIABOLOS = THE DEVIL, literally A SLANDERER.", notes: "", architecture: "D+V+L", insight: "Direct + Vibrate/Connect + Lateral — the one who knows evil, the slanderer who spreads it laterally.", bookRef: "" },
+  "dna": { hebrewRoot: "DIN A", hebrewChars: "דין-א", hebrewMeaning: "THE JUDGEMENT OF GOD", traditional: "DEOXY-RIBONUCLEIC ACID.", notes: "The Hebrew RIBON COL CO means RULER OF ALL.", architecture: "D+N", insight: "Direct + Continue — the judgement that continues, the code that directs life.", bookRef: "" },
+  "echo": { hebrewRoot: "HIKA", hebrewChars: "חיקה", hebrewMeaning: "IMITATES", traditional: "Greek – ECHO = A REVERBERATED SOUND.", notes: "", architecture: "C+H", insight: "Contain + Breath — the contained breath that returns, the imitation of sound.", bookRef: "" },
+  "electric": { hebrewRoot: "LEKET OR", hebrewChars: "לקט אור", hebrewMeaning: "COLLECTION OF LIGHT", traditional: "Greek – ELEKTRON = AMBER.", notes: "", architecture: "L+C+T+R", insight: "Lateral + Contain + Mark + Radiate — the collection of light, the flow that contains and marks radiance.", bookRef: "" },
+  "evil": { hebrewRoot: "AVEL", hebrewChars: "עוול", hebrewMeaning: "EVIL", traditional: "Anglo Saxon – YFEL = EVIL.", notes: "", architecture: "V+L", insight: "Vibrate/Connect + Lateral — evil is connection that flows sideways, that distorts.", bookRef: "" },
+  "eye": { hebrewRoot: "AYIN", hebrewChars: "עין", hebrewMeaning: "EYE", traditional: "Anglo Saxon – EAGE plural of EAGAN = EYE.", notes: "", architecture: "Y+N", insight: "Act + Continue — the eye is the act of seeing, the continuation of light into form.", bookRef: "" },
+  "fear": { hebrewRoot: "PO YAR", hebrewChars: "פה ירא", hebrewMeaning: "HERE FEARED", traditional: "Anglo Saxon – FAER = FEAR, TERROR.", notes: "", architecture: "F+R", insight: "Flow + Radiate — fear flows and radiates, the cold contraction of the self.", bookRef: "" },
+  "fire": { hebrewRoot: "PO OR", hebrewChars: "פה אור", hebrewMeaning: "HERE LIGHT", traditional: "Anglo Saxon – FYR = FIRE.", notes: "", architecture: "F+R", insight: "Flow + Radiate — fire is flowing radiance, the light that moves and consumes.", bookRef: "" },
+  "genius": { hebrewRoot: "GAON YESH", hebrewChars: "גאון יש", hebrewMeaning: "GENIUS THERE IS", traditional: "Latin – GENIUS = THE GUARDIAN DEITY or SPIRIT.", notes: "", architecture: "G+N+S", insight: "Grow + Continue + Spread — genius is growth that continues to spread, the emanating spirit.", bookRef: "" },
+  "globe": { hebrewRoot: "AGOL BO", hebrewChars: "עגול בו", hebrewMeaning: "ROUND", traditional: "Latin – GLOBUS = A BALL, SPHERE.", notes: "", architecture: "G+L+B", insight: "Grow + Lateral + Boundary — the globe is growth that flows laterally within a boundary, the sphere.", bookRef: "" },
+  "life": { hebrewRoot: "HAVAH", hebrewChars: "חוה", hebrewMeaning: "FARM / DESIRE", traditional: "Hebrew – HAWWAH = perhaps LIFE.", notes: "HAVA means A FARM. EVE means DESIRE.", architecture: "L+F", insight: "Lateral + Flow — life is the lateral flow, the desire that moves and grows.", bookRef: "" },
+  "light": { hebrewRoot: "LAHAT", hebrewChars: "להט", hebrewMeaning: "FLAME", traditional: "Anglo Saxon – LEOHT = LIGHT.", notes: "", architecture: "L+G+H+T", insight: "Lateral + Grow + Breath + Mark — light is lateral, growing breath that marks, the flame that illuminates.", bookRef: "#mu-app-m" },
+  "love": { hebrewRoot: "LAHOVE, LEV", hebrewChars: "לב", hebrewMeaning: "TO LOVE, HEART", traditional: "Anglo Saxon – LUFU, LUFE = LOVE.", notes: "", architecture: "L+V", insight: "Lateral + Vibrate/Connect — love is the lateral vibration, the connection from the heart.", bookRef: "#mu-app-m" },
+  "mirror": { hebrewRoot: "MARA OR", hebrewChars: "מראה אור", hebrewMeaning: "MIRRORS LIGHT", traditional: "Latin – MIRARI = TO WONDER AT.", notes: "", architecture: "M+R+R", insight: "Material + Radiate + Radiate — the mirror is material that radiates light back, the reflection.", bookRef: "" },
+  "money": { hebrewRoot: "MONEH", hebrewChars: "מונה", hebrewMeaning: "COUNTING DEVICE", traditional: "Latin – MONETA = A MINT, MONEY.", notes: "", architecture: "M+N", insight: "Material + Continue — money is material that continues as a measure, a counting device.", bookRef: "" },
+  "oxygen": { hebrewRoot: "OSEH GAN", hebrewChars: "עושה גן", hebrewMeaning: "GARDEN MAKER", traditional: "Greek – OXYS = ACID and GENNAN = TO GENERATE.", notes: "", architecture: "X+Y+G+N", insight: "Compound + Act + Grow + Continue — oxygen is the act of growing, the garden maker.", bookRef: "" },
+  "satan": { hebrewRoot: "SATAN", hebrewChars: "שטן", hebrewMeaning: "VEER OFF THE PATH", traditional: "Hebrew – SATAN = ENEMY.", notes: "", architecture: "S+T+N", insight: "Spread + Mark + Continue — Satan is the spread that marks deviation, the veering off the path.", bookRef: "" },
+  "spirit": { hebrewRoot: "SEFIROT", hebrewChars: "ספירות", hebrewMeaning: "COUNTING, STORIES OF GOD", traditional: "Latin – SPIRITUS = BREATH, COURAGE, VIGOR, THE SOUL, LIFE.", notes: "The ten emanations that created the universe are called SEFIROT.", architecture: "S+P+R+T", insight: "Spread + Project + Radiate + Mark — spirit is the spreading, projecting radiance that marks the soul.", bookRef: "#mu-app-m" },
+  "acquire": { hebrewRoot: "KARA", hebrewChars: "כרה", hebrewMeaning: "PURCHASED", traditional: "Latin – ACQUIRERE = TO SEEK.", notes: "", architecture: "C+R", insight: "Contain + Radiate — acquisition is the contained radiance of seeking and obtaining.", bookRef: "" },
+  "add": { hebrewRoot: "OD", hebrewChars: "עוד", hebrewMeaning: "MORE", traditional: "Latin – AD = TO and DARE = GIVE.", notes: "", architecture: "D", insight: "Direct — to add is to direct more toward, to give beyond.", bookRef: "" },
+  "admit": { hebrewRoot: "ED EMET", hebrewChars: "ה(ע)יד (א)מת", hebrewMeaning: "WITNESS OF TRUTH", traditional: "Latin – ED = TO and MITTERE = TO SEND.", notes: "", architecture: "D+M+T", insight: "Direct + Material + Mark — to admit is to direct the mark of truth, to send it forward.", bookRef: "" },
+  "afraid": { hebrewRoot: "PO HARAD", hebrewChars: "פה רד", hebrewMeaning: "HERE FEARED(TREMBLED)", traditional: "Middle-English – AFRAIEN = TO FRIGHTEN.", notes: "", architecture: "F+R+D", insight: "Flow + Radiate + Direct — fear is flow that radiates and directs, the trembling here.", bookRef: "" },
+  "ash": { hebrewRoot: "ESH", hebrewChars: "אש", hebrewMeaning: "FIRE", traditional: "Anglo Saxon – ASCE, AESC.", notes: "", architecture: "S+H", insight: "Spread + Breath — ash is the spread of breath after fire, the remains.", bookRef: "" },
+  "assure": { hebrewRoot: "ISHURE", hebrewChars: "אישור", hebrewMeaning: "APPROVE, AUTHORISED", traditional: "Latin – ASSECURARE = TO ASSURE.", notes: "", architecture: "S+R", insight: "Spread + Radiate — assurance is the spread of radiance, the confirmation that radiates.", bookRef: "" },
+  "avoid": { hebrewRoot: "AVAD", hebrewChars: "אבד", hebrewMeaning: "LOST, ASTRAY", traditional: "Latin – EX = OUT VIDUARE = DEPRIVE OFF.", notes: "", architecture: "V+D", insight: "Vibrate/Connect + Direct — to avoid is to direct vibration away, to steer astray.", bookRef: "" },
+  "aware": { hebrewRoot: "ER", hebrewChars: "ער", hebrewMeaning: "AWARE", traditional: "Anglo Saxon – GEWAER = AWARE.", notes: "", architecture: "W+R", insight: "Connect + Radiate — awareness is the connection that radiates, the sensing of what is.", bookRef: "" },
+  "band": { hebrewRoot: "BO ANAD", hebrewChars: "בה ענד", hebrewMeaning: "IN IT TIED UP", traditional: "Sanskrit – BANDHA = A BINDING.", notes: "", architecture: "B+N+D", insight: "Boundary + Continue + Direct — a band is a boundary that continues to direct, a tie that binds.", bookRef: "" },
+  "bind": { hebrewRoot: "BO ANAD", hebrewChars: "בה ענד", hebrewMeaning: "IN IT TIED UP", traditional: "Anglo Saxon – BINDAN = TO BIND.", notes: "", architecture: "B+N+D", insight: "Boundary + Continue + Direct — to bind is to create a continuing boundary that directs.", bookRef: "" },
+  "bitter": { hebrewRoot: "MAR", hebrewChars: "מר", hebrewMeaning: "BITTER", traditional: "Latin – AMARUS = BITTER.", notes: "", architecture: "B+T+R", insight: "Boundary + Mark + Radiate — bitter is the marked boundary that radiates, the sharp taste.", bookRef: "" },
+  "blame": { hebrewRoot: "BLI EMET", hebrewChars: "בלי אמת", hebrewMeaning: "WITHOUT TRUTH", traditional: "Latin – BLASPHEMARE = TO BLASPHEME.", notes: "", architecture: "B+L+M", insight: "Boundary + Lateral + Material — blame is the bounded, lateral material that lacks truth.", bookRef: "" },
+  "bloom": { hebrewRoot: "BLI EMET", hebrewChars: "בלי אמת", hebrewMeaning: "WITHOUT TRUTH", traditional: "Old Norse – BLOM = FLOWER.", notes: "", architecture: "B+L+M", insight: "Boundary + Lateral + Material — bloom is the lateral material that flowers, that grows out.", bookRef: "" },
+  "bold": { hebrewRoot: "BLI EMET", hebrewChars: "בלי אמת", hebrewMeaning: "WITHOUT TRUTH", traditional: "Old Norse – BALLR = BOLD, DARING.", notes: "", architecture: "B+L+D", insight: "Boundary + Lateral + Direct — bold is the directed, lateral boundary that dares.", bookRef: "" },
+  "break": { hebrewRoot: "BARATZ", hebrewChars: "ברץ", hebrewMeaning: "BURST, BROKEN THROUGH", traditional: "Anglo Saxon – BRECAN = TO BREAK.", notes: "", architecture: "B+R+K", insight: "Boundary + Radiate + Contain — to break is to radiate through the boundary, to burst.", bookRef: "" },
+  "breed": { hebrewRoot: "BRYH", hebrewChars: "ברכה", hebrewMeaning: "POOL", traditional: "Anglo Saxon – BREDAN = TO BREED.", notes: "", architecture: "B+R+D", insight: "Boundary + Radiate + Direct — to breed is to direct radiance into new form, to multiply.", bookRef: "" },
+  "bright": { hebrewRoot: "BAHIR ET", hebrewChars: "בהיר את", hebrewMeaning: "BRIGHT", traditional: "Sanskrit – BHARJ = TO SHINE.", notes: "", architecture: "B+R+G+H+T", insight: "Boundary + Radiate + Grow + Breath + Mark — brightness is the boundary that radiates, grows, and marks with breath.", bookRef: "" },
+  "burn": { hebrewRoot: "BARAN", hebrewChars: "בערן", hebrewMeaning: "BURN", traditional: "Icelandic – BRENNA = TO BURN.", notes: "", architecture: "B+R+N", insight: "Boundary + Radiate + Continue — to burn is to radiate continuously through a boundary, the fire that persists.", bookRef: "" },
+  "call": { hebrewRoot: "KOL", hebrewChars: "קול", hebrewMeaning: "VOICE", traditional: "Icelandic – KALLA = TO SAY, CALL, NAME.", notes: "", architecture: "C+L", insight: "Contain + Lateral — a call is the contained lateral projection of voice, the name that reaches.", bookRef: "" },
+  "case": { hebrewRoot: "KISA", hebrewChars: "כיסוי", hebrewMeaning: "COVER (HOUSING)", traditional: "Latin – CAPSA = A BOX, CHEST.", notes: "", architecture: "C+S", insight: "Contain + Spread — a case is the contained spread that houses, the cover that protects.", bookRef: "" },
+  "cave": { hebrewRoot: "KUBA", hebrewChars: "קבה", hebrewMeaning: "CUBICAL, SMALL ROOM", traditional: "Latin – CAVA = CAVITY.", notes: "", architecture: "C+V", insight: "Contain + Vibrate/Connect — a cave is the contained vibration, the hollow space.", bookRef: "" },
+  "cell": { hebrewRoot: "SAL", hebrewChars: "סוללה", hebrewMeaning: "BASKET, CELL", traditional: "Latin – CELLA = A SMALL ROOM.", notes: "", architecture: "C+L", insight: "Contain + Lateral — a cell is the contained lateral space, the small room that holds.", bookRef: "" },
+  "chase": { hebrewRoot: "SHESA", hebrewChars: "שיסה", hebrewMeaning: "CHASE", traditional: "Latin – CAPTARE = TO STRIVE TO SEIZE.", notes: "", architecture: "C+H+S", insight: "Contain + Breath + Spread — to chase is to spread breath in containment, to pursue.", bookRef: "" },
+  "clean": { hebrewRoot: "CHL", hebrewChars: "חל", hebrewMeaning: "EMPTY SPACE", traditional: "Anglo Saxon – CLANE = CLEAN, PURE.", notes: "", architecture: "C+L+N", insight: "Contain + Lateral + Continue — clean is the contained lateral continuation, the empty space purified.", bookRef: "" },
+  "clear": { hebrewRoot: "CLR", hebrewChars: "כלר", hebrewMeaning: "VOICE LIGHT", traditional: "Latin – CLARUS = CLEAR, BRIGHT.", notes: "", architecture: "C+L+R", insight: "Contain + Lateral + Radiate — clear is the contained lateral radiance, the light that shines through.", bookRef: "" },
+  "code": { hebrewRoot: "AKOOD", hebrewChars: "עקוד", hebrewMeaning: "KNOTTED", traditional: "Latin – CODEX = A WOODEN TABLET.", notes: "", architecture: "C+D", insight: "Contain + Direct — code is the contained, directed mark, the knotted instruction.", bookRef: "" },
+  "cover": { hebrewRoot: "KAVOOR", hebrewChars: "קבור", hebrewMeaning: "BURIED", traditional: "Latin – COOPERIRE = TO HIDE.", notes: "", architecture: "C+V+R", insight: "Contain + Vibrate/Connect + Radiate — to cover is to contain vibration and radiate protection, to hide.", bookRef: "" },
+  "cup": { hebrewRoot: "CUP", hebrewChars: "כוס", hebrewMeaning: "VESSEL", traditional: "Latin – CUPPA = A CUP.", notes: "", architecture: "C+P", insight: "Contain + Project — a cup is the contained projection that holds liquid.", bookRef: "" },
+  "cut": { hebrewRoot: "CATA", hebrewChars: "קטע", hebrewMeaning: "CUT", traditional: "Middle English – CUTTEN = TO CUT.", notes: "", architecture: "C+T", insight: "Contain + Mark — to cut is to mark containment, to sever with a mark.", bookRef: "" },
+  "dare": { hebrewRoot: "DAR", hebrewChars: "דער", hebrewMeaning: "KNOW FEAR", traditional: "Latin – DARE = TO GIVE.", notes: "", architecture: "D+R", insight: "Direct + Radiate — to dare is to direct radiance, to give boldly.", bookRef: "" },
+  "dark": { hebrewRoot: "DARK", hebrewChars: "דרך", hebrewMeaning: "DIRECT", traditional: "Anglo Saxon – DEORC = DARK.", notes: "", architecture: "D+R+K", insight: "Direct + Radiate + Contain — dark is directed radiance that is contained, the absence of light.", bookRef: "" },
+  "death": { hebrewRoot: "DV", hebrewChars: "דעו", hebrewMeaning: "KNOW EVIL", traditional: "Anglo Saxon – DEATH = DEATH.", notes: "", architecture: "D+T+H", insight: "Direct + Mark + Breath — death is the direct marking of breath, the cessation.", bookRef: "" },
+  "deep": { hebrewRoot: "DEEP", hebrewChars: "דעפ", hebrewMeaning: "KNOW FLOW", traditional: "Anglo Saxon – DEOP = DEEP.", notes: "", architecture: "D+P", insight: "Direct + Project — deep is the direct projection downward, the great depth.", bookRef: "" },
+  "delay": { hebrewRoot: "DELAY", hebrewChars: "דלי", hebrewMeaning: "PULL OUT, THIN OUT", traditional: "Latin – DELAY = TO PUT OFF.", notes: "", architecture: "D+L+Y", insight: "Direct + Lateral + Act — to delay is to direct the lateral act, to postpone.", bookRef: "" },
+  "doubt": { hebrewRoot: "DBT", hebrewChars: "דבת", hebrewMeaning: "DOUBT", traditional: "Latin – DUBITARE = TO DOUBT.", notes: "", architecture: "D+B+T", insight: "Direct + Boundary + Mark — doubt is the directed boundary that marks uncertainty.", bookRef: "" },
+  "dream": { hebrewRoot: "DRM", hebrewChars: "דרמ", hebrewMeaning: "DIRECT RADIATE", traditional: "Old Norse – DRAUGR = DREAM.", notes: "", architecture: "D+R+M", insight: "Direct + Radiate + Material — a dream is directed radiance made material, the vision that flows.", bookRef: "" },
+  "drive": { hebrewRoot: "DRV", hebrewChars: "דרב", hebrewMeaning: "DIRECT RADIATE", traditional: "Anglo Saxon – DRIFAN = TO DRIVE.", notes: "", architecture: "D+R+V", insight: "Direct + Radiate + Vibrate/Connect — to drive is to direct radiance with vibration, to push forward.", bookRef: "" },
+  "drop": { hebrewRoot: "DRP", hebrewChars: "דרפ", hebrewMeaning: "DIRECT RADIATE", traditional: "Anglo Saxon – DROPA = A DROP.", notes: "", architecture: "D+R+P", insight: "Direct + Radiate + Project — a drop is the direct projection of radiance, the falling.", bookRef: "" },
+  "earth": { hebrewRoot: "ERT", hebrewChars: "ארץ", hebrewMeaning: "EARTH", traditional: "Anglo Saxon – EORTHE = EARTH.", notes: "", architecture: "R+T+H", insight: "Radiate + Mark + Breath — earth is the radiant, marked breath, the ground that supports.", bookRef: "" },
+  "ease": { hebrewRoot: "EZ", hebrewChars: "אז", hebrewMeaning: "THEN", traditional: "Latin – EASE = EASE.", notes: "", architecture: "E+S", insight: "Vessel + Spread — ease is the spreading vessel, the comfort that flows.", bookRef: "" },
+  "eat": { hebrewRoot: "ET", hebrewChars: "את", hebrewMeaning: "SIGN", traditional: "Anglo Saxon – ETAN = TO EAT.", notes: "", architecture: "T", insight: "Mark — to eat is to mark, to take in through the mouth's threshold.", bookRef: "" },
+  "edge": { hebrewRoot: "EDG", hebrewChars: "עדג", hebrewMeaning: "WITNESS GROW", traditional: "Latin – EDGE = BORDER.", notes: "", architecture: "D+G", insight: "Direct + Grow — the edge is the direct growth, the border that defines.", bookRef: "" },
+  "empty": { hebrewRoot: "EMPTY", hebrewChars: "אמפ", hebrewMeaning: "MATERIAL PROJECT", traditional: "Anglo Saxon – AEMTIG = EMPTY.", notes: "", architecture: "M+P+T+Y", insight: "Material + Project + Mark + Act — empty is the projected material marked for absence.", bookRef: "" },
+  "end": { hebrewRoot: "END", hebrewChars: "ענד", hebrewMeaning: "TIE UP", traditional: "Anglo Saxon – ENDE = END.", notes: "", architecture: "N+D", insight: "Continue + Direct — the end is the continuation that arrives, the direct finish.", bookRef: "" },
+  "energy": { hebrewRoot: "ENERGY", hebrewChars: "ענג", hebrewMeaning: "PLEASURE", traditional: "Greek – ENERGEIA = ACTIVE WORK.", notes: "", architecture: "N+R+G+Y", insight: "Continue + Radiate + Grow + Act — energy is the continuing, radiating growth of action.", bookRef: "" },
+  "equal": { hebrewRoot: "HAKOL", hebrewChars: "הכול", hebrewMeaning: "EVERYTHING", traditional: "Latin – AEQUALIS = EQUAL.", notes: "", architecture: "Q+L", insight: "Contain+Connect + Lateral — equal is the contained connection that flows laterally, the same.", bookRef: "" },
+  "escape": { hebrewRoot: "ESCAPE", hebrewChars: "עסקפ", hebrewMeaning: "FLOW PROJECT", traditional: "Latin – ESCAPE = TO FLEE.", notes: "", architecture: "S+C+P", insight: "Spread + Contain + Project — to escape is to spread from containment, to project away.", bookRef: "" },
+  "even": { hebrewRoot: "EVEN", hebrewChars: "עוון", hebrewMeaning: "EVIL", traditional: "Anglo Saxon – EFE = EVEN.", notes: "", architecture: "V+N", insight: "Vibrate/Connect + Continue — even is the continuous vibration, the smooth, the flat.", bookRef: "" },
+  "ever": { hebrewRoot: "EVER", hebrewChars: "עבר", hebrewMeaning: "OVER, PASSED", traditional: "Anglo Saxon – AEHRE = EVER.", notes: "", architecture: "V+R", insight: "Vibrate/Connect + Radiate — ever is the radiating vibration, the always.", bookRef: "" },
+  "every": { hebrewRoot: "EVERY", hebrewChars: "עברי", hebrewMeaning: "OVER, PASSED", traditional: "Anglo Saxon – AEFRE = EVERY.", notes: "", architecture: "V+R+Y", insight: "Vibrate/Connect + Radiate + Act — every is the radiating act of connection, each one.", bookRef: "" },
+  "evil": { hebrewRoot: "AVEL", hebrewChars: "עוול", hebrewMeaning: "EVIL", traditional: "Anglo Saxon – YFEL = EVIL.", notes: "", architecture: "V+L", insight: "Vibrate/Connect + Lateral — evil is connection that vibrates laterally, that distorts.", bookRef: "" },
+  "exact": { hebrewRoot: "EXACT", hebrewChars: "עקסקט", hebrewMeaning: "CONTAIN SPREAD MARK", traditional: "Latin – EXACTUS = TO DEMAND.", notes: "", architecture: "X+C+T", insight: "Compound + Contain + Mark — exact is the contained mark that spreads precisely, the correct.", bookRef: "" },
+  "exit": { hebrewRoot: "YATZA ET", hebrewChars: "יצא את", hebrewMeaning: "GO OUT", traditional: "Latin – EXITUS = TO GO OUT.", notes: "", architecture: "X+T", insight: "Compound + Mark — exit is the mark that spreads out, the departure.", bookRef: "" },
+  "faint": { hebrewRoot: "FAINT", hebrewChars: "פע נ", hebrewMeaning: "WEAK", traditional: "Latin – FALL = TO FAIL.", notes: "", architecture: "F+N+T", insight: "Flow + Continue + Mark — faint is the continuing flow that marks weakness.", bookRef: "" },
+  "fair": { hebrewRoot: "FAIR", hebrewChars: "פער", hebrewMeaning: "GAP", traditional: "Old High German – FER = FAIR.", notes: "", architecture: "F+R", insight: "Flow + Radiate — fair is the flowing radiance, the just, the beautiful.", bookRef: "" },
+  "false": { hebrewRoot: "FALSE", hebrewChars: "פעלס", hebrewMeaning: "FAIL", traditional: "Latin – FALSUS = FALSE.", notes: "", architecture: "F+L+S", insight: "Flow + Lateral + Spread — false is the lateral spread of flow that deceives.", bookRef: "" },
+  "fame": { hebrewRoot: "FAME", hebrewChars: "פאם", hebrewMeaning: "HERE MATERIAL", traditional: "Latin – FAMA = FAME, RUMOUR.", notes: "", architecture: "F+M", insight: "Flow + Material — fame is the flow of material, the rumour that spreads.", bookRef: "" },
+  "father": { hebrewRoot: "FATHER", hebrewChars: "אב", hebrewMeaning: "FATHER", traditional: "Anglo Saxon – FAEDER = FATHER.", notes: "", architecture: "F+T+H+R", insight: "Flow + Mark + Breath + Radiate — father is the flowing mark that radiates breath, the source.", bookRef: "" },
+  "fault": { hebrewRoot: "FAULT", hebrewChars: "פלט", hebrewMeaning: "DISCHARGE", traditional: "Latin – FALLERE = TO DECEIVE.", notes: "", architecture: "F+L+T", insight: "Flow + Lateral + Mark — fault is the lateral flow that marks error, the mistake.", bookRef: "" },
+  "fear": { hebrewRoot: "FEAR", hebrewChars: "פער", hebrewMeaning: "FEAR", traditional: "Anglo Saxon – FAER = FEAR, TERROR.", notes: "", architecture: "F+R", insight: "Flow + Radiate — fear flows and radiates, the cold contraction.", bookRef: "" },
+  "feed": { hebrewRoot: "FEED", hebrewChars: "פיד", hebrewMeaning: "FEED", traditional: "Anglo Saxon – FEDAN = TO FEED.", notes: "", architecture: "F+D", insight: "Flow + Direct — to feed is to direct flow, to nourish.", bookRef: "" },
+  "feel": { hebrewRoot: "FEEL", hebrewChars: "פיל", hebrewMeaning: "PLEAD", traditional: "Anglo Saxon – FELAN = TO FEEL.", notes: "", architecture: "F+L", insight: "Flow + Lateral — to feel is the lateral flow of sensation, the touching.", bookRef: "" },
+  "few": { hebrewRoot: "FEW", hebrewChars: "פעו", hebrewMeaning: "HERE CONNECT", traditional: "Anglo Saxon – FEWA = FEW.", notes: "", architecture: "F+W", insight: "Flow + Connect — few is the connecting flow that is small, the minor.", bookRef: "" },
+  "field": { hebrewRoot: "FIELD", hebrewChars: "פילד", hebrewMeaning: "FLOW LATERAL DIRECT", traditional: "Anglo Saxon – FELD = FIELD.", notes: "", architecture: "F+L+D", insight: "Flow + Lateral + Direct — a field is the lateral flow that is directed, the open space.", bookRef: "" },
+  "firm": { hebrewRoot: "FIRM", hebrewChars: "פרמ", hebrewMeaning: "PROJECT MATERIAL", traditional: "Latin – FIRMUS = FIRM, STRONG.", notes: "", architecture: "F+R+M", insight: "Flow + Radiate + Material — firm is the radiating material that flows strong, the solid.", bookRef: "" },
+  "first": { hebrewRoot: "FIRST", hebrewChars: "פרשת", hebrewMeaning: "HERE FIRST", traditional: "Anglo Saxon – FYRST = FIRST.", notes: "", architecture: "F+R+S+T", insight: "Flow + Radiate + Spread + Mark — first is the radiating spread that marks the beginning.", bookRef: "" },
+  "fish": { hebrewRoot: "FISH", hebrewChars: "פיש", hebrewMeaning: "SPREAD SHARP", traditional: "Anglo Saxon – FISC = FISH.", notes: "", architecture: "F+S+H", insight: "Flow + Spread + Breath — fish is the spread of flow that breathes, the swimmer.", bookRef: "" },
+  "flame": { hebrewRoot: "FLAME", hebrewChars: "פלאם", hebrewMeaning: "FLOW LATERAL MATERIAL", traditional: "Latin – FLAMMA = FLAME.", notes: "", architecture: "F+L+M", insight: "Flow + Lateral + Material — flame is the lateral flow of material that burns.", bookRef: "" },
+  "flash": { hebrewRoot: "FLASH", hebrewChars: "פלש", hebrewMeaning: "FLOW LATERAL SHARP", traditional: "Old High German – FLASCHE = FLASK.", notes: "", architecture: "F+L+S+H", insight: "Flow + Lateral + Spread + Breath — flash is the lateral spread of flow that breathes light.", bookRef: "" },
+  "flat": { hebrewRoot: "FLAT", hebrewChars: "פלט", hebrewMeaning: "FLOW LATERAL MARK", traditional: "Old Norse – FLATR = FLAT.", notes: "", architecture: "F+L+T", insight: "Flow + Lateral + Mark — flat is the lateral flow that marks a level plane.", bookRef: "" },
+  "fleet": { hebrewRoot: "FLEET", hebrewChars: "פליט", hebrewMeaning: "FLOW LATERAL PROJECT", traditional: "Anglo Saxon – FLOT = FLEET.", notes: "", architecture: "F+L+T", insight: "Flow + Lateral + Mark — fleet is the lateral flow that marks speed, the quick.", bookRef: "" },
+  "flood": { hebrewRoot: "FLOOD", hebrewChars: "פלוד", hebrewMeaning: "FLOW LATERAL DIRECT", traditional: "Anglo Saxon – FLOD = FLOOD.", notes: "", architecture: "F+L+D", insight: "Flow + Lateral + Direct — flood is the directed lateral flow that overwhelms.", bookRef: "" },
+  "floor": { hebrewRoot: "FLOOR", hebrewChars: "פלור", hebrewMeaning: "FLOW LATERAL RADIATE", traditional: "Anglo Saxon – FLOR = FLOOR.", notes: "", architecture: "F+L+R", insight: "Flow + Lateral + Radiate — floor is the lateral flow that radiates, the ground beneath.", bookRef: "" },
+  "flower": { hebrewRoot: "FLOWER", hebrewChars: "פלור", hebrewMeaning: "FLOW LATERAL RADIATE", traditional: "Latin – FLOS = A FLOWER.", notes: "", architecture: "F+L+W+R", insight: "Flow + Lateral + Connect + Radiate — flower is the lateral flow that connects and radiates, the bloom.", bookRef: "" },
+  "fluid": { hebrewRoot: "FLUID", hebrewChars: "פלויד", hebrewMeaning: "FLOW LATERAL ACT", traditional: "Latin – FLUIDUS = FLUID.", notes: "", architecture: "F+L+D", insight: "Flow + Lateral + Direct — fluid is the directed lateral flow, the liquid.", bookRef: "" },
+  "flush": { hebrewRoot: "FLUSH", hebrewChars: "פלש", hebrewMeaning: "FLOW LATERAL SHARP", traditional: "Latin – FLUSH = TO RUSH.", notes: "", architecture: "F+L+S+H", insight: "Flow + Lateral + Spread + Breath — flush is the lateral spread of flow, the rush.", bookRef: "" },
+  "fly": { hebrewRoot: "FLY", hebrewChars: "פלי", hebrewMeaning: "FLOW LATERAL ACT", traditional: "Anglo Saxon – FLEOGAN = TO FLY.", notes: "", architecture: "F+L+Y", insight: "Flow + Lateral + Act — to fly is the lateral act of flowing through air.", bookRef: "" },
+  "foam": { hebrewRoot: "FOAM", hebrewChars: "פאם", hebrewMeaning: "HERE MATERIAL", traditional: "Anglo Saxon – FAM = FOAM.", notes: "", architecture: "F+M", insight: "Flow + Material — foam is the flow of material, the froth.", bookRef: "" },
+  "follow": { hebrewRoot: "FOLLOW", hebrewChars: "פולו", hebrewMeaning: "FLOW LATERAL", traditional: "Anglo Saxon – FOLGIAN = TO FOLLOW.", notes: "", architecture: "F+L+W", insight: "Flow + Lateral + Connect — to follow is to connect with lateral flow, to pursue.", bookRef: "" },
+  "food": { hebrewRoot: "FOOD", hebrewChars: "פוד", hebrewMeaning: "FLOW DIRECT", traditional: "Anglo Saxon – FODA = FOOD.", notes: "", architecture: "F+D", insight: "Flow + Direct — food is the directed flow of nourishment.", bookRef: "" },
+  "fool": { hebrewRoot: "FOOL", hebrewChars: "פול", hebrewMeaning: "FLOW LATERAL", traditional: "Latin – FOLLIS = A FOOL.", notes: "", architecture: "F+L", insight: "Flow + Lateral — a fool is lateral flow that is misdirected, the simpleton.", bookRef: "" },
+  "foot": { hebrewRoot: "FOOT", hebrewChars: "פוט", hebrewMeaning: "FLOW MARK", traditional: "Anglo Saxon – FOT = FOOT.", notes: "", architecture: "F+T", insight: "Flow + Mark — foot is the flow that marks, the walker.", bookRef: "" },
+  "force": { hebrewRoot: "FORCE", hebrewChars: "פורס", hebrewMeaning: "FLOW RADIATE SPREAD", traditional: "Latin – FORTIS = STRONG.", notes: "", architecture: "F+R+C", insight: "Flow + Radiate + Contain — force is the radiating flow that contains power.", bookRef: "" },
+  "forest": { hebrewRoot: "FOREST", hebrewChars: "פוריסט", hebrewMeaning: "FLOW RADIATE SPREAD MARK", traditional: "Latin – FORIS = OUTSIDE, DOOR.", notes: "", architecture: "F+R+S+T", insight: "Flow + Radiate + Spread + Mark — forest is the radiating spread that marks the wild.", bookRef: "" },
+  "forge": { hebrewRoot: "FORGE", hebrewChars: "פורג", hebrewMeaning: "FLOW RADIATE GROW", traditional: "Latin – FORGERE = TO SHAPE.", notes: "", architecture: "F+R+G", insight: "Flow + Radiate + Grow — to forge is to grow radiance through flow, to shape.", bookRef: "" },
+  "forget": { hebrewRoot: "FORGET", hebrewChars: "פרגט", hebrewMeaning: "FLOW RADIATE GROW MARK", traditional: "Anglo Saxon – FORGIETAN = TO FORGET.", notes: "", architecture: "F+R+G+T", insight: "Flow + Radiate + Grow + Mark — to forget is to mark growth that radiates away, the loss of memory.", bookRef: "" },
+  "forgive": { hebrewRoot: "FORGIVE", hebrewChars: "פרגיב", hebrewMeaning: "FLOW RADIATE GROW VIBRATE", traditional: "Anglo Saxon – FORGIFAN = TO FORGIVE.", notes: "", architecture: "F+R+G+V", insight: "Flow + Radiate + Grow + Vibrate/Connect — to forgive is to vibrate growth that radiates, the release of debt.", bookRef: "" },
+  "free": { hebrewRoot: "FREE", hebrewChars: "פרי", hebrewMeaning: "PROJECT RADIATE", traditional: "Anglo Saxon – FREO = FREE.", notes: "", architecture: "F+R", insight: "Flow + Radiate — free is the flowing radiance, the unbound.", bookRef: "" },
+  "fresh": { hebrewRoot: "FRESH", hebrewChars: "פריש", hebrewMeaning: "PROJECT RADIATE SHARP", traditional: "Anglo Saxon – FRESC = FRESH.", notes: "", architecture: "F+R+S+H", insight: "Flow + Radiate + Spread + Breath — fresh is the radiating spread of flow that breathes, the new.", bookRef: "" },
+  "friend": { hebrewRoot: "FRIEND", hebrewChars: "פרינד", hebrewMeaning: "PROJECT RADIATE CONTINUE DIRECT", traditional: "Anglo Saxon – FREOND = FRIEND.", notes: "", architecture: "F+R+N+D", insight: "Flow + Radiate + Continue + Direct — friend is the directed continuation of radiating flow, the ally.", bookRef: "" },
+  "fright": { hebrewRoot: "FRIGHT", hebrewChars: "פריגט", hebrewMeaning: "PROJECT RADIATE GROW MARK", traditional: "Anglo Saxon – FRYHTU = FRIGHT.", notes: "", architecture: "F+R+G+H+T", insight: "Flow + Radiate + Grow + Breath + Mark — fright is the marked growth of radiating flow, the fear.", bookRef: "" },
+  "frost": { hebrewRoot: "FROST", hebrewChars: "פרוסט", hebrewMeaning: "PROJECT RADIATE SPREAD MARK", traditional: "Anglo Saxon – FROST = FROST.", notes: "", architecture: "F+R+S+T", insight: "Flow + Radiate + Spread + Mark — frost is the radiating spread that marks the cold, the ice.", bookRef: "" },
+  "frozen": { hebrewRoot: "FROZEN", hebrewChars: "פרוזן", hebrewMeaning: "PROJECT RADIATE MATERIAL CONTINUE", traditional: "Anglo Saxon – FROSEN = FROZEN.", notes: "", architecture: "F+R+Z+N", insight: "Flow + Radiate + Cut + Continue — frozen is the continuing cut of radiating flow, the ice.", bookRef: "" },
+  "fruit": { hebrewRoot: "FRUIT", hebrewChars: "פרות", hebrewMeaning: "FRUIT", traditional: "Latin – FRUCTUS = ENJOYMENT, PRODUCE.", notes: "The Hebrew word PEROT = FRUIT appears in Genesis.", architecture: "F+R+T", insight: "Flow + Radiate + Mark — fruit is the marked radiance of flow, the produce, the enjoyment.", bookRef: "" },
+  "fury": { hebrewRoot: "FURY", hebrewChars: "פרי", hebrewMeaning: "WILD", traditional: "Latin – FURIA = MADNESS, RAGE, FURY.", notes: "", architecture: "F+R+Y", insight: "Flow + Radiate + Act — fury is the radiating act of flow, the rage that burns.", bookRef: "" },
+  "fuse": { hebrewRoot: "FUSE", hebrewChars: "פוס", hebrewMeaning: "FLOW", traditional: "Latin – FUSUS = TO POUR, MELT.", notes: "", architecture: "F+S", insight: "Flow + Spread — to fuse is to spread flow, to melt together.", bookRef: "" },
+  "fuzz": { hebrewRoot: "FUZZ", hebrewChars: "פז", hebrewMeaning: "CUT", traditional: "Probably echoic.", notes: "", architecture: "F+Z", insight: "Flow + Cut — fuzz is the cut flow, the soft, the fuzzy.", bookRef: "" },
+  "gather": { hebrewRoot: "GEDER", hebrewChars: "גדר", hebrewMeaning: "FENCE", traditional: "Anglo Saxon – GADERIAN = TO GATHER.", notes: "", architecture: "G+T+H+R", insight: "Grow + Mark + Breath + Radiate — to gather is to mark breath that radiates growth, to collect.", bookRef: "" },
+  "gaze": { hebrewRoot: "GAZ", hebrewChars: "גז", hebrewMeaning: "CUT", traditional: "Latin – GAW = TO GAZE.", notes: "", architecture: "G+Z", insight: "Grow + Cut — to gaze is to cut with growth, to stare intently.", bookRef: "" },
+  "gift": { hebrewRoot: "GIFT", hebrewChars: "גיפ", hebrewMeaning: "GROW PROJECT", traditional: "Old Norse – GIEFT = GIFT.", notes: "", architecture: "G+F+T", insight: "Grow + Flow + Mark — a gift is the growing flow that marks giving.", bookRef: "" },
+  "give": { hebrewRoot: "GIVE", hebrewChars: "גיב", hebrewMeaning: "GROW VIBRATE", traditional: "Anglo Saxon – GIOFAN = TO GIVE.", notes: "", architecture: "G+V", insight: "Grow + Vibrate/Connect — to give is to vibrate growth, to offer.", bookRef: "" },
+  "glad": { hebrewRoot: "GLAD", hebrewChars: "גלד", hebrewMeaning: "GROW LATERAL DIRECT", traditional: "Anglo Saxon – GLAED = BRIGHT, CHEERFUL, GLAD.", notes: "", architecture: "G+L+D", insight: "Grow + Lateral + Direct — glad is the directed lateral growth that brightens, the cheerful.", bookRef: "" },
+  "glow": { hebrewRoot: "GLOW", hebrewChars: "גלו", hebrewMeaning: "GROW LATERAL", traditional: "Anglo Saxon – GLOWAN = TO GLOW.", notes: "", architecture: "G+L+W", insight: "Grow + Lateral + Connect — to glow is to connect with lateral growth, to shine warmly.", bookRef: "" },
+  "gnaw": { hebrewRoot: "GNAW", hebrewChars: "גנ", hebrewMeaning: "GROW CONTINUE", traditional: "Anglo Saxon – GNAGAN = TO GNAW.", notes: "", architecture: "G+N", insight: "Grow + Continue — to gnaw is to continue growth, to chew persistently.", bookRef: "" },
+  "god": { hebrewRoot: "GOD", hebrewChars: "גוד", hebrewMeaning: "GROW DIRECT", traditional: "Anglo Saxon – GOD = GOD.", notes: "", architecture: "G+D", insight: "Grow + Direct — God is the direct growth, the supreme being.", bookRef: "" },
+  "gold": { hebrewRoot: "GOLD", hebrewChars: "גולד", hebrewMeaning: "GROW LATERAL DIRECT", traditional: "Anglo Saxon – GOLD = GOLD.", notes: "", architecture: "G+L+D", insight: "Grow + Lateral + Direct — gold is the direct lateral growth, the precious metal.", bookRef: "" },
+  "good": { hebrewRoot: "GOOD", hebrewChars: "גוד", hebrewMeaning: "GROW DIRECT", traditional: "Anglo Saxon – GOD = GOOD.", notes: "", architecture: "G+D", insight: "Grow + Direct — good is the direct growth, the beneficial.", bookRef: "" },
+  "grace": { hebrewRoot: "GRACE", hebrewChars: "גרס", hebrewMeaning: "GROW RADIATE SPREAD", traditional: "Latin – GRATIA = FAVOUR, GRACE.", notes: "", architecture: "G+R+C", insight: "Grow + Radiate + Contain — grace is the contained radiance of growth, the favour.", bookRef: "" },
+  "grade": { hebrewRoot: "GRADE", hebrewChars: "גרד", hebrewMeaning: "SCRATCH", traditional: "Latin – GRADUS = A STEP.", notes: "", architecture: "G+R+D", insight: "Grow + Radiate + Direct — grade is the directed radiance of growth, the step, the rank.", bookRef: "" },
+  "grain": { hebrewRoot: "GAREN", hebrewChars: "גרעין", hebrewMeaning: "SEED", traditional: "Latin – GRANNUM = A SEED, KERNEL.", notes: "", architecture: "G+R+N", insight: "Grow + Radiate + Continue — grain is the continuing radiance of growth, the seed.", bookRef: "" },
+  "grant": { hebrewRoot: "GRANT", hebrewChars: "גרנט", hebrewMeaning: "GROW RADIATE CONTINUE MARK", traditional: "Latin – GRATIA = FAVOUR.", notes: "", architecture: "G+R+N+T", insight: "Grow + Radiate + Continue + Mark — to grant is to mark the continuing radiance of growth, to bestow.", bookRef: "" },
+  "great": { hebrewRoot: "GREAT", hebrewChars: "גרט", hebrewMeaning: "GROW RADIATE MARK", traditional: "Anglo Saxon – GREAT = GREAT.", notes: "", architecture: "G+R+T", insight: "Grow + Radiate + Mark — great is the marked radiance of growth, the large.", bookRef: "" },
+  "green": { hebrewRoot: "GREEN", hebrewChars: "גרן", hebrewMeaning: "GROW RADIATE CONTINUE", traditional: "Anglo Saxon – GRENE = GREEN.", notes: "", architecture: "G+R+N", insight: "Grow + Radiate + Continue — green is the continuing radiance of growth, the colour of life.", bookRef: "" },
+  "grief": { hebrewRoot: "GRIEF", hebrewChars: "גריף", hebrewMeaning: "GROW RADIATE FLOW", traditional: "Latin – GRAVIS = HEAVY.", notes: "", architecture: "G+R+F", insight: "Grow + Radiate + Flow — grief is the flowing radiance of growth that is heavy, the sorrow.", bookRef: "" },
+  "ground": { hebrewRoot: "GROUND", hebrewChars: "גרונד", hebrewMeaning: "GROW RADIATE CONTINUE DIRECT", traditional: "Anglo Saxon – GRUND = GROUND.", notes: "", architecture: "G+R+N+D", insight: "Grow + Radiate + Continue + Direct — ground is the directed continuation of radiating growth, the earth.", bookRef: "" },
+  "grow": { hebrewRoot: "GROW", hebrewChars: "גרו", hebrewMeaning: "GROW RADIATE", traditional: "Anglo Saxon – GROWAN = TO GROW.", notes: "", architecture: "G+R+W", insight: "Grow + Radiate + Connect — to grow is to connect with radiating expansion, to increase.", bookRef: "" },
+  "guard": { hebrewRoot: "GUARD", hebrewChars: "גרד", hebrewMeaning: "SCRATCH", traditional: "Latin – GUARD = TO WATCH.", notes: "", architecture: "G+R+D", insight: "Grow + Radiate + Direct — to guard is to direct radiating growth, to protect.", bookRef: "" },
+  "guess": { hebrewRoot: "GUS", hebrewChars: "גוס", hebrewMeaning: "ROUGHLY", traditional: "Swedish – GISSA = TO GUESS.", notes: "", architecture: "G+S", insight: "Grow + Spread — to guess is to spread growth, to estimate roughly.", bookRef: "" },
+  "guide": { hebrewRoot: "GA YAD", hebrewChars: "גע יד", hebrewMeaning: "TOUCH HAND", traditional: "Old French – GUIS = A GUIDE.", notes: "", architecture: "G+D", insight: "Grow + Direct — to guide is to direct growth, to lead.", bookRef: "" },
+  "guilt": { hebrewRoot: "GUILT", hebrewChars: "גלט", hebrewMeaning: "GROW LATERAL MARK", traditional: "Anglo Saxon – GILT = GUILT.", notes: "", architecture: "G+L+T", insight: "Grow + Lateral + Mark — guilt is the marked lateral growth of responsibility, the fault.", bookRef: "" },
+  "gulf": { hebrewRoot: "GULF", hebrewChars: "גלף", hebrewMeaning: "GROW LATERAL FLOW", traditional: "Latin – GULF = A GULF.", notes: "", architecture: "G+L+F", insight: "Grow + Lateral + Flow — a gulf is the lateral flow of growth, the chasm.", bookRef: "" },
+  "gust": { hebrewRoot: "GUST", hebrewChars: "גוסט", hebrewMeaning: "GROW SPREAD MARK", traditional: "Old Norse – GUSTR = A GUST.", notes: "", architecture: "G+S+T", insight: "Grow + Spread + Mark — a gust is the marked spread of growth, the blast of wind.", bookRef: "" },
+  "habit": { hebrewRoot: "HABIT", hebrewChars: "הביט", hebrewMeaning: "THE HOUSE", traditional: "Latin – HABITARE = TO DWELL.", notes: "", architecture: "H+B+T", insight: "Breath + Boundary + Mark — a habit is the marked boundary of breath, the custom.", bookRef: "" },
+  "hail": { hebrewRoot: "HELEL", hebrewChars: "הילל", hebrewMeaning: "YELL", traditional: "Anglo Saxon – HAILEN = TO SALUTE, GREET.", notes: "", architecture: "H+L", insight: "Breath + Lateral — to hail is the lateral projection of breath, to greet.", bookRef: "" },
+  "hair": { hebrewRoot: "HAIR", hebrewChars: "האר", hebrewMeaning: "THE LIGHT", traditional: "Anglo Saxon – HAER = HAIR.", notes: "", architecture: "H+R", insight: "Breath + Radiate — hair is the radiating breath, the strands that grow.", bookRef: "" },
+  "half": { hebrewRoot: "HALF", hebrewChars: "הלף", hebrewMeaning: "THE LATERAL FLOW", traditional: "Anglo Saxon – HEALF = HALF.", notes: "", architecture: "H+L+F", insight: "Breath + Lateral + Flow — half is the lateral flow of breath, the part.", bookRef: "" },
+  "hall": { hebrewRoot: "HALL", hebrewChars: "הלל", hebrewMeaning: "EMPTY SPACE", traditional: "Anglo Saxon – HEALL = A COVER, A SHELTER.", notes: "", architecture: "H+L", insight: "Breath + Lateral — a hall is the lateral space of breath, the room.", bookRef: "" },
+  "hand": { hebrewRoot: "HAND", hebrewChars: "הנד", hebrewMeaning: "THE CONTINUE DIRECT", traditional: "Anglo Saxon – HAND = HAND.", notes: "", architecture: "H+N+D", insight: "Breath + Continue + Direct — a hand is the directed continuation of breath, the will made extension.", bookRef: "" },
+  "harbour": { hebrewRoot: "HARBOUR", hebrewChars: "הרבור", hebrewMeaning: "THE RADIATE BOUNDARY", traditional: "Anglo Saxon – HARBOUR = A SHELTER.", notes: "", architecture: "H+R+B+R", insight: "Breath + Radiate + Boundary + Radiate — a harbour is the radiating boundary that shelters, the port.", bookRef: "" },
+  "hard": { hebrewRoot: "HARD", hebrewChars: "הרד", hebrewMeaning: "THE RADIATE DIRECT", traditional: "Anglo Saxon – HEARD = HARD.", notes: "", architecture: "H+R+D", insight: "Breath + Radiate + Direct — hard is the directed radiance of breath, the solid, the tough.", bookRef: "" },
+  "harm": { hebrewRoot: "HARM", hebrewChars: "הרמ", hebrewMeaning: "THE RADIATE MATERIAL", traditional: "Old Norse – HARMR = HARM.", notes: "", architecture: "H+R+M", insight: "Breath + Radiate + Material — harm is the radiating material of breath that injures.", bookRef: "" },
+  "harvest": { hebrewRoot: "HARVEST", hebrewChars: "הרבסט", hebrewMeaning: "THE RADIATE VESSEL SPREAD MARK", traditional: "Anglo Saxon – HARFEST = HARVEST.", notes: "", architecture: "H+R+V+S+T", insight: "Breath + Radiate + Vibrate/Connect + Spread + Mark — harvest is the marked spread of vibrating radiance, the gathering.", bookRef: "" },
+  "haste": { hebrewRoot: "HASTE", hebrewChars: "הסט", hebrewMeaning: "THE SPREAD MARK", traditional: "Latin – HASTE = HASTE.", notes: "", architecture: "H+S+T", insight: "Breath + Spread + Mark — haste is the marked spread of breath, the speed.", bookRef: "" },
+  "hate": { hebrewRoot: "HATE", hebrewChars: "הט", hebrewMeaning: "THE MARK", traditional: "Anglo Saxon – HETAN = TO HATE.", notes: "", architecture: "H+T", insight: "Breath + Mark — hate is the marked breath, the strong dislike.", bookRef: "" },
+  "have": { hebrewRoot: "HAVE", hebrewChars: "הב", hebrewMeaning: "THE BOUNDARY", traditional: "Anglo Saxon – HABAN = TO HAVE.", notes: "", architecture: "H+V", insight: "Breath + Vibrate/Connect — to have is to vibrate with breath, to possess.", bookRef: "" },
+  "hazard": { hebrewRoot: "HAZARD", hebrewChars: "הזרד", hebrewMeaning: "THE CUT RADIATE DIRECT", traditional: "Latin – HAZARD = A GAME OF CHANCE.", notes: "", architecture: "H+Z+R+D", insight: "Breath + Cut + Radiate + Direct — hazard is the direct cut of radiating breath, the risk.", bookRef: "" },
+  "heal": { hebrewRoot: "HEAL", hebrewChars: "הל", hebrewMeaning: "THE LATERAL", traditional: "Anglo Saxon – HAELAN = TO HEAL.", notes: "", architecture: "H+L", insight: "Breath + Lateral — to heal is the lateral projection of breath, to make whole.", bookRef: "" },
+  "heart": { hebrewRoot: "HEART", hebrewChars: "הרט", hebrewMeaning: "THE RADIATE MARK", traditional: "Anglo Saxon – HEORTE = HEART.", notes: "", architecture: "H+R+T", insight: "Breath + Radiate + Mark — the heart is the marked radiance of breath, the emotional centre.", bookRef: "" },
+  "heat": { hebrewRoot: "HEAT", hebrewChars: "הט", hebrewMeaning: "THE MARK", traditional: "Anglo Saxon – HAET = HEAT.", notes: "", architecture: "H+T", insight: "Breath + Mark — heat is the marked breath, the warmth.", bookRef: "" },
+  "heavy": { hebrewRoot: "HEAVY", hebrewChars: "הבי", hebrewMeaning: "THE BOUNDARY ACT", traditional: "Anglo Saxon – HEFIG = HEAVY.", notes: "", architecture: "H+V+Y", insight: "Breath + Vibrate/Connect + Act — heavy is the vibrating act of breath, the weight.", bookRef: "" },
+  "help": { hebrewRoot: "HELP", hebrewChars: "הלפ", hebrewMeaning: "THE LATERAL FLOW", traditional: "Anglo Saxon – HELPAN = TO HELP.", notes: "", architecture: "H+L+P", insight: "Breath + Lateral + Project — to help is the lateral projection of breath, to aid.", bookRef: "" },
+  "herd": { hebrewRoot: "HERD", hebrewChars: "הרד", hebrewMeaning: "THE RADIATE DIRECT", traditional: "Anglo Saxon – HEARD = A HERD.", notes: "", architecture: "H+R+D", insight: "Breath + Radiate + Direct — a herd is the directed radiance of breath, the group.", bookRef: "" },
+  "here": { hebrewRoot: "HERE", hebrewChars: "הרא", hebrewMeaning: "THE SEE", traditional: "Anglo Saxon – HER = HERE.", notes: "", architecture: "H+R", insight: "Breath + Radiate — here is the radiating breath, the place.", bookRef: "" },
+  "hero": { hebrewRoot: "HERO", hebrewChars: "הרו", hebrewMeaning: "THE RADIATE CONNECT", traditional: "Greek – HERO = HERO.", notes: "", architecture: "H+R+W", insight: "Breath + Radiate + Connect — a hero is the connecting radiance of breath, the champion.", bookRef: "" },
+  "hide": { hebrewRoot: "HIDE", hebrewChars: "הד", hebrewMeaning: "THE DIRECT", traditional: "Anglo Saxon – HYDAN = TO HIDE.", notes: "", architecture: "H+D", insight: "Breath + Direct — to hide is to direct breath away, to conceal.", bookRef: "" },
+  "high": { hebrewRoot: "HIGH", hebrewChars: "הג", hebrewMeaning: "THE GROW", traditional: "Anglo Saxon – HEH = HIGH.", notes: "", architecture: "H+G", insight: "Breath + Grow — high is the growing breath, the elevated.", bookRef: "" },
+  "hill": { hebrewRoot: "HILL", hebrewChars: "הל", hebrewMeaning: "THE LATERAL", traditional: "Anglo Saxon – HYLL = A HILL.", notes: "", architecture: "H+L", insight: "Breath + Lateral — a hill is the lateral rise of breath, the mound.", bookRef: "" },
+  "holy": { hebrewRoot: "HOLY", hebrewChars: "הלי", hebrewMeaning: "THE LATERAL ACT", traditional: "Anglo Saxon – HALIG = HOLY.", notes: "", architecture: "H+L+Y", insight: "Breath + Lateral + Act — holy is the lateral act of breath, the sacred.", bookRef: "" },
+  "home": { hebrewRoot: "HOME", hebrewChars: "המ", hebrewMeaning: "THE MATERIAL", traditional: "Anglo Saxon – HAM = A HOME.", notes: "", architecture: "H+M", insight: "Breath + Material — home is the material breath, the dwelling.", bookRef: "" },
+  "honest": { hebrewRoot: "HONEST", hebrewChars: "הנט", hebrewMeaning: "THE CONTINUE MARK", traditional: "Latin – HONESTUS = HONEST.", notes: "", architecture: "H+N+S+T", insight: "Breath + Continue + Spread + Mark — honest is the marked spread of continuing breath, the truthful.", bookRef: "" },
+  "honour": { hebrewRoot: "HONOUR", hebrewChars: "הנור", hebrewMeaning: "THE CONTINUE RADIATE", traditional: "Latin – HONOR = HONOUR.", notes: "", architecture: "H+N+R", insight: "Breath + Continue + Radiate — honour is the radiating continuation of breath, the respect.", bookRef: "" },
+  "hope": { hebrewRoot: "HOPE", hebrewChars: "הפ", hebrewMeaning: "THE PROJECT", traditional: "Anglo Saxon – HOPIAN = TO HOPE.", notes: "", architecture: "H+P", insight: "Breath + Project — hope is the projected breath, the expectation of good.", bookRef: "" },
+  "horse": { hebrewRoot: "HORSE", hebrewChars: "הרס", hebrewMeaning: "THE RADIATE SPREAD", traditional: "Anglo Saxon – HORS = HORSE.", notes: "", architecture: "H+R+S", insight: "Breath + Radiate + Spread — horse is the radiating spread of breath, the animal of power.", bookRef: "" },
+  "hot": { hebrewRoot: "HOT", hebrewChars: "הט", hebrewMeaning: "THE MARK", traditional: "Anglo Saxon – HAT = HOT.", notes: "", architecture: "H+T", insight: "Breath + Mark — hot is the marked breath, the warmth, the passion.", bookRef: "" },
+  "house": { hebrewRoot: "HOUSE", hebrewChars: "הס", hebrewMeaning: "THE SPREAD", traditional: "Anglo Saxon – HUS = A HOUSE.", notes: "", architecture: "H+S", insight: "Breath + Spread — a house is the spread of breath, the dwelling.", bookRef: "" },
+  "huge": { hebrewRoot: "HUGE", hebrewChars: "הג", hebrewMeaning: "THE GROW", traditional: "Latin – HUGE = HUGE.", notes: "", architecture: "H+G", insight: "Breath + Grow — huge is the growing breath, the vast.", bookRef: "" },
+  "human": { hebrewRoot: "HUMAN", hebrewChars: "המן", hebrewMeaning: "THE MATERIAL CONTINUE", traditional: "Latin – HUMANUS = HUMAN.", notes: "", architecture: "H+M+N", insight: "Breath + Material + Continue — human is the continuing material of breath, the being.", bookRef: "" },
+  "humble": { hebrewRoot: "HUMBLE", hebrewChars: "המבל", hebrewMeaning: "THE MATERIAL BOUNDARY LATERAL", traditional: "Latin – HUMILIS = HUMBLE.", notes: "", architecture: "H+M+B+L", insight: "Breath + Material + Boundary + Lateral — humble is the lateral boundary of material breath, the modest.", bookRef: "" },
+  "humour": { hebrewRoot: "HUMOUR", hebrewChars: "המור", hebrewMeaning: "THE MATERIAL RADIATE", traditional: "Latin – HUMOR = MOISTURE.", notes: "", architecture: "H+M+R", insight: "Breath + Material + Radiate — humour is the radiating material of breath, the wit, the moisture.", bookRef: "" },
+  "hunger": { hebrewRoot: "HUNGER", hebrewChars: "הנגר", hebrewMeaning: "THE CONTINUE GROW RADIATE", traditional: "Anglo Saxon – HUNGR = HUNGER.", notes: "", architecture: "H+N+G+R", insight: "Breath + Continue + Grow + Radiate — hunger is the radiating growth of continuing breath, the need.", bookRef: "" },
+  "hurry": { hebrewRoot: "HURRY", hebrewChars: "הרי", hebrewMeaning: "THE RADIATE ACT", traditional: "Latin – HURRY = HASTE.", notes: "", architecture: "H+R+Y", insight: "Breath + Radiate + Act — hurry is the radiating act of breath, the haste.", bookRef: "" },
+  "hurt": { hebrewRoot: "HURT", hebrewChars: "הרט", hebrewMeaning: "THE RADIATE MARK", traditional: "Latin – HURT = INJURY.", notes: "", architecture: "H+R+T", insight: "Breath + Radiate + Mark — hurt is the marked radiance of breath, the injury.", bookRef: "" },
+  "husband": { hebrewRoot: "HUSBAND", hebrewChars: "הסבנד", hebrewMeaning: "THE SPREAD BOUNDARY CONTINUE DIRECT", traditional: "Anglo Saxon – HUSBANDA = HUSBAND.", notes: "", architecture: "H+S+B+N+D", insight: "Breath + Spread + Boundary + Continue + Direct — husband is the directed continuation of the spread boundary of breath, the partner.", bookRef: "" },
+  "hymn": { hebrewRoot: "HYMN", hebrewChars: "המן", hebrewMeaning: "THE MATERIAL CONTINUE", traditional: "Greek – HYMNS = A SONG.", notes: "", architecture: "H+M+N", insight: "Breath + Material + Continue — a hymn is the continuing material of breath, the sacred song.", bookRef: "" },
+  "hypocrite": { hebrewRoot: "HYPOCRITE", hebrewChars: "היפוקריט", hebrewMeaning: "THE ACT PROJECT CONTAIN RADIATE MARK", traditional: "Greek – HYPOKRITES = AN ACTOR.", notes: "", architecture: "H+P+C+R+T", insight: "Breath + Project + Contain + Radiate + Mark — a hypocrite is the marked radiance of contained projection, the pretender.", bookRef: "" }
+};
+
+// ─── DOM elements ──────────────────────────────────────────────
+const decoderInput = document.getElementById('decoderInput');
+const decoderResult = document.getElementById('decoderResult');
+const decoderEmpty = document.getElementById('decoderEmpty');
+const decoderNotFound = document.getElementById('decoderNotFound');
+const decoderCount = document.getElementById('decoderCount');
+
+function showDecoderResult(word) {
+  const entry = decoderDictionary[word];
+  if (!entry) return false;
+
+  document.getElementById('decoderWord').textContent = word.toUpperCase();
+  document.getElementById('decoderRoot').textContent = entry.hebrewRoot || '—';
+  document.getElementById('decoderChars').textContent = entry.hebrewChars || '';
+  document.getElementById('decoderMeaning').textContent = entry.hebrewMeaning || '—';
+  document.getElementById('decoderTraditional').textContent = entry.traditional || '';
+  document.getElementById('decoderNotes').textContent = entry.notes || '';
+  document.getElementById('decoderArchitecture').textContent = entry.architecture || '—';
+  document.getElementById('decoderInsight').textContent = entry.insight || '—';
+
+  const bookref = document.getElementById('decoderBookref');
+  if (entry.bookRef) {
+    bookref.style.display = 'block';
+    bookref.querySelector('a').href = entry.bookRef;
+  } else {
+    bookref.style.display = 'none';
+  }
+
+  decoderResult.style.display = 'block';
+  decoderEmpty.style.display = 'none';
+  decoderNotFound.style.display = 'none';
+  return true;
+}
+
+function doSearch(term) {
+  term = term.toLowerCase().replace(/[^a-z]/g, '');
+
+  if (!term) {
+    decoderResult.style.display = 'none';
+    decoderEmpty.style.display = 'block';
+    decoderNotFound.style.display = 'none';
+    decoderCount.textContent = '';
+    return;
+  }
+
+  const exact = decoderDictionary[term] ? [term] : [];
+  const partial = Object.keys(decoderDictionary).filter(key => key !== term && key.includes(term));
+  const matches = [...exact, ...partial];
+
+  if (matches.length === 0) {
+    decoderResult.style.display = 'none';
+    decoderEmpty.style.display = 'none';
+    decoderNotFound.style.display = 'block';
+    decoderCount.textContent = '';
+    return;
+  }
+
+  decoderCount.textContent = `Found ${matches.length} word${matches.length > 1 ? 's' : ''}`;
+  showDecoderResult(matches[0]);
+}
+
+decoderInput.addEventListener('input', function() {
+  doSearch(this.value);
+});
+
+decoderInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const term = this.value.toLowerCase().replace(/[^a-z]/g, '');
+    if (term && decoderDictionary[term]) {
+      showDecoderResult(term);
+      decoderCount.textContent = 'Found 1 word (exact match)';
+    }
+  }
+});
+
+decoderEmpty.style.display = 'block';
+decoderNotFound.style.display = 'none';
+decoderResult.style.display = 'none';
+</script>
+
+<hr>
 
 <h1 id="mu-title-note">A NOTE ON THE TITLE: WHY "MEANING UNCONFOUNDED"?</h1>
 <p><em>For those who turn to the end first. For those who stay after the credits. For those who want to know: what's in a name?</em></p>
@@ -3141,8 +3796,7 @@ Find word pairs where one version has a silent consonant and the other does not:
 <p><em>For those who turn to the end first: the book delivers. The code works. The meaning is un-confounded.</em></p>
 <p><em>For those who stay after the credits: the reward is here. The gem was always in plain sight.</em></p>
 
-<hr>
-
+<hr />
 <!-- ============================================================
      PART II: BEDROCK-REFRAMED
      ============================================================ -->
@@ -3534,7 +4188,7 @@ Find word pairs where one version has a silent consonant and the other does not:
 </ul>
 <p>The position of a consonant in a word also carries meaning. At the start: initiation. In the middle: sustain. At the end: completion.</p>
 <p>This structure is precise. It is testable. It is consistent across thousands of words. The confidence levels range from 67% to 85%. This is far above chance.</p>
-<p><em>For the complete consonant reference, see <a href="#app-a">Appendix A</a>.</em></p>
+<p><em>For the complete consonant reference, see <a href="#mu-app-a">Appendix A</a>.</em></p>
 
 <div class="truism">
   "The consonant code is not an invention. It is a discovery. It was always there, written into the structure of language, waiting to be read."
@@ -4246,15 +4900,68 @@ Find word pairs where one version has a silent consonant and the other does not:
 <p><strong>Second: find the hidden twin.</strong> When you feel driven, ask: what am I making sure never happens? The hidden twin is the anchor.</p>
 <p><strong>Third: choose your engagement.</strong> Once you can see the game and the hidden anchor, you can choose how to respond. The choice is yours.</p>
 
-<h3 id="trm-ch30" class="ch"><span class="kick">Chapter 30</span><span class="cht">The Value of Human Connection</span></h3>
+<h3 id="trm-ch30" class="ch"><span class="kick">Chapter 30</span><span class="cht">Spelling Is Casting — The Architecture of Written Words</span></h3>
+<p class="lead">Until now, we have treated the consonant code as an architecture of sound. But the code is not only heard. It is also seen. And what is seen carries meaning that the voice alone cannot carry, because the written word adds a layer the spoken word leaves invisible.</p>
+
+<p><strong>Written word vs. spoken word:</strong> The mouth speaks. The hand writes. The ear hears. The eye reads. These are not the same operation. Spelling is not sound written down. Spelling is a secondary code — a visual code that sits on top of the phonetic code. The visual code has its own architecture. Its own rules. Its own hidden structure.</p>
+
+<p>When you write, you are not transcribing sound. You are <em>casting</em> meaning into a visual field. The word "spelling" itself describes the process: <strong>SPELLING</strong> = S+P+L+L+N+G — <em>spreading, projecting, lateral, lateral, continuing, growing</em>. The word describes the act of casting meaning: the spreading of letters across a surface, the projection of a pattern that grows and continues. Spelling is not arbitrary. It is the visible architecture of meaning.</p>
+
+<p><strong>The Four Layers of Written Code</strong></p>
+
+<p><strong>Layer 1: Case — The Stop Architecture</strong></p>
+<p>When you write in ALL CAPS, every letter is a stop. The word is sealed, completed, projected. CAPS are the written equivalent of an unvoiced stop consonant. You can feel it. ALL CAPS SHOUTS because it stops the eye at every letter. Lowercase flows because the letters are not stopped. The text has breath. Lowercase is the written equivalent of voiced, flowing consonants. The case of a word changes its meaning. Consider the following pair:</p>
+
+<p><strong>HELP</strong> vs. <strong>help</strong> — The first is a command, a call for aid. The second is a quiet request, a suggestion that assistance might be welcome. Same letters. Same consonant architecture. Different case. Different meaning. The case of the word is the stop architecture.</p>
+
+<p><strong>Layer 2: Cursive — The Glide Counter-Spell</strong></p>
+<p>Cursive is the written equivalent of a glide consonant. It connects. It flows. It does not stop. When you write in cursive, the letters are connected. The meaning is fluid. The words are not isolated; they are one continuous stream. The cursive script acts as a counter-spell against the stop architecture of printed text. Print stops you. Cursive carries you forward. This is why legal documents are printed, not cursive. The stop architecture preserves the word.</p>
+
+<p><strong>Layer 3: The Space Bar — The Breath Hardware</strong></p>
+<p>The space bar is the written equivalent of the breath. It is the lateral movement between words. In spoken language, the breath is the pause between sounds. In written language, the space is the pause between words. The space separates. The space connects. It is the breath of the sentence. It is the lateral dimension of the code. Words without spaces are unreadable. Spaces without words are meaningless. The space bar is the hardware of the breath.</p>
+
+<p><strong>Layer 4: Punctuation — The Algorithmic Operators</strong></p>
+<p>Punctuation is not grammar. It is code. Punctuation marks are written instructions. They are the operators of the written field. They tell the eye where to pause, where to stop, where to query. They are the algorithm of the sentence.</p>
+
+<div class="tw"><table>
+  <caption>Punctuation as Algorithmic Operators</caption>
+  <thead><tr><th>Punctuation</th><th>Architecture</th><th>Code Function</th></tr></thead>
+  <tbody>
+    <tr><td><strong>.</strong> (Period)</td><td>T (Mark)</td><td>Stop. The sentence is complete. The mark is placed.</td></tr>
+    <tr><td><strong>?</strong> (Question Mark)</td><td>W+T (Connect + Mark)</td><td>Query. The connection is seeking a mark.</td></tr>
+    <tr><td><strong>!</strong> (Exclamation)</td><td>P+T (Project + Mark)</td><td>Projection. The mark is forcefully projected.</td></tr>
+    <tr><td><strong>…</strong> (Ellipsis)</td><td>N (Continue)</td><td>Continuation. The flow has not stopped.</td></tr>
+    <tr><td><strong>,</strong> (Comma)</td><td>L (Lateral)</td><td>Flow laterally. The sentence does not stop.</td></tr>
+    <tr><td><strong>:</strong> (Colon)</td><td>T+L (Mark + Lateral)</td><td>Mark that flows. The sentence will continue.</td></tr>
+    <tr><td><strong>;</strong> (Semicolon)</td><td>L+T (Lateral + Mark)</td><td>Flow that marks. The sentence is connected.</td></tr>
+    <tr><td><strong>—</strong> (Dash)</td><td>D (Direct)</td><td>Direct the attention. A sudden interruption.</td></tr>
+    <tr><td><strong>()</strong> (Parentheses)</td><td>B (Boundary)</td><td>Boundary. The content inside is a bounded thought.</td></tr>
+  </tbody>
+</table></div>
+
+<p><strong>What This Reveals</strong></p>
+<p>When you write, you are casting meaning into the visual field. The letters are the code. The case is the stop architecture. The cursive is the glide counter-spell. The space is the breath. The punctuation is the algorithm.</p>
+<p>You have been doing this your whole life. You knew the difference between HELP and help. You knew the difference between a question and a command. You knew that ALL CAPS SHOUTS. You just didn't know <em>why</em>.</p>
+<p>The code tells you why. The case of the word is the stop architecture. The cursive is the glide counter-spell. The space is the breath. The punctuation is the algorithm.</p>
+
+<blockquote class="gem">
+  <p><strong>💎 GEM 38: Spelling Is Casting — The Architecture of Written Words</strong></p>
+  <p><strong>Location:</strong> Chapter 30 — Spelling Is Casting</p>
+  <p>When you write, you are not transcribing sound. You are casting meaning into a visual field. The word "spelling" describes the process: SPELLING = spread, project, lateral, lateral, continue, grow. The case of the word is the stop architecture: ALL CAPS seals, completes, projects. Lowercase flows, has breath. The cursive is the glide counter-spell: it connects, flows, does not stop. Print stops you; cursive carries you forward. The space bar is the breath hardware: it is the pause between words, the lateral dimension of the code. Punctuation is the algorithm: the period is a mark, the question mark is a query, the comma is lateral flow. The written code is not a transcription of sound. It is a secondary code that sits on top of the phonetic code, adding layers of meaning that the voice alone cannot carry. You have been doing this your whole life. You knew the difference between HELP and help. You knew the difference between a question and a command. The code tells you why.</p>
+  <p><em>The mouth speaks. The hand writes. The eye reads. These are not the same operation. Spelling is not sound written down. Spelling is casting.</em></p>
+</blockquote>
+
+<hr>
+
+<h3 id="trm-ch31" class="ch"><span class="kick">Chapter 31</span><span class="cht">The Value of Human Connection</span></h3>
 <p class="lead"><strong>Connection is the experience of complementary postulates.</strong> When two people are genuinely connected, their postulates are complementary. What you are doing from your end fits what I need from mine.</p>
 <p>Genuine connection requires presence. Presence is not the absence of distraction. It is the willingness to be known. It is the willingness to know. It is the willingness to be available to another being without the protection of the hidden twin.</p>
 
-<h3 id="trm-ch31" class="ch"><span class="kick">Chapter 31</span><span class="cht">A New Kind of Power</span></h3>
+<h3 id="trm-ch32" class="ch"><span class="kick">Chapter 32</span><span class="cht">A New Kind of Power</span></h3>
 <p class="lead"><strong>Control is not security. Control is the active maintenance of the hidden twin.</strong> The person who must control is simultaneously making sure they are never controlled. The person who must control cannot be free because they are running a game that has no resolution from within the game.</p>
 <p>There is a different kind of power. Not the power to control. The power to choose. The power to choose your games. The power to choose your engagement. The power to choose your presence. <strong>The powerful person is not the one who controls the most. The powerful person is the one who is least controlled.</strong></p>
 
-<h3 id="trm-ch32" class="ch"><span class="kick">Chapter 32</span><span class="cht">The Invitation</span></h3>
+<h3 id="trm-ch33" class="ch"><span class="kick">Chapter 33</span><span class="cht">The Invitation</span></h3>
 <div class="card card-gold" style="text-align:center; padding:2rem;">
   <p style="font-size:1.3rem; font-family:Georgia, serif; font-style:italic;">
     "In an age of artificial intelligence, what remains most valuable is what only humans can offer: genuine presence, genuine connection, genuine understanding."
@@ -4470,6 +5177,16 @@ Find word pairs where one version has a silent consonant and the other does not:
         var det = link.closest("details");
         if (det && q !== "") { det.open = true; }
       });
+    });
+  }
+
+  /* ── TOC toggle ────────────────────────────────────────── */
+  var tocToggle = document.getElementById('tocToggle');
+  var toc = document.getElementById('toc');
+  if (tocToggle && toc) {
+    tocToggle.addEventListener('click', function() {
+      toc.classList.toggle('open');
+      tocToggle.textContent = toc.classList.contains('open') ? '✕ Hide Contents' : '📖 Show Contents';
     });
   }
 
