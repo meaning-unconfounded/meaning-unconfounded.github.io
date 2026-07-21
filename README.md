@@ -1,4 +1,4 @@
-# The White Book: Meaning Unconfounded — Complete Omnibus Edition
+# The White Book: Meaning Unconfounded
 
 **Live Site:** [https://meaning-unconfounded.github.io/](https://meaning-unconfounded.github.io/)
 
