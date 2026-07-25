@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>The Inversion Cosmology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            touch-action: pan-y;
+            user-select: none;
+        }
+
+        /* Scroll Container */
+        #scroll-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            z-index: 1;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        #journey {
+            width: 100%;
+            height: 600vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Fixed Viewport (Images) */
+        #viewport {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            z-index: 2;
+            pointer-events: none;
+        }
+        #breathing-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: breathe 12s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(0.5);
+            will-change: transform, opacity;
+        }
+        .layer.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* God Light */
+        #god-light {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #fff;
+            opacity: 0;
+            z-index: 10;
+            pointer-events: none;
+            transition: opacity 2s ease;
+        }
+
+        /* --- TOP NAVIGATION BAR (Play/Pause/Back) --- */
+        #top-bar {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            pointer-events: none;
+        }
+        #top-bar * {
+            pointer-events: auto;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-family: 'Georgia', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            min-width: 70px;
+            text-align: center;
+        }
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.02);
+        }
+        .nav-btn.playing {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        .nav-btn.back-link {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 10px 18px;
+        }
+        #speed-indicator {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            font-family: monospace;
+        }
+
+        /* --- TEXT OVERLAYS (Top & Bottom) --- */
+        .iteration-text {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            max-width: 700px;
+            text-align: center;
+            font-size: 1.5rem;
+            line-height: 1.9;
+            text-shadow: 0 0 40px rgba(0,0,0,0.95), 0 0 80px rgba(0,0,0,0.6);
+            opacity: 0;
+            transition: opacity 2s ease, transform 2s ease;
+            z-index: 5;
+            pointer-events: none;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            padding: 0 10px;
+        }
+        .iteration-text.visible {
+            opacity: 1;
+        }
+        .iteration-text.top {
+            top: 15%;
+            bottom: auto;
+        }
+        .iteration-text.bottom {
+            bottom: 15%;
+            top: auto;
+        }
+
+        /* Scroll Prompt (Hidden when playing) */
+        #scroll-prompt {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: pulse-down 2.5s ease-in-out infinite;
+            pointer-events: none;
+            font-family: 'Georgia', serif;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            transition: opacity 1s ease;
+        }
+        @keyframes pulse-down {
+            0%, 100% { opacity: 0.2; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.7; transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAVIGATION -->
+    <div id="top-bar">
+        <a href="https://meaning-unconfounded.github.io/" class="nav-btn back-link" target="_top">🔙 Back</a>
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <span id="speed-indicator">🐢 1x</span>
+            <button id="play-btn" class="nav-btn">▶ Play</button>
+        </div>
+    </div>
+
+    <!-- FIXED VISUALS -->
+    <div id="viewport">
+        <div id="breathing-wrapper">
+            <img id="layer1" class="layer active" src="inverse1.webp" alt="Layer 1">
+            <img id="layer2" class="layer" src="inverse2.webp" alt="Layer 2">
+            <img id="layer3" class="layer" src="inverse3.webp" alt="Layer 3">
+            <img id="layer4" class="layer" src="inverse4.webp" alt="Layer 4">
+        </div>
+    </div>
+    <div id="god-light"></div>
+
+    <!-- === 14 INSPIRING TEXTS (Top & Bottom alternating) === -->
+    <!-- Top 1 -->
+    <div id="text1" class="iteration-text top">"We live on the inner shell of a Cosmic Egg. 🥚"</div>
+    <!-- Bottom 1 -->
+    <div id="text2" class="iteration-text bottom">"The centre is infinitely far away, yet every step is home. ∞"</div>
+    <!-- Top 2 -->
+    <div id="text3" class="iteration-text top">"Gravity is not a pull. The Earth rises to meet your feet. 🌍"</div>
+    <!-- Bottom 2 -->
+    <div id="text4" class="iteration-text bottom">"Time is an iteration. Reality recalculates every moment. ⏳"</div>
+    <!-- Top 3 -->
+    <div id="text5" class="iteration-text top">"All numbers are aged quality, distance from zero. 0️⃣"</div>
+    <!-- Bottom 3 -->
+    <div id="text6" class="iteration-text bottom">"Every atom grows. The Earth expands outward. 🌱"</div>
+    <!-- Top 4 -->
+    <div id="text7" class="iteration-text top">"What if the Universe is inside out? 🌀"</div>
+    <!-- Bottom 4 -->
+    <div id="text8" class="iteration-text bottom">"The deepest hole is only 0.2% to the centre. ⛏️"</div>
+    <!-- Top 5 -->
+    <div id="text9" class="iteration-text top">"We infer the interior from gravity, not sight. 📐"</div>
+    <!-- Bottom 5 -->
+    <div id="text10" class="iteration-text bottom">"Math is a language for describing observations. 📝"</div>
+    <!-- Top 6 -->
+    <div id="text11" class="iteration-text top">"Inside a sealed box, gravity and acceleration feel the same. 📦"</div>
+    <!-- Bottom 6 -->
+    <div id="text12" class="iteration-text bottom">"The equivalence principle reveals the illusion. ✨"</div>
+    <!-- Top 7 -->
+    <div id="text13" class="iteration-text top">"The journey inward is the journey home. 🏠"</div>
+    <!-- Bottom 7 (Final) -->
+    <div id="text14" class="iteration-text bottom" style="font-size: 2rem; color: #222; text-shadow: 0 0 60px rgba(255,255,255,0.8);">
+        "Be still. You are the universe experiencing itself. 🙏"
+    </div>
+
+    <!-- SCROLL PROMPT -->
+    <div id="scroll-prompt">↓ Swipe or Press Play</div>
+
+    <!-- SCROLL SPACE -->
+    <div id="scroll-container">
+        <div id="journey"></div>
+    </div>
+
+    <script>
+        // --- DOM Elements ---
+        const scrollContainer = document.getElementById('scroll-container');
+        const layerElements = [
+            document.getElementById('layer1'),
+            document.getElementById('layer2'),
+            document.getElementById('layer3'),
+            document.getElementById('layer4')
+        ];
+        const textElements = [
+            document.getElementById('text1'), document.getElementById('text2'),
+            document.getElementById('text3'), document.getElementById('text4'),
+            document.getElementById('text5'), document.getElementById('text6'),
+            document.getElementById('text7'), document.getElementById('text8'),
+            document.getElementById('text9'), document.getElementById('text10'),
+            document.getElementById('text11'), document.getElementById('text12'),
+            document.getElementById('text13'), document.getElementById('text14')
+        ];
+        const godLight = document.getElementById('god-light');
+        const playBtn = document.getElementById('play-btn');
+        const scrollPrompt = document.getElementById('scroll-prompt');
+        const speedIndicator = document.getElementById('speed-indicator');
+
+        // --- State ---
+        let isAutoPlaying = false;
+        let autoProgress = 0;
+        let animationFrame = null;
+        let loopCount = 0;
+        let currentDuration = 60000; // starts at 60s
+        const MIN_DURATION = 10000; // 10s fastest
+        let currentLayerOrder = [0, 1, 2, 3]; // default
+
+        // --- Utility: Shuffle array (Fisher-Yates) ---
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // --- Generate new random layer order for each loop ---
+        function randomizeLayerOrder() {
+            currentLayerOrder = shuffleArray([0, 1, 2, 3]);
+        }
+
+        // --- Update Scene (progress 0 to 1) ---
+        function updateScene(progress) {
+            if (progress < 0) progress = 0;
+            if (progress > 1) progress = 1;
+
+            // ---- 14 Texts Logic (spread evenly across 0 to 0.82) ----
+            const totalTexts = textElements.length;
+            textElements.forEach((text, index) => {
+                const isLast = (index === totalTexts - 1);
+                let center = (index / totalTexts) * 0.82;
+                let start = Math.max(0, center - 0.06);
+                let end = Math.min(0.82, center + 0.06);
+
+                if (isLast) {
+                    // "Be still" appears at the very end (0.80 to 1.0)
+                    if (progress > 0.78) {
+                        text.classList.add('visible');
+                    } else {
+                        text.classList.remove('visible');
+                    }
+                } else {
+                    if (progress >= start && progress <= end) {
+                        text.classList.add('visible');
+                    } else {
+                        text.classList.remove('visible');
+                    }
+                }
+            });
+
+            // ---- Layer Transitions with RANDOM order ----
+            // Segment size: 0.0 to 0.85 (then white light)
+            // 4 layers => 4 segments of ~0.2125 each
+            const segmentSize = 0.85 / 4;
+            let layerProgress = Math.min(progress / 0.85, 1); // 0 to 1 over the 4 layers
+
+            if (progress < 0.85) {
+                let seg = layerProgress * 4; // 0 to 4
+                let idx = Math.floor(seg);
+                let p = seg - idx;
+                if (idx >= 3) {
+                    // Pure last layer
+                    setLayerByOrder(3, 1, 0);
+                } else {
+                    let outIdx = currentLayerOrder[idx];
+                    let inIdx = currentLayerOrder[idx + 1];
+                    setLayerByIndices(outIdx, inIdx, 1 - p, p);
+                }
+            } else {
+                // Dissolve to God Light (0.85 to 1.0)
+                let p = (progress - 0.85) / 0.15;
+                // Fade out the last layer in the order
+                let lastActual = currentLayerOrder[3];
+                layerElements.forEach((layer, i) => {
+                    if (i === lastActual) {
+                        layer.style.opacity = 1 - p;
+                        let scale = 1 + (1 - (1 - p)) * 1.5;
+                        layer.style.transform = `scale(${scale})`;
+                    } else {
+                        layer.style.opacity = 0;
+                    }
+                });
+                godLight.style.opacity = p;
+            }
+        }
+
+        // Helper: set transition by actual indices
+        function setLayerByIndices(outIdx, inIdx, fadeOutAmount, fadeInAmount) {
+            layerElements.forEach((layer, i) => {
+                if (i === outIdx) {
+                    layer.style.opacity = fadeOutAmount;
+                    let scale = 1 + (1 - fadeOutAmount) * 1.5;
+                    layer.style.transform = `scale(${scale})`;
+                } else if (i === inIdx) {
+                    layer.style.opacity = fadeInAmount;
+                    let scale = 0.5 + fadeInAmount * 0.5;
+                    layer.style.transform = `scale(${scale})`;
+                } else {
+                    layer.style.opacity = 0;
+                }
+            });
+        }
+
+        // Helper: set pure layer by order index
+        function setLayerByOrder(orderIdx, fadeOut, fadeIn) {
+            let actualIdx = currentLayerOrder[orderIdx];
+            layerElements.forEach((layer, i) => {
+                if (i === actualIdx) {
+                    layer.style.opacity = fadeOut;
+                    let scale = 1 + (1 - fadeOut) * 1.5;
+                    layer.style.transform = `scale(${scale})`;
+                } else if (orderIdx < 3 && i === currentLayerOrder[orderIdx + 1]) {
+                    layer.style.opacity = fadeIn;
+                    let scale = 0.5 + fadeIn * 0.5;
+                    layer.style.transform = `scale(${scale})`;
+                } else {
+                    layer.style.opacity = 0;
+                }
+            });
+        }
+
+        // --- Manual Scroll ---
+        scrollContainer.addEventListener('scroll', () => {
+            if (isAutoPlaying) return;
+            const scrollTop = scrollContainer.scrollTop;
+            const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+            if (scrollHeight <= 0) return;
+            let progress = scrollTop / scrollHeight;
+            updateScene(progress);
+        });
+
+        // --- Auto-Play with Random Rotations & Speeding up ---
+        function startAutoPlay() {
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+            isAutoPlaying = true;
+            playBtn.textContent = '⏸ Pause';
+            playBtn.classList.add('playing');
+            scrollPrompt.style.opacity = '0';
+            scrollContainer.style.scrollBehavior = 'auto';
+
+            // If at end, reset
+            if (autoProgress >= 1) {
+                autoProgress = 0;
+                scrollContainer.scrollTop = 0;
+                godLight.style.opacity = '0';
+                layerElements.forEach(l => l.style.opacity = '0');
+                // Randomize for new loop
+                randomizeLayerOrder();
+                loopCount++;
+                // Speed up
+                currentDuration = Math.max(MIN_DURATION, 60000 - loopCount * 5000);
+                let speedText = currentDuration <= 15000 ? '🐇' : currentDuration <= 30000 ? '🐕' : '🐢';
+                speedIndicator.textContent = `${speedText} ${Math.round(60000/currentDuration)}x`;
+                updateScene(0);
+            }
+
+            let startTime = performance.now();
+            let startProgress = autoProgress;
+            let duration = currentDuration;
+
+            function step(time) {
+                if (!isAutoPlaying) {
+                    animationFrame = null;
+                    return;
+                }
+                const elapsed = time - startTime;
+                let progress = startProgress + (elapsed / duration);
+
+                if (progress >= 1) {
+                    // Hold white light for 3s, then loop
+                    progress = 1;
+                    updateScene(progress);
+                    setTimeout(() => {
+                        if (isAutoPlaying) {
+                            // Reset for next loop
+                            autoProgress = 0;
+                            scrollContainer.scrollTop = 0;
+                            godLight.style.opacity = '0';
+                            layerElements.forEach(l => l.style.opacity = '0');
+                            randomizeLayerOrder();
+                            loopCount++;
+                            currentDuration = Math.max(MIN_DURATION, 60000 - loopCount * 5000);
+                            let speedText = currentDuration <= 15000 ? '🐇' : currentDuration <= 30000 ? '🐕' : '🐢';
+                            speedIndicator.textContent = `${speedText} ${Math.round(60000/currentDuration)}x`;
+                            updateScene(0);
+                            // Recursively start again
+                            startAutoPlay();
+                        }
+                    }, 3000);
+                    if (animationFrame) cancelAnimationFrame(animationFrame);
+                    animationFrame = null;
+                    return;
+                }
+
+                updateScene(progress);
+                autoProgress = progress;
+                const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                scrollContainer.scrollTop = progress * scrollHeight;
+
+                animationFrame = requestAnimationFrame(step);
+            }
+            animationFrame = requestAnimationFrame(step);
+        }
+
+        function stopAutoPlay() {
+            isAutoPlaying = false;
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = null;
+            }
+            playBtn.textContent = '▶ Play';
+            playBtn.classList.remove('playing');
+            scrollPrompt.style.opacity = '1';
+            scrollContainer.style.scrollBehavior = 'smooth';
+        }
+
+        function toggleAutoPlay() {
+            if (isAutoPlaying) {
+                stopAutoPlay();
+            } else {
+                // If we are at the end, reset before playing
+                if (autoProgress >= 1 || scrollContainer.scrollTop >= (scrollContainer.scrollHeight - scrollContainer.clientHeight - 10)) {
+                    autoProgress = 0;
+                    scrollContainer.scrollTop = 0;
+                    godLight.style.opacity = '0';
+                    layerElements.forEach(l => l.style.opacity = '0');
+                    randomizeLayerOrder();
+                    updateScene(0);
+                }
+                startAutoPlay();
+            }
+        }
+
+        // --- Event Listeners ---
+        playBtn.addEventListener('click', toggleAutoPlay);
+
+        // Initialize
+        randomizeLayerOrder();
+        updateScene(0);
+    </script>
+</body>
+</html>
