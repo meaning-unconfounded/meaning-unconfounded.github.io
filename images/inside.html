@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>♾️ The Inversion — Never-Ending Journey</title>
+    <style>
+        /* === RESET & BASE — matches meaning-unconfounded.github.io aesthetic === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            background: #0a0a0a;
+            color: #f0ece4;
+            font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+            overflow: hidden;
+            touch-action: pan-y;
+            user-select: none;
+        }
+
+        /* === SCROLL CONTAINER (drives the infinite timeline) === */
+        #scroll-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            z-index: 1;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        #journey {
+            width: 100%;
+            height: 600vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* === FIXED VIEWPORT (images + breathing) === */
+        #viewport {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a0a;
+            z-index: 2;
+            pointer-events: none;
+        }
+        #breathing-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: breathe 16s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.035);
+            }
+        }
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(0.5);
+            will-change: transform, opacity;
+            filter: brightness(0.92) saturate(0.85);
+            transition: filter 4s ease;
+        }
+        .layer.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* === SOFT GLOW OVERLAY (adds warmth & depth) === */
+        #glow-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 3;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, rgba(180, 140, 80, 0.06) 0%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.85) 100%);
+        }
+
+        /* === SUBTLE VIGNETTE === */
+        #vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 4;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        /* === TEXT OVERLAYS — the heart of the experience === */
+        .iteration-text {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 82%;
+            max-width: 780px;
+            text-align: center;
+            font-size: 1.65rem;
+            line-height: 2.0;
+            opacity: 0;
+            transition: opacity 2.4s cubic-bezier(0.23, 1, 0.32, 1), transform 2.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 6;
+            pointer-events: none;
+            letter-spacing: 0.4px;
+            padding: 0 16px;
+            text-shadow: 0 0 60px rgba(0, 0, 0, 0.95), 0 0 120px rgba(0, 0, 0, 0.7), 0 4px 40px rgba(0, 0, 0, 0.8);
+            will-change: opacity, transform;
+        }
+        .iteration-text.visible {
+            opacity: 1;
+        }
+        /* Top-aligned texts */
+        .iteration-text.top {
+            top: 14%;
+            bottom: auto;
+            transform: translateX(-50%) translateY(-6px);
+        }
+        .iteration-text.top.visible {
+            transform: translateX(-50%) translateY(0);
+        }
+        /* Bottom-aligned texts */
+        .iteration-text.bottom {
+            bottom: 14%;
+            top: auto;
+            transform: translateX(-50%) translateY(6px);
+        }
+        .iteration-text.bottom.visible {
+            transform: translateX(-50%) translateY(0);
+        }
+        /* Final "Be still" — centred, larger, with warm glow */
+        .iteration-text.final {
+            top: 50%;
+            bottom: auto;
+            transform: translate(-50%, -50%) scale(0.92);
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            color: #f0ece4;
+            text-shadow: 0 0 80px rgba(180, 140, 80, 0.3), 0 0 160px rgba(180, 140, 80, 0.1), 0 0 40px rgba(0, 0, 0, 0.9);
+            line-height: 1.4;
+        }
+        .iteration-text.final.visible {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* === SUBTLE AMBER ACCENT FOR SELECT TEXTS === */
+        .iteration-text.amber {
+            color: #d4b68a;
+        }
+        .iteration-text.light {
+            color: #f0ece4;
+        }
+        .iteration-text.dim {
+            color: #b8b0a4;
+        }
+
+        /* === FRAME BORDER (for when embedded) === */
+        .frame-border {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            border: 1px solid rgba(180, 140, 80, 0.06);
+            box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.6);
+        }
+
+        /* === HIDE SCROLLBAR === */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        /* === RESPONSIVE: Smaller screens === */
+        @media (max-width: 768px) {
+            .iteration-text {
+                font-size: 1.2rem;
+                line-height: 1.7;
+                width: 88%;
+                max-width: 600px;
+            }
+            .iteration-text.final {
+                font-size: 1.8rem;
+            }
+            .iteration-text.top {
+                top: 12%;
+            }
+            .iteration-text.bottom {
+                bottom: 12%;
+            }
+        }
+        @media (max-width: 480px) {
+            .iteration-text {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                width: 92%;
+                letter-spacing: 0.2px;
+            }
+            .iteration-text.final {
+                font-size: 1.4rem;
+            }
+            .iteration-text.top {
+                top: 10%;
+            }
+            .iteration-text.bottom {
+                bottom: 10%;
+            }
+        }
+        @media (min-width: 1200px) {
+            .iteration-text {
+                font-size: 2rem;
+                max-width: 860px;
+            }
+            .iteration-text.final {
+                font-size: 3.2rem;
+            }
+        }
+
+        /* === VERY SUBTLE AMBER GLOW LINE AT TOP === */
+        #top-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 2px;
+            z-index: 8;
+            background: linear-gradient(90deg, transparent, rgba(180, 140, 80, 0.15), rgba(180, 140, 80, 0.3), rgba(180, 140, 80, 0.15), transparent);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        #bottom-glow {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 2px;
+            z-index: 8;
+            background: linear-gradient(90deg, transparent, rgba(180, 140, 80, 0.08), rgba(180, 140, 80, 0.15), rgba(180, 140, 80, 0.08), transparent);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === AMBER GLOW LINES === -->
+    <div id="top-glow"></div>
+    <div id="bottom-glow"></div>
+
+    <!-- === GLOW OVERLAY === -->
+    <div id="glow-overlay"></div>
+    <div id="vignette"></div>
+    <div class="frame-border"></div>
+
+    <!-- === FIXED VISUALS === -->
+    <div id="viewport">
+        <div id="breathing-wrapper">
+            <img id="layer1" class="layer active" src="inverse1.webp" alt="Layer 1" />
+            <img id="layer2" class="layer" src="inverse2.webp" alt="Layer 2" />
+            <img id="layer3" class="layer" src="inverse3.webp" alt="Layer 3" />
+            <img id="layer4" class="layer" src="inverse4.webp" alt="Layer 4" />
+        </div>
+    </div>
+
+    <!-- ============================================================
+    24 INSPIRING TEXTS — alternating top/bottom with pauses
+    ============================================================ -->
+
+    <!-- 1  top    --> <div id="t1"  class="iteration-text top light">"We live on the inner shell of a Cosmic Egg. 🥚"</div>
+    <!-- 2  bottom --> <div id="t2"  class="iteration-text bottom dim">"The centre is infinitely far away, yet every step is home. ∞"</div>
+    <!-- 3  top    --> <div id="t3"  class="iteration-text top amber">"Gravity is not a pull. The Earth rises to meet your feet. 🌍"</div>
+    <!-- 4  bottom --> <div id="t4"  class="iteration-text bottom light">"Time is an iteration. Reality recalculates every moment. ⏳"</div>
+    <!-- 5  top    --> <div id="t5"  class="iteration-text top dim">"All numbers are aged quality, distance from zero. 0️⃣"</div>
+    <!-- 6  bottom --> <div id="t6"  class="iteration-text bottom amber">"Every atom grows. The Earth expands outward. 🌱"</div>
+    <!-- 7  top    --> <div id="t7"  class="iteration-text top light">"What if the Universe is inside out? 🌀"</div>
+    <!-- 8  bottom --> <div id="t8"  class="iteration-text bottom dim">"The deepest hole is only 0.2 % to the centre. ⛏️"</div>
+    <!-- 9  top    --> <div id="t9"  class="iteration-text top amber">"We infer the interior from gravity, not sight. 📐"</div>
+    <!-- 10 bottom --> <div id="t10" class="iteration-text bottom light">"Math is a language for describing observations. 📝"</div>
+    <!-- 11 top    --> <div id="t11" class="iteration-text top dim">"Inside a sealed box, gravity and acceleration feel the same. 📦"</div>
+    <!-- 12 bottom --> <div id="t12" class="iteration-text bottom amber">"The equivalence principle reveals the illusion. ✨"</div>
+    <!-- 13 top    --> <div id="t13" class="iteration-text top light">"The centre is not a place—it is pure Presence. 🕯️"</div>
+    <!-- 14 bottom --> <div id="t14" class="iteration-text bottom dim">"Every soul journeys inward to the Source of all. 🌌"</div>
+    <!-- 15 top    --> <div id="t15" class="iteration-text top amber">"Distance is not metres—it is a relationship. 🔗"</div>
+    <!-- 16 bottom --> <div id="t16" class="iteration-text bottom light">"Infinity exists within every single point. ♾️"</div>
+    <!-- 17 top    --> <div id="t17" class="iteration-text top dim">"What appears above is not outside—it is within. 🔮"</div>
+    <!-- 18 bottom --> <div id="t18" class="iteration-text bottom amber">"Galaxies curve inward. Stars are near, not distant. ✨"</div>
+    <!-- 19 top    --> <div id="t19" class="iteration-text top light">"The outer is an illusion. The inside is reality. 🪞"</div>
+    <!-- 20 bottom --> <div id="t20" class="iteration-text bottom dim">"A finite shell containing infinite space. 🐚"</div>
+    <!-- 21 top    --> <div id="t21" class="iteration-text top amber">"The journey never ends. Every path leads inward. 🧭"</div>
+    <!-- 22 bottom --> <div id="t22" class="iteration-text bottom light">"Pure awareness. Pure love. Nothing is separate. ❤️"</div>
+    <!-- 23 top    --> <div id="t23" class="iteration-text top dim">"You are not a speck in the cosmos—the cosmos is a speck in you. 🌠"</div>
+    <!-- 24 final  --> <div id="t24" class="iteration-text final amber">"Be still. You are the universe experiencing itself. 🙏"</div>
+
+    <!-- === SCROLL SPACE === -->
+    <div id="scroll-container">
+        <div id="journey"></div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  DOM REFS
+        // ============================================================
+        const scrollContainer = document.getElementById('scroll-container');
+        const layerElements = [
+            document.getElementById('layer1'),
+            document.getElementById('layer2'),
+            document.getElementById('layer3'),
+            document.getElementById('layer4')
+        ];
+        const textElements = [
+            document.getElementById('t1'), document.getElementById('t2'),
+            document.getElementById('t3'), document.getElementById('t4'),
+            document.getElementById('t5'), document.getElementById('t6'),
+            document.getElementById('t7'), document.getElementById('t8'),
+            document.getElementById('t9'), document.getElementById('t10'),
+            document.getElementById('t11'), document.getElementById('t12'),
+            document.getElementById('t13'), document.getElementById('t14'),
+            document.getElementById('t15'), document.getElementById('t16'),
+            document.getElementById('t17'), document.getElementById('t18'),
+            document.getElementById('t19'), document.getElementById('t20'),
+            document.getElementById('t21'), document.getElementById('t22'),
+            document.getElementById('t23'), document.getElementById('t24')
+        ];
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let isAutoPlaying = false;
+        let autoProgress = 0;
+        let animationFrame = null;
+        let loopCount = 0;
+        let currentDuration = 80000; // start at 80s (slow)
+        const MIN_DURATION = 14000; // fastest: 14s
+        const MAX_DURATION = 80000; // slowest: 80s
+        let currentLayerOrder = [0, 1, 2, 3];
+        let isSlowingDown = false; // for the macro rhythm
+
+        // ============================================================
+        //  UTILITIES
+        // ============================================================
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function randomizeLayerOrder() {
+            currentLayerOrder = shuffleArray([0, 1, 2, 3]);
+        }
+
+        // ============================================================
+        //  TEXT SCHEDULING — each text gets a window with pauses
+        //  We spread 24 texts across 0.0 → 0.84
+        //  Each text: window = 0.028, gap = 0.007
+        //  Total: 24 * 0.035 = 0.84
+        // ============================================================
+        const TEXT_WINDOW = 0.028;
+        const TEXT_GAP = 0.007;
+        const TEXT_STEP = TEXT_WINDOW + TEXT_GAP;
+        const TEXT_START_OFFSET = 0.01;
+
+        function getTextSchedule(index) {
+            const start = TEXT_START_OFFSET + index * TEXT_STEP;
+            const end = start + TEXT_WINDOW;
+            return { start, end };
+        }
+
+        // ============================================================
+        //  CORE SCENE UPDATE (progress 0 → 1)
+        // ============================================================
+        function updateScene(progress) {
+            if (progress < 0) progress = 0;
+            if (progress > 1) progress = 1;
+
+            // ---- TEXT VISIBILITY (with pauses between them) ----
+            const total = textElements.length;
+            textElements.forEach((el, idx) => {
+                const isFinal = (idx === total - 1);
+                const schedule = getTextSchedule(idx);
+
+                // For the final text, show it from 0.82 onward
+                if (isFinal) {
+                    if (progress > 0.82 && progress < 0.95) {
+                        el.classList.add('visible');
+                    } else {
+                        el.classList.remove('visible');
+                    }
+                } else {
+                    if (progress >= schedule.start && progress <= schedule.end) {
+                        el.classList.add('visible');
+                    } else {
+                        el.classList.remove('visible');
+                    }
+                }
+            });
+
+            // ---- LAYER TRANSITIONS (random order, no white ending) ----
+            // The 4 layers transition across 0.0 → 0.85
+            // Then from 0.85 → 1.0 we smoothly cycle back to the start
+            const segmentSize = 0.85 / 4;
+            let layerProgress = Math.min(progress / 0.85, 1);
+
+            if (progress < 0.85) {
+                let seg = layerProgress * 4;
+                let idx = Math.floor(seg);
+                let p = seg - idx;
+                if (idx >= 3) {
+                    // pure last layer
+                    setLayerByOrder(3, 1, 0);
+                } else {
+                    let outIdx = currentLayerOrder[idx];
+                    let inIdx = currentLayerOrder[idx + 1];
+                    setLayerByIndices(outIdx, inIdx, 1 - p, p);
+                }
+            } else {
+                // 0.85 → 1.0: gentle dissolve back to first layer (no white flash)
+                let p = (progress - 0.85) / 0.15; // 0 → 1
+                // Fade out the 4th layer, fade in the 1st layer
+                let lastIdx = currentLayerOrder[3];
+                let firstIdx = currentLayerOrder[0];
+                layerElements.forEach((layer, i) => {
+                    if (i === lastIdx) {
+                        layer.style.opacity = 1 - p;
+                        let scale = 1 + (1 - (1 - p)) * 1.2;
+                        layer.style.transform = 'scale(' + scale + ')';
+                    } else if (i === firstIdx) {
+                        layer.style.opacity = p * 0.6;
+                        let scale = 0.6 + p * 0.4;
+                        layer.style.transform = 'scale(' + scale + ')';
+                    } else {
+                        layer.style.opacity = 0;
+                    }
+                });
+            }
+        }
+
+        // ---- LAYER HELPERS ----
+        function setLayerByIndices(outIdx, inIdx, fadeOut, fadeIn) {
+            layerElements.forEach((layer, i) => {
+                if (i === outIdx) {
+                    layer.style.opacity = fadeOut;
+                    let scale = 1 + (1 - fadeOut) * 1.4;
+                    layer.style.transform = 'scale(' + scale + ')';
+                } else if (i === inIdx) {
+                    layer.style.opacity = fadeIn;
+                    let scale = 0.5 + fadeIn * 0.5;
+                    layer.style.transform = 'scale(' + scale + ')';
+                } else {
+                    layer.style.opacity = 0;
+                }
+            });
+        }
+
+        function setLayerByOrder(orderIdx, fadeOut, fadeIn) {
+            let actualIdx = currentLayerOrder[orderIdx];
+            layerElements.forEach((layer, i) => {
+                if (i === actualIdx) {
+                    layer.style.opacity = fadeOut;
+                    let scale = 1 + (1 - fadeOut) * 1.4;
+                    layer.style.transform = 'scale(' + scale + ')';
+                } else if (orderIdx < 3 && i === currentLayerOrder[orderIdx + 1]) {
+                    layer.style.opacity = fadeIn;
+                    let scale = 0.5 + fadeIn * 0.5;
+                    layer.style.transform = 'scale(' + scale + ')';
+                } else {
+                    layer.style.opacity = 0;
+                }
+            });
+        }
+
+        // ============================================================
+        //  SPEED CURVE: slow → medium → slow (within each cycle)
+        //  Uses an easing function to create natural rhythm
+        // ============================================================
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        // ============================================================
+        //  MACRO RHYTHM: over multiple cycles, speed pulses
+        //  slow → medium → slow → medium → ...
+        // ============================================================
+        function getMacroSpeedMultiplier(loopIndex) {
+            // Cycles: 0=slow, 1=medium, 2=slow, 3=medium, ...
+            const phase = loopIndex % 4;
+            if (phase === 0 || phase === 2) return 1.0; // slow
+            if (phase === 1) return 0.6; // medium-fast
+            return 0.4; // fast (phase 3)
+        }
+
+        // ============================================================
+        //  AUTO-PLAY ENGINE
+        // ============================================================
+        function startAutoPlay() {
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+            isAutoPlaying = true;
+
+            // If we're at the end, reset for a new loop
+            if (autoProgress >= 1) {
+                autoProgress = 0;
+                scrollContainer.scrollTop = 0;
+                layerElements.forEach(function(l) { l.style.opacity = '0'; });
+                randomizeLayerOrder();
+                loopCount++;
+                // Update duration with macro rhythm
+                const macro = getMacroSpeedMultiplier(loopCount);
+                const baseDuration = 60000; // 60s base
+                const variation = 20000; // +/- 20s
+                const targetDuration = baseDuration + variation * (macro - 0.5) * 2;
+                currentDuration = Math.max(MIN_DURATION, Math.min(MAX_DURATION, targetDuration));
+                updateScene(0);
+            }
+
+            let startTime = performance.now();
+            let startProgress = autoProgress;
+            let duration = currentDuration;
+
+            function step(time) {
+                if (!isAutoPlaying) {
+                    animationFrame = null;
+                    return;
+                }
+
+                const elapsed = time - startTime;
+                let rawProgress = startProgress + (elapsed / duration);
+
+                if (rawProgress >= 1) {
+                    // End of cycle — seamless loop back
+                    rawProgress = 1;
+                    // Apply the easing to the final step
+                    const eased = easeInOutCubic(1);
+                    updateScene(1);
+
+                    // Reset for next loop with a tiny delay to avoid jank
+                    setTimeout(function() {
+                        if (isAutoPlaying) {
+                            autoProgress = 0;
+                            scrollContainer.scrollTop = 0;
+                            layerElements.forEach(function(l) { l.style.opacity = '0'; });
+                            randomizeLayerOrder();
+                            loopCount++;
+                            const macro = getMacroSpeedMultiplier(loopCount);
+                            const baseDuration = 60000;
+                            const variation = 20000;
+                            const targetDuration = baseDuration + variation * (macro - 0.5) * 2;
+                            currentDuration = Math.max(MIN_DURATION, Math.min(MAX_DURATION, targetDuration));
+                            updateScene(0);
+                            // Re-start the loop
+                            startAutoPlay();
+                        }
+                    }, 800);
+
+                    if (animationFrame) cancelAnimationFrame(animationFrame);
+                    animationFrame = null;
+                    return;
+                }
+
+                // Apply easing to the progress for smooth speed curve
+                const easedProgress = easeInOutCubic(rawProgress);
+                // Map back to 0-1 range for the scene
+                const mappedProgress = easedProgress;
+                updateScene(mappedProgress);
+                autoProgress = rawProgress;
+
+                // Sync scroll position
+                const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                if (scrollHeight > 0) {
+                    scrollContainer.scrollTop = rawProgress * scrollHeight;
+                }
+
+                animationFrame = requestAnimationFrame(step);
+            }
+
+            animationFrame = requestAnimationFrame(step);
+        }
+
+        // ============================================================
+        //  BOOT — start automatically
+        // ============================================================
+        let hasStarted = false;
+
+        function bootExperience() {
+            if (hasStarted) return;
+            hasStarted = true;
+            randomizeLayerOrder();
+            updateScene(0);
+            startAutoPlay();
+        }
+
+        // Boot on any user interaction, or after a short delay
+        document.addEventListener('click', bootExperience);
+        document.addEventListener('touchstart', bootExperience);
+        document.addEventListener('keydown', bootExperience);
+
+        // Auto-boot after 1.2s if no interaction (for seamless embed)
+        setTimeout(function() {
+            if (!hasStarted) {
+                bootExperience();
+            }
+        }, 1200);
+
+        console.log('♾️ The Inversion Cosmology — Never-Ending Journey');
+        console.log('🌌 Text pauses between each verse. Speed ebbs and flows.');
+        console.log('✨ Designed for embedding at 70% width.');
+    </script>
+</body>
+</html>
