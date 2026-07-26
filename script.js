@@ -1158,4 +1158,77 @@
       initCarousel(c);
     }
   });
+})();/* ── The Word Garden (30-word deck) ── */
+(function() {
+  const wgWords = [
+    { word: "GOOD", arch: "G + D", line: "Grow direct. Goodness is not vague—it is direction arriving without deviation." },
+    { word: "GROW", arch: "G + R + W", line: "Grow radiate connect. To grow is to radiate outward through every connection you touch." },
+    { word: "GOD", arch: "G + D", line: "Grow direct. The source is the unfaltering upward surge—pure, unbroken arrival." },
+    { word: "LOVE", arch: "L + V", line: "Lateral connection. Love flows sideways, vibrating the space between two separate beings into one." },
+    { word: "CREATE", arch: "K + R + T", line: "Contain radiate mark. To create is to hold radiance inside a vessel long enough to leave a permanent trace." },
+    { word: "BUILD", arch: "B + L + D", line: "Boundary lateral direct. Building sets a boundary, guides the flow around it, and drives toward completion." },
+    { word: "REALITY", arch: "R + L + T + Y", line: "Radiate lateral mark deed. Reality is radiance that flows sideways, marks every surface, and insists on action." },
+    { word: "SPIRIT", arch: "S + P + R + T", line: "Spread project radiate mark. Spirit is the spread that projects radiance and marks existence with meaning." },
+    { word: "GRACE", arch: "G + R + C", line: "Grow radiate contain. Grace grows outward, radiates freely, and contains its own elegance effortlessly." },
+    { word: "PEACE", arch: "P + C", line: "Project contain. Peace projects the act of holding—presence without force." },
+    { word: "STRENGTH", arch: "S + T + R + N + G + TH", line: "Spread mark radiate continue grow threshold. Strength spreads, marks, radiates, keeps going—and crosses every threshold." },
+    { word: "WISDOM", arch: "W + S + D + M", line: "Connect spread direct material. Wisdom connects the spread of knowing directly into the substance of life." },
+    { word: "COURAGE", arch: "C + R + G", line: "Contain radiate grow. Courage holds radiance inside and lets it grow without breaking the vessel." },
+    { word: "BLESS", arch: "B + L + S + S", line: "Boundary lateral spread spread. To bless is to set a boundary and let it flow—outward, then outward again." },
+    { word: "SONG", arch: "S + N + G", line: "Spread continue grow. A song is the spread that continues to rise after the singer has stopped." },
+    { word: "STORY", arch: "S + T + R + Y", line: "Spread mark radiate act. A story spreads, marks its audience, radiates outward, and compels action." },
+    { word: "SCRIPT", arch: "S + C + R + P + T", line: "Spread contain radiate project mark. A script contains radiance, projects it, and seals it in a permanent mark." },
+    { word: "SYMBOL", arch: "S + Y + M + B + L", line: "Spread act material boundary lateral. A symbol is material acting, bounded, yet flowing sideways into meaning." },
+    { word: "SYSTEM", arch: "S + Y + S + T + M", line: "Spread act spread mark material. A system spreads, acts, spreads again, marks itself, and becomes substance." },
+    { word: "DREAM", arch: "D + R + M", line: "Direct radiate material. A dream directs the radiance of substance—turning matter into vision." },
+    { word: "FLOW", arch: "F + L + W", line: "Flow lateral connect. Flow moves sideways, seeking nothing but the next connection." },
+    { word: "RISE", arch: "R + S", line: "Radiate spread. To rise is to radiate your spread outward—announcing your arrival." },
+    { word: "GLOW", arch: "G + L + W", line: "Grow lateral connect. Glow is growth that flows sideways, connecting everything it touches." },
+    { word: "BLOOM", arch: "B + L + M", line: "Boundary lateral material. To bloom is to let material flow past its own boundary." },
+    { word: "BLOSSOM", arch: "B + L + S + M", line: "Boundary lateral spread material. Blossom is the material that spreads itself beyond every edge." },
+    { word: "FLAME", arch: "F + L + M", line: "Flow lateral material. Flame is the material made of lateral flow—substance in motion." },
+    { word: "SPARK", arch: "S + P + R + K", line: "Spread project radiate contain. A spark spreads, projects, radiates—and holds the whole fire inside." },
+    { word: "RADIATE", arch: "R + D + T", line: "Radiate direct mark. To radiate is to direct your mark straight into the world." },
+    { word: "REFLECT", arch: "R + F + L + C + T", line: "Radiate flow lateral contain mark. To reflect is to radiate flow sideways, holding the mark of what arrived." },
+    { word: "RESPECT", arch: "R + S + P + C + T", line: "Radiate spread project contain mark. Respect is the radiance you project outward, contained, marking the worth of another." }
+  ];
+
+  let wgIndex = 0;
+  const wgTotal = wgWords.length;
+
+  const wgWordEl = document.getElementById('wgWord');
+  const wgArchEl = document.getElementById('wgArch');
+  const wgLineEl = document.getElementById('wgLine');
+  const wgCounterEl = document.getElementById('wgCounter');
+  const wgDotsEl = document.getElementById('wgDots');
+  const wgPrevBtn = document.getElementById('wgPrev');
+  const wgNextBtn = document.getElementById('wgNext');
+
+  for (let i = 0; i < wgTotal; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'wg-dot' + (i === 0 ? ' active' : '');
+    dot.dataset.index = i;
+    dot.addEventListener('click', () => wgGoTo(i));
+    wgDotsEl.appendChild(dot);
+  }
+
+  function wgRender() {
+    const g = wgWords[wgIndex];
+    wgWordEl.textContent = g.word;
+    wgArchEl.textContent = g.arch;
+    wgLineEl.textContent = g.line;
+    wgCounterEl.textContent = (wgIndex + 1) + ' / ' + wgTotal;
+    document.querySelectorAll('.wg-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === wgIndex);
+    });
+  }
+
+  function wgGoTo(i) {
+    wgIndex = (i + wgTotal) % wgTotal;
+    wgRender();
+  }
+
+  wgPrevBtn.addEventListener('click', () => wgGoTo(wgIndex - 1));
+  wgNextBtn.addEventListener('click', () => wgGoTo(wgIndex + 1));
+  wgRender();
 })();
