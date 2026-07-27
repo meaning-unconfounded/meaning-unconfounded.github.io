@@ -164,7 +164,13 @@
     }
 
     function getRandom(arr, n) {
-      var shuffled = arr.slice().sort(function() { return 0.5 - Math.random(); });
+      var shuffled = arr.slice();
+      for (var i = shuffled.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = tmp;
+      }
       return shuffled.slice(0, n);
     }
 
@@ -205,7 +211,7 @@
         var picks = getRandom(videos, Math.min(2, videos.length));
         videoContainer.innerHTML = picks.map(function(src, i) {
           return '<div class="lr-video" data-video-index="' + i + '">' +
-            '<video preload="metadata" data-src="' + src + '">' +
+            '<video preload="metadata">' +
             '<source src="' + src + '" type="video/mp4">' +
             '</video>' +
             '<div class="lr-video-overlay">' +
@@ -347,11 +353,12 @@
 
         var room = document.getElementById('listeningRoom');
         if (room) {
+          room.style.transition = 'opacity 0.35s ease';
           room.style.opacity = '0.6';
           setTimeout(function() {
             render();
             room.style.opacity = '1';
-          }, 200);
+          }, 400);
         }
       });
     }
@@ -482,9 +489,15 @@
       var total = items.length;
       items.forEach(function(item) {
         var kid = item.dataset.keyId;
+        item.classList.remove('pink-found', 'green-found', 'gold-found');
         if (isSeen(kid)) {
           item.classList.add('found');
           found++;
+          var srcEl = keyElements[kid];
+          var color = srcEl && srcEl.dataset.color;
+          if (color === 'pink' || color === 'green' || color === 'gold') {
+            item.classList.add(color + '-found');
+          }
         } else {
           item.classList.remove('found');
         }
@@ -1064,10 +1077,9 @@
   decoderInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      const term = this.value.toLowerCase().replace(/[^a-z]/g, '');
-      if (term && decoderDictionary[term]) {
-        showDecoderResult(term);
-        decoderCount.textContent = 'Found 1 word (exact match)';
+      doSearch(this.value);
+      if (decoderResult && decoderResult.style.display !== 'none') {
+        decoderResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
   });
