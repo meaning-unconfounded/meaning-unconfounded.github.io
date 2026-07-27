@@ -236,8 +236,16 @@ body {
 #main {
   margin-left: var(--sb-w);
   padding: 0 clamp(1.2rem, 4vw, 3.5rem) 6rem;
+  transition: margin-left .3s ease;
 }
 #main > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+
+/* ── desktop: auto-collapse sidebar once scrolled past the cover ── */
+@media (min-width: 1081px) {
+  body.sidebar-auto-collapsed #sidebar { transform: translateX(-100%); }
+  body.sidebar-auto-collapsed #main { margin-left: 0; }
+  body.sidebar-auto-collapsed #navToggle { display: block; }
+}
 
 p { margin: 0 0 1.05rem; }
 strong { color: var(--ink); }
@@ -2333,7 +2341,7 @@ html[data-theme="dark"] .key-detail strong { color: var(--gold); }
 .ticker-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: ticker-scroll 32s linear infinite;
+  animation: ticker-scroll 64s linear infinite;
   will-change: transform;
 }
 
@@ -2399,7 +2407,7 @@ html[data-theme="dark"] .key-detail strong { color: var(--gold); }
 @media (max-width: 480px) {
   .ticker-quote { font-size: 0.9rem; }
   .ticker-attr { font-size: 0.6rem; }
-  .ticker-track { animation-duration: 40s; }
+  .ticker-track { animation-duration: 80s; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2435,27 +2443,7 @@ html[data-theme="dark"] .key-detail strong { color: var(--gold); }
   border-color: var(--gold);
 }
 
-/* ── persistent mini key/gem tracker badge ──────────────────────── */
-.mini-tracker {
-  position: fixed; top: .9rem; right: 1rem; z-index: 90;
-  font-family: var(--sans);
-  font-size: .72rem;
-  letter-spacing: .04em;
-  color: var(--gold);
-  background: var(--surface);
-  border: 1px solid var(--hair);
-  border-radius: 999px;
-  padding: .35rem .7rem;
-  opacity: .72;
-  transition: opacity .2s, border-color .2s;
-  pointer-events: none;
-  user-select: none;
-}
-.mini-tracker:hover { opacity: 1; }
-
-@media (max-width: 640px) {
-  .mini-tracker { top: auto; bottom: 1.4rem; right: 5rem; font-size: .68rem; padding: .3rem .55rem; }
-}
+/* ── (mini-tracker removed — one tracker is enough) ── */
 
 .mp-purpose {
   font-family: var(--serif);
@@ -2467,58 +2455,31 @@ html[data-theme="dark"] .key-detail strong { color: var(--gold); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   IMAGE DIVIDERS — hr1-6 (small, between Parts) and banner1-4
-   (major, before each Book and the Afterword)
+   IMAGE DIVIDERS — hr1-6 (between Parts) and banner1-4 (between Books)
+   Both are horizontal strips at the book's own content width, not
+   small centered logos — full-width, short height, visible by default.
    ═══════════════════════════════════════════════════════════════ */
 
-.divider-sm {
+.divider-sm, .divider-lg {
   max-width: var(--measure);
-  margin: 2.2rem auto 2rem auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 2.4rem auto;
+  padding: 0 1rem;
 }
-.divider-sm::before, .divider-sm::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-2), transparent);
-  min-width: 20px;
-}
-.divider-sm::before { margin-right: 0.8rem; }
-.divider-sm::after { margin-left: 0.8rem; }
-.divider-sm img {
-  display: block;
-  max-width: 100px;
-  max-height: 32px;
-  height: auto;
-  opacity: 0.55;
-  object-fit: contain;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.divider-sm:hover img { opacity: 0.9; transform: scale(1.04); }
 
-.divider-lg {
-  max-width: none !important;
-  margin: 3.5rem auto 3rem auto;
-  padding: 0.6rem 1rem;
-  text-align: center;
-  background: var(--surface-2);
-  border-top: 1px solid var(--hair);
-  border-bottom: 1px solid var(--gold-2);
-}
-.divider-lg img {
+.divider-sm img, .divider-lg img {
   display: block;
-  max-width: min(80%, 700px);
   width: 100%;
-  max-height: 80px;
-  height: auto;
-  margin: 0 auto;
-  opacity: 0.65;
-  object-fit: contain;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  height: 44px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 2px;
+  opacity: 1;
+  transition: opacity 0.25s ease;
 }
-.divider-lg:hover img { opacity: 1; transform: scale(1.015); }
+
+.divider-lg img { height: 64px; }
+
+.divider-sm:hover img, .divider-lg img:hover { opacity: 0.85; }
 
 html[data-theme="dark"] .divider-sm img,
 html[data-theme="dark"] .divider-lg img {
@@ -2526,6 +2487,48 @@ html[data-theme="dark"] .divider-lg img {
 }
 
 @media (max-width: 640px) {
-  .divider-sm img { max-width: 70px; max-height: 24px; }
-  .divider-lg img { max-height: 50px; }
+  .divider-sm img { height: 32px; }
+  .divider-lg img { height: 46px; }
+}
+
+/* ── confidence chart (Appendix A) ───────────────────────────── */
+.conf-note {
+  font-size: .82rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: -.5rem;
+}
+.conf-chart {
+  max-width: var(--measure);
+  margin: 1rem 0 1.5rem;
+}
+.conf-row {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 3rem;
+  align-items: center;
+  gap: .6rem;
+  padding: .18rem 0;
+}
+.conf-letter {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: .85rem;
+  color: var(--ink);
+}
+.conf-track {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.conf-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-2), var(--gold));
+  border-radius: 4px;
+}
+.conf-pct {
+  font-family: var(--sans);
+  font-size: .78rem;
+  color: var(--muted);
+  text-align: right;
 }
