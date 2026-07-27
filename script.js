@@ -480,6 +480,11 @@
           completion.classList.remove('show');
         }
       }
+      // persistent mini badge, visible while scrolling, not just in the appendix
+      var miniCount = document.getElementById('miniTrackerCount');
+      if (miniCount && total > 0) {
+        miniCount.textContent = found + '/' + total;
+      }
     }
 
     // ----- Get all key elements -----
@@ -1231,4 +1236,39 @@
   wgPrevBtn.addEventListener('click', () => wgGoTo(wgIndex - 1));
   wgNextBtn.addEventListener('click', () => wgGoTo(wgIndex + 1));
   wgRender();
+})();
+/* ── Front-page scrolling quote banner ── */
+(function() {
+  const tickerQuotes = [
+    { title: "The First Sound You Never Heard", quote: "Close your lips and hum. That vibration is not a sound \u2014 it is a substance. You just executed material existence through your own anatomy.", attribution: "The M-Demonstration \u00b7 Chapter 1" },
+    { title: "The Object That Isn\u2019t Real", quote: "Every physical thing you\u2019ve ever held required a category before it could be named. The floor under your feet is agreed upon. The count of your feet is not.", attribution: "Mathematics Is the Only Thing That Cannot Lie \u00b7 Chapter 5" },
+    { title: "The Weight You Carry", quote: "Call it \u2018carrying baggage\u2019 and you\u2019ve been speaking literally this whole time. A frozen postulate has real mass. It sits with actual weight in a specific location in your body.", attribution: "The Physics of Frozen Conflict \u00b7 Chapter 16" },
+    { title: "The Sound That Makes Time", quote: "N is the only sound that lets air flow through your nose without stopping. The nasal cavity is the body\u2019s time-keeping organ.", attribution: "The Sound of Time \u00b7 Key 09, Chapter 8" },
+    { title: "The Twin You Never Chose", quote: "Every must has a hidden twin. This is the single most important structural feature of any significant game, and the one most consistently invisible to the people running it.", attribution: "The Hidden Twin \u00b7 Chapter 5, The Restructured Mind" },
+    { title: "You Are Already in Heaven", quote: "We are not a random rock in a cold, dead void. We are the outer boundary of creation. We are the grand container holding the infinite inside.", attribution: "The Inversion Cosmology \u00b7 Chapter 31" },
+    { title: "Not a Line. Not an Arrow.", quote: "Hold that question. You\u2019ll need it later \u2014 there\u2019s a chapter near the end of this book that answers it, and the answer involves a shape you won\u2019t expect: not a line, not an arrow. A tube.", attribution: "The T-Mystery \u00b7 Introduction" },
+    { title: "The One Wearing Your Name", quote: "The hardest hidden postulate to find is never the one held by an institution. It\u2019s the one wearing your own name.", attribution: "The Hidden Postulate \u00b7 Chapter 28, The Restructured Mind" },
+    { title: "Where the Game Actually Lives", quote: "You can defeat every opponent you\u2019ll ever face and still be running the identical game tomorrow, against someone new, because the opponent was never the mechanism. The postulate was.", attribution: "Postulates: The Architecture of Experience \u00b7 Chapter 15" }
+  ];
+
+  const track = document.getElementById('tickerTrack');
+  const section = document.getElementById('quote-ticker');
+  if (!track || !section) return;
+
+  function buildSequence() {
+    return tickerQuotes.map(function(q) {
+      return '<span class="ticker-item"><span class="ticker-title">' + q.title + '</span>' +
+             '<span class="ticker-quote">\u201c' + q.quote + '\u201d</span>' +
+             '<span class="ticker-attr">' + q.attribution + '</span></span>' +
+             '<span class="ticker-sep">\u2766</span>';
+    }).join('');
+  }
+
+  // duplicate the sequence so the loop is seamless
+  track.innerHTML = buildSequence() + buildSequence();
+
+  let paused = false;
+  section.addEventListener('mouseenter', function() { section.classList.add('paused'); });
+  section.addEventListener('mouseleave', function() { section.classList.remove('paused'); });
+  section.addEventListener('touchstart', function() { section.classList.toggle('paused'); }, { passive: true });
 })();
