@@ -33,7 +33,13 @@
   var navToggle = document.getElementById("navToggle");
   if (navToggle) {
     navToggle.addEventListener("click", function () {
-      document.body.classList.toggle("sb-open");
+      if (document.body.classList.contains("sidebar-auto-collapsed")) {
+        // desktop: manual reopen overrides auto-collapse until they scroll back to top
+        document.body.classList.remove("sidebar-auto-collapsed");
+        pinnedOpen = true;
+      } else {
+        document.body.classList.toggle("sb-open");
+      }
     });
   }
   document.querySelectorAll(".sb-link").forEach(function (a) {
@@ -41,6 +47,23 @@
       document.body.classList.remove("sb-open");
     });
   });
+
+  /* ── desktop: auto-collapse sidebar once scrolled past the cover ── */
+  var pinnedOpen = false;
+  var desktopMQ = window.matchMedia("(min-width: 1081px)");
+  var coverEl = document.querySelector(".cover");
+  function checkSidebarCollapse() {
+    if (!desktopMQ.matches) return;
+    var threshold = coverEl ? coverEl.offsetHeight : 600;
+    if (window.scrollY > threshold) {
+      if (!pinnedOpen) document.body.classList.add("sidebar-auto-collapsed");
+    } else {
+      document.body.classList.remove("sidebar-auto-collapsed");
+      pinnedOpen = false; // back near the top resets the manual pin
+    }
+  }
+  window.addEventListener("scroll", checkSidebarCollapse, { passive: true });
+  checkSidebarCollapse();
 
   /* ── reading progress + back-to-top ────────────────────── */
   var progress = document.getElementById("progress");
@@ -480,11 +503,6 @@
           completion.classList.remove('show');
         }
       }
-      // persistent mini badge, visible while scrolling, not just in the appendix
-      var miniCount = document.getElementById('miniTrackerCount');
-      if (miniCount && total > 0) {
-        miniCount.textContent = found + '/' + total;
-      }
     }
 
     // ----- Get all key elements -----
@@ -510,16 +528,6 @@
     function processQueue() {
       if (isRevealing || revealQueue.length === 0) return;
       isRevealing = true;
-      
-      // Immediately dismiss ALL visible, non-engaged keys to prevent stacking
-      Object.keys(keyElements).forEach(function(kid) {
-        var el = keyElements[kid];
-        if (el.classList.contains('slide-in') && !el.classList.contains('engaged')) {
-          el.classList.remove('slide-in');
-          el.style.opacity = '0';
-          el.style.pointerEvents = 'none';
-        }
-      });
 
       var item = revealQueue.shift();
       var kid = item.kid;
@@ -534,6 +542,7 @@
         el.classList.add('slide-in');
         el.style.opacity = '1'; // Make it fully visible
         el.style.pointerEvents = 'auto';
+        el.dataset.revealedAt = Date.now();
         
         if (!isSeen(kid)) {
           var color = el.dataset.color || 'gold';
@@ -588,8 +597,11 @@
         if (entry.isIntersecting) {
           queueReveal(kid);
         } else {
-          // Section scrolled out – hide it completely
-          if (el.classList.contains('slide-in') && !el.classList.contains('engaged')) {
+          // Section scrolled out – hide it, but only if it's had a fair
+          // chance to be seen (avoids yanking it away mid-reveal on fast scroll)
+          var revealedAt = parseInt(el.dataset.revealedAt || '0', 10);
+          var visibleFor = Date.now() - revealedAt;
+          if (el.classList.contains('slide-in') && !el.classList.contains('engaged') && visibleFor > 3000) {
             el.classList.remove('slide-in');
             el.style.opacity = '0';
             el.style.pointerEvents = 'none';
