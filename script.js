@@ -370,10 +370,10 @@
   (function() {
     // ----- Mapping: keyId -> sectionId (Distributed evenly across the book) -----
     var keyMap = {
-      '01': 'mu-intro',
+      '01': 'mu-ch1',
       '02': 'mu-prologue',
       '03': 'mu-readers',
-      '04': 'mu-ch1',
+      '04': 'mu-ch4',
       '05': 'mu-ch2',
       '06': 'mu-ch3',
       '07': 'mu-app-r',
