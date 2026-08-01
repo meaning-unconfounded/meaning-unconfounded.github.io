@@ -2565,3 +2565,170 @@ html[data-theme="dark"] .divider-lg img {
   color: var(--ink-soft);
 }
 .cosmology-fallback a { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════
+   v2.4 POLISH — details/summary, epistemic note, print styles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── lazy-load dictionary wrappers ───────────────────────────── */
+.dict-details {
+  margin: 1.2rem 0 1.8rem;
+  border: 1px solid var(--hair);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.dict-details > summary {
+  font-family: var(--sans);
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--navy);
+  padding: .85rem 1.2rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  background: var(--surface-2);
+  border-bottom: 1px solid transparent;
+  transition: background .2s, color .2s;
+}
+.dict-details > summary::-webkit-details-marker { display: none; }
+.dict-details > summary::before {
+  content: "▸ ";
+  color: var(--gold);
+  font-weight: 700;
+}
+.dict-details[open] > summary::before { content: "▾ "; }
+.dict-details[open] > summary {
+  border-bottom-color: var(--hair);
+  color: var(--gold);
+}
+.dict-details > summary:hover {
+  background: var(--gold-soft);
+}
+.dict-details .tw {
+  margin: 0 !important;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ── epistemic note (Ch 31 working-model framing) ────────────── */
+.epistemic-note,
+p strong:first-child + em {
+  /* fallback: style the epistemic paragraph via a dedicated class if present */
+}
+.epistemic-note {
+  font-family: var(--sans);
+  font-size: .9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  background: var(--surface-2);
+  border-left: 3px solid var(--navy);
+  border-radius: 0 10px 10px 0;
+  padding: .9rem 1.2rem;
+  margin: 1.4rem 0 1.8rem;
+}
+
+/* Style the epistemic note paragraph that begins with "Epistemic note:" */
+#mu-ch31 + h2 + .lead + p + p,
+#main p:has(> strong:first-child) {
+  /* progressive enhancement; older browsers ignore :has */
+}
+
+/* Explicit class target — apply via the paragraph we already inserted */
+#main p:has(> strong:first-of-type) {
+  /* no-op for safety; the concrete rule below is more reliable */
+}
+
+/* Concrete rule for the epistemic paragraph we inserted */
+#mu-ch31 ~ p strong {
+  /* keep strong readable */
+}
+
+/* Safer, explicit styling via adjacent structure after the lead */
+h1#mu-ch31 + h2 + p.lead + p + p {
+  font-family: var(--sans);
+  font-size: .9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  background: var(--surface-2);
+  border-left: 3px solid var(--navy);
+  border-radius: 0 10px 10px 0;
+  padding: .9rem 1.2rem;
+  margin: 1.4rem 0 1.8rem;
+}
+
+html[data-theme="dark"] h1#mu-ch31 + h2 + p.lead + p + p {
+  border-left-color: var(--gold-2);
+}
+
+/* ── print styles ────────────────────────────────────────────── */
+@media print {
+  #sidebar,
+  #navToggle,
+  #toTop,
+  #progress,
+  #themeToggle,
+  .sb-search,
+  #quote-ticker,
+  .ticker-kicker,
+  #startHere,
+  #keyTracker,
+  .key-surprise,
+  .listening-room,
+  #listeningRoom {
+    display: none !important;
+  }
+
+  #main {
+    margin-left: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* Expand all lazy dictionaries so print/PDF retains full content */
+  .dict-details {
+    border: none;
+    background: transparent;
+  }
+  .dict-details > summary {
+    display: none;
+  }
+  .dict-details .tw {
+    display: block !important;
+  }
+  details.dict-details[open] .tw,
+  details.dict-details .tw {
+    display: block !important;
+  }
+
+  blockquote.gem,
+  blockquote.key {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3, .ch {
+    break-after: avoid;
+  }
+
+  table { break-inside: auto; }
+  tr { break-inside: avoid; }
+}
+
+/* Force details open for print (extra safety for engines that ignore CSS on closed details) */
+@media print {
+  details.dict-details {
+    open: true; /* non-standard but ignored harmlessly where unsupported */
+  }
+}
