@@ -366,7 +366,7 @@
     loadManifest();
   })();
 
-  /* ── KEY SYSTEM (40 Interactive Keys, Sequential Queue) ── */
+  /* ── KEY SYSTEM (42 Interactive Keys, Sequential Queue) ── */
   (function() {
     // ----- Mapping: keyId -> sectionId (Distributed evenly across the book) -----
     var keyMap = {
@@ -409,7 +409,10 @@
       '37': 'br-ch9',
       '38': 'trm-reframes',
       '39': 'trm-ch5',
-      '40': 'trm-ch15'
+      '40': 'trm-ch15',
+      // ─── ADDED KEYS 41 & 42 ───
+      '41': 'mu-prologue',      // Directional Law (appears in Prologue)
+      '42': 'mu-ch15'           // 8 Overwhelm Classes (appears in Chapter 15)
     };
 
     // ----- Audio (Soft, Professional UI Chime) -----
@@ -518,16 +521,12 @@
       }
     }
 
-    // ----- Get all key elements -----
-    // IMPORTANT: We select ONLY the key cards in the bottom gallery to avoid duplicate inline keys
+    // ----- Get all key elements (FIXED: now finds ALL keys on the page) -----
     var keyElements = {};
-    var keyGallery = document.getElementById('keyGallery');
-    if (keyGallery) {
-        keyGallery.querySelectorAll('.key-surprise').forEach(function(el) {
-            var kid = el.dataset.keyId;
-            if (kid) keyElements[kid] = el;
-        });
-    }
+    document.querySelectorAll('.key-surprise').forEach(function(el) {
+      var kid = el.dataset.keyId;
+      if (kid) keyElements[kid] = el;
+    });
 
     // ----- Sequential reveal queue -----
     var revealQueue = [];
