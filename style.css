@@ -25,8 +25,6 @@
   --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --measure: 46rem;
   --sb-w: 280px;
-
-  /* --- Key colours (new) --- */
   --key-pink: #c96478;
   --key-green: #5a9e6e;
   --key-gold: #c9a227;
@@ -244,32 +242,23 @@ body {
 /* ── desktop: auto-collapse sidebar once scrolled past the cover ── */
 @media (min-width: 1081px) {
   body.sidebar-auto-collapsed #sidebar { transform: translateX(-100%); }
-
-  /* FIX: centre the main content when sidebar is hidden */
   body.sidebar-auto-collapsed #main {
-    margin: 0 auto;               /* both auto → properly centred */
+    margin: 0 auto;
     max-width: var(--measure);
     padding-left: 2rem;
     padding-right: 2rem;
   }
-
   body.sidebar-auto-collapsed #navToggle { display: block; }
-
-  /* Ensure all normal block-level children stay within the column */
   body.sidebar-auto-collapsed #main > * {
     max-width: var(--measure) !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
-
-  /* But allow the cover and mega-part to remain full‑width */
   body.sidebar-auto-collapsed #main > .cover,
   body.sidebar-auto-collapsed #main > .mega-part {
     max-width: none !important;
     margin: 0 !important;
   }
-
-  /* Reduce mega‑part title sizes when sidebar is collapsed */
   body.sidebar-auto-collapsed .mega-part .mp-title {
     font-size: clamp(2rem, 3.5vw, 2.8rem);
   }
@@ -1464,7 +1453,7 @@ html[data-theme="dark"] .listening-room:hover {
   pointer-events: none;
 }
 
-/* ── Key Color Attributes (Fix 6) ── */
+/* ── Key Color Attributes ── */
 .key-surprise[data-color="pink"] .key-card {
   --key-color: var(--key-pink);
   --key-glow: var(--key-glow-pink);
@@ -1960,7 +1949,7 @@ html[data-theme="dark"] .listening-room:hover {
   margin-top: 0.3rem;
 }
 
-/* ── Universal Carousel (FIXED) ── */
+/* ── Universal Carousel ── */
 .univers-carousel {
   position: relative;
   width: 100%;
@@ -2080,6 +2069,7 @@ html[data-theme="dark"] .listening-room:hover {
     height: 8px;
   }
 }
+
 /* ═══════════════════════════════════════════════════════════════
    MISSING CLASS DEFINITIONS — added to match existing design system
    (.epigraph, .attribution, .code-panel, .hebrew-panel,
@@ -2153,7 +2143,6 @@ html[data-theme="dark"] .key-detail strong { color: var(--gold); }
 
 /* ═══════════════════════════════════════════════════════════════
    THE WORD GARDEN — 30-word resonance deck carousel
-   (distinct from .gem / .key systems; reuses palette only)
    ═══════════════════════════════════════════════════════════════ */
 
 .word-garden-section {
@@ -2292,10 +2281,6 @@ html[data-theme="dark"] .key-detail strong { color: var(--gold); }
 
 /* ═══════════════════════════════════════════════════════════════
    COSMOLOGY CTA + FULL-SCREEN FRAME
-   (constrained to the book's own column width, centered —
-    previously used .book-bridge/.nlm-cta, which are full-bleed
-    banner components fighting a fixed max-width; this is its own
-    lightweight component instead)
    ═══════════════════════════════════════════════════════════════ */
 
 .cosmology-cta-wrap {
@@ -2510,8 +2495,6 @@ html[data-theme="dark"] .key-detail strong { color: var(--gold); }
 
 /* ═══════════════════════════════════════════════════════════════
    IMAGE DIVIDERS — hr1-6 (between Parts) and banner1-4 (between Books)
-   Both are horizontal strips at the book's own content width, not
-   small centered logos — full-width, short height, visible by default.
    ═══════════════════════════════════════════════════════════════ */
 
 .divider-sm, .divider-lg {
@@ -2600,14 +2583,14 @@ html[data-theme="dark"] .divider-lg img {
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── lazy-load dictionary wrappers ───────────────────────────── */
-.dict-details {
+.dict-details, .appendix-collapsible {
   margin: 1.2rem 0 1.8rem;
   border: 1px solid var(--hair);
   border-radius: 12px;
   background: var(--surface);
   overflow: hidden;
 }
-.dict-details > summary {
+.dict-details > summary, .appendix-collapsible > summary {
   font-family: var(--sans);
   font-size: .88rem;
   font-weight: 600;
@@ -2621,28 +2604,38 @@ html[data-theme="dark"] .divider-lg img {
   border-bottom: 1px solid transparent;
   transition: background .2s, color .2s;
 }
-.dict-details > summary::-webkit-details-marker { display: none; }
-.dict-details > summary::before {
+.dict-details > summary::-webkit-details-marker,
+.appendix-collapsible > summary::-webkit-details-marker { display: none; }
+.dict-details > summary::before,
+.appendix-collapsible > summary::before {
   content: "▸ ";
   color: var(--gold);
   font-weight: 700;
 }
-.dict-details[open] > summary::before { content: "▾ "; }
-.dict-details[open] > summary {
+.dict-details[open] > summary::before,
+.appendix-collapsible[open] > summary::before { content: "▾ "; }
+.dict-details[open] > summary,
+.appendix-collapsible[open] > summary {
   border-bottom-color: var(--hair);
   color: var(--gold);
 }
-.dict-details > summary:hover {
+.dict-details > summary:hover,
+.appendix-collapsible > summary:hover {
   background: var(--gold-soft);
 }
-.dict-details .tw {
+.dict-details .tw,
+.appendix-collapsible .tw {
   margin: 0 !important;
   border: none;
   border-radius: 0;
   box-shadow: none;
 }
+.dict-details .tw table,
+.appendix-collapsible .tw table {
+  font-size: .85rem;
+}
 
-/* ── epistemic note (Ch 31 working-model framing) ────────────── */
+/* ── epistemic note ────────────────────────────────────────────── */
 .epistemic-note {
   font-family: var(--sans);
   font-size: .9rem;
@@ -2655,20 +2648,7 @@ html[data-theme="dark"] .divider-lg img {
   margin: 1.4rem 0 1.8rem;
 }
 
-/* Concrete rule for the epistemic paragraph we inserted */
-h1#mu-ch31 + h2 + p.lead + p + p {
-  font-family: var(--sans);
-  font-size: .9rem;
-  line-height: 1.55;
-  color: var(--ink-soft);
-  background: var(--surface-2);
-  border-left: 3px solid var(--navy);
-  border-radius: 0 10px 10px 0;
-  padding: .9rem 1.2rem;
-  margin: 1.4rem 0 1.8rem;
-}
-
-html[data-theme="dark"] h1#mu-ch31 + h2 + p.lead + p + p {
+html[data-theme="dark"] .epistemic-note {
   border-left-color: var(--gold-2);
 }
 
@@ -2705,19 +2685,20 @@ html[data-theme="dark"] h1#mu-ch31 + h2 + p.lead + p + p {
 
   a { color: inherit; text-decoration: none; }
 
-  /* Expand all lazy dictionaries so print/PDF retains full content */
-  .dict-details {
+  .dict-details, .appendix-collapsible {
     border: none;
     background: transparent;
   }
-  .dict-details > summary {
+  .dict-details > summary, .appendix-collapsible > summary {
     display: none;
   }
-  .dict-details .tw {
+  .dict-details .tw, .appendix-collapsible .tw {
     display: block !important;
   }
   details.dict-details[open] .tw,
-  details.dict-details .tw {
+  details.dict-details .tw,
+  details.appendix-collapsible[open] .tw,
+  details.appendix-collapsible .tw {
     display: block !important;
   }
 
@@ -2733,13 +2714,6 @@ html[data-theme="dark"] h1#mu-ch31 + h2 + p.lead + p + p {
 
   table { break-inside: auto; }
   tr { break-inside: avoid; }
-}
-
-/* Force details open for print (extra safety for engines that ignore CSS on closed details) */
-@media print {
-  details.dict-details {
-    open: true; /* non-standard but ignored harmlessly where unsupported */
-  }
 }
 
 /* ── volume spine sentence ───────────────────────────────────── */
@@ -2764,7 +2738,7 @@ html[data-theme="dark"] .spine {
   }
 }
 
-/* ── Letter Operator Strips (early teaching face) ─────────────── */
+/* ── Letter Operator Strips ─────────────────────────────── */
 .letter-strips {
   margin: 2rem 0 2.5rem;
   padding: 0;
@@ -2915,7 +2889,7 @@ html[data-theme="dark"] .tag-model { background: #3e2723; color: #ffcc80; }
   .evidence-contract, .importance-map, .map-cell { break-inside: avoid; }
 }
 
-/* ── YouTube playlist embeds — one consistent component ─────────── */
+/* ── YouTube playlist embeds ─────────────────────────────────── */
 .playlist-embed-wrap {
   max-width: var(--measure);
   margin: 2.2rem auto;
@@ -2943,4 +2917,54 @@ html[data-theme="dark"] .tag-model { background: #3e2723; color: #ffcc80; }
   top: 0; left: 0;
   width: 100%; height: 100%;
   border: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NEW UTILITY CLASSES (moved from inline styles)
+   ═══════════════════════════════════════════════════════════════ */
+
+.directional-law {
+  background: var(--surface-2);
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  margin: 1.5rem 0;
+}
+
+.inner-mirror {
+  background: var(--surface-2);
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  margin: 1.5rem 0;
+}
+
+.cosmology-intro {
+  background: var(--surface-2);
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  margin: 1rem 0;
+}
+
+.insanity-point {
+  background: var(--surface-2);
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  margin: 1rem 0;
+}
+
+.gold-italic {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.gold-block {
+  font-style: italic;
+  color: var(--gold);
+  margin-top: 1rem;
+}
+
+.cosmology-section {
+  background: var(--surface-2);
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  margin: 1rem 0;
 }
