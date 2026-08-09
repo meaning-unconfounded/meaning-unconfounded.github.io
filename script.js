@@ -1,8 +1,8 @@
 /**
  * THE WHITE BOOK — Complete JavaScript
  * All features: theme, sidebar, progress, scrollspy, search, TOC, parables,
- * Listening Room, Key System (40 interactive keys, sequential reveal queue),
- * NotebookLM demo, Universal Carousel
+ * Listening Room, Key System (42 interactive keys, sequential reveal queue),
+ * NotebookLM demo, Universal Carousel, Word Garden, Quote Ticker
  */
 
 (function() {
@@ -34,7 +34,6 @@
   if (navToggle) {
     navToggle.addEventListener("click", function () {
       if (document.body.classList.contains("sidebar-auto-collapsed")) {
-        // desktop: manual reopen overrides auto-collapse until they scroll back to top
         document.body.classList.remove("sidebar-auto-collapsed");
         pinnedOpen = true;
       } else {
@@ -59,7 +58,7 @@
       if (!pinnedOpen) document.body.classList.add("sidebar-auto-collapsed");
     } else {
       document.body.classList.remove("sidebar-auto-collapsed");
-      pinnedOpen = false; // back near the top resets the manual pin
+      pinnedOpen = false;
     }
   }
   window.addEventListener("scroll", checkSidebarCollapse, { passive: true });
@@ -368,7 +367,6 @@
 
   /* ── KEY SYSTEM (42 Interactive Keys, Sequential Queue) ── */
   (function() {
-    // ----- Mapping: keyId -> sectionId (Distributed evenly across the book) -----
     var keyMap = {
       '01': 'mu-ch1',
       '02': 'mu-prologue',
@@ -410,12 +408,10 @@
       '38': 'trm-reframes',
       '39': 'trm-ch5',
       '40': 'trm-ch15',
-      // ─── ADDED KEYS 41 & 42 ───
-      '41': 'mu-prologue',      // Directional Law (appears in Prologue)
-      '42': 'mu-ch15'           // 8 Overwhelm Classes (appears in Chapter 15)
+      '41': 'mu-prologue',
+      '42': 'mu-ch15'
     };
 
-    // ----- Audio (Soft, Professional UI Chime) -----
     var audioCtx = null;
     var audioEnabled = true;
 
@@ -437,35 +433,34 @@
       if (ctx.state === 'suspended') {
         ctx.resume().catch(function() {});
       }
-      
+
       var osc = ctx.createOscillator();
       var gain = ctx.createGain();
       var filter = ctx.createBiquadFilter();
-      
+
       osc.type = 'sine';
       filter.type = 'lowpass';
-      filter.frequency.value = 1200; 
-      
+      filter.frequency.value = 1200;
+
       var freq = 440;
-      if (color === 'pink') freq = 523.25; 
-      else if (color === 'green') freq = 392.00; 
-      else if (color === 'gold') freq = 440.00; 
-      
+      if (color === 'pink') freq = 523.25;
+      else if (color === 'green') freq = 392.00;
+      else if (color === 'gold') freq = 440.00;
+
       osc.frequency.value = freq;
-      
+
       gain.gain.setValueAtTime(0, ctx.currentTime);
       gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
-      
+
       osc.connect(filter);
       filter.connect(gain);
       gain.connect(ctx.destination);
-      
+
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.5);
     }
 
-    // ----- State: seen keys (localStorage) -----
     var SEEN_KEY = 'wb_seen_keys';
     var seen = [];
     try {
@@ -485,7 +480,6 @@
       return seen.includes(id);
     }
 
-    // ----- Tracker update -----
     function updateTracker() {
       var items = document.querySelectorAll('.tracker-key-item');
       var found = 0;
@@ -521,19 +515,15 @@
       }
     }
 
-    // ----- Get all key elements (FIXED: now finds ALL keys on the page) -----
     var keyElements = {};
     document.querySelectorAll('.key-surprise').forEach(function(el) {
       var kid = el.dataset.keyId;
       if (kid) keyElements[kid] = el;
     });
 
-    // ----- Sequential reveal queue -----
     var revealQueue = [];
     var isRevealing = false;
-    var QUEUE_DELAY = 1500; // 1.5 seconds between reveals
-    
-    // 10-second start delay so the reader can settle in
+    var QUEUE_DELAY = 1500;
     var isReady = false;
     setTimeout(function() { isReady = true; }, 10000);
 
@@ -549,13 +539,13 @@
         setTimeout(processQueue, 100);
         return;
       }
-      
+
       if (!el.classList.contains('engaged')) {
         el.classList.add('slide-in');
-        el.style.opacity = '1'; // Make it fully visible
+        el.style.opacity = '1';
         el.style.pointerEvents = 'auto';
         el.dataset.revealedAt = Date.now();
-        
+
         if (!isSeen(kid)) {
           var color = el.dataset.color || 'gold';
           playKeySound(color);
@@ -563,7 +553,7 @@
           updateTracker();
         }
       }
-      
+
       setTimeout(function() {
         isRevealing = false;
         processQueue();
@@ -571,27 +561,23 @@
     }
 
     function queueReveal(kid) {
-      if (!isReady) return; // Do nothing until 10s has passed
-      
-      // If already in queue, skip
+      if (!isReady) return;
       if (revealQueue.some(function(item) { return item.kid === kid; })) return;
-      
+
       var el = keyElements[kid];
       if (el && (el.classList.contains('slide-in') || el.classList.contains('engaged'))) return;
-      
-      // If the user already saw it, don't pop it up again
+
       if (isSeen(kid)) {
           updateTracker();
           return;
       }
-      
+
       revealQueue.push({ kid: kid });
       if (!isRevealing) {
         processQueue();
       }
     }
 
-    // ----- Section Observer -----
     var sectionObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         var sectionId = entry.target.id;
@@ -609,8 +595,6 @@
         if (entry.isIntersecting) {
           queueReveal(kid);
         } else {
-          // Section scrolled out – hide it, but only if it's had a fair
-          // chance to be seen (avoids yanking it away mid-reveal on fast scroll)
           var revealedAt = parseInt(el.dataset.revealedAt || '0', 10);
           var visibleFor = Date.now() - revealedAt;
           if (el.classList.contains('slide-in') && !el.classList.contains('engaged') && visibleFor > 3000) {
@@ -625,7 +609,6 @@
       threshold: 0
     });
 
-    // Observe the sections
     for (var kid in keyMap) {
       var secId = keyMap[kid];
       var secEl = document.getElementById(secId);
@@ -634,22 +617,19 @@
       }
     }
 
-    // ----- Click to dismiss / engage -----
-    // We attach to document to catch clicks on any key card, inline or gallery
     document.addEventListener('click', function(e) {
       var card = e.target.closest('.key-card');
       if (!card) return;
       e.stopPropagation();
       var container = card.closest('.key-surprise');
       if (!container) return;
-      
+
       container.classList.add('engaged');
       container.classList.remove('slide-in');
       container.style.opacity = '0';
       container.style.pointerEvents = 'none';
     });
 
-    // ----- Tracker toggle -----
     var tracker = document.getElementById('keyTracker');
     if (tracker) {
       tracker.addEventListener('click', function(e) {
@@ -659,7 +639,6 @@
       });
     }
 
-    // ----- Initialise tracker -----
     updateTracker();
 
   })();
@@ -834,7 +813,7 @@
     "genius": { hebrewRoot: "GAON YESH", hebrewChars: "גאון יש", hebrewMeaning: "GENIUS THERE IS", traditional: "Latin – GENIUS = THE GUARDIAN DEITY or SPIRIT.", notes: "", architecture: "G+N+S", insight: "Grow + Continue + Spread — genius is growth that continues to spread, the emanating spirit.", bookRef: "" },
     "globe": { hebrewRoot: "AGOL BO", hebrewChars: "עגול בו", hebrewMeaning: "ROUND", traditional: "Latin – GLOBUS = A BALL, SPHERE.", notes: "", architecture: "G+L+B", insight: "Grow + Lateral + Boundary — the globe is growth that flows laterally within a boundary, the sphere.", bookRef: "" },
     "life": { hebrewRoot: "HAVAH", hebrewChars: "חוה", hebrewMeaning: "FARM / DESIRE", traditional: "Hebrew – HAWWAH = perhaps LIFE.", notes: "HAVA means A FARM. EVE means DESIRE.", architecture: "L+F", insight: "Lateral + Flow — life is the lateral flow, the desire that moves and grows.", bookRef: "" },
-    "light": { hebrewRoot: "LAHAT", hebrewChars: "להט", hebrewMeaning: "FLAME", traditional: "Anglo Saxon – LEOHT = LIGHT.", notes: "", architecture: "L+G+H+T", insight: "Lateral + Grow + Breath + Mark — light is lateral, growing breath that marks, the flame that illuminates.", bookRef: "#mu-app-m" },
+    "light": { hebrewRoot: "LAHAT", hebrewChars: "להט", hebrewMeaning: "FLAME", traditional: "Anglo Saxon – LEOHT = LIGHT.", notes: "", architecture: "L+T", insight: "Lateral + Mark — light is lateral flow that reaches a mark, the flame that illuminates.", bookRef: "#mu-app-m" },
     "love": { hebrewRoot: "LAHOVE, LEV", hebrewChars: "לב", hebrewMeaning: "TO LOVE, HEART", traditional: "Anglo Saxon – LUFU, LUFE = LOVE.", notes: "", architecture: "L+V", insight: "Lateral + Connection-through-vibration — love is the lateral vibration, the connection from the heart.", bookRef: "#mu-app-m" },
     "mirror": { hebrewRoot: "MARA OR", hebrewChars: "מראה אור", hebrewMeaning: "MIRRORS LIGHT", traditional: "Latin – MIRARI = TO WONDER AT.", notes: "", architecture: "M+R+R", insight: "Material + Radiate + Radiate — the mirror is material that radiates light back, the reflection.", bookRef: "" },
     "money": { hebrewRoot: "MONEH", hebrewChars: "מונה", hebrewMeaning: "COUNTING DEVICE", traditional: "Latin – MONETA = A MINT, MONEY.", notes: "", architecture: "M+N", insight: "Material + Continue — money is material that continues as a measure, a counting device.", bookRef: "" },
@@ -1008,15 +987,14 @@
     "hypocrite": { hebrewRoot: "HYPOCRITE", hebrewChars: "היפוקריט", hebrewMeaning: "THE ACT PROJECT CONTAIN RADIATE MARK", traditional: "Greek – HYPOKRITES = AN ACTOR.", notes: "", architecture: "H+P+C+R+T", insight: "Breath + Project + Contain + Radiate + Mark — a hypocrite is the marked radiance of contained projection, the pretender.", bookRef: "" }
   };
 
-  // ─── DOM elements ──────────────────────────────────────────────
-  const decoderInput = document.getElementById('decoderInput');
-  const decoderResult = document.getElementById('decoderResult');
-  const decoderEmpty = document.getElementById('decoderEmpty');
-  const decoderNotFound = document.getElementById('decoderNotFound');
-  const decoderCount = document.getElementById('decoderCount');
+  var decoderInput = document.getElementById('decoderInput');
+  var decoderResult = document.getElementById('decoderResult');
+  var decoderEmpty = document.getElementById('decoderEmpty');
+  var decoderNotFound = document.getElementById('decoderNotFound');
+  var decoderCount = document.getElementById('decoderCount');
 
   function showDecoderResult(word) {
-    const entry = decoderDictionary[word];
+    var entry = decoderDictionary[word];
     if (!entry) return false;
 
     document.getElementById('decoderWord').textContent = word.toUpperCase();
@@ -1028,7 +1006,7 @@
     document.getElementById('decoderArchitecture').textContent = entry.architecture || '—';
     document.getElementById('decoderInsight').textContent = entry.insight || '—';
 
-    const bookref = document.getElementById('decoderBookref');
+    var bookref = document.getElementById('decoderBookref');
     if (entry.bookRef) {
       bookref.style.display = 'block';
       bookref.querySelector('a').href = entry.bookRef;
@@ -1053,9 +1031,11 @@
       return;
     }
 
-    const exact = decoderDictionary[term] ? [term] : [];
-    const partial = Object.keys(decoderDictionary).filter(key => key !== term && key.includes(term));
-    const matches = [...exact, ...partial];
+    var exact = decoderDictionary[term] ? [term] : [];
+    var partial = Object.keys(decoderDictionary).filter(function(key) {
+      return key !== term && key.includes(term);
+    });
+    var matches = exact.concat(partial);
 
     if (matches.length === 0) {
       decoderResult.style.display = 'none';
@@ -1065,7 +1045,7 @@
       return;
     }
 
-    decoderCount.textContent = `Found ${matches.length} word${matches.length > 1 ? 's' : ''}`;
+    decoderCount.textContent = 'Found ' + matches.length + ' word' + (matches.length > 1 ? 's' : '');
     showDecoderResult(matches[0]);
   }
 
@@ -1137,7 +1117,6 @@
       });
     });
 
-    // Touch support
     var touchStartX = 0;
     container.addEventListener('touchstart', function(e) {
       touchStartX = e.changedTouches[0].screenX;
@@ -1151,7 +1130,6 @@
       }
     }, { passive: true });
 
-    // Keyboard navigation (only when carousel is in view)
     document.addEventListener('keydown', function(e) {
       var rect = container.getBoundingClientRect();
       var isVisible = rect.top < window.innerHeight && rect.bottom > 0;
@@ -1160,7 +1138,6 @@
       if (e.key === 'ArrowLeft') { resetAutoplay(); prevSlide(); e.preventDefault(); }
     });
 
-    // Autoplay
     function startAutoplay() {
       if (autoplayInterval) clearInterval(autoplayInterval);
       autoplayInterval = setInterval(nextSlide, 5500);
@@ -1175,20 +1152,33 @@
     });
     container.addEventListener('mouseleave', startAutoplay);
 
+    // Cleanup interval on page hide
+    function cleanup() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+    }
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        clearInterval(autoplayInterval);
+      } else {
+        startAutoplay();
+      }
+    });
+
     goTo(0);
     startAutoplay();
   }
 
-  // Initialise all carousels on the page
   var carousels = document.querySelectorAll('.univers-carousel');
   carousels.forEach(function(c) {
     if (c.querySelector('.univers-track')) {
       initCarousel(c);
     }
   });
-})();/* ── The Word Garden (30-word deck) ── */
+})();
+
+/* ── The Word Garden (30-word deck) ── */
 (function() {
-  const wgWords = [
+  var wgWords = [
     { word: "GOOD", arch: "G + D", line: "Grow direct. Goodness is not vague—it is direction arriving without deviation." },
     { word: "GROW", arch: "G + R + W", line: "Grow radiate connect. To grow is to radiate outward through every connection you touch." },
     { word: "GOD", arch: "G + D", line: "Grow direct. The source is the unfaltering upward surge—pure, unbroken arrival." },
@@ -1221,34 +1211,41 @@
     { word: "RESPECT", arch: "R + S + P + C + T", line: "Radiate spread project contain mark. Respect is the radiance you project outward, contained, marking the worth of another." }
   ];
 
-  let wgIndex = 0;
-  const wgTotal = wgWords.length;
+  var wgIndex = 0;
+  var wgTotal = wgWords.length;
 
-  const wgWordEl = document.getElementById('wgWord');
-  const wgArchEl = document.getElementById('wgArch');
-  const wgLineEl = document.getElementById('wgLine');
-  const wgCounterEl = document.getElementById('wgCounter');
-  const wgDotsEl = document.getElementById('wgDots');
-  const wgPrevBtn = document.getElementById('wgPrev');
-  const wgNextBtn = document.getElementById('wgNext');
+  var wgWordEl = document.getElementById('wgWord');
+  var wgArchEl = document.getElementById('wgArch');
+  var wgLineEl = document.getElementById('wgLine');
+  var wgCounterEl = document.getElementById('wgCounter');
+  var wgDotsEl = document.getElementById('wgDots');
+  var wgPrevBtn = document.getElementById('wgPrev');
+  var wgNextBtn = document.getElementById('wgNext');
 
-  for (let i = 0; i < wgTotal; i++) {
-    const dot = document.createElement('span');
-    dot.className = 'wg-dot' + (i === 0 ? ' active' : '');
-    dot.dataset.index = i;
-    dot.addEventListener('click', () => wgGoTo(i));
-    wgDotsEl.appendChild(dot);
+  if (wgDotsEl) {
+    for (var i = 0; i < wgTotal; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'wg-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.index = i;
+      dot.addEventListener('click', function() {
+        wgGoTo(parseInt(this.dataset.index));
+      });
+      wgDotsEl.appendChild(dot);
+    }
   }
 
   function wgRender() {
-    const g = wgWords[wgIndex];
-    wgWordEl.textContent = g.word;
-    wgArchEl.textContent = g.arch;
-    wgLineEl.textContent = g.line;
-    wgCounterEl.textContent = (wgIndex + 1) + ' / ' + wgTotal;
-    document.querySelectorAll('.wg-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === wgIndex);
-    });
+    var g = wgWords[wgIndex];
+    if (wgWordEl) wgWordEl.textContent = g.word;
+    if (wgArchEl) wgArchEl.textContent = g.arch;
+    if (wgLineEl) wgLineEl.textContent = g.line;
+    if (wgCounterEl) wgCounterEl.textContent = (wgIndex + 1) + ' / ' + wgTotal;
+    if (wgDotsEl) {
+      var dots = wgDotsEl.querySelectorAll('.wg-dot');
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === wgIndex);
+      });
+    }
   }
 
   function wgGoTo(i) {
@@ -1256,26 +1253,32 @@
     wgRender();
   }
 
-  wgPrevBtn.addEventListener('click', () => wgGoTo(wgIndex - 1));
-  wgNextBtn.addEventListener('click', () => wgGoTo(wgIndex + 1));
+  if (wgPrevBtn) {
+    wgPrevBtn.addEventListener('click', function() { wgGoTo(wgIndex - 1); });
+  }
+  if (wgNextBtn) {
+    wgNextBtn.addEventListener('click', function() { wgGoTo(wgIndex + 1); });
+  }
+
   wgRender();
 })();
+
 /* ── Front-page scrolling quote banner ── */
 (function() {
-  const tickerQuotes = [
-    { title: "The First Sound You Never Heard", quote: "Close your lips and hum. That vibration is not a sound \u2014 it is a substance. You just executed material existence through your own anatomy.", attribution: "The M-Demonstration \u00b7 Chapter 1" },
-    { title: "The Object That Isn\u2019t Real", quote: "Every physical thing you\u2019ve ever held required a category before it could be named. The floor under your feet is agreed upon. The count of your feet is not.", attribution: "Mathematics Is the Only Thing That Cannot Lie \u00b7 Chapter 5" },
-    { title: "The Weight You Carry", quote: "Call it \u2018carrying baggage\u2019 and you\u2019ve been speaking literally this whole time. A frozen postulate has real mass. It sits with actual weight in a specific location in your body.", attribution: "The Physics of Frozen Conflict \u00b7 Chapter 16" },
-    { title: "The Sound That Makes Time", quote: "N is the only sound that lets air flow through your nose without stopping. The nasal cavity is the body\u2019s time-keeping organ.", attribution: "The Sound of Time \u00b7 Key 09, Chapter 8" },
-    { title: "The Twin You Never Chose", quote: "Every must has a hidden twin. This is the single most important structural feature of any significant game, and the one most consistently invisible to the people running it.", attribution: "The Hidden Twin \u00b7 Chapter 5, The Restructured Mind" },
-    { title: "You Are Already in Heaven", quote: "We are not a random rock in a cold, dead void. We are the outer boundary of creation. We are the grand container holding the infinite inside.", attribution: "The Inversion Cosmology \u00b7 Chapter 31" },
-    { title: "Not a Line. Not an Arrow.", quote: "Hold that question. You\u2019ll need it later \u2014 there\u2019s a chapter near the end of this book that answers it, and the answer involves a shape you won\u2019t expect: not a line, not an arrow. A tube.", attribution: "The T-Mystery \u00b7 Introduction" },
-    { title: "The One Wearing Your Name", quote: "The hardest hidden postulate to find is never the one held by an institution. It\u2019s the one wearing your own name.", attribution: "The Hidden Postulate \u00b7 Chapter 28, The Restructured Mind" },
-    { title: "Where the Game Actually Lives", quote: "You can defeat every opponent you\u2019ll ever face and still be running the identical game tomorrow, against someone new, because the opponent was never the mechanism. The postulate was.", attribution: "Postulates: The Architecture of Experience \u00b7 Chapter 15" }
+  var tickerQuotes = [
+    { title: "The First Sound You Never Heard", quote: "Close your lips and hum. That vibration is not a sound — it is a substance. You just executed material existence through your own anatomy.", attribution: "The M-Demonstration · Chapter 1" },
+    { title: "The Object That Isn't Real", quote: "Every physical thing you've ever held required a category before it could be named. The floor under your feet is agreed upon. The count of your feet is not.", attribution: "Mathematics Is the Only Thing That Cannot Lie · Chapter 5" },
+    { title: "The Weight You Carry", quote: "Call it 'carrying baggage' and you've been speaking literally this whole time. A frozen postulate has real mass. It sits with actual weight in a specific location in your body.", attribution: "The Physics of Frozen Conflict · Chapter 16" },
+    { title: "The Sound That Makes Time", quote: "N is the only sound that lets air flow through your nose without stopping. The nasal cavity is the body's time-keeping organ.", attribution: "The Sound of Time · Key 09, Chapter 8" },
+    { title: "The Twin You Never Chose", quote: "Every must has a hidden twin. This is the single most important structural feature of any significant game, and the one most consistently invisible to the people running it.", attribution: "The Hidden Twin · Chapter 5, The Restructured Mind" },
+    { title: "You Are Already in Heaven", quote: "We are not a random rock in a cold, dead void. We are the outer boundary of creation. We are the grand container holding the infinite inside.", attribution: "The Inversion Cosmology · Chapter 31" },
+    { title: "Not a Line. Not an Arrow.", quote: "Hold that question. You'll need it later — there's a chapter near the end of this book that answers it, and the answer involves a shape you won't expect: not a line, not an arrow. A tube.", attribution: "The T-Mystery · Introduction" },
+    { title: "The One Wearing Your Name", quote: "The hardest hidden postulate to find is never the one held by an institution. It's the one wearing your own name.", attribution: "The Hidden Postulate · Chapter 28, The Restructured Mind" },
+    { title: "Where the Game Actually Lives", quote: "You can defeat every opponent you'll ever face and still be running the identical game tomorrow, against someone new, because the opponent was never the mechanism. The postulate was.", attribution: "Postulates: The Architecture of Experience · Chapter 15" }
   ];
 
-  const track = document.getElementById('tickerTrack');
-  const section = document.getElementById('quote-ticker');
+  var track = document.getElementById('tickerTrack');
+  var section = document.getElementById('quote-ticker');
   if (!track || !section) return;
 
   function buildSequence() {
@@ -1287,10 +1290,8 @@
     }).join('');
   }
 
-  // duplicate the sequence so the loop is seamless
   track.innerHTML = buildSequence() + buildSequence();
 
-  let paused = false;
   section.addEventListener('mouseenter', function() { section.classList.add('paused'); });
   section.addEventListener('mouseleave', function() { section.classList.remove('paused'); });
   section.addEventListener('touchstart', function() { section.classList.toggle('paused'); }, { passive: true });
