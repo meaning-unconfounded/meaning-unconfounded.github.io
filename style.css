@@ -613,6 +613,7 @@ td strong { color: var(--gold); }
   color: var(--gold);
 }
 
+/* ── Cards ─────────────────────────────────────────────────────── */
 .card, .card-gold, .card-cyan, .card-purple, .card-accent {
   background: var(--surface);
   border: 1px solid var(--hair);
@@ -622,9 +623,17 @@ td strong { color: var(--gold); }
   box-shadow: var(--shadow-sm);
 }
 .card-gold { border-left: 4px solid var(--gold-2); }
-.card-cyan { border-left: 4px solid #2a9d8f; }
 .card-purple { border-left: 4px solid #7c5cbf; }
 .card-accent { border-left: 4px solid #c25e3a; }
+
+/* --- User-requested explicit .card-cyan override --- */
+.card-cyan {
+  background: var(--surface-2, #1a2332);
+  border-left: 4px solid #2dd4bf;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  border-radius: 6px;
+}
 
 .parable-grid, .hacks-grid {
   display: grid;
@@ -2633,6 +2642,20 @@ html[data-theme="dark"] .divider-lg img {
 .dict-details .tw table,
 .appendix-collapsible .tw table {
   font-size: .85rem;
+}
+
+/* --- User-requested explicit details.dict-details override --- */
+details.dict-details {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--surface-2, #1a2332);
+  border-radius: 6px;
+  border: 1px solid var(--border-light, #333);
+}
+details.dict-details > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--gold, #d4a017);
 }
 
 /* ── epistemic note ────────────────────────────────────────────── */
