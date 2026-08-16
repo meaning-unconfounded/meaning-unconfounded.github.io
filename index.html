@@ -65,26 +65,6 @@ html[data-theme="dark"] {
   --shadow: 0 14px 34px rgba(0, 0, 0, .55);
   --shadow-sm: 0 4px 14px rgba(0, 0, 0, .4);
 }
-html[data-theme="dark"] .cov-title .w {
-  background: linear-gradient(135deg, #d3b25e 0%, #e8c96a 55%, #f0d98a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-html[data-theme="dark"] .cover::before {
-  border-color: color-mix(in srgb, var(--gold-2) 22%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold-soft) 40%, transparent);
-  opacity: 0.55;
-}
-html[data-theme="dark"] .cover::after {
-  border-color: color-mix(in srgb, var(--gold-2) 10%, transparent);
-  opacity: 0.45;
-}
-html[data-theme="dark"] .cover {
-  background:
-    radial-gradient(900px 480px at 50% 18%, var(--gold-soft), transparent 60%),
-    radial-gradient(700px 400px at 75% 85%, var(--navy-soft), transparent 55%);
-}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
@@ -319,12 +299,10 @@ a:hover { color: var(--gold); }
   text-align: center;
   padding: clamp(3rem, 8vh, 5rem) 1.75rem 3rem;
   position: relative;
-  /* gold field — same family as body radials, concentrated for the hero */
   background:
     radial-gradient(900px 480px at 50% 20%, var(--gold-soft), transparent 62%),
     radial-gradient(700px 400px at 80% 90%, var(--navy-soft), transparent 55%);
 }
-/* Outer gold presence — generous inset so type never collides */
 .cover::before {
   content: "";
   position: absolute;
@@ -337,7 +315,6 @@ a:hover { color: var(--gold); }
     inset 0 0 0 1px color-mix(in srgb, var(--gold-soft) 80%, transparent),
     0 0 40px color-mix(in srgb, var(--gold-2) 8%, transparent);
 }
-/* Inner soft line — depth without crowding */
 .cover::after {
   content: "";
   position: absolute;
@@ -347,42 +324,31 @@ a:hover { color: var(--gold); }
   pointer-events: none;
   opacity: 0.7;
 }
+.cover > * { position: relative; z-index: 1; }
+
 .cov-kick {
   font-family: var(--sans);
-  font-size: .74rem;
+  font-size: .78rem;
   text-transform: uppercase;
-  letter-spacing: .3em;
-  color: var(--gold);
-  margin-bottom: 1.15rem;
-  position: relative;
-  z-index: 1;
+  letter-spacing: .34em;
+  color: var(--muted);
+  margin-bottom: 1.6rem;
 }
 .cov-title {
   font-family: var(--serif);
-  font-size: clamp(2.85rem, 7.5vw, 5.4rem);
+  font-size: clamp(3rem, 8vw, 5.6rem);
   font-weight: 700;
   letter-spacing: .05em;
-  line-height: 1.05;
+  line-height: 1.04;
   color: var(--ink);
-  position: relative;
-  z-index: 1;
 }
-.cov-title .w {
-  color: var(--gold);
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 45%, #e8c96a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 0 color-mix(in srgb, var(--gold-2) 25%, transparent));
-}
+.cov-title .w { color: var(--gold); }
 .cov-rule {
-  display: flex; align-items: center; gap: 1rem;
-  width: min(320px, 58%);
-  margin: 1.5rem auto 1.25rem;
-  color: var(--gold-2);
-  font-size: 1.1rem;
-  position: relative;
-  z-index: 1;
+  display: flex; align-items: center; gap: 1.1rem;
+  width: min(420px, 70%);
+  margin: 2rem auto 1.7rem;
+  color: var(--gold);
+  font-size: 1.15rem;
 }
 .cov-rule::before, .cov-rule::after {
   content: ""; flex: 1; height: 1px;
@@ -391,22 +357,17 @@ a:hover { color: var(--gold); }
 .cov-rule::after { background: linear-gradient(90deg, var(--gold-2), transparent); }
 .cov-sub {
   font-style: italic;
-  font-size: 1.18rem;
+  font-size: 1.28rem;
   color: var(--ink-soft);
-  margin-bottom: .6rem;
-  position: relative;
-  z-index: 1;
-  max-width: 28rem;
+  margin-bottom: .9rem;
 }
 .cov-books {
   font-family: var(--sans);
-  font-size: .8rem;
+  font-size: .82rem;
   text-transform: uppercase;
   letter-spacing: .18em;
   color: var(--gold);
-  margin-bottom: 1.5rem;
-  position: relative;
-  z-index: 1;
+  margin-bottom: 2.6rem;
 }
 .cov-meta {
   font-family: var(--sans);
@@ -414,20 +375,11 @@ a:hover { color: var(--gold); }
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--muted);
-  position: relative;
-  z-index: 1;
 }
 .cov-hint {
   position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
   color: var(--muted); font-size: 1.3rem;
   animation: bob 2.4s ease-in-out infinite;
-}
-.cover > p, .cover > div:not(.cov-rule) { position: relative; z-index: 1; }
-.cover a {
-  transition: color .2s ease, border-color .2s ease, opacity .2s ease;
-}
-.cover a:hover {
-  color: var(--gold-2);
 }
 @keyframes bob { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,7px); } }
 
@@ -2599,7 +2551,7 @@ html[data-theme="dark"] .divider-lg img {
 .cosmology-fallback a { color: var(--gold); }
 
 /* ═══════════════════════════════════════════════════════════════
-   v2.5 FINAL — details/summary, epistemic note, print styles; 31-key set locked
+   v2.5 FINAL — 31-key set locked; entry cleaned
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── lazy-load dictionary wrappers ───────────────────────────── */
@@ -3015,7 +2967,7 @@ html[data-theme="dark"] .tag-model { background: #3e2723; color: #ffcc80; }
 <aside id="sidebar">
 <div class="sb-head">
 <a class="sb-title" href="#top">The White Book</a>
-<div class="sb-sub">Complete Unified Edition</div>
+<div class="sb-sub">Final Edition</div>
 <button id="themeToggle" type="button" aria-label="Toggle colour theme">☾</button>
 </div>
 <div class="sb-search">
@@ -3181,7 +3133,7 @@ html[data-theme="dark"] .tag-model { background: #3e2723; color: #ffcc80; }
 
 <!-- COVER -->
 <header class="cover" id="top">
-<p class="cov-kick" style="color:var(--gold); letter-spacing:0.22em;">Inwards is Forwards</p>
+<p class="cov-kick">Inwards is Forwards</p>
 <h1 class="cov-title">THE <span class="w">WHITE</span> BOOK</h1>
 <div class="cov-rule">❦</div>
 <p class="cov-sub">A homage to the English language, and to the open mind</p>
@@ -3193,15 +3145,9 @@ html[data-theme="dark"] .tag-model { background: #3e2723; color: #ffcc80; }
 <p style="text-align:center; margin:0.65rem 0 0; font-size:0.78rem; color:var(--muted); font-family:var(--sans);">
   Prefer a shorter path? <a href="TheGreyBook_15Min.html" style="color:var(--gold); text-decoration:none;">15-Minute Key</a>
 </p>
+
 <div class="cov-hint">▾</div>
 </header>
-<!-- ═══════════════════════════════════════════════════════════════
-     FRONT-PAGE SCROLLING QUOTE BANNER
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ticker-kicker">From the book</div>
-<section id="quote-ticker" aria-label="Featured quotes from the book">
-  <div class="ticker-track" id="tickerTrack"></div>
-</section>
 
      <!-- START HERE — low-commitment entry point, sits above the full TOC -->
 <div id="startHere" style="text-align:center; margin:1.5rem auto 1rem; max-width:var(--measure); padding:0 1rem;">
@@ -4521,6 +4467,8 @@ This chapter is about what that weight actually is. Not a metaphor. A mechanism.
 <p>The tongue is a funnel within a funnel. The throat narrows the same way. The body is a nested series of funnels, each boundary containing a flow that returns to its source. The macrocosm repeats the microcosm not by analogy, but by shared geometry.</p>
 
 <p>The Thoth Matrix showed that the body pronounces the code through its extremities. But the code is older than anatomy. Before the body was named, the operators were named — not as characters, but as functions.</p>
+
+<!-- GEM 15 and GEM 16 deleted -->
 
 <blockquote class="key">
 <p><strong>🗝️ SIDEBAR: The Gods That Compute</strong></p>
@@ -8351,7 +8299,7 @@ https://meaning-unconfounded.github.io/
   if (tocToggle && toc) {
     tocToggle.addEventListener('click', function() {
       toc.classList.toggle('open');
-      tocToggle.textContent = toc.classList.contains('open') ? '✕ Hide Contents' : '📖 Show Contents';
+      tocToggle.textContent = toc.classList.contains('open') ? '✕ Hide Contents' : 'Contents';
     });
   }
 
@@ -9470,39 +9418,6 @@ https://meaning-unconfounded.github.io/
   wgRender();
 })();
 
-/* ── Front-page scrolling quote banner ── */
-(function() {
-  var tickerQuotes = [
-    { title: "The First Sound You Never Heard", quote: "Close your lips and hum. That vibration is not a sound — it is a substance. You just executed material existence through your own anatomy.", attribution: "The M-Demonstration · Chapter 1" },
-    { title: "The Object That Isn't Real", quote: "Every physical thing you've ever held required a category before it could be named. The floor under your feet is agreed upon. The count of your feet is not.", attribution: "Mathematics Is the Only Thing That Cannot Lie · Chapter 5" },
-    { title: "The Weight You Carry", quote: "Call it 'carrying baggage' and you've been speaking literally this whole time. A frozen postulate has real mass. It sits with actual weight in a specific location in your body.", attribution: "The Physics of Frozen Conflict · Chapter 16" },
-    { title: "The Sound That Makes Time", quote: "N is the only sound that lets air flow through your nose without stopping. The nasal cavity is the body's time-keeping organ.", attribution: "The Sound of Time · Key 09, Chapter 8" },
-    { title: "The Twin You Never Chose", quote: "Every must has a hidden twin. This is the single most important structural feature of any significant game, and the one most consistently invisible to the people running it.", attribution: "The Hidden Twin · Chapter 5, The Restructured Mind" },
-    { title: "You Are Already in Heaven", quote: "We are not a random rock in a cold, dead void. We are the outer boundary of creation. We are the grand container holding the infinite inside.", attribution: "The Inversion Cosmology · Chapter 31" },
-    { title: "Not a Line. Not an Arrow.", quote: "Hold that question. You'll need it later — there's a chapter near the end of this book that answers it, and the answer involves a shape you won't expect: not a line, not an arrow. A tube.", attribution: "The T-Mystery · Introduction" },
-    { title: "The One Wearing Your Name", quote: "The hardest hidden postulate to find is never the one held by an institution. It's the one wearing your own name.", attribution: "The Hidden Postulate · Chapter 28, The Restructured Mind" },
-    { title: "Where the Game Actually Lives", quote: "You can defeat every opponent you'll ever face and still be running the identical game tomorrow, against someone new, because the opponent was never the mechanism. The postulate was.", attribution: "Postulates: The Architecture of Experience · Chapter 15" }
-  ];
-
-  var track = document.getElementById('tickerTrack');
-  var section = document.getElementById('quote-ticker');
-  if (!track || !section) return;
-
-  function buildSequence() {
-    return tickerQuotes.map(function(q) {
-      return '<span class="ticker-item"><span class="ticker-title">' + q.title + '</span>' +
-             '<span class="ticker-quote">\u201c' + q.quote + '\u201d</span>' +
-             '<span class="ticker-attr">' + q.attribution + '</span></span>' +
-             '<span class="ticker-sep">\u2766</span>';
-    }).join('');
-  }
-
-  track.innerHTML = buildSequence() + buildSequence();
-
-  section.addEventListener('mouseenter', function() { section.classList.add('paused'); });
-  section.addEventListener('mouseleave', function() { section.classList.remove('paused'); });
-  section.addEventListener('touchstart', function() { section.classList.toggle('paused'); }, { passive: true });
-})();
 </script>
 
 </body>
