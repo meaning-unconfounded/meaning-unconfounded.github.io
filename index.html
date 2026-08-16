@@ -3212,6 +3212,137 @@ html[data-theme="dark"] .tag-model { background: #3e2723; color: #ffcc80; }
   .op-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
+
+/* Interactive Door links — scroll to chapter / appendix targets */
+a.key-door-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(42, 58, 95, 0.35);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+a.key-door-link:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold-2);
+}
+a.key-door-link:focus-visible {
+  outline: 2px solid var(--gold-2);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+html[data-theme="dark"] a.key-door-link {
+  color: var(--navy);
+  border-bottom-color: rgba(157, 179, 221, 0.4);
+}
+html[data-theme="dark"] a.key-door-link:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold-2);
+}
+.door-highlight {
+  animation: door-flash 1.6s ease-out;
+}
+@keyframes door-flash {
+  0%   { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.55); }
+  30%  { box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.28); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+
+/* ── Operator cards & 5-tier stack (not a spreadsheet) ── */
+.op-stack {
+  max-width: 28rem;
+  margin: 1.6rem auto 1.8rem;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.op-stack .os-head {
+  background: linear-gradient(90deg, var(--navy), #3d5285);
+  color: #f2ecd9;
+  text-align: center;
+  padding: 0.85rem 1rem;
+}
+.op-stack .os-letter {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+.op-stack .os-core {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 0.25rem;
+  opacity: 0.95;
+}
+.op-stack .os-tier {
+  padding: 0.65rem 1.15rem;
+  border-bottom: 1px solid var(--hair);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.op-stack .os-tier:last-child { border-bottom: 0; }
+.op-stack .os-label {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+.op-stack .os-foot {
+  padding: 0.7rem 1.15rem;
+  background: var(--surface-2);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+}
+.op-crumb {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 0.5rem;
+  margin: 1.2rem 0 1.4rem;
+}
+.op-crumb .oc {
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: 12px;
+  padding: 0.7rem 0.4rem 0.55rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.op-crumb .oc-letter {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.op-crumb .oc-core {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  margin-top: 0.2rem;
+}
+.op-home-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0.4rem 0 1.2rem;
+  font-style: italic;
+}
+
 </style>
 </head>
 <body>
@@ -3626,6 +3757,30 @@ html[data-theme="dark"] .tag-model { background: #3e2723; color: #ffcc80; }
 <p>If you felt that distinction, you have already understood the core claim of this book.</p>
 
 <p style="margin-top:1rem; font-style:italic; color:var(--gold);">You just proved the thesis in sixty seconds. One consonant difference, one letter deeper into the word, and the entire action changed. SPREAD arrives. SPRAY continues. The difference was inward — deeper into the consonant architecture — and the result was forward movement in comprehension. That is the pattern. Inwards is Forwards. The meaning changed because the physical action changed, and your jaw knew it before your mind could argue. That is the code at work.</p>
+
+
+<p style="text-align:center;font-family:var(--sans);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin:1.4rem 0 0.4rem;">One operator · Five tiers · Not a spreadsheet</p>
+<div class="op-stack" id="op-stack-d">
+  <div class="os-head">
+    <div class="os-letter">D</div>
+    <div class="os-core">Arrive</div>
+  </div>
+  <div class="os-tier"><span class="os-label">1 · Core</span><strong>Arrive</strong> — the action completes</div>
+  <div class="os-tier"><span class="os-label">2 · Concise</span>Doorway to knowledge</div>
+  <div class="os-tier"><span class="os-label">3 · Common</span>Directed reaching that opens access and delivers what was held to its destination</div>
+  <div class="os-tier"><span class="os-label">4 · Mouth (proof)</span>Tongue strikes the ridge, releases with voice</div>
+  <div class="os-tier"><span class="os-label">5 · Witness</span>Dalet (ד) — door, pathway · historical convergence, not authority</div>
+  <div class="os-foot">You just met one operator as an instrument. The full keyboard is the same stack, letter by letter.</div>
+</div>
+<div class="op-crumb" aria-label="Core operators at a glance">
+  <div class="oc"><div class="oc-letter">M</div><div class="oc-core">Material</div></div>
+  <div class="oc"><div class="oc-letter">B</div><div class="oc-core">Boundary</div></div>
+  <div class="oc"><div class="oc-letter">D</div><div class="oc-core">Arrive</div></div>
+  <div class="oc"><div class="oc-letter">S</div><div class="oc-core">Spread</div></div>
+  <div class="oc"><div class="oc-letter">T</div><div class="oc-core">Mark</div></div>
+  <div class="oc"><div class="oc-letter">R</div><div class="oc-core">Radiate</div></div>
+</div>
+<p class="op-home-note">Six keys of the keyboard. Feel one in the mouth; the rest of the deck uses the same logic. Full map: <a href="#mu-app-a">Appendix A — At a Glance</a>.</p>
 
 <p>That single distinction is not merely linguistic. The same architecture that decides whether an action arrives or continues also decides whether a conflict in the mind freezes or keeps moving — and, at the largest scale, whether we are looking outward into an infinite void or inward toward an infinite center. You have just held a key. The rest of the book shows what doors it opens.</p>
 
@@ -7260,7 +7415,7 @@ Examples: Exit (the mark out of containment), Expand (the spread that grows its 
 <p class="lead"><strong>The Exclusion Postulate Law:</strong> In compulsive games play, a player holds two postulates simultaneously: a games postulate and an exclusion postulate. The exclusion postulate is always identical to the opposition of the games postulate. The exclusion postulate acts as a shield to ensure you are never driven into the same class as your opponent.</p>
 <p>This is the game-postulate version of a wider pattern (see Chapter 28, The Hidden Postulate, for how the same shape scales up past the personal and into institutions). The exclusion postulate holds only inside games — rule-structures the mind is running, not the non-negotiable postulates that keep a body alive. That distinction matters: a life postulate resolves by being met. A game postulate resolves by being seen for what it is.</p>
 
-<h3 id="trm-ch21" class="ch"><span class="kick">Chapter 21</span><span class="cht">Bonding and Double Bonding</span></h3>
+<h3 id="trm-ch21" class="ch"><span id="trm-double-bind" class="kick">Chapter 21</span><span class="cht">Bonding and Double Bonding</span></h3>
 <p class="lead">"If A then B" and "if B then A" — A and B become equivalent. The double lock on the mind.</p>
 
 <p><strong>A bonding postulate</strong> is of the form <em>"if A then B"</em> — every time A exists, B exists. This is the basic relationship postulate. It limits freedom by rendering the common class of A and Not-B null. Example: <em>"if a person wears a dress, then a girl"</em> — the class of "person wearing a dress and not a girl" is nullified.</p>
@@ -9084,6 +9239,53 @@ https://meaning-unconfounded.github.io/
       var kid = el.dataset.keyId;
       if (kid) keyElements[kid] = el;
     });
+
+    /* ── Dynamic Door links: scroll to keyMap targets ── */
+    (function wireKeyDoors() {
+      Object.keys(keyElements).forEach(function(kid) {
+        var el = keyElements[kid];
+        var targetId = keyMap[kid];
+        if (!targetId) return;
+        var targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        var detail = el.querySelector('.key-detail');
+        if (!detail) return;
+        var doorP = null;
+        detail.querySelectorAll('p').forEach(function(p) {
+          if (/Door:/i.test(p.textContent) && !doorP) doorP = p;
+        });
+        if (!doorP) return;
+
+        var raw = doorP.textContent || '';
+        var labelMatch = raw.match(/Opens:\s*(.+)$/i);
+        var label = labelMatch ? labelMatch[1].trim() : targetId;
+
+        var link = document.createElement('a');
+        link.href = '#' + targetId;
+        link.className = 'key-door-link';
+        link.setAttribute('data-door-target', targetId);
+        link.innerHTML = '🚪 Opens: <span>' + label + '</span>';
+
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var dest = document.getElementById(targetId);
+          if (dest) {
+            dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            dest.classList.add('door-highlight');
+            setTimeout(function() { dest.classList.remove('door-highlight'); }, 1800);
+          }
+        });
+
+        doorP.innerHTML = '';
+        var strong = document.createElement('strong');
+        strong.textContent = 'Door:';
+        doorP.appendChild(strong);
+        doorP.appendChild(document.createTextNode(' '));
+        doorP.appendChild(link);
+      });
+    })();
 
     var revealQueue = [];
     var isRevealing = false;
