@@ -3,30 +3,45 @@
 **Live Site:** [https://meaning-unconfounded.github.io/](https://meaning-unconfounded.github.io/)
 
 ## Overview
-*The White Book* is the complete omnibus edition of Peter Sundbye's unified theory, synthesizing linguistics, philosophy, psychology, and mathematics into a single coherent volume. 
+*The White Book* is the complete omnibus edition of Peter Sundbye’s unified theory — linguistics, mathematics, psychology, and cosmology held in one coherent architecture.
 
-This repository contains the source code for the interactive web edition of the book. It is built as a completely self-contained, single-file HTML application. It requires no external dependencies, no build steps, and no backend—just pure HTML, CSS, and vanilla JavaScript.
+This repository contains the source for the interactive web edition. It is a fully self-contained HTML application: no external dependencies, no build step, no backend. Pure HTML, CSS, and vanilla JavaScript.
 
-## Contents
-The book is structured in three movements, unified into one reading experience:
-1. **Part I: Meaning Unconfounded (The Consonant Code)** — The discovery that consonants are the quantum particle of meaning, physically executed by the mouth.
-2. **Part II: BedRock-ReFramed (The Mathematical Foundation)** — The philosophical foundation proving that mathematics is the only objective truth and the bedrock of reality.
-3. **Part III: The Restructured Mind (Games, Overwhelm, and Freedom)** — The psychological application of the code to understand human games, overwhelm, and the architecture of freedom.
-4. **Unified Appendices A–O** — Reference tools, decoded dictionaries, and verification tests.
+## Structure
+Three movements, one reading experience:
+
+1. **Part I — Meaning Unconfounded (The Consonant Code)**  
+   Consonants as the physical carriers of meaning, executed by the mouth. Locked Core Operators (the Bone) plus Deep Resonance and historical convergence (the Blood).
+
+2. **Part II — BedRock-ReFramed (The Mathematical Foundation)**  
+   Mathematics as the only fully objective floor; the four-class structure and the directional law (Inwards is Forwards).
+
+3. **Part III — The Restructured Mind (Games, Overwhelm, and Freedom)**  
+   Postulates, frozen mass in the body, the Verb-to-Noun turn, and freedom as the ability to choose (and leave) one’s games.
+
+**Unified Appendices** — Full 22-consonant reference, number matrix, decoded dictionaries, verification tools, and the interactive apparatus.
+
+## Companion Entry Points
+- **TheGreyBook_15Min.html** — The 15-Minute Key (fast start / low-effort path)
+- **TheGreyBook_Narrative.html** — Narrative guide (printable, longer short-form)
+
+Both are self-contained and link back to `index.html`.
 
 ## Technical Features
-- **100% Self-Contained:** All CSS, JavaScript, and HTML reside in a single `index.html` file.
-- **Zero Dependencies:** No external frameworks, libraries, or CDNs. Loads instantly.
-- **Interactive Reading Experience:**
-  - Collapsible sidebar table of contents with scroll-spy.
-  - Dark/Light mode toggle (remembers user preference via `localStorage`).
-  - Reading progress bar.
-  - Back-to-top button.
-  - Clickable "Parable" cards for expanded insights.
-- **Typography:** Drop caps, mega part-dividers, and specialized blockquotes (GEMs, Key Insights, Notes).
-- **Print-Optimized:** Dedicated `@media print` rules for clean physical printing.
-- **Fully Responsive:** Optimized for mobile, tablet, and desktop reading.
+- **100% Self-Contained** — All CSS, JavaScript, and content live in the HTML files. No external frameworks, libraries, or CDNs.
+- **Interactive Reading**
+  - Collapsible sidebar with scroll-spy
+  - Dark / light mode (persists via `localStorage`)
+  - Reading progress bar
+  - Back-to-top button
+  - Expandable cards, tables, and reference tools
+- **Two-Tier Definitions** — Core Operator (Bone) for decoding + Deep Resonance / historical convergence (Blood) for felt sense and lineage
+- **Convergence Filter** — Illuminated traditions (Kabbalistic, Hermetic, etc.) admitted only as historical witnesses; the physical mouth remains the primary proof
+- **Print-Optimized** — Dedicated `@media print` rules
+- **Fully Responsive** — Mobile, tablet, and desktop
+
+## Edition
+Complete Unified Edition · Final Edition · Deep Resonance Recovery + Predictive Integrity
 
 ## Copyright
 Copyright © 2026 Peter Sundbye. All rights reserved.
-```
