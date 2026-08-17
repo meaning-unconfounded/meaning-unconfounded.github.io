@@ -9916,7 +9916,6 @@ Inwards is Forwards
     var isRevealing = false;
     var QUEUE_DELAY = 1500;
     var isReady = false;
-    setTimeout(function() { isReady = true; }, 10000);
 
     function processQueue() {
       if (isRevealing || revealQueue.length === 0) return;
@@ -9951,8 +9950,13 @@ Inwards is Forwards
       }, QUEUE_DELAY);
     }
 
+    var pendingReveal = [];
+
     function queueReveal(kid) {
-      if (!isReady) return;
+      if (!isReady) {
+        if (pendingReveal.indexOf(kid) === -1) pendingReveal.push(kid);
+        return;
+      }
       if (revealQueue.some(function(item) { return item.kid === kid; })) return;
 
       var el = keyElements[kid];
@@ -9969,34 +9973,41 @@ Inwards is Forwards
       }
     }
 
+    // When ready, flush any sections the reader already passed
+    setTimeout(function() {
+      isReady = true;
+      pendingReveal.forEach(function(kid) { queueReveal(kid); });
+      pendingReveal = [];
+    }, 1500);
+
     var sectionObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         var sectionId = entry.target.id;
-        var kid = null;
+        // Collect ALL keys mapped to this section (not only the first)
+        var kids = [];
         for (var k in keyMap) {
-          if (keyMap[k] === sectionId) {
-            kid = k;
-            break;
-          }
+          if (keyMap[k] === sectionId) kids.push(k);
         }
-        if (!kid) return;
-        var el = keyElements[kid];
-        if (!el) return;
+        if (kids.length === 0) return;
 
         if (entry.isIntersecting) {
-          queueReveal(kid);
+          kids.forEach(function(kid) { queueReveal(kid); });
         } else {
-          var revealedAt = parseInt(el.dataset.revealedAt || '0', 10);
-          var visibleFor = Date.now() - revealedAt;
-          if (el.classList.contains('slide-in') && !el.classList.contains('engaged') && visibleFor > 3000) {
-            el.classList.remove('slide-in');
-            el.style.opacity = '0';
-            el.style.pointerEvents = 'none';
-          }
+          kids.forEach(function(kid) {
+            var el = keyElements[kid];
+            if (!el) return;
+            var revealedAt = parseInt(el.dataset.revealedAt || '0', 10);
+            var visibleFor = Date.now() - revealedAt;
+            if (el.classList.contains('slide-in') && !el.classList.contains('engaged') && visibleFor > 3000) {
+              el.classList.remove('slide-in');
+              el.style.opacity = '0';
+              el.style.pointerEvents = 'none';
+            }
+          });
         }
       });
     }, {
-      rootMargin: '-5% 0px -30% 0px',
+      rootMargin: '-5% 0px -25% 0px',
       threshold: 0
     });
 
