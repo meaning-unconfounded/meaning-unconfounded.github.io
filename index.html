@@ -68,9 +68,10 @@ html[data-theme="dark"] {
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; overflow-x: hidden; }
 
 body {
+  overflow-x: hidden;
   font-family: var(--serif);
   font-size: 1.075rem;
   line-height: 1.78;
@@ -1502,54 +1503,44 @@ html[data-theme="dark"] .listening-room:hover {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  width: min(340px, calc(100vw - 24px));
-  max-width: min(340px, calc(100vw - 24px));
+  width: min(320px, calc(100vw - 24px));
+  max-width: min(320px, calc(100vw - 24px));
   z-index: 50;
   opacity: 0;
   pointer-events: none;
-  right: -400px;
+  right: 12px;
   left: auto;
-  transition: right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 0.5s ease,
-              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* stay invisible off-flow without expanding the page */
+  visibility: hidden;
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.45s;
   box-sizing: border-box;
 }
 .key-surprise.from-left {
-  right: auto;
-  left: -400px;
+  /* treat the same as right on all viewports to avoid left overflow */
+  right: 12px;
+  left: auto;
 }
 .key-surprise.slide-in {
-  right: 16px;
-  left: auto;
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
 }
 .key-surprise.from-left.slide-in {
-  right: auto;
-  left: 16px;
+  right: 12px;
+  left: auto;
 }
 
-/* Mobile & narrow: always from right, clamped inside viewport */
-@media (max-width: 1080px) {
+/* Mobile: full-width-ish overlay, never off-screen */
+@media (max-width: 640px) {
   .key-surprise,
-  .key-surprise.from-left {
-    left: auto !important;
-    right: -400px;
-  }
+  .key-surprise.from-left,
   .key-surprise.slide-in,
   .key-surprise.from-left.slide-in {
+    right: 12px !important;
     left: auto !important;
-    right: 12px;
-  }
-}
-@media (max-width: 640px) {
-  .key-surprise {
     width: calc(100vw - 24px);
     max-width: calc(100vw - 24px);
-  }
-  .key-surprise.slide-in,
-  .key-surprise.from-left.slide-in {
-    right: 12px;
   }
 }
 
@@ -1778,24 +1769,8 @@ html[data-theme="dark"] .listening-room:hover {
 
 /* ── BOOK BRIDGE (Book 1 → Book 2 Banner) ────────────────────── */
 /* ── Responsive ───────────────────────────────────────────────── */
-@media (max-width: 1080px) {
-  .key-surprise.from-left.slide-in {
-    left: 24px;
-  }
-}
+
 @media (max-width: 640px) {
-  .key-surprise {
-    max-width: calc(100vw - 32px);
-  }
-  .key-surprise.slide-in {
-    right: 16px;
-  }
-  .key-surprise.from-left.slide-in {
-    left: 16px;
-  }
-  .key-surprise.slide-in .key-card {
-    animation: none;
-  }
   #keyTracker {
     left: 12px;
     bottom: 12px;
@@ -3637,9 +3612,6 @@ img.img-missing { display: none; }
 <div class="cov-meta">Peter Sundbye · © 2026</div>
 <p style="text-align:center; margin:1.25rem 0 0; font-size:0.92rem; max-width:22rem; line-height:1.5;">
   <a href="#mu-intro" style="color:var(--gold); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--gold-2) 50%, transparent);">Begin with the 60-second proof →</a>
-</p>
-<p style="text-align:center; margin:0.65rem 0 0; font-size:0.78rem; color:var(--muted); font-family:var(--sans);">
-  Prefer a shorter path? <a href="TheGreyBook_15Min.html" style="color:var(--gold); text-decoration:none;">15-Minute Key</a>
 </p>
 
 <div class="cov-hint">▾</div>
@@ -9396,19 +9368,14 @@ AFTER-CREDITS (Inversion Cosmology)
 CITATION & FOOTER
 ═══════════════════════════════════════════════════════════════ -->
 <div class="citation" id="citation">
-<div class="card" style="margin:2rem auto; border-left:4px solid var(--gold-2);">
-<p><strong>Predictive Integrity Note (this edition) — Convergence Filter</strong></p>
-<p>All Core Operators remain exactly as listed in Appendix A. The physical articulation of the mouth is the primary, falsifiable cause. Deep Resonance now includes historical convergences (Kabbalistic, Hermetic, Masonic, and other illuminated traditions) strictly as <em>witnesses</em> — earlier code-readers who felt the same geometry and expressed it in allegory. They never rename, replace, or outrank the Core Operator.</p>
-<p style="font-size:0.9rem; color:var(--muted);">The book does not reject evidence because of stigma. Occult simply means hidden; the purpose of this work is to un-confound it. Open tensions remain visible. The strongest claim of the system continues to rest on the predictive performance of the Core Operators themselves.</p>
-</div>
-<p class="refusal-list"><strong>Publisher discipline</strong> — This edition does not prop claims with outside physics; does not add letters or mechanisms beyond the 22-unit system; does not soften “existence cannot not-exist”; does not rebrand the mind volume as therapy; does not promote cosmology from <span class="tag-model">Model</span> to <span class="tag-proof">Proof</span>; does not repeat a definition, chain, or GEM more than twice in the unified text; does not flatten expanded insights to the point of losing the resonance the book’s own decodings demonstrate. The body is instrument of evidence, not classroom play.</p>
-<p style="font-size:0.9rem;"><strong>End of The White Book</strong><br />
-<span style="font-size:0.85rem; color:var(--muted);">Sundbye, P. (2026). <em>Meaning Unconfounded</em> – The White Book.<br />
-All three books combined into one coherent volume with the latest additions.<br />
-The mouth runs math; importance freezes; naming unfreezes; the tube goes all the way up.</span></p>
-<div style="margin-top:1rem; font-family:monospace; font-size:0.8rem; background:var(--surface-2); padding:0.5rem 1rem; border-radius:4px; display:inline-block;">
-https://meaning-unconfounded.github.io/
-</div>
+<p style="text-align:center; margin:2.5rem auto 0.6rem;"><strong>End of The White Book</strong></p>
+<p style="text-align:center; font-size:0.9rem; color:var(--muted); max-width:28rem; margin:0 auto 1rem;">
+Sundbye, P. (2026). <em>Meaning Unconfounded</em> — The White Book.<br />
+The mouth runs math · importance freezes · naming unfreezes
+</p>
+<p style="text-align:center; font-family:var(--sans); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:2rem;">
+Inwards is Forwards
+</p>
 </div>
 
 </main>
