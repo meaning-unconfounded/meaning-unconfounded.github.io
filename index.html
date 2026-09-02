@@ -3429,23 +3429,33 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
   border: 1px solid var(--gold-2); border-radius: 100px;
   padding: .55rem .6rem .55rem 1.3rem; box-shadow: var(--shadow);
   font-family: var(--sans); font-size: .88rem; color: var(--ink);
-  transition: transform .45s cubic-bezier(.22,1,.36,1);
+  transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .35s ease;
   max-width: min(92vw, 560px);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
 }
-#resumePill.show { transform: translate(-50%, 0); }
+#resumePill.show {
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
 #resumePill .rp-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #resumePill .rp-label strong { color: var(--gold); font-weight: 700; }
 #resumePill .rp-go {
   border: none; cursor: pointer; border-radius: 100px;
   background: var(--gold); color: #fff; font-weight: 700; font-size: .8rem;
   padding: .45rem 1rem; font-family: var(--sans);
+  flex-shrink: 0;
 }
 #resumePill .rp-go:hover { background: var(--gold-2); }
 #resumePill .rp-x {
   border: none; cursor: pointer; background: transparent; color: var(--muted);
-  font-size: 1.05rem; padding: .2rem .5rem; border-radius: 50%;
+  font-size: 1.25rem; line-height: 1; padding: .35rem .55rem; border-radius: 50%;
+  flex-shrink: 0; min-width: 2rem; min-height: 2rem;
 }
-#resumePill .rp-x:hover { color: var(--ink); }
+#resumePill .rp-x:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 8%, transparent); }
 
 /* ── Payoff cards (chapter results) ─────────────────────────── */
 p.payoff {
@@ -10638,6 +10648,7 @@ Inwards is Forwards
 
     /* ── 4 · Resume-reading pill ───────────────────────────── */
     var POS_KEY = 'wb-position';
+    var DISMISS_KEY = 'wb-resume-dismissed';
     var pill = null, saveT = null;
 
     function currentHeading() {
@@ -10656,34 +10667,71 @@ Inwards is Forwards
       try { localStorage.setItem(POS_KEY, JSON.stringify({ id: h.id, y: window.scrollY })); } catch (e) {}
     }
 
+    function closeResumePill(opts) {
+      opts = opts || {};
+      if (!pill) return;
+      pill.classList.remove('show');
+      pill.setAttribute('aria-hidden', 'true');
+      pill.style.pointerEvents = 'none';
+      var el = pill;
+      pill = null;
+      setTimeout(function () {
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+      }, 480);
+      if (opts.clearStorage) {
+        try { localStorage.removeItem(POS_KEY); } catch (e) {}
+      }
+      /* Do not show the pill again this tab session after Resume or Dismiss */
+      if (opts.dismissSession) {
+        try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) {}
+      }
+    }
+
     window.addEventListener('scroll', function () {
       if (saveT) clearTimeout(saveT);
       saveT = setTimeout(savePos, 600);
     }, { passive: true });
 
     try {
+      var sessionDismissed = false;
+      try { sessionDismissed = sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) {}
       var saved = JSON.parse(localStorage.getItem(POS_KEY) || 'null');
-      if (saved && saved.id && seen[saved.id] && saved.id !== spine[0].id) {
+      if (!sessionDismissed && saved && saved.id && seen[saved.id] && spine.length && saved.id !== spine[0].id) {
         var target = document.getElementById(saved.id);
         if (target && Math.abs(target.offsetTop - window.scrollY) > 800) {
           pill = document.createElement('div');
           pill.id = 'resumePill';
-          pill.setAttribute('role', 'status');
+          pill.setAttribute('role', 'dialog');
+          pill.setAttribute('aria-label', 'Resume reading');
           pill.innerHTML =
             '<span class="rp-label">Continue where you left off — <strong>' +
             shortTitle(target.textContent.replace(/\s+/g, ' ').trim()) +
             '</strong></span>' +
             '<button class="rp-go" type="button">Resume</button>' +
-            '<button class="rp-x" type="button" aria-label="Dismiss">×</button>';
+            '<button class="rp-x" type="button" aria-label="Dismiss and ignore">×</button>';
           document.body.appendChild(pill);
-          requestAnimationFrame(function () { pill.classList.add('show'); });
-          pill.querySelector('.rp-go').addEventListener('click', function () {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            pill.classList.remove('show');
+          requestAnimationFrame(function () {
+            if (pill) pill.classList.add('show');
           });
-          pill.querySelector('.rp-x').addEventListener('click', function () {
-            pill.classList.remove('show');
-            try { localStorage.removeItem(POS_KEY); } catch (e) {}
+          pill.querySelector('.rp-go').addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var goTo = target;
+            closeResumePill({ clearStorage: false, dismissSession: true });
+            requestAnimationFrame(function () {
+              goTo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+          });
+          pill.querySelector('.rp-x').addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeResumePill({ clearStorage: true, dismissSession: true });
+          });
+          document.addEventListener('keydown', function onEsc(ev) {
+            if (ev.key === 'Escape' && pill) {
+              closeResumePill({ clearStorage: true, dismissSession: true });
+              document.removeEventListener('keydown', onEsc);
+            }
           });
         }
       }
