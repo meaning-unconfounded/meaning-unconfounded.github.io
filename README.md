@@ -3,7 +3,7 @@
 **Live Site:** [https://meaning-unconfounded.github.io/](https://meaning-unconfounded.github.io/)
 
 ## Overview
-*The White Book* is the complete omnibus edition of Peter Sundbye’s unified theory — linguistics, mathematics, psychology, and cosmology held in one coherent architecture.
+*The White Book* is the complete omnibus edition of Peters unified theory — linguistics, mathematics, psychology, and cosmology held in one coherent architecture.
 
 This repository contains the source for the interactive web edition. It is a fully self-contained HTML application: no external dependencies, no build step, no backend. Pure HTML, CSS, and vanilla JavaScript.
 
@@ -20,12 +20,6 @@ Three movements, one reading experience:
    Postulates, frozen mass in the body, the Verb-to-Noun turn, and freedom as the ability to choose (and leave) one’s games.
 
 **Unified Appendices** — Full 22-consonant reference, number matrix, decoded dictionaries, verification tools, and the interactive apparatus.
-
-## Companion Entry Points
-- **TheGreyBook_15Min.html** — The 15-Minute Key (fast start / low-effort path)
-- **TheGreyBook_Narrative.html** — Narrative guide (printable, longer short-form)
-
-Both are self-contained and link back to `index.html`.
 
 ## Technical Features
 - **100% Self-Contained** — All CSS, JavaScript, and content live in the HTML files. No external frameworks, libraries, or CDNs.
@@ -44,4 +38,4 @@ Both are self-contained and link back to `index.html`.
 Complete Unified Edition · Final Edition · Deep Resonance Recovery + Predictive Integrity
 
 ## Copyright
-Copyright © 2026 Peter Sundbye. All rights reserved.
+Copyright © 2026 Peters. All rights reserved.
