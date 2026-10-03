@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Gift of Thoth · Anatomical Operators · EROS Linguistics</title>
+<meta name="description" content="Language as applied science. Consonants as operators. Communication is bond. The Gift of Thoth for the EROS world."/>
+<style>
+:root {
+  --bg:#0b0a08; --surface:#12100e; --surface2:#1a1712;
+  --ink:#e8e2d6; --soft:#c9c2b0; --muted:#8a8070;
+  --gold:#d4af37; --cyan:#6a9eaf; --magenta:#d4788a; --violet:#9a7ab8;
+  --hair:rgba(212,175,55,.18);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--serif); font-size:1.05rem; line-height:1.7;
+}
+.wrap{max-width:720px; margin:0 auto; padding:1.25rem 1.15rem 4rem}
+header.hero{
+  text-align:center; padding:2rem 0 1.5rem;
+  border-bottom:1px solid var(--hair); margin-bottom:2rem;
+}
+header.hero img{max-width:100%; border-radius:12px; border:1px solid var(--hair); margin-bottom:1.2rem}
+.kicker{font-family:var(--sans); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:var(--violet); margin-bottom:.4rem}
+h1{font-size:clamp(1.6rem,4vw,2.15rem); color:var(--gold); margin:.2rem 0 .5rem; font-weight:700}
+.byline{color:var(--soft); font-style:italic; font-size:1.05rem; margin:0 0 .8rem}
+.maxim{
+  display:inline-block; margin-top:.6rem; padding:.55rem 1rem;
+  border:1px solid rgba(212,175,55,.35); border-radius:999px;
+  font-family:var(--sans); font-size:.78rem; letter-spacing:.06em;
+  color:var(--gold); text-transform:uppercase;
+}
+nav.toc{
+  background:var(--surface); border:1px solid var(--hair); border-radius:12px;
+  padding:1rem 1.15rem; margin:1.5rem 0 2rem; font-family:var(--sans); font-size:.88rem;
+}
+nav.toc strong{color:var(--gold); display:block; margin-bottom:.5rem; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase}
+nav.toc a{color:var(--soft); text-decoration:none; display:block; padding:.28rem 0}
+nav.toc a:hover{color:var(--gold)}
+h2{font-size:1.35rem; color:var(--gold); margin:2.5rem 0 .9rem; border-bottom:1px solid var(--hair); padding-bottom:.4rem}
+h3{font-size:1.08rem; color:var(--ink); margin:1.5rem 0 .5rem}
+p{margin:0 0 1rem; color:var(--soft)}
+.lede{font-size:1.12rem; color:var(--soft); font-style:italic; margin-bottom:1.1rem}
+.verse{
+  margin:1.4rem 0; padding:1.15rem 1.2rem; text-align:center;
+  border:1px solid rgba(212,175,55,.28); border-radius:12px;
+  background:linear-gradient(160deg,#15120c,#1a160f);
+  font-size:1.02rem; line-height:1.75; color:var(--soft);
+}
+.verse strong{color:var(--gold)}
+.pull{
+  margin:1.3rem 0; padding:.85rem 0 .85rem 1.1rem;
+  border-left:3px solid var(--gold);
+  background:linear-gradient(90deg,rgba(212,175,55,.09),transparent 70%);
+  font-style:italic; font-size:1.04rem; color:var(--soft);
+}
+.claim{
+  margin:1.2rem 0; padding:1.05rem 1.15rem;
+  border:1px solid var(--hair); border-radius:12px; background:var(--surface);
+}
+.claim.gold{border-color:rgba(212,175,55,.4); background:linear-gradient(135deg,#17140e,#1a1710)}
+.claim.cyan{border-color:rgba(106,158,175,.4); background:linear-gradient(135deg,#0e1518,#121a1c)}
+.claim p{margin:0 0 .5rem}.claim p:last-child{margin:0}
+.claim strong{color:var(--gold)}
+.demo{
+  margin:1.5rem 0; padding:1.25rem; border-radius:14px;
+  border:1px solid rgba(212,175,55,.4);
+  background:linear-gradient(160deg,#17140e,#12100c);
+}
+.demo .pair{
+  display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin:1rem 0;
+  font-family:var(--sans);
+}
+.demo .word{
+  text-align:center; padding:1rem .5rem; border-radius:10px;
+  background:var(--surface2); border:1px solid var(--hair);
+}
+.demo .word b{display:block; font-size:1.4rem; color:var(--gold); letter-spacing:.08em}
+.demo .word span{font-size:.78rem; color:var(--muted)}
+.demo .ops{font-family:var(--sans); font-size:.85rem; color:var(--cyan); text-align:center; margin:.5rem 0}
+.grid4{
+  display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin:1.1rem 0;
+  font-family:var(--sans); font-size:.88rem;
+}
+@media(max-width:520px){.grid4,.demo .pair{grid-template-columns:1fr}}
+.grid4 .cell{
+  padding:.85rem; border-radius:10px; border:1px solid var(--hair); background:var(--surface);
+}
+.grid4 .cell b{color:var(--gold); display:block; margin-bottom:.25rem; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase}
+.fig{margin:1.4rem 0; text-align:center}
+.fig img{max-width:100%; border-radius:12px; border:1px solid var(--hair)}
+.fig .cap{font-family:var(--sans); font-size:.75rem; color:var(--muted); margin-top:.45rem}
+.op-card{
+  margin:1.1rem 0; padding:1rem 1.1rem; border-radius:12px;
+  border:1px solid var(--hair); background:var(--surface);
+}
+.op-head{display:flex; align-items:baseline; gap:.75rem; margin-bottom:.55rem}
+.op-letter{
+  font-size:1.8rem; font-weight:700; color:var(--gold);
+  min-width:2rem; line-height:1;
+}
+.op-core{
+  font-family:var(--sans); font-size:.8rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--cyan);
+}
+.op-tiers{
+  font-family:var(--sans); font-size:.82rem; color:var(--soft);
+  display:grid; gap:.25rem; margin-bottom:.6rem;
+}
+.op-tiers .tl{
+  display:inline-block; min-width:5.5rem; color:var(--muted);
+  font-size:.68rem; letter-spacing:.06em; text-transform:uppercase;
+}
+.op-tiers strong{color:var(--gold)}
+.op-know,.op-bond{
+  font-family:var(--sans); font-size:.8rem; color:var(--muted); margin:0 0 .3rem;
+}
+.op-bond{color:var(--soft)}
+.op-grid-mini{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(64px,1fr));
+  gap:.4rem; margin:1rem 0 1.4rem;
+}
+.op-grid-mini a{
+  text-align:center; padding:.5rem .25rem; border-radius:8px;
+  border:1px solid var(--hair); background:var(--surface);
+  text-decoration:none; color:var(--gold); font-weight:700; font-size:1.1rem;
+}
+.op-grid-mini a span{
+  display:block; font-family:var(--sans); font-size:.58rem;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--muted); font-weight:500;
+}
+.dict{
+  font-family:var(--sans); font-size:.9rem;
+}
+.dict dt{color:var(--gold); margin-top:.75rem; font-weight:600}
+.dict dd{margin:0 0 0 0; color:var(--soft); padding-left:0}
+.q{
+  margin:1.2rem 0; padding:.9rem 1rem; text-align:center;
+  font-style:italic; color:var(--gold); font-size:1.05rem;
+}
+.frame-note{
+  font-family:var(--sans); font-size:.8rem; color:var(--muted);
+  border:1px dashed rgba(212,175,55,.3); border-radius:10px;
+  padding:.9rem 1rem; margin:1.2rem 0;
+}
+footer{
+  margin-top:3rem; padding-top:1.4rem; border-top:1px solid var(--hair);
+  text-align:center; font-family:var(--sans); font-size:.75rem; color:var(--muted);
+}
+footer .gold{color:var(--gold)}
+.creed{
+  margin:1.5rem 0; padding:1.4rem 1.2rem; text-align:center;
+  border:1px solid rgba(212,175,55,.4); border-radius:14px;
+  background:linear-gradient(160deg,#15120c,#1a160f);
+  line-height:1.9; color:var(--soft);
+}
+.creed strong{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">EROS · Companion Book</div>
+  <h1>The Gift of Thoth</h1>
+  <p class="byline">Anatomical Operators · Language as Applied Science</p>
+  <p class="maxim">Words have parts · Position is meaning · Communication is bond</p>
+  <div class="fig" style="margin-top:1.4rem">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Gods of EROS — Thoth among the operators"/>
+    <div class="cap">Thoth teaches. EROS binds. The operators are the instrument.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <a href="#open">1 · Open the door</a>
+  <a href="#where">2 · Where this sits</a>
+  <a href="#atomic">3 · Atomic language</a>
+  <a href="#operators">4 · The consonant operators</a>
+  <a href="#grid">5 · The four-class know grid</a>
+  <a href="#tongue">6 · Constructed tongue</a>
+  <a href="#guild">7 · Guild rules</a>
+  <a href="#dogfood">8 · Dogfood dictionary</a>
+  <a href="#practice">9 · Practice &amp; Stage 2</a>
+  <a href="#close">10 · Close</a>
+  <a href="#glossary">Appendix · Glossary</a>
+  <a href="#medicine-appendix">Appendix · Medicine track</a>
+</nav>
+
+<div class="card" style="margin:1rem 0 1.5rem;border-color:rgba(212,175,55,.35)">
+  <p style="margin:0 0 .5rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#d4af37;font-weight:700">Quick start</p>
+  <p style="margin:0;line-height:1.65">Say SPREAD / SPRAY aloud. Feel D close and Y leave open. That is an operator. Read the cards. Run one word this week. Post the skeleton. Guild before genius.</p>
+</div>
+
+
+<section id="open">
+<h2>1 · Open the door</h2>
+<p class="lede">One consonant difference. One letter deeper. The whole action changes.</p>
+
+<div class="demo">
+  <p style="text-align:center;margin:0 0 .5rem;color:var(--muted);font-family:var(--sans);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase">The thesis in sixty seconds</p>
+  <div class="pair">
+    <div class="word"><b>SPREAD</b><span>S · P · R · D</span></div>
+    <div class="word"><b>SPRAY</b><span>S · P · R · Y</span></div>
+  </div>
+  <p class="ops">Spread + Project + Radiate + <strong style="color:var(--gold)">Arrive</strong>
+  &nbsp;vs&nbsp;
+  Spread + Project + Radiate + <strong style="color:var(--gold)">Act</strong></p>
+  <p><strong style="color:var(--gold)">SPREAD</strong> — the energy reaches its destination and <em>stops</em>. The action is complete. D is Arrive.</p>
+  <p style="margin-bottom:0"><strong style="color:var(--gold)">SPRAY</strong> — the energy <em>keeps going</em>. The action continues. Y is Act — open deed, no final seal.</p>
+</div>
+
+<p>Say them aloud. Feel D close the path. Feel Y leave it open. That difference was not decoration. It was <strong>inward</strong> — deeper into the consonant architecture — and the result was <strong>forward</strong> movement in comprehension.</p>
+
+<div class="verse">
+  <strong>Inwards is forwards.</strong><br/>
+  Deeper structure first. Surface noise later.<br/>
+  That is the pattern of this book — and of the Egg.
+</div>
+
+<p class="q">What word in your life arrives… and what word only sprays?</p>
+</section>
+
+
+<section id="where">
+<h2>2 · Where this sits in The Eros Plan</h2>
+
+    
+  <p><strong>God stack (pointer).</strong> <em>NaUn</em> — choice, coding, plan. <em>Ra / Shen</em> — physics, heat, motion. <em>Thoth</em> — education, medicine, meaning, tongue. <em>EROS</em> — bond, cohesion, the force that holds. Full treatment: <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a>. You can run operators without adopting the myth; the stack only names whose workshop this manual is.</p>
+<div class="companion-map" style="margin:1.4rem 0;padding:1.1rem 1.3rem;border:1px solid rgba(212,175,55,.3);border-radius:12px;background:rgba(212,175,55,.05)">
+      <p style="margin:0 0 .6rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#d4af37;font-weight:700">Where this sits</p>
+      <p style="margin:0;line-height:1.7;font-size:.98rem">
+        <strong>Thoth’s domain</strong> in the operator stack (see <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a>).
+        The world that language describes lives in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a>.
+        Token and demand surface: <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The_Bridge</a> · door to the ecosystem: <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The_Front_Door</a>.
+        This book is the <em>linguistics guild manual</em> — consonants as operators, know/be-known grid, constructed tongue, dogfood dictionary.
+      </p>
+    </div>
+
+<div class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="The Complete Plan — four volumes"/>
+  <div class="cap">Instrument · Demand · Story · Production — language serves all four.</div>
+</div>
+
+<p>The spine is <strong>The Eros Plan</strong>: token, liquidity web, demand equation, cosmology, production guild. Companions hold their own fields — Illumination (human rail), Living Egg (vessel), Gods (four operators), Bridge (crypto).</p>
+
+<p>This book is <strong>Thoth’s instrument</strong> only. Not the pantheon. Not Atlantis. Not the macro sequence. Those books stay clean.</p>
+
+<div class="claim gold">
+  <p><strong>The through-line</strong></p>
+  <p>Communication → shared operators → understanding → <strong>bond</strong> → unity → cohesion → <strong>EROS</strong>.</p>
+  <p>A language that cannot be taught, shared, or verified fails the same test as a pool with no demand.</p>
+</div>
+
+<div class="frame-note">
+  Historical Egyptian, Hebrew, Greek, English paths appear as <em>masks and examples</em> — not rankings of peoples. Anunnaki / Nordic / breakaway persons belong in the next companion book, not under these four operators as “sub-gods.”
+</div>
+</section>
+
+
+<section id="atomic">
+<h2>3 · Atomic language</h2>
+<p class="lede">The atom has parts. The cell has parts. The word has parts.</p>
+
+<p>Vowels are the living current — breath made musical. <strong>Consonants are the deciding structure.</strong> Change the consonant skeleton and the world-model shifts. Position is not style. <strong>Position is syntax. Syntax is meaning.</strong></p>
+
+<div class="pull">
+  One consonant is an instruction. T is the instruction arriving. S is the instruction spreading. V is the instruction bonding.
+</div>
+
+<p>From Meaning Unconfound, the generative order is held as:</p>
+<div class="claim">
+  <p><strong>Life → Postulates → Numbers → Letters</strong></p>
+  <p>Letters are the readable surface of the same stack. The code is <em>discovery applied</em> — a working instrument for makers.</p>
+</div>
+
+<p>Technology means <strong>science applied</strong>. Linguistics, in Thoth’s hands, is applied structure: how sound becomes form, how form becomes shared meaning, how shared meaning becomes bond.</p>
+
+<p class="q">If your project’s words were atoms, which particles are missing?</p>
+</section>
+
+
+<section id="operators">
+<h2>4 · The consonant operators</h2>
+
+  <p><strong>On the Witness tier.</strong> Where a card says “same geometry across traditions,” read it as: the body-gesture of this consonant recurs in multiple writing cultures as a similar force (cut, bind, flow, edge). It is a pointer for comparative work, not a finished anthropology claim. If a card’s Witness line is thin, treat Core + Concise + Form as enough to work.</p>
+<p class="lede">Five tiers · not a spreadsheet. Core → Concise → Common → Form → Witness.</p>
+
+<div class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-33-teacher.jpg" alt="33 Master Teacher"/>
+  <div class="cap">Teach the fork. Numbers and letters both instruct.</div>
+</div>
+
+<div class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-gift-thoth.jpg" alt="The Gift of Thoth — operators as instrument"/>
+  <div class="cap">eros-gift-thoth.jpg · The instrument, not the lookup table.</div>
+</div>
+
+<p id="three-dim"><strong style="color:var(--gold)">4.1 · Three dimensions of every consonant</strong></p>
+<p>A core label (B = Boundary) is not enough. Every consonant carries meaning from <em>three layers at once</em>. When all three agree, the operator feels pure:</p>
+<div class="claim cyan">
+  <p><strong>1 · Identity</strong> — what the operator <em>is</em> (B = boundary).</p>
+  <p><strong>2 · Articulation point</strong> — where the body makes it (lips = the outer edge).</p>
+  <p><strong>3 · Manner</strong> — how it is produced (stop = closure and release).</p>
+</div>
+<p>All three say <em>boundary</em> at once for B. That convergence is why B is the purest boundary consonant — and why you can decode words the cards never list. The cards are an instrument. The three dimensions are why the instrument works.</p>
+
+<p>Jump to a letter:</p>
+<div class="op-grid-mini">
+<a href="#op-S">S<span>Spread</span></a><a href="#op-P">P<span>Project</span></a><a href="#op-R">R<span>Radiate</span></a><a href="#op-M">M<span>Material</span></a><a href="#op-B">B<span>Boundary</span></a><a href="#op-D">D<span>Arrive</span></a><a href="#op-T">T<span>Mark</span></a><a href="#op-N">N<span>Continue</span></a><a href="#op-F">F<span>Flow</span></a><a href="#op-V">V<span>Bond</span></a><a href="#op-W">W<span>Connect</span></a><a href="#op-K">K<span>Close</span></a><a href="#op-G">G<span>Grow</span></a><a href="#op-L">L<span>Lateral</span></a><a href="#op-Y">Y<span>Act</span></a><a href="#op-J">J<span>Express</span></a><a href="#op-H">H<span>Breath</span></a>
+</div>
+
+
+<article class="op-card" id="op-S">
+  <div class="op-head"><span class="op-letter">S</span><span class="op-core">Spread</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Spread</strong></div>
+    <div><span class="tl">2 · Concise</span>Continuous diffusion</div>
+    <div><span class="tl">3 · Common</span>Breath through a narrow channel — energy dispersing outward</div>
+    <div><span class="tl">4 · Form</span>Breath spreads between tongue and ridge</div>
+    <div><span class="tl">5 · Witness</span>Same geometry across traditions</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (dispersal into the open)</p>
+  <p class="op-bond"><b>Bond test:</b> Spread that teaches binds; spread that dilutes extracts.</p>
+</article>
+
+<article class="op-card" id="op-P">
+  <div class="op-head"><span class="op-letter">P</span><span class="op-core">Project</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Project</strong></div>
+    <div><span class="tl">2 · Concise</span>Force outward</div>
+    <div><span class="tl">3 · Common</span>Pressure released as directed push</div>
+    <div><span class="tl">4 · Form</span>Lips close and release unvoiced force</div>
+    <div><span class="tl">5 · Witness</span>Pe — mouth, projection</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (forced outward)</p>
+  <p class="op-bond"><b>Bond test:</b> Project to the room — not past the people in it.</p>
+</article>
+
+<article class="op-card" id="op-R">
+  <div class="op-head"><span class="op-letter">R</span><span class="op-core">Radiate</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Radiate</strong></div>
+    <div><span class="tl">2 · Concise</span>Ongoing emission</div>
+    <div><span class="tl">3 · Common</span>Continuous outward energy — fire, star, power still giving</div>
+    <div><span class="tl">4 · Form</span>Tongue near-trill; energy keeps leaving</div>
+    <div><span class="tl">5 · Witness</span>Resh — head, beginning</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (ongoing emission)</p>
+  <p class="op-bond"><b>Bond test:</b> Radiation without a center is noise.</p>
+</article>
+
+<article class="op-card" id="op-M">
+  <div class="op-head"><span class="op-letter">M</span><span class="op-core">Material</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Material</strong></div>
+    <div><span class="tl">2 · Concise</span>Primordial substance</div>
+    <div><span class="tl">3 · Common</span>Substance sustained through a boundary — matter held in resonance</div>
+    <div><span class="tl">4 · Form</span>Lips close; air hums through the nose</div>
+    <div><span class="tl">5 · Witness</span>Mem — water, substance</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Know (grasp the substance)</p>
+  <p class="op-bond"><b>Bond test:</b> Material without bond is inventory.</p>
+</article>
+
+<article class="op-card" id="op-B">
+  <div class="op-head"><span class="op-letter">B</span><span class="op-core">Boundary</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Boundary</strong></div>
+    <div><span class="tl">2 · Concise</span>Wall with purpose</div>
+    <div><span class="tl">3 · Common</span>Closure, pressure, release — the edge that defines a space</div>
+    <div><span class="tl">4 · Form</span>Lips seal, pressure builds, then opens</div>
+    <div><span class="tl">5 · Witness</span>Bet — house, boundary</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Not Be Known (edge / wall)</p>
+  <p class="op-bond"><b>Bond test:</b> A boundary that only hides is a prison; a boundary that defines is a room.</p>
+</article>
+
+<article class="op-card" id="op-D">
+  <div class="op-head"><span class="op-letter">D</span><span class="op-core">Arrive</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Arrive</strong></div>
+    <div><span class="tl">2 · Concise</span>Doorway to knowledge</div>
+    <div><span class="tl">3 · Common</span>Directed reaching that opens access and delivers what was held</div>
+    <div><span class="tl">4 · Form</span>Tongue strikes the ridge, releases with voice</div>
+    <div><span class="tl">5 · Witness</span>Dalet — door, pathway</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (arrival / delivery)</p>
+  <p class="op-bond"><b>Bond test:</b> Arrival completes the journey; without it, projection never lands.</p>
+</article>
+
+<article class="op-card" id="op-T">
+  <div class="op-head"><span class="op-letter">T</span><span class="op-core">Mark</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Mark</strong></div>
+    <div><span class="tl">2 · Concise</span>Fixed point</div>
+    <div><span class="tl">3 · Common</span>A stop that locates — the seal that makes a place definite</div>
+    <div><span class="tl">4 · Form</span>Tongue seals the ridge and releases</div>
+    <div><span class="tl">5 · Witness</span>Tav — mark, sign</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Know (locate / seal)</p>
+  <p class="op-bond"><b>Bond test:</b> A mark without a bond is a brand; a mark with a bond is a covenant.</p>
+</article>
+
+<article class="op-card" id="op-N">
+  <div class="op-head"><span class="op-letter">N</span><span class="op-core">Continue</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Continue</strong></div>
+    <div><span class="tl">2 · Concise</span>Ongoing presence</div>
+    <div><span class="tl">3 · Common</span>Connection that does not stop — now, known, nation</div>
+    <div><span class="tl">4 · Form</span>Tongue to ridge; air through nose</div>
+    <div><span class="tl">5 · Witness</span>Nun — continuation</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Know / position-dependent</p>
+  <p class="op-bond"><b>Bond test:</b> Continue the work when the chat is quiet.</p>
+</article>
+
+<article class="op-card" id="op-F">
+  <div class="op-head"><span class="op-letter">F</span><span class="op-core">Flow</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Flow</strong></div>
+    <div><span class="tl">2 · Concise</span>Stream in motion</div>
+    <div><span class="tl">3 · Common</span>Narrow continuous current — fire, free, force</div>
+    <div><span class="tl">4 · Form</span>Lip against teeth; air streams</div>
+    <div><span class="tl">5 · Witness</span>Same geometry across traditions</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (current)</p>
+  <p class="op-bond"><b>Bond test:</b> Flow without a bank is flood.</p>
+</article>
+
+<article class="op-card" id="op-V">
+  <div class="op-head"><span class="op-letter">V</span><span class="op-core">Bond</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Bond</strong></div>
+    <div><span class="tl">2 · Concise</span>Held vibration</div>
+    <div><span class="tl">3 · Common</span>Connection sustained through vibration — love, vow, wave</div>
+    <div><span class="tl">4 · Form</span>Lip-teeth vibration with voice</div>
+    <div><span class="tl">5 · Witness</span>Same geometry across traditions</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (sustained link)</p>
+  <p class="op-bond"><b>Bond test:</b> V is the operator closest to EROS itself.</p>
+</article>
+
+<article class="op-card" id="op-W">
+  <div class="op-head"><span class="op-letter">W</span><span class="op-core">Connect</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Connect</strong></div>
+    <div><span class="tl">2 · Concise</span>Rounded link</div>
+    <div><span class="tl">3 · Common</span>Smooth joining — with, we, will, water</div>
+    <div><span class="tl">4 · Form</span>Lips round; smooth glide</div>
+    <div><span class="tl">5 · Witness</span>Vav — hook, connection</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (join)</p>
+  <p class="op-bond"><b>Bond test:</b> Connect without capture.</p>
+</article>
+
+<article class="op-card" id="op-K">
+  <div class="op-head"><span class="op-letter">K</span><span class="op-core">Close</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Close</strong></div>
+    <div><span class="tl">2 · Concise</span>Back seal</div>
+    <div><span class="tl">3 · Common</span>Closure that contains or cuts — keep, cut, know, king</div>
+    <div><span class="tl">4 · Form</span>Back of tongue seals (position modulates)</div>
+    <div><span class="tl">5 · Witness</span>Kaf — palm, container</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Not Be Known / Must Know</p>
+  <p class="op-bond"><b>Bond test:</b> Close to protect the web; not to extract from it.</p>
+</article>
+
+<article class="op-card" id="op-G">
+  <div class="op-head"><span class="op-letter">G</span><span class="op-core">Grow</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Grow</strong></div>
+    <div><span class="tl">2 · Concise</span>Voiced expansion</div>
+    <div><span class="tl">3 · Common</span>Directed increase — go, grow, good, give</div>
+    <div><span class="tl">4 · Form</span>Back of tongue closes then releases with voice</div>
+    <div><span class="tl">5 · Witness</span>Gimel — camel, bridge</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (increase)</p>
+  <p class="op-bond"><b>Bond test:</b> Grow the web of small pools — not one giant risk.</p>
+</article>
+
+<article class="op-card" id="op-L">
+  <div class="op-head"><span class="op-letter">L</span><span class="op-core">Lateral</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Lateral</strong></div>
+    <div><span class="tl">2 · Concise</span>Lateral path</div>
+    <div><span class="tl">3 · Common</span>Movement beside — long, line, lead</div>
+    <div><span class="tl">4 · Form</span>Air around the sides of the tongue</div>
+    <div><span class="tl">5 · Witness</span>Lamed — ox-goad, learning</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Know (side path / learning)</p>
+  <p class="op-bond"><b>Bond test:</b> Lateral is how Thoth teaches: beside, not only above.</p>
+</article>
+
+<article class="op-card" id="op-Y">
+  <div class="op-head"><span class="op-letter">Y</span><span class="op-core">Act</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Act</strong></div>
+    <div><span class="tl">2 · Concise</span>Open deed</div>
+    <div><span class="tl">3 · Common</span>Action that continues without a stop — yes, you, play, say</div>
+    <div><span class="tl">4 · Form</span>Palate glide; open-ended</div>
+    <div><span class="tl">5 · Witness</span>Yod — hand, deed</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (deed continues)</p>
+  <p class="op-bond"><b>Bond test:</b> Y leaves the action open — SPRAY, not SPREAD.</p>
+</article>
+
+<article class="op-card" id="op-J">
+  <div class="op-head"><span class="op-letter">J</span><span class="op-core">Express</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Express</strong></div>
+    <div><span class="tl">2 · Concise</span>Voiced release outward</div>
+    <div><span class="tl">3 · Common</span>Inner content pushed into form — joy, judge, edge</div>
+    <div><span class="tl">4 · Form</span>Tongue and palate; voiced release</div>
+    <div><span class="tl">5 · Witness</span>Same geometry across traditions</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Be Known (inner → form)</p>
+  <p class="op-bond"><b>Bond test:</b> Express to clarify, not to dominate the room.</p>
+</article>
+
+<article class="op-card" id="op-H">
+  <div class="op-head"><span class="op-letter">H</span><span class="op-core">Breath</span></div>
+  <div class="op-tiers">
+    <div><span class="tl">1 · Core</span><strong>Breath</strong></div>
+    <div><span class="tl">2 · Concise</span>Open channel</div>
+    <div><span class="tl">3 · Common</span>Unobstructed air — home, heart, hear, holy</div>
+    <div><span class="tl">4 · Form</span>Glottis open; pure breath</div>
+    <div><span class="tl">5 · Witness</span>He — window, breath</div>
+  </div>
+  <p class="op-know"><b>Know-grid:</b> Must Know (reach toward unknown)</p>
+  <p class="op-bond"><b>Bond test:</b> Breath is the first medium of the bond.</p>
+</article>
+
+<p id="voicing"><strong style="color:var(--gold)">4.2 · Voicing — the two-sided operator</strong></p>
+<p>Every stop and fricative has a voiced / unvoiced twin. Same place in the mouth. Off or on. The vocal cords decide whether the operator <em>releases</em> or <em>holds</em>.</p>
+<div class="grid4">
+  <div class="cell"><b>Unvoiced · sharp release</b>P — Project<br/>T — Mark<br/>K — Close<br/>F — Flow<br/>S — Spread<br/>CH — Protect</div>
+  <div class="cell"><b>Voiced · held / contained</b>B — Boundary<br/>D — Arrive<br/>G — Grow<br/>V — Bond<br/>Z — Edge<br/>J — Express</div>
+</div>
+<p class="q">Whisper a hard truth. Then voice it. Same operators — different quality of the same meaning.</p>
+
+<p id="position"><strong style="color:var(--gold)">4.3 · Position rule — start, middle, end</strong></p>
+<p>An operator is not only <em>what</em> it is. It is <em>where</em> it stands in the word. <strong>N</strong> is the cleanest example:</p>
+<div class="claim">
+  <p><strong>Start</strong> — negates or initiates (No, Not / Name, Nation)</p>
+  <p><strong>Middle</strong> — continues (Continue, Maintain)</p>
+  <p><strong>End</strong> — arrives or holds presence (Done, Born, Known)</p>
+</div>
+<p>The final consonant often carries the timestamp: <strong>D / T</strong> seal (arrived, sealed); <strong>R</strong> still radiates (fire, power); <strong>N</strong> still continues (known, seen); <strong>Y</strong> runs without endpoint (energy, journey). SPREAD vs SPRAY is not a one-off — it is a <em>class</em> of distinction. Feel the word as a sequence of operations that begin somewhere and either land or continue.</p>
+
+<p 
+<p><strong>More position runs</strong></p>
+<ul>
+  <li><strong>T</strong> — start: cut opens (TIME). Middle: cut inside (WATER). End: final cut (BIT).</li>
+  <li><strong>S</strong> — start: spread announces (SPREAD). Middle: edge inside (LIST). End: residual edge (PASS).</li>
+  <li><strong>B</strong> — start: boundary first (BOND). Middle: contained beat (ABOUT). End: sealed stop (GRAB).</li>
+</ul>
+id="silent"><strong style="color:var(--gold)">4.4 · Silent consonants — the exclusion anchor</strong></p>
+<p>Only stops and affricates (B, P, T, D, K, G, CH, J) can go silent — because they have a closure phase to withhold. The silent <strong>K</strong> in KNOW is containment built but never released. The word <em>performs</em> the mechanism it describes.</p>
+<p>That is the <strong>Exclusion Anchor</strong>: meaning present, never voiced. It is also the shape of a hidden postulate in the body — a closure that holds without announcing itself. Examples: KNOW, KNIGHT, KNIFE, KNOCK, SIGN, LAMB, CASTLE, PSYCHE.</p>
+<div class="pull">This is the bond test at the level of a single word: hear what is being held back, not only what is being said.</div>
+
+<p id="verb-noun"><strong style="color:var(--gold)">4.5 · Verb-to-noun bridge</strong></p>
+<p>The verb can hide existence-claims inside actions. “I am depressed” wraps the state as an invisible all-encompassing weather. “The depression in me” makes it a <em>thing</em> — bounded, locatable, addressable. Same operation, discovered twice: in the operator code and in resolution practice (verb-to-noun conversion).</p>
+<div class="claim cyan">
+  <p><strong>NOUN</strong> ≈ N+N — continuation held as continuation: the thing that persists between words.</p>
+  <p><strong>VERB</strong> ≈ V+R+B — bonded radiance bounded: the action that can hide the thing inside motion.</p>
+</div>
+<p class="q">To speak in nouns is to make reality visible. To make reality visible is to let it change.</p>
+
+<div class="claim gold">
+  <p><strong>Composite rule</strong></p>
+  <p>Read a word by its operators in order. SPREAD = Spread · Project · Radiate · Arrive. SPRAY = Spread · Project · Radiate · Act. The last operator often decides whether the action <em>lands</em> or <em>continues</em>.</p>
+  <p style="margin-top:.6rem;font-size:.9rem;color:var(--muted)">When the operator cards feel fluent, the master book’s cluster layer (SP, ST, STR, DR…) opens next — not required here.</p>
+</div>
+
+  <h3 id="more-examples">More operator runs</h3>
+  <p><strong>LOVE</strong> — L (link/flow along a line) + V (voiced friction, held relation) + implied close. Skeleton: <em>bind along a path with sustained contact</em>. Bond test: does the line stay open or does it possess?</p>
+  <p><strong>FEAR</strong> — F (unvoiced friction, edge air) + R (radiate/iterate). Skeleton: <em>sharp edge that keeps spinning</em>. Bond test: is this warning or paralysis?</p>
+  <p><strong>BUILD</strong> — B (boundary/container) + D (stop/close). Skeleton: <em>make a room and set a floor</em>. Bond test: does the structure invite entry or only exclude?</p>
+
+</section>
+
+<section id="grid">
+<h2>5 · The four-class know grid</h2>
+<p class="lede">Under every slogan sits a postulate. Under every freeze sits a leg of the cycle.</p>
+
+
+  <p><strong>How the grid uses the operators.</strong> Operators tell you what a sound <em>does</em>. The four-class grid tells you what a claim is allowed to do in public speech: must be known, must not be known, must know, must not know. Run a word through operators first; then ask which class the sentence is serving. If the class and the operators fight, rewrite.</p>
+  <p><strong>Body as quick check (optional, testable).</strong> These are not medical claims. They are attention drills:</p>
+  <ul>
+    <li><strong>Raised shoulders</strong> — boundary held high. Ask: am I performing <em>Must Not Be Known</em> (keeping something out)?</li>
+    <li><strong>Held breath</strong> — continuation refused. Ask: am I blocking N-flow on purpose?</li>
+    <li><strong>Jaw lock</strong> — T-cut frozen. Ask: am I demanding Must Know while refusing to be known?</li>
+  </ul>
+  <p>If the drill does nothing for you, skip it. The grid still works on text alone.</p>
+
+<div class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-frankness.jpg" alt="Frankness — declaration of freedom"/>
+  <div class="cap">Frankness is a know-grid move: Must Be Known, chosen on purpose.</div>
+</div>
+
+<p>Meaning Unconfound maps four legs. As each fails, the position flips:</p>
+
+<div class="grid4">
+  <div class="cell"><b>Must Be Known</b>Force into the open · revelation · arrival</div>
+  <div class="cell"><b>Must Not Be Known</b>Conceal · wall · boundary held</div>
+  <div class="cell"><b>Must Know</b>Drive to grasp · mark · locate</div>
+  <div class="cell"><b>Must Not Know</b>Refuse the data · stay out · avoid</div>
+</div>
+
+<p>Body freeze is the same grid held in flesh — not as a therapy manual, as a <strong>map</strong>:</p>
+<ul style="color:var(--soft)">
+  <li>Raised shoulders — Must Not Be Known (B-boundary held)</li>
+  <li>Held breath — Must Not Be Known (N-continuation refused)</li>
+  <li>Jaw tension — Must Know and Must Not Be Known at once (T locked)</li>
+</ul>
+
+<div class="claim cyan">
+  <p><strong>EROS angle</strong></p>
+  <p>Bond requires some Must Be Known. Extraction culture lives in Must Not Be Known plus “please don’t abandon the coin.” Frankness is a declaration of freedom because it chooses the open leg on purpose.</p>
+</div>
+
+<p class="q">Which leg are you standing on when you write in the chat?</p>
+</section>
+
+
+<section id="tongue">
+<h2>6 · The Constructed Tongue — A Working Layer</h2>
+
+  <p class="lede">You can open a word. Next you generate new ones — under rules, not mood.</p>
+<p class="lede">Decode was the instrument. Generate is the work. Name the world.</p>
+
+<p id="gen-arg"><strong style="color:var(--gold)">6.1 · The three-generation argument</strong></p>
+<p>This is not a ranking of peoples. It is a functional progression of what language was asked to do.</p>
+<p><strong>Hebrew</strong> preserved the consonant root and treated letters as creation-units — the skeleton stayed visible. <strong>English</strong> scattered the operators across a trading tongue: fast, flexible, opaque. <strong>Esperanto</strong> optimised for neutrality and ease of learning. The <strong>EROS tongue</strong> optimises for a fourth property: <em>architectural transparency</em> — you can see the meaning in the skeleton.</p>
+<p>Each generation moved toward something. This one names the next move: operators you can feel, vowels that aim them, names a guild can lock without a founder cult.</p>
+<div class="claim">
+  <p><strong>Compare the four</strong></p>
+  <p style="font-family:var(--sans);font-size:.82rem;line-height:1.65">
+  <b style="color:var(--gold)">Hebrew</b> — root preservation high · learning cost high · neutrality low · structural transparency high<br/>
+  <b style="color:var(--gold)">English</b> — root preservation low · learning cost medium · neutrality medium · structural transparency low<br/>
+  <b style="color:var(--gold)">Esperanto</b> — root preservation medium · learning cost low · neutrality high · structural transparency medium<br/>
+  <b style="color:var(--gold)">EROS tongue</b> — root preservation high · learning cost medium · neutrality medium · structural transparency <em>designed high</em>
+  </p>
+</div>
+
+<p id="vowels"><strong style="color:var(--gold)">6.2 · The vowel vectors — the missing half of the code</strong></p>
+<p>Consonants carry the primary operator load. Vowels <em>aim</em> them. Change the vowel, change the spatial vector, change the world inside the same skeleton.</p>
+<div class="grid4">
+  <div class="cell"><b>A · Open</b>Singularity / point · unrestricted opening · grounding</div>
+  <div class="cell"><b>E · Extend</b>Exhaust / direction · forward lengthening · bright outward</div>
+  <div class="cell"><b>I · Inward</b>Narrow to a point · line of sight · still, sharp</div>
+  <div class="cell"><b>O · Encompass</b>Circular enclosure · completion loop · containing</div>
+</div>
+<div class="claim cyan">
+  <p><strong>U · Rise</strong> — Lift / cup from below · vortex · through / transitional.</p>
+  <p><strong>Test:</strong> BIT · BAT · BUT · BOOT · BITE. Skeleton B+T (Boundary + Mark) stays fixed. The vowel shifts the spatial quality of what is bounded.</p>
+  <p style="font-size:.85rem;color:var(--muted);margin-top:.5rem">Prefix shading: in RE- and PRE-, E often acts as directional return rather than pure Up/Out; in DE-, downward. Position layers the root vector — same rule as consonants.</p>
+</div>
+
+<p 
+<p><strong>Worked set — BIT / BAT / BUT / BOOT / BITE</strong></p>
+<ul>
+  <li><strong>BIT</strong> (I) — inward point; short, sharp, closed path.</li>
+  <li><strong>BAT</strong> (A) — open; unrestricted mouth; flat and wide.</li>
+  <li><strong>BUT</strong> — central push; neutral rise-and-drop.</li>
+  <li><strong>BOOT</strong> (U/O round) — encompass; long held cavity.</li>
+  <li><strong>BITE</strong> (I diphthong) — point that opens into travel.</li>
+</ul>
+<p>Say them in a row. I narrows, A opens, round vowels fill the mouth. That is the vector system in the body — a contrast you can feel, not a chart you must believe.</p>
+id="naming"><strong style="color:var(--gold)">6.3 · Naming algorithms</strong></p>
+<p>Generate in under five minutes. Skeleton first. Vowel second. Bond test last.</p>
+<div class="claim">
+  <p><strong>Character</strong> — (1) Role in one verb. (2) Pick 2–4 operators that encode it. (3) Choose vowel vector (open / extend / inward / encompass / rise). (4) Speak it aloud. (5) Bond test: does it teach or extract?<br/>
+  <em>Example:</em> Teacher-healer → T+H+TH fields → <strong>Thoth</strong>.</p>
+  <p><strong>Place</strong> — (1) What the place does to those inside it. (2) Operators of enclosure or path. (3) Vowel of containment or arrival. (4) Avoid pure spray endings unless the place is unbound.<br/>
+  <em>Example:</em> Outer shell of the world → R+N+D → <strong>Rind</strong>.</p>
+  <p><strong>Faction</strong> — (1) Shared hunger. (2) Shared vector (inward integration vs outward disintegration). (3) One distinguishing operator. (4) Name the vector, not the costume.<br/>
+  <em>Example:</em> Inward-forward remnant → fields of continue + boundary → Archive nodes, not race labels.</p>
+  <p><strong>Artifact</strong> — (1) What it measures or binds. (2) Operators of mark / material / bond. (3) Short skeleton (2–3 consonants).<br/>
+  <em>Example:</em> Bond instrument → V field dominant → names that hold vibration, not spectacle.</p>
+  <p><strong>Spell / operation</strong> — (1) Intended state change. (2) Operator sequence as procedure. (3) Final consonant = land or continue (D/T vs Y/R/N).<br/>
+  <em>Example:</em> Seal a truth → end in T/D. Keep a current alive → end in Y/N/R.</p>
+</div>
+
+<p id="derive"><strong style="color:var(--gold)">6.4 · Derivation rules</strong></p>
+<p>Minimum set. Architecture · effect · example. Cap at twelve.</p>
+<div class="claim" style="font-family:var(--sans);font-size:.84rem;line-height:1.7">
+  <p><b style="color:var(--gold)">RE-</b> (R+E) — radiate + return vector — do again / back · <em>rebuild</em></p>
+  <p><b style="color:var(--gold)">UN-</b> (N) — continue as negate at start — reverse · <em>unbind</em></p>
+  <p><b style="color:var(--gold)">PRE-</b> (P+R+E) — project + radiate + return — before · <em>prefix</em></p>
+  <p><b style="color:var(--gold)">PRO-</b> (P+R+O) — project + radiate + encompass — forward · <em>project</em></p>
+  <p><b style="color:var(--gold)">COM-/CON-</b> (K+M/N) — close + material/continue — with · <em>connect</em></p>
+  <p><b style="color:var(--gold)">EX-</b> (K+S) — close + spread — out of · <em>extract</em> (fail the bond test when abused)</p>
+  <p><b style="color:var(--gold)">DIS-</b> (D+S) — arrive + spread — apart · <em>discharge</em></p>
+  <p><b style="color:var(--gold)">TRANS-</b> (T+R+N+S) — mark + radiate + continue + spread — across · <em>transfer</em></p>
+  <p><b style="color:var(--gold)">-TION</b> — mark + continue — the sealed process as noun · <em>iteration</em></p>
+  <p><b style="color:var(--gold)">-MENT</b> — material + mark — the made thing · <em>bondment</em> (guild edge)</p>
+  <p><b style="color:var(--gold)">-NESS</b> — continue + spread — quality held · <em>frankness</em></p>
+  <p><b style="color:var(--gold)">-ING / -ER / -LY</b> — continue / agent / lateral manner · <em>bonding, bonder, frankly</em></p>
+</div>
+<p><strong>Worked case — Iteration:</strong> root iterate (T+R fields of mark + radiate in motion) → <em>iterate</em> (verb) · <em>iterating</em> (-ING continue) · <em>iterative</em> (quality) · <em>iteration</em> (-TION sealed process as noun).</p>
+
+<p id="canon-lex"><strong style="color:var(--gold)">6.5 · Canon lexicon for EROS</strong></p>
+<p>Authoritative lock. Nothing in the world may contradict this table without a guild revision.</p>
+
+<p><strong>EROS derivation note.</strong> Core skeleton is treated as <strong>R + S</strong> — Radiate + Spread — binding force iterated outward. Written E and O are vowel charge (open / encompass) around that skeleton. Canon locks the <em>force</em> (cohesion, unseen refactor), not a claim that every English letter is a separate operator. Two-letter cores name the active operators; vowels are charge.</p>
+
+<div class="claim" style="font-family:var(--sans);font-size:.78rem;line-height:1.65;overflow-x:auto">
+<p><b style="color:var(--gold)">Naun</b> — N+N · Continue+Continue · architecture / choose / code before form · NAH-oon</p>
+<p><b style="color:var(--gold)">Ra-Shen</b> — R+SH+N · Radiate+Sheer+Continue · physics / force / world-engine · RAH-shen</p>
+<p><b style="color:var(--gold)">Thoth</b> — TH+TH · Threshold fields · teacher-healer · language · medicine · THOTH</p>
+<p><b style="color:var(--gold)">EROS</b> — R+S · Radiate+Spread (bond iterated) · cohesion / unseen refactor · AIR-os / EH-ros</p>
+<p><b style="color:var(--gold)">Egg</b> — G · Grow (enclosed) · living vessel · enclosure · egg</p>
+<p><b style="color:var(--gold)">Rind</b> — R+N+D · Radiate+Continue+Arrive · outer shell / previous layer · rind</p>
+<p><b style="color:var(--gold)">Center</b> — N+T+R · Continue+Mark+Radiate · never a proper name · the still point · SEN-ter</p>
+<p><b style="color:var(--gold)">Funnel</b> — F+N+L · Flow+Continue+Lateral · inward-forward path · FUN-el</p>
+<p><b style="color:var(--gold)">Enclosure</b> — N+K+L+S+R · continue+close+lateral+spread+radiate · the Egg as system · en-KLO-zhur</p>
+<p><b style="color:var(--gold)">Architect</b> — R+K+T · Radiate+Close+Mark · planner under Naun · AR-ki-tekt</p>
+<p><b style="color:var(--gold)">Marrow</b> — M+R · Material+Radiate · deep life inside the bone of the world · MAIR-oh</p>
+<p><b style="color:var(--gold)">Iteration</b> — T+R+SH+N · mark+radiate+…+continue · EROS function · it-uh-RAY-shun</p>
+<p><b style="color:var(--gold)">Vector</b> — V+K+T · Bond+Close+Mark · aimed force · VEK-tor</p>
+<p><b style="color:var(--gold)">Bond</b> — B+N+D · Boundary+Continue+Arrive · held link / LP bond · bond</p>
+<p><b style="color:var(--gold)">TIPM</b> — T+P+M · Mark+Project+Material · frozen conflict map (reference) · tip-em</p>
+<p><b style="color:var(--gold)">Cell</b> — S+L · Spread+Lateral · living unit inside the Egg · cell</p>
+<p><b style="color:var(--gold)">Grey</b> — G+R · Grow+Radiate · biologics / phenomena stratum (lore) · gray</p>
+<p><b style="color:var(--gold)">Thread</b> — TH+R+D · Threshold+Radiate+Arrive · connective story line · thred</p>
+<p><b style="color:var(--gold)">Discharge</b> — D+S+CH+R+J · Arrive+Spread+Protect+Radiate+Express · release of held charge · DIS-charj</p>
+</div>
+
+<p id="pronounce"><strong style="color:var(--gold)">6.6 · Pronunciation guide</strong></p>
+<div class="claim" style="font-family:var(--sans);font-size:.82rem;line-height:1.7">
+  <p>S — tongue-ridge fricative · off · <em>see</em> · P — lips stop · off · <em>pay</em> · B — lips stop · on · <em>bay</em></p>
+  <p>T — ridge stop · off · <em>tie</em> · D — ridge stop · on · <em>day</em> · K — back stop · off · <em>key</em> · G — back stop · on · <em>go</em></p>
+  <p>F — lip-teeth · off · <em>fee</em> · V — lip-teeth · on · <em>vee</em> · M — lips nasal · on · <em>me</em> · N — ridge nasal · on · <em>no</em></p>
+  <p>R — approximant/trill · on · <em>run</em> · L — lateral · on · <em>lie</em> · W — rounded glide · on · <em>we</em> · Y — palate glide · on · <em>yes</em></p>
+  <p>H — open glottis · off · <em>he</em> · J — affricate · on · <em>joy</em> · TH — tongue-teeth threshold · off/on · <em>thin / then</em></p>
+</div>
+<p>Say any canon term from §6.5 using this table alone. No IPA required.</p>
+
+<p id="contract"><strong style="color:var(--gold)">6.7 · Consistency contract</strong></p>
+<div class="claim">
+  <p><strong>1</strong> — A proper noun is spelled and pronounced identically in every medium.</p>
+  <p><strong>2</strong> — The Center is never given a proper name.</p>
+  <p><strong>3</strong> — The silent-stop rule applies: a silenced stop holds meaning without releasing it.</p>
+  <p><strong>4</strong> — In-world beings do not speak any Earth language without an explicit in-story reason.</p>
+  <p><strong>5</strong> — Every new term submitted to the guild must pass the bond test before canonization.</p>
+  <p><strong>6</strong> — Operators stay fixed; only the living edge may mint terms that obey skeleton + bond.</p>
+  <p><strong>7</strong> — Breakaway / Anunnaki / Nordic labels are actors or masks — never sub-gods under Naun, Ra-Shen, Thoth, or EROS.</p>
+</div>
+
+<p id="worksheet"><strong style="color:var(--gold)">6.8 · Creator worksheet</strong></p>
+<div class="claim gold">
+  <p style="font-family:var(--sans);font-size:.88rem;line-height:1.85">
+  Meaning to encode: _______________________<br/>
+  Faction or role: _______________________<br/>
+  Vowel vector (A/E/I/O/U): _______________<br/>
+  Consonant skeleton: ____________________<br/>
+  Bond test (teach / extract?): ____________<br/>
+  Canon lock Y/N: ________ · Pronunciation: ________
+  </p>
+  <p style="margin-top:.8rem"><strong>Completed example</strong> — Meaning: inward path that delivers · Role: cosmology structure · Vowel: U (through) + E (extend) · Skeleton: F+N+L · Bond: teaches direction without extraction · Canon: Y · <strong>Funnel</strong> · FUN-el</p>
+</div>
+<p class="q">Fill the worksheet once. Post the skeleton in chat. The tongue grows where it is used.</p>
+</section>
+
+
+<section id="guild">
+<h2>7 · Guild rules (Klingon model)</h2>
+<div class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-notebook-studio.jpg" alt="Public Notebook Studio"/>
+  <div class="cap">Kit not house. Language is part of the kit Stage 2 will animate.</div>
+</div>
+
+<div class="claim">
+  <p><strong>1 · Canon core</strong> — Operator table + four-class grid change slowly. Treat them as infrastructure.</p>
+  <p><strong>2 · Living edge</strong> — Mint a new term only if the consonant skeleton is honest and the bond test passes.</p>
+  <p><strong>3 · Dogfood</strong> — Define EROS project words with operators (below).</p>
+  <p><strong>4 · Media rule</strong> — Comics, series, games reuse canon so the tongue is heard before it is fluent.</p>
+  <p><strong>5 · Fork teach, don’t extract</strong> — Same ethic as build-on-EROS. Teach the shape of the decision.</p>
+</div>
+
+<p>Star Trek made Klingon real by <strong>rules first, culture second, fluency third</strong>. EROS can do the same without pretending every holder must become a linguist.</p>
+
+  <p><strong>Contribution example.</strong> Proposed living-edge term: <em>SKRITH</em> — S-spread + K-cut + R-radiate + voiced end. Claimed force: “edge that keeps announcing itself.” Bond test: does it clarify a warning, or only sound sharp? If three guild readers can restate the force in their own words and the bond test passes, it may sit on the living edge until canon review.</p>
+
+</section>
+
+
+<section id="dogfood">
+<h2>8 · Dogfood dictionary</h2>
+<p class="lede">Eat your own operators. Define the world you are building.</p>
+
+<dl class="dict">
+  <dt>EROS</dt>
+  <dd>Bond · iterate · unseen refactor — the cohesion that holds the stack. (V / N / R fields)</dd>
+  <dt>Bond</dt>
+  <dd>V — held vibration; sustained connection. Liquidity bond is the same idea in pools.</dd>
+  <dt>Web</dt>
+  <dd>W + many small B-boundaries — connection without one giant capture.</dd>
+  <dt>Egg</dt>
+  <dd>Enclosure · vessel · inwards is forwards. Not a fifth god.</dd>
+  <dt>Fork</dt>
+  <dd>F + K — flow that closes into a teachable choice (fair structure vs extract).</dd>
+  <dt>Bag</dt>
+  <dd>B + G — boundary of capital + growth of position. Serious skin in the game.</dd>
+  <dt>Branch</dt>
+  <dd>B + R — boundary that radiates — your TG/Discord node off the hub.</dd>
+  <dt>Frankness</dt>
+  <dd>F + R + K — flow · radiate · close — open current sealed as truth.</dd>
+  <dt>Arrive</dt>
+  <dd>D — the doorway that delivers. Chart may invite; work makes them stay.</dd>
+  <dt>Spray</dt>
+  <dd>Attention without landing. Avoid in education; use only when the deed must continue.</dd>
+</dl>
+</section>
+
+
+<section id="practice">
+<h2>9 · Practice & Stage 2</h2>
+
+  <p><strong>Week one — exact actions</strong></p>
+  <ol>
+    <li>Pick one word from chat or a coin name. Write Core + Concise + Bond test. Post the skeleton.</li>
+    <li>Run SPREAD/SPRAY aloud once. Then run LOVE or FEAR with the same method.</li>
+    <li>Name one thing using a naming algorithm (character, place, or LP theme). Post the operator skeleton, not only the pretty name.</li>
+    <li>Add one dogfood entry to your private list. Use it in a real sentence this week.</li>
+  </ol>
+  <p><strong>Stage 2 link.</strong> Comics, scripts, and UI copy need consistent voice. This guild supplies the voice rules; media guilds supply the frames. Start with names and chat skeletons before full conlang.</p>
+<div class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="The Front Door"/>
+  <div class="cap">Enter by work. Language is one of the tools behind the door.</div>
+</div>
+
+<ol style="color:var(--soft)">
+  <li>Pick one operator per week. Use it in chat with a real example (SPREAD/SPRAY level).</li>
+  <li>Name a character, LP pair, or Archive fragment with honest skeleton + bond test.</li>
+  <li>When Stage 2 animates the books, put canon terms on screen — familiar before fluent.</li>
+  <li>NotebookLM: treat this volume as the language pack for Studio voice and glyphs.</li>
+</ol>
+
+<div class="claim gold">
+  <p><strong>Stage map reminder</strong></p>
+  <p>Stage 1 — Education (books, image library, notebook). Stage 2 — Media (comics, animation, series). Stage 3 — World (game, film, parallel build). Language is Stage 1 infrastructure for Stage 2 motion. The Constructed Tongue (§6) is the generative half of that infrastructure.</p>
+</div>
+</section>
+
+
+<section id="close">
+<h2>10 · Close</h2>
+<div class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="The Living Egg"/>
+  <div class="cap">Inwards is forwards — in cosmology and in the word.</div>
+</div>
+
+<div class="creed">
+  Communication is bond.<br/>
+  Bond is unity.<br/>
+  Unity is cohesion.<br/>
+  <strong>Cohesion is EROS.</strong>
+</div>
+
+<p>Thoth teaches the operators. EROS tests whether they serve the web or the extract. A future companion may build <strong>the constructed tongue</strong> (living edge made systematic). The next production book turns to <strong>breakaway footprints — men of renown, Anunnaki masks, Atlantis as Archive</strong> — actors inside the Egg, not sub-gods under these four.</p>
+
+<p class="q">What will you mark, spread, or bond this week — on purpose?</p>
+
+<div class="frame-note">
+  Sources re-homed under Thoth: Meaning Unconfound consonant tiers and SPREAD–SPRAY; Western Influence know-grid and stack; Gods of EROS operator stack.
+</div>
+</section>
+
+
+<div class="verse">
+  <strong>Name one thing this week.</strong><br/>
+  A character. A place. An artifact.<br/>
+  Post it in the chat with its skeleton.<br/>
+  The tongue grows where it is used.
+</div>
+
+
+
+<section id="glossary">
+  <h2>Appendix · Glossary</h2>
+  <p class="lede">Terms used in the operator method. Keep this near while you work cards.</p>
+  <div class="card" style="line-height:1.75">
+    <p><strong>Minimal pair</strong> — two words that differ by one sound and change meaning (SPREAD / SPRAY).</p>
+    <p><strong>Voiced / unvoiced</strong> — voiced: vocal cords vibrate (B, D, G, V). Unvoiced: air only (P, T, K, F).</p>
+    <p><strong>Fricative</strong> — continuous friction (F, V, S, Z, TH). Air never fully stops.</p>
+    <p><strong>Affricate</strong> — stop released into friction (CH, J as in judge).</p>
+    <p><strong>Approximant</strong> — near-vowel glide (W, Y, R, L). Path almost open.</p>
+    <p><strong>Glottis</strong> — the opening at the larynx; H is glottal friction.</p>
+    <p><strong>Stop (plosive)</strong> — full closure then release (P, B, T, D, K, G).</p>
+    <p><strong>Operator</strong> — a consonant treated as an instruction that acts on meaning.</p>
+    <p><strong>Canon / living edge</strong> — fixed core definitions vs community extensions under guild rules.</p>
+    <p><strong>Dogfood</strong> — use the system in real names, posts, and scripts, or it stays ornamental.</p>
+  </div>
+</section>
+
+<section id="medicine-appendix">
+<h2>Appendix · Medicine track (lore)</h2>
+<p><em>Optional lore. Not required to use operators. Not medical instruction.</em></p><p>Thoth is educator and physician of the stack. In the Gods book: without learning, energy never becomes life.</p>
+<p>Plant law and expanded cognition appear here as a <strong>historical hypothesis</strong> for the leap into symbol use — the “stoned ape” line as lore and research posture, not a dosing guide. The community does not need chemicals to practice operators. It needs attention, repetition, and the bond test.</p>
+<div class="pull">
+  Thumb · toe · tongue · thought — the specialisations that let a being grasp, stand, speak, and process the stage Ra-Shen provides.
+</div>
+<p class="q">What are you still learning that energy alone cannot teach?</p>
+</section>
+
+<footer>
+  <p><span class="gold">THE GIFT OF THOTH</span> · Anatomical Operators</p>
+  <p>EROS · Tenacity Through Integrity · t.me/Eros_Revival</p>
+  <p style="margin-top:1rem;font-size:.85rem;line-height:1.8;opacity:.9">
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift_Of_Thoth</a> ·
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a> ·
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a> ·
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The_Front_Door</a> ·
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The_Bridge</a> ·
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men_Of_Renown</a> ·
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination_Strategy</a>
+  </p>
+</footer>
+
+</div>
+</body>
+</html>
