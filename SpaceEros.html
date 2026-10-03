@@ -2,1569 +2,1297 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-<title>SpaceEros — Electric Universe · PulseChain</title>
-<meta name="theme-color" content="#06050d"/>
-<meta name="description" content="Real-time visualization of EROS liquidity pools and on-chain swaps on PulseChain, rendered as an electric cosmos."/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SpaceEros 💕 · One Swap, Three Destinations · EROS on PulseChain</title>
+<meta name="theme-color" content="#05030b"/>
+<meta name="description" content="SpaceEros — the EROS community's living map on PulseChain. Every swap: 2% burns to 0x…0369, 2% vaults, 1% deepens the WPLS hub. Ownership renounced. True DeFi on PulseChain."/>
+<meta property="og:title" content="SpaceEros 💕 Live Map · EROS on PulseChain"/>
+<meta property="og:description" content="Every swap: 2% burns, 2% vaults, 1% deepens the WPLS hub — a real-time map of EROS on PulseChain."/>
+<meta property="og:image" content="https://meaning-unconfounded.github.io/images/eros-space.jpg"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#06050d;
-  --ink:#e8e4dd;
-  --ink-2:#8a8496;
-  --ink-3:#565064;
-  --hair:rgba(255,255,255,.08);
-  --hair-2:rgba(255,255,255,.14);
-  --gold:#c9a227;
-  --cyan:#5ab8d4;
-  --magenta:#c47ab8;
-  --green:#4ec38a;
-  --amber:#d99a3a;
-  --red:#cf6a6a;
-  --glass:rgba(10,8,20,.72);
-  --glass-2:rgba(10,8,20,.88);
-  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+--void:#05030b;--ink:#f2eee6;--ink-2:#a49db4;--ink-3:#6f6880;
+--hair:rgba(255,255,255,.08);--hair-2:rgba(255,255,255,.15);
+--gold:#c9a227;--gold-2:#e8c547;--gold-3:#f6dc7a;
+--eros:#ff4fd8;--plasma:#35e0ff;--green:#4ec38a;--red:#cf6a6a;--ember:#ff7a2e;
+--glass:rgba(8,5,16,.62);--glass-2:rgba(8,5,16,.86);
+--display:'Cinzel',Georgia,serif;--serif:Georgia,'Iowan Old Style',serif;
+--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
-html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;height:100vh;width:100vw;touch-action:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-canvas{display:block;position:fixed;inset:0;cursor:grab;touch-action:none}
+[hidden]{display:none!important}
+html,body{background:var(--void);color:var(--ink);font-family:var(--sans);overflow:hidden;height:100vh;height:100dvh;width:100vw;touch-action:none;-webkit-font-smoothing:antialiased}
+canvas{display:block;position:fixed;inset:0;cursor:grab;touch-action:none;z-index:0}
 canvas:active{cursor:grabbing}
 a{text-decoration:none;color:inherit}
-
-/* ═══════════════════════════════════════════════════════
-   DRAGGABLE PANEL SYSTEM
-   ═══════════════════════════════════════════════════════ */
-.panel{position:fixed;z-index:20}
-.panel.max-w{max-width:calc(100vw - 28px)}
-.drag-grip{
-  position:absolute;
-  top:6px;right:6px;
-  width:16px;height:16px;
-  border-radius:3px;
-  cursor:grab;
-  opacity:0;
-  transition:opacity .2s,background .15s,transform .15s;
-  touch-action:none;
-  user-select:none;
-  -webkit-user-select:none;
-  display:flex;align-items:center;justify-content:center;
-  z-index:3;
-}
-.drag-grip::before{
-  content:'';
-  width:8px;height:8px;
-  background-image:radial-gradient(circle,rgba(255,255,255,.55) .9px,transparent 1px);
-  background-size:4px 4px;
-  background-repeat:repeat;
-  border-radius:1px;
-}
-.panel:hover .drag-grip{opacity:.55}
-.drag-grip:hover{opacity:1 !important;background:rgba(255,255,255,.08)}
-.drag-grip:active{cursor:grabbing}
-.panel.dragging{z-index:200;box-shadow:0 24px 60px rgba(0,0,0,.75) !important;border-color:var(--hair-2) !important}
-.panel.dragging .drag-grip{opacity:1}
-.panel.snapback{transition:left .28s cubic-bezier(.3,.9,.4,1),top .28s cubic-bezier(.3,.9,.4,1)}
-
-/* ═══════════════════════════════════════════════════════
-   BRAND (top-left)
-   ═══════════════════════════════════════════════════════ */
-#brand{top:18px;left:22px;display:flex;align-items:baseline;gap:12px;padding:6px 22px 6px 4px;border-radius:6px}
-#brand .mark{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:2.4px;color:var(--ink);text-transform:uppercase}
-#brand .tag{font-size:10px;letter-spacing:2.2px;color:var(--ink-3);text-transform:uppercase;font-weight:600}
-
-/* ═══════════════════════════════════════════════════════
-   MODE (top-right)
-   ═══════════════════════════════════════════════════════ */
-#mode{top:18px;right:22px;display:flex;align-items:center;gap:10px;padding:6px 24px 6px 12px;background:var(--glass);border:1px solid var(--hair);border-radius:6px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-family:var(--mono);font-size:11px;letter-spacing:.3px}
-#mode .ind{width:7px;height:7px;border-radius:50%;background:var(--ink-3);flex-shrink:0;transition:background .3s,box-shadow .3s}
-#mode .ind.loading{background:var(--amber);box-shadow:0 0 8px rgba(217,154,58,.5);animation:pulse 1.6s ease-in-out infinite}
-#mode .ind.replay{background:var(--cyan);box-shadow:0 0 8px rgba(90,184,212,.5)}
-#mode .ind.live{background:var(--green);box-shadow:0 0 10px rgba(78,195,138,.6)}
-#mode .ind.warn{background:var(--red);box-shadow:0 0 8px rgba(207,106,106,.5)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
-#mode .label{color:var(--ink);font-weight:600;letter-spacing:.4px;white-space:nowrap}
-#mode .sep{color:var(--ink-3)}
-#mode .detail{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(340px,calc(100vw - 340px))}
-
-/* ═══════════════════════════════════════════════════════
-   MARKET (top-right, under mode)
-   ═══════════════════════════════════════════════════════ */
-#market{top:66px;right:22px;display:flex;flex-direction:column;gap:1px;padding:12px 24px 12px 14px;background:var(--glass);border:1px solid var(--hair);border-radius:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);min-width:180px}
-#market .row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;line-height:1.7}
-#market .row .k{color:var(--ink-3);letter-spacing:.6px;text-transform:uppercase;font-size:9.5px}
-#market .row .v{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
-#market .row.price .v{font-size:15px;font-weight:600;color:var(--gold);letter-spacing:.2px}
-#market .row .v.up{color:var(--green)}
-#market .row .v.down{color:var(--red)}
-#market .divider{height:1px;background:var(--hair);margin:7px 0 6px}
-#market a{display:block;margin-top:9px;padding-top:9px;border-top:1px solid var(--hair);font-family:var(--sans);font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;font-weight:700;color:var(--gold);text-align:center;transition:color .15s}
-#market a:hover{color:#e8c547}
-
-/* ═══════════════════════════════════════════════════════
-   ABOUT (bottom-left)
-   ═══════════════════════════════════════════════════════ */
-#about{bottom:20px;left:20px;max-width:320px;padding:14px 26px 14px 16px;background:var(--glass);border:1px solid var(--hair);border-radius:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-#about .lbl{font-size:9.5px;letter-spacing:2px;color:var(--ink-3);text-transform:uppercase;font-weight:700;margin-bottom:7px}
-#about .body{font-family:var(--serif);font-size:12.5px;line-height:1.65;color:var(--ink-2);margin-bottom:9px}
-#about .body b{color:var(--ink);font-weight:600}
-#about .meta{font-family:var(--mono);font-size:10px;letter-spacing:.4px;color:var(--ink-3);border-top:1px solid var(--hair);padding-top:9px}
-#about .meta span{color:var(--ink-2)}
-
-/* ═══════════════════════════════════════════════════════
-   PANTHEON (bottom-right)
-   ═══════════════════════════════════════════════════════ */
-#pantheon{bottom:22px;right:22px;display:flex;gap:10px;align-items:center;padding:6px 22px 6px 12px;background:var(--glass);border:1px solid var(--hair);border-radius:6px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);pointer-events:auto}
-#pantheon .g{font-family:var(--serif);font-size:13px;font-weight:700;letter-spacing:.5px;opacity:.28;transition:opacity .5s ease,text-shadow .5s ease;line-height:1}
-#pantheon .g.naun{color:#9a7ab8}
-#pantheon .g.rashen{color:var(--gold)}
-#pantheon .g.thoth{color:var(--cyan)}
-#pantheon .g.eros{color:var(--magenta)}
-#pantheon .g.on{opacity:1;text-shadow:0 0 14px currentColor}
-#pantheon .sep{width:1px;height:12px;background:var(--hair-2)}
-
-/* ═══════════════════════════════════════════════════════
-   ACTION LINE (transient, centered)
-   ═══════════════════════════════════════════════════════ */
-#action{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(8px);z-index:19;width:min(520px,calc(100vw - 380px));text-align:center;pointer-events:none;opacity:0;transition:opacity .5s ease,transform .5s ease}
-#action.on{opacity:1;transform:translateX(-50%) translateY(0)}
-#action .lore{font-family:var(--serif);font-style:italic;font-size:14px;color:#b09ad4;letter-spacing:.2px;line-height:1.5;margin-bottom:5px}
-#action .data{font-family:var(--mono);font-size:11.5px;letter-spacing:.4px;color:var(--ink-2);font-variant-numeric:tabular-nums}
-#action .data .sym{color:var(--ink);font-weight:600;letter-spacing:.5px}
-#action .data .arr{color:var(--cyan);padding:0 6px;font-weight:400}
-#action .data .amt{color:var(--magenta);font-weight:600}
-#action .data .tag{display:inline-block;font-size:9px;padding:1px 6px;border-radius:3px;margin-left:6px;letter-spacing:.8px;font-weight:700;vertical-align:1px;font-family:var(--sans)}
-#action .data .tag.buy{background:rgba(78,195,138,.12);color:var(--green);border:1px solid rgba(78,195,138,.3)}
-#action .data .tag.sell{background:rgba(196,122,184,.12);color:var(--magenta);border:1px solid rgba(196,122,184,.3)}
-#action .data .tag.arb{background:rgba(201,162,39,.12);color:var(--gold);border:1px solid rgba(201,162,39,.3)}
-#action .data .tag.hel{background:rgba(196,122,184,.16);color:var(--magenta);border:1px solid rgba(196,122,184,.4)}
-
-/* ═══════════════════════════════════════════════════════
-   CARD (bottom, draggable, grip at bottom-right)
-   ═══════════════════════════════════════════════════════ */
-#card{left:50%;bottom:110px;transform:translateX(-50%) translateY(16px);z-index:25;width:min(340px,calc(100vw - 40px));background:var(--glass-2);border:1px solid var(--hair-2);border-radius:10px;padding:16px 18px 14px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-#card.on{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-#card .drag-grip{top:auto;bottom:6px;right:6px}
-#card .close{position:absolute;top:10px;right:12px;color:var(--ink-3);background:none;border:none;cursor:pointer;font-size:16px;line-height:1;padding:2px 4px;transition:color .15s;z-index:4}
-#card .close:hover{color:var(--ink)}
-#card .head{display:flex;align-items:baseline;gap:8px;margin-bottom:2px;padding-right:24px}
-#card .sym{font-family:var(--sans);font-size:18px;font-weight:700;color:var(--ink);letter-spacing:.4px}
-#card .badge{font-size:8.5px;padding:2px 6px;border-radius:3px;font-weight:700;letter-spacing:1px;font-family:var(--sans);background:rgba(196,122,184,.15);color:var(--magenta);border:1px solid rgba(196,122,184,.4)}
-#card .pair-label{font-family:var(--mono);font-size:10px;letter-spacing:.6px;color:var(--ink-3);margin-bottom:12px;text-transform:uppercase}
-#card .flow{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
-#card .flow .arr{font-family:var(--mono);font-size:16px;font-weight:500;color:var(--cyan)}
-#card .flow .amt{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.2px}
-#card .flow .amt .u{font-size:11px;color:var(--ink-3);font-weight:500;margin-left:3px;font-family:var(--sans)}
-#card .paired{font-family:var(--mono);font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;margin-bottom:14px}
-#card .act{display:flex;gap:8px}
-#card .act a{flex:1;padding:9px 10px;border-radius:7px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.6px;text-align:center;text-transform:uppercase;transition:all .15s}
-#card .act .buy{background:var(--gold);color:#1a0a00}
-#card .act .buy:hover{background:#e0b93a}
-#card .act .verify{background:rgba(255,255,255,.04);border:1px solid var(--hair-2);color:var(--ink-2)}
-#card .act .verify:hover{background:rgba(255,255,255,.08);color:var(--ink)}
-#card .act .verify.dis{opacity:.3;pointer-events:none}
-#card .src{font-family:var(--mono);font-size:9.5px;letter-spacing:.4px;color:var(--ink-3);margin-top:11px;padding-top:10px;border-top:1px solid var(--hair);text-align:center;padding-right:22px}
-
-/* ═══════════════════════════════════════════════════════
-   WELCOME
-   ═══════════════════════════════════════════════════════ */
-#welcome{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 40%,rgba(90,184,212,.04),rgba(6,5,13,.99) 55%),var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .9s ease,visibility .9s;overflow-y:auto}
-#welcome.hidden{opacity:0;visibility:hidden;pointer-events:none}
-#welcome .box{max-width:520px;width:calc(100% - 40px);margin:auto;padding:44px 40px 36px;text-align:center;border:1px solid var(--hair);border-radius:14px;background:rgba(10,8,20,.4);backdrop-filter:blur(20px);animation:boxIn 1s cubic-bezier(.2,.9,.3,1)}
-@keyframes boxIn{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
-#welcome .kicker{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;font-weight:600}
-#welcome h1{font-family:var(--serif);font-size:44px;font-weight:700;letter-spacing:6px;color:var(--gold);line-height:1;margin-bottom:10px}
-#welcome .sub{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-2);margin-bottom:30px}
-#welcome .rule{width:44px;height:1px;background:var(--hair-2);margin:0 auto 30px}
-#welcome .thesis{text-align:left;font-family:var(--serif);font-size:14px;line-height:1.75;color:var(--ink-2);margin-bottom:8px}
-#welcome .thesis b{color:var(--ink);font-weight:600}
-#welcome .thesis em{color:var(--gold);font-style:italic}
-#welcome .meta{display:flex;justify-content:center;gap:22px;margin:26px 0 30px;padding-top:20px;border-top:1px solid var(--hair)}
-#welcome .meta div{font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--ink-3);text-align:center}
-#welcome .meta div span{display:block;color:var(--ink);font-size:12px;margin-top:3px;font-weight:500}
-#welcome .enter{display:block;width:100%;padding:14px;border:none;border-radius:8px;background:var(--gold);color:#1a0a00;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-bottom:10px}
-#welcome .enter:hover{background:#e0b93a}
-#welcome .enter.wait{opacity:.5;pointer-events:none;cursor:default}
-#welcome .buy-link{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.8px;color:var(--ink-3);text-transform:uppercase;font-weight:600;transition:color .15s}
-#welcome .buy-link:hover{color:var(--gold)}
-#welcome .status{font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--ink-3);min-height:12px;margin-top:10px}
-#welcome .tip{font-family:var(--serif);font-style:italic;font-size:11.5px;color:var(--ink-3);margin-top:16px;padding-top:14px;border-top:1px solid var(--hair)}
-
-/* ═══════════════════════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════════════════════ */
-#toast{position:fixed;top:66px;left:50%;transform:translateX(-50%) translateY(-6px);z-index:22;padding:8px 14px;background:var(--glass-2);border:1px solid var(--hair);border-radius:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.6px;color:var(--ink-2);opacity:0;transition:opacity .4s,transform .4s;backdrop-filter:blur(12px);pointer-events:none}
+#topbar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;
+padding:9px 18px;background:linear-gradient(to bottom,rgba(5,3,11,.88),rgba(5,3,11,.55) 70%,rgba(5,3,11,0));
+border-bottom:1px solid var(--hair);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);pointer-events:none}
+#topbar>*{pointer-events:auto}
+.tb-left{display:flex;align-items:center;gap:10px;min-width:0}
+.tb-left .sigil{width:22px;height:22px;flex-shrink:0;filter:drop-shadow(0 0 6px rgba(255,79,216,.55))}
+.tb-left .mark{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:3.2px;
+background:linear-gradient(180deg,var(--gold-3),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.tb-left .mark em{font-style:normal;background:linear-gradient(180deg,#fff,var(--eros));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tb-left .tag{font-size:9px;letter-spacing:2.4px;color:var(--ink-3);text-transform:uppercase;font-weight:600;white-space:nowrap}
+#modePill{position:relative;overflow:hidden;display:flex;align-items:center;gap:9px;padding:5px 12px;border:1px solid var(--hair);
+border-radius:999px;background:var(--glass);font-family:var(--mono);font-size:10.5px;min-width:0}
+#modePill.sweep::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(53,224,255,.35) 50%,transparent 80%);transform:translateX(-100%);animation:sweep .9s ease forwards}
+@keyframes sweep{to{transform:translateX(100%)}}
+#modePill .ind{width:7px;height:7px;border-radius:50%;background:var(--ink-3);flex-shrink:0;transition:background .3s,box-shadow .3s}
+#modePill .ind.loading{background:var(--gold-2);box-shadow:0 0 8px rgba(232,197,71,.5);animation:pulse 1.6s ease-in-out infinite}
+#modePill .ind.replay{background:var(--plasma);box-shadow:0 0 9px rgba(53,224,255,.6)}
+#modePill .ind.live{background:var(--green);box-shadow:0 0 10px rgba(78,195,138,.65)}
+#modePill .ind.warn{background:var(--red);box-shadow:0 0 8px rgba(207,106,106,.5)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+#modePill .label{color:var(--ink);font-weight:700;letter-spacing:.6px;white-space:nowrap}
+#modePill .sep{color:var(--ink-3)}
+#modePill .detail{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(300px,32vw)}
+.tb-right{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tb-right .tick{font-size:10.5px;color:var(--ink-2);white-space:nowrap}
+.tb-right .tick.price{font-size:14px;font-weight:700;color:var(--gold-2);text-shadow:0 0 14px rgba(232,197,71,.35)}
+.tb-right .tick.up{color:var(--green)}.tb-right .tick.down{color:var(--red)}
+.tb-right a.buy,.tb-right button.dashbtn{padding:6px 14px;border-radius:999px;font-size:9.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;transition:all .2s;cursor:pointer;white-space:nowrap}
+.tb-right a.buy{border:1px solid rgba(232,197,71,.5);color:var(--gold-2);background:rgba(232,197,71,.08)}
+.tb-right a.buy:hover{background:var(--gold);color:#1a0a00;box-shadow:0 0 18px rgba(232,197,71,.45)}
+.tb-right button.dashbtn{border:1px solid rgba(255,79,216,.5);background:rgba(255,79,216,.08);color:var(--eros);font-family:var(--sans)}
+.tb-right button.dashbtn:hover{background:var(--eros);color:#1a0016}
+#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px 16px calc(9px + env(safe-area-inset-bottom,0px));
+background:linear-gradient(to top,rgba(5,3,11,.92),rgba(5,3,11,.6) 70%,rgba(5,3,11,0));
+border-top:1px solid var(--hair);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);text-align:center;pointer-events:none}
+#hud>*{pointer-events:auto}
+#hud .lore{font-family:var(--serif);font-style:italic;font-size:12.5px;color:#d5a6e6;line-height:1.4;min-height:17px}
+#hud .data{font-family:var(--mono);font-size:11px;letter-spacing:.3px;color:var(--ink-2);font-variant-numeric:tabular-nums;min-height:16px;margin-top:2px}
+#hud .data a{color:var(--gold-2);border-bottom:1px dotted rgba(232,197,71,.5)}
+#hud .data .sym{color:var(--ink);font-weight:700;letter-spacing:.5px}
+#hud .data .arr{color:var(--plasma);padding:0 6px}
+#hud .data .amt{color:var(--eros);font-weight:700}
+#hud .data .tag{display:inline-block;font-size:8.5px;padding:1px 6px;border-radius:3px;margin-left:6px;letter-spacing:.9px;font-weight:800;vertical-align:1px;font-family:var(--sans)}
+#hud .data .tag.buy{background:rgba(78,195,138,.12);color:var(--green);border:1px solid rgba(78,195,138,.3)}
+#hud .data .tag.sell{background:rgba(255,79,216,.1);color:var(--eros);border:1px solid rgba(255,79,216,.3)}
+#hud .data .tag.burn{background:rgba(255,122,46,.13);color:var(--ember);border:1px solid rgba(255,122,46,.35)}
+#hud .data .tag.vault{background:rgba(232,197,71,.14);color:var(--gold-2);border:1px solid rgba(232,197,71,.4)}
+#hud .data .tag.lp{background:rgba(53,224,255,.12);color:var(--plasma);border:1px solid rgba(53,224,255,.35)}
+#hud .meta{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;margin-top:7px;padding-top:7px;border-top:1px solid var(--hair);
+font-family:var(--mono);font-size:9px;letter-spacing:.5px;color:var(--ink-3)}
+#hud .meta b{font-weight:700}
+#hud .meta .verify{color:var(--green)}
+#hud .meta .verify.warn{color:var(--red)}
+#hud .meta .renounce{color:var(--green);font-weight:700;letter-spacing:.7px;text-shadow:0 0 8px rgba(78,195,138,.55)}
+.feebar{display:flex;width:110px;height:5px;border-radius:3px;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,.06)}
+.feebar .f{transition:filter .3s,box-shadow .3s}
+.feebar .f.burn{background:var(--ember);color:var(--ember)}
+.feebar .f.vault{background:var(--gold);color:var(--gold)}
+.feebar .f.lp{background:var(--plasma);color:var(--plasma)}
+.feebar .f.hot{filter:brightness(1.9);box-shadow:0 0 10px currentColor}
+.feelegend{display:flex;gap:8px;flex-wrap:wrap}
+.feelegend b.burn{color:var(--ember)}.feelegend b.vault{color:var(--gold-2)}.feelegend b.lp{color:var(--plasma)}
+.sepv{width:1px;height:10px;background:var(--hair-2)}
+#hud .meta .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ember);box-shadow:0 0 7px var(--ember);margin-right:4px;vertical-align:0}
+#hud .meta .burnstat b{color:var(--ink-2)}
+#skipBtn,#againBtn{margin-left:6px;padding:4px 12px;border:1px solid var(--hair-2);border-radius:999px;background:transparent;color:var(--ink-2);
+font-family:var(--mono);font-size:9.5px;letter-spacing:.8px;cursor:pointer;transition:all .2s}
+#skipBtn:hover,#againBtn:hover{color:var(--ink);border-color:var(--plasma);box-shadow:0 0 12px rgba(53,224,255,.3)}
+#againBtn{border-color:rgba(255,79,216,.5);color:var(--eros)}
+#againBtn:hover{border-color:var(--eros);box-shadow:0 0 12px rgba(255,79,216,.35)}
+#toast{position:fixed;top:58px;left:50%;transform:translateX(-50%) translateY(-6px);z-index:30;padding:7px 15px;background:var(--glass-2);
+border:1px solid var(--hair-2);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:.7px;color:var(--ink-2);
+opacity:0;transition:opacity .4s,transform .4s;backdrop-filter:blur(12px);pointer-events:none}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-#toast b{color:var(--gold);font-weight:600}
-
-/* ═══════════════════════════════════════════════════════
-   RESET HINT (appears briefly when a panel has been moved)
-   ═══════════════════════════════════════════════════════ */
-#resetHint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:21;font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--ink-3);padding:5px 11px;background:var(--glass);border:1px solid var(--hair);border-radius:5px;opacity:0;transition:opacity .4s;pointer-events:none;backdrop-filter:blur(8px)}
-#resetHint.on{opacity:1}
-#resetHint b{color:var(--ink-2);font-weight:500}
-
-/* ═══════════════════════════════════════════════════════
-   MOBILE
-   ═══════════════════════════════════════════════════════ */
-@media(max-width:820px){
-  #about{display:none}
-  #action{width:calc(100vw - 40px);bottom:88px}
-  #brand{top:12px;left:14px}
-  #brand .mark{font-size:15px;letter-spacing:1.6px}
-  #brand .tag{display:none}
-  #mode{top:12px;right:14px;font-size:10px;padding:5px 22px 5px 9px;gap:7px}
-  #mode .detail{max-width:min(160px,calc(100vw - 200px))}
-  #market{top:auto;bottom:16px;right:14px;padding:9px 22px 9px 10px;min-width:150px}
-  #market .row.price .v{font-size:13px}
-  #pantheon{bottom:88px;right:14px;gap:8px;padding:5px 20px 5px 10px}
-  #pantheon .g{font-size:11px}
-  #card{bottom:150px}
-  #welcome h1{font-size:32px;letter-spacing:4px}
-  #welcome .box{padding:32px 24px 28px}
-  #welcome .meta{gap:16px}
-  .drag-grip{opacity:.4 !important;width:18px;height:18px}
+#toast b{color:var(--gold-2);font-weight:700}
+#welcome{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;overflow:hidden;
+background:radial-gradient(circle at 50% 38%,rgba(255,79,216,.09),transparent 55%),radial-gradient(circle at 22% 78%,rgba(53,224,255,.07),transparent 50%),rgba(5,3,11,.84);
+backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);transition:opacity .9s ease,visibility .9s}
+#welcome.hidden{opacity:0;visibility:hidden;pointer-events:none}
+#welcome .hero-bg{position:absolute;inset:0;z-index:0;opacity:0;transition:opacity 1.6s ease}
+#welcome .hero-bg.ok{opacity:.5}
+#welcome .hero-bg img{width:100%;height:100%;object-fit:cover;animation:kb 26s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.02) translateY(0)}to{transform:scale(1.1) translateY(-14px)}}
+#welcome .hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(5,3,11,.3),rgba(5,3,11,.86) 68%,rgba(5,3,11,.97))}
+#welcome .box{position:relative;z-index:2;max-width:580px;width:calc(100% - 40px);padding:24px;text-align:center;animation:boxIn 1s cubic-bezier(.2,.9,.3,1)}
+@keyframes boxIn{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+#welcome .crest{width:88px;height:88px;margin:0 auto 14px;display:block;animation:floaty 6s ease-in-out infinite;
+filter:drop-shadow(0 0 18px rgba(255,79,216,.5)) drop-shadow(0 0 46px rgba(232,197,71,.25))}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#welcome h1{font-family:var(--display);font-size:44px;font-weight:700;letter-spacing:8px;line-height:1;margin-bottom:8px}
+#welcome h1 .wm{background:linear-gradient(180deg,var(--gold-3),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+#welcome h1 .wm em{font-style:normal;background:linear-gradient(180deg,#fff,var(--eros));-webkit-background-clip:text;background-clip:text;color:transparent}
+#welcome h1 .hrt{font-size:.45em;vertical-align:.4em;letter-spacing:0}
+#welcome .sub{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--ink-2);margin-bottom:16px}
+#welcome .purpose{max-width:460px;margin:0 auto 16px;text-align:left;font-family:var(--mono);font-size:10px;line-height:1.9;letter-spacing:.4px;color:var(--ink-2)}
+#welcome .purpose b{color:var(--gold-2);letter-spacing:1.4px}
+#welcome .feebar{width:200px;height:7px;margin:0 auto 8px}
+#welcome .feelegend{justify-content:center;font-family:var(--mono);font-size:9px;letter-spacing:1.2px;margin-bottom:16px}
+#welcome .status{font-family:var(--mono);font-size:10px;letter-spacing:.6px;color:var(--ink-3);min-height:14px;margin-bottom:16px}
+#welcome .enter{display:block;max-width:280px;margin:0 auto;padding:14px 30px;border:1px solid rgba(232,197,71,.6);border-radius:999px;
+background:linear-gradient(180deg,var(--gold-2),var(--gold));color:#1a0a00;font-weight:800;font-size:11.5px;letter-spacing:2.6px;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s,transform .25s;font-family:var(--sans)}
+#welcome .enter:hover{box-shadow:0 0 30px rgba(232,197,71,.5);transform:translateY(-1px)}
+#welcome .enter.wait{opacity:.55;cursor:default}
+#welcome .buy-link{display:block;margin-top:14px;font-size:10px;letter-spacing:1.2px;color:var(--ink-3);text-transform:uppercase;font-weight:700}
+#welcome .buy-link:hover{color:var(--gold-2)}
+#pulseMotif{position:fixed;top:50%;left:50%;width:min(90vw,720px);height:min(90vw,720px);transform:translate(-50%,-50%);pointer-events:none;z-index:1;opacity:.12;
+background:radial-gradient(circle,rgba(255,79,216,.22) 0%,rgba(53,224,255,.07) 38%,transparent 66%)}
+#welcome .box{position:relative}
+#welcome .halo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0}
+#welcome .halo i{position:absolute;top:31%;left:50%;width:130px;height:130px;margin:-65px 0 0 -65px;border:1px solid rgba(232,197,71,.4);border-radius:50%;animation:halo 3.2s ease-out infinite}
+#welcome .halo i:nth-child(2){animation-delay:1.07s;border-color:rgba(53,224,255,.35)}
+#welcome .halo i:nth-child(3){animation-delay:2.13s;border-color:rgba(255,79,216,.3)}
+@keyframes halo{0%{transform:scale(.5);opacity:.85}100%{transform:scale(2.3);opacity:0}}
+#welcome .box>*{position:relative;z-index:1}
+/* ═══ dashboard drawer ═══ */
+#drawer{position:fixed;inset:0;z-index:60;background:rgba(5,3,11,.965);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s;overflow:hidden;touch-action:auto}
+#drawer.open{opacity:1;visibility:visible}
+#drawer .dw-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:auto;padding:64px 0 60px}
+#drawer .dw-in{max-width:1040px;margin:0 auto;padding:0 20px}
+#drawer .dw-close{position:fixed;top:14px;right:18px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--hair-2);
+background:var(--glass);color:var(--ink);font:700 16px var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+#drawer .dw-close:hover{border-color:var(--eros);color:var(--eros);box-shadow:0 0 14px rgba(255,79,216,.35)}
+#drawer h2{font-family:var(--display);font-size:clamp(1.25rem,3.6vw,1.7rem);letter-spacing:1.6px;margin:34px 0 6px;
+background:linear-gradient(180deg,var(--gold-3),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+#drawer h2:first-of-type{margin-top:12px}
+#drawer .lead{color:var(--ink-2);font-size:.9rem;margin-bottom:12px;max-width:46em;line-height:1.5}
+#drawer .note{padding:12px 15px;border:1px dashed var(--gold);border-radius:12px;font-size:.85rem;line-height:1.5;margin-top:12px;color:var(--ink-2)}
+#drawer .note b{color:var(--gold-2)}
+#burnhero{padding:24px 22px;border:1px solid rgba(255,122,46,.35);border-radius:20px;background:linear-gradient(160deg,rgba(255,122,46,.12),rgba(8,5,16,.9))}
+#burnhero .big{font-family:var(--display);font-size:clamp(1.9rem,7vw,3.2rem);font-weight:700;color:var(--ember);line-height:1.05;margin:4px 0}
+#burnhero .sub{color:var(--ink-2);font-size:.86rem;line-height:1.4}
+#burnhero .bar{height:11px;border-radius:99px;background:#12050c;overflow:hidden;margin:14px 0 6px}
+#burnhero .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--eros),var(--ember));transition:width 1.2s ease}
+#dashGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+.stat{padding:13px 15px;border-left:3px solid var(--eros);background:var(--glass);border-radius:0 12px 12px 0}
+.stat .k{color:var(--ink-3);font-size:.76rem;letter-spacing:.4px}
+.stat .v{font-family:var(--mono);font-size:1.22rem;font-weight:700;margin-top:3px;overflow-wrap:anywhere;line-height:1.2}
+.stat .s{color:var(--ink-3);font-size:.72rem;margin-top:2px}
+.stat.gold{border-left-color:var(--gold-2)}
+.stat.plasma{border-left-color:var(--plasma)}
+.stat.ember{border-left-color:var(--ember)}
+.stat.green{border-left-color:var(--green)}
+.stat.green .v{color:var(--green);text-shadow:0 0 12px rgba(78,195,138,.35)}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.cut{padding:15px;border:1px solid var(--hair-2);border-radius:14px;background:var(--glass)}
+.cut b{font-family:var(--display);font-size:1.8rem;color:var(--gold-2);line-height:1}
+.cut.burn b{color:var(--ember)}.cut.vault b{color:var(--gold-2)} .cut.lp b{color:var(--plasma)}
+.cut h3{font-size:.96rem;margin:3px 0 3px}
+.cut p{color:var(--ink-2);font-size:.82rem;line-height:1.4}
+#srcStrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:12px}
+.src{padding:10px 13px;border:1px solid var(--hair);border-radius:12px;background:var(--glass);font-family:var(--mono);font-size:11px;display:flex;align-items:center;gap:9px}
+.src .dot{width:8px;height:8px;border-radius:50%;background:var(--ink-3);flex-shrink:0}
+.src.ok .dot{background:var(--green);box-shadow:0 0 8px rgba(78,195,138,.6)}
+.src.bad .dot{background:var(--red);box-shadow:0 0 8px rgba(207,106,106,.5)}
+.src.wait .dot{background:var(--gold-2);box-shadow:0 0 8px rgba(232,197,71,.5);animation:pulse 1.6s ease-in-out infinite}
+.src .name{color:var(--ink);font-weight:700;flex:1}
+.src .age{color:var(--ink-3);font-size:10px}
+#trFilter{display:flex;gap:8px;margin:12px 0 8px}
+#trFilter button{padding:5px 14px;border:1px solid var(--hair-2);border-radius:999px;background:transparent;color:var(--ink-2);
+font:700 10px var(--sans);letter-spacing:1.2px;cursor:pointer;text-transform:uppercase;transition:all .2s}
+#trFilter button.on{border-color:var(--eros);color:var(--eros);background:rgba(255,79,216,.08)}
+.tw{overflow-x:auto;border:1px solid var(--hair);border-radius:14px;background:rgba(8,5,16,.4)}
+.tw table{width:100%;min-width:640px;border-collapse:collapse}
+.tw th{padding:9px 10px;text-align:left;color:var(--ink-3);font:700 .72rem var(--sans);letter-spacing:.8px;border-bottom:1px solid var(--hair-2);white-space:nowrap}
+.tw td{padding:9px 10px;border-bottom:1px solid var(--hair);font-size:.8rem;vertical-align:middle;white-space:nowrap}
+.tw td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tw td.buy{color:var(--green);font-weight:700}
+.tw td.sell{color:var(--eros);font-weight:700}
+.tw td a{color:var(--gold-2);border-bottom:1px dotted rgba(232,197,71,.4)}
+.tw tr:last-child td{border-bottom:none}
+.tw .empty{padding:22px 12px;text-align:center;color:var(--ink-3);font-size:.85rem}
+#addrTable{width:100%;border-collapse:collapse;font-size:.82rem}
+#addrTable td{padding:11px 6px;border-bottom:1px solid var(--hair);vertical-align:top}
+#addrTable td:first-child{color:var(--ink-2);white-space:nowrap;padding-right:14px;font-weight:600}
+#addrTable td.a{font-family:var(--mono);font-size:.76rem;overflow-wrap:anywhere;word-break:break-all;white-space:normal}
+#addrTable button,#addrTable a{display:inline-block;margin:4px 6px 0 0;padding:2px 9px;border:1px solid var(--hair-2);border-radius:99px;
+background:transparent;color:var(--gold-2);font:700 10px var(--sans);cursor:pointer;letter-spacing:.4px}
+#addrTable button:hover,#addrTable a:hover{border-color:var(--gold-2)}
+.facts{list-style:none;padding:0}
+.facts li{padding:11px 0;border-bottom:1px solid var(--hair);font-size:.88rem;line-height:1.5}
+.facts li span{display:block;color:var(--ink-3);font-size:.73rem;margin-bottom:2px;letter-spacing:.6px;text-transform:uppercase}
+.facts li b{color:var(--ink)}
+.facts li.ok span{color:var(--green)}
+.facts li.ok b{color:var(--ink)}
+.facts li.ok .tick{color:var(--green);font-weight:700;text-shadow:0 0 8px rgba(78,195,138,.5)}
+.fine{color:var(--ink-3);font-size:.76rem;margin-top:24px;line-height:1.55}
+.pics{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.pics img{width:100%;height:auto;border-radius:12px;border:1px solid var(--hair-2);display:block}
+@media(max-width:860px){
+.tb-left .tag{display:none}.tb-left .mark{font-size:14px;letter-spacing:2px}
+#modePill .detail{max-width:26vw}.tb-right .tick.mcap{display:none}
+#hud .lore{font-size:11.5px}#hud .data{font-size:10px}
+#welcome h1{font-size:32px;letter-spacing:5px}#welcome .crest{width:72px;height:72px}
 }
-@media(hover:none){
-  .drag-grip{opacity:.35}
+@media(max-width:560px){
+#modePill .detail,#modePill .sep{display:none}.tb-right .tick.chg{display:none}
+#hud .meta .counts,#hud .meta .coreline{display:none}.feebar{width:84px}
+#drawer .dw-in{padding:0 14px}
 }
-@media(max-width:520px){
-  #action .lore{font-size:12.5px}
-  #action .data{font-size:11px}
-}
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
-  .panel.snapback{transition:none !important}
-}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
+<div id="pulseMotif" aria-hidden="true"></div>
 <canvas id="c"></canvas>
 
-<div id="brand" class="panel">
-  <span class="mark">SpaceEros</span>
-  <span class="tag">Electric Universe · PulseChain</span>
-</div>
-
-<div id="mode" class="panel">
-  <span class="ind loading" id="modeInd"></span>
-  <span class="label" id="modeLabel">Connecting</span>
-  <span class="sep" id="modeSep" style="display:none">·</span>
-  <span class="detail" id="modeDetail"></span>
-</div>
-
-<div id="market" class="panel">
-  <div class="row price"><span class="k">EROS</span><span class="v" id="mPrice">—</span></div>
-  <div class="divider"></div>
-  <div class="row"><span class="k">Mkt Cap</span><span class="v" id="mMcap">—</span></div>
-  <div class="row"><span class="k">24h</span><span class="v" id="mChg">—</span></div>
-  <a href="https://app.pulsex.com/swap?outputCurrency=0x0f1b7cffc37547c5d189b08f255b60aa394c62cf" target="_blank" rel="noopener">Buy on PulseX</a>
-</div>
-
-<div id="about" class="panel">
-  <div class="lbl">About</div>
-  <div class="body">
-    Real EROS liquidity pools on PulseChain, each drawn as a planet. <b>Every swap is real on-chain data</b> — replayed at speed, then handed off to live. When one pool trades, the network answers in gold.
+<header id="topbar">
+  <div class="tb-left">
+    <svg class="sigil" viewBox="-10 -10 20 20" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 0 6.4 C 6.6 1.2, 5.7 -5.6, 0 -2.3 C -5.7 -5.6, -6.6 1.2, 0 6.4 Z" stroke="#ff4fd8" stroke-width="1.5"/>
+      <path d="M -7.4 7.4 L 7.4 -7.4 M 7.4 -7.4 L 3.9 -6.6 M 7.4 -7.4 L 6.6 -3.9 M -7.4 7.4 L -5.1 6.6 M -7.4 7.4 L -6.6 5.1" stroke="#e8c547" stroke-width="1.3"/>
+    </g></svg>
+    <span class="mark">SPACE<em>EROS</em></span>
+    <span class="tag">One swap · three destinations</span>
   </div>
+  <div id="modePill">
+    <span class="ind loading" id="modeInd"></span>
+    <span class="label" id="modeLabel">Connecting</span>
+    <span class="sep" id="modeSep" style="display:none">·</span>
+    <span class="detail" id="modeDetail"></span>
+  </div>
+  <div class="tb-right">
+    <span class="tick price" id="tPrice">—</span>
+    <span class="tick chg" id="tChg">—</span>
+    <span class="tick mcap" id="tMcap">—</span>
+    <button class="dashbtn" id="dashOpen" type="button">Dashboard</button>
+    <a class="buy" href="https://app.pulsex.com/swap?outputCurrency=0x0f1b7cffc37547c5d189b08f255b60aa394c62cf" target="_blank" rel="noopener">Buy</a>
+  </div>
+</header>
+
+<footer id="hud" aria-live="polite">
+  <div class="lore" id="footLore">The sky is waking…</div>
+  <div class="data" id="footData">resolving pools</div>
   <div class="meta">
-    <span id="aboutPools">—</span> pools &nbsp;·&nbsp; <span id="aboutEvents">—</span> events &nbsp;·&nbsp; <span id="aboutSources">—</span>
+    <span class="feebar" id="feeBar" aria-label="5% flow fee: 2% burn, 2% vault, 1% core LP">
+      <i class="f burn" style="flex:2"></i><i class="f vault" style="flex:2"></i><i class="f lp" style="flex:1"></i>
+    </span>
+    <span class="feelegend"><b class="burn">2% BURN</b><b class="vault">2% VAULT</b><b class="lp">1% CORE LP</b></span>
+    <span class="sepv"></span>
+    <span class="burnstat"><i class="dot"></i><b id="cBurn">—</b> burned (<b id="cBurnPct">—</b>)</span>
+    <span class="sepv"></span>
+    <span class="counts"><span id="cPools">—</span> pools · <span id="cEvents">—</span> events</span>
+    <span class="sepv"></span>
+    <span class="coreline">hub: <b id="cCore">WPLS · V1+V2</b></span>
+    <span class="sepv"></span>
+    <span class="verify" id="cVerify"></span>
+    <span class="sepv" id="cRenounceSep" hidden></span>
+    <span class="renounce" id="cRenounce" hidden>✓ Renounced</span>
+    <button id="skipBtn" type="button" hidden>Skip replay ›</button>
+    <button id="againBtn" type="button" hidden>Replay again ↻</button>
   </div>
-</div>
+</footer>
 
-<div id="pantheon" class="panel" aria-hidden="true">
-  <span class="g naun" data-god="naun" title="Naun · the architecture">N</span>
-  <span class="sep"></span>
-  <span class="g rashen" data-god="rashen" title="Ra-Shen · outward force">R</span>
-  <span class="sep"></span>
-  <span class="g thoth" data-god="thoth" title="Thoth · the teacher">T</span>
-  <span class="sep"></span>
-  <span class="g eros" data-god="eros" title="EROS · the bond">E</span>
-</div>
-
-<div id="action">
-  <div class="lore" id="actionLore"></div>
-  <div class="data" id="actionData"></div>
-</div>
-
-<div id="toast"></div>
-<div id="resetHint"><b>Double-click a panel's grip to reset its position</b></div>
-
-<div id="card" class="panel">
-  <button class="close" id="cardClose">×</button>
-  <div class="head">
-    <span class="sym" id="cardSym">—</span>
-    <span class="badge" id="cardBadge" style="display:none">Helios</span>
-  </div>
-  <div class="pair-label" id="cardPair">EROS pair</div>
-  <div class="flow">
-    <span class="arr" id="cardArr">→</span>
-    <span class="amt"><span id="cardAmt">—</span><span class="u">EROS</span></span>
-  </div>
-  <div class="paired" id="cardPaired">—</div>
-  <div class="act">
-    <a class="buy" id="cardBuy" href="#" target="_blank" rel="noopener">Buy EROS</a>
-    <a class="verify" id="cardVerify" href="#" target="_blank" rel="noopener">Verify</a>
-  </div>
-  <div class="src" id="cardSrc">—</div>
-</div>
+<button id="toast" aria-live="polite"></button>
 
 <div id="welcome">
+  <div class="hero-bg" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/eros-space.jpg" alt=""
+    onload="this.parentNode.classList.add('ok')" onerror="this.parentNode.style.display='none'"></div>
   <div class="box">
-    <div class="kicker">Electric Universe</div>
-    <h1>SPACEEROS</h1>
-    <div class="sub">Real liquidity, rendered as a sky.</div>
-    <div class="rule"></div>
-    <p class="thesis">
-      Every EROS pool on PulseChain becomes a planet.
-      Every on-chain swap becomes a Birkeland current.
-      When one pool trades, <b>arbitrage bots fire gold filaments</b> across the network — the market rebalancing in real time.
-    </p>
-    <p class="thesis" style="margin-top:12px">
-      <em>What you are about to see is not a game.</em>
-      It is actual EROS data — the last thirty-six on-chain swaps — replayed at speed so you can watch the network breathe. Then it goes live.
-    </p>
-    <div class="meta">
-      <div>Pools<span id="wPools">—</span></div>
-      <div>Events<span id="wEvents">—</span></div>
-      <div>Replay<span id="wSpeed">—</span></div>
-      <div>Source<span id="wSrc">—</span></div>
+    <div class="halo" aria-hidden="true"><i></i><i></i><i></i></div>
+    <svg class="crest" viewBox="-10 -10 20 20" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 0 6.4 C 6.6 1.2, 5.7 -5.6, 0 -2.3 C -5.7 -5.6, -6.6 1.2, 0 6.4 Z" stroke="#ff4fd8" stroke-width="1.4"/>
+      <path d="M -7.4 7.4 L 7.4 -7.4 M 7.4 -7.4 L 3.9 -6.6 M 7.4 -7.4 L 6.6 -3.9 M -7.4 7.4 L -5.1 6.6 M -7.4 7.4 L -6.6 5.1" stroke="#e8c547" stroke-width="1.2"/>
+    </g></svg>
+    <h1><span class="wm">SPACE<em>EROS</em></span> <span class="hrt">💕</span></h1>
+    <div class="sub">True DeFi · renounced · one swap · three destinations</div>
+    <div class="purpose">
+      <div><b>ONE SWAP · THREE DESTINATIONS</b></div>
+      <div>2% burns to 0x…0369 · 2% vault · 1% core WPLS LP — every pulse is a real on-chain swap. Ownership renounced. No treasury.</div>
     </div>
-    <button class="enter wait" id="wEnter">Enter the sky</button>
-    <a class="buy-link" href="https://app.pulsex.com/swap?outputCurrency=0x0f1b7cffc37547c5d189b08f255b60aa394c62cf" target="_blank" rel="noopener">Buy EROS on PulseX →</a>
     <div class="status" id="wStatus">Waking the sun…</div>
-    <div class="tip">Every panel is movable · hover to reveal the grip · double-click the grip to reset</div>
+    <button class="enter wait" id="wEnter"><span>Enter the sky</span></button>
+    <a class="buy-link" href="https://app.pulsex.com/swap?outputCurrency=0x0f1b7cffc37547c5d189b08f255b60aa394c62cf" target="_blank" rel="noopener">Buy EROS on PulseX · 6% slippage →</a>
+  </div>
+</div>
+
+<div id="drawer" aria-hidden="true" role="dialog" aria-label="EROS dashboard">
+  <button class="dw-close" id="dashClose" type="button" aria-label="Close">✕</button>
+  <div class="dw-scroll">
+    <div class="dw-in">
+
+      <h2>Vital signs</h2>
+      <p class="lead">Every figure below carries the source that produced it. If a source is quiet, its numbers read "—". Nothing on this page is guessed. Ownership is verified live from owner() on every load.</p>
+      <div id="srcStrip">
+        <div class="src wait" data-src="rpc"><span class="dot"></span><span class="name">Chain RPC</span><span class="age" data-age>waiting</span></div>
+        <div class="src wait" data-src="ds"><span class="dot"></span><span class="name">DexScreener</span><span class="age" data-age>waiting</span></div>
+        <div class="src wait" data-src="gt"><span class="dot"></span><span class="name">GeckoTerminal</span><span class="age" data-age>waiting</span></div>
+        <div class="src wait" data-src="scan"><span class="dot"></span><span class="name">PulseScan</span><span class="age" data-age>waiting</span></div>
+      </div>
+
+      <div id="burnhero" style="margin-top:16px">
+        <div class="sub">Balance of the PulseChain burn address <span style="color:var(--ember)">0x…0369</span></div>
+        <div class="big" id="dBurn">…</div>
+        <div class="bar"><i id="dBar"></i></div>
+        <div class="sub" id="dBurnPct">&nbsp;</div>
+      </div>
+
+      <div id="dashGrid">
+        <div class="stat gold"><div class="k">Price</div><div class="v" id="dPrice">…</div><div class="s" id="dChg">24h</div></div>
+        <div class="stat"><div class="k">Market cap (FDV)</div><div class="v" id="dMcap">…</div><div class="s">as reported by DexScreener</div></div>
+        <div class="stat ember"><div class="k">Market cap (burn-adjusted)</div><div class="v" id="dMcapBurn">…</div><div class="s">price × (supply − burned)</div></div>
+        <div class="stat plasma"><div class="k">On-chain totalSupply</div><div class="v" id="dSupply">…</div><div class="s">reads flat · burns accumulate separately</div></div>
+        <div class="stat"><div class="k">Liquidity, all pools</div><div class="v" id="dLiq">…</div><div class="s" id="dPools">tracked</div></div>
+        <div class="stat"><div class="k">24h volume, all pools</div><div class="v" id="dVol">…</div><div class="s">from the pool indexers</div></div>
+        <div class="stat green"><div class="k">Holders</div><div class="v" id="dHolders">…</div><div class="s">PulseScan</div></div>
+        <div class="stat green" id="renounceCard" hidden><div class="k">Contract ownership</div><div class="v" id="dRenounce">✓ Renounced</div><div class="s" id="dRenounceSub">owner() = 0x000…0000</div></div>
+        <div class="stat" id="dayCard" hidden><div class="k">Days live</div><div class="v" id="dDays">…</div><div class="s">from the contract creation block</div></div>
+        <div class="stat"><div class="k">Also in 0x…dEaD</div><div class="v" id="dDead">…</div><div class="s">for comparison</div></div>
+      </div>
+
+      <h2>Where the 5% goes</h2>
+      <p class="lead">One swap. Three destinations. Every transfer pays a 5% flow fee — none of it routes to a human wallet, DAO, or treasury.</p>
+      <div class="split">
+        <div class="cut burn"><b>2%</b><h3>Burned</h3><p>Sent to <span style="color:var(--ember)">0x…0369</span>. Gone from circulation. The hole only grows.</p></div>
+        <div class="cut vault"><b>2%</b><h3>Vault</h3><p>Staker rewards and temporary lock — the savings side of the protocol.</p></div>
+        <div class="cut lp"><b>1%</b><h3>Core LP</h3><p>Auto-deepens the WPLS/EROS hub on PulseX. The sun gets denser.</p></div>
+      </div>
+      <p class="note">To buy EROS on PulseX, set slippage to <b>6%</b> — 5% flow fee plus price impact.</p>
+
+      <h2>Ownership & launch</h2>
+      <ul class="facts" id="ownFacts">
+        <li id="factOwner"><span>Contract owner()</span><b>reading…</b></li>
+        <li id="factLaunch"><span>Contract creation block</span><b>reading…</b></li>
+        <li id="factSupply"><span>Supply behaviour</span><b>totalSupply is fixed at 333,333,333,333. The burn address accumulates; nothing is minted, nothing is burned by _burn().</b></li>
+        <li id="factTeam"><span>Team, treasury, DAO allocation</span><b>None on-chain. Ownership is renounced. The 5% flow fee has no human destination — only burn, vault, and core LP.</b></li>
+      </ul>
+
+      <h2>Check it yourself</h2>
+      <p class="lead">Every address this page touches. Open each on a block explorer and compare.</p>
+      <table id="addrTable">
+        <tr><td>EROS (PulseChain)</td><td class="a">0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf<button data-copy="0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf">Copy</button><a target="_blank" rel="noopener" href="https://scan.pulsechain.com/token/0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf">Scan</a></td></tr>
+        <tr><td>EROS (Ethereum)</td><td class="a">0xc0366e013BDD46946b7F22118E1af489b1693e0f<button data-copy="0xc0366e013BDD46946b7F22118E1af489b1693e0f">Copy</button><a target="_blank" rel="noopener" href="https://etherscan.io/token/0xc0366e013BDD46946b7F22118E1af489b1693e0f">Scan</a></td></tr>
+        <tr><td>Burn address</td><td class="a">0x0000000000000000000000000000000000000369<button data-copy="0x0000000000000000000000000000000000000369">Copy</button><a target="_blank" rel="noopener" href="https://scan.pulsechain.com/address/0x0000000000000000000000000000000000000369">Scan</a></td></tr>
+        <tr><td>WPLS hub pair</td><td class="a">0xa1077a294dde1b09bb078844df40758a5d0f9a27<button data-copy="0xa1077a294dde1b09bb078844df40758a5d0f9a27">Copy</button><a target="_blank" rel="noopener" href="https://scan.pulsechain.com/token/0xa1077a294dde1b09bb078844df40758a5d0f9a27">Scan</a></td></tr>
+        <tr><td>PulseX V2 router</td><td class="a">0x98bf93ebf5c380c0e6ae8e192a7e2ae08edacc02<button data-copy="0x98bf93ebf5c380c0e6ae8e192a7e2ae08edacc02">Copy</button><a target="_blank" rel="noopener" href="https://scan.pulsechain.com/address/0x98bf93ebf5c380c0e6ae8e192a7e2ae08edacc02">Scan</a></td></tr>
+      </table>
+
+      <h2>Recent WPLS / EROS swaps</h2>
+      <p class="lead" id="trSrc">The last 30 swaps on the WPLS pools, newest first. Filter by side, then follow each row's link to the chain.</p>
+      <div id="trFilter">
+        <button data-f="all" class="on">All</button>
+        <button data-f="buy">Buys</button>
+        <button data-f="sell">Sells</button>
+      </div>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Time</th><th>Side</th><th>EROS</th><th>WPLS</th><th>Price</th><th>USD</th><th>Trader</th><th>Tx</th></tr></thead>
+          <tbody id="trBody"><tr><td colspan="8" class="empty">Waiting for pool data. If this stays empty, your browser is blocking the data sources — open the file in a normal browser tab.</td></tr></tbody>
+        </table>
+      </div>
+
+      <p class="fine">A community-built dashboard, not the official EROS site. Figures come from the PulseChain RPC, DexScreener, GeckoTerminal and PulseScan and may be delayed or wrong. The cross-verification pill in the footer compares indexed trades against raw on-chain logs. Not financial advice. EROS is an immutable contract and you can lose everything you put in — do your own research.</p>
+
+      <button id="toSky" type="button" style="display:block;margin:26px auto 0;padding:9px 20px;border:1px solid var(--hair-2);border-radius:999px;background:transparent;color:var(--ink-2);font:700 11px var(--sans);letter-spacing:1px;cursor:pointer">↑ Back to the sky</button>
+    </div>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
 <script>
 "use strict";
-
-/* ═══════════════════════════════════════════════════════
-   DRAGGABLE PANEL SYSTEM
-   ═══════════════════════════════════════════════════════ */
-function makeDraggable(el, key) {
-  const STORE = 'se_pos_' + key;
-  const grip = document.createElement('div');
-  grip.className = 'drag-grip';
-  grip.title = 'Drag to move · double-click to reset';
-  grip.setAttribute('aria-label', 'Drag to move, double-click to reset');
-  el.appendChild(grip);
-
-  // Capture default position (from initial CSS layout)
-  const defRect = el.getBoundingClientRect();
-  const defaultPos = { x: defRect.left, y: defRect.top };
-
-  // Restore saved position
-  try {
-    const raw = localStorage.getItem(STORE);
-    if (raw) {
-      const pos = JSON.parse(raw);
-      if (typeof pos.x === 'number' && typeof pos.y === 'number') {
-        applyPos(el, pos.x, pos.y);
-      }
-    }
-  } catch(_) {}
-
-  let dragging = false;
-  let startX = 0, startY = 0, startL = 0, startT = 0;
-
-  function applyPos(el, x, y) {
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.right = 'auto';
-    el.style.bottom = 'auto';
-    el.style.transform = 'none';
-  }
-
-  function startDrag(e) {
-    if (e.button !== undefined && e.button !== 0) return;
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    e.preventDefault();
-    e.stopPropagation();
-    // Lock current visual position as left/top
-    const rect = el.getBoundingClientRect();
-    applyPos(el, rect.left, rect.top);
-    startX = e.clientX;
-    startY = e.clientY;
-    startL = rect.left;
-    startT = rect.top;
-    dragging = true;
-    el.classList.add('dragging');
-    el.classList.remove('snapback');
-    try { grip.setPointerCapture(e.pointerId); } catch(_) {}
-    grip.addEventListener('pointermove', onMove);
-    grip.addEventListener('pointerup', onUp);
-    grip.addEventListener('pointercancel', onUp);
-  }
-
-  function onMove(e) {
-    if (!dragging) return;
-    e.preventDefault();
-    const rect = el.getBoundingClientRect();
-    const w = rect.width, h = rect.height;
-    let nx = startL + (e.clientX - startX);
-    let ny = startT + (e.clientY - startY);
-    const maxX = Math.max(4, window.innerWidth - w - 4);
-    const maxY = Math.max(4, window.innerHeight - h - 4);
-    if (nx < 4) nx = 4;
-    if (ny < 4) ny = 4;
-    if (nx > maxX) nx = maxX;
-    if (ny > maxY) ny = maxY;
-    el.style.left = nx + 'px';
-    el.style.top = ny + 'px';
-  }
-
-  function onUp(e) {
-    if (!dragging) return;
-    dragging = false;
-    el.classList.remove('dragging');
-    try { grip.releasePointerCapture(e.pointerId); } catch(_) {}
-    grip.removeEventListener('pointermove', onMove);
-    grip.removeEventListener('pointerup', onUp);
-    grip.removeEventListener('pointercancel', onUp);
-    const rect = el.getBoundingClientRect();
-    try { localStorage.setItem(STORE, JSON.stringify({x: rect.left, y: rect.top})); } catch(_) {}
-    showResetHint();
-  }
-
-  grip.addEventListener('pointerdown', startDrag);
-
-  grip.addEventListener('dblclick', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    try { localStorage.removeItem(STORE); } catch(_) {}
-    el.classList.add('snapback');
-    applyPos(el, defaultPos.x, defaultPos.y);
-    setTimeout(() => el.classList.remove('snapback'), 320);
-  });
-
-  // Bring back into view on window resize
-  window.addEventListener('resize', () => {
-    const rect = el.getBoundingClientRect();
-    const w = rect.width, h = rect.height;
-    const maxX = Math.max(4, window.innerWidth - w - 4);
-    const maxY = Math.max(4, window.innerHeight - h - 4);
-    let nx = rect.left, ny = rect.top;
-    let changed = false;
-    if (nx > maxX) { nx = maxX; changed = true; }
-    if (ny > maxY) { ny = maxY; changed = true; }
-    if (nx < 4) { nx = 4; changed = true; }
-    if (ny < 4) { ny = 4; changed = true; }
-    if (changed && (el.style.left || el.style.top)) {
-      el.style.left = nx + 'px';
-      el.style.top = ny + 'px';
-    }
-  });
-}
-
-let resetHintShown = false;
-function showResetHint() {
-  if (resetHintShown) return;
-  resetHintShown = true;
-  const hint = document.getElementById('resetHint');
-  hint.classList.add('on');
-  setTimeout(() => hint.classList.remove('on'), 3800);
-}
-
-// Wire up all panels after DOM ready
-requestAnimationFrame(() => {
-  makeDraggable(document.getElementById('brand'), 'brand');
-  makeDraggable(document.getElementById('mode'), 'mode');
-  makeDraggable(document.getElementById('market'), 'market');
-  makeDraggable(document.getElementById('about'), 'about');
-  makeDraggable(document.getElementById('pantheon'), 'pantheon');
-  makeDraggable(document.getElementById('card'), 'card');
-});
-
-/* ═══════════════════════════════════════════════════════
-   CONFIG
-   ═══════════════════════════════════════════════════════ */
-const RPC_HTTP=[
-  'https://rpc.pulsechain.com',
-  'https://pulsechain-rpc.publicnode.com',
-  'https://pulsechain.drpc.org'
-];
+/* ═══════ CONFIG ═══════ */
+const RPC_HTTP=['https://rpc.pulsechain.com','https://pulsechain-rpc.publicnode.com','https://pulsechain.drpc.org'];
 const RPC_WS=['wss://rpc.pulsechain.com','wss://pulsechain-rpc.publicnode.com'];
 const EROS='0x0f1b7cffc37547c5d189b08f255b60aa394c62cf'.toLowerCase();
-const HELIOS='0x20d310db599ed2c596e07c729113ddc874478858'.toLowerCase();
-const PULSEX_URL='https://app.pulsex.com/swap?outputCurrency='+EROS;
-const MAX_PAIRS=22;
-const HISTORY_TARGET=36;
-const REPLAY_MS=520;
-const CACHE_TTL=1000*60*60*8;
+const WPLS='0xa1077a294dde1b09bb078844df40758a5d0f9a27'.toLowerCase();
+const BURN_ADDR='0x0000000000000000000000000000000000000369'.toLowerCase();
+const DEAD='0x000000000000000000000000000000000000dead';
+const SCAN_API='https://api.scan.pulsechain.com/api';
+let TOTAL_SUPPLY_EROS=333333333333;
+const MAX_PAIRS=50,PLANET_LIMIT=14,HISTORY_TARGET=36,REPLAY_MS=400,CACHE_TTL=1000*60*60*8;
+const TILT=0.46;
 const DS_URL='https://api.dexscreener.com/latest/dex/tokens/'+EROS;
 const GT_BASE='https://api.geckoterminal.com/api/v2';
 const GT_POOLS=GT_BASE+'/networks/pulsechain/tokens/'+EROS+'/pools?page=1';
 const gtTrades=a=>GT_BASE+'/networks/pulsechain/pools/'+a+'/trades';
 const logoUrl=a=>'https://cdn.dexscreener.com/tokens/pulsechain/'+((a||'').toLowerCase())+'.png';
 const logoCache=new Map();
-
 const SWAP_IFACE=new ethers.utils.Interface([
-  'function token0() view returns (address)',
-  'function token1() view returns (address)',
-  'event Swap(address indexed sender, uint a0i, uint a1i, uint a0o, uint a1o, address indexed to)'
-]);
+'function token0() view returns (address)','function token1() view returns (address)',
+'event Swap(address indexed sender, uint a0i, uint a1i, uint a0o, uint a1o, address indexed to)']);
 const SWAP_TOPIC=SWAP_IFACE.getEventTopic('Swap');
-
-/* ═══════════════════════════════════════════════════════
-   STATE
-   ═══════════════════════════════════════════════════════ */
+/* ═══════ STATE ═══════ */
 let rpcIdx=0,wsProvider=null,wsRetries=0,pollTimer=null;
-let pairs=[],planets=[],history=[],historyIndex=-1,mode='loading',replayTimer=null,queuedDuringReplay=[];
+let pairs=[],planets=[],asteroids=[],history=[],historyIndex=-1,mode='loading',replayTimer=null,queuedDuringReplay=[];
 let hovered=null,dragging=false,dragStart=null,pressed=null,lastPointer={x:0,y:0},viewPan={x:0,y:0},viewZoom=1,targetZoom=1,pinchStart=null;
-let sunPulse=0,heliosFlare=0,pinchWaves=[],filaments=[],ripples=[],petroglyph={t:0,active:false},stars=[],nebulae=[];
-let liveCount=0,currentBlock=0,isSimulated=false,arbitrageActive=0,replaySpeed=0;
-
-const market={price:null,mcap:null,chg:null};
+let sunPulse=0,filaments=[],ripples=[],stars=[],nebulae=[];
+let currentBlock=0,replaySpeed=0,replaySpanH=0,lastEcho=0,corePlanet=null,corePairRef=null,lpFlash=0;
+let burnFlare=0,vaultFlash=0,vaultCoins=0,vaultCoin=0,sessBurn=0,sessVault=0,sessLP=0,embers=[],frameDt=16.7,lastFrame=0;
+let hudTop=0,hudBot=0,verifyStat=null;
+let ownerInfo=null,launchInfo=null,holderCount=null,deadBal=null;
+let tradeRows=[],tradeFilter='all',trFilterBound=false;
+const srcState={rpc:{ok:null,t:0},ds:{ok:null,t:0},gt:{ok:null,t:0},scan:{ok:null,t:0}};
+const market={price:null,mcap:null,chg:null,burned:null,burnPct:null};
 const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
-let W,H,cx,cy;
-
-/* ═══════════════════════════════════════════════════════
-   RPC
-   ═══════════════════════════════════════════════════════ */
-function withTimeout(p,ms,l){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error((l||'rpc')+' timeout')),ms))])}
+const topbarEl=document.getElementById('topbar'),hudEl=document.getElementById('hud');
+let W,H,cx,cy,rafHandle=null,visible=true;
+/* ═══════ RPC ═══════ */
+function withTimeout(p,ms,l){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error((l||'rpc')+' timeout')),ms))]);}
 async function rpc(method,params,timeoutMs=12000){
-  let lastErr=null;
-  for(let i=0;i<RPC_HTTP.length;i++){
-    const url=RPC_HTTP[(rpcIdx+i)%RPC_HTTP.length];
-    try{
-      const result=await withTimeout((async()=>{
-        const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:Math.floor(Math.random()*1e9),method,params:params||[]})});
-        if(!r.ok)throw new Error('HTTP '+r.status);
-        const j=await r.json();
-        if(j.error)throw new Error(j.error.message||'rpc');
-        return j.result;
-      })(),timeoutMs,method);
-      rpcIdx=(rpcIdx+i)%RPC_HTTP.length;
-      return result;
-    }catch(e){lastErr=e}
-  }
-  throw lastErr||new Error('rpc failed');
-}
-async function blockNum(){return Number(BigInt(await rpc('eth_blockNumber',[],6000)))}
+let lastErr=null;
+for(let i=0;i<RPC_HTTP.length;i++){const url=RPC_HTTP[(rpcIdx+i)%RPC_HTTP.length];
+try{const result=await withTimeout((async()=>{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},
+body:JSON.stringify({jsonrpc:'2.0',id:Math.floor(Math.random()*1e9),method,params:params||[]})});
+if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(j.error)throw new Error(j.error.message||'rpc');return j.result;})(),timeoutMs,method);
+rpcIdx=(rpcIdx+i)%RPC_HTTP.length;srcMark('rpc',true);return result;}catch(e){lastErr=e;srcMark('rpc',false);}}
+throw lastErr||new Error('rpc failed');}
+async function blockNum(){return Number(BigInt(await rpc('eth_blockNumber',[],6000)));}
 async function getLogs(addrs,from,to,depth=0){
-  try{
-    const res=await rpc('eth_getLogs',[{address:addrs,topics:[SWAP_TOPIC],fromBlock:'0x'+from.toString(16),toBlock:'0x'+to.toString(16)}],14000);
-    return Array.isArray(res)?res:[];
-  }catch(e){
-    if(depth>5||to-from<200)return[];
-    const mid=Math.floor((from+to)/2);
-    const[a,b]=await Promise.all([getLogs(addrs,from,mid,depth+1),getLogs(addrs,mid+1,to,depth+1)]);
-    return a.concat(b);
-  }
-}
-
-/* ═══════════════════════════════════════════════════════
-   DISCOVERY
-   ═══════════════════════════════════════════════════════ */
-function loadCache(){try{const raw=localStorage.getItem('se_pairs_v3');if(!raw)return null;const d=JSON.parse(raw);if(Date.now()-d.ts>CACHE_TTL)return null;return d.pairs||null}catch(_){return null}}
-function saveCache(list){try{localStorage.setItem('se_pairs_v3',JSON.stringify({ts:Date.now(),pairs:list}))}catch(_){}}
-
+try{const res=await rpc('eth_getLogs',[{address:addrs,topics:[SWAP_TOPIC],fromBlock:'0x'+from.toString(16),toBlock:'0x'+to.toString(16)}],14000);
+return Array.isArray(res)?res:[];}catch(e){if(depth>5||to-from<200)return[];
+const mid=Math.floor((from+to)/2);const[a,b]=await Promise.all([getLogs(addrs,from,mid,depth+1),getLogs(addrs,mid+1,to,depth+1)]);return a.concat(b);}}
+/* ═══════ SOURCE STRIP ═══════ */
+function srcMark(k,ok){srcState[k]={ok:!!ok,t:Date.now()};paintSources();}
+function srcAgeStr(ts){if(!ts)return'—';const s=Math.round((Date.now()-ts)/1000);if(s<5)return'now';if(s<60)return s+'s';if(s<3600)return Math.floor(s/60)+'m';return Math.floor(s/3600)+'h';}
+function paintSources(){
+const strip=document.getElementById('srcStrip');if(!strip)return;
+for(const el of strip.querySelectorAll('.src')){const k=el.dataset.src,s=srcState[k];
+el.classList.remove('ok','bad','wait');
+if(s.ok===true)el.classList.add('ok');else if(s.ok===false)el.classList.add('bad');else el.classList.add('wait');
+const ageEl=el.querySelector('[data-age]');if(ageEl)ageEl.textContent=srcAgeStr(s.t);}}
+setInterval(paintSources,4000);
+/* ═══════ DISCOVERY ═══════ */
+function loadCache(){try{const raw=localStorage.getItem('se_pairs_v7');if(!raw)return null;const d=JSON.parse(raw);if(Date.now()-d.ts>CACHE_TTL)return null;return d.pairs||null;}catch(_){return null;}}
+function saveCache(list){try{localStorage.setItem('se_pairs_v7',JSON.stringify({ts:Date.now(),pairs:list}));}catch(_){}}
 async function fetchDex(){
-  try{
-    const r=await fetch(DS_URL,{cache:'no-store'});
-    if(!r.ok)throw new Error('ds '+r.status);
-    const j=await r.json();
-    const raw=(j.pairs||[]).filter(p=>p.chainId==='pulsechain');
-    raw.sort((a,b)=>((b.liquidity&&b.liquidity.usd)||0)-((a.liquidity&&a.liquidity.usd)||0));
-    const out=[],seen=new Set();
-    for(const p of raw){
-      if(out.length>=MAX_PAIRS)break;
-      const addr=(p.pairAddress||'').toLowerCase();
-      if(!addr||seen.has(addr))continue;
-      seen.add(addr);
-      const base=p.baseToken||{},quote=p.quoteToken||{};
-      const erosIsToken0=(base.address||'').toLowerCase()===EROS;
-      const other=erosIsToken0?quote:base;
-      const sym=(other.symbol||'???').replace(/[^\x20-\x7E]/g,'').slice(0,14)||'???';
-      if(/^\$?EROS\d*$/i.test(sym))continue;
-      const otherAddr=(other.address||'').toLowerCase();
-      out.push({
-        address:addr,token0:(base.address||'').toLowerCase(),token1:(quote.address||'').toLowerCase(),
-        erosIsToken0,other:otherAddr,otherSymbol:sym,
-        isHelios:otherAddr===HELIOS,
-        liq:(p.liquidity&&p.liquidity.usd)||0,
-        vol24:(p.volume&&p.volume.h24)||0,
-        txns24:((p.txns&&p.txns.h24&&(p.txns.h24.buys+p.txns.h24.sells))||0),
-        price:parseFloat(p.priceUsd)||null,
-        chg:(p.priceChange&&p.priceChange.h24!=null)?p.priceChange.h24:null,
-        mcap:p.marketCap||p.fdv||null,
-        logo:logoUrl(otherAddr)
-      });
-    }
-    return out;
-  }catch(e){return[]}
-}
+try{const r=await fetch(DS_URL,{cache:'no-store'});if(!r.ok)throw new Error('ds '+r.status);const j=await r.json();
+const raw=(j.pairs||[]).filter(p=>p.chainId==='pulsechain');
+const out=[],seen=new Set();
+for(const p of raw){if(out.length>=MAX_PAIRS)break;const addr=(p.pairAddress||'').toLowerCase();if(!addr||seen.has(addr))continue;seen.add(addr);
+const base=p.baseToken||{},quote=p.quoteToken||{};const erosIsToken0=(base.address||'').toLowerCase()===EROS;
+const other=erosIsToken0?quote:base;const sym=(other.symbol||'???').replace(/[^\x20-\x7E]/g,'').slice(0,14)||'???';
+if(/^\$?EROS\d*$/i.test(sym))continue;const otherAddr=(other.address||'').toLowerCase();
+out.push({address:addr,token0:(base.address||'').toLowerCase(),token1:(quote.address||'').toLowerCase(),erosIsToken0,other:otherAddr,otherSymbol:sym,
+liq:(p.liquidity&&p.liquidity.usd)||0,vol24:(p.volume&&p.volume.h24)||0,
+txns24:((p.txns&&p.txns.h24&&(p.txns.h24.buys+p.txns.h24.sells))||0),price:parseFloat(p.priceUsd)||null,
+chg:(p.priceChange&&p.priceChange.h24!=null)?p.priceChange.h24:null,mcap:p.marketCap||p.fdv||null,logo:logoUrl(otherAddr)});}
+srcMark('ds',true);return out;}catch(e){srcMark('ds',false);return [];}}
 async function fetchGT(){
-  try{
-    const r=await fetch(GT_POOLS,{cache:'no-store',headers:{'Accept':'application/json'}});
-    if(!r.ok)throw new Error('gt '+r.status);
-    const j=await r.json();
-    const inc=j.included||[];
-    const tokById=new Map(inc.filter(x=>x.type==='token').map(x=>[x.id,x.attributes]));
-    const out=[];
-    for(const item of(j.data||[])){
-      const a=item.attributes||{},rel=item.relationships||{};
-      const addr=(a.address||'').toLowerCase();
-      if(!addr)continue;
-      const baseId=rel.base_token&&rel.base_token.data&&rel.base_token.data.id;
-      const quoteId=rel.quote_token&&rel.quote_token.data&&rel.quote_token.data.id;
-      const bT=tokById.get(baseId)||{},qT=tokById.get(quoteId)||{};
-      const bA=(bT.address||'').toLowerCase(),qA=(qT.address||'').toLowerCase();
-      const erosIsToken0=bA===EROS;
-      const oT=erosIsToken0?qT:bT;
-      const oA=(oT.address||'').toLowerCase();
-      const sym=(oT.symbol||'???').replace(/[^\x20-\x7E]/g,'').slice(0,14)||'???';
-      if(!oA||/^\$?EROS\d*$/i.test(sym))continue;
-      out.push({
-        address:addr,token0:erosIsToken0?EROS:oA,token1:erosIsToken0?oA:EROS,
-        erosIsToken0,other:oA,otherSymbol:sym,
-        isHelios:oA===HELIOS,
-        liq:parseFloat(a.reserve_in_usd)||0,
-        vol24:parseFloat(a.volume_usd&&a.volume_usd.h24)||0,
-        txns24:0,price:null,chg:null,mcap:null,
-        logo:logoUrl(oA)
-      });
-    }
-    return out;
-  }catch(e){return[]}
-}
-function mergePairs(a,b){
-  const seen=new Map();
-  for(const p of a)seen.set(p.address,p);
-  for(const p of b)if(!seen.has(p.address))seen.set(p.address,p);
-  const out=Array.from(seen.values());
-  for(const p of out){
-    const ds=a.find(x=>x.address===p.address),gt=b.find(x=>x.address===p.address);
-    if(ds&&gt){
-      if(!p.liq)p.liq=gt.liq||ds.liq;
-      if(!p.vol24)p.vol24=gt.vol24||ds.vol24;
-      if(p.price==null)p.price=ds.price;
-      if(p.mcap==null)p.mcap=ds.mcap;
-      if(p.chg==null)p.chg=ds.chg;
-    }
-  }
-  out.sort((x,y)=>(y.liq||0)-(x.liq||0));
-  return out.slice(0,MAX_PAIRS);
-}
-
+try{const r=await fetch(GT_POOLS,{cache:'no-store',headers:{'Accept':'application/json'}});if(!r.ok)throw new Error('gt '+r.status);const j=await r.json();
+const inc=j.included||[];const tokById=new Map(inc.filter(x=>x.type==='token').map(x=>[x.id,x.attributes]));const out=[];
+for(const item of(j.data||[])){const a=item.attributes||{},rel=item.relationships||{};const addr=(a.address||'').toLowerCase();if(!addr)continue;
+const baseId=rel.base_token&&rel.base_token.data&&rel.base_token.data.id,quoteId=rel.quote_token&&rel.quote_token.data&&rel.quote_token.data.id;
+const bT=tokById.get(baseId)||{},qT=tokById.get(quoteId)||{};const bA=(bT.address||'').toLowerCase(),qA=(qT.address||'').toLowerCase();
+const erosIsToken0=bA===EROS;const oT=erosIsToken0?qT:bT;const oA=(oT.address||'').toLowerCase();
+const sym=(oT.symbol||'???').replace(/[^\x20-\x7E]/g,'').slice(0,14)||'???';if(!oA||/^\$?EROS\d*$/i.test(sym))continue;
+out.push({address:addr,token0:erosIsToken0?EROS:oA,token1:erosIsToken0?oA:EROS,erosIsToken0,other:oA,otherSymbol:sym,
+liq:parseFloat(a.reserve_in_usd)||0,vol24:parseFloat(a.volume_usd&&a.volume_usd.h24)||0,txns24:0,price:null,chg:null,mcap:null,logo:logoUrl(oA)});}
+srcMark('gt',true);return out;}catch(e){srcMark('gt',false);return [];}}
+function mergePairs(a,b){const seen=new Map();for(const p of a)seen.set(p.address,p);for(const p of b)if(!seen.has(p.address))seen.set(p.address,p);
+const out=Array.from(seen.values());
+for(const p of out){const ds=a.find(x=>x.address===p.address),gt=b.find(x=>x.address===p.address);
+if(ds&&gt){if(!p.liq)p.liq=gt.liq||ds.liq;if(!p.vol24)p.vol24=gt.vol24||ds.vol24;if(p.price==null)p.price=ds.price;if(p.mcap==null)p.mcap=ds.mcap;if(p.chg==null)p.chg=ds.chg;}}
+out.sort((x,y)=>((y.liq||0)+(y.vol24||0)*0.6)-((x.liq||0)+(x.vol24||0)*0.6));return out.slice(0,MAX_PAIRS);}
 async function fetchGTTrades(pair){
-  try{
-    const r=await fetch(gtTrades(pair.address),{cache:'no-store',headers:{'Accept':'application/json'}});
-    if(!r.ok)throw new Error('gt t '+r.status);
-    const j=await r.json();
-    const out=[];
-    for(const item of(j.data||[])){
-      const a=item.attributes||{};
-      const kind=a.kind;
-      if(!kind)continue;
-      const sent=Math.abs(parseFloat(a.from_token_amount)||0);
-      const got=Math.abs(parseFloat(a.to_token_amount)||0);
-      let amountEros,amountOther,direction;
-      if(pair.erosIsToken0){
-        if(kind==='buy'){amountEros=got;amountOther=sent;direction='OTHER_TO_EROS'}
-        else{amountEros=sent;amountOther=got;direction='EROS_TO_OTHER'}
-      }else{
-        if(kind==='buy'){amountEros=sent;amountOther=got;direction='EROS_TO_OTHER'}
-        else{amountEros=got;amountOther=sent;direction='OTHER_TO_EROS'}
-      }
-      const ts=a.block_timestamp?Math.floor(new Date(a.block_timestamp).getTime()/1000):null;
-      out.push({
-        pair,direction,amountEros,amountOther,
-        txHash:a.tx_hash||'',
-        blockNumber:a.block_number||(ts?Math.round(ts/10):0),
-        logIndex:0,_gt:true
-      });
-    }
-    return out;
-  }catch(e){return[]}
-}
+try{const r=await fetch(gtTrades(pair.address),{cache:'no-store',headers:{'Accept':'application/json'}});if(!r.ok)throw new Error('gt t '+r.status);const j=await r.json();
+const out=[];for(const item of(j.data||[])){const a=item.attributes||{};const kind=a.kind;if(!kind)continue;
+const sent=Math.abs(parseFloat(a.from_token_amount)||0),got=Math.abs(parseFloat(a.to_token_amount)||0);
+let amountEros,amountOther,direction;
+if(pair.erosIsToken0){if(kind==='buy'){amountEros=got;amountOther=sent;direction='OTHER_TO_EROS';}else{amountEros=sent;amountOther=got;direction='EROS_TO_OTHER';}}
+else{if(kind==='buy'){amountEros=sent;amountOther=got;direction='EROS_TO_OTHER';}else{amountEros=got;amountOther=sent;direction='OTHER_TO_EROS';}}
+const ts=a.block_timestamp?Math.floor(new Date(a.block_timestamp).getTime()/1000):null;
+out.push({pair,direction,amountEros,amountOther,txHash:a.tx_hash||'',blockNumber:a.block_number||(ts?Math.round(ts/10):0),logIndex:0,_gt:true,_ts:ts,_approx:!a.block_number,_trader:(a.tx_from_address||'').toLowerCase(),_usd:parseFloat(a.volume_in_usd)||null});}
+srcMark('gt',true);return out;}catch(e){srcMark('gt',false);return [];}}
 async function fetchAllTrades(pools,cap=6){
-  const results=[];
-  let idx=0;
-  const workers=Array.from({length:3},()=>(async()=>{
-    while(true){
-      const i=idx++;
-      if(i>=pools.length)return;
-      const p=pools[i];
-      if((p.vol24||0)<0.5&&(p.txns24||0)===0){await new Promise(r=>setTimeout(r,80));continue}
-      try{
-        const t=await fetchGTTrades(p);
-        if(t.length)results.push(...t.slice(-cap));
-      }catch(_){}
-      await new Promise(r=>setTimeout(r,240));
-    }
-  })());
-  await Promise.all(workers);
-  results.sort((a,b)=>(a.blockNumber||0)-(b.blockNumber||0));
-  return results;
-}
-function crossVerify(gtT,rpcT){
-  const rpcByHash=new Map(rpcT.map(t=>[t.txHash,t]));
-  let checked=0,mismatches=0;
-  for(const gt of gtT){
-    const rpc=rpcByHash.get(gt.txHash);
-    if(!rpc)continue;
-    checked++;
-    const relErr=Math.abs(gt.amountEros-rpc.amountEros)/Math.max(1e-9,rpc.amountEros);
-    if(relErr>0.02||gt.direction!==rpc.direction){
-      mismatches++;
-      if(mismatches<=3)console.warn('[SpaceEros] mismatch:',{tx:gt.txHash.slice(0,10),gt:{d:gt.direction,a:gt.amountEros.toFixed(4)},rpc:{d:rpc.direction,a:rpc.amountEros.toFixed(4)}});
-    }
-  }
-  if(checked>0)console.log(`[SpaceEros] Cross-verified ${checked} trades · ${mismatches} mismatches · ${mismatches===0?'CONFIRMED':'NEED REVIEW'}`);
-  return{checked,mismatches};
-}
-function preloadLogos(list){
-  for(const p of list){
-    if(!p.logo||logoCache.has(p.other))continue;
-    const img=new Image();
-    img.crossOrigin='anonymous';
-    img.onload=()=>logoCache.set(p.other,img);
-    img.onerror=()=>logoCache.set(p.other,'failed');
-    img.src=p.logo;
-  }
-}
+const results=[];let idx=0;
+const workers=Array.from({length:3},()=>(async()=>{while(true){const i=idx++;if(i>=pools.length)return;const p=pools[i];
+if((p.vol24||0)<0.5&&(p.txns24||0)===0){await new Promise(r=>setTimeout(r,80));continue;}
+try{const t=await fetchGTTrades(p);if(t.length)results.push(...t.slice(-cap));}catch(_){}
+await new Promise(r=>setTimeout(r,240));}})());
+await Promise.all(workers);results.sort((a,b)=>(a.blockNumber||0)-(b.blockNumber||0));return results;}
+function preloadLogos(list){for(const p of list){if(!p.logo||logoCache.has(p.other))continue;const img=new Image();img.crossOrigin='anonymous';
+img.onload=()=>logoCache.set(p.other,img);img.onerror=()=>logoCache.set(p.other,'failed');img.src=p.logo;}}
+async function loadDecimals(list){await Promise.all(list.map(async p=>{try{const x=await rpc('eth_call',[{to:p.other,data:'0x313ce567'},'latest'],5000);
+const d=Number(BigInt(x));if(d>=0&&d<=36)p.otherDec=d;}catch(_){}}));}
+async function loadSupply(){try{const x=await rpc('eth_call',[{to:EROS,data:'0x18160ddd'},'latest'],5000);const s=Number(BigInt(x))/1e18;if(s>0)TOTAL_SUPPLY_EROS=s;}catch(_){}}
 function decodeSwap(log){
-  let parsed;
-  try{parsed=SWAP_IFACE.parseLog(log)}catch(_){return null}
-  const pair=pairs.find(p=>p.address.toLowerCase()===log.address.toLowerCase());
-  if(!pair)return null;
-  const A=parsed.args;
-  const f=(v,d)=>parseFloat(ethers.utils.formatUnits(v,d));
-  const a0i=f(A.a0i,18),a1i=f(A.a1i,18),a0o=f(A.a0o,18),a1o=f(A.a1o,18);
-  let direction,amountEros,amountOther;
-  if(pair.erosIsToken0){
-    if(a0i>0){direction='EROS_TO_OTHER';amountEros=a0i;amountOther=a1o}
-    else{direction='OTHER_TO_EROS';amountEros=a0o;amountOther=a1i}
-  }else{
-    if(a1i>0){direction='EROS_TO_OTHER';amountEros=a1i;amountOther=a0o}
-    else{direction='OTHER_TO_EROS';amountEros=a1o;amountOther=a0i}
-  }
-  return{pair,direction,amountEros,amountOther,txHash:log.transactionHash,blockNumber:Number(BigInt(log.blockNumber)),logIndex:Number(BigInt(log.logIndex||'0x0'))};
-}
+let parsed;try{parsed=SWAP_IFACE.parseLog(log);}catch(_){return null;}
+const pair=pairs.find(p=>p.address.toLowerCase()===log.address.toLowerCase());if(!pair)return null;
+const A=parsed.args;const f=(v,d)=>parseFloat(ethers.utils.formatUnits(v,d));
+const od=pair.otherDec==null?18:pair.otherDec;const d0=pair.erosIsToken0?18:od,d1=pair.erosIsToken0?od:18;
+const a0i=f(A.a0i,d0),a1i=f(A.a1i,d1),a0o=f(A.a0o,d0),a1o=f(A.a1o,d1);
+let direction,amountEros,amountOther;
+if(pair.erosIsToken0){if(a0i>0){direction='EROS_TO_OTHER';amountEros=a0i;amountOther=a1o;}else{direction='OTHER_TO_EROS';amountEros=a0o;amountOther=a1i;}}
+else{if(a1i>0){direction='EROS_TO_OTHER';amountEros=a1i;amountOther=a0o;}else{direction='OTHER_TO_EROS';amountEros=a1o;amountOther=a0i;}}
+return{pair,direction,amountEros,amountOther,txHash:log.transactionHash,blockNumber:Number(BigInt(log.blockNumber)),logIndex:Number(BigInt(log.logIndex||'0x0')),_trader:(A.sender||'').toLowerCase()};}
 async function fetchChainHistory(){
-  const addrs=pairs.map(p=>p.address);
-  if(!addrs.length)return[];
-  try{
-    const cur=await blockNum();
-    currentBlock=cur;
-    const from=Math.max(0,cur-15000);
-    setWelcomeStatus('Reading on-chain swap logs…');
-    const logs=await getLogs(addrs,from,cur);
-    const out=[];
-    for(const log of logs){const e=decodeSwap(log);if(e)out.push(e)}
-    out.sort((a,b)=>(a.blockNumber-b.blockNumber)||((a.logIndex||0)-(b.logIndex||0)));
-    return out;
-  }catch(e){return[]}
-}
-
-/* ═══════════════════════════════════════════════════════
-   UI HELPERS
-   ═══════════════════════════════════════════════════════ */
+const addrs=pairs.map(p=>p.address);if(!addrs.length)return[];
+try{const cur=await blockNum();currentBlock=cur;const from=Math.max(0,cur-15000);
+setWelcomeStatus('Reading on-chain swap logs…');
+const logs=await getLogs(addrs,from,cur);const out=[];
+for(const log of logs){const e=decodeSwap(log);if(e)out.push(e);}
+out.sort((a,b)=>(a.blockNumber-b.blockNumber)||((a.logIndex||0)-(b.logIndex||0)));return out;}catch(e){return [];}}
+/* ═══════ TRUTH FETCHES ═══════ */
+const ZERO_ADDR='0x0000000000000000000000000000000000000000';
+async function loadOwner(){
+try{const r=await rpc('eth_call',[{to:EROS,data:'0x8da5cb5b'},'latest'],5000);
+const addr=('0x'+r.slice(26)).toLowerCase();
+ownerInfo=(addr===ZERO_ADDR)?{renounced:true,addr:ZERO_ADDR}:{renounced:false,addr};}
+catch(e){ownerInfo={error:true};}
+paintOwnFacts();paintRenounceBadge();paintDashboard();}
+async function loadLaunch(){
+try{const u=SCAN_API+'?module=contract&action=getcontractcreation&contractaddresses='+EROS;
+const r=await fetch(u);const j=await r.json();
+if(j.status==='1'&&j.result&&j.result[0]&&j.result[0].blockNumber){
+const blk=Number(j.result[0].blockNumber);
+const b=await rpc('eth_getBlockByNumber',['0x'+blk.toString(16),false],6000);
+if(b&&b.timestamp){launchInfo={block:blk,ts:Number(BigInt(b.timestamp)),src:'PulseScan'};srcMark('scan',true);paintOwnFacts();paintDashboard();return;}}
+}catch(_){}
+try{
+const codeAt=async n=>{try{const c=await rpc('eth_getCode',[EROS,'0x'+n.toString(16)],5000);return c&&c!=='0x';}catch(_){return false;}};
+let hi=currentBlock||await blockNum();
+if(!(await codeAt(hi)))return;
+let lo=1;
+while(hi-lo>1500){const mid=Math.floor((lo+hi)/2);if(await codeAt(mid))hi=mid;else lo=mid;}
+const b=await rpc('eth_getBlockByNumber',['0x'+hi.toString(16),false],6000);
+if(b&&b.timestamp)launchInfo={block:hi,ts:Number(BigInt(b.timestamp)),src:'binary search on chain'};}
+catch(_){}
+paintOwnFacts();paintDashboard();}
+async function loadHolders(){
+try{const u=SCAN_API+'?module=token&action=tokenholdercount&contractaddress='+EROS;
+const r=await fetch(u);const j=await r.json();
+if(j.status==='1'&&j.result){holderCount=Number(j.result);srcMark('scan',true);paintDashboard();}
+}catch(_){srcMark('scan',false);}}
+async function loadDead(){
+try{const data='0x70a08231000000000000000000000000'+DEAD.slice(2);
+const r=await rpc('eth_call',[{to:EROS,data},'latest'],6000);
+deadBal=Number(BigInt(r))/1e18;paintDashboard();}catch(_){}}
+/* ═══════ TRUST: cross-verify indexed trades against on-chain logs ═══════ */
+function crossVerify(gtT,rpcT){
+const m=new Map(rpcT.map(t=>[t.txHash,t]));let checked=0,mismatches=0;
+for(const g of gtT){const r=m.get(g.txHash);if(!r)continue;checked++;
+const rel=Math.abs(g.amountEros-r.amountEros)/Math.max(1e-9,r.amountEros);
+if(rel>0.02||g.direction!==r.direction)mismatches++;}
+return{checked,mismatches};}
+function updateVerifyUI(){
+const el=document.getElementById('cVerify');if(!el)return;
+if(!verifyStat||!verifyStat.checked){el.textContent='✓ on-chain';el.className='verify';return;}
+if(verifyStat.mismatches){el.textContent='⚠ '+(verifyStat.checked-verifyStat.mismatches)+'/'+verifyStat.checked+' verified';el.className='verify warn';}
+else{el.textContent='✓ '+verifyStat.checked+'/'+verifyStat.checked+' verified';el.className='verify';}}
+/* ═══════ UI HELPERS ═══════ */
 const welcome=document.getElementById('welcome'),wEnter=document.getElementById('wEnter'),wStatus=document.getElementById('wStatus');
-function setWelcomeStatus(msg){wStatus.textContent=msg}
+function setWelcomeStatus(msg){wStatus.textContent=msg;}
 function setMode(state,label,detail){
-  document.getElementById('modeInd').className='ind '+(state||'');
-  document.getElementById('modeLabel').textContent=label;
-  const sep=document.getElementById('modeSep'),det=document.getElementById('modeDetail');
-  if(detail){sep.style.display='';det.textContent=detail}
-  else{sep.style.display='none';det.textContent=''}
-}
-function hideWelcome(){welcome.classList.add('hidden');setTimeout(()=>{try{welcome.remove()}catch(_){}},900)}
-wEnter.addEventListener('click',()=>hideWelcome());
-
-const godTimers={};
-function pulseGod(g){
-  const el=document.querySelector(`#pantheon .g[data-god="${g}"]`);
-  if(!el)return;
-  el.classList.add('on');
-  clearTimeout(godTimers[g]);
-  godTimers[g]=setTimeout(()=>el.classList.remove('on'),1000);
-}
-
-function fmtPrice(p){
-  if(p==null||isNaN(p))return'—';
-  if(p>=1)return'$'+p.toFixed(3);
-  if(p>=0.01)return'$'+p.toFixed(4);
-  if(p>=0.0001)return'$'+p.toFixed(6);
-  const s=p.toFixed(20),after=s.split('.')[1];
-  let z=0;for(let i=0;i<after.length;i++){if(after[i]==='0')z++;else break}
-  const sig=after.slice(z,z+4).replace(/0+$/,'')||after.slice(z,z+2);
-  const subs='₀₁₂₃₄₅₆₇₈₉';
-  return'$0.0'+z.toString().split('').map(d=>subs[+d]).join('')+sig;
-}
-function fmtBig(n){
-  if(n==null||isNaN(n))return'—';
-  if(n>=1e9)return(n/1e9).toFixed(2)+'B';
-  if(n>=1e6)return(n/1e6).toFixed(2)+'M';
-  if(n>=1e3)return(n/1e3).toFixed(1)+'K';
-  return n.toFixed(0);
-}
-function fmtAmt(n){
-  if(typeof n!=='number'||isNaN(n))return'—';
-  if(n>=1e6)return(n/1e6).toFixed(2)+'M';
-  if(n>=1e3)return(n/1e3).toFixed(2)+'K';
-  if(n>=1)return n.toFixed(3);
-  if(n===0)return'0';
-  return n.toFixed(5);
-}
-function fmtSpeed(mult){
-  if(mult>=1000)return Math.round(mult/100)*100+'×';
-  if(mult>=100)return Math.round(mult/10)*10+'×';
-  return Math.round(mult)+'×';
-}
+document.getElementById('modeInd').className='ind '+(state||'');
+document.getElementById('modeLabel').textContent=label;
+const sep=document.getElementById('modeSep'),det=document.getElementById('modeDetail');
+if(detail){sep.style.display='';det.textContent=detail;}else{sep.style.display='none';det.textContent='';}}
+function hideWelcome(){welcome.classList.add('hidden');setTimeout(()=>{try{welcome.remove();}catch(_){}},900);}
+wEnter.addEventListener('click',hideWelcome);
+const feeTimers={};
+function feeFlash(which){const bar=document.getElementById('feeBar');if(!bar)return;
+which.forEach(w=>{const el=bar.querySelector('.f.'+w);if(!el)return;el.classList.add('hot');
+clearTimeout(feeTimers[w]);feeTimers[w]=setTimeout(()=>el.classList.remove('hot'),650);});}
+function fmtPrice(p){if(p==null||isNaN(p))return'—';if(p>=1)return'$'+p.toFixed(3);if(p>=0.01)return'$'+p.toFixed(4);if(p>=0.0001)return'$'+p.toFixed(6);
+const s=p.toFixed(20),after=s.split('.')[1];let z=0;for(let i=0;i<after.length;i++){if(after[i]==='0')z++;else break;}
+const sig=after.slice(z,z+4).replace(/0+$/,'')||after.slice(z,z+2);const subs='₀₁₂₃₄₅₆₇₈₉';
+return'$0.0'+z.toString().split('').map(d=>subs[+d]).join('')+sig;}
+function fmtBig(n){if(n==null||isNaN(n))return'—';if(n>=1e9)return(n/1e9).toFixed(2)+'B';if(n>=1e6)return(n/1e6).toFixed(2)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n.toFixed(0);}
+function fmtAmt(n){if(typeof n!=='number'||isNaN(n))return'—';if(n>=1e6)return(n/1e6).toFixed(2)+'M';if(n>=1e3)return(n/1e3).toFixed(2)+'K';if(n>=1)return n.toFixed(3);if(n===0)return'0';return n.toFixed(5);}
+function fmtSpeed(m){if(m>=1000)return Math.round(m/100)*100+'×';if(m>=100)return Math.round(m/10)*10+'×';return Math.round(m)+'×';}
 function updateMarket(){
-  document.getElementById('mPrice').textContent=market.price!=null?fmtPrice(market.price):'—';
-  document.getElementById('mMcap').textContent=market.mcap!=null?'$'+fmtBig(market.mcap):'—';
-  const c=document.getElementById('mChg');
-  if(market.chg!=null){
-    c.textContent=(market.chg>=0?'+':'')+market.chg.toFixed(2)+'%';
-    c.className='v '+(market.chg>=0?'up':'down');
-  }else{c.textContent='—';c.className='v'}
-}
-function computeMarket(ds){
-  if(!ds||!ds.length)return;
-  const top=[...ds].sort((a,b)=>(b.liq||0)-(a.liq||0))[0];
-  market.price=top.price;
-  market.mcap=top.mcap;
-  market.chg=top.chg;
-  updateMarket();
-}
-function updateAbout(poolCount,eventCount,srcs){
-  document.getElementById('aboutPools').textContent=poolCount||'—';
-  document.getElementById('aboutEvents').textContent=eventCount||'—';
-  document.getElementById('aboutSources').textContent=srcs||'—';
-}
-
-/* ═══════════════════════════════════════════════════════
-   CANVAS
-   ═══════════════════════════════════════════════════════ */
+document.getElementById('tPrice').textContent=market.price!=null?fmtPrice(market.price):'—';
+document.getElementById('tMcap').textContent=market.mcap!=null?'$'+fmtBig(market.mcap):'—';
+const c=document.getElementById('tChg');
+if(market.chg!=null){c.textContent=(market.chg>=0?'+':'')+market.chg.toFixed(2)+'%';c.className='tick chg '+(market.chg>=0?'up':'down');}
+else{c.textContent='—';c.className='tick chg';}}
+function computeMarket(ds){if(!ds||!ds.length)return;const top=[...ds].sort((a,b)=>(b.liq||0)-(a.liq||0))[0];
+market.price=top.price;market.mcap=top.mcap;market.chg=top.chg;updateMarket();}
+function updateAbout(poolCount,eventCount){
+document.getElementById('cPools').textContent=poolCount||'—';
+document.getElementById('cEvents').textContent=eventCount||'—';
+const el=document.getElementById('cCore');
+if(corePairRef)el.textContent=corePairRef.other===WPLS
+?('WPLS · V1+V2 · $'+fmtBig(corePairRef.hubLiq||0))
+:('EROS/'+corePairRef.otherSymbol+' · $'+fmtBig(corePairRef.liq||0));}
+/* ═══════ CANVAS + LAYOUT ═══════ */
 function resize(){
-  const pw=W||0,ph=H||0;
-  W=canvas.width=window.innerWidth;
-  H=canvas.height=window.innerHeight;
-  cx=W/2+viewPan.x;cy=H/2+viewPan.y;
-  if(!stars.length||W>pw*1.35||H>ph*1.35){initStars();initNebulae()}
-}
+const pw=W||0,ph=H||0;
+W=window.innerWidth;H=window.innerHeight;
+hudTop=topbarEl.offsetHeight||0;hudBot=hudEl.offsetHeight||0;
+const dpr=Math.min(2,window.devicePixelRatio||1);
+canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);
+canvas.style.width=W+'px';canvas.style.height=H+'px';
+ctx.setTransform(dpr,0,0,dpr,0,0);
+cx=W/2+viewPan.x;cy=hudTop+(H-hudTop-hudBot)/2+viewPan.y;
+if(!stars.length||W>pw*1.35||H>ph*1.35){initStars();initNebulae();}}
 window.addEventListener('resize',resize);resize();
-function initStars(){
-  stars.length=0;
-  const n=Math.min(280,Math.floor(W*H/7500));
-  for(let i=0;i<n;i++){
-    const roll=Math.random();
-    stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+0.2,a:Math.random()*0.55+0.1,tw:Math.random()*Math.PI*2,hue:roll<0.55?200:roll<0.8?45:300});
-  }
-}
-function initNebulae(){
-  nebulae.length=0;
-  for(let i=0;i<4;i++)nebulae.push({x:Math.random()*W,y:Math.random()*H,r:180+Math.random()*320,hue:[200,300,40,280][i%4],a:0.025+Math.random()*0.04});
-}
-function hashHue(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return Math.abs(h)%360}
-function pairColours(p){
-  if(p.isHelios)return{hue:310,core:'#e8d5f0',mid:'#c47ab8',edge:'#8a4a80'};
-  const hue=hashHue(p.otherSymbol||'X');
-  return{hue,core:`hsl(${hue},75%,85%)`,mid:`hsl(${hue},65%,65%)`,edge:`hsl(${hue},55%,42%)`};
-}
+function stageH(){return Math.max(200,H-hudTop-hudBot);}
+function sceneScale(){return Math.max(0.55,Math.min(W/1100,stageH()/760,1.35));}
+function burnAnchor(){const S=sceneScale();const maxY=H-hudBot-24-160*S;const desired=cy+Math.min(stageH()*0.42,360*S);return{x:cx,y:Math.min(desired,maxY),S};}
+function vaultAnchor(){const S=sceneScale();const minY=hudTop+6+58*S;const desired=cy-Math.min(stageH()*0.42,360*S);return{x:cx,y:Math.max(desired,minY),S};}
+function initStars(){stars.length=0;const n=Math.min(280,Math.floor(W*H/7500));
+for(let i=0;i<n;i++){const roll=Math.random();
+stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+0.2,a:Math.random()*0.55+0.1,tw:Math.random()*Math.PI*2,hue:roll<0.6?200:roll<0.85?300:45});}}
+function initNebulae(){nebulae.length=0;for(let i=0;i<4;i++)nebulae.push({x:Math.random()*W,y:Math.random()*H,r:180+Math.random()*320,hue:[300,200,320,190][i%4],a:0.03+Math.random()*0.045});}
+function hashHue(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return Math.abs(h)%360;}
+/* ═══════ SIGIL ═══════ */
+function sigilPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+0.64*s);
+ctx.bezierCurveTo(x+0.66*s,y+0.12*s,x+0.57*s,y-0.56*s,x,y-0.23*s);
+ctx.bezierCurveTo(x-0.57*s,y-0.56*s,x-0.66*s,y+0.12*s,x,y+0.64*s);ctx.closePath();}
+function drawHeartSigil(x,y,s,color,lw,alpha,arrow){
+ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.lineCap='round';ctx.lineJoin='round';
+sigilPath(x,y,s);ctx.stroke();
+if(arrow){ctx.beginPath();
+ctx.moveTo(x-0.74*s,y+0.74*s);ctx.lineTo(x+0.74*s,y-0.74*s);
+ctx.moveTo(x+0.74*s,y-0.74*s);ctx.lineTo(x+0.39*s,y-0.66*s);
+ctx.moveTo(x+0.74*s,y-0.74*s);ctx.lineTo(x+0.66*s,y-0.39*s);
+ctx.moveTo(x-0.74*s,y+0.74*s);ctx.lineTo(x-0.51*s,y+0.66*s);
+ctx.moveTo(x-0.74*s,y+0.74*s);ctx.lineTo(x-0.66*s,y+0.51*s);ctx.stroke();}
+ctx.restore();}
+/* ═══════ BURN (2%) ═══════ */
+async function fetchBurnBalance(){
+try{const u=SCAN_API+'?module=account&action=tokenbalance&contractaddress='+EROS+'&address='+BURN_ADDR;
+const r=await fetch(u);const j=await r.json();
+if(j&&j.status==='1'&&j.result){const whole=Number(j.result)/1e18;market.burned=whole;market.burnPct=(whole/TOTAL_SUPPLY_EROS)*100;updateBurnUI();paintDashboard();srcMark('scan',true);return whole;}}
+catch(_){}
+try{const data='0x70a08231000000000000000000000000'+BURN_ADDR.slice(2);const res=await rpc('eth_call',[{to:EROS,data},'latest']);
+if(res){const whole=Number(BigInt(res))/1e18;market.burned=whole;market.burnPct=(whole/TOTAL_SUPPLY_EROS)*100;updateBurnUI();paintDashboard();return whole;}}catch(_){}
+return null;}
+function updateBurnUI(){
+const el=document.getElementById('cBurn'),elp=document.getElementById('cBurnPct');
+if(el&&market.burned!=null){const b=market.burned;
+el.textContent=b>=1e9?(b/1e9).toFixed(2)+'B':b>=1e6?(b/1e6).toFixed(1)+'M':Math.round(b).toLocaleString();}
+if(elp&&market.burnPct!=null)elp.textContent=market.burnPct.toFixed(2)+'%';}
+function drawBlackHole(){
+const{x:hx,y:hy,S}=burnAnchor();const t=Date.now();const fl=burnFlare;
+const rimRx=46*S,rimRy=12*S,depth=132*S;
+const rMult=1+Math.min(0.35,(market.burnPct||0)*0.03);
+const glow=ctx.createRadialGradient(hx,hy,rimRx*0.3,hx,hy,rimRx*4.2);
+glow.addColorStop(0,'rgba(255,120,30,'+(0.26+fl*0.3)+')');glow.addColorStop(0.4,'rgba(200,50,20,'+(0.11+fl*0.15)+')');glow.addColorStop(1,'rgba(200,50,20,0)');
+ctx.fillStyle=glow;ctx.beginPath();ctx.arc(hx,hy,rimRx*4.2,0,7);ctx.fill();
+const sg=ctx.createLinearGradient(hx,hy,hx,hy+depth);
+sg.addColorStop(0,'rgba(255,150,55,0.92)');sg.addColorStop(0.22,'rgba(245,95,25,0.75)');
+sg.addColorStop(0.5,'rgba(150,30,10,0.78)');sg.addColorStop(0.78,'rgba(25,4,2,0.92)');sg.addColorStop(1,'rgba(0,0,0,1)');
+ctx.fillStyle=sg;ctx.beginPath();
+ctx.moveTo(hx-rimRx*rMult,hy);ctx.quadraticCurveTo(hx-rimRx*rMult*0.5,hy+depth*0.5,hx-rimRx*0.1,hy+depth);
+ctx.lineTo(hx+rimRx*0.1,hy+depth);ctx.quadraticCurveTo(hx+rimRx*rMult*0.5,hy+depth*0.5,hx+rimRx*rMult,hy);ctx.closePath();ctx.fill();
+for(let i=0;i<9;i++){const k=((i*0.13+t/2400)%1);const q=1-k*0.9;const ry=hy+4*S+k*depth*0.94;
+ctx.strokeStyle='rgba(255,'+(100+Math.floor(140*(1-k)))+',40,'+(0.12+0.55*(1-k))+')';ctx.lineWidth=(0.8+1.7*(1-k))*S;
+ctx.beginPath();ctx.ellipse(hx,ry,rimRx*rMult*q,rimRy*q,0,0,7);ctx.stroke();}
+ctx.globalCompositeOperation='lighter';
+for(let i=0;i<26;i++){const a=(i/26)*Math.PI*2;
+const bx=hx+Math.cos(a)*rimRx*rMult,by=hy+Math.sin(a)*rimRy;
+const flick=Math.sin(t/140+i*2.1)+Math.sin(t/89+i*3.3)*0.6;
+const pull=0.5+0.8*Math.max(0,Math.sin(a));
+const len=(15+9*Math.abs(flick)+fl*32)*(0.65+0.35*Math.sin(a*3+t/210))*S;
+const tx=hx+Math.cos(a)*rimRx*0.42+Math.sin(t/95+i)*5*S;
+const ty=by+len*pull;
+const fg=ctx.createLinearGradient(bx,by,tx,ty);
+fg.addColorStop(0,'rgba(255,240,180,0.95)');fg.addColorStop(0.45,'rgba(255,130,35,0.6)');fg.addColorStop(1,'rgba(210,25,10,0)');
+ctx.fillStyle=fg;ctx.beginPath();ctx.moveTo(bx-7*S,by);
+ctx.quadraticCurveTo(bx-3*S+Math.sin(t/105+i)*3*S,by+len*0.5,tx,ty);
+ctx.quadraticCurveTo(bx+3*S+Math.cos(t/115+i)*3*S,by+len*0.5,bx+7*S,by);
+ctx.closePath();ctx.fill();}
+ctx.globalCompositeOperation='source-over';
+if(embers.length<90&&Math.random()<0.35+fl*0.6)embers.push({ang:Math.random()*6.28,k:0,v:0.007+Math.random()*0.011,up:Math.random()<0.24,s:0.6+Math.random()*0.9});
+for(let i=embers.length-1;i>=0;i--){const e=embers[i];e.k+=e.v*(frameDt/10);if(e.k>=1){embers.splice(i,1);continue;}
+const radius=rimRx*rMult*(1-e.k*0.85)*0.85;const x=hx+Math.cos(e.ang+e.k*3)*radius;
+const y=e.up?hy-e.k*95*S:hy+4*S+e.k*depth*0.92;const alpha=(1-e.k)*0.9;
+ctx.fillStyle=e.up?'rgba(255,215,80,'+alpha+')':'rgba(255,'+Math.max(60,160-e.k*100)+',50,'+alpha+')';
+ctx.beginPath();ctx.arc(x,y,(0.7+1.4*e.s*(1-e.k*0.5))*S,0,7);ctx.fill();}
+ctx.fillStyle='#030102';ctx.beginPath();ctx.ellipse(hx,hy+depth,rimRx*0.13,rimRy*0.5,0,0,7);ctx.fill();
+ctx.strokeStyle='rgba(255,215,140,'+(0.85+fl*0.15)+')';ctx.lineWidth=(2.4+fl*2)*S;
+ctx.beginPath();ctx.ellipse(hx,hy,rimRx*rMult,rimRy,0,0,7);ctx.stroke();
+const ly=hy+depth+18*S;ctx.textAlign='center';ctx.textBaseline='alphabetic';
+ctx.fillStyle='rgba(255,170,90,0.95)';ctx.font='700 '+Math.round(10*S)+'px ui-monospace,Menlo,monospace';
+ctx.fillText('🔥 BURN · 2% — down the infinite hole',hx,ly);
+ctx.fillStyle='rgba(255,210,170,0.72)';ctx.font=Math.round(9.5*S)+'px ui-monospace,Menlo,monospace';
+const burnLine='sink 0x…0369 · '+(market.burned!=null?fmtBig(market.burned)+' gone ('+(market.burnPct||0).toFixed(2)+'%)':'forever')+(sessBurn>0?' · +'+fmtAmt(sessBurn):'');
+ctx.fillText(burnLine,hx,ly+13*S);}
+function spawnBurnFilament(planet,am){if(!planet||!isFinite(planet.x))return;const h=burnAnchor();
+filaments.push({x1:planet.x,y1:planet.y,x2:h.x,y2:h.y,cx:(Math.random()-0.5)*40,cy:(Math.random()-0.5)*30,t:0,hue:15,ph:Math.random()*Math.PI*2,burn:true,pl:planet,pe:'s',tgt:'hole',amt:am||0});}
+/* ═══════ VAULT (2%) ═══════ */
+function drawVault(){
+const{x:vx,y:vy,S}=vaultAnchor();const t=Date.now(),fl=vaultFlash;const R=46*S;
+const gg=ctx.createRadialGradient(vx,vy,R*0.2,vx,vy,R*2.8);
+gg.addColorStop(0,'rgba(240,200,90,'+(0.16+fl*0.42)+')');gg.addColorStop(1,'rgba(240,200,90,0)');
+ctx.fillStyle=gg;ctx.beginPath();ctx.arc(vx,vy,R*2.8,0,7);ctx.fill();
+ctx.fillStyle='#120c04';ctx.beginPath();ctx.arc(vx,vy,R+9*S,0,7);ctx.fill();
+ctx.strokeStyle='#5c4712';ctx.lineWidth=2*S;ctx.beginPath();ctx.arc(vx,vy,R+9*S,0,7);ctx.stroke();
+const dg=ctx.createRadialGradient(vx-R*0.32,vy-R*0.36,R*0.1,vx,vy,R);
+dg.addColorStop(0,'#f9e28c');dg.addColorStop(0.45,'#d4af37');dg.addColorStop(0.8,'#8a6a1d');dg.addColorStop(1,'#58430f');
+ctx.fillStyle=dg;ctx.beginPath();ctx.arc(vx,vy,R,0,7);ctx.fill();
+ctx.strokeStyle='rgba(255,238,165,'+(0.7+fl*0.3)+')';ctx.lineWidth=3*S;ctx.beginPath();ctx.arc(vx,vy,R-2*S,0,7);ctx.stroke();
+ctx.fillStyle='#4a3a10';
+for(let i=0;i<12;i++){const a=i/12*Math.PI*2+t/9000;ctx.beginPath();ctx.arc(vx+Math.cos(a)*(R-2*S),vy+Math.sin(a)*(R-2*S),1.6*S,0,7);ctx.fill();}
+ctx.fillStyle='rgba(255,244,200,0.9)';ctx.font='700 '+Math.round(15*S)+'px Georgia,serif';
+ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('$',vx,vy-R*0.38);
+const hub=R*0.34;ctx.fillStyle='#241a06';ctx.beginPath();ctx.arc(vx,vy+3*S,hub,0,7);ctx.fill();
+ctx.strokeStyle='#d4af37';ctx.lineWidth=2*S;ctx.beginPath();ctx.arc(vx,vy+3*S,hub,0,7);ctx.stroke();
+const rot=t/2600+fl*3;ctx.strokeStyle='#f2d060';ctx.lineWidth=4.2*S;ctx.lineCap='round';
+for(let i=0;i<4;i++){const a=rot+i*Math.PI/2;ctx.beginPath();
+ctx.moveTo(vx+Math.cos(a)*hub*0.22,vy+3*S+Math.sin(a)*hub*0.22);ctx.lineTo(vx+Math.cos(a)*hub*0.9,vy+3*S+Math.sin(a)*hub*0.9);ctx.stroke();}
+ctx.fillStyle='#ffe9a8';ctx.beginPath();ctx.arc(vx,vy+3*S,4*S,0,7);ctx.fill();
+const stackX=vx+R+20*S,stackY=vy+R*0.5;
+const nStack=Math.min(vaultCoins+2,9);
+for(let j=0;j<nStack;j++){const cy2=stackY-j*4.4*S;
+ctx.fillStyle=j%2?'#c8941a':'#e0b028';ctx.strokeStyle='#f6dc7a';ctx.lineWidth=1;
+ctx.beginPath();ctx.ellipse(stackX,cy2,12*S,4.4*S,0,0,7);ctx.fill();ctx.stroke();}
+if(vaultCoins>0){ctx.fillStyle='rgba(255,244,200,0.9)';ctx.font='700 '+Math.round(10*S)+'px Georgia,serif';
+ctx.fillText('$',stackX,stackY-(nStack-1)*4.4*S);}
+if(vaultCoin>0.03){const cy2=stackY-46*S*vaultCoin;
+ctx.globalAlpha=Math.min(1,vaultCoin*1.4);
+ctx.fillStyle='#e0b028';ctx.strokeStyle='#f6dc7a';ctx.lineWidth=1;
+ctx.beginPath();ctx.ellipse(stackX,cy2,12*S,4.4*S,0,0,7);ctx.fill();ctx.stroke();
+ctx.globalAlpha=1;}
+const sheenA=0.06+0.05*Math.sin(t/1800);
+ctx.strokeStyle='rgba(255,246,205,'+(sheenA+fl*0.5)+')';ctx.lineWidth=1.4*S;
+ctx.beginPath();ctx.arc(vx,vy,hub*1.25,-2.4,-1.2);ctx.stroke();
+if(fl>0.1){ctx.strokeStyle='rgba(255,238,160,'+fl+')';ctx.lineWidth=1.4*S;
+for(let i=0;i<6;i++){const a=i*1.047+0.5,r0=R*1.2;ctx.beginPath();
+ctx.moveTo(vx+Math.cos(a)*r0,vy+Math.sin(a)*r0);ctx.lineTo(vx+Math.cos(a)*(r0+12*fl*S),vy+Math.sin(a)*(r0+12*fl*S));ctx.stroke();}}
+ctx.textAlign='center';ctx.textBaseline='alphabetic';
+ctx.fillStyle='rgba(232,197,71,0.95)';ctx.font='700 '+Math.round(10*S)+'px ui-monospace,Menlo,monospace';
+ctx.fillText('💰 VAULT · 2% — SAVINGS',vx,vy+R+18*S);
+ctx.fillStyle='rgba(240,225,170,0.78)';ctx.font=Math.round(9.5*S)+'px ui-monospace,Menlo,monospace';
+ctx.fillText('stake + lock · one vault that earns'+(sessVault>0?' · +'+fmtAmt(sessVault):''),vx,vy+R+31*S);}
+function spawnVaultFilament(planet){if(!planet||!isFinite(planet.x))return;const v=vaultAnchor();
+filaments.push({x1:planet.x,y1:planet.y,x2:v.x,y2:v.y,cx:(Math.random()-0.5)*36,cy:(Math.random()-0.5)*28,t:0,hue:45,ph:Math.random()*Math.PI*2,vault:true,pl:planet,pe:'s',tgt:'vault'});}
+function spawnCoreFilament(planet){if(!planet||!isFinite(planet.x)||!corePlanet||planet===corePlanet)return;
+filaments.push({x1:planet.x,y1:planet.y,x2:corePlanet.x,y2:corePlanet.y,cx:(Math.random()-0.5)*30,cy:(Math.random()-0.5)*24,t:0,hue:190,ph:Math.random()*Math.PI*2,core:true,pl:planet,pe:'s',tgt:'core'});}
+function isHubPair(p){return !!(corePairRef&&corePairRef.hubAddresses&&corePairRef.hubAddresses.includes(p.address.toLowerCase()));}
+/* ═══════ PLANETS & BELT ═══════ */
+function pairColours(p){const hue=hashHue(p.otherSymbol||'X');
+return{hue,core:'hsl('+hue+',75%,85%)',mid:'hsl('+hue+',65%,65%)',edge:'hsl('+hue+',55%,42%)'};}
+function markHub(){
+const wpls=pairs.filter(p=>p.other===WPLS);
+if(wpls.length){wpls.sort((a,b)=>(b.vol24||0)-(a.vol24||0));
+const prim=wpls[0];prim.isCore=true;
+prim.hubAddresses=wpls.map(p=>p.address.toLowerCase());
+prim.hubLiq=wpls.reduce((s,p)=>s+(p.liq||0),0);
+prim.hubVol=wpls.reduce((s,p)=>s+(p.vol24||0),0);
+for(let i=1;i<wpls.length;i++)wpls[i].isHubSibling=true;
+corePairRef=prim;}
+else{const top=[...pairs].sort((a,b)=>(b.vol24||0)-(a.vol24||0))[0];
+if(top){top.isCore=true;top.hubAddresses=[top.address.toLowerCase()];top.hubLiq=top.liq;top.hubVol=top.vol24;corePairRef=top;}}}
+function finalizeHub(){if(corePairRef&&corePairRef.hubAddresses){let t=0;
+for(const a of corePairRef.hubAddresses){const p=pairs.find(x=>x.address.toLowerCase()===a);if(p)t+=(p.act24||0);}
+corePairRef.hubTxns=t;}}
+function actOf(p){return p.hubTxns!=null?p.hubTxns:(p.act24||p.txns24||0);}
 function buildPlanets(){
-  planets=[];
-  const n=pairs.length;if(!n)return;
-  const orbitCount=n<=6?1:n<=14?2:n<=22?3:4;
-  const perOrbit=Math.ceil(n/orbitCount);
-  for(let i=0;i<n;i++){
-    const orbit=Math.floor(i/perOrbit),idx=i%perOrbit;
-    const countInOrbit=Math.min(perOrbit,n-orbit*perOrbit);
-    const baseR=150+orbit*105;
-    const angle=(idx/countInOrbit)*Math.PI*2+orbit*0.4;
-    planets.push({pair:pairs[i],angle,baseR,r:pairs[i].isHelios?13:7+Math.random()*3,x:0,y:0,pulse:0,glow:0,arb:0});
-  }
-}
-
+planets=[];asteroids=[];corePlanet=null;const n=pairs.length;if(!n)return;const S=sceneScale();
+const pool=pairs.filter(p=>!p.isHubSibling);
+const maxLiq=Math.max(1,...pool.map(p=>p.hubLiq||p.liq||1));
+const maxLogAct=Math.max(1,...pool.map(p=>Math.log10(1+actOf(p))));
+const score=p=>0.6*Math.min(1,Math.log10(1+actOf(p))/maxLogAct)+0.4*Math.sqrt(Math.min(1,(p.hubLiq||p.liq||1)/maxLiq));
+const ranked=pool.slice().sort((a,b)=>{if(a.isCore!==b.isCore)return a.isCore?-1:1;return score(b)-score(a);});
+let planetIdx=0;
+for(let i=0;i<ranked.length;i++){const p=ranked[i];
+const depth=Math.sqrt(Math.min(1,(p.hubLiq||p.liq||1)/maxLiq));
+const actN=Math.min(1,Math.log10(1+actOf(p))/3);
+let r=(5+depth*8+actN*3)*S;if(p.isCore)r=Math.max(r,16*S);
+const obj={pair:p,angle:(i/Math.min(ranked.length,PLANET_LIMIT))*Math.PI*2+Math.random()*0.5,baseR:0,r,x:0,y:0,pulse:0,
+glow:actN*0.25+depth*0.05,labelAlways:i<8||p.isCore,isCore:!!p.isCore};
+if(planetIdx<PLANET_LIMIT){
+const orbit=p.isCore?0:Math.min(4,1+Math.floor(Math.max(0,i-1)/4));
+obj.baseR=(95+orbit*66)*S;obj.tier=orbit;planets.push(obj);
+if(p.isCore)corePlanet=obj;planetIdx++;}
+else{obj.baseR=(340+Math.random()*120)*S;obj.speed=(0.8+Math.random()*0.4)/obj.baseR;asteroids.push(obj);}}}
+function promoteToPlanet(a){
+const i=asteroids.indexOf(a);if(i<0)return a;
+asteroids.splice(i,1);
+if(planets.length>=PLANET_LIMIT){
+let weak=null;
+for(const p of planets){if(p.isCore)continue;if(!weak||((p.pair.liq||0)<(weak.pair.liq||0)))weak=p;}
+if(weak&&weak!==a){const j=planets.indexOf(weak);planets.splice(j,1);
+weak.baseR=(340+Math.random()*120)*sceneScale();weak.speed=(0.8+Math.random()*0.4)/weak.baseR;
+weak.labelAlways=false;weak.tier=0;asteroids.push(weak);}}
+let outer=null;for(const p of planets){if(!outer||p.baseR>outer.baseR)outer=p;}
+a.baseR=outer?outer.baseR:(95+3*66)*sceneScale();
+a.tier=outer?(outer.tier||0):3;
+a.labelAlways=true;a.pulse=1;a.glow=Math.max(a.glow,0.6);
+planets.push(a);return a;}
 function loreLine(e){
-  const sym=e.pair.otherSymbol,isBuy=e.direction==='OTHER_TO_EROS';
-  if(e.pair.isHelios)return isBuy?'Helios answers the enclosure':'The enclosure answers Helios';
-  if(isBuy){
-    const a=[`A discharge from the ${sym} colony toward the Center`,`Energy flows inward from ${sym} to EROS`,`A Birkeland filament ignites — ${sym} to EROS`];
-    return a[Math.floor(Math.random()*a.length)];
-  }
-  const a=[`EROS radiates outward to the ${sym} orbit`,`The sun releases charge to ${sym}`,`A return filament lights the ${sym} node`];
-  return a[Math.floor(Math.random()*a.length)];
-}
-
-let actionTimer=null,arbTimer=null;
-function showAction(e){
-  clearTimeout(arbTimer);
-  const a=document.getElementById('action');
-  document.getElementById('actionLore').textContent=loreLine(e);
-  const data=document.getElementById('actionData');
-  const isBuy=e.direction==='OTHER_TO_EROS';
-  const tag=isBuy?'<span class="tag buy">BUY</span>':'<span class="tag sell">SELL</span>';
-  const heliosTag=e.pair.isHelios?'<span class="tag hel">Z-PINCH</span>':'';
-  data.innerHTML=
-    '<span class="sym">'+e.pair.otherSymbol+'</span>'+
-    '<span class="arr">'+(isBuy?'→':'←')+'</span>'+
-    '<span class="amt">'+fmtAmt(e.amountEros)+' EROS</span>'+tag+heliosTag;
-  a.classList.add('on');
-  clearTimeout(actionTimer);
-  actionTimer=setTimeout(()=>a.classList.remove('on'),mode==='live'?4200:1800);
-}
-function showArbAction(n){
-  clearTimeout(actionTimer);
-  const a=document.getElementById('action');
-  document.getElementById('actionLore').textContent='The network responds across the web';
-  const data=document.getElementById('actionData');
-  data.innerHTML='<span class="sym">'+n+' arbitrage filaments</span><span class="tag arb">REBALANCE</span>';
-  a.classList.add('on');
-  clearTimeout(arbTimer);
-  arbTimer=setTimeout(()=>a.classList.remove('on'),2200);
-}
-
-const card=document.getElementById('card');
-function showCard(e){
-  document.getElementById('cardSym').textContent=e.pair.otherSymbol;
-  document.getElementById('cardBadge').style.display=e.pair.isHelios?'inline-block':'none';
-  document.getElementById('cardPair').textContent=e.pair.erosIsToken0?'EROS / '+e.pair.otherSymbol:e.pair.otherSymbol+' / EROS';
-  const isBuy=e.direction==='OTHER_TO_EROS';
-  document.getElementById('cardArr').textContent=isBuy?'→':'←';
-  document.getElementById('cardAmt').textContent=fmtAmt(e.amountEros);
-  document.getElementById('cardPaired').textContent=fmtAmt(e.amountOther)+' '+e.pair.otherSymbol;
-  document.getElementById('cardBuy').href=PULSEX_URL;
-  const verify=document.getElementById('cardVerify');
-  if(e._simulated||!e.txHash||e.txHash.startsWith('SIM-')){
-    verify.href='#';
-    verify.classList.add('dis');
-  }else{
-    verify.href='https://scan.pulsechain.com/tx/'+e.txHash;
-    verify.classList.remove('dis');
-  }
-  const src=document.getElementById('cardSrc');
-  if(e._simulated)src.textContent='◆ SIMULATED — illustrative';
-  else if(e._gt)src.textContent='GeckoTerminal · on-chain verified';
-  else src.textContent='on-chain · PulseChain';
-  card.classList.add('on');
-  clearTimeout(card._t);
-  card._t=setTimeout(()=>card.classList.remove('on'),e._simulated?5000:8000);
-}
-document.getElementById('cardClose').addEventListener('click',()=>card.classList.remove('on'));
-
+const sym=e.pair.otherSymbol,isBuy=e.direction==='OTHER_TO_EROS';
+if(isHubPair(e.pair))return isBuy?'The hub deepens — WPLS trades inward':'The hub releases charge — the core holds';
+const fee=['One swap, three destinations: burn · vault · hub','2% burns forever · 2% earns · 1% deepens the hub','The hole grows, the vault earns, the hub deepens'];
+if(Math.random()<0.35)return fee[Math.floor(Math.random()*fee.length)];
+if(isBuy)return'Energy flows inward from '+sym+' to EROS';
+return'EROS radiates outward to the '+sym+' orbit';}
+/* ═══════ CONSOLE ═══════ */
+const footLore=document.getElementById('footLore'),footData=document.getElementById('footData');
+let lastFoot=null;
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function footEvent(e){
+lastFoot={type:'event',e};footLore.textContent=loreLine(e);
+const isBuy=e.direction==='OTHER_TO_EROS';
+const tag=isBuy?'<span class="tag buy">BUY</span>':'<span class="tag sell">SELL</span>';
+const hubTag=isHubPair(e.pair)?'<span class="tag lp">HUB</span>':'';
+let html='<span class="sym">'+esc(e.pair.otherSymbol)+'</span><span class="arr">'+(isBuy?'→':'←')+'</span>'+
+'<span class="amt">'+fmtAmt(e.amountEros)+' EROS</span>'+tag+hubTag+
+'<span class="tag burn">2% BURN</span><span class="tag vault">2% VAULT</span><span class="tag lp">1% LP</span>';
+if(e.txHash)html+=' · <a href="https://scan.pulsechain.com/tx/'+e.txHash+'" target="_blank" rel="noopener">verify ↗</a>';
+footData.innerHTML=html;}
+function footPool(p){
+lastFoot={type:'pool',p};footLore.textContent=isHubPair(p)?'The hub — where EROS lives and trades':'Orbiting pool · EROS ecosystem';
+footData.innerHTML='<span class="sym">'+esc(p.otherSymbol)+'</span> <span class="arr">◎</span> <span class="amt">$'+fmtBig(p.hubLiq||p.liq||0)+
+'</span> liquidity · 24h vol $'+fmtBig(p.hubVol||p.vol24||0)+' · 24h swaps '+(actOf(p)||'—')+
+(isHubPair(p)?' <span class="tag lp">CORE LP · 1% inflow</span>':'')+
+' · <a href="https://scan.pulsechain.com/address/'+p.address+'" target="_blank" rel="noopener">pool ↗</a>';}
 function onSwap(e,isLive){
-  const planet=planets.find(p=>p.pair.address.toLowerCase()===e.pair.address.toLowerCase());
-  if(!planet)return;
-  planet.pulse=1;planet.glow=1;
-  if(isLive){liveCount++;toast('LIVE · '+e.pair.otherSymbol)}
-  pulseGod('rashen');
-  if(e.direction==='EROS_TO_OTHER')pulseGod('thoth');
-  if(e.pair.isHelios){pulseGod('eros');heliosFlare=1;sunPulse=1;pinchWaves.push({t:0,hue:310,maxR:280});petroglyph.t=1;petroglyph.active=true}
-  else sunPulse=Math.max(sunPulse,0.28);
-  spawnFilament(planet,e.direction,e.pair.isHelios);
-  showAction(e);
-  if(!e._simulated)spawnArbitrage(planet);
-}
-function spawnFilament(planet,direction,isHelios){
-  const fromP=direction==='OTHER_TO_EROS';
-  const x1=fromP?planet.x:cx,y1=fromP?planet.y:cy;
-  const x2=fromP?cx:planet.x,y2=fromP?cy:planet.y;
-  const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1;
-  const perp=26+Math.random()*22;
-  filaments.push({x1,y1,x2,y2,cx:(-dy/len)*perp*(Math.random()>0.5?1:-1),cy:(dx/len)*perp*(Math.random()>0.5?1:-1),t:0,hue:isHelios?310:planet.pair.colours.hue,isHelios,arb:false,ph:Math.random()*Math.PI*2});
-}
-function spawnArbitrage(origin){
-  if(!origin)return;
-  const others=planets.filter(p=>p!==origin&&p.pair.address!==origin.pair.address);
-  if(!others.length)return;
-  const sorted=others.slice().sort((a,b)=>Math.abs(a.baseR-origin.baseR)-Math.abs(b.baseR-origin.baseR));
-  const n=Math.min(3+Math.floor(Math.random()*3),sorted.length);
-  const targets=sorted.slice(0,Math.max(n,3)).sort(()=>Math.random()-0.5).slice(0,n);
-  arbitrageActive=2.2;
-  targets.forEach((p,i)=>{
-    setTimeout(()=>{
-      const fp=Math.random()>0.5;
-      filaments.push({x1:fp?p.x:cx,y1:fp?p.y:cy,x2:fp?cx:p.x,y2:fp?cy:p.y,cx:(Math.random()-0.5)*70,cy:(Math.random()-0.5)*70,t:0,hue:38,isHelios:false,arb:true,ph:Math.random()*Math.PI*2});
-      ripples.push({x:p.x,y:p.y,r:p.r+4,maxR:70,t:0,hue:38});
-      p.arb=1;
-    },320+i*130);
-  });
-  showArbAction(n);
-}
-
+if(mode==='live')noteLiveActivity();
+const addr=e.pair.address.toLowerCase();
+const match=p=>{const hs=p.pair.hubAddresses;return hs?hs.some(a=>a===addr):p.pair.address.toLowerCase()===addr;};
+let body=planets.find(match)||asteroids.find(match);
+if(!body)return;
+if(asteroids.includes(body))body=promoteToPlanet(body);
+const planet=body;
+planet.pulse=1;planet.glow=1;
+if(isLive)toast('LIVE · '+esc(e.pair.otherSymbol));
+const ae=e.amountEros||0;
+sunPulse=Math.max(sunPulse,Math.min(1,0.25+Math.log10(1+ae)/8));
+spawnFilament(planet,e.direction);
+sessBurn+=ae*0.02;sessVault+=ae*0.02;sessLP+=ae*0.01;
+feeFlash(['burn']);setTimeout(()=>feeFlash(['vault','lp']),180);
+spawnBurnFilament(planet,Math.min(0.9,Math.log10(1+ae)/6));
+spawnVaultFilament(planet);
+spawnCoreFilament(planet);
+footEvent(e);}
+function spawnFilament(planet,direction){
+if(!planet||!isFinite(planet.x))return;
+const fromP=direction==='OTHER_TO_EROS';
+const x1=fromP?planet.x:cx,y1=fromP?planet.y:cy,x2=fromP?cx:planet.x,y2=fromP?cy:planet.y;
+const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1;const perp=26+Math.random()*22;
+filaments.push({x1,y1,x2,y2,cx:(-dy/len)*perp*(Math.random()>0.5?1:-1),cy:(dx/len)*perp*(Math.random()>0.5?1:-1),
+t:0,hue:planet.pair.colours.hue,ph:Math.random()*Math.PI*2,pl:planet,pe:fromP?'s':'e',buy:fromP});}
 let toastTimer=null;
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.innerHTML=msg;
-  t.classList.add('on');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('on'),2400);
-}
-
+function toast(msg){const t=document.getElementById('toast');t.innerHTML=msg;t.classList.add('on');
+clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),2400);}
+/* ═══════ REPLAY → LIVE ═══════ */
+function replayDelayFor(e){const amt=Math.abs(Number(e.amountEros)||0);let ms=REPLAY_MS;
+if(amt>80000)ms=Math.round(REPLAY_MS*1.85);else if(amt>25000)ms=Math.round(REPLAY_MS*1.45);else if(amt>8000)ms=Math.round(REPLAY_MS*1.2);
+return ms;}
+function replaySpanText(){
+if(!history.length)return'';
+const first=history[0].blockNumber||0,last=history[history.length-1].blockNumber||0;
+const blocks=Math.max(0,last-first);const hours=blocks*10/3600;
+if(hours<0.1)return history.length+' swaps · single block range';
+if(hours<1)return history.length+' swaps · ~'+Math.round(hours*60)+'m';
+if(hours<48)return history.length+' swaps · ~'+hours.toFixed(1)+'h';
+return history.length+' swaps · ~'+(hours/24).toFixed(1)+'d';}
 function startReplay(){
-  mode='replay';
-  historyIndex=-1;
-  if(history.length>1){
-    const first=history[0].blockNumber||0;
-    const last=history[history.length-1].blockNumber||0;
-    const realSec=(last-first)*10;
-    const replaySec=(history.length*REPLAY_MS)/1000;
-    replaySpeed=Math.max(1,realSec/replaySec);
-  }
-  setMode('replay','HISTORICAL REPLAY',history.length+' on-chain swaps · ~'+fmtSpeed(replaySpeed)+' speed');
-  const step=()=>{
-    historyIndex++;
-    if(historyIndex>=history.length){stopReplay();goLive();return}
-    onSwap(history[historyIndex],false);
-    setMode('replay','HISTORICAL REPLAY',(historyIndex+1)+'/'+history.length+' · ~'+fmtSpeed(replaySpeed)+' speed');
-  };
-  step();
-  replayTimer=setInterval(step,REPLAY_MS);
-}
-function stopReplay(){if(replayTimer){clearInterval(replayTimer);replayTimer=null}}
+const sb=document.getElementById('skipBtn'),ab=document.getElementById('againBtn');
+sb.hidden=false;ab.hidden=true;
+sb.onclick=()=>{stopReplay();goLive();};
+mode='replay';historyIndex=-1;
+if(history.length>1){const first=history[0].blockNumber||0,last=history[history.length-1].blockNumber||0;
+replaySpeed=Math.max(1,(last-first)*10/((history.length*REPLAY_MS)/1000));replaySpanH=replaySpanText();}
+setMode('replay','REPLAY · CINEMA',history.length+' real on-chain events · '+replaySpanH);
+const step=()=>{historyIndex++;
+if(historyIndex>=history.length){stopReplay();replayComplete();return;}
+const e=history[historyIndex];onSwap(e,false);
+setMode('replay','REPLAY · CINEMA',(historyIndex+1)+'/'+history.length+' · '+replaySpanH);
+replayTimer=setTimeout(step,replayDelayFor(e));};
+step();}
+function replayComplete(){
+setMode('replay','REPLAY · COMPLETE',history.length+' beats · '+replaySpanH);
+const ab=document.getElementById('againBtn');ab.hidden=false;
+ab.onclick=()=>{ab.hidden=true;startReplay();};
+setTimeout(goLive,900);}
+function stopReplay(){if(replayTimer){clearTimeout(replayTimer);clearInterval(replayTimer);replayTimer=null;}}
 function goLive(){
-  stopReplay();mode='live';
-  setMode('live','LIVE · real-time','watching '+pairs.length+' pools');
-  toast('Handoff to <b>live</b> · real-time on-chain events');
-  if(queuedDuringReplay.length){
-    queuedDuringReplay.forEach(e=>onSwap(e,true));
-    queuedDuringReplay=[];
-  }
-}
-
+const sb=document.getElementById('skipBtn');if(sb)sb.hidden=true;
+stopReplay();mode='live';
+const pill=document.getElementById('modePill');pill.classList.remove('sweep');void pill.offsetWidth;pill.classList.add('sweep');
+setMode('live','PULSE · LIVE',pairs.length+' pools · live when the chain speaks');
+toast('Pulse mode — <b>listening live</b>');
+if(queuedDuringReplay.length){queuedDuringReplay.forEach((e,i)=>setTimeout(()=>onSwap(e,true),i*900));queuedDuringReplay=[];}
+lastEcho=Date.now();}
+function noteLiveActivity(){lastEcho=Date.now();}
 function listenLive(){
-  try{
-    if(wsProvider){try{wsProvider.destroy()}catch(_){}}
-    wsProvider=new ethers.providers.WebSocketProvider(RPC_WS[0]);
-    wsProvider.on({address:pairs.map(p=>p.address),topics:[SWAP_TOPIC]},(log)=>{
-      const e=decodeSwap(log);
-      if(!e)return;
-      if(mode==='replay'){queuedDuringReplay.push(e);return}
-      if(mode==='live')onSwap(e,true);
-    });
-    const ws=wsProvider._websocket;
-    if(ws){
-      ws.onopen=()=>{wsRetries=0;if(pollTimer){clearInterval(pollTimer);pollTimer=null}};
-      ws.onclose=()=>{
-        if(mode!=='live')return;
-        const delay=Math.min(20000,1500*Math.pow(2,wsRetries++));
-        setMode('warn','RECONNECTING',Math.round(delay/1000)+'s');
-        setTimeout(()=>{if(wsRetries>4){poll();return}try{listenLive()}catch(_){poll()}},delay);
-      };
-      ws.onerror=()=>{if(mode==='live')poll()};
-    }
-  }catch(e){poll()}
-}
+try{if(wsProvider){try{wsProvider.destroy();}catch(_){}}
+wsProvider=new ethers.providers.WebSocketProvider(RPC_WS[0]);
+wsProvider.on({address:pairs.map(p=>p.address),topics:[SWAP_TOPIC]},(log)=>{const e=decodeSwap(log);if(!e)return;
+if(mode==='replay'){queuedDuringReplay.push(e);return;}if(mode==='live')onSwap(e,true);});
+const ws=wsProvider._websocket;
+if(ws){ws.onopen=()=>{wsRetries=0;srcMark('rpc',true);if(pollTimer){clearInterval(pollTimer);pollTimer=null;}};
+ws.onclose=()=>{const delay=Math.min(20000,1500*Math.pow(2,wsRetries++));if(mode==='live')setMode('warn','RECONNECTING',Math.round(delay/1000)+'s');
+setTimeout(()=>{if(wsRetries>4){poll();return;}try{listenLive();}catch(_){poll();}},delay);};
+ws.onerror=()=>{if(mode==='live')poll();};}}catch(e){poll();}}
 function poll(){
-  if(pollTimer)return;
-  setMode('warn','POLLING','8s interval');
-  let last=currentBlock;
-  pollTimer=setInterval(async()=>{
-    try{
-      const cur=await blockNum();
-      if(cur<=last)return;
-      const logs=await getLogs(pairs.map(p=>p.address),last+1,cur);
-      for(const log of logs){
-        const e=decodeSwap(log);
-        if(!e)continue;
-        if(mode==='replay')queuedDuringReplay.push(e);
-        else if(mode==='live')onSwap(e,true);
-      }
-      last=cur;currentBlock=cur;
-    }catch(e){}
-  },8000);
-}
-
-let lastFrame=0;
+if(pollTimer)return;if(mode==='live')setMode('warn','POLLING','8s interval');
+let last=currentBlock;
+pollTimer=setInterval(async()=>{try{const cur=await blockNum();if(!last)last=cur-1;if(cur<=last)return;
+const logs=await getLogs(pairs.map(p=>p.address),last+1,cur);
+for(const log of logs){const e=decodeSwap(log);if(!e)continue;if(mode==='replay')queuedDuringReplay.push(e);else if(mode==='live')onSwap(e,true);}
+last=cur;currentBlock=cur;}catch(e){}},8000);}
+/* ═══════ RENDER ═══════ */
 function render(t){
-  const dt=Math.min(t-lastFrame,60);
-  lastFrame=t;
-  viewZoom+=(targetZoom-viewZoom)*0.12;
-  cx=W/2+viewPan.x;cy=H/2+viewPan.y;
-  ctx.fillStyle='rgba(6,5,13,0.28)';
-  ctx.fillRect(0,0,W,H);
-  drawNebulae();drawStars(t);drawPolarAxis(t);
-  const scx=cx,scy=cy;
-  ctx.save();
-  ctx.translate(scx,scy);ctx.scale(viewZoom,viewZoom);ctx.translate(-scx,-scy);
-  drawOrbits(scx,scy);drawSun(t,scx,scy);drawPlanets(t,scx,scy);drawRipples();drawFilaments(dt);drawPinchWaves();drawPetroglyph();
-  ctx.restore();
-  sunPulse*=0.94;heliosFlare*=0.955;arbitrageActive*=0.985;
-  for(const p of planets){p.pulse*=0.92;p.glow*=0.93;p.arb*=0.94}
-  requestAnimationFrame(render);
-}
-function drawNebulae(){
-  for(const n of nebulae){
-    const nx=n.x+viewPan.x*0.06,ny=n.y+viewPan.y*0.06;
-    const g=ctx.createRadialGradient(nx,ny,0,nx,ny,n.r);
-    g.addColorStop(0,`hsla(${n.hue},70%,55%,${n.a})`);
-    g.addColorStop(1,`hsla(${n.hue},70%,40%,0)`);
-    ctx.fillStyle=g;
-    ctx.beginPath();ctx.arc(nx,ny,n.r,0,Math.PI*2);ctx.fill();
-  }
-}
-function drawStars(t){
-  for(const s of stars){
-    const tw=0.5+0.5*Math.sin(t/1700+s.tw);
-    ctx.fillStyle=`hsla(${s.hue},50%,85%,${s.a*tw})`;
-    ctx.beginPath();ctx.arc(s.x+viewPan.x*0.1,s.y+viewPan.y*0.1,s.r,0,Math.PI*2);ctx.fill();
-  }
-}
+if(!visible){rafHandle=null;return;}
+const dt=Math.min(t-lastFrame,60);frameDt=dt||16.7;lastFrame=t;
+viewZoom+=(targetZoom-viewZoom)*0.12;
+cx=W/2+viewPan.x;cy=hudTop+(H-hudTop-hudBot)/2+viewPan.y;
+ctx.fillStyle='rgba(5,3,11,0.28)';ctx.fillRect(0,0,W,H);
+drawNebulae();drawStars(t);drawPolarAxis(t);
+ctx.save();ctx.translate(cx,cy);ctx.scale(viewZoom,viewZoom);ctx.translate(-cx,-cy);
+drawOrbits(t);drawSun(t);drawVault();drawBlackHole();drawAsteroids(t);drawPlanets(t);drawRipples();drawFilaments(dt);
+ctx.restore();
+burnFlare*=0.965;vaultFlash*=0.95;vaultCoin*=0.93;sunPulse*=0.94;lpFlash*=0.94;
+const pm=document.getElementById('pulseMotif');
+if(pm)pm.style.opacity=String(0.1+sunPulse*0.18);
+for(const p of planets){p.pulse*=0.92;p.glow*=0.93;}
+for(const a of asteroids){a.pulse*=0.92;a.glow*=0.93;}
+rafHandle=requestAnimationFrame(render);}
+document.addEventListener('visibilitychange',()=>{
+if(document.hidden){visible=false;if(rafHandle){cancelAnimationFrame(rafHandle);rafHandle=null;}}
+else if(!visible){visible=true;lastFrame=performance.now();rafHandle=requestAnimationFrame(render);}});
+function drawNebulae(){for(const n of nebulae){const nx=n.x+viewPan.x*0.06,ny=n.y+viewPan.y*0.06;
+const g=ctx.createRadialGradient(nx,ny,0,nx,ny,n.r);g.addColorStop(0,'hsla('+n.hue+',75%,55%,'+n.a+')');g.addColorStop(1,'hsla('+n.hue+',75%,40%,0)');
+ctx.fillStyle=g;ctx.beginPath();ctx.arc(nx,ny,n.r,0,Math.PI*2);ctx.fill();}}
+function drawStars(t){for(const s of stars){const tw=0.5+0.5*Math.sin(t/1700+s.tw);
+ctx.fillStyle='hsla('+s.hue+',50%,85%,'+(s.a*tw)+')';ctx.beginPath();ctx.arc(s.x+viewPan.x*0.1,s.y+viewPan.y*0.1,s.r,0,Math.PI*2);ctx.fill();}}
 function drawPolarAxis(t){
-  const px=cx+viewPan.x*0.05;
-  const intensity=0.04+sunPulse*0.09+heliosFlare*0.14+arbitrageActive*0.07;
-  const g=ctx.createLinearGradient(px,H*0.28,px,cy);
-  g.addColorStop(0,'rgba(90,184,212,0)');
-  g.addColorStop(0.4,`rgba(90,184,212,${intensity})`);
-  g.addColorStop(0.75,`rgba(196,122,184,${intensity*0.6})`);
-  g.addColorStop(1,'rgba(196,122,184,0)');
-  ctx.fillStyle=g;
-  const w=18+Math.sin(t/2800)*3;
-  ctx.fillRect(px-w/2,H*0.28,w,cy-H*0.28);
-  for(let i=0;i<3;i++){
-    const ry=H*0.32+i*42;
-    if(ry>=cy-30)break;
-    ctx.strokeStyle=`rgba(90,184,212,${intensity*(0.35-i*0.1)})`;
-    ctx.lineWidth=1;
-    ctx.beginPath();ctx.ellipse(px,ry,14+i*5,4+i*2,0,0,Math.PI*2);ctx.stroke();
-  }
-}
-function drawOrbits(scx,scy){
-  const seen=new Set();
-  for(const p of planets){
-    const k=Math.round(p.baseR);
-    if(seen.has(k))continue;
-    seen.add(k);
-    const g=ctx.createRadialGradient(scx,scy,p.baseR*0.9,scx,scy,p.baseR*1.1);
-    g.addColorStop(0,'rgba(90,184,212,0)');
-    g.addColorStop(0.5,'rgba(90,184,212,0.045)');
-    g.addColorStop(1,'rgba(90,184,212,0)');
-    ctx.strokeStyle=g;ctx.lineWidth=1;
-    ctx.beginPath();ctx.arc(scx,scy,p.baseR,0,Math.PI*2);ctx.stroke();
-  }
-}
-function drawSun(t,scx,scy){
-  const r=(42)*(1+sunPulse*0.32+Math.sin(t/1000)*0.015);
-  if(arbitrageActive>0.05){
-    ctx.strokeStyle=`rgba(217,154,58,${arbitrageActive*0.45})`;
-    ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.arc(scx,scy,r*3.2,0,Math.PI*2);ctx.stroke();
-  }
-  const cor=ctx.createRadialGradient(scx,scy,r*0.5,scx,scy,r*5.5);
-  cor.addColorStop(0,'rgba(90,184,212,0.28)');
-  cor.addColorStop(0.3,'rgba(90,184,212,0.1)');
-  cor.addColorStop(0.6,'rgba(196,122,184,0.05)');
-  cor.addColorStop(1,'rgba(90,184,212,0)');
-  ctx.fillStyle=cor;
-  ctx.beginPath();ctx.arc(scx,scy,r*5.5,0,Math.PI*2);ctx.fill();
-  ctx.strokeStyle=`rgba(90,184,212,${0.1+sunPulse*0.2})`;
-  ctx.lineWidth=1.2;
-  ctx.beginPath();ctx.arc(scx,scy,r*2.5,0,Math.PI*2);ctx.stroke();
-  if(heliosFlare>0.01){
-    const fg=ctx.createRadialGradient(scx,scy,r*0.6,scx,scy,r*11);
-    fg.addColorStop(0,`rgba(248,245,255,${heliosFlare*0.9})`);
-    fg.addColorStop(0.25,`rgba(196,122,184,${heliosFlare*0.55})`);
-    fg.addColorStop(0.6,`rgba(90,184,212,${heliosFlare*0.28})`);
-    fg.addColorStop(1,'rgba(196,122,184,0)');
-    ctx.fillStyle=fg;
-    ctx.beginPath();ctx.arc(scx,scy,r*11,0,Math.PI*2);ctx.fill();
-  }
-  const gl=ctx.createRadialGradient(scx,scy,0,scx,scy,r*1.6);
-  gl.addColorStop(0,'rgba(255,240,210,0.9)');
-  gl.addColorStop(0.4,'rgba(240,180,80,0.5)');
-  gl.addColorStop(0.75,'rgba(230,120,60,0.16)');
-  gl.addColorStop(1,'rgba(220,80,30,0)');
-  ctx.fillStyle=gl;
-  ctx.beginPath();ctx.arc(scx,scy,r*1.6,0,Math.PI*2);ctx.fill();
-  const cr=ctx.createRadialGradient(scx-r*0.28,scy-r*0.28,0,scx,scy,r);
-  cr.addColorStop(0,'#fffdf5');
-  cr.addColorStop(0.25,'#fdeec0');
-  cr.addColorStop(0.5,'#e8c547');
-  cr.addColorStop(0.8,'#d4952d');
-  cr.addColorStop(1,'#a55e1a');
-  ctx.fillStyle=cr;
-  ctx.beginPath();ctx.arc(scx,scy,r,0,Math.PI*2);ctx.fill();
-  ctx.save();
-  ctx.shadowColor='rgba(80,30,0,0.9)';ctx.shadowBlur=3;
-  ctx.fillStyle='rgba(40,18,0,0.85)';
-  ctx.font='bold 13px Georgia,serif';
-  ctx.textAlign='center';ctx.textBaseline='middle';
-  ctx.fillText('EROS',scx,scy);
-  ctx.restore();
-}
-function drawPlanets(t,scx,scy){
-  for(const p of planets){
-    const speed=p.pair.isHelios?16000:21000+p.baseR*36;
-    p.angle+=(1/60)*(60000/speed)*0.016;
-    p.x=scx+Math.cos(p.angle)*p.baseR;
-    p.y=scy+Math.sin(p.angle)*p.baseR;
-    const isH=hovered===p;
-    const pr=p.r*(1+p.pulse*0.55)*(isH?1.22:1);
-    const c=p.pair.colours;
-    if(p.arb>0.05){
-      ctx.strokeStyle=`rgba(217,154,58,${p.arb*0.6})`;
-      ctx.lineWidth=1.5;
-      ctx.beginPath();ctx.arc(p.x,p.y,pr+5,0,Math.PI*2);ctx.stroke();
-    }
-    if(p.pair.isHelios){
-      ctx.strokeStyle=`rgba(196,122,184,${0.42+p.glow*0.4})`;
-      ctx.lineWidth=1.4;
-      ctx.setLineDash([4,4]);
-      ctx.beginPath();ctx.arc(p.x,p.y,pr+6,0,Math.PI*2);ctx.stroke();
-      ctx.setLineDash([]);
-      const fa=t*0.004;
-      ctx.strokeStyle=`rgba(196,122,184,${0.25+p.glow*0.35})`;
-      ctx.lineWidth=0.9;
-      for(let i=0;i<4;i++){
-        const a=fa+(Math.PI/2)*i;
-        ctx.beginPath();
-        ctx.moveTo(p.x+Math.cos(a)*pr*1.3,p.y+Math.sin(a)*pr*1.3);
-        ctx.lineTo(p.x+Math.cos(a)*pr*2.1,p.y+Math.sin(a)*pr*2.1);
-        ctx.stroke();
-      }
-    }
-    const glowR=pr*(2.3+p.glow*3.8+p.arb*1.8+(isH?1.1:0));
-    const gg=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,glowR);
-    const alpha=0.38+p.glow*0.45+p.arb*0.28+(isH?0.22:0);
-    gg.addColorStop(0,`hsla(${c.hue},80%,62%,${alpha})`);
-    gg.addColorStop(1,`hsla(${c.hue},80%,55%,0)`);
-    ctx.fillStyle=gg;
-    ctx.beginPath();ctx.arc(p.x,p.y,glowR,0,Math.PI*2);ctx.fill();
-    const bg=ctx.createRadialGradient(p.x-pr*0.35,p.y-pr*0.35,0,p.x,p.y,pr);
-    bg.addColorStop(0,c.core);
-    bg.addColorStop(0.55,c.mid);
-    bg.addColorStop(1,c.edge);
-    ctx.fillStyle=bg;
-    ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);ctx.fill();
-    const logo=logoCache.get(p.pair.other);
-    if(logo&&logo!=='failed'&&logo.complete&&logo.naturalWidth){
-      ctx.save();
-      ctx.beginPath();ctx.arc(p.x,p.y,pr*0.92,0,Math.PI*2);ctx.clip();
-      const s=pr*1.84;
-      ctx.drawImage(logo,p.x-s/2,p.y-s/2,s,s);
-      ctx.restore();
-      const vg=ctx.createRadialGradient(p.x,p.y,pr*0.55,p.x,p.y,pr);
-      vg.addColorStop(0,'rgba(6,5,13,0)');
-      vg.addColorStop(1,'rgba(6,5,13,0.4)');
-      ctx.fillStyle=vg;
-      ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);ctx.fill();
-    }
-    ctx.strokeStyle=`hsla(${c.hue},70%,82%,0.4)`;
-    ctx.lineWidth=1.1;
-    ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);ctx.stroke();
-    if(isH||p.pair.isHelios||viewZoom>0.9){
-      ctx.fillStyle=isH?'#fff':`hsla(${c.hue},60%,88%,0.72)`;
-      ctx.font=isH?'bold 11.5px sans-serif':'10px sans-serif';
-      ctx.textAlign='center';ctx.textBaseline='top';
-      ctx.fillText(p.pair.otherSymbol,p.x,p.y+pr+4);
-    }
-  }
-}
-function drawRipples(){
-  for(let i=ripples.length-1;i>=0;i--){
-    const r=ripples[i];
-    r.t+=0.02;
-    if(r.t>=1){ripples.splice(i,1);continue}
-    const rad=r.r+r.t*(r.maxR-r.r);
-    const a=(1-r.t)*0.5;
-    ctx.strokeStyle=`hsla(${r.hue},85%,58%,${a})`;
-    ctx.lineWidth=1.4;
-    ctx.beginPath();ctx.arc(r.x,r.y,rad,0,Math.PI*2);ctx.stroke();
-  }
-}
+const px=cx+viewPan.x*0.05;const intensity=0.04+sunPulse*0.12;
+const g=ctx.createLinearGradient(px,H*0.28,px,cy);
+g.addColorStop(0,'rgba(53,224,255,0)');g.addColorStop(0.4,'rgba(53,224,255,'+intensity+')');
+g.addColorStop(0.75,'rgba(255,79,216,'+(intensity*0.6)+')');g.addColorStop(1,'rgba(255,79,216,0)');
+ctx.fillStyle=g;const w=18+Math.sin(t/2800)*3;ctx.fillRect(px-w/2,H*0.28,w,cy-H*0.28);}
+function drawOrbits(t){
+const seen=new Set();
+for(const p of planets){const k=Math.round(p.baseR);if(seen.has(k))continue;seen.add(k);
+const tier=p.tier||0;const alpha=0.06+tier*0.012+sunPulse*0.04;
+ctx.strokeStyle='rgba(201,162,39,'+(alpha*0.4)+')';ctx.lineWidth=1;
+ctx.beginPath();ctx.ellipse(cx,cy,p.baseR,p.baseR*TILT,0,0,Math.PI*2);ctx.stroke();
+ctx.strokeStyle='rgba(90,184,212,'+alpha+')';ctx.lineWidth=1.1;
+ctx.beginPath();ctx.ellipse(cx,cy,p.baseR-3,p.baseR*TILT-3*TILT,0,0,Math.PI*2);ctx.stroke();
+const sa=t/5200+tier*1.7;
+ctx.strokeStyle='rgba(53,224,255,'+(0.12+sunPulse*0.12)+')';ctx.lineWidth=1.6;
+ctx.beginPath();ctx.ellipse(cx,cy,p.baseR,p.baseR*TILT,0,sa,sa+0.7);ctx.stroke();}}
+function drawSun(t){
+const S=sceneScale();const r=42*S*(1+sunPulse*0.36+Math.sin(t/1000)*0.018);
+const cor=ctx.createRadialGradient(cx,cy,r*0.5,cx,cy,r*5.5);
+cor.addColorStop(0,'rgba(53,224,255,0.26)');cor.addColorStop(0.3,'rgba(53,224,255,0.1)');
+cor.addColorStop(0.6,'rgba(255,79,216,0.06)');cor.addColorStop(1,'rgba(53,224,255,0)');
+ctx.fillStyle=cor;ctx.beginPath();ctx.arc(cx,cy,r*5.5,0,Math.PI*2);ctx.fill();
+const gl=ctx.createRadialGradient(cx,cy,0,cx,cy,r*1.6);
+gl.addColorStop(0,'rgba(255,240,210,0.9)');gl.addColorStop(0.4,'rgba(240,180,80,0.5)');
+gl.addColorStop(0.75,'rgba(230,120,60,0.16)');gl.addColorStop(1,'rgba(220,80,30,0)');
+ctx.fillStyle=gl;ctx.beginPath();ctx.arc(cx,cy,r*1.6,0,Math.PI*2);ctx.fill();
+const cr=ctx.createRadialGradient(cx-r*0.28,cy-r*0.28,0,cx,cy,r);
+cr.addColorStop(0,'#fffdf5');cr.addColorStop(0.25,'#fdeec0');cr.addColorStop(0.5,'#e8c547');cr.addColorStop(0.8,'#d4952d');cr.addColorStop(1,'#a55e1a');
+ctx.fillStyle=cr;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+drawHeartSigil(cx,cy,r*0.52,'rgba(58,22,0,0.85)',1.6*S,0.9,true);
+ctx.save();ctx.shadowColor='rgba(80,30,0,0.9)';ctx.shadowBlur=3;
+ctx.fillStyle='rgba(40,18,0,0.85)';ctx.font='700 '+Math.round(9*S)+'px ui-monospace,Menlo,monospace';
+ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('EROS',cx,cy+r*0.78);ctx.restore();}
+function drawAsteroids(t){
+const S=sceneScale();
+for(const a of asteroids){
+a.angle+=a.speed*frameDt;
+a.x=cx+Math.cos(a.angle)*a.baseR;
+a.y=cy+Math.sin(a.angle)*a.baseR*TILT*0.6;
+const c=a.pair.colours;
+if(a.pulse>0.05){ctx.strokeStyle='hsla('+c.hue+',85%,70%,'+(a.pulse*0.7)+')';ctx.lineWidth=1.2;
+ctx.beginPath();ctx.arc(a.x,a.y,(4+a.pulse*6)*S,0,Math.PI*2);ctx.stroke();}
+ctx.fillStyle='hsla('+c.hue+',60%,70%,'+(0.3+a.glow*0.5)+')';
+ctx.beginPath();ctx.arc(a.x,a.y,1.8*S,0,Math.PI*2);ctx.fill();}}
+function drawPlanets(t){
+const order=planets.slice().sort((a,b)=>a.y-b.y);
+for(const p of order){
+const speed=21000+p.baseR*36;
+p.angle+=(frameDt/16.7)*(1/60)*(60000/speed)*0.016;
+p.x=cx+Math.cos(p.angle)*p.baseR;
+p.y=cy+Math.sin(p.angle)*p.baseR*TILT;
+const depth=1+0.15*Math.sin(p.angle);
+const isH=hovered===p;
+const pr=p.r*depth*(1+p.pulse*0.55)*(isH?1.22:1);
+const c=p.pair.colours;
+const glowR=pr*(2.3+p.glow*3.8+(isH?1.1:0));
+const gg=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,glowR);
+const alpha=0.38+p.glow*0.45+(isH?0.22:0);
+gg.addColorStop(0,'hsla('+c.hue+',80%,62%,'+alpha+')');gg.addColorStop(1,'hsla('+c.hue+',80%,55%,0)');
+ctx.fillStyle=gg;ctx.beginPath();ctx.arc(p.x,p.y,glowR,0,Math.PI*2);ctx.fill();
+if(p.isCore){
+const t2=Date.now();const binAngle=t2/2000;const binR=pr*0.6;
+const x1=p.x+Math.cos(binAngle)*binR,y1=p.y+Math.sin(binAngle)*binR;
+const x2=p.x-Math.cos(binAngle)*binR,y2=p.y-Math.sin(binAngle)*binR;
+const g1=ctx.createRadialGradient(x1,y1,0,x1,y1,pr*0.8);
+g1.addColorStop(0,'#fffdf5');g1.addColorStop(0.5,'#e8c547');g1.addColorStop(1,'rgba(232,197,71,0)');
+ctx.fillStyle=g1;ctx.beginPath();ctx.arc(x1,y1,pr*0.8,0,Math.PI*2);ctx.fill();
+const g2=ctx.createRadialGradient(x2,y2,0,x2,y2,pr*0.8);
+g2.addColorStop(0,'#fff');g2.addColorStop(0.5,'#ff4fd8');g2.addColorStop(1,'rgba(255,79,216,0)');
+ctx.fillStyle=g2;ctx.beginPath();ctx.arc(x2,y2,pr*0.8,0,Math.PI*2);ctx.fill();
+ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+ctx.strokeStyle='rgba(53,224,255,'+(0.35+lpFlash*0.5)+')';ctx.lineWidth=1.6;
+ctx.setLineDash([3,5]);ctx.beginPath();ctx.arc(p.x,p.y,pr+7,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+}else{
+const bg=ctx.createRadialGradient(p.x-pr*0.35,p.y-pr*0.35,0,p.x,p.y,pr);
+bg.addColorStop(0,c.core);bg.addColorStop(0.55,c.mid);bg.addColorStop(1,c.edge);
+ctx.fillStyle=bg;ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);ctx.fill();
+const logo=logoCache.get(p.pair.other);
+if(logo&&logo!=='failed'&&logo.complete&&logo.naturalWidth){
+ctx.save();ctx.beginPath();ctx.arc(p.x,p.y,pr*0.92,0,Math.PI*2);ctx.clip();
+const s=pr*1.84;ctx.drawImage(logo,p.x-s/2,p.y-s/2,s,s);ctx.restore();
+const vg=ctx.createRadialGradient(p.x,p.y,pr*0.55,p.x,p.y,pr);
+vg.addColorStop(0,'rgba(5,3,11,0)');vg.addColorStop(1,'rgba(5,3,11,0.6)');
+ctx.fillStyle=vg;ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);ctx.fill();}
+ctx.strokeStyle='hsla('+c.hue+',70%,82%,0.6)';ctx.lineWidth=2*sceneScale();
+ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);ctx.stroke();
+ctx.strokeStyle='hsla('+c.hue+',70%,90%,0.3)';ctx.lineWidth=1;
+ctx.beginPath();ctx.arc(p.x,p.y,pr-2*sceneScale(),0,Math.PI*2);ctx.stroke();}
+if(isH||p.labelAlways||viewZoom>0.85){
+ctx.fillStyle=isH?'#fff':'hsla('+c.hue+',60%,88%,'+(p.labelAlways&&!isH?0.66:0.8)+')';
+ctx.font=(isH?'700 11px':'10px')+' ui-monospace,Menlo,monospace';
+ctx.textAlign='center';ctx.textBaseline='top';
+ctx.fillText(p.isCore?(p.pair.other===WPLS?'CORE LP · WPLS V1+V2':'CORE LP · '+p.pair.otherSymbol):p.pair.otherSymbol,p.x,p.y+pr+4);
+if(p.isCore){ctx.fillStyle='rgba(53,224,255,0.75)';ctx.font=Math.round(9*sceneScale())+'px ui-monospace,Menlo,monospace';
+ctx.fillText('1% inflow · the hub'+(sessLP>0?' · +'+fmtAmt(sessLP):''),p.x,p.y+pr+17);}}}}
+function drawRipples(){for(let i=ripples.length-1;i>=0;i--){const r=ripples[i];r.t+=0.02;if(r.t>=1){ripples.splice(i,1);continue;}
+const rad=r.r+r.t*(r.maxR-r.r);const a=(1-r.t)*0.5;
+ctx.strokeStyle='hsla('+r.hue+',85%,58%,'+a+')';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(r.x,r.y,rad,0,Math.PI*2);ctx.stroke();}}
 function drawFilaments(dt){
-  for(let i=filaments.length-1;i>=0;i--){
-    const f=filaments[i];
-    f.t+=dt/(f.arb?1600:1400);
-    if(f.t>=1){filaments.splice(i,1);continue}
-    const ease=f.t<0.5?2*f.t*f.t:1-Math.pow(-2*f.t+2,2)/2;
-    const hx=(1-ease)*(1-ease)*f.x1+2*(1-ease)*ease*(f.x1+f.x2)/2+ease*ease*f.x2;
-    const hy=(1-ease)*(1-ease)*f.y1+2*(1-ease)*ease*(f.y1+f.y2)/2+ease*ease*f.y2;
-    const STEPS=f.arb?22:30;
-    const phase=f.ph+f.t*Math.PI*4;
-    const lw=f.arb?1.3:1.8;
-    const sn=f.arb?5:6.5;
-    for(let strand=0;strand<2;strand++){
-      const sign=strand===0?1:-1;
-      ctx.beginPath();
-      for(let s=0;s<=STEPS*ease;s++){
-        const tt=s/STEPS;
-        const bx=(1-tt)*(1-tt)*f.x1+2*(1-tt)*tt*((f.x1+f.x2)/2+f.cx)+tt*tt*f.x2;
-        const by=(1-tt)*(1-tt)*f.y1+2*(1-tt)*tt*((f.y1+f.y2)/2+f.cy)+tt*tt*f.y2;
-        const dx=f.x2-f.x1,dy=f.y2-f.y1;
-        const len=Math.hypot(dx,dy)||1;
-        const px=-dy/len,py=dx/len;
-        const sV=Math.sin(tt*Math.PI*6+phase)*sn*sign;
-        const x=bx+px*sV,y=by+py*sV;
-        if(s===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-      }
-      const a=Math.sin(f.t*Math.PI)*(f.arb?0.65:0.85);
-      ctx.strokeStyle=`hsla(${f.hue},75%,${f.arb?62:(f.isHelios?70:66)}%,${a})`;
-      ctx.lineWidth=lw;
-      ctx.stroke();
-      if(!f.arb){
-        ctx.strokeStyle=`hsla(${f.hue},70%,55%,${a*0.2})`;
-        ctx.lineWidth=4.5;
-        ctx.stroke();
-      }
-    }
-    const hA=Math.sin(f.t*Math.PI);
-    const hg=ctx.createRadialGradient(hx,hy,0,hx,hy,f.arb?9:14);
-    hg.addColorStop(0,`hsla(${f.hue},80%,88%,${hA})`);
-    hg.addColorStop(0.5,`hsla(${f.hue},75%,62%,${hA*0.45})`);
-    hg.addColorStop(1,`hsla(${f.hue},70%,50%,0)`);
-    ctx.fillStyle=hg;
-    ctx.beginPath();ctx.arc(hx,hy,f.arb?9:14,0,Math.PI*2);ctx.fill();
-  }
-}
-function drawPinchWaves(){
-  for(let i=pinchWaves.length-1;i>=0;i--){
-    const w=pinchWaves[i];
-    w.t+=0.011;
-    if(w.t>=1){pinchWaves.splice(i,1);continue}
-    const r=48+w.t*w.maxR;
-    const a=(1-w.t)*0.6;
-    for(let ring=0;ring<4;ring++){
-      const rr=r-ring*16;
-      if(rr<28)continue;
-      ctx.strokeStyle=`hsla(${w.hue-ring*8},75%,${68-ring*6}%,${a-ring*0.1})`;
-      ctx.lineWidth=2.2-ring*0.4;
-      ctx.beginPath();ctx.arc(cx,cy,rr,0,Math.PI*2);ctx.stroke();
-    }
-  }
-}
-function drawPetroglyph(){
-  if(!petroglyph.active)return;
-  petroglyph.t-=0.0075;
-  if(petroglyph.t<=0){petroglyph.active=false;return}
-  const a=petroglyph.t*0.55;
-  const s=95;
-  ctx.save();
-  ctx.translate(cx,cy);
-  ctx.globalAlpha=a;
-  ctx.strokeStyle='#5ab8d4';ctx.lineWidth=2.4;ctx.lineCap='round';
-  ctx.beginPath();ctx.moveTo(0,-s*0.2);ctx.lineTo(0,s*0.3);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,-s*0.4,11,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(0,-s*0.15);ctx.lineTo(-s*0.32,-s*0.38);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(0,-s*0.15);ctx.lineTo(s*0.32,-s*0.38);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(0,s*0.3);ctx.lineTo(-s*0.22,s*0.58);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(0,s*0.3);ctx.lineTo(s*0.22,s*0.58);ctx.stroke();
-  for(let i=0;i<12;i++){
-    const ang=(i/12)*Math.PI*2;
-    ctx.beginPath();
-    ctx.arc(Math.cos(ang)*s*0.92,Math.sin(ang)*s*0.92-s*0.08,2.6,0,Math.PI*2);
-    ctx.fillStyle='#5ab8d4';ctx.fill();
-  }
-  ctx.restore();
-}
-
+for(let i=filaments.length-1;i>=0;i--){const f=filaments[i];
+if(f.pl){if(f.pe==='s'){f.x1=f.pl.x;f.y1=f.pl.y;}else{f.x2=f.pl.x;f.y2=f.pl.y;}}
+if(f.tgt==='hole'){const h=burnAnchor();f.x2=h.x;f.y2=h.y;}
+else if(f.tgt==='vault'){const v=vaultAnchor();f.x2=v.x;f.y2=v.y;}
+else if(f.tgt==='core'&&corePlanet){f.x2=corePlanet.x;f.y2=corePlanet.y;}
+f.t+=dt/1400;
+if(f.t>=1){
+if(f.tgt==='hole')burnFlare=Math.min(1.6,burnFlare+0.3+(f.amt||0));
+else if(f.tgt==='vault'){vaultFlash=1;vaultCoin=1;vaultCoins=Math.min(9,vaultCoins+1);}
+else if(f.tgt==='core'){lpFlash=1;if(corePlanet)corePlanet.glow=1;}
+filaments.splice(i,1);continue;}
+const ease=f.t<0.5?2*f.t*f.t:1-Math.pow(-2*f.t+2,2)/2;
+const hx=(1-ease)*(1-ease)*f.x1+2*(1-ease)*ease*((f.x1+f.x2)/2)+ease*ease*f.x2;
+const hy=(1-ease)*(1-ease)*f.y1+2*(1-ease)*ease*((f.y1+f.y2)/2)+ease*ease*f.y2;
+const STEPS=30,phase=f.ph+f.t*Math.PI*4,lw=1.8,sn=6.5;
+for(let strand=0;strand<2;strand++){const sign=strand===0?1:-1;ctx.beginPath();
+for(let s=0;s<=STEPS*ease;s++){const tt=s/STEPS;
+const bx=(1-tt)*(1-tt)*f.x1+2*(1-tt)*tt*((f.x1+f.x2)/2+f.cx)+tt*tt*f.x2;
+const by=(1-tt)*(1-tt)*f.y1+2*(1-tt)*tt*((f.y1+f.y2)/2+f.cy)+tt*tt*f.y2;
+const dx=f.x2-f.x1,dy=f.y2-f.y1;const len=Math.hypot(dx,dy)||1;const px=-dy/len,py=dx/len;
+const sV=Math.sin(tt*Math.PI*6+phase)*sn*sign;const x=bx+px*sV,y=by+py*sV;
+if(s===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}
+const a=Math.sin(f.t*Math.PI)*0.85;
+const hue=f.burn?12:(f.vault?45:(f.core?190:f.hue));
+const lum=f.burn?58:(f.vault?62:(f.core?68:66));
+ctx.strokeStyle='hsla('+hue+',75%,'+lum+'%,'+a+')';ctx.lineWidth=lw;ctx.stroke();
+ctx.strokeStyle='hsla('+hue+',90%,86%,'+(a*0.55)+')';ctx.lineWidth=lw*0.45;ctx.stroke();
+ctx.strokeStyle='hsla('+hue+',70%,55%,'+(a*0.2)+')';ctx.lineWidth=4.5;ctx.stroke();}
+const hA=Math.sin(f.t*Math.PI);
+const hg=ctx.createRadialGradient(hx,hy,0,hx,hy,14);
+hg.addColorStop(0,'hsla('+f.hue+',80%,88%,'+hA+')');hg.addColorStop(0.5,'hsla('+f.hue+',75%,62%,'+(hA*0.45)+')');hg.addColorStop(1,'hsla('+f.hue+',70%,50%,0)');
+ctx.fillStyle=hg;ctx.beginPath();ctx.arc(hx,hy,14,0,Math.PI*2);ctx.fill();
+if(f.buy)drawHeartSigil(hx,hy,4.6,'#ff4fd8',1.1,hA*0.9,false);}}
+/* ═══════ INTERACTION ═══════ */
 function planetAt(mx,my){
-  const lx=cx+(mx-cx)/viewZoom,ly=cy+(my-cy)/viewZoom;
-  for(let i=planets.length-1;i>=0;i--){
-    const p=planets[i];
-    if(Math.hypot(p.x-lx,p.y-ly)<p.r+18)return p;
-  }
-  return null;
-}
+const lx=cx+(mx-cx)/viewZoom,ly=cy+(my-cy)/viewZoom;
+for(let i=planets.length-1;i>=0;i--){const p=planets[i];if(Math.hypot(p.x-lx,p.y-ly)<p.r+18)return p;}
+for(let i=asteroids.length-1;i>=0;i--){const a=asteroids[i];if(Math.hypot(a.x-lx,a.y-ly)<12)return a;}
+return null;}
 canvas.addEventListener('mousemove',e=>{
-  if(dragging){viewPan.x+=e.clientX-lastPointer.x;viewPan.y+=e.clientY-lastPointer.y;lastPointer={x:e.clientX,y:e.clientY};return}
-  hovered=planetAt(e.clientX,e.clientY);
-  canvas.style.cursor=hovered?'pointer':(dragging?'grabbing':'grab');
-});
-canvas.addEventListener('mousedown',e=>{
-  lastPointer={x:e.clientX,y:e.clientY};
-  dragStart={x:e.clientX,y:e.clientY};
-  const p=planetAt(e.clientX,e.clientY);
-  if(p){pressed=p;hovered=p}
-  else{dragging=true;pressed=null;card.classList.remove('on')}
-});
+if(dragging){viewPan.x+=e.clientX-lastPointer.x;viewPan.y+=e.clientY-lastPointer.y;lastPointer={x:e.clientX,y:e.clientY};return;}
+hovered=planetAt(e.clientX,e.clientY);canvas.style.cursor=hovered?'pointer':'grab';});
+canvas.addEventListener('mousedown',e=>{lastPointer={x:e.clientX,y:e.clientY};dragStart={x:e.clientX,y:e.clientY};
+const p=planetAt(e.clientX,e.clientY);if(p){pressed=p;hovered=p;}else{dragging=true;pressed=null;}});
 window.addEventListener('mouseup',e=>{
-  if(pressed&&dragStart){
-    const moved=Math.hypot(e.clientX-dragStart.x,e.clientY-dragStart.y);
-    if(moved<12){
-      const latest=[...history].reverse().find(h=>h.pair.address===pressed.pair.address);
-      if(latest)showCard(latest);
-      else showCard({pair:pressed.pair,direction:'OTHER_TO_EROS',amountEros:0,amountOther:0,txHash:'',blockNumber:'—',_simulated:true});
-    }
-  }
-  dragging=false;pressed=null;dragStart=null;
-});
-canvas.addEventListener('wheel',e=>{
-  e.preventDefault();
-  targetZoom=Math.max(0.55,Math.min(2.0,targetZoom*(e.deltaY<0?1.1:0.9)));
-},{passive:false});
+if(pressed&&dragStart){const moved=Math.hypot(e.clientX-dragStart.x,e.clientY-dragStart.y);
+if(moved<12){const latest=[...history].reverse().find(h=>h.pair.address===pressed.pair.address);
+if(latest)footEvent(latest);else footPool(pressed.pair);}}
+dragging=false;pressed=null;dragStart=null;});
+canvas.addEventListener('wheel',e=>{e.preventDefault();targetZoom=Math.max(0.55,Math.min(2.0,targetZoom*(e.deltaY<0?1.1:0.9)));},{passive:false});
 canvas.addEventListener('touchstart',e=>{
-  if(e.touches.length===1){
-    e.preventDefault();
-    const t=e.touches[0];
-    lastPointer={x:t.clientX,y:t.clientY};dragStart={x:t.clientX,y:t.clientY};
-    const p=planetAt(t.clientX,t.clientY);
-    if(p){pressed=p;hovered=p}else{dragging=true;pressed=null;card.classList.remove('on')}
-  }else if(e.touches.length===2){
-    const a=e.touches[0],b=e.touches[1];
-    pinchStart=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
-    dragging=false;pressed=null;
-  }
-},{passive:false});
-canvas.addEventListener('touchmove',e=>{
-  e.preventDefault();
-  if(e.touches.length===1&&dragging){
-    const t=e.touches[0];
-    viewPan.x+=t.clientX-lastPointer.x;viewPan.y+=t.clientY-lastPointer.y;
-    lastPointer={x:t.clientX,y:t.clientY};
-  }else if(e.touches.length===2){
-    const a=e.touches[0],b=e.touches[1];
-    const d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
-    if(pinchStart==null)pinchStart=d;
-    targetZoom=Math.max(0.55,Math.min(2.0,targetZoom*(d/pinchStart)));
-    pinchStart=d;
-  }
-},{passive:false});
-canvas.addEventListener('touchend',e=>{
-  e.preventDefault();
-  if(e.touches.length<2)pinchStart=null;
-  const t=e.changedTouches[0];
-  if(pressed&&dragStart&&t){
-    const moved=Math.hypot(t.clientX-dragStart.x,t.clientY-dragStart.y);
-    if(moved<12){
-      const latest=[...history].reverse().find(h=>h.pair.address===pressed.pair.address);
-      if(latest)showCard(latest);
-      else showCard({pair:pressed.pair,direction:'OTHER_TO_EROS',amountEros:0,amountOther:0,txHash:'',blockNumber:'—',_simulated:true});
-    }
-  }
-  dragging=false;pressed=null;dragStart=null;
-},{passive:false});
-
-function makeSim(){
-  if(!pairs.length)return[];
-  const synth=[];
-  const now=currentBlock||28000000;
-  const weighted=[];
-  for(const p of pairs){
-    const w=Math.max(1,Math.round((p.liq||50)/80)+Math.round((p.vol24||0)/20));
-    for(let i=0;i<w;i++)weighted.push(p);
-  }
-  const n=Math.min(HISTORY_TARGET,26+Math.floor(Math.random()*8));
-  for(let i=0;i<n;i++){
-    const p=weighted[Math.floor(Math.random()*weighted.length)]||pairs[i%pairs.length];
-    const isBuy=Math.random()>0.42;
-    const scale=1+Math.log10(Math.max(10,p.liq||50));
-    const ae=(1200+Math.random()*55000)*scale*0.35;
-    const ao=ae*(0.0006+Math.random()*0.035);
-    synth.push({
-      pair:p,direction:isBuy?'OTHER_TO_EROS':'EROS_TO_OTHER',
-      amountEros:ae,amountOther:ao,
-      txHash:'SIM-'+Array.from({length:8},()=>Math.floor(Math.random()*16).toString(16)).join(''),
-      blockNumber:now-(n-i)*90,
-      logIndex:i,_simulated:true
-    });
-  }
-  synth.sort((a,b)=>a.blockNumber-b.blockNumber);
-  return synth;
+if(e.touches.length===1){e.preventDefault();const t=e.touches[0];lastPointer={x:t.clientX,y:t.clientY};dragStart={x:t.clientX,y:t.clientY};
+const p=planetAt(t.clientX,t.clientY);if(p){pressed=p;hovered=p;}else{dragging=true;pressed=null;}}
+else if(e.touches.length===2){const a=e.touches[0],b=e.touches[1];pinchStart=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);dragging=false;pressed=null;}},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();
+if(e.touches.length===1&&dragging){const t=e.touches[0];viewPan.x+=t.clientX-lastPointer.x;viewPan.y+=t.clientY-lastPointer.y;lastPointer={x:t.clientX,y:t.clientY};}
+else if(e.touches.length===2){const a=e.touches[0],b=e.touches[1];const d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
+if(pinchStart==null)pinchStart=d;targetZoom=Math.max(0.55,Math.min(2.0,targetZoom*(d/pinchStart)));pinchStart=d;}},{passive:false});
+canvas.addEventListener('touchend',e=>{e.preventDefault();
+if(e.touches.length<2)pinchStart=null;const t=e.changedTouches[0];
+if(pressed&&dragStart&&t){const moved=Math.hypot(t.clientX-dragStart.x,t.clientY-dragStart.y);
+if(moved<12){const latest=[...history].reverse().find(h=>h.pair.address===pressed.pair.address);
+if(latest)footEvent(latest);else footPool(pressed.pair);}}
+dragging=false;pressed=null;dragStart=null;},{passive:false});
+/* ═══════ DASHBOARD ═══════ */
+const fmt=n=>n.toLocaleString('en-US',{maximumFractionDigits:2});
+const sh=n=>n>=1e9?fmt(n/1e9)+'B':n>=1e6?fmt(n/1e6)+'M':n>=1e3?fmt(n/1e3)+'K':fmt(n);
+const usd=n=>n==null||isNaN(n)?'—':(n<1?'$'+n.toPrecision(3):'$'+sh(n));
+function fmtN(n,d){if(n==null||isNaN(n))return'—';return n.toLocaleString('en-US',{maximumFractionDigits:d==null?0:d});}
+function paintRenounceBadge(){
+const sep=document.getElementById('cRenounceSep'),badge=document.getElementById('cRenounce'),card=document.getElementById('renounceCard');
+if(!ownerInfo){if(sep)sep.hidden=true;if(badge)badge.hidden=true;if(card)card.hidden=true;return;}
+if(ownerInfo.renounced){
+if(sep)sep.hidden=false;if(badge)badge.hidden=false;if(card)card.hidden=false;
+const sub=document.getElementById('dRenounceSub');if(sub)sub.textContent='owner() = '+ZERO_ADDR.slice(0,6)+'…'+ZERO_ADDR.slice(-4);
 }
-
+else{
+if(sep)sep.hidden=true;if(badge)badge.hidden=true;if(card)card.hidden=true;}}
+function paintOwnFacts(){
+const el=document.getElementById('factOwner');
+if(el){
+const row=el;
+if(!ownerInfo){row.className='';row.querySelector('b').textContent='reading…';}
+else if(ownerInfo.error){row.className='';row.querySelector('b').textContent='chain read failed — reload to retry';}
+else if(ownerInfo.renounced){
+row.className='ok';
+row.querySelector('b').innerHTML='<span class="tick">✓ Renounced on-chain.</span> owner() returns '+ZERO_ADDR+' — every onlyOwner function on this contract is permanently unreachable. Verified live from the PulseChain RPC on every load, not taken from the docs.';}
+else{
+row.className='';
+row.querySelector('b').innerHTML='Live owner address: <span style="color:var(--gold-2);font-family:var(--mono);font-size:.78rem;word-break:break-all">'+esc(ownerInfo.addr)+'</span> — this address can still call onlyOwner functions. Verify on PulseScan before trusting any "no admin keys" claim.';}}
+const el2=document.getElementById('factLaunch');
+if(el2){if(!launchInfo){el2.querySelector('b').textContent=currentBlock?'searching…':'waiting for chain…';}
+else{const d=new Date(launchInfo.ts*1000);
+const dateStr=d.toISOString().slice(0,10);
+el2.querySelector('b').innerHTML='Block '+launchInfo.block+' · '+dateStr+' · <span style="color:var(--ink-3)">source: '+launchInfo.src+'</span>';}}}
+function paintDashboard(){
+if(market.burned!=null){
+document.getElementById('dBurn').textContent=fmt(market.burned)+' EROS';
+const p=market.burned/TOTAL_SUPPLY_EROS*100;
+document.getElementById('dBurnPct').textContent=fmt(p,2)+'% of the '+fmt(TOTAL_SUPPLY_EROS,0)+' fixed supply';
+document.getElementById('dBar').style.width=Math.min(p,100)+'%';}
+document.getElementById('dPrice').textContent=market.price!=null?fmtPrice(market.price):'—';
+document.getElementById('dChg').textContent=market.chg!=null?(market.chg>=0?'+':'')+market.chg.toFixed(2)+'% in 24h':'24h';
+document.getElementById('dMcap').textContent=usd(market.mcap);
+if(market.price!=null&&market.burned!=null){
+const adj=market.price*(TOTAL_SUPPLY_EROS-market.burned);
+document.getElementById('dMcapBurn').textContent=usd(adj);}
+else document.getElementById('dMcapBurn').textContent='—';
+document.getElementById('dSupply').textContent=sh(TOTAL_SUPPLY_EROS);
+let liq=0,vol=0;for(const p of pairs){liq+=p.liq||0;vol+=p.vol24||0;}
+document.getElementById('dLiq').textContent=usd(liq);document.getElementById('dVol').textContent=usd(vol);
+document.getElementById('dPools').textContent=pairs.length+' pools tracked';
+document.getElementById('dHolders').textContent=holderCount!=null?fmtN(holderCount):'—';
+document.getElementById('dDead').textContent=deadBal!=null?fmtN(deadBal):'—';
+const dayCard=document.getElementById('dayCard');
+if(launchInfo){const days=Math.max(0,Math.floor((Date.now()-launchInfo.ts*1000)/86400000));
+dayCard.hidden=false;document.getElementById('dDays').textContent='Day '+fmtN(days);}}
+setInterval(paintDashboard,3000);
+/* trades table */
+const ago=ts=>{const x=Math.max(0,Math.round(Date.now()/1000-ts));return x<60?x+'s':x<3600?Math.floor(x/60)+'m':x<86400?Math.floor(x/3600)+'h':Math.floor(x/86400)+'d';};
+function nfT(n,d){if(n==null||isNaN(n))return'—';if(n>=1e9)return fmt(n/1e9)+'B';if(n>=1e6)return fmt(n/1e6)+'M';if(n>=1e3)return fmt(n/1e3)+'K';return n.toLocaleString('en-US',{maximumFractionDigits:d==null?2:d});}
+async function loadTrades(){
+const hubs=pairs.filter(q=>q.other===WPLS);
+const rows=new Map();let gtOk=false;let chainAdded=0;
+await Promise.all(hubs.slice(0,3).map(async q=>{try{
+const r=await fetch(GT_BASE+'/networks/pulsechain/pools/'+q.address+'/trades',{headers:{Accept:'application/json'},cache:'no-store'});
+if(!r.ok)return;const j=await r.json();gtOk=true;
+for(const it of(j.data||[])){const a=it.attributes||{};if(!a.kind||!/^0x[0-9a-fA-F]{64}$/.test(a.tx_hash||''))continue;
+const sent=Math.abs(parseFloat(a.from_token_amount)||0),got=Math.abs(parseFloat(a.to_token_amount)||0);
+const buy=q.erosIsToken0?a.kind==='buy':a.kind==='sell';
+const eros=buy?got:sent,other=buy?sent:got;
+const ts=a.block_timestamp?Date.parse(a.block_timestamp)/1000:null;if(!ts)continue;
+const price=eros>0?other/eros:null;
+rows.set(a.tx_hash+q.address,{ts,buy,eros,other,price,trader:(a.tx_from_address||'').toLowerCase(),usd:parseFloat(a.volume_in_usd)||null,tx:a.tx_hash,src:'gt'});}
+}catch(_){}}));
+for(const e of history){if(!e.pair||e.pair.other!==WPLS||!/^0x[0-9a-fA-F]{64}$/.test(e.txHash||''))continue;
+if([...rows.values()].some(x=>x.tx===e.txHash))continue;
+const ts=e._ts||(currentBlock&&e.blockNumber?Date.now()/1000-(currentBlock-e.blockNumber)*10:null);if(!ts)continue;
+const price=e.amountEros>0?e.amountOther/e.amountEros:null;
+rows.set(e.txHash+e.pair.address,{ts,buy:e.direction==='OTHER_TO_EROS',eros:e.amountEros,other:e.amountOther,price,trader:(e._trader||'').toLowerCase(),usd:null,tx:e.txHash,src:'chain'});chainAdded++;}
+tradeRows=[...rows.values()].sort((a,b)=>b.ts-a.ts).slice(0,30);
+const srcEl=document.getElementById('trSrc');
+srcEl.textContent='The last '+tradeRows.length+' swaps on the WPLS pools, newest first'+(gtOk?' (GeckoTerminal index'+(chainAdded?' plus on-chain logs':'')+')':' (on-chain logs)')+'. Each row links to its PulseChain transaction.';
+paintTrades();}
+function paintTrades(){
+const body=document.getElementById('trBody');if(!body)return;
+body.textContent='';
+const list=tradeFilter==='all'?tradeRows:tradeRows.filter(x=>tradeFilter==='buy'?x.buy:!x.buy);
+if(!list.length){const tr=body.insertRow();const td=tr.insertCell();td.colSpan=8;td.className='empty';
+td.textContent=tradeRows.length?'No trades match this filter.':'No trades found yet. The pools may be quiet, or the source is unreachable.';return;}
+for(const x of list){const tr=body.insertRow();
+tr.insertCell().textContent=ago(x.ts);
+const t=tr.insertCell();t.textContent=x.buy?'Buy':'Sell';t.className=x.buy?'buy':'sell';
+const c1=tr.insertCell();c1.className='n';c1.textContent=nfT(x.eros,0);
+const c2=tr.insertCell();c2.className='n';c2.textContent=nfT(x.other,x.other<1?4:2);
+const c3=tr.insertCell();c3.className='n';c3.textContent=x.price!=null?nfT(x.price,x.price<1?6:4):'—';
+const c4=tr.insertCell();c4.className='n';c4.textContent=x.usd!=null?'$'+nfT(x.usd,2):'—';
+const c5=tr.insertCell();c5.className='n';c5.style.fontSize='.72rem';
+if(x.trader&&/^0x[0-9a-f]{40}$/.test(x.trader))c5.innerHTML='<a href="https://scan.pulsechain.com/address/'+x.trader+'" target="_blank" rel="noopener">'+x.trader.slice(0,6)+'…'+x.trader.slice(-4)+'</a>';
+else c5.textContent='—';
+const c6=tr.insertCell();const a=document.createElement('a');a.target='_blank';a.rel='noopener';
+a.href='https://scan.pulsechain.com/tx/'+x.tx;a.textContent=x.tx.slice(0,8)+'…';c6.appendChild(a);}}
+/* drawer */
+const drawer=document.getElementById('drawer');
+function openDrawer(){drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');paintDashboard();paintOwnFacts();paintRenounceBadge();paintSources();}
+function closeDrawer(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');}
+document.getElementById('dashOpen').addEventListener('click',openDrawer);
+document.getElementById('dashClose').addEventListener('click',closeDrawer);
+document.getElementById('toSky').addEventListener('click',closeDrawer);
+drawer.addEventListener('click',e=>{
+const b=e.target.closest('[data-copy]');if(b){if(navigator.clipboard)navigator.clipboard.writeText(b.dataset.copy).then(()=>{const o=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=o,1200);});return;}
+const f=e.target.closest('#trFilter button');if(f){tradeFilter=f.dataset.f;
+for(const b2 of drawer.querySelectorAll('#trFilter button'))b2.classList.toggle('on',b2===f);
+paintTrades();}});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))closeDrawer();});
+setInterval(()=>{if(tradeRows.length===0&&pairs.length&&mode!=='loading')loadTrades();},3000);
+setInterval(()=>{if(tradeRows.length)loadTrades();},60000);
+/* ═══════ MAIN ═══════ */
 async function main(){
-  requestAnimationFrame(render);
-  setWelcomeStatus('Waking the sun…');
-  sunPulse=0.4;
-  pulseGod('naun');
-
-  setWelcomeStatus('Reading pools from DexScreener and GeckoTerminal…');
-  const[ds,gt]=await Promise.all([fetchDex(),fetchGT()]);
-  let raw=mergePairs(ds,gt);
-  if(!raw.length){const cached=loadCache();if(cached&&cached.length)raw=cached}
-
-  computeMarket(ds.length?ds:raw);
-
-  let sources='—';
-  if(ds.length&&gt.length)sources='DS + GT';
-  else if(ds.length)sources='DexScreener';
-  else if(gt.length)sources='GeckoTerminal';
-  else if(raw.length)sources='cache';
-
-  if(raw.length){
-    pairs=raw;
-    for(const p of pairs)p.colours=pairColours(p);
-    preloadLogos(pairs);
-    buildPlanets();
-    saveCache(pairs.map(p=>({address:p.address,token0:p.token0,token1:p.token1,erosIsToken0:p.erosIsToken0,other:p.other,otherSymbol:p.otherSymbol,isHelios:p.isHelios,liq:p.liq,vol24:p.vol24,logo:p.logo})));
-    document.getElementById('wPools').textContent=pairs.length;
-    document.getElementById('wSrc').textContent=sources;
-    updateAbout(pairs.length,'—',sources);
-    setWelcomeStatus(pairs.length+' pools resolved');
-    if(planets[0])setTimeout(()=>{spawnFilament(planets[0],'OTHER_TO_EROS',planets[0].pair.isHelios);sunPulse=0.5},400);
-  }else{
-    setWelcomeStatus('No pools found — running in demo mode');
-  }
-
-  try{listenLive()}catch(_){poll()}
-
-  setWelcomeStatus('Reading the last 36 on-chain swaps…');
-  let gtH=[],chainH=[];
-  try{
-    const[r1,r2]=await Promise.all([
-      Promise.race([fetchAllTrades(pairs),new Promise(r=>setTimeout(()=>r([]),12000))]),
-      Promise.race([fetchChainHistory(),new Promise(r=>setTimeout(()=>r([]),6000))])
-    ]);
-    gtH=r1;chainH=r2;
-  }catch(_){}
-  crossVerify(gtH,chainH);
-
-  const byKey=new Map();
-  for(const e of gtH)byKey.set(e.txHash||`${e.pair.address}-${e.blockNumber}-${e.amountEros}`,e);
-  for(const e of chainH){
-    const k=e.txHash||`${e.pair.address}-${e.blockNumber}-${e.amountEros}`;
-    byKey.set(k,e);
-  }
-  let hist=Array.from(byKey.values()).sort((a,b)=>(a.blockNumber||0)-(b.blockNumber||0));
-  console.log(`[SpaceEros] History: GT=${gtH.length}, on-chain=${chainH.length}, merged=${hist.length}`);
-  hist=hist.slice(-HISTORY_TARGET);
-
-  isSimulated=hist.length<3&&pairs.length>0;
-  if(isSimulated)hist=makeSim();
-  history=hist;
-
-  document.getElementById('wEvents').textContent=history.length;
-  updateAbout(pairs.length,history.length,sources);
-
-  if(!history.length){
-    setWelcomeStatus('Quiet · waiting for first event');
-    setMode('live','LIVE · real-time','watching '+pairs.length+' pools');
-    mode='live';
-    wEnter.classList.remove('wait');
-    setTimeout(()=>{if(!welcome.classList.contains('hidden'))hideWelcome()},1600);
-    return;
-  }
-
-  if(history.length>1){
-    const first=history[0].blockNumber||0;
-    const last=history[history.length-1].blockNumber||0;
-    const realSec=(last-first)*10;
-    const replaySec=(history.length*REPLAY_MS)/1000;
-    replaySpeed=Math.max(1,realSec/replaySec);
-  }
-  document.getElementById('wSpeed').textContent='~'+fmtSpeed(replaySpeed);
-
-  if(isSimulated){
-    setWelcomeStatus('Historical data sparse — simulation active');
-    setMode('replay','SIMULATION','real pools · illustrative events');
-  }else{
-    setWelcomeStatus(history.length+' real swaps ready · replay at ~'+fmtSpeed(replaySpeed));
-    setMode('replay','READY',history.length+' on-chain swaps · ~'+fmtSpeed(replaySpeed)+' speed');
-  }
-  wEnter.classList.remove('wait');
-
-  let entered=false;
-  const go=()=>{if(entered)return;entered=true;hideWelcome();setTimeout(startReplay,500)};
-  const auto=setTimeout(go,3000);
-  wEnter.addEventListener('click',()=>{clearTimeout(auto);go()});
-  if(welcome.classList.contains('hidden')){clearTimeout(auto);go()}
-}
-
+rafHandle=requestAnimationFrame(render);
+setWelcomeStatus('Waking the sun…');sunPulse=0.4;
+setWelcomeStatus('Reading pools + burn sink 0369…');
+loadSupply().finally(()=>fetchBurnBalance().catch(()=>{}));
+setInterval(()=>fetchBurnBalance().catch(()=>{}),120000);
+loadOwner();
+loadHolders();
+loadDead();
+const[ds,gt]=await Promise.all([fetchDex(),fetchGT()]);
+let raw=mergePairs(ds,gt);
+if(!raw.length){const cached=loadCache();if(cached&&cached.length)raw=cached;}
+computeMarket(ds.length?ds:raw);
+if(raw.length){
+pairs=raw;for(const p of pairs)p.colours=pairColours(p);
+for(const p of pairs)p.act24=p.txns24||0;
+markHub();
+await Promise.race([loadDecimals(pairs),new Promise(x=>setTimeout(x,4000))]);
+preloadLogos(pairs);buildPlanets();
+saveCache(pairs.map(p=>({address:p.address,token0:p.token0,token1:p.token1,erosIsToken0:p.erosIsToken0,other:p.other,otherSymbol:p.otherSymbol,liq:p.liq,vol24:p.vol24,txns24:p.txns24,logo:p.logo})));
+updateAbout(pairs.length,'—');updateVerifyUI();
+setWelcomeStatus(pairs.length+' pools resolved · hub marked');
+if(corePlanet)setTimeout(()=>{spawnFilament(corePlanet,'OTHER_TO_EROS');sunPulse=0.5;},400);
+}else{setWelcomeStatus('No pools found — sources blocked or offline');}
+try{listenLive();}catch(_){poll();}
+loadLaunch();
+setWelcomeStatus('Reading the last 36 on-chain swaps…');
+let gtH=[],chainH=[];
+try{const[r1,r2]=await Promise.all([
+Promise.race([fetchAllTrades(pairs),new Promise(r=>setTimeout(()=>r([]),8000))]),
+Promise.race([fetchChainHistory(),new Promise(r=>setTimeout(()=>r([]),5000))])]);
+gtH=r1;chainH=r2;}catch(_){}
+if(!currentBlock){try{currentBlock=await blockNum();}catch(_){}}
+if(currentBlock)for(const e of gtH)if(e._approx&&e._ts)e.blockNumber=Math.round(currentBlock-(Date.now()/1000-e._ts)/10);
+for(const e of chainH){e.pair.obs=(e.pair.obs||0)+1;}
+for(const p of pairs){p.act24=p.txns24||Math.round((p.obs||0)*0.6);}
+finalizeHub();buildPlanets();
+verifyStat=crossVerify(gtH,chainH);updateVerifyUI();
+const byKey=new Map();
+for(const e of gtH)byKey.set(e.txHash||(e.pair.address+'-'+e.blockNumber+'-'+e.amountEros),e);
+for(const e of chainH)byKey.set(e.txHash||(e.pair.address+'-'+e.blockNumber+'-'+e.amountEros),e);
+let hist=Array.from(byKey.values()).sort((a,b)=>(a.blockNumber||0)-(b.blockNumber||0));
+hist=hist.slice(-HISTORY_TARGET);
+history=hist;
+updateAbout(pairs.length,history.length);
+if(!history.length){
+setWelcomeStatus('Quiet · waiting for first real event');
+if(pairs.length)setMode('live','LIVE · real-time','watching '+pairs.length+' pools');else setMode('warn','NO DATA','sources blocked or offline · open in a normal browser tab');
+mode='live';wEnter.classList.remove('wait');
+setTimeout(()=>{if(!welcome.classList.contains('hidden'))hideWelcome();},1600);return;}
+if(history.length>1){const first=history[0].blockNumber||0,last=history[history.length-1].blockNumber||0;
+replaySpeed=Math.max(1,(last-first)*10/((history.length*REPLAY_MS)/1000));replaySpanH=replaySpanText();}
+setWelcomeStatus(history.length+' real swaps ready · replay at ~'+fmtSpeed(replaySpeed));
+setMode('replay','READY',replaySpanH+' · ~'+fmtSpeed(replaySpeed));
+wEnter.classList.remove('wait');
+let entered=false;
+const go=()=>{if(entered)return;entered=true;hideWelcome();setTimeout(startReplay,500);};
+let left=3;
+const paint=()=>{if(entered)return;try{wEnter.querySelector('span').textContent=left>0?('Enter the sky · '+left+'s'):'Enter the sky';}catch(_){}};
+paint();
+const autoIv=setInterval(()=>{left--;paint();if(left<=0){clearInterval(autoIv);go();}},1000);
+wEnter.addEventListener('click',()=>{clearInterval(autoIv);go();});
+if(welcome.classList.contains('hidden')){clearInterval(autoIv);go();}}
 main().catch(e=>{
-  console.error('FATAL',e);
-  setMode('warn','ERROR',e.message.slice(0,40));
-  setWelcomeStatus('Something went quiet — '+e.message);
-  requestAnimationFrame(render);
-  wEnter.classList.remove('wait');
-  setTimeout(()=>{hideWelcome();goLive()},1500);
-});
+console.error('FATAL',e);
+setMode('warn','ERROR',(e.message||'').slice(0,40));
+setWelcomeStatus('Something went quiet — '+(e.message||''));
+if(!rafHandle)rafHandle=requestAnimationFrame(render);
+wEnter.classList.remove('wait');
+setTimeout(()=>{hideWelcome();goLive();},1500);});
 </script>
 </body>
 </html>
