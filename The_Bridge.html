@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="The Bridge — Field manual for EROS on PulseChain. Tokenomics, Poolonomics, liquidity lessons, risks, playbook. TitanX path. True DeFi. Renounced."/>
+<meta property="og:title" content="The Bridge · EROS · PulseChain · Poolonomics"/>
+<meta property="og:description" content="Finance-grade field manual: what an LP is, pool vs wallet supply, liquidity bonding, Pulseonomics, risks, and how to act."/>
+<meta property="og:type" content="book"/>
+<meta property="og:image" content="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<title>The Bridge · EROS · PulseChain · Poolonomics</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌉</text></svg>"/>
+<style>
+:root{
+  --bg:#080706;--surface:#14110d;--surface2:#1b1712;
+  --ink:#ebe6dc;--soft:#c9c2b0;--muted:#8a8273;
+  --gold:#d4af37;--gold2:#e8c547;--magenta:#d4788a;--cyan:#6a9eaf;
+  --violet:#9a7ab8;--hair:#2a261e;
+  --ember:#ff7a2e;--plasma:#35e0ff;--eros:#ff4fd8;--green:#4ec38a;
+  --serif:Georgia,"Palatino Linotype","Book Antiqua",serif;
+  --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --measure:48rem;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:1rem}
+body{
+  font-family:var(--serif);font-size:1.06rem;line-height:1.8;
+  background:
+    radial-gradient(1100px 520px at 90% -5%, rgba(212,175,55,.08), transparent 55%),
+    radial-gradient(900px 480px at -5% 30%, rgba(53,224,255,.06), transparent 50%),
+    radial-gradient(700px 420px at 100% 85%, rgba(255,79,216,.05), transparent 45%),
+    var(--bg);
+  min-height:100vh;
+}
+html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
+html::before{inset:8px;border:1px solid rgba(212,175,55,.2)}
+html::after{inset:12px;border:1px solid rgba(212,175,55,.09)}
+@media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
+.page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.2rem 5rem}
+#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--plasma),var(--eros));z-index:9999;transition:width .08s linear}
+a{color:#e8c547;text-decoration:none;border-bottom:1px solid rgba(232,197,71,.35);transition:color .15s,border-color .15s}
+a:hover{color:#f0d878;border-bottom-color:rgba(240,216,120,.7)}
+a:visited{color:#d4af37;border-bottom-color:rgba(212,175,55,.28)}
+a:active{color:#ffb84d}
+footer a,.toc a{border-bottom:none}
+footer a:hover,.toc a:hover{border-bottom:1px solid rgba(232,197,71,.45)}
+::selection{background:var(--gold);color:#14110d}
+h1,h2,h3{text-wrap:balance}
+p,li{overflow-wrap:break-word}
+.cover{min-height:86vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem}
+.cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:600}
+.cover h1{font-size:clamp(2.2rem,6vw,3.5rem);font-weight:700;letter-spacing:.08em;color:var(--gold);text-shadow:0 0 48px rgba(212,175,55,.28);margin-bottom:.35rem;line-height:1.1}
+.cover .sub{font-style:italic;font-size:1.05rem;color:var(--soft);margin-bottom:1rem}
+.cover .rule{width:min(280px,60%);height:1px;margin:0 auto 1.4rem;background:linear-gradient(90deg,transparent,var(--gold),var(--plasma),transparent)}
+.cover .opening{font-size:1.05rem;color:var(--soft);max-width:38rem;line-height:1.8;margin-bottom:1.3rem}
+.cover .opening em{color:var(--gold)}
+.cover .seal{padding:1.05rem 1.2rem;border:1px solid rgba(212,175,55,.4);border-radius:12px;background:linear-gradient(150deg,#15120c,#1a160f);font-size:.92rem;color:var(--soft);max-width:36rem;text-align:left;box-shadow:0 10px 36px rgba(0,0,0,.4)}
+.cover .seal strong{color:var(--gold)}
+figure.hero{margin:0 0 1.6rem;text-align:center}
+figure.hero img{max-width:100%;height:auto;border-radius:12px;border:1px solid rgba(212,175,55,.28);box-shadow:0 14px 48px rgba(0,0,0,.55)}
+figure.hero figcaption,figure.plate figcaption{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.55rem;letter-spacing:.04em}
+figure.plate{margin:1.4rem 0;text-align:center}
+figure.plate img{max-width:100%;border-radius:10px;border:1px solid var(--hair)}
+.toc{margin:1.5rem 0 2rem;padding:1.1rem 1.15rem;border:1px solid var(--hair);border-radius:14px;background:var(--surface)}
+.toc h2{font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.toc a{display:flex;gap:.65rem;align-items:baseline;padding:.26rem 0;border:0;color:var(--soft);font-family:var(--sans);font-size:.88rem}
+.toc a:hover{color:var(--gold2)}
+.toc .tn{color:var(--gold);font-weight:700;min-width:1.5rem;font-variant-numeric:tabular-nums}
+.part-break{margin:2.6rem 0 1.3rem;padding:1.2rem 0 .9rem;border-top:1px solid rgba(212,175,55,.22);text-align:center}
+.part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.part-break h2{font-size:clamp(1.4rem,3.4vw,1.8rem);color:var(--ink);letter-spacing:.03em}
+.part-break p{color:var(--muted);font-style:italic;font-size:.93rem;margin-top:.3rem}
+section{margin:0 0 1.6rem}
+section > h2{font-size:1.28rem;color:var(--gold2);margin:1.5rem 0 .65rem;letter-spacing:.02em}
+section > h3{font-size:1.05rem;color:var(--soft);margin:1.15rem 0 .45rem;font-family:var(--sans);font-weight:600}
+p{margin:0 0 .95rem}
+ul,ol{margin:0 0 1rem 1.2rem}
+li{margin:.26rem 0}
+.pull{margin:1.3rem 0;padding:1rem 1.15rem;border-left:3px solid var(--gold);background:rgba(212,175,55,.06);font-style:italic;color:var(--soft);border-radius:0 10px 10px 0}
+.axiom{margin:1.2rem 0;padding:1rem 1.15rem;border:1px solid rgba(212,175,55,.28);border-radius:12px;background:var(--surface);font-size:.94rem}
+.axiom b{color:var(--gold);font-family:var(--sans);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.35rem}
+.note{margin:1rem 0;padding:.85rem 1rem;border:1px dashed rgba(212,175,55,.35);border-radius:10px;font-size:.9rem;color:var(--soft)}
+.note b{color:var(--gold2)}
+.warn{margin:1rem 0;padding:.85rem 1rem;border:1px solid rgba(255,122,46,.4);border-radius:10px;background:rgba(255,122,46,.06);font-size:.9rem;color:var(--soft)}
+.warn b{color:var(--ember)}
+.fee-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:1.2rem 0}
+.fee-card{padding:1rem;border-radius:14px;border:1px solid var(--hair);background:var(--surface);text-align:center}
+.fee-card b{display:block;font-family:var(--sans);font-size:1.6rem;line-height:1.1;margin-bottom:.25rem}
+.fee-card.burn b{color:var(--ember)}
+.fee-card.stake b{color:var(--gold2)}
+.fee-card.lock b{color:var(--violet)}
+.fee-card.lp b{color:var(--plasma)}
+.fee-card h4{font-family:var(--sans);font-size:.86rem;color:var(--ink);margin-bottom:.3rem}
+.fee-card p{font-size:.78rem;color:var(--muted);margin:0;line-height:1.4}
+.facts{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.84rem;margin:1rem 0 1.3rem}
+.facts th,.facts td{border:1px solid var(--hair);padding:.55rem .7rem;text-align:left;vertical-align:top}
+.facts th{background:var(--surface2);color:var(--gold);font-weight:600;letter-spacing:.04em;width:32%}
+.facts td{background:var(--surface);color:var(--soft)}
+.facts code{font-family:var(--mono);font-size:.78rem;color:var(--gold2);word-break:break-all}
+.addr{font-family:var(--mono);font-size:.78rem;word-break:break-all;color:var(--gold2);background:var(--surface2);padding:.55rem .7rem;border-radius:8px;border:1px solid var(--hair);margin:.4rem 0 1rem;display:block}
+.chip-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0}
+.chip{font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;padding:.28rem .65rem;border-radius:999px;border:1px solid var(--hair);color:var(--soft);background:var(--surface)}
+.chip.hot{border-color:rgba(255,79,216,.45);color:var(--eros)}
+.chip.pulse{border-color:rgba(53,224,255,.4);color:var(--plasma)}
+.chip.gold{border-color:rgba(212,175,55,.45);color:var(--gold2)}
+.steps{counter-reset:step;list-style:none;margin:1rem 0 1.2rem;padding:0}
+.steps li{counter-increment:step;position:relative;padding:.7rem .8rem .7rem 2.8rem;margin:.4rem 0;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+.steps li::before{content:counter(step);position:absolute;left:.7rem;top:.75rem;width:1.5rem;height:1.5rem;border-radius:50%;background:rgba(212,175,55,.15);color:var(--gold);font-family:var(--sans);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.lesson{margin:1.4rem 0;padding:1.15rem 1.2rem;border:1px solid var(--hair);border-radius:14px;background:var(--surface)}
+.lesson .ln{font-family:var(--sans);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.lesson h3{font-size:1.12rem;color:var(--ink);margin:0 0 .55rem;font-family:var(--serif)}
+.lesson p:last-child{margin-bottom:0}
+.media-block{margin:1.4rem 0;border:1px solid var(--hair);border-radius:14px;overflow:hidden;background:var(--surface)}
+.media-block video{display:block;width:100%;max-height:min(56vh,420px);background:#000}
+.media-block figcaption{padding:.7rem 1rem .9rem;font-size:.88rem;color:var(--soft);line-height:1.5;border-top:1px solid var(--hair)}
+.media-block figcaption b{color:var(--gold)}
+.space-frame{margin:1.5rem 0;border:1px solid rgba(53,224,255,.35);border-radius:16px;overflow:hidden;background:#05030b;box-shadow:0 0 40px rgba(53,224,255,.08)}
+.space-frame .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:.65rem 1rem;background:linear-gradient(180deg,rgba(53,224,255,.1),transparent);border-bottom:1px solid rgba(255,255,255,.08);font-family:var(--sans);font-size:.78rem}
+.space-frame .bar span{color:var(--plasma);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.space-frame .bar a{border:1px solid rgba(232,197,71,.5);border-radius:999px;padding:.35rem .9rem;color:var(--gold2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.7rem}
+.space-frame .bar a:hover{background:var(--gold);color:#1a0a00;border-color:var(--gold)}
+.space-frame iframe{display:block;width:100%;height:min(72vh,640px);border:0;background:#05030b}
+.space-note{font-size:.82rem;color:var(--muted);margin:.5rem 0 0;font-family:var(--sans)}
+.risk-grid{display:grid;gap:.55rem;margin:1rem 0}
+.risk{padding:.75rem .9rem;border-radius:10px;border:1px solid var(--hair);background:var(--surface);font-size:.9rem}
+.risk b{color:var(--ember);font-family:var(--sans);font-size:.78rem;letter-spacing:.06em}
+.faq details{margin:.45rem 0;border:1px solid var(--hair);border-radius:10px;background:var(--surface);padding:.7rem .9rem}
+.faq summary{cursor:pointer;font-family:var(--sans);font-weight:600;color:var(--gold2);font-size:.92rem}
+.faq details p{margin:.55rem 0 0;font-size:.9rem;color:var(--soft)}
+footer{margin-top:3rem;padding:1.6rem 0 2rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.82rem;color:var(--muted)}
+footer .gold{color:var(--gold)}
+footer a{margin:0 .35rem}
+#toTop{position:fixed;right:1.2rem;bottom:1.2rem;z-index:50;width:42px;height:42px;border-radius:50%;border:1px solid rgba(212,175,55,.4);background:rgba(8,7,6,.85);color:var(--gold);font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(8px)}
+#toTop.show{opacity:1;pointer-events:auto}
+@media(max-width:560px){body{font-size:1.02rem}.space-frame iframe{height:min(62vh,480px)}.toc a{font-size:.84rem}.facts th{width:38%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.thesis{margin:1.5rem 0 1.4rem;padding:1.25rem 1.3rem;border:1px solid rgba(212,175,55,.42);border-radius:14px;background:linear-gradient(160deg,rgba(212,175,55,.09),rgba(53,224,255,.05));text-align:left}
+.thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:.7rem}
+.thesis p{color:var(--ink);margin:0 0 .85rem;font-size:1.02rem;line-height:1.75}
+.thesis p:last-child{margin-bottom:0}
+.how{margin:1rem 0 1.5rem;padding:1rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:.95rem;color:var(--soft)}
+.how strong{color:var(--gold);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
+</style>
+</head>
+<body>
+<div id="progressBar" aria-hidden="true"></div>
+<div class="page" id="main">
+
+<header class="cover">
+  <div class="kick">Field Manual · EROS · PulseChain</div>
+  <h1>THE BRIDGE</h1>
+  <p class="sub">Tokenomics · Poolonomics · Liquidity · Playbook</p>
+  <div class="rule"></div>
+  <p class="opening">This is a <em>finance-grade field manual</em>, not a whitepaper of promises. What an LP is. How pool liquidity differs from wallet supply. Why bonding is not the same as farming a third-party inflation token. How to verify. How to act. Risks included.</p>
+  <div class="seal">
+    <strong>PulseChain native.</strong> EROS is a PRC-20. The pairs are PulseX pairs. TitanX holders received the airdrop path. Lore companions explain <em>why people stay</em>. This book explains <em>how the instrument works</em>.
+  </div>
+</header>
+
+<figure class="hero">
+  <img src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Bridge" width="1200" height="800" loading="eager"/>
+  <figcaption>THE BRIDGE · liquidity as infrastructure</figcaption>
+</figure>
+
+<div class="thesis" id="thesis">
+  <span class="label">What this book is about</span>
+  <p><strong>The Bridge</strong> is the finance-grade field manual for EROS on PulseChain: tokenomics, Poolonomics, liquidity bonding, verification, risks, and playbook. It is not a whitepaper of promises. It is how the instrument works — fee split, renounce, LP vs wallet supply, bridge path, demand equation, and how to act without trusting badges or DMs.</p>
+  <p><strong>Why you should care.</strong> Most people enter crypto through a green candle and leave through a silent chart. This book exists so that if the chart opens the door, you still know what you are holding: fixed supply, 2/1/1/1 flow fee, renounced owner, TitanX airdrop path, multi-pair liquidity web. Verification is the culture. Bonding is intentional LP as network edge — not farming someone else’s inflation token.</p>
+  <p><strong>Who this is for / what this is not.</strong> For holders, LPs, and builders who need the crypto surface stated cleanly. Lore (why people stay long) lives in companions — <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>, <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>, <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>, <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>, <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. Collaboration door: <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>. This volume is the instrument and the playbook only. No price targets. No guarantees.</p>
+</div>
+
+<div class="how">
+  <strong>How to read this book</strong>
+  1 · <strong>First three actions:</strong> verify contract on PulseScan · $5-scale test swap on PulseX · read the risk register.<br/>
+  2 · Tokenomics (fee 2/1/1/1) before Poolonomics (what an LP actually is).<br/>
+  3 · Risks are first-class — read them before you size.<br/>
+  4 · ErosX / 33eros are <em>design discussion only</em> — not announced products, not dates.<br/>
+  5 · SpaceEros is visual theatre; official chain data is the truth.
+</div>
+
+<div class="axiom" id="terms">
+  <b>Core terms (defined once)</b>
+  <strong>AMM</strong> — automated market maker: a smart contract that holds two tokens and prices swaps by formula. PulseX is an AMM.<br/>
+  <strong>PRC-20</strong> — PulseChain’s token standard, parallel to Ethereum’s ERC-20.<br/>
+  <strong>Slippage</strong> — difference between the price you see and the price you get when the trade executes (fee + impact).<br/>
+  <strong>Arb</strong> — arbitrage: trading across pools or venues to close a price gap.<br/>
+  <strong>LP token</strong> — the receipt that represents your share of an AMM pool.
+</div>
+
+<div class="part-break" id="exec">
+  <p class="pk">Start here</p>
+  <h2>Executive summary</h2>
+  <p>One page</p>
+</div>
+<section>
+  <p><strong>What it is.</strong> EROS is a fixed-supply, community-distributed token on PulseChain. Free airdrop to TitanX liquid holders. Contract renounced. No team treasury allocation in the fee design. Docs: <a href="https://eros.gitbook.io/eros-docs/" target="_blank" rel="noopener">eros.gitbook.io</a>.</p>
+  <p><strong>Fee (canonical).</strong> 5% flow fee: <strong>2% burn · 1% staking · 1% temporary lock · 1% WPLS/EROS LP</strong>. Buy slippage typically 6%. Source: official Burnonomics.</p>
+  <p><strong>Why PulseChain.</strong> Low fees, PRC-20 surface, PulseX pools, Heart-stack demand (PLS, PLSX, HEX, INC) and community pairs with TitanX/BOT and Pulse natives (Atropa, Bear, pDAI, more).</p>
+  <p><strong>Liquidity web.</strong> EROS as bonding hub: pair assets you already want with EROS, own the LP, earn trading fees in the underlyings — not a separate inflationary farm token.</p>
+  <p><strong>Risks.</strong> Smart contract, bridge, thin liquidity, volatility, concentration, impermanent loss, regulatory, execution burnout. Full register below.</p>
+  <p><strong>Next.</strong> Verify contract and owner() → official bridge only → tiny test trade → hold / LP / stake / lock by choice → never share seeds; never trust DMs.</p>
+  <div class="pull">The chart can open the door. Verification and work are why people stay. Nothing here guarantees price or return.</div>
+</section>
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <a href="#thesis"><span class="tn">·</span> What this is about</a>
+  <a href="#exec"><span class="tn">0</span> Executive summary</a>
+  <a href="#p1"><span class="tn">I</span> Key facts &amp; on-chain proof</a>
+  <a href="#p2"><span class="tn">II</span> The instrument — tokenomics</a>
+  <a href="#p3"><span class="tn">III</span> Poolonomics — liquidity lessons</a>
+  <a href="#p4"><span class="tn">IV</span> Pulseonomics — bridge &amp; web</a>
+  <a href="#p5"><span class="tn">V</span> Demand equation</a>
+  <a href="#p6"><span class="tn">VI</span> SpaceEros — live map</a>
+  <a href="#p7"><span class="tn">VII</span> Risks</a>
+  <a href="#p8"><span class="tn">VIII</span> Playbook &amp; checklists</a>
+  <a href="#p9"><span class="tn">IX</span> Ecosystem &amp; comparables</a>
+  <a href="#erosx-layer"><span class="tn">IX-B</span> ErosX · 33eros · theme LPs</a>
+  <a href="#p10"><span class="tn">X</span> Roadmap language</a>
+  <a href="#p11"><span class="tn">XI</span> Culture (short) · companions</a>
+  <a href="#p12"><span class="tn">XII</span> FAQ · glossary · disclaimers</a>
+</nav>
+
+<div class="part-break" id="p1">
+  <p class="pk">Part I</p>
+  <h2>Key facts &amp; on-chain proof</h2>
+  <p>Do not trust a badge. Open the chain.</p>
+</div>
+<section>
+  <table class="facts">
+    <tr><th>Chain</th><td>PulseChain (primary). Ethereum twin exists with thinner liquidity.</td></tr>
+    <tr><th>Pulse contract</th><td><code>0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf</code></td></tr>
+    <tr><th>ETH contract</th><td><code>0xc0366e013BDD46946b7F22118E1af489b1693e0f</code></td></tr>
+    <tr><th>Burn sink</th><td><code>0x0000000000000000000000000000000000000369</code></td></tr>
+    <tr><th>Supply</th><td>Fixed 333,333,333,333 — no mint path in design</td></tr>
+    <tr><th>Flow fee</th><td>5% = 2% burn + 1% staking + 1% temp lock + 1% WPLS/EROS LP</td></tr>
+    <tr><th>Slippage</th><td>Typically 6% on buys (fee + price impact)</td></tr>
+    <tr><th>Ownership</th><td>Renounced — verify live with <code>owner()</code></td></tr>
+    <tr><th>Distribution</th><td>Free airdrop to TitanX liquid holders (historical)</td></tr>
+    <tr><th>dApp</th><td><a href="https://erosrevival.win" target="_blank" rel="noopener">erosrevival.win</a></td></tr>
+    <tr><th>Docs</th><td><a href="https://eros.gitbook.io/eros-docs/" target="_blank" rel="noopener">eros.gitbook.io/eros-docs</a></td></tr>
+    <tr><th>Bridge</th><td><a href="https://bridge.pulsechain.com" target="_blank" rel="noopener">bridge.pulsechain.com</a> only</td></tr>
+    <tr><th>DEX</th><td><a href="https://pulsex.com" target="_blank" rel="noopener">pulsex.com</a> · <a href="https://piteas.io" target="_blank" rel="noopener">piteas.io</a></td></tr>
+  </table>
+  <h3>How to verify</h3>
+  <ol class="steps">
+    <li>PulseScan: read <code>owner()</code> — expect zero address if renounced.</li>
+    <li>Read <code>totalSupply</code>. Compare burn balance at <code>0x…0369</code>.</li>
+    <li>Scan top holders. Note concentration and dormant airdrop wallets.</li>
+    <li>Count live PulseX pairs via SpaceEros / PulseX — do not invent numbers.</li>
+    <li>DexScreener / GeckoTerminal for volume and liquidity USD (estimates).</li>
+    <li>Read GitBook Burnonomics and Disclaimer yourself.</li>
+  </ol>
+  <div class="lesson">
+    <div class="ln">Worked · verification</div>
+    <h3>PulseScan in six moves</h3>
+    <ol>
+      <li>Open a PulseChain explorer (PulseScan) from a bookmarked official link — not a chat hyperlink.</li>
+      <li>Paste <code>0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf</code> into search.</li>
+      <li>Open the <strong>Contract</strong> tab → <strong>Read</strong> methods.</li>
+      <li>Call <code>owner()</code>. If renounced, you should see the zero address (<code>0x000…000</code>). If not, stop and reassess.</li>
+      <li>Call <code>totalSupply</code>. Note the number. Separately open the burn address <code>0x…0369</code> and read its EROS balance.</li>
+      <li>Holders tab: scan top wallets. Ask whether concentration or dormant airdrop supply could become exit inventory.</li>
+    </ol>
+    <p>That is verification. A badge in a group chat is not a substitute.</p>
+  </div>
+  <div class="axiom"><b>Receipt</b> Claims about largest holder, pair counts, and renounce status are only as good as your last on-chain check.</div>
+</section>
+
+<div class="part-break" id="p2">
+  <p class="pk">Part II</p>
+  <h2>The instrument — tokenomics</h2>
+  <p>One transfer · four destinations</p>
+</div>
+<section>
+  <div class="fee-grid">
+    <div class="fee-card burn"><b>2%</b><h4>Burn</h4><p>To 0x…0369. Removed from circulation.</p></div>
+    <div class="fee-card stake"><b>1%</b><h4>Staking</h4><p>Rewarded to stakers per protocol rules.</p></div>
+    <div class="fee-card lock"><b>1%</b><h4>Temp lock</h4><p>Temporary locking of staked EROS (docs).</p></div>
+    <div class="fee-card lp"><b>1%</b><h4>Core LP</h4><p>Adds to WPLS/EROS on PulseX.</p></div>
+  </div>
+  <p class="note"><b>Source.</b> Official Burnonomics: 2% burn, 1% staking, 1% temporary locking, 1% WPLS/EROS liquidity. Slippage 6%.</p>
+  <figure class="media-block" id="burn-baby-burn">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
+      <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
+    </video>
+    <figcaption><b>EROS · Burn Baby Burn</b> — primary crypto video for this book.</figcaption>
+  </figure>
+  <h3>What EROS is not</h3>
+  <ul>
+    <li>Not a stablecoin</li>
+    <li>Not a guaranteed return</li>
+    <li>Not a replacement for TitanX</li>
+    <li>Not a risk-free farm</li>
+    <li>Not legal, tax, or listing advice</li>
+  </ul>
+</section>
+
+<div class="part-break" id="p3">
+  <p class="pk">Part III</p>
+  <h2>Poolonomics — liquidity lessons</h2>
+  <p>Education first. No slogans.</p>
+</div>
+<section>
+  <p><strong>Poolonomics</strong> is the framework: how liquidity, ownership, bonding, fees, supply location, and community behaviour interact. <strong>Pulseonomics</strong> is the case study — Poolonomics applied to PulseChain (TitanX path → EROS pairs). Same method; one name for the theory, one for the chain.</p>
+
+  <div class="lesson"><div class="ln">Lesson 1</div><h3>What is liquidity?</h3>
+  <p>How easily you enter or exit without moving price a lot. Not market cap. Not holder count. Not total token supply.</p></div>
+
+  <div class="lesson"><div class="ln">Lesson 2</div><h3>What is an LP?</h3>
+  <p>Deposit two tokens into an AMM pool and you receive a <strong>liquidity position</strong> — a claim on a share of that pool. That position is an asset. You typically earn a share of trading fees when people swap, per DEX rules.</p></div>
+
+  <div class="lesson"><div class="ln">Lesson 3</div><h3>Your LP position is an asset</h3>
+  <p>You are a market-maker. You can often withdraw (with risks). You are not merely watching a candle.</p></div>
+
+  <div class="lesson"><div class="ln">Lesson 4</div><h3>Pool liquidity ≠ wallet supply · property-market analogy</h3>
+  <p>A pool is a <em>window</em>, not the whole city. Listings on a high street are visible inventory; almost every house could sell at some price. In crypto, tokens and capital outside the pool are potential future supply and demand. <strong>Pool depth is not total demand or total supply.</strong></p></div>
+
+  <div class="lesson"><div class="ln">Lesson 5</div><h3>Thin vs deep · volatility · whose problem is size?</h3>
+  <p><strong>Deep pools</strong> absorb size with less impact — and can be exit inventory for holders. <strong>Thin pools</strong> move on small flow — upside and downside. If you do not own the asset, “huge liquidity” is not automatically an invitation. If you provide LP, depth is your infrastructure and fee engine. <strong>Perspective depends on ownership.</strong></p>
+  <div class="warn"><b>Correction.</b> “New buyers should always prefer thin liquidity for ROI” is too absolute. Thin liquidity amplifies both directions. Size, horizon, and exit plans matter more than a single rule.</div></div>
+
+  <div class="lesson"><div class="ln">Lesson 6</div><h3>Yield farming vs trading fees</h3>
+  <p><strong>Classic farm:</strong> deposit A+B, earn a third-party inflationary reward often sold into the market. <strong>Liquidity-bonding contrast:</strong> pair assets you want (e.g. A + EROS), earn trading fees in the pool’s mechanism — more of the underlyings when activity exists. Fees need volume. Not a salary. Not guaranteed APY.</p></div>
+
+  <div class="lesson"><div class="ln">Lesson 7</div><h3>Liquidity bonding</h3>
+  <p>Pair an asset you believe in with EROS (or another intentional pair), own the LP, participate in fees and network density. Community examples: DragonX, Bear, JakeX, LegendX, Helios, Blaze, Inferno, TitanX, Atropa — always verify the pair is live on PulseX.</p></div>
+
+  <div class="lesson"><div class="ln">Lesson 8</div><h3>Owning a token vs providing liquidity</h3>
+  <p>Spot: directional exposure. LP: pair exposure, fee potential, impermanent loss if prices diverge. Different tools — neither universally better.</p></div>
+
+  <h3>Impermanent loss — plain language</h3>
+  <p>When you LP two assets, the AMM keeps rebalancing as prices move. Compared with simply holding both tokens in your wallet, the LP position often ends with <em>less</em> of the asset that pumped and <em>more</em> of the one that lagged. That gap is impermanent loss — “impermanent” only until you exit; then it is realized.</p>
+  <p><strong>Worked sketch (illustrative, not a promise).</strong> You LP $100 EROS + $100 TITANX (equal value). EROS triples versus TITANX. Arb trades the pool toward the new ratio. On exit you hold more TITANX and less EROS than a pure hold of both. Fees earned during the path may offset some or none of that gap — depending on volume, time, and fee tier. A quiet pool with a huge move is the painful case: IL without fee income.</p>
+  <table class="facts">
+    <tr><th>Situation</th><td>What often happens</td></tr>
+    <tr><th>Prices sideways + volume</th><td>Fees can dominate; IL small</td></tr>
+    <tr><th>One side pumps hard + quiet book</th><td>IL large; fees may not cover</td></tr>
+    <tr><th>Both move together</th><td>IL smaller; still not zero</td></tr>
+  </table>
+  <p><strong>IL is the cost of continuous market-making, not a glitch.</strong> Spot holding is a different tool. Choose on purpose.</p>
+  <div class="axiom"><b>Poolonomics</b> Depth without demand is a museum. Demand without depth is a spike that dies. Bond both — and understand IL first.</div>
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" alt="Yin-yang LP" loading="lazy"/>
+    <figcaption>Two assets · one position · shared incentive to promote the pair</figcaption>
+  </figure>
+</section>
+
+<div class="part-break" id="p4">
+  <p class="pk">Part IV</p>
+  <h2>Pulseonomics — bridge &amp; web</h2>
+  <p>ETH factory · Pulse marketplace</p>
+</div>
+<section>
+  <div class="lesson"><div class="ln">Lesson 9</div><h3>Ethereum → PulseChain</h3>
+  <p>Community strategy: move TitanX-ecosystem ERC-20 exposure toward PRC-20 liquidity so bridging can reduce ETH-side market sells while Pulse gains pairs and activity. ETH-side mechanics can continue; Pulse is an additional demand surface. <strong>Coordination, not magic.</strong> Bridge only at <a href="https://bridge.pulsechain.com" target="_blank" rel="noopener">bridge.pulsechain.com</a>.</p></div>
+  <h3>Conceptual loop</h3>
+  <ol class="steps">
+    <li>Own assets you actually want.</li>
+    <li>Bridge on the official path when clear.</li>
+    <li>Pair with EROS (or intentional pair) → LP position.</li>
+    <li>Earn trading fees when activity exists.</li>
+    <li>Accumulate underlyings if fees accrue.</li>
+    <li>Stake / lock EROS only if risk tolerance allows.</li>
+    <li>Promote the pair you own — densify the web.</li>
+  </ol>
+  <h3>Liquidity web</h3>
+  <p>GitBook snapshots listed many EROS pairs (WPLS, TITANX, TEDDY BEAR, DRAGONX, ATROPA, PLSX, LEGENDX, Blaze, Inferno, …). Count live pools; treat any number as dated.</p>
+  <div class="chip-row">
+    <span class="chip pulse">WPLS</span><span class="chip hot">TITANX</span><span class="chip">DRAGONX</span>
+    <span class="chip gold">ATROPA</span><span class="chip">BEAR</span><span class="chip">PLSX</span>
+    <span class="chip">LEGENDX</span><span class="chip">Blaze / Inferno</span><span class="chip">+ live set</span>
+  </div>
+  <p><strong>Housing analogy.</strong> Spot trades are hotel nights. Multi-pair LP depth is housing stock — a district, harder to empty in one exit.</p>
+</section>
+
+<div class="part-break" id="p5">
+  <p class="pk">Part V</p>
+  <h2>Demand equation</h2>
+  <p>Attention · community · liquidity</p>
+</div>
+<section>
+  <p>Supply without demand fades. Liquidity without attention stagnates. Community without activity disappears.</p>
+  <p><strong>Structural path:</strong> TitanX/BOT → official bridge → Pulse LPs → Pulse-side discovery and trade.</p>
+  <p><strong>Human path:</strong> posts, promoted LPs, media, tools. Optional studio work is a sticky layer — not required to hold, trade, stake, or LP.</p>
+  <div class="pull">Buy, hold, bond, stake, lock, trade — all valid. Work and belief make demand harder to unwind. Neither replaces verification.</div>
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-demand.jpg" alt="Demand" loading="lazy"/>
+    <figcaption>Demand equation</figcaption>
+  </figure>
+
+  <h3>Demand in practice (one loop)</h3>
+  <p>Abstract formula: attention + community + liquidity. One concrete loop:</p>
+  <ol>
+    <li>Someone posts a live pair address and a reason to care (attention).</li>
+    <li>Holders answer, correct bad links, refuse fake admins (community).</li>
+    <li>Someone adds size to the pool they promote (liquidity).</li>
+    <li>Trades hit that pool; LPs earn fees; the pair is harder to ignore next week.</li>
+  </ol>
+  <p>That loop can fail at any step. The manual cannot invent volume. It can only refuse magical thinking.</p>
+  <div class="lesson">
+    <div class="ln">Beyond the candle</div>
+    <h3>Optional sticky work</h3>
+    <p>Ship one asset (panel, clip, tool, sound, micro-game). Help with code or media. Bond the pair you will actually watch. Studio work is optional — hold, trade, stake, and LP remain valid without it.</p>
+  </div>
+</section>
+
+<div class="part-break" id="p6">
+  <p class="pk">Part VI</p>
+  <h2>SpaceEros — live map</h2>
+  <p>Visual proof theatre</p>
+</div>
+<section>
+  <div class="space-frame">
+    <div class="bar">
+      <span>SpaceEros 💕</span>
+      <a href="https://meaning-unconfounded.github.io/images/SpaceEros.html" target="_blank" rel="noopener">Open full screen ↗</a>
+    </div>
+    <iframe title="SpaceEros" src="https://meaning-unconfounded.github.io/images/SpaceEros.html" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allow="fullscreen"></iframe>
+  </div>
+  <p class="space-note">If blank on mobile, use Open full screen.</p>
+</section>
+
+<div class="part-break" id="p7">
+  <p class="pk">Part VII</p>
+  <h2>Risk register</h2>
+  <p>First-class. No hiding.</p>
+</div>
+<section>
+  <div class="risk-grid">
+    <div class="risk"><b>Smart contract</b> Bugs, composability, DEX/bridge dependencies.</div>
+    <div class="risk"><b>Bridge</b> Phishing URLs, delays, failed transfers — official bridge only.</div>
+    <div class="risk"><b>Liquidity</b> Thin = impact &amp; volatility; deep = harder marks, more exit inventory.</div>
+    <div class="risk"><b>Impermanent loss</b> LP can underperform simply holding both assets.</div>
+    <div class="risk"><b>Concentration</b> Top wallets, dormant airdrop supply, correlated exits.</div>
+    <div class="risk"><b>Volatility</b> Large drawdowns are normal in this asset class.</div>
+    <div class="risk"><b>Regulatory / tax</b> Jurisdiction-dependent; get professional advice.</div>
+    <div class="risk"><b>Execution</b> Burnout, stalled media, failed multi-tribe coordination.</div>
+    <div class="risk"><b>Narrative</b> Attention leaves; lore does not pay gas.</div>
+    <div class="risk"><b>Operational</b> Phishing, fake tokens, hostile DMs.</div>
+    <div class="risk"><b>No admin safety net</b> Renounced = no privileged pause — feature and risk.</div>
+  </div>
+</section>
+
+<div class="part-break" id="p8">
+  <p class="pk">Part VIII</p>
+  <h2>Playbook &amp; checklists</h2>
+</div>
+<section>
+  <ol class="steps">
+    <li>Verify Pulse contract and <code>owner()</code>.</li>
+    <li>Bridge only via bridge.pulsechain.com.</li>
+    <li>Tiny test swap on PulseX at 6% slippage.</li>
+    <li>Choose: spot · LP · stake · lock — match risk.</li>
+    <li>If LP: pair you will watch and promote.</li>
+    <li>Open SpaceEros. Re-read fee split.</li>
+    <li>Watch <a href="#burn-baby-burn">Burn Baby Burn</a>.</li>
+    <li>Never seed in chat. Never “admin” DM support.</li>
+  </ol>
+
+  <div class="lesson">
+    <div class="ln">Worked · test swap</div>
+    <h3>PulseX in plain steps</h3>
+    <ol>
+      <li>Bookmark <a href="https://pulsex.com" target="_blank" rel="noopener">pulsex.com</a> — open from the bookmark, not a chat link.</li>
+      <li>Connect a wallet you use only for on-chain experiments if possible.</li>
+      <li>Select WPLS → EROS (or the pair you verified). Paste the official EROS address if the UI does not resolve the symbol.</li>
+      <li>Enter a <strong>tiny</strong> amount. Set slippage near <strong>6%</strong> (fee + impact). Read the minimum received.</li>
+      <li>Confirm. Wait for success. Check the explorer receipt. Then — and only then — consider size.</li>
+    </ol>
+  </div>
+
+  <div class="lesson">
+    <div class="ln">Worked · add liquidity</div>
+    <h3>LP on PulseX (conceptual walkthrough)</h3>
+    <ol>
+      <li>Hold both sides of the pair you chose (e.g. EROS + WPLS or EROS + a community pair you verified).</li>
+      <li>On PulseX open Liquidity → Add. Select both tokens. Match the ratio the pool asks for.</li>
+      <li>Approve each token if needed. Confirm deposit. You receive an LP position (receipt of your share).</li>
+      <li>Record the pool address. If you will theme-brand, that address is what you promote — not a random ticker graphic.</li>
+      <li>Remember IL. You are market-making, not holding two spot bags in a drawer.</li>
+    </ol>
+  </div>
+
+  <div class="axiom">
+    <b>Decision tree (sizing mindset)</b>
+    <strong>Small capital · learning:</strong> verify → bridge dust → $5-scale swap → stop. Read risks again.<br/>
+    <strong>You want exposure only:</strong> spot size you can lose; no LP until you understand IL.<br/>
+    <strong>You will watch and promote a pair:</strong> LP that pair; theme-brand optional; measure fees and depth, not hopium.<br/>
+    <strong>Someone DMs “support” or a new bridge:</strong> assume hostile. Use bookmarks only.
+  </div>
+
+  <h3>Due diligence</h3>
+  <ul>
+    <li>□ Addresses match GitBook</li>
+    <li>□ owner() checked</li>
+    <li>□ Supply &amp; burn balance checked</li>
+    <li>□ Top holders scanned</li>
+    <li>□ Live pairs verified</li>
+    <li>□ Official dApp / bridge / DEX only</li>
+    <li>□ Burnonomics re-read</li>
+    <li>□ Small test tx first</li>
+  </ul>
+  <h3>Security</h3>
+  <ul>
+    <li>□ Hardware wallet when possible</li>
+    <li>□ No seed in cloud screenshots</li>
+    <li>□ Bookmark official URLs</li>
+    <li>□ Revoke stale approvals</li>
+    <li>□ Treat unsolicited DMs as hostile</li>
+  </ul>
+</section>
+
+<div class="part-break" id="p9">
+  <p class="pk">Part IX</p>
+  <h2>Ecosystem &amp; comparables</h2>
+</div>
+<section>
+  <p><strong>Heart stack:</strong> PLS, PLSX, HEX, INC. <strong>Atropa lane:</strong> Atropa, pDAI, Bear. <strong>TitanX/BOT:</strong> ETH-origin; EROS as Pulse bonding hub in community practice.</p>
+  <table class="facts">
+    <tr><th>EROS</th><td>5% (2/1/1/1) · renounced · no team treasury in fee design · Pulse primary</td></tr>
+    <tr><th>pTGC / forks</th><td>Different fees &amp; governance — do not copy assumptions</td></tr>
+    <tr><th>TitanX</th><td>ETH-centric; EROS does not replace it</td></tr>
+    <tr><th>HEX / PLSX</th><td>Different products; shared chain culture</td></tr>
+  </table>
+</section>
+
+<div class="part-break" id="erosx-layer">
+  <p class="pk">Part IX-B</p>
+  <h2>ErosX, 33eros &amp; theme-branded LPs</h2>
+  <p>How · why · open deploy · mutual web</p>
+</div>
+<section>
+  <p><strong>Frame (read first).</strong> This section is a <em>design discussion</em> — patterns the community has talked about for a flow layer and a teachable transform. It is <strong>not</strong> an announced product, not a launch date, and not a promise that any named builder will deploy. Treat every ratio and timeline below as illustration until verified mainnet code and a public parameter post exist. If none appear, the pattern was still useful as education.</p>
+  <p>Code patterns and math exist in community notes and sibling transform tech (TitanX → X28 / Pulsar-style rails). Who deploys, when, and final parameters remain open.</p>
+
+  <h3>Why two layers?</h3>
+  <p><strong>EROS 💕</strong> is the <em>engine</em>: fixed supply, 5% flow fee, burn, stake/lock, core LP. Hyper-deflationary under volume. Heavy by design — membership dues for a liquidity web.</p>
+  <p><strong>ErosX 🏹</strong> is discussed as the <em>flow layer</em>: a transform or companion currency aimed at easier movement — low or zero transfer tax, community spend, in-world / game rails, possible V3/V4 and omnichain paths once the contract is light enough to travel. Engine stays scarce; flow is meant to move.</p>
+  <div class="axiom"><b>Separation of jobs</b> Taxed web engine (EROS) vs spendable flow (ErosX). Confusing them is how people ship the wrong tool for the job.</div>
+
+  <h3>33eros — teachable transform pattern</h3>
+  <p>Community numerology and pedagogy point at a <strong>33 / 33 / 33</strong> style transform (exact code TBD on deploy):</p>
+  <ul>
+    <li>A slice of input burned</li>
+    <li>A slice used to seed or deepen LP (e.g. base/transform pair)</li>
+    <li>A slice routed to gradual buy-and-burn or similar sink</li>
+  </ul>
+  <p>The point is not only a new ticker. It is a <strong>template other builders can copy ethically</strong> — influencers and communities learning to launch transforms that burn, bond, and avoid silent founder extraction. EROS → ErosX and a 33eros-class release are the first teaching vehicles discussed, not a closed franchise.</p>
+  <div class="note"><b>Open deploy.</b> Preference in community chat has often named trusted ecosystem builders (e.g. names tied to TitanX transform history) for reputation — that is preference, not a contract. Anyone discussing deploy should publish parameters, verify source, and accept that until mainnet code is live and verified, treat all ratios as proposals.</div>
+
+  <h3>Theme branding your LP — identity as infrastructure</h3>
+  <p>An LP is not only a passive fee claim. It can be a <strong>brand</strong>.</p>
+  <p>Pattern: a large holder of a pair (example from community practice: <strong>EROS / TEDDY BEAR</strong>) promotes the <em>LP contract</em> and a persona — “Bear God King” energy, memes, recurring presence. Traffic that hits that pair deepens <em>their</em> pool, earns fees for LPs, and keeps EROS in the story of another community.</p>
+  <p><strong>Narrative sketch.</strong> Week 1: holder posts the pool address weekly, not a random chart screenshot. Week 4: strangers ask for the pair by name. Week 12: depth is higher than when the persona started — not because of a promise, because inventory and attention met. Your results will differ. The lesson is the pattern: promote the doorway you own.</p>
+  <p>Same pattern works for DragonX/EROS, Inferno/EROS, Atropa/EROS, and any live pair you actually own. You are not only bagholding a ticker; you are marketing a doorway.</p>
+  <div class="pull">Promote the LP address. Name the pair. Make it identity. That is meme culture attached to real inventory — not empty ticker spam.</div>
+
+  <h3>Market-cap equivalent bots &amp; mutual lift</h3>
+  <p>When many pairs share EROS as one side, arbitrage bots hunt gaps. Example: Bear/EROS jumps; the implied EROS price disagrees with DragonX/EROS; a bot trades across the shared EROS leg until the edges realign. Activity in one themed pool can therefore tug another — not magic, connected inventory.</p>
+  <p><strong>That is why tribal isolation is expensive:</strong> competing clubs refuse to bond edges; allied clubs share a graph.</p>
+  <p>Crypto done well here means: help the pairs you touch, expect others to help theirs, and let mechanical arb do part of the cross-promotion. Separate tribes with zero shared liquidity fight for the same attention with no structural reason to lift each other.</p>
+  <div class="axiom"><b>Allies, not islands</b> Theme-brand your pool. Bond edges. Let bots balance what culture connects. Mutual web &gt; competing clubs with empty bridges.</div>
+
+  <h3>Future goals (tension held open)</h3>
+  <p>Chat carries real tension: denser LP counts, burn share, ErosX deploy, 33eros teaching release, media flywheel, who has keys and when. Holding tension without fake certainty is healthy. Measure: live pairs, burn balance, verified deploys, shipping media. Do not substitute roadmap poetry for those receipts.</p>
+</section>
+
+<div class="part-break" id="p10">
+  <p class="pk">Part X</p>
+  <h2>Roadmap language</h2>
+  <p>Triggers · not prophecies</p>
+</div>
+<section>
+  <p>Community north stars are <strong>things to measure</strong>, not promises:</p>
+  <ul>
+    <li>Live pair count and depth (PulseX / SpaceEros — verify, do not invent)</li>
+    <li>Burn balance at <code>0x…0369</code></li>
+    <li>Whether media and tools actually ship</li>
+    <li>Whether any transform (ErosX / 33eros-class) appears as verified mainnet code with public parameters</li>
+    <li>Whether theme-branded LPs are promoted with real pool addresses</li>
+  </ul>
+  <div class="warn"><b>No price targets in this manual.</b> Chat market-cap stories are not commitments.</div>
+</section>
+
+<div class="part-break" id="p11">
+  <p class="pk">Part XI</p>
+  <h2>Culture (short) · companions</h2>
+  <p>Seasoning — not the meal</p>
+</div>
+<section>
+  <p>Why some stay: larger board (Illumination), cosmology (Living Egg), intrigue (Men of Renown), production guild. Companions hold the depth. Here is taste only.</p>
+  <h3>Future of production</h3>
+  <p>Decentralised creation; AI synthesis. Optional. Token functions without it.</p>
+  <figure class="media-block">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg">
+      <source src="https://meaning-unconfounded.github.io/images/gifted.mp4" type="video/mp4"/>
+    </video>
+    <figcaption><b>Gifted</b> — emotional catch for decentralised story production.</figcaption>
+  </figure>
+  <h3>Fractal contribution</h3>
+  <p>Build at your scale — tool, panel, micro-game, sound. The larger story can nest smaller worlds. Everyone can contribute something that fits.</p>
+  <p>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a> ·
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a> ·
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men_Of_Renown</a> ·
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination_Strategy</a>
+  </p>
+  <figure class="media-block">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg">
+      <source src="https://meaning-unconfounded.github.io/images/sommi_facts.mp4" type="video/mp4"/>
+    </video>
+    <figcaption><b>Sommi · Facts</b> — workhorse signal.</figcaption>
+  </figure>
+</section>
+
+<div class="part-break" id="p12">
+  <p class="pk">Part XII</p>
+  <h2>FAQ · glossary · disclaimers</h2>
+</div>
+<section class="faq">
+  <details><summary>Why no dev fee in the split?</summary><p>Documented design. Still verify code and owner(). No treasury line ≠ no risk.</p></details>
+  <details><summary>What if nobody trades?</summary><p>Fee and burn flow slow. Demand is not automatic.</p></details>
+  <details><summary>What if Pulse loses attention?</summary><p>Primary venue risk. Concentration inherits chain fate.</p></details>
+  <details><summary>What if named people never engage?</summary><p>Do not build a plan on third-party attention.</p></details>
+  <details><summary>Is it too late?</summary><p>Unknown. Structure and sizing beat FOMO scripts.</p></details>
+  <details><summary>How is this not a scam?</summary><p>Published contracts and renounce claims help — you still verify, size small, accept total loss as possible.</p></details>
+  <details><summary>ErosX / 33eros?</summary><p>See <a href="#erosx-layer">ErosX &amp; 33eros — the next layer</a>. Math and transform patterns are discussed; deployment is open (who/when not settled). Not launched products with fixed dates in this manual.</p></details>
+  <details><summary>What is theme branding of an LP?</summary><p>You promote the <em>pair</em> you own — identity, memes, name — so traffic hits your pool. Example pattern: a major Bear/EROS holder promoting as a themed identity helps that pool and, via shared EROS edges and arb, can lift connected pairs. Allies, not isolated tribes.</p></details>
+  <details><summary>How do I exit?</summary><p>Sell or withdraw LP subject to liquidity, slippage, fees. No guaranteed buyer.</p></details>
+  <h3>Glossary</h3>
+  <table class="facts">
+    <tr><th>AMM</th><td>Automated market maker — pool that prices swaps by formula (e.g. PulseX)</td></tr>
+    <tr><th>PRC-20</th><td>PulseChain token standard (parallel to ERC-20)</td></tr>
+    <tr><th>Slippage</th><td>Difference between quoted and executed price</td></tr>
+    <tr><th>LP</th><td>Liquidity provider position in an AMM</td></tr>
+    <tr><th>IL</th><td>Impermanent loss — LP vs hold gap when prices diverge</td></tr>
+    <tr><th>Flow fee</th><td>5% transfer split burn/stake/lock/LP</td></tr>
+    <tr><th>Renounced</th><td>Owner privilege given up — verify</td></tr>
+    <tr><th>Bonding</th><td>Intentional LP as network edge</td></tr>
+    <tr><th>Poolonomics</th><td>Framework for LP, fees, supply location, community</td></tr>
+    <tr><th>Pulseonomics</th><td>Poolonomics applied to PulseChain / EROS case study</td></tr>
+  </table>
+  <h3>Further reading (optional · not required for the instrument)</h3>
+  <p>Builders who want metal-up symbolic and array craft sometimes point at Mark Tarver’s <em>Book of Shen</em> and <em>Logic, Proof and Computation</em>, and array programming in K. Those texts are not prerequisites for verifying EROS or adding LP.</p>
+  <div class="note"><b>What this book cannot see.</b> Technical analysis, tax treatment, portfolio theory, and evaluating non-EROS protocols are outside scope. This manual is mechanics, verification, risk, and playbook.</div>
+  <div class="warn"><b>Disclaimer.</b> Not financial, legal, or tax advice. Crypto can go to zero. Contracts can fail. You can lose everything. DYOR. See also GitBook Disclaimer.</div>
+</section>
+
+<footer>
+  <p><span class="gold">THE BRIDGE</span> · EROS on PulseChain · v2 field manual</p>
+  <p>Full github.io URLs for Telegram, shares, NotebookLM.</p>
+  <p style="margin-top:.6rem">
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a> ·
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a> ·
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men_Of_Renown</a> ·
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination_Strategy</a> ·
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift_Of_Thoth</a> ·
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The_Front_Door</a> ·
+    <a href="https://meaning-unconfounded.github.io/images/SpaceEros.html">SpaceEros</a>
+  </p>
+  <p style="margin-top:.8rem;font-size:.75rem">Fee split per official Burnonomics (2/1/1/1). Verify on-chain. Bridge v2.</p>
+</footer>
+</div>
+<button id="toTop" type="button" aria-label="Back to top">↑</button>
+<script>
+(function(){
+  var bar=document.getElementById('progressBar');
+  var top=document.getElementById('toTop');
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?(h.scrollTop/max)*100:0;
+    if(bar)bar.style.width=p+'%';
+    if(top)top.classList.toggle('show', h.scrollTop>600);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
+</body>
+</html>
