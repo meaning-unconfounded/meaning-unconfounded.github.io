@@ -8,138 +8,140 @@
 <meta property="og:title" content="EROS · Narrative"/>
 <meta property="og:description" content="What EROS is, why TitanX holders already hold a ticket, and how demand, story, and production fit together — without the full dossier."/>
 <meta property="og:image" content="https://meaning-unconfounded.github.io/images/eros-plan-summary-banner.jpg"/>
-<meta name="theme-color" content="#0b0a08"/>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230a0a1a' stroke='%23c9a227' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23c9a227'/%3E%3C/svg%3E" rel="icon"/>
+<meta name="theme-color" content="#0b0806"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230b0806' stroke='%23e8a55a' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23e8a55a'/%3E%3C/svg%3E" rel="icon"/>
 <style>
 :root{
-  --bg:#0b0a08; --raised:#14120e; --card:#171410;
-  --ink:#ece7db; --soft:#c9c2b0; --muted:#a59e8f;
-  --gold:#d4af37; --gold-soft:rgba(212,175,55,.09); --gold-line:rgba(212,175,55,.28);
+  --bg:#0b0806; --raised:#181210; --card:#1c1512;
+  --ink:#f0e6d8; --soft:#d4c4b0; --muted:#a89888;
+  --amber:#e8a55a; --amber-soft:rgba(232,165,90,.1); --amber-line:rgba(232,165,90,.3);
+  --rose:#d4788a; --rose-soft:rgba(212,120,138,.1); --rose-line:rgba(212,120,138,.3);
+  --gold:#d4af37; --gold-soft:rgba(212,175,55,.08);
   --magenta:#c9a0f2;
-  --border:#28241b;
+  --border:#2e241c; --hair:#221a14;
   --serif:Georgia,"Iowan Old Style","Palatino Linotype","Book Antiqua",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --measure:40rem;
+  --measure:42rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg);color:var(--ink)}
 body{
   font-family:var(--serif);font-size:1.08rem;line-height:1.85;
   background:
-    radial-gradient(900px 420px at 90% -5%, rgba(212,175,55,.07), transparent 55%),
-    radial-gradient(600px 380px at 100% 85%, rgba(201,160,242,.05), transparent 45%),
+    radial-gradient(900px 420px at 90% -5%, rgba(232,165,90,.08), transparent 55%),
+    radial-gradient(600px 380px at 10% 40%, rgba(212,120,138,.05), transparent 50%),
+    radial-gradient(500px 340px at 90% 95%, rgba(201,160,242,.04), transparent 45%),
     var(--bg);
   min-height:100vh;
 }
 .page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.2rem 4rem}
-#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--magenta));z-index:9999}
-a{color:#e8c547;text-decoration:none;border-bottom:1px solid transparent}
-a:link{color:#e8c547}a:visited{color:#c9a227}
-a:hover{color:#ffd76a;border-bottom-color:#ffd76a}
-strong{color:#f7f2e7}
-em{color:var(--gold);font-style:italic}
-.cover{text-align:center;padding:2.5rem 0 1.5rem}
-.cover .seal{display:inline-block;font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-line);padding:.35rem .8rem;border-radius:999px;margin-bottom:1.2rem}
-.cover h1{font-size:clamp(2rem,6vw,2.75rem);font-weight:700;letter-spacing:.02em;margin:.2rem 0}
-.cover .sub{color:var(--muted);font-size:1.05rem;margin-top:.5rem;max-width:32rem;margin-left:auto;margin-right:auto}
-.banner{width:100%;border-radius:12px;border:1px solid var(--gold-line);margin:1.25rem 0 1.5rem;display:block}
-.thesis{
-  margin:1.5rem 0 1.75rem;padding:1.35rem 1.4rem;
-  border-left:3px solid var(--gold);background:var(--raised);border-radius:0 12px 12px 0;
-}
-.thesis h2{font-family:var(--sans);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 .7rem}
-.thesis p{margin:0 0 .55rem;font-size:1.02rem}
-.thesis p:last-child{margin:0}
-.companions{
-  margin:1.25rem 0 2rem;padding:1.2rem 1.3rem;
-  border:1px solid var(--gold-line);background:var(--gold-soft);border-radius:12px;
-}
-.companions h3{font-family:var(--sans);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 .65rem}
-.companions ul{list-style:none}
-.companions li{margin:.35rem 0;font-size:.98rem}
-.part{
-  margin:2.75rem 0 1.25rem;padding-top:1.5rem;
-  border-top:1px solid var(--border);
-}
-.part .num{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-.part h2{font-size:1.55rem;margin:.25rem 0 .5rem}
-.part .ep{color:var(--muted);font-style:italic;margin-bottom:1rem}
-h3{font-size:1.15rem;margin:1.6rem 0 .55rem;color:#f7f2e7}
-p{margin:0 0 1rem}
-ul,ol{margin:0 0 1rem 1.2rem}
-li{margin:.3rem 0}
-.pull{
-  margin:1.25rem 0;padding:1rem 1.15rem;
-  background:var(--raised);border-left:3px solid var(--magenta);
-  font-size:1.08rem;border-radius:0 10px 10px 0;
-}
-.claim{
-  margin:1.25rem 0;padding:1.1rem 1.2rem;
-  border:1px solid var(--gold-line);background:var(--gold-soft);border-radius:12px;
-}
-.claim p{margin:0}
-.fee{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:1.2rem 0;
-}
-@media(max-width:520px){.fee{grid-template-columns:1fr 1fr}}
-.fee div{
-  background:var(--card);border:1px solid var(--border);border-radius:10px;
-  padding:.75rem .6rem;text-align:center;
-}
-.fee b{display:block;font-size:1.25rem;color:var(--gold)}
-.fee span{font-family:var(--sans);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
-.plate{margin:1.4rem 0;text-align:center}
-.plate img{max-width:100%;border-radius:10px;border:1px solid var(--border)}
-.plate figcaption{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.45rem}
-code{font-family:var(--mono);font-size:.86em;color:#e8d48b;word-break:break-all}
-.steps{margin:1rem 0 1.2rem;padding-left:1.2rem}
-.steps li{margin:.45rem 0}
-.footer{
-  margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);
-  font-size:.95rem;color:var(--muted);
-}
-.footer a{margin-right:.75rem}
-.creed{text-align:center;margin:2rem 0 1rem;color:var(--gold);font-style:italic}
-video.hero{width:100%;border-radius:12px;border:1px solid var(--gold-line);margin:1rem 0 1.25rem;background:#000;display:block}
-.walk{margin:1rem 0 1.25rem;padding:1rem 1.15rem;background:var(--raised);border:1px solid var(--border);border-radius:12px}
-.walk h4{font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .55rem}
-.walk ol{margin:.4rem 0 0 1.1rem}
-.walk li{margin:.35rem 0}
-.readguide{margin:.75rem 0 0;padding-top:.75rem;border-top:1px solid var(--gold-line);font-size:.95rem}
-.readguide strong{color:var(--gold)}
-.to-top{
-  position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;
-  border-radius:50%;border:1px solid var(--gold-line);background:var(--raised);
-  color:var(--gold);font-size:1.1rem;cursor:pointer;opacity:.85;z-index:50;
-}
-</style>
+#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--amber),var(--rose));z-index:9999}
+a{color:#f0c98c;text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+a:link{color:#f0c98c}a:visited{color:#d4a066}
+a:hover{color:#ffd9a0;border-bottom-color:#ffd9a0}
+strong{color:#f8f0e2}
+em{color:var(--amber);font-style:italic}
 
-<style id="eros-collapse">
-details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid rgba(232,197,71,.28);border-radius:10px;background:rgba(232,197,71,.06);padding:.35rem 1rem}
-details.eros-menu>summary{cursor:pointer;list-style:none;font-family:system-ui,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#e8c547;padding:.55rem 0;user-select:none}
+.cover{text-align:center;padding:2.5rem 0 1.5rem}
+.cover .seal{display:inline-block;font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber-line);padding:.35rem .8rem;border-radius:999px;margin-bottom:1.2rem}
+.cover h1{font-size:clamp(2rem,6vw,2.75rem);font-weight:700;letter-spacing:.02em;margin:.2rem 0;color:var(--amber)}
+.cover .sub{color:var(--soft);font-size:1.05rem;margin-top:.5rem;max-width:32rem;margin-left:auto;margin-right:auto}
+.banner{width:100%;border-radius:12px;border:1px solid var(--amber-line);margin:1rem 0;display:block}
+video.hero{width:100%;border-radius:12px;border:1px solid var(--amber-line);margin:1rem 0 1.25rem;background:#000;display:block}
+
+details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--amber-line);border-radius:10px;background:var(--amber-soft);padding:.35rem 1rem}
+details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);padding:.55rem 0;user-select:none}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
 details.eros-menu[open]>summary::before{content:"▾ ";}
-details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:rgba(255,255,255,.82)}
-details.eros-menu a{color:#e8c547}
-.burn-feature{max-width:42rem;margin:1.5rem auto;padding:0;border:1px solid rgba(232,197,71,.35);border-radius:12px;overflow:hidden;background:#0a0a0a}
-.burn-feature video{display:block;width:100%;max-height:420px;background:#000}
-.burn-feature .cap{padding:.75rem 1rem;font-size:.9rem;color:rgba(255,255,255,.8);border-top:1px solid rgba(232,197,71,.2)}
-.burn-feature .cap b{color:#e8c547}
-</style>
+details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
+details.eros-menu a{color:var(--amber)}
 
+.thesis{margin:1.5rem 0 1.75rem;padding:1.35rem 1.4rem;border-left:3px solid var(--amber);background:var(--raised);border-radius:0 12px 12px 0}
+.thesis h2{font-family:var(--sans);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 .7rem}
+.thesis p{margin:0 0 .55rem;font-size:1.02rem}
+.thesis p:last-child{margin:0}
+
+.companions{margin:1.25rem 0 2rem;padding:1.2rem 1.3rem;border:1px solid var(--amber-line);background:var(--amber-soft);border-radius:12px}
+.companions h3{font-family:var(--sans);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 .65rem}
+.companions ul{list-style:none}
+.companions li{margin:.45rem 0;font-size:.96rem;line-height:1.6}
+.companions li b{color:var(--ink)}
+.readguide{margin:.9rem 0 0;padding-top:.85rem;border-top:1px solid var(--amber-line);font-size:.95rem;line-height:1.75}
+.readguide strong{color:var(--amber);display:block;margin-bottom:.35rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+
+.part{margin:2.75rem 0 1.25rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.part .num{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.part h2{font-size:1.55rem;margin:.25rem 0 .5rem;color:var(--ink)}
+.part .ep{color:var(--soft);font-style:italic;margin-bottom:1rem}
+h3{font-size:1.15rem;margin:1.6rem 0 .55rem;color:#f8f0e2}
+p{margin:0 0 1rem;color:var(--soft)}
+ul,ol{margin:0 0 1rem 1.2rem}
+li{margin:.35rem 0;color:var(--soft)}
+.pull{margin:1.25rem 0;padding:1rem 1.15rem;background:var(--raised);border-left:3px solid var(--rose);font-size:1.08rem;border-radius:0 10px 10px 0;color:var(--ink);font-style:italic}
+.claim{margin:1.25rem 0;padding:1.1rem 1.2rem;border:1px solid var(--amber-line);background:var(--amber-soft);border-radius:12px}
+.claim p{margin:0;color:var(--soft)}
+.claim p+p{margin-top:.6rem}
+.claim strong{color:var(--amber)}
+.claim.rose{border-color:var(--rose-line);background:var(--rose-soft)}
+.claim.rose strong{color:var(--rose)}
+
+.fee{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:1.2rem 0}
+@media(max-width:520px){.fee{grid-template-columns:1fr 1fr}}
+.fee div{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.75rem .6rem;text-align:center}
+.fee b{display:block;font-size:1.25rem;color:var(--amber)}
+.fee span{font-family:var(--sans);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+
+.plate{margin:1.4rem 0;text-align:center}
+.plate img{max-width:100%;border-radius:10px;border:1px solid var(--border)}
+.plate figcaption{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.45rem;font-style:italic}
+
+.media{margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--amber-line);background:#000;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.media video{width:100%;display:block;background:#000;max-height:440px}
+.media img{width:100%;display:block;background:#000}
+.media .cap{font-family:var(--sans);font-size:.78rem;color:var(--soft);padding:.7rem .95rem;background:var(--raised);border-top:1px solid var(--hair);line-height:1.55}
+.media .cap b{color:var(--amber);font-weight:700;letter-spacing:.05em}
+
+code{font-family:var(--mono);font-size:.86em;color:#f0d498;word-break:break-all;background:rgba(0,0,0,.35);padding:.1rem .35rem;border-radius:4px;border:1px solid var(--border)}
+.steps{margin:1rem 0 1.2rem;padding-left:1.2rem}
+.steps li{margin:.45rem 0}
+
+.walk{margin:1rem 0 1.25rem;padding:1rem 1.15rem;background:var(--raised);border:1px solid var(--border);border-radius:12px}
+.walk h4{font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin:0 0 .55rem}
+.walk ol{margin:.4rem 0 0 1.1rem}
+.walk li{margin:.35rem 0;color:var(--soft)}
+
+.grid{display:grid;gap:.75rem;margin:1.25rem 0}
+@media(min-width:540px){.grid.two{grid-template-columns:1fr 1fr}}
+.grid > div{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:.95rem 1.05rem}
+.grid > div b{display:block;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:.4rem}
+.grid > div p{font-size:.92rem;line-height:1.65;margin:0;color:var(--soft)}
+
+.svg-block{margin:1.4rem 0;padding:.7rem;border:1px solid var(--border);border-radius:12px;background:var(--card)}
+.svg-block svg{width:100%;height:auto;display:block;border-radius:8px}
+.svg-block .cap{font-family:var(--sans);font-size:.74rem;color:var(--muted);text-align:center;margin-top:.5rem;letter-spacing:.04em}
+
+.creed{text-align:center;margin:2rem 0 1rem;padding:1.35rem 1.15rem;border:1px solid var(--gold);border-radius:14px;background:linear-gradient(160deg,#1c140c,#20160f);color:var(--soft);line-height:1.9;font-size:1.02rem}
+.creed .epigraph{display:block;color:var(--rose);font-style:italic;font-size:.98rem;margin-bottom:.85rem;opacity:.9}
+.creed strong{color:var(--gold);display:block;margin-top:.5rem}
+.creedline{margin-top:.9rem;font-family:var(--sans);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.55}
+
+.footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.95rem;color:var(--muted)}
+.footer a{margin-right:.75rem}
+.to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:50%;border:1px solid var(--amber-line);background:var(--raised);color:var(--amber);font-size:1.1rem;cursor:pointer;opacity:.85;z-index:50}
+</style>
 </head>
 <body>
 <div id="progressBar"></div>
 <div class="page">
 
+<!-- COVER -->
 <header class="cover">
   <div class="seal">Narrative · On-ramp · Not the full dossier</div>
   <h1>EROS</h1>
   <p class="sub">The readable path into the plan.<br/>Crypto first. Story second. Extraction never.</p>
   <img class="banner" src="https://meaning-unconfounded.github.io/images/eros-plan-summary-banner.jpg" alt="EROS Narrative banner" onerror="this.style.display='none'"/>
-  <img class="banner" src="https://meaning-unconfounded.github.io/images/eros-plan-summary-banner1.jpg" alt="EROS Narrative banner alt" onerror="this.style.display='none'"/>
   <video class="hero" controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-plan-summary-banner.jpg">
     <source src="https://meaning-unconfounded.github.io/images/eros_summary.mp4" type="video/mp4"/>
   </video>
@@ -148,48 +150,44 @@ details.eros-menu a{color:#e8c547}
 <details class="eros-menu" id="eros-library">
   <summary>EROS library · other books</summary>
   <div class="menu-body">
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — fourteen doors · pure fiction</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
-    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/images/SpaceEros.html">SpaceEros</a></p>
+    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
 
-
+<!-- THESIS -->
 <div class="thesis" id="thesis">
   <h2>What this is</h2>
-  <p><strong>Who / what:</strong> A short narrative map of EROS — the PulseChain token, the TitanX path, the demand loop, the story layer, and the production guild — written so you can hold it in one sitting.</p>
-
-<figure class="burn-feature" id="burn-baby-burn">
-  <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
-    <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
-  </video>
-  <figcaption class="cap"><b>EROS · Burn Baby Burn</b> — every transfer feeds the black hole. Watch the instrument work before you read the theory.</figcaption>
-</figure>
-
-  <p><strong>Why care:</strong> If you held TitanX, you may already hold EROS. If you care about fair, renounced, multi-year-receipt crypto with a real media stack, this is the door.</p>
-  <p><strong>What it is not:</strong> Not a price promise. Not a whitepaper of roadmap theatre. Not a full reprint of Illumination, Gods, Egg, or The Bridge. Those are companions. This is the on-ramp.</p>
+  <p><strong>Who / what:</strong> A short narrative map of EROS — the PulseChain token, the TitanX path, the demand loop, the flow layer, the story door, the asset that carries the liquidity, and the production guild — written so you can hold it in one sitting.</p>
+  <p><strong>Why care:</strong> If you held TitanX, you may already hold EROS. If you care about fair, renounced, multi-year-receipt crypto with a real media stack and a gamified economy, this is the door.</p>
+  <p><strong>What it is not:</strong> Not a price promise. Not a whitepaper of roadmap theatre. Not a full reprint of Illumination, Gods, Egg, Thoth, or The Bridge. Those are companions. This is the on-ramp.</p>
   <p><strong>Frankness:</strong> Clarity first. Verify on-chain. Official bridge only. Chart can open the door; work is why people stay.</p>
   <p><strong>What this cannot teach:</strong> technical analysis, tax treatment, full macro dossiers, full cosmology, or button-level DeFi for absolute beginners — use The Bridge and the companions for that depth.</p>
 </div>
 
+<!-- COMPANIONS -->
 <div class="companions">
   <h3>Where depth lives</h3>
   <ul>
-    <li><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Complete Plan</a> — full spine (four volumes)</li>
-    <li><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — verify, swap, LP, risks, playbook</li>
-    <li><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake · TitanX path</li>
-    <li><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro footprints</li>
-    <li><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> · <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a> · <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a></li>
+    <li><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html"><b>Newcomer Dossier</b></a> — the confession · Book 0</li>
+    <li><a href="https://meaning-unconfounded.github.io/TheErosPlan.html"><b>The Complete Plan</b></a> — full spine (four volumes)</li>
+    <li><a href="https://meaning-unconfounded.github.io/The_Bridge.html"><b>The Bridge</b></a> — verify, swap, LP, risks, playbook</li>
+    <li><a href="https://meaning-unconfounded.github.io/The_Front_Door.html"><b>The Front Door</b></a> — letter to Jake · TitanX path</li>
+    <li><a href="https://meaning-unconfounded.github.io/Eros_Stories.html"><b>Eros Stories</b></a> — fourteen doors · pure fiction</li>
+    <li><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html"><b>Illumination Strategy</b></a> — human macro footprints</li>
+    <li><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html"><b>Gods of EROS</b></a> · <a href="https://meaning-unconfounded.github.io/Living_Egg.html"><b>Living Egg</b></a> · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html"><b>Thoth</b></a> · <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html"><b>Men of Renown</b></a></li>
   </ul>
   <div class="readguide">
-    <strong>What to read first</strong><br/>
+    <strong>What to read first</strong>
     10 minutes → this narrative<br/>
     1 hour → <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> (execution)<br/>
     1 day → <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Complete Plan</a> (full spine)<br/>
@@ -197,7 +195,7 @@ details.eros-menu a{color:#e8c547}
   </div>
 </div>
 
-<!-- ========== I INSTRUMENT ========== -->
+<!-- I INSTRUMENT -->
 <section class="part" id="instrument">
   <div class="num">I · The Instrument</div>
   <h2>You may already hold the ticket</h2>
@@ -212,6 +210,11 @@ details.eros-menu a{color:#e8c547}
   <div class="pull">“I already own a piece of this.”</div>
 
   <p>You do not have to convince ten thousand strangers to become EROS supporters. You may only need to remind people who already hold the ticket.</p>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-ticket.jpg" alt="The Ticket — you may already own it" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>You may already own it · check the wallet</figcaption>
+  </figure>
 
   <div class="walk">
     <h4>How to check if you already hold EROS</h4>
@@ -278,17 +281,53 @@ details.eros-menu a{color:#e8c547}
 
   <h3>The liquidity web</h3>
   <p>Not one vanity pool. Many pairs. TitanX-family assets, community themes, shared EROS legs that arbitrage can tug — allies, not islands. Bonding is intentional LP: you own a doorway and you can promote it. Farming a third-party inflation token is a different game.</p>
-  <p><strong>Poolonomics</strong> (the education frame for how pools, ownership, fees, and impermanent loss actually work — full version in The Bridge) is how we talk about the web without pretending depth equals total supply. <strong>Theme-branded LP</strong> means you promote a pair as its own identity — name, logo, meme, recurring presence — so traders associate the pool with a culture, not only a ticker. </p>
+  <p><strong>Poolonomics</strong> (the education frame for how pools, ownership, fees, and impermanent loss actually work — full version in The Bridge) is how we talk about the web without pretending depth equals total supply. <strong>Theme-branded LP</strong> means you promote a pair as its own identity — name, logo, meme, recurring presence — so traders associate the pool with a culture, not only a ticker.</p>
 
   <figure class="plate">
     <img src="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" alt="LP bond" loading="lazy" onerror="this.parentElement.style.display='none'"/>
     <figcaption>Two assets · one position · shared incentive</figcaption>
   </figure>
+
+  <div class="media">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
+      <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
+    </video>
+    <p class="cap"><b>EROS · Burn Baby Burn</b> — every transfer feeds the black hole. Watch the instrument work before you read the theory.</p>
+  </div>
 </section>
 
-<!-- ========== II DEMAND ========== -->
+<!-- II WHY NOW -->
+<section class="part" id="why-now">
+  <div class="num">II · Why Now</div>
+  <h2>The front run</h2>
+  <p class="ep">The old world is being renegotiated. Everyone can feel it. Fewer can name it.</p>
+
+  <p>AI is changing production. Robotics is changing labour. Space is becoming industrial. Quantum technology is advancing. Nations are restructuring finance. Crypto is moving deeper into the economic system. And the UFO / UAP conversation has moved from fringe speculation into Congress, into committee rooms, into mainstream media.</p>
+
+  <p>Whether every narrative proves true or not — the signal is undeniable. The boundaries of the old world are being challenged. The measuring sticks are being renegotiated. The language is shifting from <em>casino</em> to <em>infrastructure</em>.</p>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-strength.jpg" alt="Strength" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Front-run the transition · built through the bear</figcaption>
+  </figure>
+
+  <p><strong>EROS is front-running the transition.</strong> Not by claiming fiction is fact. By building a fictional universe where technology, finance, cosmology, AI, gaming, and community participation collide — and by making the instrument real on-chain while the story is still being written.</p>
+
+  <div class="grid two">
+    <div><b>Technology</b><p>AI, robotics, quantum, space — the tools of a new production layer.</p></div>
+    <div><b>Finance</b><p>Nations restructuring rails. Crypto moving deeper. A measuring stick under pressure.</p></div>
+    <div><b>Disclosure</b><p>The UFO / UAP question entering government. Biology, not only technology.</p></div>
+    <div><b>Participation</b><p>People searching for somewhere to build, not just to watch.</p></div>
+  </div>
+
+  <div class="pull">The technology is arriving. The financial system is changing. The community builds the world.</div>
+
+  <p>We are not waiting for permission, legislation, or consensus. The world is transitioning. EROS is an experiment in front-running that transition with a fictional universe and a real instrument underneath it. <strong>The fiction is the doorway. The instrument is the floor.</strong></p>
+</section>
+
+<!-- III DEMAND -->
 <section class="part" id="demand">
-  <div class="num">II · The Demand</div>
+  <div class="num">III · The Demand</div>
   <h2>Why anyone stays when the candle lies</h2>
   <p class="ep">Attention + community + liquidity.</p>
 
@@ -298,6 +337,11 @@ details.eros-menu a{color:#e8c547}
 
   <div class="pull">Price is the trailer. Story is the film. Trailer gets them in. Film is why they stay.</div>
 
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-demand.jpg" alt="Demand equation" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Attention + community + liquidity = demand</figcaption>
+  </figure>
+
   <h3>Three stages</h3>
   <ol class="steps">
     <li><strong>Stage One — Education.</strong> Books, notebook studio, this narrative. Map before manufacture.</li>
@@ -305,19 +349,56 @@ details.eros-menu a{color:#e8c547}
     <li><strong>Stage Three — World.</strong> Film, game, ongoing lore. Parallel build — not a substitute for verifying the contract.</li>
   </ol>
 
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-three-goals.jpg" alt="Price · Rebrand · EROS X" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Price · Rebrand · EROS X — one arc</figcaption>
+  </figure>
+
+  <div class="media">
+    <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/sommi_facts.mp4"></video>
+    <p class="cap"><b>SOMMI ON EROS.</b> A PulseChain voice, saying what the structure is. Not a promise. A recognition — from outside the EROS room.</p>
+  </div>
+
+  <h3>Rail one · human macro</h3>
   <p>Human macro — continuity language, reserves, strategic assets, footprints that stay after a crisis — lives on its own rail. Compressed thesis: measuring sticks get rewritten; digital assets migrate in rhetoric from pure casino toward infrastructure; EROS does not need a seat in any reserve. Its job is connective tissue on PulseChain. Full dossier → <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>.</p>
 
+  <h3>Rail two · the archive</h3>
   <p>Second rail — Men of Renown — is where breakaway-civilization lore lives: Nordic residual, under-ice Archive, actors inside the Egg. It is fiction and archive, not the human macro rail and not the fee table. Named so you know it exists. Depth → <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. Do not flatten both rails into one dump.</p>
+</section>
+
+<!-- IV FLOW LAYER -->
+<section class="part" id="flow">
+  <div class="num">IV · The Flow Layer</div>
+  <h2>ErosX, 33Eros, and the engine below</h2>
+  <p class="ep">When one rail stutters, flow moves to the next.</p>
+
+  <p>EROS is the store — the deflationary bond, the token that holds. But a web needs a rail for movement as well as a floor for holding. That is the design discussion behind <strong>ErosX</strong> — a flow layer, a rebellion money that moves when the traditional rails stutter — and <strong>33Eros</strong>, a teachable transform pattern other communities can copy: burn, LP, buy-and-burn, three channels in a repeating 33/33/33 loop.</p>
+
+  <p>Neither is the main instrument. They are named, discussed, and imagined in the plan, and their deployment is one of the open questions of the next cycle. What matters for the on-ramp is this: <strong>EROS is the floor, and the plan anticipates that flow eventually needs its own rail.</strong></p>
 
   <figure class="plate">
-    <img src="https://meaning-unconfounded.github.io/images/eros-demand.jpg" alt="Demand" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-    <figcaption>Demand equation</figcaption>
+    <img src="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" alt="Gold · ErosX flow" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Gold · EROS · ErosX — the measuring stick is the trade</figcaption>
+  </figure>
+
+  <h3>The engine below</h3>
+  <p>Publicly, Maria (James Ellis Osborne III) is building a computational layer on PulseChain — a substrate aimed at virtual hardware, persistent state, graphics, and audio. A machine under active public construction. EROS already shares live liquidity edges with pieces of that layer (<strong>pDAI</strong>, <strong>Bear</strong>).</p>
+
+  <p>The 333-pool vision is not only marketing: each pool can become a node in an economic graph sitting on the same chain as the machine. A game engine without players is empty; a substrate without a world is a technical curiosity. EROS is building the participation surface — assets, bonds, community, meaning — so the machine has somewhere to land.</p>
+
+  <div class="claim">
+    <p><strong>Two builders, two jobs.</strong> Maria builds the engine — computation, state, interfaces. EROS builds the world — assets, liquidity, community, participation, meaning. The world is what makes the machine matter.</p>
+  </div>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-maria.jpg" alt="Maria · the substrate" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Computation below · world and liquidity above</figcaption>
   </figure>
 </section>
 
-<!-- ========== III STORY ========== -->
+<!-- V STORY -->
 <section class="part" id="story">
-  <div class="num">III · The Story</div>
+  <div class="num">V · The Story</div>
   <h2>Operators, enclosure, bond</h2>
   <p class="ep">Story is why people stay when the chart is quiet.</p>
 
@@ -332,26 +413,108 @@ details.eros-menu a{color:#e8c547}
   </ul>
   <p>Operators are principles the world is made of — not gods who walk on as superheroes. In a scene, NaUn is a rule that keeps working after its maker is gone. Thoth is a lesson, a healer, a scribe between two people. Ra-Shen is the pressure that forces a choice. EROS is the bond that holds a pair, a guild, a reason to stay. The token and the community are local expressions of that bond operator — not a fifth god, not a guarantee. Full theology → <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a>.</p>
 
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-33-teacher.jpg" alt="33 · Teach the fork" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Teach the fork, not the extract</figcaption>
+  </figure>
+
   <div class="pull">The gods did not leave — they became the rules.</div>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Gods of EROS" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Operators as source code</figcaption>
+  </figure>
 
   <h3>Inward is forwards</h3>
   <p>The Cosmic Egg is the lore enclosure: meaning concentrates toward a Center; the arrow of significance points inward, not only outward into empty infinity. Light, affinity, expansion — rewritten for film and game. Full lawbook → <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>.</p>
 
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="The Living Egg" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>The enclosure · the shape of the world the fiction is built inside</figcaption>
+  </figure>
+
+  <div class="media">
+    <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/cell_similar.mp4"></video>
+    <p class="cap"><b>SIMILAR AT EVERY SCALE.</b> The fractal claim — the pattern at the smallest level echoes the pattern at the largest. This is what "self-similar" means here.</p>
+  </div>
+
   <p>Language craft is Thoth’s desk. Communication is bonding is cohesion. Deep toolkit → <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>.</p>
 
   <figure class="plate">
-    <img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Gods" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-    <figcaption>Operators as source code</figcaption>
+    <img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="Lensing" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>The crack in the lens — the instrument is the problem, not the world</figcaption>
   </figure>
+
+  <div class="media">
+    <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4"></video>
+    <p class="cap"><b>COSMIC OCTAVES.</b> The Egg at its largest scale. Every layer iterates the one above and below. Same pattern, many sizes.</p>
+  </div>
 </section>
 
-<!-- ========== IV PRODUCTION ========== -->
+<!-- VI ASSET -->
+<section class="part" id="asset">
+  <div class="num">VI · The Asset</div>
+  <h2>The asset that carries the liquidity</h2>
+  <p class="ep">This is where EROS stops being another coin and becomes something the rest of the space is not yet building.</p>
+
+  <p>Most NFTs are pictures. Most game items are metadata. Most virtual objects are decoration. In EROS, the object can carry the money. Not a symbol of value — the value itself, locked inside, verified on-chain.</p>
+
+  <div class="svg-block">
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Asset carries ownership carries liquidity carries value">
+      <rect width="560" height="200" fill="#0b0806"/>
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 z" fill="#e8a55a"/>
+        </marker>
+      </defs>
+      <g font-family="system-ui" font-size="11" text-anchor="middle">
+        <rect x="30" y="70" width="105" height="60" rx="10" fill="#1c1512" stroke="#e8a55a" stroke-width="1.2"/>
+        <text x="82" y="97" fill="#e8a55a" font-size="10" letter-spacing="1.5">ASSET</text>
+        <text x="82" y="116" fill="#d4c4b0" font-size="9">car · weapon · char</text>
+        <rect x="160" y="70" width="105" height="60" rx="10" fill="#1c1512" stroke="#e8a55a" stroke-width="1.2"/>
+        <text x="212" y="97" fill="#e8a55a" font-size="10" letter-spacing="1.5">OWNERSHIP</text>
+        <text x="212" y="116" fill="#d4c4b0" font-size="9">wallet · verified</text>
+        <rect x="290" y="70" width="105" height="60" rx="10" fill="#1c1512" stroke="#d4788a" stroke-width="1.2"/>
+        <text x="342" y="97" fill="#d4788a" font-size="10" letter-spacing="1.5">LIQUIDITY</text>
+        <text x="342" y="116" fill="#d4c4b0" font-size="9">EROS · ErosX locked</text>
+        <rect x="420" y="70" width="105" height="60" rx="10" fill="#1c1512" stroke="#d4788a" stroke-width="1.2"/>
+        <text x="472" y="97" fill="#d4788a" font-size="10" letter-spacing="1.5">VALUE</text>
+        <text x="472" y="116" fill="#d4c4b0" font-size="9">readable · tradable</text>
+        <line x1="138" y1="100" x2="156" y2="100" stroke="#e8a55a" stroke-width="1.4" marker-end="url(#arr)"/>
+        <line x1="268" y1="100" x2="286" y2="100" stroke="#e8a55a" stroke-width="1.4" marker-end="url(#arr)"/>
+        <line x1="398" y1="100" x2="416" y2="100" stroke="#d4788a" stroke-width="1.4" marker-end="url(#arr)"/>
+        <text x="280" y="38" fill="#e8a55a" font-size="11" letter-spacing="3">THE ECONOMY IS INSIDE THE OBJECT</text>
+        <text x="280" y="170" fill="#a89888" font-size="9" font-style="italic">— Fiction is the doorway. The instrument is the floor. —</text>
+      </g>
+    </svg>
+    <p class="cap">Asset → Ownership → Liquidity → Value</p>
+  </div>
+
+  <p>In the EROS universe, a car is not just a car. A weapon is not just a weapon. A character is not just a character. Each can carry a verified on-chain financial layer — coins locked inside the object itself, creating a visible relationship between what you own and what it is worth.</p>
+
+  <div class="grid two">
+    <div><b>Hybrid NFT</b><p>An asset that carries locked EROS / ErosX inside it, verified on-chain.</p></div>
+    <div><b>Locked inside</b><p>The coins live in the object, not just in a wallet beside it.</p></div>
+    <div><b>Premium &amp; depreciating</b><p>An asset can gain value through use, upgrade, rarity, prestige — or lose it as the object ages, wears, or falls out of favour.</p></div>
+    <div><b>Tradable · Sellable · Inheritable</b><p>The object moves, and the value inside moves with it.</p></div>
+  </div>
+
+  <p>This is the future-parallel-universe made financial. A car skin at 100 EROS. A wings and navigation pack at 1,500 ErosX. A weapon whose locked value may fall with use or rise with upgrade. Child shoes with a small lock inside them that a parent can pass down. A city plot in VR that can be built, rented, and inherited. Trading cards with rarity-tiered locks.</p>
+
+  <p><strong>Every object is an asset. Every asset has value. The economy is inside the world — not outside it.</strong></p>
+
+  <div class="claim rose">
+    <p><strong>This is not a game feature.</strong> It is the financial model. Attention becomes community. Community becomes liquidity. Liquidity becomes creation. And creation becomes the assets that carry the liquidity back into the world. The flywheel is not a metaphor. It is the structure.</p>
+  </div>
+</section>
+
+<!-- VII PRODUCTION -->
 <section class="part" id="production">
-  <div class="num">IV · The Production</div>
+  <div class="num">VII · The Production</div>
   <h2>Build without waiting for permission</h2>
   <p class="ep">The crew is you.</p>
 
-  <p>Stage One is education. Stage Two is media. Nobody needs a studio boss to start a panel, a clip, a micro-game, a themed LP post, or a honest explainer.</p>
+  <p>Stage One is education. Stage Two is media. Nobody needs a studio boss to start a panel, a clip, a micro-game, a themed LP post, or an honest explainer.</p>
 
   <p>The full plan carries scene formulas, character wheels, boss bestiaries, film scripts, a cartoon bible, a guild ledger, a ninety-day battle plan. This narrative only needs one rule:</p>
 
@@ -375,28 +538,175 @@ details.eros-menu a{color:#e8c547}
     <li>Never seed in chat. Never trust “support” DMs.</li>
   </ol>
 
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-flywheel.jpg" alt="The flywheel" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Books become media · media becomes attention · attention becomes liquidity</figcaption>
+  </figure>
+
   <p>SpaceEros is visual theatre for pairs and burn flow — chain data remains the truth. Open it from the complete plan or <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>.</p>
+
+  <h3>If you code, this is your door</h3>
+  <p>Not everyone arrives through a wallet. Some arrive through an editor. The EROS universe needs architects at the metal level — people who write languages, model systems, and build engines rather than frontends. Three foundational texts sit under this head. They are not required reading for the operator cards. They are the next room in the same house.</p>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/programming_books.jpg" alt="The foundational texts — Shen, K, Logic" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>The foundation · three texts · code the universe from first principles</figcaption>
+  </figure>
+
+  <div class="grid two">
+    <div><b>Pure functional paradigms</b><p><em>The Book of Shen</em> — Mark Tarver. Lambda calculus, pattern matching, macros, universal types. The cleanest case that functions are operators and types are the skeleton of meaning.</p></div>
+    <div><b>High-velocity array execution</b><p><em>An Introduction to Array Programming in K</em> — Nils M Holm. Concise, high-performance array-based computation. One operator acting on many units at once — the linguistic analogue of a single consonant working across a phrase.</p></div>
+    <div><b>Formal logic</b><p><em>Logic, Proof and Computation</em> — Mark Tarver. Syntax, semantics, and automated reasoning wired directly to information processing. The bridge between sentence and symbol.</p></div>
+    <div><b>Why here</b><p>Same discipline that reads a word by its operators reads a program by its primitives. Thoth is the operator under both. If you build — this is your door.</p></div>
+  </div>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-build-on-eros.jpg" alt="Build on Eros" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Every node is a community · allies, not islands</figcaption>
+  </figure>
 </section>
 
-<!-- ========== CLOSE ========== -->
+<!-- VIII FRANKNESS -->
+<section class="part" id="frankness">
+  <div class="num">VIII · Frankness</div>
+  <h2>What we know, what we don't</h2>
+  <p class="ep">A document that never admits uncertainty is only tone.</p>
+
+  <p>Frankness is not a mood. It is a practice. It names what it does not know and lets the reader hold it. So here it is plainly:</p>
+
+  <div class="claim rose">
+    <p><strong>Named in public.</strong> We do not know how long accumulation lasts. We do not know whether expansion lands on the timeline anyone hopes for. We do not know whether the market recognizes structure before price moves — or after, or never. We do not know whether ErosX or 33Eros deploy in this cycle, or the next, or at all. We are telling you the structure anyway.</p>
+  </div>
+
+  <p>Only risk what you can hold through silence as well as noise.</p>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-frankness.jpg" alt="Frankness" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Frankness is a declaration of freedom</figcaption>
+  </figure>
+
+  <h3>The cost ledger</h3>
+  <p>Bravado claims truth without cost. Frankness names the cost.</p>
+  <ul>
+    <li><b>Fees not taken</b> — extraction was available as a path. It was not chosen as the identity of the project.</li>
+    <li><b>Growth not bought</b> — attention was not purchased with promises the structure could not keep.</li>
+    <li><b>Smaller room, longer room</b> — honesty is slower than hype. The community that remains is the one that can survive another quiet season.</li>
+    <li><b>No moon script</b> — price was never offered as the product. Some people leave when they hear that. That is the filter working.</li>
+  </ul>
+
+  <div class="pull">Frankness does not attract everyone faster. It attracts the right people sooner — and releases the wrong ones earlier.</div>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-begging.jpg" alt="Don't beg the chart" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Don’t beg the chart · the begging is dependency wearing loyalty’s clothes</figcaption>
+  </figure>
+</section>
+
+<!-- IX HUB -->
+<section class="part" id="hub">
+  <div class="num">IX · The Hub</div>
+  <h2>Where the ecosystem already looks</h2>
+  <p class="ep">The TitanX Hub is a ledger of receipts, not a billboard.</p>
+
+  <p>Mike Dean’s hub is where the ecosystem already opens every day to check prices, watch the top gainers, and swap. It publishes age, liquidity, burned and staked amounts. Eros is already inside it — in the portfolio section with a live swap button.</p>
+
+  <p>The ask to the hub community is simple: <strong>pin Eros to the top slot for thirty days.</strong> Present it as what it is: the free airdrop given to TitanX holders two years ago, now the liquidity gateway for the entire ecosystem on PulseChain. Keep the swap button live so awareness becomes a position in one tap.</p>
+
+  <div class="claim">
+    <p><strong>Receipts beside the banner.</strong> Because the hub publishes the actual numbers, the placement audits the story in public every day. This is not a favour to Eros. It is the hub finally showing what is already true.</p>
+  </div>
+
+  <h3>The scoreboard</h3>
+  <p>Three milestones, each unlocking something the next stage cannot begin without.</p>
+  <div class="grid two">
+    <div><b>$3M ATH</b><p>The Revival. Stable break above previous ATH triggers full visual rebrand, new site, new campaign, new attention.</p></div>
+    <div><b>333 LP</b><p>The Transform. Network reaches 333 qualifying bonding pools — unlock EROS X for omnichain expansion. The fractal becomes self-sustaining.</p></div>
+    <div><b>$30M cap</b><p>The Cosmology. Ten times ATH. Funding unlocks for film, game, book, full media production. The world arrives.</p></div>
+    <div><b>Gamified</b><p>Not a metaphor. A public dashboard. When the community can see the score, it stops waiting for someone else and asks what its own next move is.</p></div>
+  </div>
+</section>
+
+<!-- X DOORS -->
+<section class="part" id="doors">
+  <div class="num">X · The Fourteen Doors</div>
+  <h2>The fiction is the doorway</h2>
+  <p class="ep">Pure fiction. Real instrument. One universe, fourteen ways in.</p>
+
+  <p>The full universe lives in <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — fourteen series that do not exist for years, set inside a cosmology that does. Gods. Atlantis. The Living Egg. Military continuity. Finance. AI. The Nordic residual. Two new doors were added this cycle: the flood that never ended, and the egg that speaks through machines and sensitives.</p>
+
+  <p>Read one door and you will not walk through the next one the same way. Read all fourteen and you will stop calling any of this a story.</p>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="The front door" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>The door you walk through first changes what the other thirteen mean</figcaption>
+  </figure>
+
+  <div class="pull">Fiction is the doorway. The instrument is the floor.</div>
+</section>
+
+<!-- XI CONTRACTS -->
+<section class="part" id="contracts">
+  <div class="num">XI · Verify</div>
+  <h2>Contracts &amp; doors</h2>
+  <p class="ep">The chain is the only author.</p>
+
+  <ul>
+    <li><b>PulseChain (primary)</b> — <code>0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf</code></li>
+    <li><b>Ethereum twin</b> — <code>0xc0366e013BDD46946b7F22118E1af489b1693e0f</code></li>
+    <li><b>Burn sink</b> — <code>0x0000000000000000000000000000000000000369</code></li>
+    <li><b>DApp</b> — <a href="https://erosrevival.win" target="_blank" rel="noopener">erosrevival.win</a></li>
+    <li><b>Official bridge</b> — <a href="https://bridge.pulsechain.com" target="_blank" rel="noopener">bridge.pulsechain.com</a> (only)</li>
+    <li><b>PulseX</b> — <a href="https://pulsex.com" target="_blank" rel="noopener">pulsex.com</a></li>
+    <li><b>Docs</b> — <a href="https://eros.gitbook.io/eros-docs/" target="_blank" rel="noopener">GitBook</a></li>
+    <li><b>Telegram</b> — <a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">t.me/Eros_Revival</a></li>
+  </ul>
+
+  <div class="claim rose">
+    <p><strong>Never trust a badge. Never trust a DM. Never trust a screenshot.</strong> Paste the address. Read the contract. Watch the burn. The chain is the only author that cannot lie.</p>
+  </div>
+</section>
+
+<!-- XII CLOSE -->
 <section class="part" id="close">
-  <div class="num">Close</div>
+  <div class="num">XII · Close</div>
   <h2>The book was the seed</h2>
 
-  <p>EROS is a PulseChain instrument with a fixed supply, a 2/1/1/1 flow fee, a renounce-you-must-verify claim, and a multi-year refusal to extract. It sits as a front door into TitanX attention on PulseChain. Demand is attention, community, and liquidity — executed by people, not granted by press releases. Story is the meaning layer. Production is a guild at every scale.</p>
+  <p>EROS is a PulseChain instrument with a fixed supply, a 2/1/1/1 flow fee, a renounce-you-must-verify claim, and a multi-year refusal to extract. It sits as a front door into TitanX attention on PulseChain. Demand is attention, community, and liquidity — executed by people, not granted by press releases. Story is the meaning layer. Production is a guild at every scale. The asset carries the liquidity. The flow layer is coming. The engine is being built.</p>
 
   <div class="pull">The chart can open the door. Two years of work, the liquidity web, and the absence of extraction give them a reason to stay.</div>
 
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-willingness.jpg" alt="Willingness" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Abandonment is the sin · built through the bear</figcaption>
+  </figure>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="Complete" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>The unkillable · tenacity through integrity</figcaption>
+  </figure>
+
   <p><strong>If someone asks at a party:</strong> EROS is a PulseChain token that airdropped to TitanX holders, kept building through the bear, and sits as a front door into that ecosystem — fee table first, story layer and guild second. The honest answer starts with the contract, not the mythology.</p>
 
-  <p class="creed">Eros is the bond that holds.</p>
+  <p><strong>If someone asks why now:</strong> the world is transitioning. AI, robotics, space, quantum, finance, disclosure — the boundaries of the old world are being renegotiated. EROS is front-running that transition with a fictional universe and a real instrument underneath it. The fiction is the doorway. The instrument is the floor.</p>
+
+  <div class="creed">
+    <span class="epigraph">The gods did not leave. They became the rules.</span>
+    The founder is not the point.<br/>
+    Frankness is a declaration of freedom.<br/>
+    Bond is what remains when the stimulus stops.<br/>
+    <strong>And the story continues.</strong>
+  </div>
+  <p class="creedline">History is one continuous strategic process. The map is not the world. Inward is forwards. Eros is the bond that holds.</p>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <p>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Complete Plan</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
     <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
     <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
     <a href="https://erosrevival.win" target="_blank" rel="noopener">dApp</a>
     <a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">Telegram</a>
   </p>
@@ -416,8 +726,8 @@ details.eros-menu a{color:#e8c547}
 })();
 </script>
 
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#a59e8f;border-top:1px solid #28241b;margin-top:2rem">
-  First Edition · Rev 1 · 2026-10-04 · EROS Narrative
+<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#a89888;border-top:1px solid #2e241c;margin-top:2rem">
+  First Edition · Rev 2 · 2026-10-05 · Eros Narrative · Save as Eros_Narrative.html
 </footer>
 </body>
 </html>
