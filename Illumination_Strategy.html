@@ -8,205 +8,166 @@
 <title>Eros Illumination Strategy · Footprints over Confession</title>
 <style>
 :root{
-  --bg:#080706; --surface:#14110d; --surface2:#1b1712;
-  --ink:#ebe6dc; --soft:#c9c2b0; --muted:#8a8273;
-  --gold:#d4af37; --gold2:#e8c547; --magenta:#d4788a; --cyan:#6a9eaf;
-  --violet:#9a7ab8; --hair:#2a261e;
-  --serif:Georgia,"Palatino Linotype","Book Antiqua",serif;
-  --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+  --bg:#070a0e; --surface:#0e1319; --surface2:#141b24;
+  --ink:#e8e6e0; --soft:#b8bcc2; --muted:#7d858f;
+  --steel:#7da3c8; --steel2:#a0c0dd; --steel-soft:rgba(125,163,200,.1); --steel-line:rgba(125,163,200,.35);
+  --bone:#e8e2d6; --bone-soft:#c9c2b0;
+  --gold:#c9a860; --gold2:#d4af37; --gold-soft:rgba(201,168,96,.08); --gold-line:rgba(201,168,96,.3);
+  --magenta:#c9a0f2; --cyan:#6a9eaf; --rose:#d4788a; --violet:#9a7ab8;
+  --hair:rgba(125,163,200,.18); --hair2:rgba(125,163,200,.09);
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype","Book Antiqua",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --measure:46rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg);color:var(--ink)}
-body{
-  font-family:var(--serif);font-size:1.08rem;line-height:1.8;
+body{font-family:var(--serif);font-size:1.08rem;line-height:1.8;
   background:
-    radial-gradient(1100px 520px at 90% -5%, rgba(212,175,55,.09), transparent 55%),
+    radial-gradient(1100px 520px at 90% -5%, rgba(125,163,200,.09), transparent 55%),
     radial-gradient(900px 480px at -5% 25%, rgba(106,158,175,.07), transparent 50%),
-    radial-gradient(700px 420px at 100% 80%, rgba(212,120,138,.06), transparent 45%),
-    var(--bg);
-  min-height:100vh;
-}
+    radial-gradient(700px 420px at 100% 80%, rgba(201,168,96,.05), transparent 45%),
+    var(--bg);min-height:100vh}
 html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
-html::before{inset:8px;border:1px solid rgba(212,175,55,.2)}
-html::after{inset:12px;border:1px solid rgba(212,175,55,.09)}
+html::before{inset:8px;border:1px solid rgba(125,163,200,.2)}
+html::after{inset:12px;border:1px solid rgba(125,163,200,.09)}
 @media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
 .page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.2rem 5rem}
-#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--magenta));z-index:9999;transition:width .08s linear}
+#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--steel),var(--gold),var(--magenta));z-index:9999;transition:width .08s linear}
 
-/* Cover */
+a{color:var(--steel2);text-decoration:none;border-bottom:1px solid rgba(160,192,221,.3);transition:color .15s,border-color .15s}
+a:hover{color:#c0d8ec;border-bottom-color:rgba(192,216,236,.7)}
+a:visited{color:#8fb0d0;border-bottom-color:rgba(143,176,208,.28)}
+
 .cover{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2.5rem 1rem 3rem}
-.cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;font-weight:600}
-.cover h1{font-size:clamp(2.1rem,6vw,3.2rem);font-weight:700;letter-spacing:.1em;color:var(--gold);text-shadow:0 0 48px rgba(212,175,55,.28);margin-bottom:.35rem;line-height:1.15}
+.cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--steel);margin-bottom:1.5rem;font-weight:600}
+.cover h1{font-size:clamp(2.1rem,6vw,3.2rem);font-weight:700;letter-spacing:.1em;color:var(--steel);text-shadow:0 0 48px rgba(125,163,200,.28);margin-bottom:.35rem;line-height:1.15}
 .cover .sub{font-style:italic;font-size:1.15rem;color:var(--soft);margin-bottom:1.2rem}
-.cover .rule{width:min(280px,65%);height:1px;margin:0 auto 1.6rem;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cover .rule{width:min(280px,65%);height:1px;margin:0 auto 1.6rem;background:linear-gradient(90deg,transparent,var(--steel),transparent)}
 .cover .party{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;width:100%;max-width:30rem;margin:0 auto 1.8rem;font-family:var(--sans);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase}
 .cover .party span{padding:.5rem .15rem;border:1px solid var(--hair);border-radius:8px;background:var(--surface)}
-.cover .party .p{color:var(--gold2);border-color:rgba(232,197,71,.4)}
-.cover .party .m{color:var(--cyan);border-color:rgba(106,158,175,.4)}
+.cover .party .p{color:var(--steel2);border-color:rgba(160,192,221,.4)}
+.cover .party .m{color:var(--gold2);border-color:rgba(212,175,55,.4)}
 .cover .party .a{color:var(--violet);border-color:rgba(154,122,184,.45)}
-.cover .party .w{color:var(--magenta);border-color:rgba(212,120,138,.4)}
+.cover .party .w{color:var(--rose);border-color:rgba(212,120,138,.4)}
 .cover .open{font-size:1.05rem;color:var(--soft);max-width:32rem;line-height:1.75;margin-bottom:1.6rem}
-.cover .seal{margin-top:.5rem;padding:1.15rem 1.3rem;border:1px solid rgba(212,175,55,.4);border-radius:12px;background:linear-gradient(150deg,#15120c,#1a160f);font-size:.98rem;color:var(--soft);max-width:28rem;box-shadow:0 10px 36px rgba(0,0,0,.4)}
-.cover .seal strong{color:var(--gold)}
+.cover .seal{margin-top:.5rem;padding:1.15rem 1.3rem;border:1px solid var(--steel-line);border-radius:12px;background:linear-gradient(150deg,#0e1319,#141b24);font-size:.98rem;color:var(--soft);max-width:28rem;box-shadow:0 10px 36px rgba(0,0,0,.4)}
+.cover .seal strong{color:var(--steel2)}
 .cover .layer-key{margin-top:1.6rem;font-family:var(--sans);font-size:.68rem;color:var(--muted);line-height:1.6;letter-spacing:.04em}
 .cover .layer-key span{display:inline-block;margin:0 .6rem}
 
-/* Part breaks */
-.part-break{margin:3.5rem 0 2.5rem;padding:2.2rem 1.2rem;text-align:center;border-radius:16px;border:1px solid var(--hair);background:linear-gradient(160deg,#12101a,#0e0c12)}
-.part-break.ledger{background:linear-gradient(160deg,#1a160c,#120f08)}
-.part-break.arch{background:linear-gradient(160deg,#0c1418,#0a1014)}
-.part-break.bond{background:linear-gradient(160deg,#160e12,#100a0e)}
-.part-break.last{background:linear-gradient(160deg,#14101a,#0e0c12)}
-.part-break .pk{font-family:var(--sans);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.part-break{margin:3.5rem 0 2.5rem;padding:2.2rem 1.2rem;text-align:center;border-radius:16px;border:1px solid var(--hair);background:linear-gradient(160deg,#0e1319,#0a0f14)}
+.part-break.ledger{background:linear-gradient(160deg,#141b24,#0e1319)}
+.part-break.arch{background:linear-gradient(160deg,#0e1820,#0a1218)}
+.part-break.bond{background:linear-gradient(160deg,#141016,#100c12)}
+.part-break.last{background:linear-gradient(160deg,#141420,#0e0e18)}
+.part-break .pk{font-family:var(--sans);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--steel);margin-bottom:.6rem}
 .part-break h2{font-size:clamp(1.55rem,4vw,2.05rem);color:var(--ink);border:none;margin:0 0 .4rem;padding:0}
 .part-break p{margin:0;font-style:italic;color:var(--soft);font-size:.98rem}
 
-/* Headings */
-h2{font-size:1.4rem;color:var(--gold);margin:2.6rem 0 .95rem;border-bottom:1px solid var(--hair);padding-bottom:.45rem}
+h2{font-size:1.4rem;color:var(--steel2);margin:2.6rem 0 .95rem;border-bottom:1px solid var(--hair);padding-bottom:.45rem}
 h3{font-size:1.1rem;color:var(--ink);margin:1.65rem 0 .55rem}
-h4{font-family:var(--sans);font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);margin:2rem 0 .7rem}
+h4{font-family:var(--sans);font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);margin:2rem 0 .7rem}
 p{margin:0 0 1.05rem}
 .lede{font-size:1.12rem;color:var(--soft);font-style:italic;margin-bottom:1.1rem}
 
-/* Verse / Pull */
-.verse{margin:1.55rem 0;padding:1.2rem 1.25rem;text-align:center;border:1px solid rgba(212,175,55,.28);border-radius:12px;background:linear-gradient(160deg,#15120c,#1a160f);font-size:1.04rem;line-height:1.75;color:var(--soft)}
-.verse strong{color:var(--gold)}
-.pull{margin:1.45rem 0;padding:.9rem 0 .9rem 1.15rem;border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(212,175,55,.09),transparent 70%);font-style:italic;font-size:1.06rem;color:var(--soft)}
+.verse{margin:1.55rem 0;padding:1.2rem 1.25rem;text-align:center;border:1px solid var(--gold-line);border-radius:12px;background:linear-gradient(160deg,#15120c,#1a160f);font-size:1.04rem;line-height:1.75;color:var(--soft)}
+.verse strong{color:var(--gold2)}
+.pull{margin:1.45rem 0;padding:.9rem 0 .9rem 1.15rem;border-left:3px solid var(--steel);background:linear-gradient(90deg,var(--steel-soft),transparent 70%);font-style:italic;font-size:1.06rem;color:var(--soft)}
 
-/* Claim cards */
 .claim{margin:1.3rem 0;padding:1.1rem 1.2rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
-.claim.gold{border-color:rgba(212,175,55,.4);background:linear-gradient(135deg,#17140e,#1a1710)}
+.claim.gold{border-color:var(--gold-line);background:linear-gradient(135deg,#17140e,#1a1710)}
 .claim.cyan{border-color:rgba(106,158,175,.4);background:linear-gradient(135deg,#0e1518,#121a1c)}
-.claim.magenta{border-color:rgba(212,120,138,.4);background:linear-gradient(135deg,#171014,#1a1216)}
+.claim.magenta{border-color:rgba(201,160,242,.4);background:linear-gradient(135deg,#171014,#1a1216)}
 .claim.violet{border-color:rgba(154,122,184,.4);background:linear-gradient(135deg,#15121a,#1a1520)}
-.claim p{margin:0}.claim strong{color:var(--gold)}
+.claim.steel{border-color:var(--steel-line);background:linear-gradient(135deg,#0e1319,#141b24)}
+.claim p{margin:0}.claim strong{color:var(--steel2)}
+.claim.gold strong{color:var(--gold2)}
+.claim.magenta strong{color:var(--magenta)}
 .claim p+p{margin-top:.7rem}
 
-/* Math */
 .math{margin:1.2rem 0;padding:1.05rem 1.15rem;border-radius:10px;background:var(--surface2);border:1px solid var(--hair);font-family:var(--sans);font-size:.9rem;line-height:1.75;color:var(--soft);white-space:pre-line}
 
-/* Oracle */
-.oracle{font-style:italic;margin:0 0 1.05rem;padding:.7rem 1rem;border-left:2px solid rgba(212,175,55,.5);color:var(--gold);font-size:1.04rem}
+.oracle{font-style:italic;margin:0 0 1.05rem;padding:.7rem 1rem;border-left:2px solid var(--steel);color:var(--steel2);font-size:1.04rem}
 
-/* Tag chips */
 .tag-chip{display:inline-block;font-family:var(--sans);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.12rem .38rem;border-radius:4px;margin-left:.35rem;vertical-align:middle;font-weight:600;white-space:nowrap}
-.tag-chip.layer1{background:rgba(212,175,55,.15);color:var(--gold);border:1px solid rgba(212,175,55,.3)}
-.tag-chip.layer2{background:rgba(106,158,175,.12);color:var(--cyan);border:1px solid rgba(106,158,175,.25)}
-.tag-chip.layer3{background:rgba(212,120,138,.12);color:var(--magenta);border:1px dashed rgba(212,120,138,.35)}
+.tag-chip.layer1{background:rgba(201,168,96,.15);color:var(--gold2);border:1px solid rgba(201,168,96,.3)}
+.tag-chip.layer2{background:rgba(125,163,200,.12);color:var(--steel2);border:1px solid rgba(125,163,200,.25)}
+.tag-chip.layer3{background:rgba(201,160,242,.12);color:var(--magenta);border:1px dashed rgba(201,160,242,.35)}
 
-/* Footprint cards */
 .footprint{border:1px solid var(--hair);border-radius:10px;background:var(--surface);padding:1rem 1.15rem;margin:1.2rem 0}
-.footprint .fp-title{font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.6rem}
+.footprint .fp-title{font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel2);font-weight:700;margin-bottom:.6rem}
 .footprint .fp-row{display:flex;gap:.6rem;margin-bottom:.45rem;font-size:.95rem}
 .footprint .fp-row:last-child{margin-bottom:0}
 .footprint .fp-label{flex:0 0 auto;font-family:var(--sans);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-width:8.5em;padding-top:.18rem}
 .footprint .fp-value{flex:1;color:var(--soft)}
 
-/* Tables */
 .table-wrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--hair);border-radius:10px;background:var(--surface)}
 table.ref{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.65;min-width:560px}
-table.ref th{background:#0e0d0a;color:var(--gold);font-family:var(--sans);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--hair);font-weight:700;white-space:nowrap}
+table.ref th{background:#0a0f14;color:var(--steel2);font-family:var(--sans);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--hair);font-weight:700;white-space:nowrap}
 table.ref td{padding:.85rem 1rem;border-bottom:1px solid var(--hair);vertical-align:top}
 table.ref tr:last-child td{border-bottom:none}
-table.ref tr:hover td{background:rgba(212,175,55,.03)}
-table.ref td strong{color:var(--gold)}
+table.ref tr:hover td{background:rgba(125,163,200,.03)}
+table.ref td strong{color:var(--steel2)}
 
-/* Ledger */
 .ledger{margin:1.15rem 0;padding:1.05rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
-.ledger ul{margin:.3rem 0 0 1.1rem}.ledger li{margin-bottom:.38rem}.ledger b{color:var(--gold)}
+.ledger ul{margin:.3rem 0 0 1.1rem}.ledger li{margin-bottom:.38rem}.ledger b{color:var(--steel2)}
 
-/* Grid */
 .grid{display:grid;gap:1rem;margin:1.5rem 0}
 @media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}}
 .grid>div{border:1px solid var(--hair);background:var(--surface);border-radius:10px;padding:1rem 1.15rem;transition:border-color .25s}
-.grid>div:hover{border-color:rgba(212,175,55,.35)}
-.grid>div b{display:block;font-family:var(--sans);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.5rem}
+.grid>div:hover{border-color:var(--steel-line)}
+.grid>div b{display:block;font-family:var(--sans);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel2);font-weight:700;margin-bottom:.5rem}
 .grid>div p{font-size:.95rem;line-height:1.7;margin-bottom:0;font-family:var(--sans);color:var(--soft)}
 
-/* Creed */
-.creed{margin:1.45rem 0;padding:1.55rem 1.25rem;border:1px solid rgba(212,175,55,.42);border-radius:14px;background:linear-gradient(160deg,#15120c,#1a160f);text-align:center;font-size:1.06rem;line-height:1.95;color:var(--soft);box-shadow:0 10px 32px rgba(0,0,0,.35)}
-.creed strong{color:var(--gold);display:block;margin-top:.45rem}
+.creed{margin:1.45rem 0;padding:1.55rem 1.25rem;border:1px solid var(--gold-line);border-radius:14px;background:linear-gradient(160deg,#15120c,#1a160f);text-align:center;font-size:1.06rem;line-height:1.95;color:var(--soft);box-shadow:0 10px 32px rgba(0,0,0,.35)}
+.creed strong{color:var(--gold2);display:block;margin-top:.45rem}
 .creedline{margin-top:1.15rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.55;text-align:center}
 
-/* Appendix */
 details.appendix{border:1px solid var(--hair);border-radius:12px;background:var(--surface);margin:1.8rem 0;overflow:hidden}
 details.appendix summary{cursor:pointer;list-style:none;padding:1.2rem 1.4rem;font-family:var(--sans);font-weight:700;letter-spacing:.04em;color:var(--ink);display:flex;align-items:center;gap:.75rem;transition:background .2s}
 details.appendix summary::-webkit-details-marker{display:none}
-details.appendix summary:hover{background:rgba(212,175,55,.04)}
-details.appendix summary .tag{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(212,175,55,.3);border-radius:999px;padding:.22rem .55rem;flex:none}
-details.appendix summary .chev{margin-left:auto;color:var(--gold);transition:transform .25s}
+details.appendix summary:hover{background:rgba(125,163,200,.04)}
+details.appendix summary .tag{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--steel2);border:1px solid var(--steel-line);border-radius:999px;padding:.22rem .55rem;flex:none}
+details.appendix summary .chev{margin-left:auto;color:var(--steel2);transition:transform .25s}
 details.appendix[open] summary .chev{transform:rotate(90deg)}
 details.appendix .abody{padding:0 1.4rem 1.4rem;border-top:1px solid var(--hair)}
 details.appendix .abody p,details.appendix .abody li{font-size:.96rem}
 
-/* Frame note */
 .frame-note,.connect{font-family:var(--sans);font-size:.8rem;color:var(--muted);border:1px solid var(--hair);border-radius:10px;padding:.95rem 1.05rem;background:var(--surface);margin:1rem 0 1.25rem}
-.connect{border-style:dashed;border-color:rgba(212,175,55,.35)}
+.connect{border-style:dashed;border-color:var(--steel-line)}
 
-/* Glossary */
 .glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin:1.2rem 0}
 .glossary div{padding:.7rem .85rem;border:1px solid var(--hair);border-radius:8px;background:var(--surface)}
-.glossary b{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+.glossary b{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--steel2);margin-bottom:.25rem}
 .glossary p{font-size:.88rem;color:var(--soft);margin:0;line-height:1.55}
 
-/* Footer */
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.75rem;color:var(--muted)}
-footer .gold{color:var(--gold)}
+footer .steel{color:var(--steel2)}
 
-/* Coda */
-.coda{margin:6rem 0 0;padding:4rem 1.5rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(212,175,55,.05),transparent 60%)}
+.coda{margin:6rem 0 0;padding:4rem 1.5rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(125,163,200,.05),transparent 60%)}
 .coda p{font-size:1.3rem;font-style:italic;line-height:1.7;color:var(--ink);max-width:36rem;margin:0 auto 1.3rem}
 .coda .next{font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);display:block;margin-top:2.5rem}
 
-@media print{
-  @page{size:A4;margin:14mm}
-  html::before,html::after{display:none!important}
-  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .part-break,.claim,.verse,.footprint{break-inside:avoid}
-  #progressBar{display:none}
-}
-@media(max-width:640px){
-  body{font-size:1rem}
-  .page{padding:1rem 1rem 4rem}
-  .cover .party{grid-template-columns:repeat(2,1fr);max-width:20rem}
-}
+@media print{@page{size:A4;margin:14mm}html::before,html::after{display:none!important}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.part-break,.claim,.verse,.footprint{break-inside:avoid}#progressBar{display:none}}
+@media(max-width:640px){body{font-size:1rem}.page{padding:1rem 1rem 4rem}.cover .party{grid-template-columns:repeat(2,1fr);max-width:20rem}}
 
-.thesis{margin:1.5rem 0 1.6rem;padding:1.3rem 1.35rem;border:1px solid rgba(212,175,55,.42);border-radius:14px;background:linear-gradient(160deg,rgba(212,175,55,.09),rgba(106,158,175,.05));text-align:left}
-.thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:.7rem}
+.thesis{margin:1.5rem 0 1.6rem;padding:1.3rem 1.35rem;border:1px solid var(--steel-line);border-radius:14px;background:linear-gradient(160deg,rgba(125,163,200,.08),rgba(106,158,175,.05));text-align:left}
+.thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--steel2);font-weight:700;display:block;margin-bottom:.7rem}
 .thesis p{color:var(--ink);margin:0 0 .85rem;font-size:1.02rem;line-height:1.75}
 .thesis p:last-child{margin-bottom:0}
-.thesis a{color:var(--gold)}
+.thesis a{color:var(--steel2)}
 .how{margin:1rem 0 1.5rem;padding:1rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:.95rem;color:var(--soft)}
-.how strong{color:var(--gold);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
+.how strong{color:var(--steel2);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
 
-/* Links — gold family on dark */
-a{color:#e8c547;text-decoration:none;border-bottom:1px solid rgba(232,197,71,.35);transition:color .15s,border-color .15s}
-a:hover{color:#f0d878;border-bottom-color:rgba(240,216,120,.7)}
-a:visited{color:#d4af37;border-bottom-color:rgba(212,175,55,.28)}
-a:active{color:#ffb84d}
-footer a, .connect a, .thesis a{border-bottom:none}
-footer a:hover, .connect a:hover, .thesis a:hover{border-bottom:1px solid rgba(232,197,71,.5)}
-</style>
-
-<style id="eros-collapse">
-details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid rgba(232,197,71,.28);border-radius:10px;background:rgba(232,197,71,.06);padding:.35rem 1rem}
-details.eros-menu>summary{cursor:pointer;list-style:none;font-family:system-ui,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#e8c547;padding:.55rem 0;user-select:none}
+details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--steel-line);border-radius:10px;background:var(--steel-soft);padding:.35rem 1rem}
+details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel2);padding:.55rem 0;user-select:none;font-weight:700}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
 details.eros-menu[open]>summary::before{content:"▾ ";}
-details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:rgba(255,255,255,.82)}
-details.eros-menu a{color:#e8c547}
-.burn-feature{max-width:42rem;margin:1.5rem auto;padding:0;border:1px solid rgba(232,197,71,.35);border-radius:12px;overflow:hidden;background:#0a0a0a}
-.burn-feature video{display:block;width:100%;max-height:420px;background:#000}
-.burn-feature .cap{padding:.75rem 1rem;font-size:.9rem;color:rgba(255,255,255,.8);border-top:1px solid rgba(232,197,71,.2)}
-.burn-feature .cap b{color:#e8c547}
-.intrigue-card{max-width:42rem;margin:1.75rem auto;padding:1.25rem 1.4rem;border:1px solid rgba(232,197,71,.3);border-radius:12px;background:rgba(232,197,71,.05)}
-.intrigue-card h3{margin:0 0 .5rem;font-size:1.15rem;color:#e8c547;letter-spacing:.04em}
-.intrigue-card p{margin:.4rem 0;line-height:1.65}
-.intrigue-card a{color:#e8c547}
+details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
+details.eros-menu a{color:var(--steel2)}
 </style>
-
 </head>
 <body>
 
@@ -214,13 +175,12 @@ details.eros-menu a{color:#e8c547}
 
 <main class="page">
 
-<!-- ==================== COVER ==================== -->
 <header class="cover">
   <p class="kick">The EROS Universe · Operational Companion</p>
   <h1>EROS ILLUMINATION STRATEGY</h1>
-  <p class="sub">Power · Money · AI · Military</p>
+  <p class="sub">Power · Money · Energy · Perimeter · AI · Military</p>
   <div class="rule"></div>
-  <p style="margin:1rem 0 1.2rem"><img src="https://meaning-unconfounded.github.io/images/eros-illumination-banner.jpg" alt="Illumination Strategy" style="max-width:100%;border-radius:12px;border:1px solid rgba(212,175,55,.25)"/></p>
+  <p style="margin:1rem 0 1.2rem"><img src="https://meaning-unconfounded.github.io/images/eros-illumination-banner.jpg" alt="Illumination Strategy" style="max-width:100%;border-radius:12px;border:1px solid rgba(125,163,200,.25)"/></p>
   <div class="party">
     <span class="p">Power</span>
     <span class="m">Money</span>
@@ -246,19 +206,19 @@ details.eros-menu a{color:#e8c547}
 <details class="eros-menu" id="eros-library">
   <summary>EROS library · other books</summary>
   <div class="menu-body">
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — fourteen doors · pure fiction</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
-    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/images/SpaceEros.html">SpaceEros</a></p>
+    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
-
 
 <div class="thesis" id="thesis">
   <span class="label">What this book is about</span>
@@ -282,6 +242,7 @@ details.eros-menu a{color:#e8c547}
 <div class="frame-note">
   <strong>Hard rule.</strong> The reader is not asked to believe. The reader is asked to <em>track footprints</em>. Theology stays in Gods of Eros. Breakaway Archive stays in Men of Renown. Here the deeper architecture appears only as pattern — coordinating intelligence visible when you stop treating history as a list of accidents. Covert first, normalize second, formalize third. Structure over sideshow.
 </div>
+
 <div class="connect">
   <strong>Companion volumes:</strong>
   <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> (mythos) ·
@@ -294,7 +255,7 @@ details.eros-menu a{color:#e8c547}
   One architecture, many doors. Breakaway lore does not merge into this file — hinge only.
 </div>
 
-<!-- ==================== PROLOGUE ==================== -->
+<!-- =============== PROLOGUE =============== -->
 <section>
   <h2>Prologue · The Operating System Beneath the Interface</h2>
   <p class="oracle">The visible government is not the primary decision-making architecture. Beneath the elections, the Congress, and the media spectacle lies a continuity structure rooted in military intelligence, unconventional warfare doctrine, and Continuity of Government planning.</p>
@@ -308,16 +269,16 @@ details.eros-menu a{color:#e8c547}
   <p>You are not being asked to accept the theology. You are being asked to notice that the two layers describe one phenomenon. <em>The gods are subtle in this volume. The pattern is not.</em></p>
 </section>
 
-<!-- ==================== BOOK I ==================== -->
+<!-- =============== BOOK I =============== -->
 <div class="part-break ledger">
   <p class="pk">Book I</p>
-  
-  <div class="claim">
+
+  <div class="claim steel">
     <p><strong>Method.</strong> Military and continuity operations are not required to brief the public. Absence of a press conference is expected, not disproof. We do not wait for official agreement. We read footprints. The news is often the set. The continuous strategic process is the script. <em>What if</em> is allowed when labeled as insight. Conspiracy-as-certainty is refused. Structure over sideshow.</p>
   </div>
 
-<h2>The Ledger</h2>
-  <p>1913 · 1947 · 1971 · 2008 · 2022 · The Repricing · The Gold Trigger</p>
+  <h2>The Ledger</h2>
+  <p>1913 · 1947 · 1971 · 2008 · 2022 · The Repricing · The Gold Trigger · Quantum.gov</p>
 </div>
 
 <section>
@@ -382,6 +343,28 @@ details.eros-menu a{color:#e8c547}
 </section>
 
 <section>
+  <h2>2022–Now · The Official Gold Bid</h2>
+  <p>Central banks have been accumulating gold at a record pace — the largest official bid in generations — while the public is sold the "pet rock" era story. Formal gold reserves are climbing at the official sector's slow, deliberate cadence, and the private commentary cycle keeps calling the metal irrelevant. The two layers are not the same ledger.<span class="tag-chip layer1">Layer 1</span></p>
+  <div class="pull">The official sector votes with its balance sheet. Ratios first, explanations later.</div>
+</section>
+
+<section>
+  <h2>2025–2026 · Quantum.gov and America.gov — The Digital Layer</h2>
+  <p class="lede">Two government digital-front-door programs matter more than any single executive order in this window. Both are Layer 1 documented. Both are the surface of the strategic stack's coordination layer.</p>
+  <p><strong>quantum.gov</strong> is the public face of the National Quantum Initiative. It is not a portal for quantum computing hobbyists. It is the coordination hub for federal quantum strategy across NIST, DOE, DoD, NSF, and the intelligence community — with explicit workstreams on <em>quantum-resistant cryptography</em> and <em>digital asset treasury coordination</em>. The Treasury Quantum-Readiness Task Force operates under this umbrella and its published scope includes <strong>digital assets and emerging technology risk</strong>.<span class="tag-chip layer1">Layer 1</span></p>
+  <p><strong>America.gov</strong> is ordered as the unified digital front door to federal information and covered services — sign in once, ask in plain language, complete transactions without wandering agency mazes. Login.gov integration. Super Intelligence in the interface. Tax filing and certain national-security services carved out as exceptions.<span class="tag-chip layer1">Layer 1</span></p>
+  <div class="grid two">
+    <div><b>Quantum.gov</b><p>The cryptographic rebuild. Quantum-resistant standards move from research to procurement. The rails underneath the digital economy are being re-cut while the public argues about AI logos.</p></div>
+    <div><b>America.gov</b><p>The unified gate. Better economics of access — less friction, less paperwork theatre — arrives with a single conversational identity.</p></div>
+    <div><b>The overlap</b><p>Quantum-readiness is not only cryptography. It is a justification for rebuilding <em>every</em> critical ledger — including sovereign-adjacent digital assets — on rails the state can see and settle.</p></div>
+    <div><b>The question</b><p>Does the gate remain a <em>door</em> or become a <em>valve</em>? Who holds the keys. What can be switched off. Whether exit remains real.</p></div>
+  </div>
+  <div class="claim gold">
+    <p><strong>Watch the valve.</strong> Convenience and captivity can share the same login. The unified door and the national-security exception carveout are not separate stories — they are the same story viewed from opposite ends. The citizen gains speed. The system gains legibility. Which one wins depends on whether exit remains real.</p>
+  </div>
+</section>
+
+<section>
   <h2>The Repricing — Measuring-Stick Side</h2>
   <div class="claim magenta">
     <p><strong>Look at the tape.</strong> 🥇 Gold bid. 🥈 Silver bid. 📈 Stocks ATH. 🏠 Housing ATH. 🏦 Credit getting chased. <em>They're pumping everything.</em> When every asset goes up together, the measuring stick breaks. Then money acts like water and looks for a new ledger.</p>
@@ -420,7 +403,7 @@ details.eros-menu a{color:#e8c547}
   </div>
   <div class="pull">What was once a private fraud became, through law, the operating principle of the entire monetary system. The goldsmiths did not disappear. They became the banks.</div>
   <p>The chain is continuous. From the goldsmiths' excess receipts, to the Bank of England's founding charter in 1694, to the Federal Reserve Act of 1913, to the gold window closing in 1971, to the platinum coin loophole in 2011, to the "$35 trillion crypto" remark in 2024 — the same mechanism appears at every stage. <strong>Create the claim first. Find the reserve later. Reprice the ledger if the gap grows too wide.</strong></p>
-  <div class="claim">
+  <div class="claim steel">
     <p><strong>The permanence test, applied across four centuries.</strong> Every emergency — war finance, liquidity crisis, debt ceiling standoff — becomes an occasion to expand the gap between the claims and the reserves. The language fades. The gap remains. The goldsmiths' fraud is not a historical curiosity. It is the load-bearing architecture of the present.</p>
   </div>
 </section>
@@ -431,18 +414,18 @@ details.eros-menu a{color:#e8c547}
   <p>The official stories are recorded (inflation control, democratic accountability, resource allocation). They are not trusted as complete. The operational reading is sharper: <strong>taxation creates permanent structural demand for the currency the state issues.</strong> Without the tax liability, the currency has no forced use-case.</p>
   <p>Bonds serve a parallel function — they are largely a monetary-management tool, not a pure funding necessity. When the Treasury spends more than it takes in, it credits bank reserves; excess reserves push short-term rates toward zero; bond sales drain those reserves and help the central bank hit its target. The debt-and-tax architecture is therefore a control and coordination system as much as a financing system.<span class="tag-chip layer2">Layer 2</span></p>
   <p>This is why the 1913 pairing of income tax and Federal Reserve remains foundational: currency creation plus forced demand for that currency through taxation. A future reset that revalues gold, absorbs Fed functions into the Treasury, and simplifies the tax code rewrites that dual architecture.</p>
-  <div class="claim">
+  <div class="claim steel">
     <p><strong>The asset sequence (speculative).</strong> Stocks inflate nominally → Housing inflates nominally → Gold and silver rise dramatically → Crypto becomes the final high-beta phase → A financial "crisis" triggers the repricing → Debt is restructured → The Federal Reserve is absorbed into or subordinated to the Treasury → A new monetary architecture emerges: Treasury-issued, resource-backed, algorithmically managed, with digital rails carrying the unit of account.<span class="tag-chip layer3">Layer 3</span></p>
   </div>
 </section>
 
 <section>
-  
-<figure style="max-width:42rem;margin:1.5rem auto;text-align:center">
-  <img src="https://meaning-unconfounded.github.io/images/eros-sequence-reprice.jpg" alt="Repricing sequence" style="width:100%;border-radius:10px;border:1px solid rgba(232,197,71,.25)" loading="lazy"/>
-  <figcaption style="font-size:.85rem;color:rgba(255,255,255,.65);margin-top:.5rem">Sequence · reprice. Human-rail macro — not archive lore.</figcaption>
-</figure>
-<h2>The Empirical Proof — What the Banks Admitted</h2>
+  <figure style="max-width:42rem;margin:1.5rem auto;text-align:center">
+    <img src="https://meaning-unconfounded.github.io/images/eros-sequence-reprice.jpg" alt="Repricing sequence" style="width:100%;border-radius:10px;border:1px solid rgba(125,163,200,.25)" loading="lazy"/>
+    <figcaption style="font-size:.85rem;color:var(--soft);margin-top:.5rem">Sequence · reprice. Human-rail macro — not archive lore.</figcaption>
+  </figure>
+
+  <h2>The Empirical Proof — What the Banks Admitted</h2>
   <p>For most of the twentieth century, three theories of banking competed for the mantle of truth. Only one of them described what actually happens.<span class="tag-chip layer1">Layer 1</span></p>
   <div class="grid three">
     <div><b>Theory 1 · Intermediation</b><p>Banks take in deposits and lend them out. They are middlemen between savers and borrowers.</p></div>
@@ -490,15 +473,15 @@ details.eros-menu a{color:#e8c547}
   <p>Treasury Secretary Scott Bessent has publicly invoked a "Post-Bretton Woods realignment" — language that frames the current period as structural reshuffling of how the global financial system operates. In the same window, he has discussed "monetizing the asset side" of the U.S. balance sheet.<span class="tag-chip layer1">Layer 1</span></p>
   <p>Read together with the gold trigger, this suggests the repricing is not a single event but a layered rebuild. The old system is not necessarily abolished. It becomes the foundation for something new built on top of it.<span class="tag-chip layer2">Layer 2</span></p>
   <p>The official framing is that the dollar should remain the world's reserve currency. If that is the constraint, then the project is not replacement — it is <strong>re-architecture</strong>. Strengthen the anchor while changing how the anchor moves.</p>
-  <div class="claim">
+  <div class="claim steel">
     <p><strong>The frame:</strong> not "crypto replaces the dollar" — but "the dollar stays at the centre while the rails underneath it change."</p>
   </div>
   <div class="grid two">
     <div><b>🥇 Gold</b><p>The US holds a massive gold reserve, carried on the books at an old official value. If gold were repriced, it could create a huge balance-sheet gain without selling the gold.</p></div>
-    <div><b>🇺🇸 The Dollar</b><p>Trump's message is clear: the dollar should remain the world's reserve currency. The goal may not be replacing the dollar — but strengthening it while changing how dollars move.</p></div>
+    <div><b>🇺🇸 The Dollar</b><p>The message is clear: the dollar should remain the world's reserve currency. The goal may not be replacing the dollar — but strengthening it while changing how dollars move.</p></div>
     <div><b>💵 Stablecoins</b><p>Stablecoins could become digital dollars for the internet. If they grow massively, they may create more demand for US Treasuries backing them.</p></div>
     <div><b>🔗 Tokenisation</b><p>Tokenisation could turn traditional assets into digital assets that move across blockchain networks. Crypto rails could power traditional finance.</p></div>
-    <div><b>₿ Bitcoin</b><p>Trump's Strategic Bitcoin Reserve changed the conversation. Bitcoin is no longer being treated purely as something outside government thinking.</p></div>
+    <div><b>₿ Bitcoin</b><p>The Strategic Bitcoin Reserve changed the conversation. Bitcoin is no longer being treated purely as something outside government thinking.</p></div>
     <div><b>🏦 Treasuries</b><p>Imagine US Treasury assets becoming tokenised. Ownership and settlement could increasingly happen digitally, 24/7.</p></div>
   </div>
   <p><strong>Synthesis:</strong> traditional finance <strong>absorbs</strong> the technology rather than being displaced by it. Gold strengthens the sovereign balance sheet. The dollar remains the settlement anchor. Treasuries remain the backbone of collateral. Stablecoins extend dollar utility into internet-native rails. Tokenisation upgrades settlement speed and programmability. Bitcoin sits at the edge as a strategic-reserve conversation that is now officially open.</p>
@@ -528,7 +511,7 @@ details.eros-menu a{color:#e8c547}
   <h2>What to Track — The Ledger</h2>
   <div class="ledger">
     <ul>
-      <li><b>Treasury language on gold revaluation</b> — Bessent's "monetizing the asset side" was the opening signal. Watch for the follow-through.</li>
+      <li><b>Treasury language on gold revaluation</b> — "monetizing the asset side" was the opening signal. Watch for the follow-through.</li>
       <li><b>Stablecoin legislation and required reserve composition</b> — frameworks that require high-quality liquid reserves create structural demand for Treasuries.</li>
       <li><b>Tokenized Treasury pilots and settlement finality</b> — DTCC, BNY, and Tradeweb are already running live tests.</li>
       <li><b>Strategic reserve announcements</b> — the Strategic Bitcoin Reserve exists as a no-sell directive but not yet as an active acquisition program.</li>
@@ -547,8 +530,12 @@ details.eros-menu a{color:#e8c547}
   <p>Book I ends here. What we have is the monetary ledger — the long arc from 1913 to the repricing, and the footprints that mark every pivot.</p>
   <p><em>The measuring stick is the trade.</em></p>
   <p class="creedline">History is one continuous strategic process. The map is not the world. Inward is forwards. Eros is the bond that holds.</p>
-  <span class="next">Book II · The Architecture follows</span>
+  <span class="next">Method Demonstrated and Book II · The Architecture follow</span>
 </section>
+
+<!-- ============================================================= -->
+<!-- END OF PART 1 · CONTINUE WITH PART 2 · METHOD + BOOK II begins here -->
+<!-- ============================================================= -->
 
 
 <!-- ==================== METHOD DEMONSTRATED ==================== -->
@@ -585,7 +572,7 @@ details.eros-menu a{color:#e8c547}
 <div class="part-break arch">
   <p class="pk">Book II</p>
   <h2>The Architecture</h2>
-  <p>Continuity · The Studio · 9/11 · Assange · Obama · Trump · Biden · COVID</p>
+  <p>Continuity · The Studio · 9/11 · Assange · Obama · Trump · Biden · COVID · Executive Signal</p>
 </div>
 
 <section>
@@ -618,7 +605,7 @@ details.eros-menu a{color:#e8c547}
   </div>
   <p>Politics increasingly resembles a production. Characters are cast. Narratives are synchronized. Outrage is harvested. The population stays focused on the visible conflict while the deeper architecture — monetary, military, technological, geographic — continues its work.<span class="tag-chip layer2">Layer 2</span></p>
   <p>The "Studio" is not a literal building. It is a <strong>Multi-Domain Coordination Cell</strong> — the fusion of military intelligence, Treasury/monetary levers, Silicon Valley AI, and media/entertainment psychological operations. Its purpose is to synchronize the Visible Layer (Presidents, Congress, celebrities, pundits) with the Invisible Layer (resource acquisition, military repositioning, AI data harvesting).<span class="tag-chip layer3">Layer 3</span></p>
-  <div class="claim">
+  <div class="claim steel">
     <p><strong>On the record:</strong> On the 2 July 2026 episode of Jesse Michels' <em>American Alchemy</em>, Congressman Eric Burlison described how he first contacted David Grusch. His exact words: "So we reached out to the studio and was able to get a conversation with David, like the next week." A sitting member of Congress used the language of a production company to describe access to a former intelligence official and UAP whistleblower. The phrase stands on the record.<span class="tag-chip layer1">Layer 1</span></p>
   </div>
   <p>Donald Trump has used the phrase "central casting" repeatedly across both terms and the intervening years — for generals, for Pence, for foreign leaders, for Supreme Court nominees, for Fed candidates, for police, for military officers. Central Casting is a real, century-old Hollywood company that supplied extras and character actors to the studios. Trump's vocabulary is not metaphorical colour; it is the language of someone who experiences politics as casting.<span class="tag-chip layer1">Layer 1</span></p>
@@ -631,7 +618,7 @@ details.eros-menu a{color:#e8c547}
   <p class="lede">Werner's framework for analysing central bankers is the same framework this book applies to every institution: judge by what they do, not by what they say.<span class="tag-chip layer1">Layer 1</span></p>
   <p>Werner's contribution to central-bank analysis is the concept of <strong>revealed preference</strong> — the recognition that official statements are frequently disconnected from operational behaviour, and that the operational behaviour is the data. A central bank that says it is fighting inflation while its balance sheet expands by trillions is revealing a preference that its language conceals.<span class="tag-chip layer1">Layer 1</span></p>
   <p>This is the same method this book uses throughout. Footprints over narratives. Permanence over press conferences. Ratios before explanations. Personnel continuity across administrations as a signature of function rather than policy.</p>
-  <div class="claim">
+  <div class="claim steel">
     <p><strong>Werner's rule:</strong> when an institution's words and its balance sheet disagree, the balance sheet is the truth. The words are the production layer. The balance sheet is the architecture.</p>
   </div>
   <p>The method has a long lineage now — from Werner's central-bank analysis, to the anomaly-first scanning of this book, to the parallel "footprints over narratives" principle running through the companion cosmology. What looks like three separate disciplines is one method applied at three scales: institution, state, cosmos.</p>
@@ -706,7 +693,7 @@ details.eros-menu a{color:#e8c547}
   </ul>
   <div class="pull">The return is not a legal event. It is a <em>strategic signal</em> — the return of an operator whose releases are still relevant because the institutional conflict they exposed has not concluded. Under this reading, the <em>timing of the return is the data</em>.</div>
   <p>His reappearance in public life strengthens the Illumination narrative because it is a live demonstration of the thesis: the conflict between the old security architecture and the restructuring operation is not over. It is still being fought, in public, with the same personnel, on the same board. Assange is not a side story. He is a footprint.</p>
-  <div class="claim">
+  <div class="claim steel">
     <p><strong>In a screenplay, that is not a scene. That is the third act turn.</strong></p>
   </div>
 </section>
@@ -734,12 +721,12 @@ details.eros-menu a{color:#e8c547}
 </section>
 
 <section>
-  
-<figure style="max-width:42rem;margin:1.5rem auto;text-align:center">
-  <img src="https://meaning-unconfounded.github.io/images/eros-risk-on-wall.jpg" alt="Risk on the wall" style="width:100%;border-radius:10px;border:1px solid rgba(232,197,71,.25)" loading="lazy"/>
-  <figcaption style="font-size:.85rem;color:rgba(255,255,255,.65);margin-top:.5rem">Risk on the wall — falsification before belief.</figcaption>
-</figure>
-<h2>The Biden Interregnum</h2>
+  <figure style="max-width:42rem;margin:1.5rem auto;text-align:center">
+    <img src="https://meaning-unconfounded.github.io/images/eros-risk-on-wall.jpg" alt="Risk on the wall" style="width:100%;border-radius:10px;border:1px solid rgba(125,163,200,.25)" loading="lazy"/>
+    <figcaption style="font-size:.85rem;color:var(--soft);margin-top:.5rem">Risk on the wall — falsification before belief.</figcaption>
+  </figure>
+
+  <h2>The Biden Interregnum</h2>
   <p>Joe Biden was inaugurated in January 2021. He conducted much of his campaign from a basement. His administration continued many Trump-era policies while reversing others. UAP disclosure accelerated during this period.<span class="tag-chip layer1">Layer 1</span></p>
   <p>The Biden administration functions in this hypothesis as a <strong>managed interregnum</strong> — a placeholder period designed to absorb public anger, maintain institutional continuity, and allow the deeper transition to proceed without the disruptive personality of Trump dominating every news cycle. The rapid acceleration of AI, UAP institutionalization, and monetary expansion during this period suggests that the underlying architecture was not idle.<span class="tag-chip layer3">Layer 3</span></p>
 </section>
@@ -756,8 +743,53 @@ details.eros-menu a{color:#e8c547}
   </div>
 </section>
 
+<section>
+  <h2>Executive Signal — The Direct Language Chapter</h2>
+  <p class="lede">Footprints are stronger than confessions. But when a sitting executive says the quiet part in public, the confession itself becomes a footprint. This chapter is where the boundary between covert and open is thinnest.</p>
+
+  <p>Presidents and senior officials rarely say what the strategic layer is doing. When they do, it is either a slip, a signal, or a deliberate test of public tolerance — and by the reveal rules, a deliberate signal is the most common case. The following are on the record. They are Layer 1. The reading placed on them is Layer 3.<span class="tag-chip layer1">Layer 1</span></p>
+
+  <h3>The $35 Trillion Crypto Line</h3>
+  <p>In 2024, then-candidate Trump said, verbatim: <em>"Maybe we'll pay off the $35 trillion in crypto… I'll write on a little piece of paper '$35 trillion crypto' — we have no debt."</em><span class="tag-chip layer1">Layer 1</span></p>
+  <p>It was received as a joke. Read against the platinum-coin loophole of 2011 and the 1934 gold revaluation, it is not a joke. It is the same family of move: <strong>reprice the ledger, don't pay the debt</strong>. The 1934 revaluation did exactly this — the Treasury repriced its gold, created a multibillion-dollar book gain, and used it as the seed capital for the Exchange Stabilization Fund. No debt was paid. The measuring stick moved. The same shape appears in Trump's framing, in Bessent's "monetizing the asset side," and in the live policy conversation about gold-certificate revaluation. Three different mouths. One grammar.<span class="tag-chip layer3">Layer 3</span></p>
+  <div class="pull">A joke is the safest test balloon. It announces the move, gauges reaction, and commits to nothing.</div>
+
+  <h3>"Central Casting" — The Vocabulary of Casting</h3>
+  <p>Trump's use of the phrase "central casting" is not a verbal tic. It is the vocabulary of a producer, applied to political roles. Generals, cabinet secretaries, foreign leaders, Fed chairs, Supreme Court justices — the pattern repeats. Central Casting is a real Hollywood company founded in 1925 that supplied extras and character actors to the studios of the Golden Age. Its name is now a generic term for any role-filling operation.<span class="tag-chip layer1">Layer 1</span></p>
+  <p>When a sitting executive consistently uses production vocabulary to describe political appointments, it is worth noticing. It does not prove an orchestration layer. It does prove that the executive experiences the political surface as theatre, and that the deeper roles are being filled from a different menu than the public sees.<span class="tag-chip layer3">Layer 3</span></p>
+
+  <h3>The Bitcoin Reserve Order — March 2025</h3>
+  <p>The Strategic Bitcoin Reserve was established by executive order in March 2025. Its immediate practical effect was a no-sell directive on seized BTC (~328,372 BTC) — the government will not liquidate the coins it holds. It did not authorize new purchases. It did, however, place Bitcoin inside the official framework of U.S. sovereign assets.<span class="tag-chip layer1">Layer 1</span></p>
+  <p>The category shift is the footprint. Prior to the order, Bitcoin was a foreign speculation. After the order, it is a strategic reserve asset. Categories are not cosmetics — they determine custody arrangements, budget treatment, legal standing, and eventually what can and cannot be sold.<span class="tag-chip layer2">Layer 2</span></p>
+
+  <h3>The Renaming of the Department of Defense</h3>
+  <p>In 2025, the executive renamed the Department of Defense to the <strong>Department of War</strong> — restoring a name not used since 1949. The rename was framed as a return to clarity. Read against the continuity literature, it is a signal: the posture of the department is now openly the posture of a war department, not a defence department. That is what a continuity doctrine looks like when it stops pretending to be civilian.<span class="tag-chip layer3">Layer 3</span></p>
+
+  <h3>The Bitcoin Strategic Asset Statement — Hegseth</h3>
+  <p>Secretary of War Pete Hegseth, testifying before the House Armed Services Committee in 2025, confirmed that the Pentagon is running classified Bitcoin projects that provide the U.S. military "a lot of leverage in a lot of different scenarios." Indo-Pacific Commander Admiral Samuel Paparo separately revealed that the U.S. military operates a Bitcoin node to secure and protect networks.<span class="tag-chip layer1">Layer 1</span></p>
+  <p>This is not on the record as an abstraction. It is the Secretary of War and a combatant commander stating, in open testimony, that the U.S. military treats Bitcoin as a strategic operational asset. The category is already established. The only thing left is quantity.<span class="tag-chip layer2">Layer 2</span></p>
+
+  <h3>Terminology as Policy — Super Intelligence</h3>
+  <p>In September 2026 the executive branch directed use of the term <strong>Super Intelligence (SI)</strong> in place of "Artificial Intelligence" and "AI" in official non-statutory communications. The change was presented as clarity. The change is policy. When the state renames the frontier, it is claiming the stack: science missions, data-center permitting, national SI frameworks, and the cognitive layer treated like energy and territory.<span class="tag-chip layer1">Layer 1</span></p>
+  <div class="pull">Renaming a frontier is not a vocabulary change. It is a claim of jurisdiction.</div>
+
+  <h3>What To Watch — Executive Signal</h3>
+  <div class="ledger">
+    <ul>
+      <li><b>Direct asset references</b> in presidential remarks — specific instruments, specific quantities, specific moves. Jokes precede policy.</li>
+      <li><b>Production vocabulary</b> applied to appointments, allies, adversaries. "Central casting," "script," "scene," "audience."</li>
+      <li><b>Category shifts</b> — orders that move an asset from one institutional class to another. Naming is the first draft of law.</li>
+      <li><b>Renames</b> of departments, programs, and doctrines. A rename is a claim about what the thing actually is.</li>
+      <li><b>Public testimonies</b> by senior officials that state a new institutional posture — even when framed as an aside.</li>
+    </ul>
+  </div>
+  <div class="claim magenta">
+    <p><strong>Failure markers:</strong> Direct asset references remain purely rhetorical with no follow-through in executive order or agency action. Central Casting language fades without further evidence of role-filling outside the public menu. The Strategic Bitcoin Reserve remains a no-sell directive with no path to acquisition, custody expansion, or integration with Treasury operations. The DoD rename is reversed or neutralized. No SI framework moves from terminology to policy.</p>
+  </div>
+</section>
+
 <section class="coda">
-  <p>Book II ends here. What we have is the architecture — the continuity apparatus, the production layer, the personnel signatures that recur across supposedly unrelated operations, and the living witnesses whose return is itself a signal.</p>
+  <p>Book II ends here. What we have is the architecture — the continuity apparatus, the production layer, the personnel signatures that recur across supposedly unrelated operations, the living witnesses whose return is itself a signal, and the executive language that announces moves before they land.</p>
   <p><em>The studio is in full effect.</em></p>
   <p class="creedline">History is one continuous strategic process. The map is not the world. Inward is forwards. Eros is the bond that holds.</p>
   <span class="next">Book III · The Bond follows</span>
@@ -767,7 +799,7 @@ details.eros-menu a{color:#e8c547}
 <div class="part-break bond">
   <p class="pk">Book III</p>
   <h2>The Bond</h2>
-  <p>Saylor · BitMine · Convergence · The Four Pathways · The Strategic Stack</p>
+  <p>Saylor · BitMine · Convergence · Four Pathways · Western Hemisphere · Oil · BRICS · Strategic Stack</p>
 </div>
 
 <section>
@@ -783,7 +815,7 @@ details.eros-menu a{color:#e8c547}
     <div><b>BitMine (BMNR)</b><p>5,983,940 ETH · ~4.9% of supply · 85% staked via MAVAN · $17.1B total crypto + cash</p></div>
   </div>
 
-  <p><strong>Fundstrat</strong> — Tom Lee’s research platform — sits beside the accumulation vehicle. Research, narrative, and balance-sheet strategy are not separate industries here; they are one apparatus. The same voice that frames the cycle is adjacent to the treasury that executes it.<span class="tag-chip layer2">Layer 2</span></p>
+  <p><strong>Fundstrat</strong> — Tom Lee's research platform — sits beside the accumulation vehicle. Research, narrative, and balance-sheet strategy are not separate industries here; they are one apparatus. The same voice that frames the cycle is adjacent to the treasury that executes it.<span class="tag-chip layer2">Layer 2</span></p>
   <div class="claim magenta">
     <p><strong>The central question.</strong> What happens when private corporations accumulate assets that governments increasingly treat as strategic infrastructure? Bitcoin has been named a strategic asset in military-adjacent speech. Ethereum underpins settlement, staking, and the tokenisation stack. Private balance sheets already hold quantities that would matter on a sovereign scale.</p>
   </div>
@@ -828,6 +860,70 @@ details.eros-menu a{color:#e8c547}
 </section>
 
 <section>
+  <h2>Western Hemisphere — The Resource Fortress Doctrine</h2>
+  <p class="lede">The United States is not expanding a global empire in this window. It is contracting into a resource-and-energy fortress that can survive the coming monetary stress and the multipolar realignment. The war rhetoric is the set. The resource acquisition is the script.</p>
+
+  <h3>The Shape of the Move</h3>
+  <p>Between 2025 and 2027 the visible U.S. posture in the Western Hemisphere has shifted from trade and diplomacy to <strong>direct strategic acquisition</strong>: control of oil reserves, control of shipping chokepoints, control of critical minerals, and control of the polar approaches. The public is told this is about democracy, drugs, migration, or China. The infrastructure being built is about the physical preconditions for a sovereign economic fortress.<span class="tag-chip layer2">Layer 2</span></p>
+
+  <h3>The Specific Targets</h3>
+  <div class="table-wrap">
+    <table class="ref">
+      <thead><tr><th>Target</th><th>Strategic Asset</th><th>Public Narrative</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Venezuela</strong></td><td>65+ billion barrels proven oil reserves; Caribbean positioning; pipeline and refinery access</td><td>"Restoring democracy"</td></tr>
+        <tr><td><strong>Iran</strong></td><td>Blockade capability at Hormuz; constraining China's energy imports; oil market leverage</td><td>"Nuclear containment"</td></tr>
+        <tr><td><strong>Greenland</strong></td><td>Arctic shipping routes; rare earths; fresh water; missile warning geometry</td><td>"National security purchase"</td></tr>
+        <tr><td><strong>Canada</strong></td><td>Arctic access; industrial base; continental defense integration; energy pipelines</td><td>"51st state" rhetoric</td></tr>
+        <tr><td><strong>Mexico</strong></td><td>Manufacturing; labor; Pacific and Atlantic port access; energy reform</td><td>"Trade renegotiation" / "cartel action"</td></tr>
+        <tr><td><strong>Panama</strong></td><td>Canal access; port control; Chinese investment counter; shipping lane security</td><td>"Sovereignty concerns"</td></tr>
+        <tr><td><strong>Cuba</strong></td><td>Caribbean strategic geography; signals intelligence posture</td><td>"Countering China/Russia"</td></tr>
+        <tr><td><strong>Iceland</strong></td><td>GIUK Gap; North Atlantic shipping; NATO flank; rare earth potential</td><td>"Allied partnership"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The Straits and the Chokepoints</h3>
+  <p>The strategic logic that ties the targets together is chokepoints. Whoever physically controls or guarantees the flow of oil through the Straits of Hormuz, the Strait of Malacca, the Panama Canal, the Suez approaches, and the Arctic passages determines the physical preconditions of global energy trade. Public attention is drawn to the aerial footage and the drone strikes. The permanent outcome is control of the valves.<span class="tag-chip layer2">Layer 2</span></p>
+  <div class="claim steel">
+    <p><strong>Rhetoric says war. Ledger says ownership.</strong> The strategic product of the Western Hemisphere doctrine is not conquest. It is a durable physical footprint on the movement of oil, minerals, and shipping — the preconditions of any future currency, whatever it is called.</p>
+  </div>
+
+  <h3>The Anti-BRICS Dimension</h3>
+  <p>Since 2023 the BRICS bloc has been building parallel financial infrastructure: a shared reserve currency discussion, alternative settlement rails, bilateral commodity trade in non-dollar units, and central-bank gold accumulation outside the Western system. A rising bloc with independent energy, independent commodity pricing, and independent settlement capability is the strategic threat the Western Hemisphere doctrine is built to answer.<span class="tag-chip layer2">Layer 2</span></p>
+  <p>The American response has three layers:<span class="tag-chip layer3">Layer 3</span></p>
+  <ul>
+    <li><strong>Physical</strong> — Energy control. If the U.S. and its allies physically guarantee the flow of a large share of the world's oil, the BRICS settlement plans lose the physical anchor they need.</li>
+    <li><strong>Monetary</strong> — Stablecoins and tokenised Treasuries extend the dollar into internet-native rails, competing with any alternative settlement layer before it can scale.</li>
+    <li><strong>Narrative</strong> — Sanctions, secondary sanctions, and legal pressure on any institution that participates in parallel rails. The threat is not military. The threat is exclusion from the Western financial system.</li>
+  </ul>
+  <div class="pull">The BRICS question is not "will they replace the dollar?" It is "will the U.S. retain the physical and legal grip that makes the question moot?"</div>
+
+  <h3>The Fortress Logic</h3>
+  <p>Under this reading, the "war" in the Western Hemisphere is not primarily a kinetic war. It is a <strong>resource fortification</strong>. The United States is securing the physical base that any future sovereign currency would need: energy, minerals, food, fresh water, shipping, and the polar approaches.<span class="tag-chip layer3">Layer 3</span></p>
+  <p>If the dollar's legal infrastructure is rebuilt (gold revalue, stablecoin rails, tokenised Treasuries), and if the physical infrastructure is secured (Hemisphere resources, Arctic routes, Panama and Hormuz chokepoints), then the new architecture is not a replacement of American power. It is a <em>consolidation</em> — the same power, moved onto different rails, with different assets, and fewer dependencies.<span class="tag-chip layer2">Layer 2</span></p>
+  <div class="claim gold">
+    <p><strong>The frame:</strong> not "America is at war with the world" — but "America is quietly consolidating the physical preconditions of a new monetary order while the world argues about the old one."</p>
+  </div>
+
+  <h3>What To Watch — Western Hemisphere</h3>
+  <div class="ledger">
+    <ul>
+      <li><b>Oil licenses and production rights</b> in Venezuela and Iran-adjacent regimes — the physical anchor of the fortress.</li>
+      <li><b>Greenland and Arctic base expansion</b> — permanent infrastructure, not just visits.</li>
+      <li><b>Panama Canal port control and Chinese counter-investments</b> — the shipping lane.</li>
+      <li><b>Strait of Hormuz traffic and escort patterns</b> — the chokepoint that connects to Beijing.</li>
+      <li><b>BRICS settlement announcements</b> — the pace and scope of alternative rails.</li>
+      <li><b>Gold reserve accumulation outside the Western system</b> — the BRICS anchor.</li>
+      <li><b>US STRATCOM and NORTHCOM posture language</b> — the doctrinal surface of the fortress.</li>
+    </ul>
+  </div>
+  <div class="claim magenta">
+    <p><strong>Failure markers:</strong> No durable oil access is secured in Venezuela or Iran. Arctic infrastructure stalls without permanent basing. Panama Canal control is diluted by Chinese or regional counter-moves. BRICS settlement rails scale faster than Western rails can absorb. US posture language retreats to traditional global-empire framing instead of fortress-consolidation. The physical preconditions of the fortress are never actually built.</p>
+  </div>
+</section>
+
+<section>
   <h2>The Four Pathways — Corporate Accumulation</h2>
   <p class="lede">Do not read the following as established fact. Read it as an Illumination hypothesis. Four possible pathways for how private accumulation and eventual government participation might connect.</p>
 
@@ -854,32 +950,31 @@ details.eros-menu a{color:#e8c547}
 </section>
 
 <section>
-  
   <h2 id="perimeter">The Perimeter — Access Without a Press Conference</h2>
   <p class="lede">The question is not whether a new country has been announced. The question is whether routes, minerals, missile geometry, and investment vetoes are being wired into one operating layer.</p>
-  <p>In 2026 the United States, Denmark, and Greenland formalized an expanded security arrangement: deeper American military presence, barriers to adversary bases and sensitive investment without approval, while Danish sovereignty and Greenlandic self-determination remained on the public face of the deal. NORTHCOM’s map language has treated Greenland inside the North American defense picture. National strategy text has restated hemispheric priority — a corollary to older Monroe logic — aimed at denying non-hemispheric competitors forces or control of vital assets.</p>
+  <p>In 2026 the United States, Denmark, and Greenland formalized an expanded security arrangement: deeper American military presence, barriers to adversary bases and sensitive investment without approval, while Danish sovereignty and Greenlandic self-determination remained on the public face of the deal. NORTHCOM's map language has treated Greenland inside the North American defense picture. National strategy text has restated hemispheric priority — a corollary to older Monroe logic — aimed at denying non-hemispheric competitors forces or control of vital assets.</p>
   <p>Under Illumination rules, the footprint matters more than the flag ceremony. <strong>Access and exclusion can move without a purchase announcement.</strong> The audience argues annexation. The operators argue radar, minerals, and who may not build.</p>
   <div class="pull">We are not required to believe in a single new passport from the Arctic to the Caribbean. We are required to notice when bases, canals, licenses, and screens line up on one map.</div>
-  <p><strong>What if</strong> the real product is a hemispheric operating system — energy, food basin, inland rivers, ports, data, force posture — rather than a map sticker? That reading fits continuous strategic process. A viral claim that “it is already one country in secret documents” remains unverified theater until footprints force the upgrade.</p>
-  <div class="claim">
+  <p><strong>What if</strong> the real product is a hemispheric operating system — energy, food basin, inland rivers, ports, data, force posture — rather than a map sticker? That reading fits continuous strategic process. A viral claim that "it is already one country in secret documents" remains unverified theater until footprints force the upgrade.</p>
+  <div class="claim steel">
     <p><strong>Counter.</strong> Sovereignty language was preserved. Canada is not a fiftieth state. Cuba is not under a published integration treaty. The perimeter thesis is stronger. The formal-unification thesis is not proven. Illumination holds both sentences at once.</p>
   </div>
 
-
   <h2 id="energy-grammar">Energy Grammar — Old Words, New Stage</h2>
   <p class="lede">Some strategic preferences do not need to be invented in a crisis. They only need a stage.</p>
-  <p>Decades before the present Gulf crisis cycle, the same public voice argued for seizing oil installations, keeping them, and treating chokepoints as leverage rather than charity. That grammar returned in contemporary posts and speeches — sometimes beside denials that “this is about oil.” Illumination does not require you to pick a cable-news team. It requires you to notice <em>continuity of stated preference</em>.</p>
+  <p>Decades before the present Gulf crisis cycle, the same public voice argued for seizing oil installations, keeping them, and treating chokepoints as leverage rather than charity. That grammar returned in contemporary posts and speeches — sometimes beside denials that "this is about oil." Illumination does not require you to pick a cable-news team. It requires you to notice <em>continuity of stated preference</em>.</p>
   <p><strong>Hypothesis (labeled, not sworn):</strong> prolonged kinetic noise can function as cover while facilities, islands, routes, and traffic rules are rearranged. The hypothesis is tested against footprints — licenses, escorts, export patterns, infrastructure rights — not against slogans.</p>
   <p>Venezuela offers a cleaner demo reel in the same family of methods: political rupture, then licenses, then production recovery, then long-duration rights and governance influence over energy vehicles. Pattern rhyme is not identity. Iran is not Venezuela. The <em>method family</em> — oil, infrastructure, shipping, conditionality — is what the stack watches.</p>
   <div class="pull">The show discusses war. The ledger discusses who can move the barrels and who may not invest.</div>
 
-
   <h2 id="strategic-depth">Strategic Depth — Rivers, Food, Fuel, Compute</h2>
   <p class="lede">A strong perimeter is not only coastlines and radar. It is the ability to feed, fuel, move, and compute inside the line.</p>
-  <p>North America’s inland waterways and agricultural basin are not romantic scenery. They are logistics. Energy density — from conventional barrels to grid and generation — is posture. Frontier compute and the data centers that drink power are now strategic assets in the same sentence as bases and ports. Tariffs and border stories train the public for onshore myth; the revenue math of “tariffs replace income tax” does not need to be true for the <em>narrative engineering</em> to matter.</p>
+  <p>North America's inland waterways and agricultural basin are not romantic scenery. They are logistics. Energy density — from conventional barrels to grid and generation — is posture. Frontier compute and the data centers that drink power are now strategic assets in the same sentence as bases and ports. Tariffs and border stories train the public for onshore myth; the revenue math of "tariffs replace income tax" does not need to be true for the <em>narrative engineering</em> to matter.</p>
   <p>Illumination adds these as <strong>depth layers</strong>, not as a second book. Half a page each is enough. Excess becomes sideshow.</p>
+</section>
 
-<h2>The Strategic Stack</h2>
+<section>
+  <h2>The Strategic Stack</h2>
   <p class="lede">Continuity of government becomes continuity of technology. The stage is larger than any single administration. The studio is already in production.</p>
   <p>Modern power is no longer only territory and fleets. It is energy, chips, models, links, orbits, and settlement. States that cannot mobilize those layers at speed lose to states that can. Democratic systems carry friction by design — elections, courts, press, delay. That friction is a feature until the race becomes structural. Then the pressure rises to coordinate private capability without waiting for every civilian process to finish.<span class="tag-chip layer2">Layer 2</span></p>
   <div class="claim magenta">
@@ -891,7 +986,7 @@ details.eros-menu a{color:#e8c547}
   <div class="math">Energy → Semiconductors → AI → Communications → Space → Defense → Digital Finance → Treasury</div>
   <p>Eight layers. One emerging infrastructure. The extraordinary possibility is that these are not eight independent industries. They are becoming one interconnected strategic surface for a state that must compete with systems that do not pause for election cycles or bad press.</p>
 
-  <div class="claim">
+  <div class="claim steel">
     <p><strong>The studio is in full effect.</strong> The whole world is a stage. Capability is built first — often in corporate and classified form. Narratives are leaked, tested, and A/B'd against public tolerance. Multi-track plans run in parallel. What the audience is ready to accept is staged; what it is not ready to accept remains backstage. Later, the same developments reappear as policy, reserve, contract, or statute — "discovered" as fact after the production has already moved. Covert first. Normalization second. Formalization third. That sequence is the method. When it repeats across AI, Bitcoin, and communications in the same window, the strategic restructuring is no longer only a theory. It is an observed process.</p>
   </div>
 
@@ -928,13 +1023,12 @@ details.eros-menu a{color:#e8c547}
 </section>
 
 <section>
-  
   <h2 id="illumination-eros">What This Weather Means for EROS</h2>
   <p class="lede">Macro is climate. EROS is the instrument you still have to fly.</p>
   <p>When settlement, energy, and compute harden into blocs, connective tissue matters more, not less. A liquidity web of many small bonds is a different bet than a single throne pool. Frankness — structure that does not require begging a founder to stay — is culture matched to an age of non-disclosure above. The chart may be the invitation. The work remains the reason anyone stays.</p>
   <p>This volume does not replace the Essential or the Complete Plan. It tells you what kind of sky the Plan is written under.</p>
 
-<h2>The EROS Reading</h2>
+  <h2>The EROS Reading</h2>
   <p>Each pathway is a different configuration of the same phenomenon: <strong>systems bonding</strong>. Government bonds to corporation. Corporation bonds to asset. Asset bonds to infrastructure. Infrastructure bonds to AI. AI bonds to defense. Defense bonds to currency. Currency bonds to the population.</p>
   <div class="math">Government → Military → AI → Energy → Communications → Finance → Bitcoin → Ethereum → Tokenization → Corporate Treasury → Strategic Infrastructure</div>
   <p>EROS is the name for the force that makes these bonds hold. Not sentiment. Not ideology. <strong>Connection itself</strong> — the invisible substrate that allows previously separate systems to function as one body once the bonds are in place.</p>
@@ -978,11 +1072,16 @@ details.eros-menu a{color:#e8c547}
   <span class="next">Book IV · The Last Card follows</span>
 </section>
 
+<!-- ============================================================= -->
+<!-- END OF PART 2 · CONTINUE WITH PART 3 · BOOK IV begins here   -->
+<!-- ============================================================= -->
+
+
 <!-- ==================== BOOK IV ==================== -->
 <div class="part-break last">
   <p class="pk">Book IV</p>
   <h2>The Last Card</h2>
-  <p>The Illumination Threads · Three Capitals · Fortress · AI · Ontological Reset · Freedom Paradox</p>
+  <p>Illumination Threads · Three Capitals · Fortress · AI · PURSUE · Ontological Reset · Freedom Paradox</p>
 </div>
 
 <section>
@@ -1047,21 +1146,35 @@ details.eros-menu a{color:#e8c547}
         <tr><td>Greenland</td><td>Arctic control; critical minerals; fresh water</td><td>"National security purchase"</td></tr>
         <tr><td>Canada</td><td>Arctic access; industrial base; continental defense</td><td>"51st state" rhetoric</td></tr>
         <tr><td>Mexico</td><td>Manufacturing; labor; Pacific/Atlantic access</td><td>"Trade renegotiation"</td></tr>
+        <tr><td>Panama</td><td>Canal access; port control; counter to Chinese investment</td><td>"Sovereignty concerns"</td></tr>
         <tr><td>Cuba</td><td>Caribbean strategic geography</td><td>"Countering China/Russia"</td></tr>
+        <tr><td>Iceland</td><td>GIUK Gap; North Atlantic flank; rare earth potential</td><td>"Allied partnership"</td></tr>
       </tbody>
     </table>
   </div>
-  <p>The strategic chain is coherent: constrain Iranian supply → weaken China's energy security → bring Venezuelan reserves under U.S.-aligned control → expand domestic production → rebuild the Strategic Petroleum Reserve → establish American energy as the dominant geopolitical weapon. The public sees "Trump being aggressive." The reality is the military finalizing a continental fortress.</p>
+  <p>The strategic chain is coherent: constrain Iranian supply → weaken China's energy security → bring Venezuelan reserves under U.S.-aligned control → expand domestic production → rebuild the Strategic Petroleum Reserve → establish American energy as the dominant geopolitical weapon. The public sees aggressive posturing. The reality is the military finalizing a continental fortress.</p>
 </section>
 
 <section>
   <h2>AI as the Strategic Layer</h2>
   <p>The public AI systems — chatbots, image generators, large language models — are the lowest tier of the capability stack. The military and intelligence community possess advanced decision-support AI that operates in classified environments, modeling millions of scenario branches across military, economic, political, and informational domains simultaneously.<span class="tag-chip layer2">Layer 2</span></p>
   <p>This is not "AI ruling humanity." It is <strong>AI-assisted strategic governance</strong>. Human decision-makers still issue the orders. But they choose from menus generated by computational systems that evaluate consequence trees no human mind could process. The "Studio" does not need to script every event manually. It models probabilities, selects optimal pathways, and allows the system to self-correct toward the desired strategic outcome.<span class="tag-chip layer3">Layer 3</span></p>
-  <div class="pull">The result is a governance architecture that appears chaotic on the surface (Trump's unpredictability, market volatility, geopolitical shocks) but is statistically coherent underneath. <strong>The chaos is the method. The ambiguity is the strategy.</strong></div>
+  <div class="pull">The result is a governance architecture that appears chaotic on the surface (unpredictability, market volatility, geopolitical shocks) but is statistically coherent underneath. <strong>The chaos is the method. The ambiguity is the strategy.</strong></div>
   <h3>Super Intelligence — Terminology as Policy</h3>
-  <p>In September 2026 the executive branch directed use of the terms <strong>Super Intelligence (SI)</strong> in place of “Artificial Intelligence” and “AI” in official non-statutory communications. Terminology is not decoration. When the state renames the frontier, it is claiming the stack: science missions, data-center permitting, national SI frameworks, and the cognitive layer treated like energy and territory.<span class="tag-chip layer1">Layer 1</span></p>
-  <p>Frontier labs front-run governance talk in the press. IPOs delay. “Alignment” becomes a perimeter word. Illumination reading: strategic control of the model layer is already an operational concern — not a future debate.<span class="tag-chip layer2">Layer 2</span></p>
+  <p>In September 2026 the executive branch directed use of the terms <strong>Super Intelligence (SI)</strong> in place of "Artificial Intelligence" and "AI" in official non-statutory communications. Terminology is not decoration. When the state renames the frontier, it is claiming the stack: science missions, data-center permitting, national SI frameworks, and the cognitive layer treated like energy and territory.<span class="tag-chip layer1">Layer 1</span></p>
+  <p>Frontier labs front-run governance talk in the press. IPOs delay. "Alignment" becomes a perimeter word. Illumination reading: strategic control of the model layer is already an operational concern — not a future debate.<span class="tag-chip layer2">Layer 2</span></p>
+</section>
+
+<section>
+  <h2>PURSUE — The 2026 Disclosure Acceleration</h2>
+  <p class="lede">The single most important UAP development in 2026 is not a hearing or a witness. It is an executive directive that made disclosure an operational mandate — not a matter of debate.</p>
+  <p>In February 2026 the executive branch issued a directive mandating <strong>"Maximum Transparency"</strong> regarding non-human intelligence and anomalous aerospace vehicles. The order created a formalized interagency process — codenamed <strong>PURSUE</strong> — to systematically declassify, review, and release UAP records across the Department of War, the intelligence community, NASA, the DOE, and the archives. The mandate was not "investigate further." The mandate was <em>release what is already held</em>.<span class="tag-chip layer1">Layer 1</span></p>
+  <p>PURSUE is the culmination of a sequence that ran through 2023–2026: AARO reporting, Grusch testimony, the UAP Records Collection Act, the Senate Select Committee on Intelligence's 2025 report, and the emergence of <em>non-human intelligence</em> as a defined term in U.S. statutory language. The direct executive order consolidated the process under a single mandate with a release schedule and a dedicated review office.<span class="tag-chip layer1">Layer 1</span></p>
+  <div class="claim gold">
+    <p><strong>Watch the sequence.</strong> PURSUE is not an isolated event. It is the executive layer executing on a multi-year legislative and intelligence-community foundation. When the executive branch moves from "we are studying the question" to "we are releasing the records," it has moved from investigation to declaration. The question the disclosure actually discloses is the next chapter.</p>
+  </div>
+  <p><strong>Entertainment synchronization.</strong> In the same window, Spielberg's <em>Disclosure Day</em> entered production as a mainstream, non-fringe treatment of UFO secrecy — a first for a major studio director. Official language (NHI), entertainment language (Disclosure Day), and executive language (PURSUE) synchronized in the same year. Under the production rules of the Studio chapter, that is not coincidence. That is the set being lit for the next scene.<span class="tag-chip layer2">Layer 2</span></p>
+  <div class="pull">The disclosure has already happened. It is the disclosure of the disclosure process itself. The next phase is what the process reveals.</div>
 </section>
 
 <section>
@@ -1069,8 +1182,8 @@ details.eros-menu a{color:#e8c547}
   <p>UAP has progressed from fringe subject to official government priority. The Pentagon released Navy videos. AARO was established. Congressional hearings were held. David Grusch testified under oath. The terminology has shifted from UFO to UAP to <em>non-human intelligence</em> (NHI). Congress defined NHI as "any sentient intelligent non-human lifeform regardless of nature or ultimate origin."<span class="tag-chip layer1">Layer 1</span></p>
   <p>This is the <strong>Trump Card</strong> — the final narrative play. Once the physical and monetary restructures are locked in, the system will trigger the Disclosure event. Not because the public is ready, but because the public <em>cannot be unified by politics anymore</em>. You cannot heal a population fractured by outrage marketing with more politics. You need an <strong>existential other</strong>.<span class="tag-chip layer3">Layer 3</span></p>
   <div class="math">The managed sequence:<br/>1. UFOs exist as unexplained phenomena.<br/>2. Government acknowledges some incidents are genuine.<br/>3. Military and intelligence officials discuss anomalous capabilities.<br/>4. Terminology shifts to "non-human intelligence."<br/>5. Subject moves beyond spacecraft to consciousness, dimensions, and ontology.<br/>6. Humanity is confronted with a broader question about its place in reality.</div>
-  <p><strong>Sequence markers (live):</strong> hearings → standing offices → terminological shift (UAP → NHI) → entertainment synchronization → consciousness/ontology framing in official-adjacent speech.</p>
-  <p><strong>Failure markers:</strong> permanent stall at "sensor unexplained"; no terminological progression; entertainment and official language diverge; subject returns to pure aviation safety with no ontological turn.</p>
+  <p><strong>Sequence markers (live):</strong> hearings → standing offices → terminological shift (UAP → NHI) → PURSUE directive → entertainment synchronization (<em>Disclosure Day</em>) → consciousness/ontology framing in official-adjacent speech.</p>
+  <p><strong>Failure markers:</strong> permanent stall at "sensor unexplained"; no terminological progression; entertainment and official language diverge; subject returns to pure aviation safety with no ontological turn; PURSUE declassifies nothing material or is quietly defunded.</p>
   <p>By revealing NHI and confirming that reality is structured around consciousness and dimensions, the old political divides become irrelevant. The Military-Industrial-Intelligence complex becomes the "Guardian of Humanity." The AI system becomes the interface for understanding the new reality. The political circus ends. A global "consciousness initiative" is launched.<span class="tag-chip layer3">Layer 3</span></p>
   <p>This is the lowest-probability outcome, but the highest strategic ceiling. It is the ultimate ace — the one card that renders all previous historical cycles obsolete.</p>
 </section>
@@ -1119,7 +1232,7 @@ details.eros-menu a{color:#e8c547}
   <p><strong>Model D is not a conspiracy in the ordinary sense.</strong> It does not require coordination meetings, hidden councils, or secret oaths. It requires only what already exists: banks with the legal privilege of creating money out of nothing, and a state whose interest is served by taxation paid in that money. The fraud is structural. The permanence is architectural. The bond between the two is the operating principle.</p>
 </section>
 
-<section id="falsification">
+<section id="falsification-4">
   <h2>Falsification Criteria</h2>
   <p>A hypothesis that cannot die is not operational — it is theology. This one dies, or weakens, if the footprints fail to appear. (See also the worked application under <a href="#method-demo">Method Demonstrated</a>.)</p>
   <ul>
@@ -1129,6 +1242,7 @@ details.eros-menu a{color:#e8c547}
     <li>Stablecoins and tokenised Treasuries remain permanently segregated from the sovereign balance sheet and settlement core.</li>
     <li>Western Hemisphere consolidation stalls.</li>
     <li>UAP terminology stalls at "unidentified objects" without progression to NHI/consciousness.</li>
+    <li>PURSUE declassifies nothing material, or is quietly defunded.</li>
     <li>Political conflict produces genuinely divergent institutional outcomes rather than convergent plumbing.</li>
     <li>Digital-asset policy remains purely adversarial with no path into reserve composition or rails architecture.</li>
   </ul>
@@ -1159,8 +1273,7 @@ details.eros-menu a{color:#e8c547}
   <p class="creedline">History is one continuous strategic process. The map is not the world. Inward is forwards. Eros is the bond that holds.</p>
 </section>
 
-<!-- ==================== APPENDIX ==================== -->
-
+<!-- ==================== APPENDIX · MISSING TRILLIONS ==================== -->
 <section>
   <h2>The Missing Trillions — Fitts Hinge</h2>
   <p class="lede">The surface ledger and the parallel build. Human continuity rail only.</p>
@@ -1249,9 +1362,10 @@ details.eros-menu a{color:#e8c547}
         <div><b>1976 · Tehran</b><p>Two F-4s pursue a luminous object; instruments die, weapons fail, the object outflies the Shah's entire air force. Filed in a U.S. Defense Intelligence Agency report.</p></div>
         <div><b>1997–2008 · The Burial Pattern</b><p>Phoenix Lights — thousands of witnesses, a governor's late admission. Nimitz — radar, video, four crews. O'Hare — a hole in the clouds over a major airport. Stephenville — radar-confirmed, dozens of officers.</p></div>
         <div><b>2021 · The ODNI Report</b><p>The Director of National Intelligence goes to Congress: 144 military incidents, one explained. The unexplained becomes the official baseline.</p></div>
-        <div><b>2026 · PURSUE</b><p>The direct culmination of a February 2026 executive directive mandating "Maximum Transparency" regarding non-human intelligence and anomalous aerospace vehicles.</p></div>
+        <div><b>2023 · Grusch Under Oath</b><p>A former intelligence officer testifies to Congress about crash-retrieval programs and non-human craft. Layer 1: the testimony is on the record. Layer 3: what it actually contains.</p></div>
+        <div><b>2026 · PURSUE</b><p>The direct culmination of the February 2026 executive directive mandating "Maximum Transparency" regarding non-human intelligence and anomalous aerospace vehicles.</p></div>
       </div>
-      <div class="pull">The pattern: military confirmation, then burial within days. The subject advances only when the system allows it.</div>
+      <div class="pull">The pattern: military confirmation, then burial within days. The subject advances only when the system allows it. PURSUE is the system allowing it.</div>
     </div>
   </details>
 
@@ -1304,6 +1418,7 @@ details.eros-menu a{color:#e8c547}
         <div><b>Layer 3</b><p>Operational hypothesis. The through-line of this document. Speculative, labelled, testable.</p></div>
         <div><b>Strategic Bitcoin Reserve</b><p>Established by executive order in March 2025. A no-sell directive holding seized BTC. ~328,372 BTC. Not yet an active acquisition program.</p></div>
         <div><b>NHI</b><p>Non-Human Intelligence. Congressional definition: "any sentient intelligent non-human lifeform regardless of nature or ultimate origin."</p></div>
+        <div><b>PURSUE</b><p>2026 executive directive mandating maximum transparency on NHI and anomalous aerospace vehicles. The formalized declassification process across DoW, IC, NASA, DOE, and archives.</p></div>
         <div><b>ESF</b><p>Exchange Stabilization Fund. Born from the 1934 gold revaluation. Still operates outside meaningful audit.</p></div>
         <div><b>MAVAN</b><p>BitMine's staking platform. ~85% of BitMine's ETH holdings are staked through it.</p></div>
         <div><b>Alchemy of 5%</b><p>BitMine's stated target: accumulate 5% of Ethereum's total supply.</p></div>
@@ -1311,6 +1426,8 @@ details.eros-menu a{color:#e8c547}
         <div><b>EROS</b><p>In this volume: the principle of bonding — the invisible relationship that allows previously separate systems to function as one body. In the companion cosmology: the force that holds iteration in time.</p></div>
         <div><b>Secular Naun</b><p>The pattern of building an architecture that continues after its builder withdraws. Visible at state scale in the Strategic Stack whether anyone uses the mythological names or not.</p></div>
         <div><b>C_R / C_F</b><p>Werner's distinction: C_R is credit for real production, repaid out of income the credit creates. C_F is credit for financial speculation, repaid out of the next buyer's loan.</p></div>
+        <div><b>Department of War</b><p>2025 rename of the Department of Defense. The posture of a war department, restored to open language.</p></div>
+        <div><b>Super Intelligence (SI)</b><p>September 2026 executive branch directive replacing "AI" in official non-statutory communications. A claim of jurisdiction over the frontier.</p></div>
       </div>
     </div>
   </details>
@@ -1340,8 +1457,10 @@ details.eros-menu a{color:#e8c547}
 </section>
 
 <footer>
-  <p><span class="gold">EROS ILLUMINATION STRATEGY</span> · The Operational Companion</p>
+  <p><span class="steel">EROS ILLUMINATION STRATEGY</span> · The Operational Companion</p>
   <p>Companions:
+  <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a> ·
+  <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> ·
   <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> ·
   <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> ·
   <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> ·
@@ -1382,8 +1501,8 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 })();
 </script>
 
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#a59e8f;border-top:1px solid #28241b;margin-top:2rem">
-  First Edition · Rev 1 · 2026-10-04 · Illumination Strategy
+<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#7d858f;border-top:1px solid #1a1e24;margin-top:2rem">
+  First Edition · Rev 2 · 2026-10-05 · Illumination Strategy · Save as Illumination_Strategy.html
 </footer>
 </body>
 </html>
