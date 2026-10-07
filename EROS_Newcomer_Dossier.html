@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="EROS Newcomer Dossier — The Confession. Frankness is a declaration of freedom. The founder is not the point."/>
+<meta name="description" content="EROS Newcomer Dossier — The Confession. Frankness is a declaration of freedom. The founder is not the point. We are not extraction — we are everything DeFi should have been."/>
 <meta property="og:title" content="EROS · Newcomer Dossier — The Confession"/>
-<meta property="og:description" content="The founder is not the point. Frankness is freedom. Bond is what remains when the stimulus stops."/>
+<meta property="og:description" content="The founder is not the point. Frankness is freedom. Bond is what remains when the stimulus stops. This is the gift crypto has not had."/>
 <meta property="og:image" content="https://meaning-unconfounded.github.io/images/eros-door.jpg"/>
 <meta name="theme-color" content="#0b0a08"/>
 <title>EROS · Newcomer Dossier — The Confession</title>
@@ -22,6 +22,10 @@
   --gold-line:rgba(212,175,55,.28);
   --magenta:#c9a0f2;
   --magenta-line:rgba(201,160,242,.4);
+  --pulse:#A020F0;
+  --pulse2:#E040FB;
+  --cyan:#00D4FF;
+  --green:#00FF88;
   --border:#28241b;
   --hair:#1c1913;
   --serif:Georgia,"Palatino Linotype","Book Antiqua",serif;
@@ -38,27 +42,46 @@ body{
   letter-spacing:.002em;
   background:
     radial-gradient(800px 400px at 90% -5%, rgba(212,175,55,.07), transparent 55%),
-    radial-gradient(600px 360px at -5% 40%, rgba(201,160,242,.05), transparent 50%),
-    radial-gradient(500px 340px at 100% 90%, rgba(106,158,175,.04), transparent 45%),
+    radial-gradient(600px 360px at -5% 40%, rgba(160,32,240,.07), transparent 50%),
+    radial-gradient(500px 340px at 100% 90%, rgba(0,212,255,.04), transparent 45%),
     var(--bg);
   min-height:100vh;
   overflow-x:hidden;
 }
 html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
 html::before{inset:8px;border:1px solid rgba(212,175,55,.18)}
-html::after{inset:12px;border:1px solid rgba(212,175,55,.07)}
+html::after{inset:12px;border:1px solid rgba(160,32,240,.12)}
 @media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
 
 .page{max-width:var(--measure);margin:0 auto;padding:1.5rem 1.2rem 4rem}
 #progressBar{
   position:fixed;top:0;left:0;height:2px;width:0;
-  background:linear-gradient(90deg,var(--gold) 0%,var(--gold) 60%,var(--magenta) 100%);
+  background:linear-gradient(90deg,var(--pulse) 0%,var(--gold) 50%,var(--magenta) 100%);
   z-index:9999;
   transition:width .08s linear;
 }
 
+/* PULSECHAIN TOP BAR */
+.pulse-top{
+  text-align:center;
+  padding:.6rem 0 1.1rem;
+  margin-bottom:1.1rem;
+  border-bottom:1px solid var(--gold-line);
+}
+.pulse-top svg{display:inline-block;vertical-align:middle;margin:0 .35rem;filter:drop-shadow(0 0 12px rgba(160,32,240,.35))}
+.pulse-top .tagline{
+  display:block;
+  font-family:var(--sans);
+  font-size:.6rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-top:.55rem;
+  font-weight:600;
+}
+
 /* COVER */
-.cover{text-align:center;padding:1rem 0 1.4rem}
+.cover{text-align:center;padding:.6rem 0 1.4rem}
 .cover .kick{
   font-family:var(--sans);font-size:.62rem;letter-spacing:.38em;
   text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;font-weight:600;
@@ -158,6 +181,7 @@ li::marker{color:var(--gold)}
   color:var(--soft);
   line-height:1.75;
 }
+.pull.pulse{border-left-color:var(--pulse2);background:linear-gradient(90deg,rgba(160,32,240,.08),transparent 75%)}
 .claim{
   margin:1.35rem 0;
   padding:1.1rem 1.2rem;
@@ -168,10 +192,12 @@ li::marker{color:var(--gold)}
 }
 .claim.gold{border-color:var(--gold-line);background:linear-gradient(135deg,#17140e,#1a1710)}
 .claim.magenta{border-color:var(--magenta-line);background:linear-gradient(135deg,#171014,#1a1216)}
+.claim.pulse{border-color:rgba(160,32,240,.4);background:linear-gradient(135deg,#150a20,#180c24)}
 .claim p{margin:0}
 .claim strong{color:var(--gold)}
 .claim p+p{margin-top:.6rem}
 .claim.magenta strong{color:var(--magenta)}
+.claim.pulse strong{color:var(--pulse2)}
 .grid{display:grid;gap:.75rem;margin:1.25rem 0}
 @media(min-width:540px){.grid.two{grid-template-columns:1fr 1fr}}
 .grid>div{
@@ -376,6 +402,15 @@ footer .pillar{
   margin:.5rem 0 .85rem;
 }
 footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
+.footer-pulse{
+  margin-top:1.2rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.75rem;
+  flex-wrap:wrap;
+}
+.footer-pulse svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3))}
 
 @media print{
   @page{size:A4;margin:14mm}
@@ -396,6 +431,35 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
 <div id="progressBar"></div>
 <main class="page">
 
+<!-- PULSECHAIN TOP BAR -->
+<div class="pulse-top">
+  <svg width="42" height="42" viewBox="0 0 100 100" aria-label="PulseChain">
+    <defs>
+      <linearGradient id="pcg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#A020F0"/>
+        <stop offset="55%" stop-color="#E040FB"/>
+        <stop offset="100%" stop-color="#7A00D4"/>
+      </linearGradient>
+    </defs>
+    <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pcg)"/>
+    <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0b0a08" opacity=".92"/>
+    <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg width="38" height="38" viewBox="0 0 100 100" aria-label="PulseX">
+    <defs>
+      <linearGradient id="pxg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#00D4FF"/>
+        <stop offset="50%" stop-color="#A020F0"/>
+        <stop offset="100%" stop-color="#E040FB"/>
+      </linearGradient>
+    </defs>
+    <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pxg)"/>
+    <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0b0a08" opacity=".92"/>
+    <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="tagline">Faster · Cheaper · Stronger · We are on PulseChain</span>
+</div>
+
 <!-- COVER -->
 <header class="cover">
   <p class="kick">EROS · The Confession · Book 0</p>
@@ -406,7 +470,7 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
     <img src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="The front door" onerror="this.src='https://meaning-unconfounded.github.io/images/8.jpg'"/>
   </figure>
   <div class="seal">
-    <strong>Read this first.</strong> Not a whitepaper. Not a price promise. A frank account of the wound at the bottom of a bear market — and of a project built so you never have to beg a coin not to die.
+    <strong>Read this first.</strong> Not a whitepaper. Not a price promise. A frank account of the wound at the bottom of a bear market — and of a project built so you never have to beg a coin not to die. <strong>We are not extraction. We are everything DeFi should have been.</strong>
   </div>
 </header>
 
@@ -422,7 +486,7 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
       <li><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — the field manual. How to act.</li>
       <li><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — the letter to the builder.</li>
       <li><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — the spine, four volumes.</li>
-      <li><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — the fourteen doors. Pure fiction.</li>
+      <li><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — the sixteen doors. Pure fiction.</li>
       <li>Depth rails — <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>, <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>, <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>, <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>, <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>.</li>
     </ol>
     <p><strong>Companion library:</strong> this is one book in a twelve-part universe. Every other book is a door. You do not have to read them in order. But the Dossier was written for the person who has not read any of them yet.</p>
@@ -500,9 +564,32 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   </div>
 </section>
 
-<!-- 05 -->
+<!-- 05 · NEW · THE GIFT -->
 <section>
-  <h2><span class="num">05</span>What EROS is not</h2>
+  <h2><span class="num">05</span>The gift</h2>
+  <p class="lede">What we bring is not another token. It is everything DeFi should have been — and mostly wasn't.</p>
+  <p>Crypto has a graveyard. Coins that launched loud and went quiet. Founders who made promises, took the fees, and walked away. Communities left holding a chart and a bad taste. You have seen it. You have probably felt it — the specific loneliness of holding something you loved after the people who built it stopped showing up.</p>
+  <p>That is the world EROS is responding to. Not with a slogan. With a structure.</p>
+
+  <div class="grid two">
+    <div><b>Not extraction</b><p>No founder-drain fee. No team allocation in the burn economy. The supply is fixed. The posture is zero.</p></div>
+    <div><b>Everything DeFi should be</b><p>Bond. Liquidity as relationship. Burn as the cost of activity. Zero-extraction as the shape of the thing.</p></div>
+    <div><b>Through it all</b><p>Two years of quiet seasons. Every bear. Every time the chart looked dead. EROS posted. EROS shipped. EROS stayed.</p></div>
+    <div><b>With big plans</b><p>Sixteen doors. Hybrid assets. VR cities. A guild that builds across years. Not a moon script — a world script.</p></div>
+  </div>
+
+  <div class="claim pulse">
+    <p><strong>The gift, said once.</strong> Not a promise that price goes up. A promise that the structure is honest, the receipts are public, and the people here are here on purpose. Code can be copied. Belief cannot be manufactured. Survival is the signal.</p>
+  </div>
+
+  <div class="pull pulse">You cannot only build the tech. You must bring the right people.</div>
+
+  <p>The right people are not the ones who come to sell. They are the ones who build because they made something worth keeping. <strong>Creative causative</strong> — not extractive. They build stories, assets, worlds, and they find a home inside the thing they built. That home is EROS.</p>
+</section>
+
+<!-- 06 -->
+<section>
+  <h2><span class="num">06</span>What EROS is not</h2>
   <p>Count the coins in this ecosystem that stopped posting. Then count the ones whose founders still show up every day without a fee.</p>
   <p>One list is long. The other is short.</p>
   <p><strong>EROS is not:</strong></p>
@@ -518,9 +605,9 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   </div>
 </section>
 
-<!-- 06 -->
+<!-- 07 · RECEIPTS -->
 <section>
-  <h2><span class="num">06</span>Receipts — what we have said out loud</h2>
+  <h2><span class="num">07</span>Receipts — what we have said out loud</h2>
   <p class="lede">Frankness that has never been tested is only a tone. Here is a small inventory of lines already said in public — not summaries of positions, but the positions themselves, kept from the record.</p>
 
   <div class="receipts">
@@ -548,14 +635,18 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
       <p class="quote">“The biggest mistake in a bull market is not being wrong. It is being invisible.”</p>
       <p class="source">— Eros Plan · The Front Door</p>
     </div>
+    <div class="receipt">
+      <p class="quote">“Do not fake a cosmos to pump a bag. Build a cosmos worth entering.”</p>
+      <p class="source">— Living Egg · Manual of Law</p>
+    </div>
   </div>
 
   <p>Each of these was written before this Dossier existed. None of them were written for it. That is the point of a receipt — it exists whether or not you are reading it. More can be added as the record is mined. Nothing on this list is a promise. All of it is on file.</p>
 </section>
 
-<!-- 07 -->
+<!-- 08 · MECHANISM -->
 <section>
-  <h2><span class="num">07</span>The mechanism — not the mood</h2>
+  <h2><span class="num">08</span>The mechanism — not the mood</h2>
   <p class="lede">Frankness is credible only when it has nothing to hide. Here is what “no founder dependency” means in structure — not in slogans.</p>
   <div class="ledger">
     <ul>
@@ -564,6 +655,7 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
       <li><b>Bond as stored intention</b> — Liquidity locked in relationship is a public postulate: we stay coupled across time.</li>
       <li><b>Media independent of mood</b> — Books, posts, and artifacts exist whether a founder is loud or quiet.</li>
       <li><b>Naun’s Law</b> — A creation that cannot continue without its maker is unfinished. The design aim is the opposite.</li>
+      <li><b>On PulseChain</b> — Cheap enough to iterate, community-run, IPFS-hosted interfaces. The floor does not depend on a single operator staying up.</li>
     </ul>
   </div>
 
@@ -575,9 +667,9 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   <p>If you cannot verify a claim, treat it as unproven. Frankness includes that rule.</p>
 </section>
 
-<!-- 08 -->
+<!-- 09 · COST LEDGER -->
 <section>
-  <h2><span class="num">08</span>The cost ledger</h2>
+  <h2><span class="num">09</span>The cost ledger</h2>
   <p>Bravado claims truth without cost. Frankness names the cost.</p>
   <p>Even those who agree with you often want a price for that courage. Agreement is not support. Support costs what many will not pay. So the frank person pays alone — or builds a room where paying alone is no longer required.</p>
   <div class="ledger">
@@ -591,9 +683,9 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   <div class="pull">Frankness does not attract everyone faster.<br/>It attracts the right people sooner — and releases the wrong ones earlier.</div>
 </section>
 
-<!-- 09 -->
+<!-- 10 · WHAT WE DO NOT KNOW -->
 <section>
-  <h2><span class="num">09</span>What we do not know</h2>
+  <h2><span class="num">10</span>What we do not know</h2>
   <p>A document about frankness that never admits uncertainty is only tone.</p>
   <div class="claim">
     <p><strong>Named in public.</strong> We do not know how long accumulation lasts. We do not know whether expansion lands on the timeline anyone hopes for. We do not know whether the market recognizes structure before price moves — or after, or never. We are telling you the structure anyway.</p>
@@ -601,9 +693,9 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   <p>Only risk what you can hold through silence as well as noise.</p>
 </section>
 
-<!-- 10 -->
+<!-- 11 · ASSET -->
 <section>
-  <h2><span class="num">10</span>The asset that carries the liquidity</h2>
+  <h2><span class="num">11</span>The asset that carries the liquidity</h2>
   <p class="lede">This is where EROS stops being another coin and becomes something the rest of the space is not yet building.</p>
   <p>Most NFTs are pictures. Most game items are metadata. Most virtual objects are decoration. In EROS, the object can carry the money. Not a symbol of value — the value itself, locked inside, verified on-chain.</p>
 
@@ -669,9 +761,9 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   </div>
 </section>
 
-<!-- 11 NEW — PROGRAMMERS -->
+<!-- 12 · PROGRAMMERS -->
 <section>
-  <h2><span class="num">11</span>Build the universe — the architects</h2>
+  <h2><span class="num">12</span>Build the universe — the architects</h2>
   <p class="lede">From syntax to systems. While the charts breathe, the real architecture is compiling behind the scenes.</p>
   <p>The EROS stack is not only economic and not only narrative. There is a technical floor underneath both — a working layer being built by people who want to code a world from the metal up. This is the call for them.</p>
 
@@ -703,9 +795,31 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   </div>
 </section>
 
-<!-- 12 STORY DOOR -->
+<!-- 13 · NEW · BRING THE RIGHT PEOPLE -->
 <section>
-  <h2><span class="num">12</span>The story door</h2>
+  <h2><span class="num">13</span>Bring the right people</h2>
+  <p class="lede">A stack is not a community. A community is what makes a stack worth building.</p>
+  <p>The bridge is not only for coins. It is for people. Every ERC-20 that crosses to PRC-20 is a step. But every builder who finds a home on the other side is a whole neighbourhood.</p>
+
+  <div class="grid two">
+    <div><b>Creative causative</b><p>People who build because the thing they made deserves to exist — not because the market is warm.</p></div>
+    <div><b>Community holders</b><p>People who stay because they helped make it. Not exit liquidity — co-authors.</p></div>
+    <div><b>Story builders</b><p>Writers, artists, panel-makers, world-builders who want a universe to build inside.</p></div>
+    <div><b>Asset creators</b><p>People who want to design cars, characters, weapons, cities — and have the value live inside the object.</p></div>
+  </div>
+
+  <p>The bridge brings the coins. The right people bring the world. Both are needed. Neither works without the other.</p>
+
+  <div class="pull pulse">You are not the exit liquidity for someone else's story.<br/>You are a co-author of the world you will live in.</div>
+
+  <p>This is what the demand equation actually means when it stops being a formula: attention becomes community, community becomes liquidity, liquidity becomes creation — and creation is done by people who are here to build, not to flip. Bring people who love what they made. Bring people who will still be here in the next quiet season. Bring people who will teach the next person.</p>
+
+  <p>That is the invitation. Not "buy this coin." Not "check out this chart." <strong>Come build something you would want to live inside.</strong></p>
+</section>
+
+<!-- 14 · STORY DOOR -->
+<section>
+  <h2><span class="num">14</span>The story door</h2>
   <p class="lede">The story door is not a space opera. It is an enclosure.</p>
   <p>We are not told we live on a ball in a void. We are told we live inside a living shell, looking inward toward a Center. The premise is old in human memory and strange in modern habits.</p>
   <div class="pull">Inward is forwards.</div>
@@ -716,7 +830,7 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
     <p class="cap"><b>THE ENCLOSURE.</b> The egg is not a metaphor. It is the shape of the world the EROS fiction is built inside — and the shape the cosmology claims we actually live in.</p>
   </div>
 
-  <p>The cosmology is not decoration. It is the reason the fiction has a floor. Long before the token, before the books, before the fourteen doors — there was a question: what is the shape of the place we live in? The EROS answer is an enclosure, iterated, inward-oriented, alive.</p>
+  <p>The cosmology is not decoration. It is the reason the fiction has a floor. Long before the token, before the books, before the sixteen doors — there was a question: what is the shape of the place we live in? The EROS answer is an enclosure, iterated, inward-oriented, alive.</p>
 
   <div class="media">
     <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4"></video>
@@ -743,18 +857,18 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   </div>
 </section>
 
-<!-- 13 FOURTEEN DOORS -->
+<!-- 15 · SIXTEEN DOORS -->
 <section>
-  <h2><span class="num">13</span>The fourteen doors</h2>
-  <p class="lede">Pure fiction. Real instrument. One universe, fourteen ways in.</p>
-  <p>The full universe lives in <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — fourteen series that do not exist for years, set inside a cosmology that does. Gods. Atlantis. The Living Egg. Military continuity. Finance. AI. The Nordic residual. Two new doors were added this cycle: the flood that never ended, and the egg that speaks through machines and sensitives.</p>
-  <p>Read one door and you will not walk through the next one the same way. Read all fourteen and you will stop calling any of this a story.</p>
+  <h2><span class="num">15</span>The sixteen doors</h2>
+  <p class="lede">Pure fiction. Real instrument. One universe, sixteen ways in.</p>
+  <p>The full universe lives in <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen series that do not exist for years, set inside a cosmology that does. Gods. Atlantis. The Living Egg. Military continuity. Finance. AI. The Nordic residual. Two recent additions: the flood that never ended, and the egg that speaks through machines and sensitives.</p>
+  <p>Read one door and you will not walk through the next one the same way. Read all sixteen and you will stop calling any of this a story.</p>
   <div class="pull">Fiction is the doorway.<br/>The instrument is the floor.</div>
 </section>
 
-<!-- 14 PRACTICE -->
+<!-- 16 · PRACTICE -->
 <section>
-  <h2><span class="num">14</span>The practice — how to be frank here</h2>
+  <h2><span class="num">16</span>The practice — how to be frank here</h2>
   <div class="ledger">
     <ol>
       <li><b>Say what you don’t know</b> — Uncertainty is allowed in public.</li>
@@ -768,9 +882,9 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   <p>One person being frank is courage. A room being frank is culture. Culture is what outlives founders — which is the whole thesis.</p>
 </section>
 
-<!-- 15 WHAT TO DO -->
+<!-- 17 · WHAT TO DO -->
 <section>
-  <h2><span class="num">15</span>What to do</h2>
+  <h2><span class="num">17</span>What to do</h2>
   <div class="ledger">
     <ol>
       <li><b>Check the wallet</b> — The airdrop may already be there.</li>
@@ -778,13 +892,14 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
       <li><b>Bridge &amp; bond if you choose</b> — Small size still makes a node.</li>
       <li><b>Read the spine</b> — Essential or Expanded Summary.</li>
       <li><b>Enter the room</b> — Telegram. One honest message beats ten slogans.</li>
+      <li><b>Bring one person</b> — Someone who builds, not someone who flips. The gift is the people.</li>
     </ol>
   </div>
 </section>
 
-<!-- 16 CONTRACTS + BURN -->
+<!-- 18 · CONTRACTS + BURN -->
 <section>
-  <h2><span class="num">16</span>The instrument — burn, bond, verify</h2>
+  <h2><span class="num">18</span>The instrument — burn, bond, verify</h2>
   <p class="lede">The crypto is not a side note. It is the floor the fiction stands on. Watch it burn.</p>
 
   <div class="media">
@@ -817,9 +932,9 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   <div class="pull">Verify on-chain. Never trust a badge. Never trust a DM. The chain is the only author.</div>
 </section>
 
-<!-- 17 INVITATION -->
+<!-- 19 · INVITATION -->
 <section>
-  <h2><span class="num">17</span>The invitation</h2>
+  <h2><span class="num">19</span>The invitation</h2>
   <p class="lede">You will know in a few minutes if this is for you.</p>
   <p>If you want a casino, close the tab. If you want a room where receipts are real, the founder is not the point, and the story is still being written in public — open the wallet. Or open the book. Or open the chat and say one true thing.</p>
 
@@ -828,6 +943,7 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
     The founder is not the point.<br/>
     Frankness is a declaration of freedom.<br/>
     Bond is what remains when the stimulus stops.<br/>
+    We are not extraction — we are what DeFi should have been.<br/>
     <strong>And the story continues.</strong>
   </div>
   <p class="creedline">History is one continuous strategic process. The map is not the world. Inward is forwards. Eros is the bond that holds.</p>
@@ -844,6 +960,21 @@ footer a{color:var(--gold);border-bottom:1px dotted rgba(212,175,55,.4)}
   <p class="pillar">Frankness as architecture</p>
   <p>Companions: <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> · <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a> · <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a> · <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a> · <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a> · <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a> · <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a> · <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a> · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a> · <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a></p>
   <p>t.me/Eros_Revival · meaning-unconfounded.github.io</p>
+
+  <div class="footer-pulse">
+    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0b0a08"/>
+      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span style="font-family:var(--sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase">Built on PulseChain · Faster · Cheaper · Stronger</span>
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0b0a08"/>
+      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
   <p style="margin-top:.85rem;opacity:.75">Not financial advice. Verify on-chain. Cosmology is a door, not a demand. The Receipts section is intended to grow as the record is mined.</p>
 </footer>
 
