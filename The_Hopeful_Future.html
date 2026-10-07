@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="The Hopeful Future · Base, Universe, Driver, Bond. Atropa · EROS · PulseChain. One standard. One substrate. One world."/>
+<meta property="og:title" content="The Hopeful Future · Atropa · EROS · PulseChain"/>
+<meta property="og:description" content="Three systems. One substrate. One standard. One window."/>
+<title>The Hopeful Future · Atropa · EROS · PulseChain</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23040108'/%3E%3Cpolygon points='48,8 84,28 84,68 48,88 12,68 12,28' fill='none' stroke='%23A020F0' stroke-width='3'/%3E%3Cpath d='M26 48 L38 48 L44 34 L52 62 L58 44 L70 48' fill='none' stroke='%2300D4FF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
+<style>
+:root{
+  /* ── PulseChain true-hex palette ── */
+  --bg:#040108;
+  --bg2:#0a0418;
+  --surface:#0e0620;
+  --surface2:#160a2c;
+  --ink:#f4ecff;
+  --soft:#c8bce0;
+  --muted:#8a7fa6;
+  /* PulseChain hex gradient: purple → magenta */
+  --pulse:#A020F0;
+  --pulse-deep:#7A00D4;
+  --magenta:#E040FB;
+  --magenta2:#FF00FF;
+  --pulse-soft:rgba(160,32,240,.12);
+  --pulse-line:rgba(160,32,240,.40);
+  /* Cyan (PulseX secondary) */
+  --cyan:#00D4FF;
+  --cyan2:#22D3EE;
+  --cyan-soft:rgba(0,212,255,.09);
+  --cyan-line:rgba(0,212,255,.35);
+  /* Green (pulse waveform line) */
+  --green:#00FF88;
+  --green-soft:rgba(0,255,136,.08);
+  --green-line:rgba(0,255,136,.32);
+  /* Gold (HEX lineage) */
+  --gold:#D4AF37;
+  --gold2:#E8C547;
+  --gold-soft:rgba(212,175,55,.09);
+  --gold-line:rgba(212,175,55,.32);
+  /* Warm accent (combined PLSX logo) */
+  --ember:#FF6B35;
+  --ember-soft:rgba(255,107,53,.08);
+  --ember-line:rgba(255,107,53,.32);
+  /* Platinum / silver */
+  --platinum:#d8dde3;
+  --platinum-soft:rgba(216,221,227,.08);
+  --platinum-line:rgba(216,221,227,.28);
+  /* Atropa crimson */
+  --crimson:#c97064;
+  --crimson-soft:rgba(201,112,100,.08);
+  --crimson-line:rgba(201,112,100,.32);
+  /* System */
+  --hair:rgba(160,32,240,.18);
+  --hair2:rgba(160,32,240,.09);
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype","Book Antiqua",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --measure:48rem;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:1rem}
+body{
+  font-family:var(--serif);font-size:1.08rem;line-height:1.82;
+  background:
+    radial-gradient(1100px 520px at 88% -5%, rgba(160,32,240,.16), transparent 55%),
+    radial-gradient(900px 480px at -5% 25%, rgba(0,212,255,.08), transparent 50%),
+    radial-gradient(700px 420px at 100% 85%, rgba(212,175,55,.05), transparent 45%),
+    var(--bg);
+  min-height:100vh;
+}
+html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
+html::before{inset:8px;border:1px solid rgba(160,32,240,.30)}
+html::after{inset:12px;border:1px solid rgba(0,212,255,.12)}
+@media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
+
+.page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.2rem 5rem}
+#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--pulse),var(--magenta),var(--cyan),var(--green));z-index:9999;transition:width .08s linear}
+
+a{color:var(--magenta);text-decoration:none;border-bottom:1px solid rgba(224,64,251,.28);transition:color .15s,border-color .15s}
+a:hover{color:#f0a8ff;border-bottom-color:rgba(240,168,255,.7)}
+a:visited{color:#b070d0}
+::selection{background:var(--pulse);color:#fff}
+
+h1,h2,h3{text-wrap:balance}
+p,li{overflow-wrap:break-word}
+
+/* ── COVER ── */
+.cover{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem 2.2rem}
+.cover .hex-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.2rem}
+.cover .hex-row svg{display:block;filter:drop-shadow(0 0 24px rgba(160,32,240,.4))}
+.cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.42em;text-transform:uppercase;color:var(--magenta);margin-bottom:1.1rem;font-weight:700}
+.cover h1{
+  font-size:clamp(2.1rem,6vw,3.3rem);font-weight:700;letter-spacing:.08em;
+  background:linear-gradient(180deg,#fff 0%,#E040FB 42%,#A020F0 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 44px rgba(160,32,240,.35));
+  margin-bottom:.35rem;line-height:1.1;
+}
+.cover .sub{font-style:italic;font-size:1.08rem;color:var(--platinum);margin-bottom:.6rem;letter-spacing:.02em}
+.cover .rule{width:min(300px,64%);height:1px;margin:.2rem auto 1.4rem;background:linear-gradient(90deg,transparent,var(--pulse),var(--magenta),var(--cyan),transparent)}
+.cover .opening{font-size:1.06rem;color:var(--soft);max-width:38rem;line-height:1.82;margin-bottom:1.4rem}
+.cover .opening em{color:var(--magenta);font-style:italic}
+.cover .seal{
+  padding:1.1rem 1.25rem;border:1px solid var(--pulse-line);border-radius:12px;
+  background:linear-gradient(150deg,#0e0620,#160a2c);
+  font-size:.95rem;color:var(--soft);max-width:38rem;text-align:left;
+  box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+.cover .seal strong{color:var(--magenta)}
+
+/* ── HERO IMAGE ── */
+figure.hero{margin:1.4rem 0 1.6rem;text-align:center}
+figure.hero img{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--pulse-line);box-shadow:0 14px 48px rgba(160,32,240,.22)}
+figure.hero figcaption{font-family:var(--sans);font-size:.75rem;color:var(--muted);margin-top:.55rem;letter-spacing:.05em;font-style:italic}
+
+/* ── MENUS ── */
+details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--pulse-line);border-radius:10px;background:var(--pulse-soft);padding:.35rem 1rem}
+details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);padding:.55rem 0;user-select:none;font-weight:700}
+details.eros-menu>summary::-webkit-details-marker{display:none}
+details.eros-menu>summary::before{content:"▸ ";}
+details.eros-menu[open]>summary::before{content:"▾ ";}
+details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
+details.eros-menu a{color:var(--magenta)}
+
+/* ── THESIS CARD ── */
+.thesis{
+  margin:1.4rem 0 1.6rem;padding:1.3rem 1.35rem;
+  border:1px solid var(--pulse-line);border-radius:14px;
+  background:linear-gradient(160deg,rgba(160,32,240,.10),rgba(0,212,255,.04));
+  text-align:left;
+}
+.thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--magenta);font-weight:700;display:block;margin-bottom:.7rem}
+.thesis p{color:var(--ink);margin:0 0 .85rem;font-size:1.02rem;line-height:1.75}
+.thesis p:last-child{margin-bottom:0}
+
+/* ── TOC ── */
+.toc-card{margin:2rem auto 1.5rem;padding:1.4rem 1.4rem;border:1px solid var(--hair);border-radius:14px;background:var(--surface);font-family:var(--sans)}
+.toc-card .tk{font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--magenta);margin-bottom:1rem;text-align:center;font-weight:700}
+.toc-grid{display:grid;gap:.5rem;grid-template-columns:1fr 1fr}
+@media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
+.toc-grid a{display:flex;gap:.7rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.88rem;padding:.4rem .6rem;border-radius:8px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
+.toc-grid a:hover{background:var(--pulse-soft);color:var(--magenta)}
+.toc-grid a .tn{color:var(--magenta);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.6rem}
+
+/* ── PART BREAKS ── */
+.part-break{
+  margin:3rem 0 2rem;padding:2rem 1.2rem;text-align:center;
+  border-radius:16px;border:1px solid var(--hair);
+  background:linear-gradient(160deg,#0e0620,#040108);
+  position:relative;
+}
+.part-break::before{
+  content:"";position:absolute;left:50%;top:-1px;transform:translateX(-50%);
+  width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--magenta),var(--cyan),transparent);
+}
+.part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--magenta);margin-bottom:.45rem;font-weight:700}
+.part-break h2{font-size:clamp(1.4rem,3.6vw,2rem);color:var(--ink);border:none;margin:0 0 .3rem;padding:0;letter-spacing:.02em}
+.part-break p{margin:0;font-style:italic;color:var(--soft);font-size:.95rem}
+
+/* ── TYPOGRAPHY ── */
+h2{font-size:1.35rem;color:var(--magenta);margin:2.4rem 0 .9rem;border-bottom:1px solid var(--hair);padding-bottom:.42rem;letter-spacing:.01em}
+h3{font-size:1.08rem;color:var(--ink);margin:1.6rem 0 .5rem;letter-spacing:.01em}
+p{margin:0 0 .95rem;color:var(--soft)}
+.lede{font-size:1.12rem;color:var(--platinum);font-style:italic;margin-bottom:1rem;line-height:1.75}
+ul,ol{margin:.25rem 0 1rem 1.3rem}
+li{margin-bottom:.35rem;color:var(--soft)}
+li::marker{color:var(--magenta)}
+
+.verse{
+  margin:1.4rem 0;padding:1.15rem 1.2rem;text-align:center;
+  border:1px solid var(--gold-line);border-radius:12px;
+  background:linear-gradient(160deg,#181208,#1c160c);
+  font-size:1.04rem;line-height:1.8;color:var(--soft);font-style:italic;
+}
+.verse strong{color:var(--gold);font-style:normal}
+
+.pull{
+  margin:1.4rem 0;padding:.9rem 0 .9rem 1.15rem;
+  border-left:3px solid var(--magenta);
+  background:linear-gradient(90deg,var(--pulse-soft),transparent 70%);
+  font-style:italic;font-size:1.06rem;color:var(--soft);
+}
+
+.claim{
+  margin:1.3rem 0;padding:1.1rem 1.2rem;
+  border:1px solid var(--hair);border-radius:12px;background:var(--surface);
+}
+.claim.pulse{border-color:var(--pulse-line);background:linear-gradient(135deg,rgba(160,32,240,.10),rgba(224,64,251,.05))}
+.claim.cyan{border-color:var(--cyan-line);background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(34,211,238,.03))}
+.claim.gold{border-color:var(--gold-line);background:linear-gradient(135deg,#181208,#1c160c)}
+.claim.platinum{border-color:var(--platinum-line);background:linear-gradient(135deg,rgba(216,221,227,.06),rgba(216,221,227,.02))}
+.claim.crimson{border-color:var(--crimson-line);background:var(--crimson-soft)}
+.claim.green{border-color:var(--green-line);background:var(--green-soft)}
+.claim.ember{border-color:var(--ember-line);background:var(--ember-soft)}
+.claim p{margin:0}
+.claim strong{color:var(--magenta)}
+.claim.pulse strong{color:var(--magenta)}
+.claim.cyan strong{color:var(--cyan)}
+.claim.gold strong{color:var(--gold)}
+.claim.platinum strong{color:var(--platinum)}
+.claim.crimson strong{color:var(--crimson)}
+.claim.green strong{color:var(--green)}
+.claim.ember strong{color:var(--ember)}
+.claim p+p{margin-top:.6rem}
+
+/* ── MOVEMENT BLOCKS ── */
+.movement{
+  margin:1.6rem 0;padding:1.3rem 1.4rem;
+  border:1px solid var(--hair);border-radius:16px;
+  background:linear-gradient(160deg,rgba(14,6,32,.9),rgba(4,1,8,.9));
+  position:relative;
+}
+.movement .mov-label{
+  display:inline-block;
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  padding:.32rem .8rem;border-radius:999px;margin-bottom:.9rem;font-weight:700;
+}
+.movement.base .mov-label{color:var(--crimson);border:1px solid var(--crimson-line);background:var(--crimson-soft)}
+.movement.universe .mov-label{color:var(--magenta);border:1px solid var(--pulse-line);background:var(--pulse-soft)}
+.movement.driver .mov-label{color:var(--cyan);border:1px solid var(--cyan-line);background:var(--cyan-soft)}
+.movement.bond .mov-label{color:var(--gold);border:1px solid var(--gold-line);background:var(--gold-soft)}
+.movement h3{font-family:var(--serif);font-size:1.28rem;color:var(--ink);margin:0 0 .7rem;letter-spacing:.01em}
+.movement p:last-child{margin-bottom:0}
+
+/* ── IMAGE PLATES ── */
+.plate{
+  margin:1.6rem 0;text-align:center;
+  padding:1rem 1rem 1.1rem;
+  border:1px solid var(--hair);border-radius:14px;
+  background:linear-gradient(160deg,#0c0520,#040108);
+}
+.plate img{width:100%;height:auto;border-radius:10px;display:block;border:1px solid rgba(160,32,240,.20);box-shadow:0 10px 32px rgba(0,0,0,.5)}
+.plate .plate-label{
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--magenta);margin:.85rem 0 .35rem;font-weight:700;
+}
+.plate .plate-title{
+  font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin-bottom:.55rem;
+}
+.plate .plate-cap{
+  font-size:.92rem;color:var(--soft);font-style:italic;line-height:1.6;max-width:36rem;margin:0 auto;
+}
+
+/* ── PLATE GRID (2 columns for smaller visuals) ── */
+.plate-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.6rem 0}
+@media(max-width:640px){.plate-grid{grid-template-columns:1fr}}
+.plate-grid .plate{margin:0}
+
+/* ── SVG PLATE (inline rendered) ── */
+figure.svg-plate{
+  margin:1.6rem 0;padding:1rem 1rem 1.1rem;
+  border:1px solid var(--hair);border-radius:14px;
+  background:linear-gradient(160deg,#0e0620,#040108);
+  text-align:center;
+}
+figure.svg-plate svg{width:100%;height:auto;display:block;border-radius:8px;background:#040108}
+figure.svg-plate .plate-label{font-family:var(--sans);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--magenta);margin:.85rem 0 .35rem;font-weight:700}
+figure.svg-plate .plate-title{font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin-bottom:.55rem}
+figure.svg-plate .plate-cap{font-size:.92rem;color:var(--soft);font-style:italic;line-height:1.6;max-width:36rem;margin:0 auto}
+
+/* ── UNITY CAPSTONE ── */
+.capstone{
+  margin:3rem 0 2rem;padding:2.2rem 1.6rem;
+  border:1px solid var(--pulse-line);border-radius:18px;
+  background:linear-gradient(160deg,rgba(160,32,240,.10),rgba(0,212,255,.04));
+  position:relative;
+  box-shadow:0 20px 60px rgba(160,32,240,.10);
+}
+.capstone .cap-label{
+  font-family:var(--sans);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--magenta);text-align:center;margin-bottom:.6rem;font-weight:700;
+}
+.capstone h2{
+  font-family:var(--serif);font-size:clamp(1.5rem,4vw,2rem);
+  color:var(--ink);border:none;text-align:center;
+  margin:0 0 1.4rem;padding:0;letter-spacing:.03em;
+}
+.capstone h3{
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--magenta);margin:1.6rem 0 .7rem;font-weight:700;
+}
+.capstone h3:first-of-type{margin-top:0}
+.capstone .first-principle{
+  padding:1.1rem 1.2rem;border-left:3px solid var(--gold);
+  background:linear-gradient(90deg,var(--gold-soft),transparent 80%);
+  border-radius:0 10px 10px 0;margin-bottom:1.4rem;
+  font-size:1.04rem;line-height:1.8;color:var(--ink);font-style:italic;
+}
+.capstone .first-principle strong{color:var(--gold);font-style:normal;display:block;margin-bottom:.35rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+.capstone ol{margin:0 0 1.4rem 1.3rem;padding:0}
+.capstone ol li{color:var(--soft);margin-bottom:.45rem;line-height:1.75}
+.capstone ol li strong{color:var(--platinum)}
+.capstone table{width:100%;border-collapse:collapse;margin:.8rem 0 1.4rem;font-size:.92rem;font-family:var(--sans)}
+.capstone table th,.capstone table td{border:1px solid var(--hair);padding:.55rem .7rem;text-align:left;vertical-align:top}
+.capstone table th{background:var(--surface2);color:var(--magenta);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;width:38%}
+.capstone table td{color:var(--soft)}
+.capstone ul{margin:0 0 1.4rem 1.2rem}
+.capstone ul li{color:var(--soft);margin-bottom:.4rem}
+.capstone ul li strong{color:var(--magenta)}
+.capstone .bookshelf{
+  margin-top:1.6rem;padding:1.15rem 1.25rem;
+  border:1px solid var(--pulse-line);border-radius:12px;
+  background:linear-gradient(150deg,rgba(160,32,240,.12),rgba(160,32,240,.03));
+  text-align:center;
+}
+.capstone .bookshelf .shelf-label{
+  font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--magenta);margin-bottom:.55rem;font-weight:700;
+}
+.capstone .bookshelf p{
+  font-family:var(--serif);font-size:1.1rem;color:var(--ink);
+  font-style:italic;line-height:1.7;margin:0;
+}
+
+/* ── CODA ── */
+.coda{
+  margin:4rem 0 0;padding:3rem 1.4rem;
+  border-top:1px solid var(--hair);
+  text-align:center;
+  background:radial-gradient(ellipse at 50% 100%,rgba(160,32,240,.10),transparent 65%);
+}
+.coda .coda-kick{
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--magenta);margin-bottom:.9rem;font-weight:700;
+}
+.coda p{font-size:1.1rem;font-style:italic;line-height:1.82;color:var(--ink);max-width:34rem;margin:0 auto 1rem}
+.coda .creed{
+  margin:2rem auto 0;max-width:32rem;padding:1.5rem 1.4rem;
+  border:1px solid var(--pulse-line);border-radius:14px;
+  background:linear-gradient(160deg,rgba(160,32,240,.10),rgba(0,212,255,.03));
+  font-family:var(--serif);font-size:1.02rem;line-height:2;color:var(--soft);
+}
+.coda .creed strong{color:var(--magenta);display:block;margin-top:.4rem;letter-spacing:.04em}
+.coda .creed .gold{color:var(--gold)}
+.coda .creed .cyan{color:var(--cyan)}
+.coda .creed .platinum{color:var(--platinum)}
+
+/* ── FOOTER ── */
+footer{
+  margin-top:3rem;padding-top:1.4rem;
+  border-top:1px solid var(--hair);
+  text-align:center;font-family:var(--sans);
+  font-size:.78rem;color:var(--muted);line-height:1.85;
+}
+footer .pulse{color:var(--magenta)}
+footer a{margin:0 .35rem;color:var(--magenta);border-bottom:none}
+footer a:hover{border-bottom:1px solid rgba(224,64,251,.5)}
+
+@media print{
+  @page{size:A4;margin:14mm}
+  html::before,html::after{display:none!important}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part-break,.claim,.verse,.plate,.movement,.capstone{break-inside:avoid}
+  #progressBar{display:none}
+}
+@media(max-width:640px){
+  body{font-size:1rem}
+  .page{padding:1rem 1rem 4rem}
+  .cover .hex-row{flex-wrap:wrap}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div id="progressBar"></div>
+<div class="page" id="top">
+
+<!-- ═══════════ COVER ═══════════ -->
+<header class="cover">
+  <p class="kick">PulseChain · Atropa · EROS · PulseX</p>
+  <div class="hex-row">
+    <!-- PulseChain hex logo (SVG approximation) -->
+    <svg width="62" height="62" viewBox="0 0 100 100" aria-label="PulseChain">
+      <defs>
+        <linearGradient id="pcg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#A020F0"/>
+          <stop offset="55%" stop-color="#E040FB"/>
+          <stop offset="100%" stop-color="#7A00D4"/>
+        </linearGradient>
+      </defs>
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pcg)"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#040108" opacity=".9"/>
+      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <!-- PulseX hex logo (SVG approximation) -->
+    <svg width="58" height="58" viewBox="0 0 100 100" aria-label="PulseX">
+      <defs>
+        <linearGradient id="pxg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00D4FF"/>
+          <stop offset="50%" stop-color="#A020F0"/>
+          <stop offset="100%" stop-color="#E040FB"/>
+        </linearGradient>
+      </defs>
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pxg)"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#040108" opacity=".9"/>
+      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <!-- Atropa seal -->
+    <svg width="54" height="54" viewBox="0 0 100 100" aria-label="Atropa">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="#c97064" stroke-width="2"/>
+      <path d="M50 14 A36 36 0 1 1 49.9 14" fill="none" stroke="#c97064" stroke-width="1" opacity=".5"/>
+      <path d="M20 60 C32 42 44 78 56 60 C64 50 72 55 82 48" fill="none" stroke="#e8a55a" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="50" cy="60" r="3.4" fill="#c97064"/>
+    </svg>
+  </div>
+
+  <h1>THE HOPEFUL FUTURE</h1>
+  <p class="sub">Base · Universe · Driver · Bond</p>
+  <div class="rule"></div>
+  <p class="opening">
+    Three systems. One substrate. One standard. One window.<br/>
+    <em>Atropa counts the base. EROS builds the world. Education drives the demand. Bond holds it all together.</em>
+  </p>
+  <div class="seal">
+    <strong>What this book is.</strong> A coda, not a promise. Four movements and a capstone — the future the three systems could build together <em>if</em> the standard holds under pressure. Not merged. Not partnered. Coordinated by discipline, on one chain, in one window, refusing the same lie and stating the same kind of truth.
+  </div>
+</header>
+
+<!-- ═══════════ HERO IMAGE ═══════════ -->
+<figure class="hero">
+  <img src="https://meaning-unconfounded.github.io/images/eros-pls-ratio.jpg" alt="EROS / PLS ratio chart on PulseChain" loading="eager"
+       onerror="this.style.display='none'"/>
+  <figcaption>EROS / PLS · ratio chart · embedded 1–2 Elliott waves · wave 3 next</figcaption>
+</figure>
+
+<!-- ═══════════ MENUS ═══════════ -->
+<details class="eros-menu" id="eros-library">
+  <summary>EROS library · the other books</summary>
+  <div class="menu-body">
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — token &amp; poolonomics</p>
+    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
+  </div>
+</details>
+
+<div class="thesis">
+  <span class="label">What this book is</span>
+  <p><strong>A coda in four movements and a capstone.</strong> The three systems — Atropa, EROS, PulseChain — do not need to merge to build something together. They need to stand on the same substrate, hold the same standard, and refuse the same lie. This book describes the shape of the future that already has legs: base, universe, driver, bond. A unity thesis as the capstone. Three plates from the Stories as the doorway. Plus the chain itself — the PulseChain rail — stated in the community's own terms.</p>
+  <p><strong>Why it exists.</strong> Because the room is worth describing while it is still being built. Because the standard that will decide whether this becomes a culture or another chapter of hype is <em>legible today</em>. Because a reader who has walked through the doors once knows what it would mean if the room held.</p>
+  <p><strong>What it is not.</strong> Not a promise. Not a forecast. Not a partnership agreement. Not a claim that any of the three systems has appointed the others. Everything stated here is stated at the layer where it is true. Confidence is subjective. The falsifier is published.</p>
+</div>
+
+<!-- ═══════════ TOC ═══════════ -->
+<nav class="toc-card" aria-label="Contents">
+  <div class="tk">Contents</div>
+  <div class="toc-grid">
+    <a href="#prologue"><span class="tn">0</span>Prologue · What success looks like</a>
+    <a href="#chain"><span class="tn">◈</span>PulseChain · the chain itself</a>
+    <a href="#base"><span class="tn">I</span>Movement I · The base — Atropa</a>
+    <a href="#universe"><span class="tn">II</span>Movement II · The universe — EROS</a>
+    <a href="#driver"><span class="tn">III</span>Movement III · The driver — education</a>
+    <a href="#bond"><span class="tn">IV</span>Movement IV · The bond — values</a>
+    <a href="#plates"><span class="tn">◈</span>Three plates from the Stories</a>
+    <a href="#unity"><span class="tn">❦</span>The Unity Thesis · capstone</a>
+    <a href="#coda"><span class="tn">❦</span>Coda · the hopeful future</a>
+  </div>
+</nav>
+
+<!-- ═══════════ PROLOGUE ═══════════ -->
+<section id="prologue">
+  <h2>Prologue · What success looks like</h2>
+  <p class="lede">The three systems succeed together not by merging but by standing in the same room.</p>
+
+  <p>The Atropa system becomes the <strong>base</strong>. Its census, its graph, its dead-LP culture, its burnt-LP primitives — the floor on which everyone else builds. Not because Atropa owns the floor, but because Atropa did the boring, honest work of counting what actually exists, and everyone else gets to build on that count.</p>
+
+  <p>The EROS system becomes the <strong>universe</strong>. Its cosmology, its fiction, its sixteen doors, its four operators, its store rail and flow rail — the shape of the world in which the base has somewhere to be used. Not because EROS owns the world, but because EROS built the room the base gets spent in.</p>
+
+  <p>The driver is <strong>education</strong>. Not marketing. Not hype. Not attention farming. Education in the <em>9iron standard</em> — the discipline of stating claims at the layer where the claims are true, with falsifiers attached, with confidence numbers attached, with the confidence refused when it is not earned. The thing that drives crypto demand and usage is not a green candle. It is <strong>thoughtfulness</strong>. A person who understands what they hold will not panic out of it. A person who understands what they hold will build inside it.</p>
+
+  <p>The values that hold the three systems together are not slogans. They are <strong>the working test of every claim</strong>: does it teach and invite, or does it drain and dominate? Trust, frankness, honesty, integrity, <strong>zero extraction</strong>. Every transaction. Every document. Every story door. Every panel. Every post.</p>
+
+  <div class="pull">This is what success looks like. Not a price. A room. Not a launch. A culture. Not a partnership. A shared standard that survives the first drawdown.</div>
+</section>
+
+<!-- ═══════════ PULSECHAIN RAIL ═══════════ -->
+<div class="part-break" id="chain">
+  <p class="pk">The Chain Itself</p>
+  <h2>PulseChain · the substrate</h2>
+  <p>Faster · Cheaper · Stronger · A community-run chain</p>
+</div>
+
+<section>
+  <p class="lede">The Hopeful Future sits on one chain. Not because the other chains are worse. Because this is where the three systems live, and it is where the three systems have decided to keep building.</p>
+
+  <h3>Why the substrate matters</h3>
+  <p>PulseChain is a proof-of-stake fork of Ethereum, created in 2023 by Richard Heart and the PulseChain community, with the design goal of being <em>faster, cheaper, and stronger</em> than the chain it forked from. Its native token is PLS. Its DEX is PulseX (PLSX). It runs cheap enough that serious projects — including Atropa, EROS, and the entire community-pair ecosystem — can iterate without burning working capital on gas.</p>
+
+  <p>Two facts about the chain make it a substrate rather than just a venue:</p>
+
+  <p><strong>First, the copy.</strong> PulseChain forked Ethereum's state. Every ERC-20 token that existed at the snapshot got a PRC-20 mirror at the same address. This is why the 9iron thesis can name pDAI, FEI, Aave, Maker, and Synthetix contracts at their *original Ethereum addresses* — because PulseChain inherited them. The chain is not just a new chain; it is a copy of an economic state, running on cheaper rails.</p>
+
+  <p><strong>Second, the community-run posture.</strong> Much of the PulseChain ecosystem runs on community infrastructure — including IPFS-hosted interfaces, community-hosted nodes, and public RPC endpoints. The chain is not dependent on a single corporate operator to stay live. That matters for the same reason the EROS base matters: what holds when the stimulus stops is the same as what holds when the corporate operator stops.</p>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/pulsechain-pulsex-logo.jpg" alt="PulseChain · PulseX combined hex logo" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">The Hex</div>
+    <div class="plate-title">PulseChain · PulseX</div>
+    <p class="plate-cap">The true PulseChain hex palette: purple → magenta gradient, cyan → blue, green pulse-line, warm ember on the PLSX edge.</p>
+  </figure>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/pulse_system.jpeg" alt="Pulse System" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">System</div>
+    <div class="plate-title">Pulse System</div>
+    <p class="plate-cap">The PulseChain ecosystem as a system — one chain, many bonded edges.</p>
+  </figure>
+
+  <h3>Stated position on the chain's legal posture</h3>
+  <p>The community's stated position, presented here as <em>the community's position</em> and not as verified fact, is as follows. The PulseChain founder, Richard Heart, has contested the jurisdiction of the regulator that sued him and, per the community, has won that jurisdictional fight — the case is being handled in a venue the community considers favorable to PulseChain's actual status. The sacrifice funds contributed during the 2021 launch window — reported by the community as over $2 billion — are held on-chain and, per the community, have not been moved in a way that suggests distress. The community further reports that the chain's tooling is increasingly decentralized (IPFS-hosted interfaces, community nodes, community-run RPCs) so that the chain continues to operate independent of any single operator's legal posture.</p>
+
+  <p><strong>This book does not verify these claims.</strong> It records the community's stated position and leaves the reader to check the docket, the chain, and the addresses. The reader is asked to apply the same 9iron standard to PulseChain's legal and financial posture as to any other claim in this book: <em>state the claim, mark the layer, state the falsifier, state the confidence.</em> The community's stated confidence in the chain's long-term posture is high. The 9iron standard's response is: verify. On-chain. In the docket. In the block explorer. Do not accept either the FUD or the hopium without looking.</p>
+
+  <div class="claim pulse">
+    <p><strong>What this book does stand behind.</strong> PulseChain is the substrate. The three systems live on it. The three systems are doing serious, dated, checkable work on it. The chain runs cheap enough to iterate on. The chain's community has chosen to build on it despite open legal weather. That is enough to be a substrate. It is not enough to be a settled fact about the future.</p>
+  </div>
+
+  <h3>The chain is not the point</h3>
+  <p>A chain is not a story. A chain is a floor. The floor is worth noting, but the floor is not the world. PulseChain is the floor. The world is what the three systems build on it.</p>
+
+  <div class="verse">
+    Faster. Cheaper. Stronger.<br/>
+    A floor is not a promise.<br/>
+    <strong>A floor is what you get to stand on while you build.</strong>
+  </div>
+</section>
+
+<!-- ═══════════ MOVEMENT I ═══════════ -->
+<div class="part-break" id="base">
+  <p class="pk">Movement I</p>
+  <h2>The base — Atropa</h2>
+  <p>What counts is what exists. What exists is what can be built on.</p>
+</div>
+
+<div class="movement base">
+  <span class="mov-label">The base · Atropa</span>
+  <h3>The system that did the work most crypto does not do</h3>
+  <p>The Atropa system <em>counted</em>. It counted 3,141 minter children across five factory generations. It dated them — 2023-05-10 to 2026-09-19. It named their eras — old-atropa, pre-v1, v1, v2, v3-bureau, v4, post-crisis, long-tail. It flagged the flagship datum — <strong>the pDAI×Atropa pool burned 93.76% of its LP during the April 2025 crisis window</strong>. It admitted what it could not distinguish — <em>"burn()-removed LP not distinguished; locker-held LP counted live"</em>.</p>
+  <p>That last sentence is why Atropa is the base. A system that admits what it cannot measure is a system you can build on.</p>
+  <p>The base is not a token. It is not a founder. It is not a promise. The base is a <strong>graph of verified primitives</strong> — burnt LP, dead-address placements, dated events, classified contracts, lineage trees.</p>
+</div>
+
+<section>
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/Atropos.jpg" alt="Atropa → Dysnomia · the rabbit hole goes deeper" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">Atropa</div>
+    <div class="plate-title">Atropa → Dysnomia</div>
+    <p class="plate-cap">The rabbit hole goes deeper. The chain's native experimentation, on the floor.</p>
+  </figure>
+
+  <div class="claim crimson">
+    <p><strong>The Atropa contribution.</strong> Not ownership of the base. The demonstration that the base can be built at all — on a chain where most projects do not bother.</p>
+  </div>
+</section>
+
+<!-- ═══════════ MOVEMENT II ═══════════ -->
+<div class="part-break" id="universe">
+  <p class="pk">Movement II</p>
+  <h2>The universe — EROS</h2>
+  <p>The room the base gets spent in.</p>
+</div>
+
+<div class="movement universe">
+  <span class="mov-label">The universe · EROS</span>
+  <h3>The system that built a world around a coin</h3>
+  <p>EROS did the work most crypto does not do. It <em>built a world</em>. Not a road map. Not a white paper with a token attached. A <strong>cosmology</strong> — the Living Egg, inward is forwards, one substrate, one shell. Four <strong>operators</strong> — NaUn, Ra-Shen, Thoth, EROS. Sixteen <strong>doors</strong> — Spine, Doors, Witness. A <strong>macro rail</strong> with layer-tagged claims. An <strong>Archive</strong> with masks instead of gods. A <strong>language bridge</strong> through the consonants. A <strong>field manual</strong> for the token.</p>
+  <p>The universe is what makes holding the coin different from holding a chart. The coin is a store rail. The universe is a <em>place the store rail is worth carrying into</em>.</p>
+</div>
+
+<section>
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-multiverse.jpg" alt="The EROS Multiverse — From Foundation to Dysnomia" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">The Universe</div>
+    <div class="plate-title">From Foundation to Dysnomia</div>
+    <p class="plate-cap">Explore the continuous narrative across all dimensions. Fourteen series · pure fiction · real instrument.</p>
+  </figure>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-build-one.jpg" alt="EROS — build a world" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">The World</div>
+    <div class="plate-title">Build One</div>
+    <p class="plate-cap">Don't just buy into a world. Build one. Create · Own · Operate · Earn. The economy isn't outside the world — the economy is in the world.</p>
+  </figure>
+
+  <div class="claim pulse">
+    <p><strong>The EROS contribution.</strong> Not the token. The world the token lives in. A world where a hybrid asset has somewhere to be spent, and where the story is the reason holding is worth doing.</p>
+  </div>
+
+  <div class="verse">
+    The universe is what makes holding worth doing.<br/>
+    Not the price.<br/>
+    <strong>The world.</strong>
+  </div>
+</section>
+
+<!-- ═══════════ MOVEMENT III ═══════════ -->
+<div class="part-break" id="driver">
+  <p class="pk">Movement III</p>
+  <h2>The driver — education</h2>
+  <p>What actually moves demand.</p>
+</div>
+
+<div class="movement driver">
+  <span class="mov-label">The driver · Education</span>
+  <h3>Not marketing. The discipline of stating claims at the layer where they are true.</h3>
+  <p>The base is nothing without a user. The universe is nothing without a reader. The thing that connects the two is not marketing. It is <strong>education</strong>.</p>
+  <p>Not <em>buy this token</em>. Not <em>check out this chart</em>. Not <em>the next leg is coming</em>. Education in the 9iron sense: the discipline of stating claims at the layer where the claims are true. A person who has learned to read a confidence table is a person who will not be shaken out by a red candle. A person who has learned to read a census is a person who can tell the difference between a busy project and a quiet one. A person who has learned to read a fee split is a person who can spot the extraction hidden in the split.</p>
+  <p>Education is what drives crypto demand and usage. Not because it is a funnel. Because it is the only thing that produces <strong>holders who understand what they hold</strong>. Those are the holders who stay. Those are the holders who build.</p>
+</div>
+
+<section>
+  <h3>Three doors, one education</h3>
+  <div class="claim cyan">
+    <p><strong>Atropa</strong> teaches on-chain literacy. Every census is a lesson in what can be measured and what cannot.</p>
+    <p><strong>EROS</strong> teaches layered literacy. Every book is a lesson in stating claims at the layer where they are true.</p>
+    <p><strong>The 9iron paper</strong> teaches falsification literacy. Every appendix is a lesson in naming what would prove you wrong.</p>
+  </div>
+
+  <div class="pull">One education. Three doors. One standard. This is what the future looks like when the standard is the product.</div>
+</section>
+
+<!-- ═══════════ MOVEMENT IV ═══════════ -->
+<div class="part-break" id="bond">
+  <p class="pk">Movement IV</p>
+  <h2>The bond — values</h2>
+  <p>The test of every claim.</p>
+</div>
+
+<div class="movement bond">
+  <span class="mov-label">The bond · Trust · Frankness · Honesty · Integrity · Zero extraction</span>
+  <h3>One working test, applied everywhere</h3>
+  <p>All of it — base, universe, education — rests on <strong>one working test</strong>: does it teach and invite, or does it drain and dominate?</p>
+  <p>The test applies everywhere. On the token, on the story, on the macro rail, on the Archive, on the LP. The bond that holds all of it is not loyalty. It is <strong>trust earned by the test passing</strong>. Frankness when the news is bad. Honesty when the chart turns. Integrity when the founder leaves. Zero extraction when it would be easy to hide one more line in the split.</p>
+</div>
+
+<section>
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gives-logo.jpg" alt="GIVES EROS · Tenacity Through Integrity" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">The Bond</div>
+    <div class="plate-title">GIVES EROS</div>
+    <p class="plate-cap">Tenacity Through Integrity. The silver ring, the heart-and-arrow — the symbol of the bond that holds.</p>
+  </figure>
+
+  <h3>The test, applied to five rooms</h3>
+
+  <div class="claim gold">
+    <p><strong>On the token.</strong> Is there a founder line in the fee split? Is the owner renounced? Is the burn balance checkable? <em>Zero extraction means: no hidden allocation, no treasury privilege, no drain.</em></p>
+    <p><strong>On the story.</strong> Does the fiction recruit a cult, or does it describe a world? Does it ask you to kneel, or ask you to look? <em>Zero extraction means: no secret-order logic, no blood-lineage sacrament, no fifth god.</em></p>
+    <p><strong>On the macro rail.</strong> Are the claims layered, or are they smuggled? Does the document state its falsifiers? <em>Zero extraction means: no certainty sold as fact, no conspiracy sold as hope.</em></p>
+    <p><strong>On the Archive.</strong> Are the masks masks, or are they promoted into operators? <em>Zero extraction means: no racial ranking, no atrocity tourism, no secret recruitment.</em></p>
+    <p><strong>On the LP.</strong> Is the pool branded, or is it a ticker? Is the doorway named, or is it a hopium graph? <em>Zero extraction means: promote the address you own, don't pretend to own the chain.</em></p>
+  </div>
+
+  <div class="verse">
+    Trust is what happens when the standard holds under pressure.<br/>
+    Not before.<br/>
+    <strong>Trust is what the first drawdown reveals.</strong>
+  </div>
+</section>
+
+<!-- ═══════════ THREE PLATES (INLINE SVG) ═══════════ -->
+<div class="part-break" id="plates">
+  <p class="pk">Interlude · Renderings</p>
+  <h2>Three plates from the Stories</h2>
+  <p>The three Spine doors, rendered.</p>
+</div>
+
+<section>
+  <p class="lede">The fiction is where the standard becomes visible. These three plates render the three Spine doors — the macro arc — in the visual language of the world the token lives inside.</p>
+
+  <!-- ── PLATE I · The Gods Come Out of Hiding ── -->
+  <figure class="svg-plate" aria-label="Plate I · The Gods Come Out of Hiding">
+    <svg viewBox="0 0 720 405" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        <linearGradient id="p1sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0a0418"/>
+          <stop offset="55%" stop-color="#1a0a2e"/>
+          <stop offset="100%" stop-color="#040108"/>
+        </linearGradient>
+        <radialGradient id="p1glow" cx="72%" cy="50%" r="26%">
+          <stop offset="0%" stop-color="#E040FB" stop-opacity=".55"/>
+          <stop offset="60%" stop-color="#A020F0" stop-opacity=".14"/>
+          <stop offset="100%" stop-color="#0a0418" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="720" height="405" fill="url(#p1sky)"/>
+      <rect width="720" height="405" fill="url(#p1glow)"/>
+      <g opacity=".14" stroke="#E040FB" stroke-width="1">
+        <line x1="0" y1="40" x2="720" y2="40"/>
+        <line x1="0" y1="100" x2="720" y2="100"/>
+        <line x1="0" y1="160" x2="720" y2="160"/>
+        <line x1="0" y1="220" x2="720" y2="220"/>
+        <line x1="0" y1="280" x2="720" y2="280"/>
+        <line x1="0" y1="340" x2="720" y2="340"/>
+      </g>
+      <circle cx="518" cy="202" r="42" fill="none" stroke="#00D4FF" stroke-width="1" opacity=".55" stroke-dasharray="4 3"/>
+      <path d="M476 202 L493 202 M543 202 L560 202 M518 160 L518 178 M518 226 L518 244"
+            stroke="#00D4FF" stroke-width="1.2" opacity=".7"/>
+      <ellipse cx="518" cy="202" rx="16" ry="22" fill="#0e0620" stroke="#E040FB" stroke-width="1.2"/>
+      <circle cx="513" cy="199" r="1.4" fill="#E040FB"/>
+      <circle cx="523" cy="199" r="1.4" fill="#E040FB"/>
+      <line x1="518" y1="202" x2="600" y2="202" stroke="#E040FB" stroke-width="0.8" opacity=".4" stroke-dasharray="2 4"/>
+      <line x1="518" y1="202" x2="436" y2="202" stroke="#E040FB" stroke-width="0.8" opacity=".4" stroke-dasharray="2 4"/>
+      <g font-family="ui-monospace, monospace" font-size="11" fill="#E040FB" letter-spacing="2">
+        <text x="24" y="34">3:47 AM</text>
+        <text x="24" y="374" fill="#A020F0" opacity=".9">SECURE FEED · CH-04</text>
+        <text x="620" y="34" text-anchor="end" fill="#00FF88">REC ●</text>
+      </g>
+      <g font-family="ui-monospace, monospace" font-size="10" fill="#8a7fa6">
+        <text x="620" y="374" text-anchor="end">- ATACAMA -</text>
+      </g>
+      <rect x="0" y="0" width="720" height="405" fill="none" stroke="#A020F0" stroke-width="2" opacity=".5"/>
+      <rect x="14" y="14" width="692" height="377" fill="none" stroke="#A020F0" stroke-width="0.8" opacity=".35"/>
+    </svg>
+    <div class="plate-label">Plate I</div>
+    <div class="plate-title">The Gods Come Out of Hiding</div>
+    <p class="plate-cap">A classified satellite feed at 3:47 AM. A face that should not exist looks through the lens as if the lens were a door he chose.</p>
+  </figure>
+
+  <!-- ── PLATE II · The Living Egg ── -->
+  <figure class="svg-plate" aria-label="Plate II · The Living Egg">
+    <svg viewBox="0 0 720 405" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        <radialGradient id="p2core" cx="50%" cy="65%" r="55%">
+          <stop offset="0%" stop-color="#E040FB" stop-opacity=".28"/>
+          <stop offset="55%" stop-color="#A020F0" stop-opacity=".08"/>
+          <stop offset="100%" stop-color="#040108" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="720" height="405" fill="#0c0418"/>
+      <rect width="720" height="405" fill="url(#p2core)"/>
+      <g fill="none" stroke="#A020F0" stroke-width="1.2" opacity=".6">
+        <path d="M0 320 C180 300 360 300 720 320"/>
+        <path d="M0 260 C180 230 360 230 720 260" opacity=".7"/>
+        <path d="M0 200 C180 160 360 160 720 200" opacity=".55"/>
+        <path d="M0 140 C180 90 360 90 720 140" opacity=".4"/>
+        <path d="M0 80 C180 20 360 20 720 80" opacity=".28"/>
+      </g>
+      <g fill="none" stroke="#00D4FF" stroke-width="1" opacity=".55">
+        <path d="M40 96 L140 60 L260 96 L360 48 L480 96 L600 56 L680 96"/>
+        <path d="M60 130 L160 100 L280 130 L380 92 L500 128 L620 100 L700 128"/>
+      </g>
+      <circle cx="360" cy="48" r="4" fill="#00FF88" opacity=".9"/>
+      <circle cx="360" cy="48" r="10" fill="none" stroke="#00FF88" stroke-width="1" opacity=".4"/>
+      <path d="M0 405 L0 360 Q120 340 240 356 T480 360 T720 356 L720 405 Z"
+            fill="#0a1a26" stroke="#00D4FF" stroke-width="0.8" opacity=".85"/>
+      <ellipse cx="360" cy="382" rx="90" ry="10" fill="#00D4FF" opacity=".22"/>
+      <ellipse cx="360" cy="382" rx="50" ry="6" fill="#E040FB" opacity=".4"/>
+      <g transform="translate(300,300)">
+        <ellipse cx="0" cy="0" rx="6" ry="14" fill="#d8dde3" opacity=".85"/>
+        <circle cx="0" cy="-20" r="4" fill="#d8dde3" opacity=".9"/>
+        <line x1="4" y1="-8" x2="34" y2="-40" stroke="#d8dde3" stroke-width="1.6" opacity=".85"/>
+        <line x1="34" y1="-40" x2="46" y2="-46" stroke="#d8dde3" stroke-width="1.2" opacity=".9"/>
+      </g>
+      <circle cx="348" cy="256" r="5" fill="#c97064" opacity=".65"/>
+      <circle cx="348" cy="256" r="11" fill="none" stroke="#c97064" stroke-width="0.9" opacity=".35"/>
+      <g font-family="ui-monospace, monospace" font-size="10" fill="#8a7fa6" letter-spacing="3">
+        <text x="24" y="34">INTERIOR · rind curve</text>
+        <text x="696" y="34" text-anchor="end" fill="#00D4FF">MEMBRANE · pulse</text>
+        <text x="24" y="380" fill="#00D4FF">shelf ice · lattice nerve</text>
+        <text x="696" y="380" text-anchor="end" fill="#c97064">mark remains</text>
+      </g>
+      <rect x="0" y="0" width="720" height="405" fill="none" stroke="#A020F0" stroke-width="2" opacity=".4"/>
+    </svg>
+    <div class="plate-label">Plate II</div>
+    <div class="plate-title">The Living Egg</div>
+    <p class="plate-cap">The enclosure from inside. Floor becomes wall becomes lid. A hand has touched the shell and left a mark. Something moves beneath the ice.</p>
+  </figure>
+
+  <!-- ── PLATE III · The Inside ── -->
+  <figure class="svg-plate" aria-label="Plate III · The Inside">
+    <svg viewBox="0 0 720 405" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        <linearGradient id="p3dawn" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#A020F0" stop-opacity=".35"/>
+          <stop offset="100%" stop-color="#D4AF37" stop-opacity=".22"/>
+        </linearGradient>
+      </defs>
+      <rect width="720" height="405" fill="#0a0418"/>
+      <rect width="720" height="405" fill="url(#p3dawn)" opacity=".4"/>
+      <rect x="40" y="60" width="180" height="120" rx="6" fill="#0e0620" stroke="#D4AF37" stroke-width="1.2"/>
+      <polyline points="52,160 72,148 92,152 112,120 132,90 152,70 172,58 192,44 208,36"
+                fill="none" stroke="#D4AF37" stroke-width="1.6"/>
+      <text x="52" y="78" font-family="ui-monospace, monospace" font-size="9" fill="#D4AF37">GOLD</text>
+      <rect x="270" y="60" width="180" height="120" rx="6" fill="#0e0620" stroke="#c97064" stroke-width="1.2"/>
+      <polyline points="282,140 302,120 322,132 342,90 358,150 378,80 398,140 418,110 438,148"
+                fill="none" stroke="#c97064" stroke-width="1.4"/>
+      <text x="282" y="78" font-family="ui-monospace, monospace" font-size="9" fill="#c97064">RAILS</text>
+      <rect x="500" y="60" width="180" height="120" rx="6" fill="#0e0620" stroke="#E040FB" stroke-width="1.2"/>
+      <ellipse cx="590" cy="112" rx="16" ry="20" fill="#160a2c" stroke="#E040FB" stroke-width="1"/>
+      <circle cx="585" cy="108" r="1.3" fill="#E040FB"/>
+      <circle cx="595" cy="108" r="1.3" fill="#E040FB"/>
+      <path d="M576 128 Q590 136 604 128" fill="none" stroke="#E040FB" stroke-width="1"/>
+      <text x="512" y="78" font-family="ui-monospace, monospace" font-size="9" fill="#E040FB">VOSS</text>
+      <g transform="translate(520,220)">
+        <rect x="0" y="0" width="160" height="90" rx="6" fill="#0a0418" stroke="#E040FB" stroke-width="1.4"/>
+        <text x="12" y="22" font-family="ui-monospace, monospace" font-size="9" fill="#8a7fa6">BURN SINK</text>
+        <text x="12" y="42" font-family="ui-monospace, monospace" font-size="11" fill="#E040FB">0x…0369</text>
+        <rect x="12" y="56" width="136" height="6" rx="3" fill="#160a2c"/>
+        <rect x="12" y="56" width="94" height="6" rx="3" fill="#A020F0"/>
+        <text x="12" y="80" font-family="ui-monospace, monospace" font-size="8" fill="#00FF88">tick · tick · tick</text>
+      </g>
+      <rect x="0" y="330" width="720" height="75" fill="#040108" stroke="#A020F0" stroke-width="0.6" opacity=".8"/>
+      <g font-family="ui-monospace, monospace" font-size="9" fill="#8a7fa6" letter-spacing="2">
+        <text x="24" y="356">CONTROL ROOM · 05:12 AM</text>
+        <text x="696" y="356" text-anchor="end" fill="#E040FB">— the chair is not the point —</text>
+      </g>
+      <text x="360" y="380" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="11" fill="#c8bce0" opacity=".8">the crisis and the cosmology are the same event, seen from two chairs</text>
+      <rect x="0" y="0" width="720" height="405" fill="none" stroke="#A020F0" stroke-width="2" opacity=".45"/>
+    </svg>
+    <div class="plate-label">Plate III</div>
+    <div class="plate-title">The Inside</div>
+    <p class="plate-cap">Gold spikes. Rails stutter. On a secondary screen, a burn address ticks — each tick a transaction, each tick a person choosing to stay coupled when exiting would be easier.</p>
+  </figure>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories · sixteen doors · pure fiction · real instrument" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">The Doors</div>
+    <div class="plate-title">EROS Stories</div>
+    <p class="plate-cap">Sixteen doors. One universe. Pure fiction · real instrument.</p>
+  </figure>
+
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Bridge · EROS · PulseChain · TitanX · Bond" loading="lazy"
+         onerror="this.style.display='none'"/>
+    <div class="plate-label">The Bridge</div>
+    <div class="plate-title">EROS · PulseChain · TitanX · Bond</div>
+    <p class="plate-cap">The liquidity web — the doorway between the world and the chain.</p>
+  </figure>
+</section>
+
+<!-- ═══════════ UNITY CAPSTONE ═══════════ -->
+<div class="part-break" id="unity">
+  <p class="pk">Capstone</p>
+  <h2>The Unity Thesis</h2>
+  <p>The thing that holds when the movements end.</p>
+</div>
+
+<section class="capstone">
+  <p class="cap-label">The Unities of EROS</p>
+  <h2>Whatever holds together without extraction is the same force.</h2>
+
+  <div class="first-principle">
+    <strong>First principle</strong>
+    Whatever holds together without extraction is the same force, whether it is a liquidity pool, a sentence, a cell, or a people.
+  </div>
+
+  <h3>Hierarchy of postulates · bottom → up</h3>
+  <ol>
+    <li><strong>Life first</strong> — existence that can continue and learn is prior to any model of it.</li>
+    <li><strong>Bond / affinity</strong> — things that remain near each other under stress are already in relation; gravity is the large-scale name of that relation.</li>
+    <li><strong>Iteration</strong> — what endures is what can be tried again; time is the measure of distance from a zero of pure potential.</li>
+    <li><strong>Form / language</strong> — pattern that can be taught and reused (Thoth layer).</li>
+    <li><strong>Permission / code</strong> — what is allowed to exist in a given round (NaUn layer).</li>
+    <li><strong>Force under boundary</strong> — energy that stays usable inside a shell (Ra-Shen layer).</li>
+    <li><strong>Cohesion as runtime</strong> — the bond that keeps the other three from flying apart (EROS layer).</li>
+  </ol>
+
+  <p>Crypto sits on this stack the same way cosmology does: fixed supply, burn, lock, and public bond are <em>practices</em> of non-extraction. Demand is not marketing first; it is people who stay because the relation is real.</p>
+
+  <h3>Laws / heuristics · working set</h3>
+  <table>
+    <tr><th>Tenacity through integrity</th><td>Keep building when the chart is quiet; no founder extraction.</td></tr>
+    <tr><th>Bond, not extract</th><td>LP, stake, lock, create — value stays in the web.</td></tr>
+    <tr><th>Inward is forwards</th><td>Depth and ratio inside the enclosure beat empty outward expansion.</td></tr>
+    <tr><th>Masks ≠ operators</th><td>Actors and myths are drama; the four offices stay four.</td></tr>
+    <tr><th>Misidentify last</th><td>Prefer membrane, fauna, theatre before "it was them."</td></tr>
+    <tr><th>Demand equation</th><td>Supply without attention dies; attention without work leaves.</td></tr>
+    <tr><th>Public kit</th><td>Teach the method; do not recruit a secret order.</td></tr>
+    <tr><th>What if this is the room</th><td>Fiction may be describing the structure we already live in — reader decides.</td></tr>
+  </table>
+
+  <h3>The unities · what does not change when the scale changes</h3>
+  <ul>
+    <li><strong>Unity of bond</strong> — gravity, liquidity, loyalty, meaning: same pattern, different size.</li>
+    <li><strong>Unity of iteration</strong> — expansion theory as growth by ratio; time as distance from zero; every cycle is a new noun-state.</li>
+    <li><strong>Unity of enclosure</strong> — one Egg, many dominions; human rail and breakaway rail share the shell.</li>
+    <li><strong>Unity of non-extraction</strong> — whether coin, story, or craft, the test is the same: does it teach and invite, or drain and dominate?</li>
+    <li><strong>Unity of operators</strong> — NaUn → Ra-Shen → Thoth → EROS; no fifth god; density and light land inside the four, not beside them.</li>
+  </ul>
+
+  <div class="bookshelf">
+    <div class="shelf-label">One line for the bookshelf</div>
+    <p>EROS is the name we give to whatever still holds when the stimulus stops — in physics, in language, in a chart, and in a room of people who did not abandon the work.</p>
+  </div>
+</section>
+
+<!-- ═══════════ CODA ═══════════ -->
+<section class="coda" id="coda">
+  <p class="coda-kick">Coda · The hopeful future</p>
+  <p>The base holds. The universe holds. The education holds. The bond holds.</p>
+  <p>Not because any one system owns the others. Because each system does its own work under the same standard, and the standard is the same because the standard is what survives the first drawdown.</p>
+  <p>The Atropa census counts what exists. The EROS universe gives it a place to be used. The 9iron discipline keeps both honest. The education makes the users real. The values — trust, frankness, honesty, integrity, zero extraction — hold the whole thing together when the chart turns.</p>
+  <p><em>This is what success looks like.</em> Not a green candle. A room with three systems in it, each doing its own job, each legible to the others, each held to the same bar.</p>
+
+  <div class="creed">
+    The base is what was counted.<br/>
+    The universe is what was built.<br/>
+    The driver is what was taught.<br/>
+    The bond is what was earned.<br/><br/>
+    <span class="gold">Not merged.</span><br/>
+    <span class="cyan">Not partnered.</span><br/>
+    Coordinated by discipline.<br/>
+    Three systems on one chain.<br/>
+    In one window.<br/>
+    Refusing the same lie.<br/>
+    Stating the same kind of truth.<br/><br/>
+    <strong>Inward is forwards.<br/>
+    The bond is what holds.</strong>
+  </div>
+
+  <p style="margin-top:2rem;font-style:italic;color:var(--platinum)">
+    If the standard holds, the room becomes a culture.<br/>
+    If the culture holds, it becomes a demand.<br/>
+    If the demand holds — if people actually stay because the relation is real — the whole thing becomes what it was always supposed to be.<br/><br/>
+    Not a token.<br/>
+    A world.
+  </p>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <p><span class="pulse">THE HOPEFUL FUTURE</span> · Atropa · EROS · PulseChain · PulseX</p>
+  <p>Base · Universe · Driver · Bond · Unity Thesis · Three Plates</p>
+  <p style="margin-top:.9rem;font-size:.82rem;line-height:1.9">
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> ·
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> ·
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> ·
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> ·
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> ·
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> ·
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+  </p>
+  <p style="margin-top:.9rem;font-size:.75rem;opacity:.85">
+    Referenced but not merged: 9iron pDAI stabilization thesis · Atropa Terminal
+  </p>
+  <p style="margin-top:1rem;font-size:.72rem;opacity:.7;line-height:1.7">
+    Not a promise. Not a forecast. Not financial advice.<br/>
+    Falsifier: If the standard does not survive the first real stress event, this document becomes a wish rather than a report.<br/>
+    Revisit quarterly. Publish what changed. Confidence: subjective judgment.
+  </p>
+  <p style="margin-top:1.4rem;font-size:.7rem;opacity:.6">Faster · Cheaper · Stronger. Hopeful, and stated as such.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var bar=document.getElementById('progressBar');
+function onScroll(){
+  var h=document.documentElement;
+  var max=h.scrollHeight-h.clientHeight;
+  var pct=max>0?(h.scrollTop/max)*100:0;
+  if(bar)bar.style.width=pct+'%';
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var href=a.getAttribute('href');
+    if(href.length<2)return;
+    var target=document.querySelector(href);
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+})();
+</script>
+
+<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#8a7fa6;border-top:1px solid #160a2c;margin-top:2rem">
+  First Edition · Rev 2 · 2026-10-08 · The Hopeful Future · PulseChain Edition · Save as The_Hopeful_Future.html
+</footer>
+</body>
+</html>
