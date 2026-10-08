@@ -426,6 +426,59 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* ── LINK BANNER · interactive plate ── */
+.link-banner{margin:2rem 0;text-align:center}
+.link-banner .lb-frame{
+  position:relative;width:100%;max-width:100%;
+  aspect-ratio:16/6.5;border-radius:14px;overflow:hidden;
+  background:#0a0418;border:1px solid rgba(160,32,240,.35);
+  box-shadow:0 14px 44px rgba(0,0,0,.5), 0 0 0 0 rgba(224,64,251,0);
+  cursor:pointer;
+  transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s cubic-bezier(.22,1,.36,1),border-color .4s ease;
+  animation:lb-arrive 1.4s cubic-bezier(.22,1,.36,1) both, lb-pulse 2.6s ease-out 1.6s 1;
+}
+.link-banner .lb-frame img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  transition:transform 1.4s cubic-bezier(.22,1,.36,1),filter .5s ease;
+  will-change:transform;
+}
+.link-banner .lb-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 90% at center,transparent 30%,rgba(0,0,0,.45) 75%,rgba(0,0,0,.75) 100%);
+  opacity:.55;transition:opacity .6s ease;pointer-events:none;
+}
+.link-banner .lb-sheen{
+  position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.14) 48%,rgba(255,255,255,.22) 50%,rgba(255,255,255,.14) 52%,transparent 62%);
+  transform:translateX(-130%);pointer-events:none;
+  animation:lb-sheen-run 2.4s ease-out .9s 1;
+}
+.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
+  transform:scale(1.015);border-color:rgba(224,64,251,.55);
+  box-shadow:0 22px 60px rgba(0,0,0,.55),0 0 42px rgba(224,64,251,.28),0 0 88px rgba(160,32,240,.18);
+}
+.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
+  transform:scale(1.09);filter:saturate(1.18) brightness(1.08) contrast(1.04);
+}
+.link-banner .lb-frame:hover .lb-vignette,.link-banner .lb-frame:focus-visible .lb-vignette{opacity:.85}
+.link-banner figcaption{
+  font-family:var(--sans,system-ui,sans-serif);
+  font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--muted,#8a7fa6);margin-top:.8rem;
+}
+@keyframes lb-arrive{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@keyframes lb-pulse{
+  0%{box-shadow:0 14px 44px rgba(0,0,0,.5),0 0 0 0 rgba(224,64,251,.4)}
+  60%{box-shadow:0 14px 44px rgba(0,0,0,.5),0 0 0 18px rgba(224,64,251,0)}
+  100%{box-shadow:0 14px 44px rgba(0,0,0,.5),0 0 0 0 rgba(224,64,251,0)}
+}
+@keyframes lb-sheen-run{0%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+@media (prefers-reduced-motion:reduce){
+  .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-vignette,.link-banner .lb-sheen{transition:none !important;animation:none !important}
+  .link-banner .lb-frame:hover img{transform:none}
+}
 </style>
 </head>
 <body>
@@ -482,6 +535,17 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
   <p><span class="medal">🫀</span><strong class="heart-c">PulseChain</strong> is the floor beneath all three.</p>
   <p>The bridge is the mission. Bonding is the work. Bringing the right people is the point. This is what they build together — and it is a gift.</p>
 </section>
+
+<figure class="link-banner" role="img" aria-label="The weakest link — EROS welcomes only the strong. Love, Liquidity, Legacy.">
+  <div class="lb-frame">
+    <img src="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg"
+         alt="The weakest link — EROS welcomes only the strong"
+         loading="lazy" onerror="this.parentElement.parentElement.style.display='none'"/>
+    <span class="lb-vignette" aria-hidden="true"></span>
+    <span class="lb-sheen" aria-hidden="true"></span>
+  </div>
+  <figcaption>Love · Liquidity · Legacy</figcaption>
+</figure>
 
 <div style="margin:1.4rem 0">
   <figure class="plate gift">
