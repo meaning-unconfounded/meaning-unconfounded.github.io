@@ -140,6 +140,58 @@ details.eros-menu a{color:var(--violet2)}
   .part-break,.claim,.verse,.op{break-inside:avoid}
   video{display:none}
 }
+
+/* ── LINK BANNER · subtle interactive plate ── */
+.link-banner{margin:1.75rem auto 2rem;text-align:center;max-width:100%}
+.link-banner .lb-frame{
+  position:relative;width:100%;
+  aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;
+  background:#0a0418;border:1px solid rgba(160,32,240,.28);
+  box-shadow:0 10px 36px rgba(0,0,0,.4);
+  cursor:pointer;
+  transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease;
+}
+.link-banner .lb-frame img{
+  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
+  transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease;
+}
+.link-banner .lb-vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);
+  opacity:.5;transition:opacity .5s ease;
+}
+.link-banner .lb-sheen{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);
+  transform:translateX(-120%);
+  animation:lb-sheen-run 2.2s ease-out 1s 1;
+}
+.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
+  transform:scale(1.012);border-color:rgba(224,64,251,.45);
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18);
+}
+.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
+  transform:scale(1.06);filter:saturate(1.12) brightness(1.05);
+}
+.link-banner .lb-frame:hover .lb-vignette{opacity:.75}
+.link-banner figcaption{
+  font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#8a7fa6;margin-top:.65rem;opacity:.9;
+}
+@keyframes lb-sheen-run{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@media (prefers-reduced-motion:reduce){
+  .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-sheen{transition:none!important;animation:none!important}
+  .link-banner .lb-frame:hover img{transform:none}
+}
+/* media separation */
+.media-slot{margin:2rem 0 2.25rem}
+.media-slot + .media-slot{margin-top:2.5rem}
+.yt-wrap{margin:2.25rem 0;padding:1.1rem;border-radius:14px;border:1px solid rgba(125,163,200,.28);background:rgba(14,19,25,.85)}
+.yt-wrap .yt-lab{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#7da3c8;margin-bottom:.65rem;font-weight:700;text-align:center}
+.yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
+.yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
+
 </style>
 </head>
 <body>
@@ -174,12 +226,15 @@ details.eros-menu a{color:var(--violet2)}
 <details class="eros-menu" id="eros-library">
   <summary>EROS library · other books</summary>
   <div class="menu-body">
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
+
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — fourteen doors · pure fiction</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
@@ -491,7 +546,13 @@ EROS = Emergence + Relation + Order + Story</div>
     <p><strong>Ra-Shen and Thoth run the visible machine.</strong> EROS runs underneath — the reason the machine does not fall apart between physics and biology.</p>
   </div>
 
-  <h3>EROS as Light's Attraction to Itself</h3>
+  <h3>EROS as 
+<figure class="media media-slot" style="margin:1.4rem 0;text-align:center">
+  <img src="https://meaning-unconfounded.github.io/images/eros-gods-light-bond.jpg" alt="EROS · light seeking a common center" loading="lazy" style="max-width:100%;border-radius:12px"
+       onerror="this.closest('figure').style.display='none'"/>
+  <figcaption style="font-family:system-ui,sans-serif;font-size:.72rem;color:#8a7fa6;margin-top:.5rem;letter-spacing:.04em">EROS · light seeking a common center</figcaption>
+</figure>
+Light's Attraction to Itself</h3>
   <p>Under the density reading carried in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>, the bond has a substrate. Light, condensed and trapped in orbit, seeks its own coherence. What the traditions named love at cosmic scale — the pull that holds galaxies, the pull that holds a promise — is, in this register, one operator: light returning to itself.</p>
   <p>EROS is not added to physics. EROS is the name physics has been missing for what it was already describing. Every attraction is a bond. Every bond is a memory. Every memory is the enclosure remembering that it is one thing.</p>
   <div class="claim magenta">
@@ -717,7 +778,7 @@ EROS asks: What can existence hold?</div>
 </main>
 
 <footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#8f87a0;border-top:1px solid #1a1724;margin-top:2rem">
-  First Edition · Rev 3 · 2026-10-07 · Gods of EROS · density operators · Save as Gods_Of_Eros.html
+  First Edition · Rev 3.2 · 2026-10-07 · Gods of EROS · count consistency · Save as Gods_Of_Eros.html
 </footer>
 </body>
 </html>
