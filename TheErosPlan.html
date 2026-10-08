@@ -245,6 +245,58 @@ html::after{inset:14px;border:1px solid rgba(212,175,55,.10)}
 .burn-feature .cap{padding:.75rem 1rem;font-size:.9rem;color:rgba(255,255,255,.8);border-top:1px solid rgba(232,197,71,.2)}
 .burn-feature .cap b{color:#e8c547}
 @media print{@page{size:A4;margin:11mm;background:#0b0a08}html{background:#0b0a08!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{background:#0b0a08!important;color:#ece7db!important;font-size:10.5pt;line-height:1.55;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;margin:0!important;padding:7mm!important;border:1.75pt solid #d4af37!important;box-sizing:border-box}.topbar,#toTop,#progressBar,#resumePrompt,.chapternav{display:none!important}.page{max-width:none!important;margin:0!important;padding:0!important}.cover{padding:12mm 4mm 8mm!important;page-break-after:always}.volume-opener{min-height:auto!important;padding:16mm 4mm 12mm!important;page-break-before:always;page-break-after:avoid;break-inside:avoid}h2{page-break-after:avoid;break-after:avoid}h3,h4{page-break-after:avoid;break-after:avoid}figure,.plate,.claim,.pull,.math,.ledger,.table-wrap,.art-grid,.grid,.stage,.roadmap,.readmap,.creed,.onesentence{break-inside:avoid;page-break-inside:avoid}.coda{page-break-before:always}details.appendix{break-inside:avoid}details.appendix[open] .abody{display:block}img,svg{max-width:100%!important;height:auto!important}a{color:inherit;text-decoration:none}.reveal{opacity:1!important;transform:none!important}.claim,.math,.ledger,.table-wrap,.grid>div,.art{border-color:#28241b!important;background:#171410!important}.pull{border-left-color:#d4af37!important;background:linear-gradient(90deg,rgba(212,175,55,.09),transparent 70%)!important}video{display:none}}
+
+/* ── LINK BANNER · subtle interactive plate ── */
+.link-banner{margin:1.75rem auto 2rem;text-align:center;max-width:100%}
+.link-banner .lb-frame{
+  position:relative;width:100%;
+  aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;
+  background:#0a0418;border:1px solid rgba(160,32,240,.28);
+  box-shadow:0 10px 36px rgba(0,0,0,.4);
+  cursor:pointer;
+  transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease;
+}
+.link-banner .lb-frame img{
+  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
+  transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease;
+}
+.link-banner .lb-vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);
+  opacity:.5;transition:opacity .5s ease;
+}
+.link-banner .lb-sheen{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);
+  transform:translateX(-120%);
+  animation:lb-sheen-run 2.2s ease-out 1s 1;
+}
+.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
+  transform:scale(1.012);border-color:rgba(224,64,251,.45);
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18);
+}
+.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
+  transform:scale(1.06);filter:saturate(1.12) brightness(1.05);
+}
+.link-banner .lb-frame:hover .lb-vignette{opacity:.75}
+.link-banner figcaption{
+  font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#8a7fa6;margin-top:.65rem;opacity:.9;
+}
+@keyframes lb-sheen-run{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@media (prefers-reduced-motion:reduce){
+  .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-sheen{transition:none!important;animation:none!important}
+  .link-banner .lb-frame:hover img{transform:none}
+}
+/* media separation */
+.media-slot{margin:2rem 0 2.25rem}
+.media-slot + .media-slot{margin-top:2.5rem}
+.yt-wrap{margin:2.25rem 0;padding:1.1rem;border-radius:14px;border:1px solid rgba(125,163,200,.28);background:rgba(14,19,25,.85)}
+.yt-wrap .yt-lab{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#7da3c8;margin-bottom:.65rem;font-weight:700;text-align:center}
+.yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
+.yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
+
 </style>
 </head>
 <body>
@@ -287,11 +339,14 @@ html::after{inset:14px;border:1px solid rgba(212,175,55,.10)}
   <details class="eros-menu" id="eros-library">
     <summary>EROS library · other books</summary>
     <div class="menu-body">
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
+
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
-      <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — fourteen doors · pure fiction</p>
+      <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
@@ -321,7 +376,18 @@ html::after{inset:14px;border:1px solid rgba(212,175,55,.10)}
     <p><strong>Why you should care:</strong> If you hold TitanX, EROS, or PulseChain liquidity — or you want a fair, renounced, multi-year-receipt token with a real media and lore stack — this is the map. Crypto first. Lore second. Extraction never.</p>
     <p><strong>What it is not:</strong> Not a price promise. Not a whitepaper of roadmap theatre. Not a merger of human Continuity-of-Government footprints with breakaway / Nordic lore into one flat dump. Rails stay separate; hinges are labeled.</p>
     <p><strong>Frankness policy:</strong> Clarity at the start of every volume. Verify on-chain. Official bridge only. Companions deepen each rail without replacing this book.</p>
+  
+<figure class="link-banner media-slot" role="img" aria-label="The weakest link — EROS welcomes only the strong">
+  <div class="lb-frame" tabindex="0">
+    <img src="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg" alt="The weakest link — EROS welcomes only the strong" loading="lazy"
+         onerror="this.closest('figure').style.display='none'"/>
+    <span class="lb-vignette" aria-hidden="true"></span>
+    <span class="lb-sheen" aria-hidden="true"></span>
   </div>
+  <figcaption>Love · Liquidity · Legacy</figcaption>
+</figure>
+
+</div>
 
   <details class="eros-menu" id="library">
     <summary>Companion library · full sub-books</summary>
@@ -330,7 +396,7 @@ html::after{inset:14px;border:1px solid rgba(212,175,55,.10)}
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics, Poolonomics, risks, playbook (crypto surface)</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake · TitanX path</p>
-      <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — fourteen doors · pure fiction</p>
+      <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro / CoG / footprints</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — NaUn · Ra-Shen · Thoth · EROS operators</p>
       <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics · consonants · language craft</p>
@@ -429,6 +495,18 @@ html::after{inset:14px;border:1px solid rgba(212,175,55,.10)}
   <p>AI is changing production. Robotics is changing labour. Space is becoming industrial. Quantum technology is advancing. Nations are restructuring finance. Crypto is moving deeper into the economic system. And the UFO / UAP conversation has moved from fringe speculation into Congress, into committee rooms, into mainstream media.</p>
 
   <p>Whether every narrative proves true or not — the signal is undeniable. The boundaries of the old world are being challenged. The measuring sticks are being renegotiated. The language is shifting from <em>casino</em> to <em>infrastructure</em>.</p>
+
+<div class="yt-wrap media-slot">
+  <p class="yt-lab">Watch · Gold · Measuring stick · Continuity</p>
+  <div class="yt-frame">
+    <iframe src="https://www.youtube.com/embed/S_0f4twDjYY" title="Gold, continuity, and the measuring stick" loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+  <p class="yt-cap">Footprints over confession. Public instruments. Verify the layer yourself.</p>
+</div>
+
+
 
   <figure class="plate">
     <img src="https://meaning-unconfounded.github.io/images/eros-strength.jpg" alt="Strength — built through the bear" loading="lazy" onerror="this.parentElement.style.display='none'"/>
