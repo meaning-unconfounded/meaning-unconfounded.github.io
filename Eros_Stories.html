@@ -100,11 +100,28 @@ a:hover{color:var(--pink)}
 h1{font-size:clamp(1.9rem,5.2vw,2.7rem);font-weight:400;letter-spacing:.06em;margin-bottom:.25rem;
   background:linear-gradient(90deg,var(--pulse2),var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .sub{color:var(--soft);margin-bottom:.5rem;font-size:.98rem}
-.banner img{width:100%;max-width:920px;height:auto;border-radius:14px;border:1px solid rgba(160,32,240,.4);display:block;margin:0 auto;box-shadow:0 8px 36px rgba(168,85,247,.2)}
 .epigraph{font-style:italic;color:var(--muted);max-width:36rem;margin:.55rem auto .85rem;line-height:1.55}
 .cta-row{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin:.7rem 0 .9rem}
 .cta{font-family:var(--sans);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#07060c;background:linear-gradient(90deg,var(--pulse2),var(--cyan));border-radius:999px;padding:.4rem .9rem;text-decoration:none}
 .cta:hover{filter:brightness(1.15)}
+
+/* ── ONE BANNER TREATMENT ── */
+.banner{margin:1.6rem auto;text-align:center;max-width:100%}
+.banner img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  margin:0 auto;
+  border-radius:14px;
+  border:1px solid rgba(160,32,240,.45);
+  box-shadow:0 10px 40px rgba(168,85,247,.22);
+  background:#0a0612;
+}
+.banner figcaption{
+  font-family:system-ui,sans-serif;font-size:.72rem;color:#8a7fa6;
+  margin-top:.55rem;letter-spacing:.04em;
+}
 
 .pitch{margin:1.1rem 0;padding:1.2rem 1.3rem;border:1px solid rgba(160,32,240,.5);border-radius:16px;
   background:linear-gradient(180deg,rgba(160,32,240,.13),rgba(18,16,26,.98));
@@ -193,8 +210,19 @@ details.fold[open] .fold-body{border-top-color:rgba(34,211,238,.2)}
 
 .body{padding:1rem 1.1rem 1.3rem;border:1px solid rgba(34,211,238,.45);border-top:none;border-radius:0 0 14px 14px;background:var(--surface)}
 
-.hero{margin:0 0 .9rem}
-.hero img{width:100%;max-height:280px;object-fit:cover;border-radius:12px;border:1px solid var(--hair);display:block;background:#0a0612}
+/* ── HERO — natural aspect ratio, capped twice, no cropping ── */
+.hero{margin:0 0 .9rem;text-align:center}
+.hero img{
+  display:block;
+  max-width:100%;
+  max-height:420px;
+  width:auto;
+  height:auto;
+  margin:0 auto;
+  border-radius:12px;
+  border:1px solid var(--hair);
+  background:#0a0612;
+}
 
 .spine{margin:.7rem 0 .9rem;padding:.75rem .9rem;border:1px solid rgba(34,211,238,.28);border-radius:10px;background:rgba(34,211,238,.05);font-size:.93rem}
 .spine b{color:var(--cyan);font-family:var(--sans);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin:.45rem 0 .15rem}
@@ -226,9 +254,25 @@ details.fold[open] .fold-body{border-top-color:rgba(34,211,238,.2)}
 .egg-end .lab{font-family:var(--sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:.5rem}
 .egg-end video{width:100%;max-width:520px;border-radius:10px;border:1px solid rgba(34,211,238,.3);background:#000;display:block;margin:0 auto}
 
+/* ── INTERLUDE — small gallery grid, not stacked ── */
 .interlude{margin:2rem 0;text-align:center}
 .ilab{font-family:var(--sans);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:.5rem}
-.interlude img{width:100%;max-width:620px;border-radius:12px;border:1px solid rgba(160,32,240,.3);display:block;margin:.35rem auto;background:#000}
+.interlude .il-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:.6rem;
+  max-width:720px;
+  margin:.5rem auto 0;
+}
+.interlude .il-grid img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid rgba(160,32,240,.3);
+  display:block;
+  background:#000;
+}
 .interlude video{width:100%;max-width:620px;border-radius:12px;border:1px solid rgba(160,32,240,.3);display:block;margin:.35rem auto;background:#000}
 
 .burn-block{margin:2.5rem 0 1rem;padding:1.4rem 1.5rem;border:1px solid rgba(251,113,133,.45);border-radius:16px;
@@ -418,8 +462,8 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <p class="kick">EROS world view · pure fiction · real instrument</p>
   <h1>EROS STORIES</h1>
   <p class="sub">Sixteen doors · One universe · Step in blind</p>
-  <figure class="banner promo">
-    <img src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories · Sixteen Doors · Pure fiction. Real instrument." loading="eager"/>
+  <figure class="banner">
+    <img src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories · Sixteen Doors · Pure fiction. Real instrument." loading="eager" onerror="this.closest('figure').style.display='none'"/>
   </figure>
   <p class="epigraph">Get a bag. Bond it. Commit. Create.<br/>
   Fiction is where belief is tested.</p>
@@ -478,10 +522,9 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <p class="stamp">This document is fiction. The company above it is real. We are not extraction — we are everything DeFi should have been.</p>
 </div>
 
-<figure class="banner promo media-slot" style="margin:1.4rem 0;text-align:center">
-  <img src="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" alt="Sixteen doors · one vessel" loading="lazy" style="max-width:100%;border-radius:12px"
-       onerror="this.closest('figure').style.display='none'"/>
-  <figcaption style="font-family:system-ui,sans-serif;font-size:.72rem;color:#8a7fa6;margin-top:.5rem;letter-spacing:.04em">Sixteen doors · one vessel</figcaption>
+<figure class="banner">
+  <img src="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" alt="Sixteen doors · one vessel" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+  <figcaption>Sixteen doors · one vessel</figcaption>
 </figure>
 
 <p class="tier-hint">Three Spine doors · six genre Doors · seven Witness files.<br/>
@@ -630,14 +673,16 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
 
 <div class="interlude">
   <p class="ilab">Cosmology</p>
-  <img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="Egg cover" loading="lazy"/>
-  <img src="https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg" alt="Living Egg" loading="lazy"/>
+  <div class="il-grid">
+    <img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="Egg cover" loading="lazy" onerror="this.style.display='none'"/>
+    <img src="https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg" alt="Living Egg" loading="lazy" onerror="this.style.display='none'"/>
+  </div>
 </div>
 
 <div class="stories-header">
   <p class="stories-kick">Enter the doors</p>
-  <figure class="stories-banner">
-    <img src="https://meaning-unconfounded.github.io/images/eros-stories-banner.jpg" alt="EROS Stories — the doors" loading="lazy"/>
+  <figure class="banner">
+    <img src="https://meaning-unconfounded.github.io/images/eros-stories-banner.jpg" alt="EROS Stories — the doors" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
   </figure>
 </div>
 
@@ -652,7 +697,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Gods" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Gods" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Stop the wrong war. Learn whether the Nordics are threat, ally, or both.
     <b>Problem</b>Military grammar only knows enemies and assets. Panic wants a simple story.
@@ -697,7 +742,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="Egg" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="Egg" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Map gestation without turning the Egg into a brand or a bomb.
     <b>Problem</b>Disciplines cannot see one organism. Ego wants to be the child, not the tissue.
@@ -742,7 +787,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" alt="Gold · ErosX" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" alt="Gold · ErosX" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Stabilise the emergency without lying about the enclosure.
     <b>Problem</b>Markets demand narrative faster than truth. Flow-money mania creates real scarcity on the bonded instrument.
@@ -795,7 +840,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/egg-enclosure.jpg" alt="Enclosure" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/egg-enclosure.jpg" alt="Enclosure" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Prove the enclosure. Touch contact without becoming a weapon.
     <b>Problem</b>Institutions need noise. Delay factions need time. Pride slows the ask for help.
@@ -839,7 +884,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="Living sky" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="Living sky" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Survive disclosure without unseeing or losing the table.
     <b>Problem</b>Adults manage fear with silence, jokes, guns, curriculum.
@@ -884,7 +929,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-atlantis-rind.jpg" alt="Rind" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-atlantis-rind.jpg" alt="Rind" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Ruin or organ — stop the strip-mine.
     <b>Problem</b>Sponsorship owns extract. Flags arrive. Damage propagates through a ganglion.
@@ -928,7 +973,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-nordic-veil.jpg" alt="Veil" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-nordic-veil.jpg" alt="Veil" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Contact without worship or extermination.
     <b>Problem</b>Hardliners want clean enmity. Nearness makes threat intimate.
@@ -972,7 +1017,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-notebook-studio.jpg" alt="Studio" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-notebook-studio.jpg" alt="Studio" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Stop capture as weapon or brand. Learn what it optimises.
     <b>Problem</b>Everyone wants a tame oracle. Open-source chaos wants pure release.
@@ -1017,7 +1062,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-space.jpg" alt="Space" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-space.jpg" alt="Space" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>True maps even if careers die.
     <b>Problem</b>Vacuum model is institutional identity. Scrub protects funding.
@@ -1055,9 +1100,11 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
 
 <div class="interlude">
   <p class="ilab">Membrane studies</p>
-  <img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="Lensing" loading="lazy"/>
-  <img src="https://meaning-unconfounded.github.io/images/inverse1.webp" alt="Inversion" loading="lazy"/>
-  <img src="https://meaning-unconfounded.github.io/images/eros-illuminate.jpg" alt="Illuminate" loading="lazy"/>
+  <div class="il-grid">
+    <img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="Lensing" loading="lazy" onerror="this.style.display='none'"/>
+    <img src="https://meaning-unconfounded.github.io/images/inverse1.webp" alt="Inversion" loading="lazy" onerror="this.style.display='none'"/>
+    <img src="https://meaning-unconfounded.github.io/images/eros-illuminate.jpg" alt="Illuminate" loading="lazy" onerror="this.style.display='none'"/>
+  </div>
 </div>
 
 <p class="tier-lab">THE WITNESS</p>
@@ -1071,7 +1118,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-pin-door.jpg" alt="Pin the door" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-pin-door.jpg" alt="Pin the door" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Civilian membrane weather map before policy freezes.
     <b>Problem</b>Schools ban. Military treats children as noise.
@@ -1115,7 +1162,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-strength.jpg" alt="Strength" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-strength.jpg" alt="Strength" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Continuity without elite-only arks. Seat every kind that shares the seal.
     <b>Problem</b>Dual water. Human-only protocols. Purity hardliners.
@@ -1160,7 +1207,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-atlantis-void.jpg" alt="Void · reach" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-atlantis-void.jpg" alt="Void · reach" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Prevent the second flood from being a human-only lifeboat.
     <b>Problem</b>Old resentment between the lineages that survived Round One. Modern institutions want one ark for one species.
@@ -1204,7 +1251,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-measuring-stick.jpg" alt="Measuring stick" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-measuring-stick.jpg" alt="Measuring stick" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Expose the cull logic as a human reading — before policy industrialises it.
     <b>Problem</b>The hypothesis is coherent and seductive. Models are echoing it.
@@ -1249,7 +1296,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="Complete" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="Complete" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Survive the boom-and-crash of ErosX mania without abandoning the underlying bond.
     <b>Problem</b>ErosX goes viral. EROS transforms. 33Eros follows. A shortage drives EROS price into hyper-range. Early LPs become quietly rich. Latecomers buy the top.
@@ -1293,7 +1340,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-stories-choir-ridge.jpg" alt="Ridge lights" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-stories-choir-ridge.jpg" alt="Ridge lights" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Record long-duration luminous phenomena on a remote ridge without forcing a geophysical conclusion.
     <b>Problem</b>The lights hold shape, answer rhythm, and refuse to behave like known plasma.
@@ -1329,7 +1376,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="hint"></p>
 </summary>
 <div class="body">
-  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-stories-density-craft.jpg" alt="Density craft" loading="lazy"/></figure>
+  <figure class="hero"><img src="https://meaning-unconfounded.github.io/images/eros-stories-density-craft.jpg" alt="Density craft" loading="lazy" onerror="this.closest('figure').style.display='none'"/></figure>
   <div class="spine">
     <b>Mission</b>Complete a routine cargo run.
     <b>Problem</b>Instruments agree with the profile; the star field does not. Local density has changed.
@@ -1359,9 +1406,11 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
 
 <div class="interlude">
   <p class="ilab">Gift · Thoth · Complete</p>
-  <img src="https://meaning-unconfounded.github.io/images/eros-gift-thoth.jpg" alt="Gift of Thoth" loading="lazy"/>
-  <img src="https://meaning-unconfounded.github.io/images/eros-call-to-arms.jpg" alt="Call to arms" loading="lazy"/>
-  <img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="Complete" loading="lazy"/>
+  <div class="il-grid">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gift-thoth.jpg" alt="Gift of Thoth" loading="lazy" onerror="this.style.display='none'"/>
+    <img src="https://meaning-unconfounded.github.io/images/eros-call-to-arms.jpg" alt="Call to arms" loading="lazy" onerror="this.style.display='none'"/>
+    <img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="Complete" loading="lazy" onerror="this.style.display='none'"/>
+  </div>
 </div>
 
 <section class="burn-block" id="burn">
