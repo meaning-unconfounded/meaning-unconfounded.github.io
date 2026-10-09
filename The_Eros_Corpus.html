@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>How the Corpus Works · EROS Library Map</title>
-<meta name="description" content="The map of the EROS library. Twelve books, three paths, two rails, one vessel. Read this first, then walk through any door."/>
+<meta name="description" content="The map of the EROS library. Fourteen books, three paths, two rails, one vessel. Read this first, then walk through any door."/>
 <meta name="theme-color" content="#f2ede0"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%23f2ede0' stroke='%238a6a1d' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%238a6a1d'/%3E%3C/svg%3E"/>
 <style>
@@ -19,6 +19,7 @@
   --amber:#9a6a1e; --amber-soft:rgba(154,106,30,.08); --amber-line:rgba(154,106,30,.28);
   --teal:#3e7a7e; --teal-soft:rgba(62,122,126,.08); --teal-line:rgba(62,122,126,.28);
   --gift:#c97a2c; --gift2:#b86820; --gift-soft:rgba(201,122,44,.08); --gift-line:rgba(201,122,44,.28);
+  --platinum:#7a7089; --platinum-soft:rgba(122,112,137,.08); --platinum-line:rgba(122,112,137,.32);
   --hair:rgba(28,26,22,.12); --hair2:rgba(28,26,22,.06);
   --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
@@ -46,10 +47,42 @@ a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(138,106,29
 a:hover{color:var(--gold2);border-bottom-color:var(--gold2)}
 ::selection{background:var(--gold);color:var(--surface)}
 
+/* ── STANDARD HEADER ── */
+.corpus-bar{
+  position:sticky;top:0;z-index:850;
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+  padding:.55rem 1.1rem;
+  background:rgba(242,237,224,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--gold-line);
+  font-family:var(--sans);
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;border-bottom:none;
+}
+.corpus-bar .brand:hover{color:var(--gold2);border-bottom:none}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
+  border-bottom:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--gold);background:var(--gold-soft);border-bottom:none}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.66rem}
+  .corpus-bar nav a{padding:.3rem .45rem;font-size:.6rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+5){display:none}
+}
+
 header.cover{text-align:center;padding:2.5rem 1rem 2rem}
 header.cover .kick{font-family:var(--sans);font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:700}
 header.cover h1{font-size:clamp(2rem,5.5vw,3rem);font-weight:700;letter-spacing:.02em;color:var(--ink);line-height:1.15;margin-bottom:.5rem}
-header.cover .sub{font-style:italic;color:var(--soft);font-size:1.12rem;max-width:36rem;margin:0 auto 1.2rem;line-height:1.7}
+header.cover .sub{font-style:italic;color:var(--soft);font-size:1.12rem;max-width:38rem;margin:0 auto 1.2rem;line-height:1.7}
 header.cover .rule{width:min(200px,50%);height:1px;margin:0 auto 1.5rem;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 header.cover .onesentence{max-width:38rem;margin:0 auto;font-size:1.02rem;color:var(--soft);line-height:1.75}
 header.cover .map-badge{display:inline-block;font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);border:1px solid var(--gold-line);border-radius:999px;padding:.35rem .95rem;margin-bottom:1rem;font-weight:700;background:var(--gold-soft)}
@@ -66,12 +99,14 @@ p{margin:0 0 1rem;color:var(--soft)}
 .claim.violet{border-color:var(--violet-line);background:var(--violet-soft)}
 .claim.teal{border-color:var(--teal-line);background:var(--teal-soft)}
 .claim.gift{border-color:var(--gift-line);background:var(--gift-soft)}
+.claim.platinum{border-color:var(--platinum-line);background:var(--platinum-soft)}
 .claim p:last-child{margin-bottom:0}
 .claim strong{color:var(--gold)}
 .claim.crimson strong{color:var(--crimson)}
 .claim.indigo strong{color:var(--indigo)}
 .claim.violet strong{color:var(--violet)}
 .claim.gift strong{color:var(--gift2)}
+.claim.platinum strong{color:var(--platinum)}
 
 .svg-map{margin:1.8rem 0;padding:1.4rem;border:1px solid var(--hair);border-radius:14px;background:var(--surface)}
 .svg-map svg{width:100%;height:auto;display:block}
@@ -89,6 +124,7 @@ table.ref td a{color:var(--gold)}
 .book-card.n0{border-left-color:var(--amber)}
 .book-card.n1{border-left-color:var(--amber)}
 .book-card.n2{border-left-color:var(--teal)}
+.book-card.platinum{border-left-color:var(--platinum)}
 .book-card.n3{border-left-color:var(--gold)}
 .book-card.n4{border-left-color:var(--steel)}
 .book-card.n5{border-left-color:var(--crimson)}
@@ -97,12 +133,13 @@ table.ref td a{color:var(--gold)}
 .book-card.n8{border-left-color:var(--crimson)}
 .book-card.n9{border-left-color:var(--indigo)}
 .book-card.gift{border-left-color:var(--gift)}
+.book-card.resonance{border-left-color:var(--violet)}
 .book-card.n11{border-left-color:var(--violet)}
 .book-card .bc-head{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin-bottom:.4rem}
 .book-card .bc-title{font-weight:700;color:var(--ink);font-size:1.05rem}
 .book-card .bc-title a{color:var(--ink);border-bottom:none}
 .book-card .bc-title a:hover{color:var(--gold)}
-.book-card .bc-tag{font-family:var(--sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--surface2);padding:.22rem .6rem;border-radius:999px;font-weight:700}
+.book-card .bc-tag{font-family:var(--sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--surface2);padding:.22rem .6rem;border-radius:999px;font-weight:700;white-space:nowrap}
 .book-card p{font-size:.95rem;margin:0;line-height:1.65}
 
 details.fold{margin:.7rem 0;border:1px solid var(--hair);border-radius:10px;background:var(--surface);overflow:hidden}
@@ -140,81 +177,75 @@ details.fold .body li{margin:.3rem 0;font-size:.95rem;color:var(--soft);line-hei
 .legend .row{display:flex;gap:.6rem;align-items:baseline;margin:.3rem 0}
 .legend .swatch{width:.7rem;height:.7rem;border-radius:50%;flex-shrink:0;margin-top:.35rem}
 
-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.78rem;color:var(--muted);line-height:1.8}
-footer .gold{color:var(--gold)}
-footer a{margin:0 .3rem}
-
 .cta{margin:2rem 0 0;text-align:center;padding:1.6rem 1.2rem;border:1px solid var(--gold-line);border-radius:14px;background:var(--gold-soft)}
 .cta .cc{font-family:var(--sans);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;font-weight:700}
 .cta .cl{font-size:1.12rem;font-style:italic;color:var(--ink);margin-bottom:1rem;line-height:1.7}
 .cta a.enter{display:inline-block;padding:.7rem 1.4rem;border-radius:999px;background:var(--gold);color:var(--surface);font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:none;margin:.3rem .3rem 0}
 .cta a.enter:hover{background:var(--gold2);color:var(--surface)}
 
-@media print{@page{size:A4;margin:14mm}html::before,html::after,#progressBar{display:none!important}.svg-map,.book-card,.claim,.path,.rails,.table-wrap{break-inside:avoid}}
+/* ── MASTER FOOTER ── */
+footer.master{
+  margin-top:3rem;padding:2rem 1rem 1.2rem;
+  border-top:1px solid var(--gold-line);
+  text-align:center;font-family:var(--sans);
+  font-size:.78rem;color:var(--muted);line-height:1.85;
+}
+footer.master .title{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spacing:.08em;font-weight:700;margin-bottom:.3rem}
+footer.master .count{font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem}
+footer.master .tier{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
+  max-width:46rem;margin:0 auto 1rem;
+}
+footer.master .tier a{
+  padding:.32rem .72rem;border-radius:999px;
+  background:var(--surface);border:1px solid var(--hair);
+  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
+  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
+}
+footer.master .tier a:hover{color:var(--gold);border-color:var(--gold-line);background:var(--gold-soft)}
+footer.master .tier a.primary{background:var(--gold-soft);border-color:var(--gold-line);color:var(--gold);font-weight:700}
+footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1rem}
+footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.85rem;margin-top:.6rem}
+
+@media print{
+  @page{size:A4;margin:14mm}
+  html::before,html::after,#progressBar,.corpus-bar{display:none!important}
+  body{background:#fff!important;color:#111;font-size:10.5pt}
+  .page{max-width:none;padding:0}
+  a{color:#111;border-bottom:none}
+  .svg-map,.book-card,.claim,.path,.rails,.table-wrap,details.fold,.cta{break-inside:avoid}
+  h2{break-after:avoid}
+  header.cover{padding:.5rem 0 1rem}
+  header.cover h1{font-size:1.9rem}
+  .corpus-bar{display:none!important}
+  footer.master .tier a{border:1px solid #ccc;background:#fff}
+}
 @media(max-width:640px){body{font-size:1rem}.page{padding:1.2rem 1.1rem 4rem}table.ref{font-size:.85rem}}
-
-/* ── LINK BANNER · subtle interactive plate ── */
-.link-banner{margin:1.75rem auto 2rem;text-align:center;max-width:100%}
-.link-banner .lb-frame{
-  position:relative;width:100%;
-  aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;
-  background:#0a0418;border:1px solid rgba(160,32,240,.28);
-  box-shadow:0 10px 36px rgba(0,0,0,.4);
-  cursor:pointer;
-  transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease;
-}
-.link-banner .lb-frame img{
-  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
-  transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease;
-}
-.link-banner .lb-vignette{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);
-  opacity:.5;transition:opacity .5s ease;
-}
-.link-banner .lb-sheen{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);
-  transform:translateX(-120%);
-  animation:lb-sheen-run 2.2s ease-out 1s 1;
-}
-.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
-  transform:scale(1.012);border-color:rgba(224,64,251,.45);
-  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18);
-}
-.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
-  transform:scale(1.06);filter:saturate(1.12) brightness(1.05);
-}
-.link-banner .lb-frame:hover .lb-vignette{opacity:.75}
-.link-banner figcaption{
-  font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
-  color:#8a7fa6;margin-top:.65rem;opacity:.9;
-}
-@keyframes lb-sheen-run{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-@media (prefers-reduced-motion:reduce){
-  .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-sheen{transition:none!important;animation:none!important}
-  .link-banner .lb-frame:hover img{transform:none}
-}
-/* media separation */
-.media-slot{margin:2rem 0 2.25rem}
-.media-slot + .media-slot{margin-top:2.5rem}
-.yt-wrap{margin:2.25rem 0;padding:1.1rem;border-radius:14px;border:1px solid rgba(125,163,200,.28);background:rgba(14,19,25,.85)}
-.yt-wrap .yt-lab{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#7da3c8;margin-bottom:.65rem;font-weight:700;text-align:center}
-.yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
-.yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
-
 </style>
 </head>
 <body>
 <div id="progressBar"></div>
-<div class="page">
+
+<!-- ── STANDARD HEADER ── -->
+<header class="corpus-bar">
+  <a class="brand" href="#top">✦ EROS · Corpus Map</a>
+  <nav aria-label="Section navigation">
+    <a href="#map">Map</a>
+    <a href="#paths">Paths</a>
+    <a href="#books">Books</a>
+    <a href="#urls">URLs</a>
+    <a href="media.html">Media</a>
+    <a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">Telegram</a>
+  </nav>
+</header>
+
+<div class="page" id="top">
 
 <header class="cover">
   <p class="map-badge">The Map · Orientation</p>
   <p class="kick">EROS Library · Orientation</p>
   <h1>How the Corpus Works</h1>
-  <p class="sub">Twelve books. Three paths. Two rails. One vessel.</p>
+  <p class="sub">Fourteen books. Three paths. Two rails. One vessel. One gift. One standard.</p>
   <div class="rule"></div>
   <p class="onesentence">A single page that tells you what each book does, which one to open first, and how the whole library fits together inside one architecture.</p>
 </header>
@@ -226,24 +257,24 @@ footer a{margin:0 .3rem}
   <p>This page names the architecture in one place so that a new reader can find the first door, and a returning reader can remember where the load-bearing walls are.</p>
 
   <div class="claim gold">
-    <p><strong>A note about this page.</strong> This is the map. It does not sit inside the library — it sits above it. The twelve books are the doors. This is the wall they are mounted on. You are holding the map right now. Everything else is a book.</p>
+    <p><strong>A note about this page.</strong> This is the map. It does not sit inside the library — it sits above it. The fourteen books are the doors. This is the wall they are mounted on. You are holding the map right now. Everything else is a book.</p>
   </div>
 </section>
 
 <!-- ═══════════════ CORPUS MAP ═══════════════ -->
 <section id="map">
   <h2>The corpus map</h2>
-  <p>Twelve books arranged by layer. The spine is central. The rails branch. The gift sits at the top of the stack. The story layer is the roof. The door sits at the bottom.</p>
+  <p>Fourteen books arranged by layer. The spine is central. The rails branch. The gift sits at the top of the stack. The story layer is the roof. The door sits at the bottom.</p>
 
   <div class="svg-map">
-    <svg viewBox="0 0 720 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EROS corpus map">
-      <rect width="720" height="640" fill="#fbf8f0"/>
+    <svg viewBox="0 0 720 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EROS corpus map">
+      <rect width="720" height="680" fill="#fbf8f0"/>
 
       <!-- STORY LAYER (top) -->
       <g font-family="Georgia,serif" text-anchor="middle">
         <rect x="40" y="30" width="640" height="60" rx="12" fill="#ede6f2" stroke="#6e5292" stroke-width="1.4"/>
         <text x="360" y="56" fill="#6e5292" font-size="13" font-weight="bold" letter-spacing="2">STORY LAYER</text>
-        <text x="360" y="76" fill="#4a463d" font-size="12" font-style="italic">Eros Stories — sixteen doors of pure fiction</text>
+        <text x="360" y="76" fill="#4a463d" font-size="12" font-style="italic">Eros Stories · The First Resonance — the narrative roof</text>
       </g>
 
       <!-- HOPEFUL FUTURE (gift / capstone) -->
@@ -291,48 +322,56 @@ footer a{margin:0 .3rem}
 
       <!-- INSTRUMENT LAYER -->
       <g font-family="Georgia,serif" text-anchor="middle">
-        <rect x="40" y="420" width="205" height="70" rx="12" fill="#e8eef2" stroke="#3e7a7e" stroke-width="1.4"/>
-        <text x="142" y="448" fill="#3e7a7e" font-size="12" font-weight="bold" letter-spacing="1.4">The Bridge</text>
-        <text x="142" y="466" fill="#4a463d" font-size="10.5" font-style="italic">crypto field manual</text>
-        <text x="142" y="480" fill="#7a7568" font-size="9.5">token · Poolonomics · risks</text>
+        <text x="360" y="422" fill="#7a7568" font-size="10" letter-spacing="3" font-family="system-ui">INSTRUMENT &amp; SPINE</text>
 
-        <rect x="258" y="420" width="205" height="70" rx="12" fill="#f0e8dc" stroke="#8a6a1d" stroke-width="1.4"/>
-        <text x="360" y="448" fill="#8a6a1d" font-size="12" font-weight="bold" letter-spacing="1.4">The Front Door</text>
-        <text x="360" y="466" fill="#4a463d" font-size="10.5" font-style="italic">letter to Jake</text>
-        <text x="360" y="480" fill="#7a7568" font-size="9.5">TitanX path · collaboration</text>
+        <rect x="40" y="434" width="151" height="78" rx="11" fill="#e8eef2" stroke="#3e7a7e" stroke-width="1.4"/>
+        <text x="115" y="460" fill="#3e7a7e" font-size="11" font-weight="bold" letter-spacing="1">The Bridge</text>
+        <text x="115" y="478" fill="#4a463d" font-size="9.5" font-style="italic">crypto field manual</text>
+        <text x="115" y="495" fill="#7a7568" font-size="8.5">Poolonomics · risks</text>
 
-        <rect x="475" y="420" width="205" height="70" rx="12" fill="#f0e8dc" stroke="#8a6a1d" stroke-width="1.4"/>
-        <text x="577" y="448" fill="#8a6a1d" font-size="12" font-weight="bold" letter-spacing="1.4">The Eros Plan</text>
-        <text x="577" y="466" fill="#4a463d" font-size="10.5" font-style="italic">the spine</text>
-        <text x="577" y="480" fill="#7a7568" font-size="9.5">Instrument · Demand · Story · Production</text>
+        <rect x="203" y="434" width="151" height="78" rx="11" fill="#ebe7f0" stroke="#7a7089" stroke-width="1.6"/>
+        <text x="278" y="460" fill="#5a5170" font-size="11" font-weight="bold" letter-spacing="1">Platinum Standard</text>
+        <text x="278" y="478" fill="#4a463d" font-size="9.5" font-style="italic">transform · flow rail</text>
+        <text x="278" y="495" fill="#7a7568" font-size="8.5">rock → river</text>
+
+        <rect x="366" y="434" width="151" height="78" rx="11" fill="#f0e8dc" stroke="#8a6a1d" stroke-width="1.4"/>
+        <text x="441" y="460" fill="#8a6a1d" font-size="11" font-weight="bold" letter-spacing="1">Front Door</text>
+        <text x="441" y="478" fill="#4a463d" font-size="9.5" font-style="italic">letter to Jake</text>
+        <text x="441" y="495" fill="#7a7568" font-size="8.5">TitanX path</text>
+
+        <rect x="529" y="434" width="151" height="78" rx="11" fill="#f0e8dc" stroke="#8a6a1d" stroke-width="1.4"/>
+        <text x="604" y="460" fill="#8a6a1d" font-size="11" font-weight="bold" letter-spacing="1">Eros Plan</text>
+        <text x="604" y="478" fill="#4a463d" font-size="9.5" font-style="italic">the spine</text>
+        <text x="604" y="495" fill="#7a7568" font-size="8.5">4 volumes · 1 page</text>
       </g>
 
       <!-- DOOR LAYER (bottom) -->
       <g font-family="Georgia,serif" text-anchor="middle">
-        <rect x="120" y="510" width="200" height="60" rx="12" fill="#f2ede0" stroke="#9a6a1e" stroke-width="1.4"/>
-        <text x="220" y="536" fill="#9a6a1e" font-size="12" font-weight="bold" letter-spacing="1.4">Eros Narrative</text>
-        <text x="220" y="554" fill="#4a463d" font-size="10.5" font-style="italic">on-ramp · 10 minutes</text>
+        <rect x="120" y="540" width="200" height="60" rx="12" fill="#f2ede0" stroke="#9a6a1e" stroke-width="1.4"/>
+        <text x="220" y="566" fill="#9a6a1e" font-size="12" font-weight="bold" letter-spacing="1.4">Eros Narrative</text>
+        <text x="220" y="584" fill="#4a463d" font-size="10.5" font-style="italic">on-ramp · 10 minutes</text>
 
-        <rect x="400" y="510" width="200" height="60" rx="12" fill="#f2ede0" stroke="#9a6a1e" stroke-width="1.4"/>
-        <text x="500" y="536" fill="#9a6a1e" font-size="12" font-weight="bold" letter-spacing="1.4">Newcomer Dossier</text>
-        <text x="500" y="554" fill="#4a463d" font-size="10.5" font-style="italic">Book 0 · the confession</text>
+        <rect x="400" y="540" width="200" height="60" rx="12" fill="#f2ede0" stroke="#9a6a1e" stroke-width="1.4"/>
+        <text x="500" y="566" fill="#9a6a1e" font-size="12" font-weight="bold" letter-spacing="1.4">Newcomer Dossier</text>
+        <text x="500" y="584" fill="#4a463d" font-size="10.5" font-style="italic">Book 0 · the confession</text>
       </g>
 
       <!-- CORPUS LABEL -->
-      <text x="360" y="615" text-anchor="middle" fill="#7a7568" font-family="system-ui" font-size="10" letter-spacing="3">ONE ARCHITECTURE · MANY DOORS</text>
+      <text x="360" y="645" text-anchor="middle" fill="#7a7568" font-family="system-ui" font-size="10" letter-spacing="3">ONE ARCHITECTURE · MANY DOORS</text>
     </svg>
     <p class="cap">Every book is a door into the same architecture. The gift sits at the top of the stack. The spine is central. The rails branch. The story layer is the roof. The door sits at the bottom.</p>
   </div>
 
   <div class="legend">
     <div class="row"><span class="swatch" style="background:#9a6a1e"></span><span><b>Door books</b> — where to enter. Narrative, Dossier.</span></div>
-    <div class="row"><span class="swatch" style="background:#8a6a1d"></span><span><b>Instrument &amp; spine</b> — the crypto surface and the master map. Bridge, Front Door, Eros Plan.</span></div>
+    <div class="row"><span class="swatch" style="background:#8a6a1d"></span><span><b>Instrument &amp; spine</b> — the crypto surface and the master map. Bridge, Platinum Standard, Front Door, Eros Plan.</span></div>
+    <div class="row"><span class="swatch" style="background:#7a7089"></span><span><b>Platinum Standard</b> — the transform / flow rail. Rock → river.</span></div>
     <div class="row"><span class="swatch" style="background:#547896"></span><span><b>Rail A</b> — human continuity, macro, money. Illumination Strategy.</span></div>
     <div class="row"><span class="swatch" style="background:#a05048"></span><span><b>Rail B</b> — breakaway archive, masks, residual. Men of Renown.</span></div>
     <div class="row"><span class="swatch" style="background:#8a6a1d"></span><span><b>Mythos &amp; tongue</b> — operators, language. Gods, Thoth.</span></div>
     <div class="row"><span class="swatch" style="background:#546a94"></span><span><b>Cosmology floor</b> — the vessel that holds everything. Living Egg.</span></div>
     <div class="row"><span class="swatch" style="background:#c97a2c"></span><span><b>The gift</b> — the capstone that ties settlement, base, world, floor and bridge. Hopeful Future.</span></div>
-    <div class="row"><span class="swatch" style="background:#6e5292"></span><span><b>Fiction layer</b> — the sixteen doors of story. Eros Stories.</span></div>
+    <div class="row"><span class="swatch" style="background:#6e5292"></span><span><b>Story layer</b> — sixteen doors and a narrative on-ramp. Eros Stories · The First Resonance.</span></div>
   </div>
 </section>
 
@@ -348,7 +387,8 @@ footer a{margin:0 .3rem}
       <li><strong>Newcomer Dossier</strong> — the confession. Ten minutes. Sets the tone: no price promises, real structure.</li>
       <li><strong>Eros Narrative</strong> — the ten-minute map. Sets the architecture: crypto first, story second.</li>
       <li><strong>The Bridge</strong> — the field manual. What an LP is. How the fee works. What to verify.</li>
-      <li><strong>The Hopeful Future</strong> — the gift and the stack. Where settlement, base, world, floor and bridge fit together. Newest book, capstone.</li>
+      <li><strong>The Platinum Standard</strong> — the transform. Rock to river. What the flow rail is for.</li>
+      <li><strong>The Hopeful Future</strong> — the gift and the stack. Where settlement, base, world, floor and bridge fit together. Newest capstone.</li>
       <li><strong>The Front Door</strong> — the letter to Jake. Why the community matters more than any founder.</li>
       <li><strong>Eros Stories</strong> — if the fiction pulls you, start walking through doors.</li>
     </ol>
@@ -359,8 +399,9 @@ footer a{margin:0 .3rem}
     <p><em>Time: a weekend. You are crypto-literate. You want the full architecture so you can build inside it.</em></p>
     <ol>
       <li><strong>The Bridge</strong> — get the mechanics and the risks right first.</li>
+      <li><strong>The Platinum Standard</strong> — the transform / flow rail, and where it can travel next.</li>
       <li><strong>TheErosPlan</strong> — the spine. Four volumes on one page. Instrument → Demand → Story → Production.</li>
-      <li><strong>The Hopeful Future</strong> — the gift, the stack, the scoreboard, the crossing. Newest book.</li>
+      <li><strong>The Hopeful Future</strong> — the gift, the stack, the scoreboard, the crossing.</li>
       <li><strong>Gods of Eros</strong> — the four operators as source code.</li>
       <li><strong>Gift of Thoth</strong> — the tongue that keeps the culture legible.</li>
       <li><strong>Living Egg</strong> — the vessel. Inward is forwards.</li>
@@ -374,6 +415,7 @@ footer a{margin:0 .3rem}
     <p><em>Time: as long as you want. You are here for story, not for token.</em></p>
     <ol>
       <li><strong>Eros Stories</strong> — sixteen doors. Read whichever door pulls you first.</li>
+      <li><strong>The First Resonance</strong> — the novel. The narrative on-ramp that opens onto the doors.</li>
       <li><strong>Living Egg</strong> — the world the stories live inside.</li>
       <li><strong>Gods of Eros</strong> — the four operators.</li>
       <li><strong>Men of Renown</strong> — the archive and the residual.</li>
@@ -417,15 +459,16 @@ footer a{margin:0 .3rem}
   <p>The <strong>human macro rail</strong> (Illumination Strategy) contains documented events, structural inferences, and clearly labelled operational hypotheses. The reader is asked to <em>test footprints</em>, not to believe.</p>
   <p>The <strong>archive rail</strong> (Men of Renown) is archive and story architecture. It contains historical claims, folkloric claims, and explicitly speculative materials. It is framed as a lore contract from the first page. The reader is asked to <em>use it as raw material</em>, not to assert it as settled fact.</p>
   <p>The <strong>cosmology</strong> (Living Egg) and the <strong>mythos</strong> (Gods of Eros) are fictional. They are offered as working models and as sacred lore for a fictional universe. The physics is labelled soft. The theology is labelled fictional. The operators are principles of the fiction, not objects of worship.</p>
-  <p>The <strong>gift book</strong> (The Hopeful Future) is the capstone — the book that names the stack and the gift. It carries pDAI, Atropa, Dysnomia and EROS as a documented layer-set on top of PulseChain. Its pDAI section quotes the thesis's own confidence numbers, including its own low-confidence gates. Its Atropa section quotes the Atropa Terminal's own "not affiliated" line. Its EROS section states the token's own on-chain facts. Nothing is dressed up as more than it is.</p>
-  <p>The <strong>stories</strong> (Eros Stories) are marked pure fiction on the cover. Sixteen doors. No confusion.</p>
+  <p>The <strong>transform thesis</strong> (The Platinum Standard) is stated as a <em>design discussion</em>. The store rail is live today. The flow rail — ErosX, 33EROS, the equivalence bots, the Genesis phase — is a proposal with its own open questions, its own deploy conditions, and its own milestones before code. Nothing here is announced as deployed until verified mainnet code exists.</p>
+  <p>The <strong>gift book</strong> (The Hopeful Future) is the capstone — the book that names the stack and the gift. It carries pDAI, Atropa, Dysnomia and EROS as a documented layer-set on top of PulseChain, and quotes each system's own confidence numbers and gates.</p>
+  <p>The <strong>story layer</strong> (Eros Stories and The First Resonance) is marked pure fiction. Sixteen doors and one novel. No confusion.</p>
   <p>The corpus does not blur these categories. It labels them everywhere. That is the integrity.</p>
 </section>
 
 <!-- ═══════════════ BOOK CARDS ═══════════════ -->
 <section id="books">
-  <h2>The twelve books</h2>
-  <p>Short descriptions to help you choose. Every book is linked at the canonical URL. Order below follows the layering of the map: door → instrument → rails → mythos → cosmology → gift → fiction.</p>
+  <h2>The fourteen books</h2>
+  <p>Short descriptions to help you choose. Every book is linked at the canonical URL. Order below follows the layering of the map: door → instrument → rails → mythos → cosmology → gift → story.</p>
 
   <div class="book-card n0">
     <div class="bc-head">
@@ -449,6 +492,14 @@ footer a{margin:0 .3rem}
       <span class="bc-tag">Instrument · Field manual</span>
     </div>
     <p>The crypto field manual. What an LP is, pool vs wallet supply, liquidity bonding, impermanent loss, risks, playbook. Platinum register. The manual you can actually verify.</p>
+  </div>
+
+  <div class="book-card platinum">
+    <div class="bc-head">
+      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a></div>
+      <span class="bc-tag">Instrument · Transform</span>
+    </div>
+    <p>The transform thesis. EROS is the rock — fixed supply, burn sink climbing, store rail. ErosX and 33EROS are the river — the flow rail. The 33/33/33 mechanism, the equivalence bots, the Genesis phase, and the path to omnichain. Stated as a design discussion with its own open questions, not a promise.</p>
   </div>
 
   <div class="book-card n3">
@@ -478,7 +529,7 @@ footer a{margin:0 .3rem}
   <div class="book-card n6">
     <div class="bc-head">
       <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a></div>
-      <span class="bc-tag">Rail B · Archive 7</span>
+      <span class="bc-tag">Rail B · Archive</span>
     </div>
     <p>The breakaway archive. Nordic residual, Greek god-masks, Anunnaki-class lore, electric sky, firmament break, Gnostic frame. Held inside a fiction contract. Masks, not operators. Crimson register.</p>
   </div>
@@ -512,7 +563,15 @@ footer a{margin:0 .3rem}
       <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a></div>
       <span class="bc-tag">Gift · Stack · Capstone</span>
     </div>
-    <p>The gift book. Not extraction — everything DeFi should have been. The full stack on PulseChain: pDAI (settlement), Atropa · Dysnomia (base), EROS (world), the bridge (mission). The scoreboard, the crossing, the sixteen plates, the unity thesis. The newest substantial book in the library, and the capstone the whole corpus points at.</p>
+    <p>The gift book. Not extraction — everything DeFi should have been. The full stack on PulseChain: pDAI (settlement), Atropa · Dysnomia (base), EROS (world), the bridge (mission). The scoreboard, the crossing, the sixteen plates, the unity thesis. The capstone the whole corpus points at.</p>
+  </div>
+
+  <div class="book-card resonance">
+    <div class="bc-head">
+      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a></div>
+      <span class="bc-tag">Story · Book One</span>
+    </div>
+    <p>The opening salvo. A transmission novel. A sixteen-year-old coder, a ray of light, a visitor at 4:47, a notebook, and a practice that spreads by resonance rather than recruitment. Twenty-one chapters teaching every precept of the corpus while walking a story. The narrative on-ramp that opens onto the sixteen doors.</p>
   </div>
 
   <div class="book-card n11">
@@ -551,6 +610,7 @@ footer a{margin:0 .3rem}
         <tr><td><strong>Newcomer Dossier</strong></td><td>Door</td><td><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">EROS_Newcomer_Dossier.html</a></td></tr>
         <tr><td><strong>Eros Narrative</strong></td><td>Door</td><td><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros_Narrative.html</a></td></tr>
         <tr><td><strong>The Bridge</strong></td><td>Instrument</td><td><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The_Bridge.html</a></td></tr>
+        <tr><td><strong>The Platinum Standard</strong></td><td>Instrument · Transform</td><td><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The_Platinum_Standard.html</a></td></tr>
         <tr><td><strong>The Front Door</strong></td><td>Letter</td><td><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The_Front_Door.html</a></td></tr>
         <tr><td><strong>The Eros Plan</strong></td><td>Spine</td><td><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">TheErosPlan.html</a></td></tr>
         <tr><td><strong>Illumination Strategy</strong></td><td>Rail A</td><td><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination_Strategy.html</a></td></tr>
@@ -559,8 +619,10 @@ footer a{margin:0 .3rem}
         <tr><td><strong>Gift of Thoth</strong></td><td>Tongue</td><td><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift_Of_Thoth.html</a></td></tr>
         <tr><td><strong>The Living Egg</strong></td><td>Cosmology</td><td><a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg.html</a></td></tr>
         <tr><td><strong>The Hopeful Future</strong></td><td>Gift · Capstone</td><td><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The_Hopeful_Future.html</a></td></tr>
-        <tr><td><strong>Eros Stories</strong></td><td>Fiction</td><td><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros_Stories.html</a></td></tr>
-        <tr><td><strong>SpaceEros</strong></td><td>Live instrument</td><td><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros.html</a></td></tr>
+        <tr><td><strong>The First Resonance</strong></td><td>Story · Book One</td><td><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The_First_Resonance.html</a></td></tr>
+        <tr><td><strong>Eros Stories</strong></td><td>Story · Fiction</td><td><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros_Stories.html</a></td></tr>
+        <tr><td><strong>SpaceEros</strong></td><td>Live tool — not a book</td><td><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros.html</a></td></tr>
+        <tr><td><strong>Media Index</strong></td><td>Reference · future book</td><td><a href="https://meaning-unconfounded.github.io/media.html">media.html</a></td></tr>
       </tbody>
     </table>
   </div>
@@ -569,7 +631,7 @@ footer a{margin:0 .3rem}
 <!-- ═══════════════ COMPANIONS ═══════════════ -->
 <section id="companions">
   <h2>Companion volumes</h2>
-  <p>The twelve books above are the corpus. The list below is a short reference for the four operators, for the tongue, and for the vessel — in case you want the deeper layer.</p>
+  <p>The fourteen books above are the corpus. The list below is a short reference for the four operators, for the tongue, for the vessel, for the transform, and for the media index — in case you want the deeper layer.</p>
 
   <details class="fold">
     <summary>The four operators · NaUn · Ra-Shen · Thoth · EROS</summary>
@@ -605,7 +667,16 @@ footer a{margin:0 .3rem}
     <summary>The gift · settlement · base · world · floor · bridge</summary>
     <div class="body">
       <p>The stack the whole library is aiming at. pDAI (settlement), Atropa · Dysnomia (base), EROS (world), PulseChain (floor), the bridge (mission). Sixteen plates, one unity thesis, one gift.</p>
+      <p>Companion transform rail: <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</p>
       <p>Full treatment: <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>.</p>
+    </div>
+  </details>
+
+  <details class="fold">
+    <summary>The transform · rock → river · store rail → flow rail</summary>
+    <div class="body">
+      <p>EROS is the rock — fixed supply, burn sink, store rail. ErosX and 33EROS are the river — the flow rail, the transform, the omnichain layer. Equivalence bots (market-cap equivalence arbitrage agents) connect the pairs. The Genesis phase builds the foundation before the permanent mechanism begins.</p>
+      <p>Full treatment: <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. Field mechanics: <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>.</p>
     </div>
   </details>
 
@@ -614,6 +685,14 @@ footer a{margin:0 .3rem}
     <div class="body">
       <p>Rail A (human macro, documented) and Rail B (breakaway archive, fiction contract) stay separate on purpose. They connect only at hinges: money, recovery events, disclosure weather.</p>
       <p>Merging collapses the corpus into a single conspiracy. The separation is the discipline. See <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> and <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>.</p>
+    </div>
+  </details>
+
+  <details class="fold">
+    <summary>Media index · the visual record</summary>
+    <div class="body">
+      <p>Every image and video used across the corpus, with usage notes and known placement. The visual system as its own living reference — in time, its own book.</p>
+      <p>Reference: <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>.</p>
     </div>
   </details>
 
@@ -633,28 +712,37 @@ footer a{margin:0 .3rem}
   <a class="enter" href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Begin · Newcomer Dossier</a>
   <a class="enter" href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Or · Eros Narrative</a>
   <a class="enter" href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Or · Hopeful Future</a>
+  <a class="enter" href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Or · First Resonance</a>
 </div>
 
-<footer>
-  <p><span class="gold">HOW THE CORPUS WORKS</span> · EROS Library Orientation</p>
-  <p>Twelve books · Three paths · Two rails · One vessel · One gift</p>
-  <p style="margin-top:.8rem;font-size:.72rem;opacity:.8">
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front_Door</a> ·
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">ErosPlan</a> ·
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a> ·
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a> ·
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful_Future</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a> ·
-    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a> ·
+<!-- ═══════════════ MASTER FOOTER ═══════════════ -->
+<footer class="master">
+  <p class="title">HOW THE CORPUS WORKS</p>
+  <p class="count">Fourteen books · Three paths · Two rails · One vessel · One gift · One standard</p>
+
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
     <a href="https://t.me/Eros_Revival">Telegram</a>
-  </p>
-  <p style="margin-top:.6rem;font-size:.7rem;opacity:.65">The map is not the world. This page is the map.</p>
+  </nav>
+
+  <p class="sig">The map is not the world. This page is the map.</p>
+  <p class="line">First Edition · Rev 3 · 2026-10-09 · Save as The_Eros_Corpus.html</p>
 </footer>
 
 </div>
@@ -671,11 +759,16 @@ function onScroll(){
 }
 window.addEventListener('scroll',onScroll,{passive:true});
 onScroll();
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var href=a.getAttribute('href');
+    if(href.length<2)return;
+    var t=document.querySelector(href);
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
 })();
 </script>
-
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#7a7568;border-top:1px solid rgba(28,26,22,.1);margin-top:2rem">
-  First Edition · Rev 2 · 2026-10-08 · How the Corpus Works · Save as The_Eros_Corpus.html
-</footer>
 </body>
 </html>
