@@ -13,7 +13,6 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230a0b0e' stroke='%23d8dde3' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='14' fill='%23d8dde3'/%3E%3C/svg%3E"/>
 <style>
 :root{
-  /* ——— Deep Silver · Platinum field manual ——— */
   --bg:#0a0b0e; --surface:#14161b; --surface2:#1b1e25;
   --ink:#eaeef2; --soft:#b8bfc8; --muted:#7d858f;
   --platinum:#d8dde3; --platinum-soft:rgba(216,221,227,.08); --platinum-line:rgba(216,221,227,.28);
@@ -28,7 +27,7 @@
   --measure:48rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:1rem}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
 body{
   font-family:var(--serif);font-size:1.06rem;line-height:1.8;
   background:
@@ -50,6 +49,47 @@ a:visited{color:#b8bfc8;border-bottom-color:rgba(168,176,186,.28)}
 ::selection{background:var(--platinum);color:#0a0b0e}
 h1,h2,h3{text-wrap:balance}
 p,li{overflow-wrap:break-word}
+
+/* ── STANDARD HEADER ── */
+.corpus-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.55rem 1.1rem;
+  background:rgba(10,11,14,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--platinum-line);
+  font-family:var(--sans);
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--platinum);font-weight:700;border-bottom:none;
+}
+.corpus-bar .brand:hover{color:#eef2f6;border-bottom:none}
+.corpus-bar .pin{
+  width:36px;height:36px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--platinum-line);
+  box-shadow:0 0 14px rgba(216,221,227,.3),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
+  border-bottom:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--platinum);background:var(--platinum-soft);border-bottom:none}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
+  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+6){display:none}
+  .corpus-bar .pin{width:28px;height:28px}
+}
 
 .cover{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem}
 .cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.42em;text-transform:uppercase;color:var(--platinum);margin-bottom:1.2rem;font-weight:600}
@@ -81,7 +121,7 @@ figure.plate img{max-width:100%;border-radius:10px;border:1px solid var(--hair)}
 
 .part-break{margin:2.6rem 0 1.3rem;padding:1.2rem 0 .9rem;border-top:1px solid var(--platinum-line);text-align:center}
 .part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--platinum);margin-bottom:.3rem}
-.part-break h2{font-size:clamp(1.4rem,3.4vw,1.8rem);color:var(--ink);letter-spacing:.03em}
+.part-break h2{font-size:clamp(1.4rem,3.4vw,1.8rem);color:var(--ink);letter-spacing:.03em;font-family:var(--serif);font-weight:600;border:none;padding:0;margin:0}
 .part-break p{color:var(--muted);font-style:italic;font-size:.93rem;margin-top:.3rem}
 
 section{margin:0 0 1.6rem}
@@ -99,6 +139,10 @@ li{margin:.26rem 0;color:var(--soft)}
 .warn b{color:var(--ember)}
 strong{color:#f3f6f9}
 em{color:var(--platinum);font-style:italic}
+
+.connect{margin:1.2rem 0;padding:.9rem 1.15rem;border:1px dashed var(--platinum-line);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.86rem;color:var(--soft);line-height:1.7}
+.connect strong{color:var(--platinum);font-weight:700;display:block;margin-bottom:.3rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.connect a{color:var(--platinum)}
 
 .fee-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:1.2rem 0}
 .fee-card{padding:1rem;border-radius:14px;border:1px solid var(--hair);background:var(--surface);text-align:center}
@@ -155,9 +199,6 @@ em{color:var(--platinum);font-style:italic}
 .faq summary{cursor:pointer;font-family:var(--sans);font-weight:600;color:var(--platinum);font-size:.92rem}
 .faq details p{margin:.55rem 0 0;font-size:.9rem;color:var(--soft)}
 
-footer{margin-top:3rem;padding:1.6rem 0 2rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.82rem;color:var(--muted)}
-footer .silver{color:var(--platinum)}
-footer a{margin:0 .35rem}
 #toTop{position:fixed;right:1.2rem;bottom:1.2rem;z-index:50;width:42px;height:42px;border-radius:50%;border:1px solid var(--platinum-line);background:rgba(10,11,14,.85);color:var(--platinum);font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(8px)}
 #toTop.show{opacity:1;pointer-events:auto}
 @media(max-width:560px){body{font-size:1.02rem}.space-frame iframe{height:min(62vh,480px)}.toc a{font-size:.84rem}.facts th{width:38%}}
@@ -170,7 +211,6 @@ footer a{margin:0 .35rem}
 .how{margin:1rem 0 1.5rem;padding:1rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:.95rem;color:var(--soft)}
 .how strong{color:var(--platinum);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
 
-/* ErosX use-case block — distinctive */
 .usecase{margin:1.6rem 0;padding:1.4rem 1.5rem;border:1px solid rgba(201,168,96,.4);border-radius:16px;background:linear-gradient(160deg,rgba(201,168,96,.09),rgba(216,221,227,.04));box-shadow:0 8px 32px rgba(0,0,0,.35)}
 .usecase .uc-label{display:inline-block;font-family:var(--sans);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,96,.4);border-radius:999px;padding:.28rem .8rem;margin-bottom:.9rem;font-weight:700}
 .usecase h3{font-family:var(--serif);font-size:1.2rem;color:var(--ink);margin:0 0 .65rem}
@@ -179,70 +219,90 @@ footer a{margin:0 .35rem}
 .usecase strong{color:var(--gold)}
 .usecase .flow{font-family:var(--mono);font-size:.85rem;color:var(--gold);background:rgba(0,0,0,.35);border:1px solid rgba(201,168,96,.25);border-radius:8px;padding:.7rem .9rem;margin:.8rem 0;letter-spacing:.06em;text-align:center;line-height:1.7}
 
-/* docs menu at top */
 details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--platinum-line);border-radius:10px;background:var(--platinum-soft);padding:.35rem 1rem}
-details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--platinum);padding:.55rem 0;user-select:none}
+details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--platinum);padding:.55rem 0;user-select:none;font-weight:700}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
 details.eros-menu[open]>summary::before{content:"▾ ";}
 details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
 details.eros-menu a{color:var(--platinum)}
 
-/* ── LINK BANNER · subtle interactive plate ── */
 .link-banner{margin:1.75rem auto 2rem;text-align:center;max-width:100%}
-.link-banner .lb-frame{
-  position:relative;width:100%;
-  aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;
-  background:#0a0418;border:1px solid rgba(160,32,240,.28);
-  box-shadow:0 10px 36px rgba(0,0,0,.4);
-  cursor:pointer;
-  transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease;
-}
-.link-banner .lb-frame img{
-  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
-  transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease;
-}
-.link-banner .lb-vignette{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);
-  opacity:.5;transition:opacity .5s ease;
-}
-.link-banner .lb-sheen{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);
-  transform:translateX(-120%);
-  animation:lb-sheen-run 2.2s ease-out 1s 1;
-}
-.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
-  transform:scale(1.012);border-color:rgba(224,64,251,.45);
-  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18);
-}
-.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
-  transform:scale(1.06);filter:saturate(1.12) brightness(1.05);
-}
+.link-banner .lb-frame{position:relative;width:100%;aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;background:#0a0418;border:1px solid rgba(160,32,240,.28);box-shadow:0 10px 36px rgba(0,0,0,.4);cursor:pointer;transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease}
+.link-banner .lb-frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease}
+.link-banner .lb-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);opacity:.5;transition:opacity .5s ease}
+.link-banner .lb-sheen{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);transform:translateX(-120%);animation:lb-sheen-run 2.2s ease-out 1s 1}
+.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{transform:scale(1.012);border-color:rgba(224,64,251,.45);box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18)}
+.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{transform:scale(1.06);filter:saturate(1.12) brightness(1.05)}
 .link-banner .lb-frame:hover .lb-vignette{opacity:.75}
-.link-banner figcaption{
-  font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
-  color:#8a7fa6;margin-top:.65rem;opacity:.9;
-}
+.link-banner figcaption{font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#8a7fa6;margin-top:.65rem;opacity:.9}
 @keyframes lb-sheen-run{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
 @media (prefers-reduced-motion:reduce){
   .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-sheen{transition:none!important;animation:none!important}
   .link-banner .lb-frame:hover img{transform:none}
 }
-/* media separation */
 .media-slot{margin:2rem 0 2.25rem}
-.media-slot + .media-slot{margin-top:2.5rem}
 .yt-wrap{margin:2.25rem 0;padding:1.1rem;border-radius:14px;border:1px solid rgba(125,163,200,.28);background:rgba(14,19,25,.85)}
 .yt-wrap .yt-lab{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#7da3c8;margin-bottom:.65rem;font-weight:700;text-align:center}
 .yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
 .yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
 
+/* ── MASTER FOOTER ── */
+footer.master{margin-top:3rem;padding:2rem 0 1.4rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.78rem;color:var(--muted);line-height:1.85}
+footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:.85rem;margin-bottom:.6rem}
+footer.master .pin{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--platinum-line);box-shadow:0 0 18px rgba(216,221,227,.3),0 0 0 1px rgba(255,255,255,.05) inset;flex-shrink:0;background:var(--surface)}
+footer.master .title{font-family:var(--serif);font-size:1.05rem;color:var(--platinum);letter-spacing:.1em;font-weight:700}
+footer.master .count{font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem}
+footer.master .tier{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;max-width:46rem;margin:0 auto 1rem}
+footer.master .tier a{padding:.32rem .72rem;border-radius:999px;background:var(--surface);border:1px solid var(--hair);color:var(--soft);font-size:.7rem;letter-spacing:.05em;border-bottom:none;transition:color .18s,background .18s,border-color .18s}
+footer.master .tier a:hover{color:var(--platinum);border-color:var(--platinum);background:var(--platinum-soft)}
+footer.master .tier a.primary{background:var(--platinum-soft);border-color:var(--platinum);color:var(--platinum);font-weight:700}
+footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
+footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(216,221,227,.18)}
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(216,221,227,.3))}
+footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--platinum);font-weight:600}
+
+@media print{
+  @page{size:A4;margin:14mm}
+  html::before,html::after,#progressBar,.corpus-bar,#toTop{display:none!important}
+  body{background:#fff!important;color:#111!important;padding:0}
+  .page{max-width:42rem;padding:0}
+  a{color:#111;border-bottom:none}
+  video,iframe{display:none}
+  .media-block,.plate,.claim,.lesson,.axiom,.warn,.note,.usecase,.risk,.faq details,.connect,footer.master{break-inside:avoid}
+  h2{break-after:avoid}
+}
+@media(max-width:640px){
+  .page{padding:1rem 1.05rem 4rem}
+  footer.master .title-row{flex-direction:column;gap:.6rem}
+  footer.master .pin{width:38px;height:38px}
+}
 </style>
 </head>
 <body>
 <div id="progressBar" aria-hidden="true"></div>
+
+<!-- ── STANDARD HEADER ── -->
+<header class="corpus-bar">
+  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span>✦ EROS · The Bridge</span>
+  </a>
+  <nav aria-label="Section navigation">
+    <a href="#thesis">Thesis</a>
+    <a href="#p1">Key facts</a>
+    <a href="#p2">Tokenomics</a>
+    <a href="#p3">Poolonomics</a>
+    <a href="#p4b">Use case</a>
+    <a href="#p7">Risks</a>
+    <a href="#p8">Playbook</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+  </nav>
+</header>
+
 <div class="page" id="main">
 
 <!-- ══════ COVER ══════ -->
@@ -257,8 +317,6 @@ details.eros-menu a{color:var(--platinum)}
   </div>
 </header>
 
-
-
 <figure class="link-banner media-slot" role="img" aria-label="The weakest link — EROS welcomes only the strong">
   <div class="lb-frame" tabindex="0">
     <img src="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg" alt="The weakest link — EROS welcomes only the strong" loading="lazy"
@@ -270,27 +328,28 @@ details.eros-menu a{color:var(--platinum)}
 </figure>
 
 <details class="eros-menu" id="eros-library">
-  <summary>EROS library · other books</summary>
+  <summary>EROS library · the other books</summary>
   <div class="menu-body">
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
-
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river · transform</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
-    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
+    <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
 
 <figure class="hero">
-  <img src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Bridge" width="1200" height="800" loading="eager"/>
+  <img src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Bridge" width="1200" height="800" loading="eager" onerror="this.parentElement.style.display='none'"/>
   <figcaption>THE BRIDGE · liquidity as infrastructure</figcaption>
 </figure>
 
@@ -329,7 +388,7 @@ details.eros-menu a{color:var(--platinum)}
   <p><strong>Fee (canonical).</strong> 5% flow fee: <strong>2% burn · 1% staking · 1% temporary lock · 1% WPLS/EROS LP</strong>. Buy slippage typically 6%. Source: official Burnonomics.</p>
   <p><strong>Why PulseChain.</strong> Low fees, PRC-20 surface, PulseX pools, Heart-stack demand (PLS, PLSX, HEX, INC) and community pairs with TitanX/BOT and Pulse natives (Atropa, Bear, pDAI, more).</p>
   <p><strong>Liquidity web.</strong> EROS as bonding hub: pair assets you already want with EROS, own the LP, earn trading fees in the underlyings — not a separate inflationary farm token.</p>
-  <p><strong>Use case.</strong> The core crypto utility is the <strong>Eros → ErosX transform</strong> — a tax-light flow rail for spend, in-world use, and cross-community movement, paired with the burning store rail on the EROS side. Both are the operational layer of the EROS world. Details in Part IV-B.</p>
+  <p><strong>Use case.</strong> The core crypto utility is the <strong>Eros → ErosX transform</strong> — a tax-light flow rail for spend, in-world use, and cross-community movement, paired with the burning store rail on the EROS side. Both are the operational layer of the EROS world. Full mechanics in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</p>
   <p><strong>Risks.</strong> Smart contract, bridge, thin liquidity, volatility, concentration, impermanent loss, regulatory, execution burnout. Full register below.</p>
   <p><strong>Next.</strong> Verify contract and owner() → official bridge only → tiny test trade → hold / LP / stake / lock by choice → never share seeds; never trust DMs.</p>
   <div class="pull">The chart can open the door. Verification and work are why people stay. Nothing here guarantees price or return.</div>
@@ -543,6 +602,10 @@ details.eros-menu a{color:var(--platinum)}
   </ul>
   <p>The transform (see <a href="#erosx-layer">Part IX-B</a> for the open design discussion) is the bridge between the two rails. You do not buy the same coin twice. You move between rails based on what you are doing.</p>
 
+  <div class="connect">
+    <strong>Full mechanics</strong> The 33/33/33 split, the equivalence bots, the Genesis phase, the triangular market, the path to omnichain — live in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. This section names the use case. Platinum walks the mechanism.
+  </div>
+
   <div class="axiom"><b>Use case demand</b> The demand for EROS comes from wanting the store rail (burn, bond, stake, LP). The demand for ErosX comes from wanting the flow rail (spend, in-world use, movement). Both come from the world — the fiction, the game, the community, the assets. If the world grows, both rails have somewhere to be spent.</div>
 
   <h3>What the use case is not</h3>
@@ -671,6 +734,11 @@ details.eros-menu a{color:var(--platinum)}
     </ol>
   </div>
 
+  <figure class="media-block media-sm">
+    <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/rainMan.mp4"></video>
+    <figcaption><b>Rainman · white paper &amp; PulseDEX pools</b> — Community explainer: GitHub white paper and how to open liquidity pools. Small player by design (source resolution). Verify everything on-chain.</figcaption>
+  </figure>
+
   <div class="axiom">
     <b>Decision tree (sizing mindset)</b>
     <strong>Small capital · learning:</strong> verify → bridge dust → $5-scale swap → stop. Read risks again.<br/>
@@ -730,6 +798,10 @@ details.eros-menu a{color:var(--platinum)}
   <p><strong>ErosX 🏹</strong> is discussed as the <em>flow layer</em>: a transform or companion currency aimed at easier movement — low or zero transfer tax, community spend, in-world / game rails, possible V3/V4 and omnichain paths once the contract is light enough to travel. Engine stays scarce; flow is meant to move.</p>
   <div class="axiom"><b>Separation of jobs</b> Taxed web engine (EROS) vs spendable flow (ErosX). Confusing them is how people ship the wrong tool for the job.</div>
 
+  <div class="connect">
+    <strong>Full treatment</strong> The complete transform thesis — 33/33/33 split, equivalence bots, the Genesis phase (first billion), post-Genesis permanent mechanism, the triangular market, X28 omnichain, BuildFi — in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.
+  </div>
+
   <h3>33eros — teachable transform pattern</h3>
   <p>Community numerology and pedagogy point at a <strong>33 / 33 / 33</strong> style transform (exact code TBD on deploy):</p>
   <ul>
@@ -738,15 +810,8 @@ details.eros-menu a{color:var(--platinum)}
     <li>A slice routed to gradual buy-and-burn or similar sink</li>
   </ul>
   <p>The point is not only a new ticker. It is a <strong>template other builders can copy ethically</strong> — influencers and communities learning to launch transforms that burn, bond, and avoid silent founder extraction. EROS → ErosX and a 33eros-class release are the first teaching vehicles discussed, not a closed franchise.</p>
-  <div class="note"><b>Open deploy.</b> Preference in community chat has often named trusted ecosystem builders (e.g. names tied to TitanX transform history) for reputation — that is preference, not a contract. Anyone discussing deploy should publish parameters, verify source, and accept that until mainnet code is live and verified, treat all ratios as proposals.</div>
 
-  
-<figure class="media-block media-sm">
-  <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/rainMan.mp4"></video>
-  <figcaption><b>Rainman · white paper &amp; PulseDEX pools</b> — Community explainer: GitHub white paper and how to open liquidity pools. Small player by design (source resolution). Verify everything on-chain.</figcaption>
-</figure>
-
-<h3>Theme branding your LP — identity as infrastructure</h3>
+  <h3>Theme branding your LP — identity as infrastructure</h3>
   <p>An LP is not only a passive fee claim. It can be a <strong>brand</strong>.</p>
   <p>Pattern: a large holder of a pair (example from community practice: <strong>EROS / TEDDY BEAR</strong>) promotes the <em>LP contract</em> and a persona — “Bear God King” energy, memes, recurring presence. Traffic that hits that pair deepens <em>their</em> pool, earns fees for LPs, and keeps EROS in the story of another community.</p>
   <p><strong>Narrative sketch.</strong> Week 1: holder posts the pool address weekly, not a random chart screenshot. Week 4: strangers ask for the pair by name. Week 12: depth is higher than when the persona started — not because of a promise, because inventory and attention met. Your results will differ. The lesson is the pattern: promote the doorway you own.</p>
@@ -759,22 +824,14 @@ details.eros-menu a{color:var(--platinum)}
   <p>Crypto done well here means: help the pairs you touch, expect others to help theirs, and let mechanical arb do part of the cross-promotion. Separate tribes with zero shared liquidity fight for the same attention with no structural reason to lift each other.</p>
   <div class="axiom"><b>Allies, not islands</b> Theme-brand your pool. Bond edges. Let bots balance what culture connects. Mutual web &gt; competing clubs with empty bridges.</div>
 
-<figure class="media-block media-sm">
-  <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/ChizExplains.mp4"></video>
-  <figcaption><b>Chiz Explains · why bond TitanX family coins with EROS</b> — Three reasons to hold EROS, white-paper walkthrough, bridging DragonX / Hydra / Scale, and liquidity bonding Atropa · pDAI · Bear. Educational placement, not decoration.</figcaption>
-</figure>
+  <figure class="media-block media-sm">
+    <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/ChizExplains.mp4"></video>
+    <figcaption><b>Chiz Explains · why bond TitanX family coins with EROS</b> — Three reasons to hold EROS, white-paper walkthrough, bridging DragonX / Hydra / Scale, and liquidity bonding Atropa · pDAI · Bear. Educational placement, not decoration.</figcaption>
+  </figure>
 
-
-  
-<figure class="media-block media-sm">
-  <video controls playsinline preload="metadata" src="https://meaning-unconfounded.github.io/images/Chiz.mp4"></video>
-  <figcaption><b>Chiz · Gifford · Rich Landon</b> — Liquidity strategy, bonding TitanX assets to PulseChain, and building on EROS. Community voices in the room.</figcaption>
-</figure>
-
-<h3>Future goals (tension held open)</h3>
+  <h3>Future goals (tension held open)</h3>
   <p>Chat carries real tension: denser LP counts, burn share, ErosX deploy, 33eros teaching release, media flywheel, who has keys and when. Holding tension without fake certainty is healthy. Measure: live pairs, burn balance, verified deploys, shipping media. Do not substitute roadmap poetry for those receipts.</p>
 </section>
-
 
 <!-- ══════ pDAI · ATROPA · MYCELIUM ══════ -->
 <div class="part-break" id="pdai-atropa">
@@ -791,11 +848,14 @@ details.eros-menu a{color:var(--platinum)}
     <p>Full conditional architecture, routes, and falsifiers: <a href="https://9iron-pdai-thesis.vercel.app/" target="_blank" rel="noopener">pDAI stabilization thesis (9iron)</a>. Community reconstruction of the Maria corpus and liquidity graph: <a href="https://atropa-terminal.vercel.app/" target="_blank" rel="noopener">Atropa Terminal</a>.</p>
   </div>
 
-  
-<figure class="plate">
-  <img src="https://meaning-unconfounded.github.io/images/Atropos.jpg" alt="Atropa → Dysnomia · the rabbit hole goes deeper · EROS multiverse" loading="lazy"/>
-  <figcaption>Atropa → Dysnomia · cutting the thread · mycelium goes deeper · companion visual for the ecosystem web</figcaption>
-</figure>
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/Atropos.jpg" alt="Atropa → Dysnomia · the rabbit hole goes deeper · EROS multiverse" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <figcaption>Atropa → Dysnomia · cutting the thread · mycelium goes deeper · companion visual for the ecosystem web</figcaption>
+  </figure>
+
+  <div class="connect">
+    <strong>Money authority</strong> The visual companion to this section — measuring stick, instruments, footprints — lives in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html#standard">The Platinum Standard → The Standard</a>. Same discipline: state the claim, name the layer, say how confident you are, move on. The wider five-layer stack (settlement · base · world · floor · bridge) is in <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>.
+  </div>
 
   <h3>Beyond Web3 — why this sits in a field manual</h3>
   <p>Web1 moved information. Web2 moved platforms. Web3 moved ownership. The next layer under discussion is <strong>autonomous coordination</strong>: blockchain for settlement and ownership, AI agents for continuous analysis and action, communities for intention, tokens for economic coupling. Atropa’s public mythology and tooling push toward a network that can grow by <em>node → connection → replication</em> rather than only centre → command.</p>
@@ -831,22 +891,20 @@ details.eros-menu a{color:var(--platinum)}
 <!-- ══════ PART X ══════ -->
 <div class="part-break" id="p10">
   <p class="pk">Part X</p>
-
-<div class="yt-wrap media-slot">
-  <p class="yt-lab">Watch · Gold · Measuring stick · Continuity</p>
-  <div class="yt-frame">
-    <iframe src="https://www.youtube.com/embed/S_0f4twDjYY" title="Gold, continuity, and the measuring stick" loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-  </div>
-  <p class="yt-cap">Footprints over confession. Public instruments. Verify the layer yourself.</p>
-</div>
-
-
   <h2>Roadmap language</h2>
   <p>Triggers · not prophecies</p>
 </div>
 <section>
+  <div class="yt-wrap media-slot">
+    <p class="yt-lab">Watch · Gold · Measuring stick · Continuity</p>
+    <div class="yt-frame">
+      <iframe src="https://www.youtube.com/embed/S_0f4twDjYY" title="Gold, continuity, and the measuring stick" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+    <p class="yt-cap">Footprints over confession. Public instruments. Verify the layer yourself.</p>
+  </div>
+
   <p>Community north stars are <strong>things to measure</strong>, not promises:</p>
   <ul>
     <li>Live pair count and depth (PulseX / SpaceEros — verify, do not invent)</li>
@@ -858,7 +916,7 @@ details.eros-menu a{color:var(--platinum)}
   <div class="warn"><b>No price targets in this manual.</b> Chat market-cap stories are not commitments.</div>
 </section>
 
-<!-- ══════ PART XI · WORLD ══════ -->
+<!-- ══════ PART XI ══════ -->
 <div class="part-break" id="p11">
   <p class="pk">Part XI</p>
   <h2>The world where it gets used</h2>
@@ -902,20 +960,6 @@ details.eros-menu a{color:var(--platinum)}
   <p>Why some stay: larger board (Illumination), cosmology (Living Egg), intrigue (Men of Renown), production guild. Companions hold the depth. Here is taste only.</p>
   <p><strong>Fractal contribution.</strong> Build at your scale — tool, panel, micro-game, sound. The larger story can nest smaller worlds. Everyone can contribute something that fits.</p>
 
-  <figure class="media-block">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg">
-      <source src="https://meaning-unconfounded.github.io/images/gifted.mp4" type="video/mp4"/>
-    </video>
-    <figcaption><b>Gifted</b> — the emotional register of the world the crypto rails carry. Sample quality. Same heart, larger machine.</figcaption>
-  </figure>
-
-  <figure class="media-block">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg">
-      <source src="https://meaning-unconfounded.github.io/images/sommi_facts.mp4" type="video/mp4"/>
-    </video>
-    <figcaption><b>Sommi · Facts</b> — a PulseChain voice from outside the EROS room, saying what the structure is.</figcaption>
-  </figure>
-
   <p>
     <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a> ·
     <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a> ·
@@ -938,7 +982,7 @@ details.eros-menu a{color:var(--platinum)}
   <details><summary>Is it too late?</summary><p>Unknown. Structure and sizing beat FOMO scripts.</p></details>
   <details><summary>How is this not a scam?</summary><p>Published contracts and renounce claims help — you still verify, size small, accept total loss as possible.</p></details>
   <details><summary>What is the Atropa / pDAI section claiming?</summary><p>Conditional architecture and footprints — early LP commitment, settlement-fulcrum idea, mycelium framing beyond Web3. Not a guarantee of peg or appointment of EROS. See <a href="#pdai-atropa">pDAI · Atropa · mycelium</a> and the 9iron link.</p></details>
-  <details><summary>ErosX / 33eros?</summary><p>See <a href="#erosx-layer">Part IX-B</a> and <a href="#p4b">Part IV-B</a>. Math and transform patterns are discussed; deployment is open (who/when not settled). Not launched products with fixed dates in this manual.</p></details>
+  <details><summary>ErosX / 33eros?</summary><p>See <a href="#erosx-layer">Part IX-B</a> and <a href="#p4b">Part IV-B</a>. Math and transform patterns are discussed; deployment is open (who/when not settled). Not launched products with fixed dates in this manual. Full treatment: <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</p></details>
   <details><summary>What is theme branding of an LP?</summary><p>You promote the <em>pair</em> you own — identity, memes, name — so traffic hits your pool. Example pattern: a major Bear/EROS holder promoting as a themed identity helps that pool and, via shared EROS edges and arb, can lift connected pairs. Allies, not isolated tribes.</p></details>
   <details><summary>How do I exit?</summary><p>Sell or withdraw LP subject to liquidity, slippage, fees. No guaranteed buyer.</p></details>
 
@@ -956,6 +1000,7 @@ details.eros-menu a{color:var(--platinum)}
     <tr><th>Pulseonomics</th><td>Poolonomics applied to PulseChain / EROS case study</td></tr>
     <tr><th>ErosX</th><td>Flow-layer transform — design discussion, not launched product</td></tr>
     <tr><th>33eros</th><td>Teachable transform pattern — burn/LP/buy-burn split</td></tr>
+    <tr><th>Equivalence bots</th><td>Market-cap equivalence arbitrage agents — connected inventory across shared EROS legs</td></tr>
     <tr><th>pDAI fulcrum</th><td>Conditional thesis: pDAI as settlement/routing unit + replenishment flywheel</td></tr>
     <tr><th>Atropa mycelium</th><td>Framing of Atropa/Treasury network as fractal, beyond-Web3 coordination on Pulse</td></tr>
     <tr><th>Cut the thread</th><td>Atropos metaphor — exit inherited permissioned architecture toward open settlement</td></tr>
@@ -973,24 +1018,54 @@ details.eros-menu a{color:var(--platinum)}
   <div class="warn"><b>Disclaimer.</b> Not financial, legal, or tax advice. Crypto can go to zero. Contracts can fail. You can lose everything. DYOR. See also GitBook Disclaimer.</div>
 </section>
 
-<footer>
-  <p><span class="silver">THE BRIDGE</span> · EROS on PulseChain · field manual v4</p>
-  <p>Full github.io URLs for Telegram, shares, NotebookLM.</p>
-  <p style="margin-top:.6rem">
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front_Door</a> ·
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a> ·
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a> ·
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men_Of_Renown</a> ·
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a> ·
+<!-- ── MASTER FOOTER ── -->
+<footer class="master">
+  <div class="title-row">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span class="title">THE BRIDGE</span>
+  </div>
+  <p class="count">Field manual · EROS on PulseChain · tokenomics · Poolonomics · playbook</p>
+
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
     <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-  </p>
-  <p style="margin-top:.8rem;font-size:.75rem">Fee split per official Burnonomics (2/1/1/1). Verify on-chain. Bridge v4.</p>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://t.me/Eros_Revival">Telegram</a>
+  </nav>
+
+  <p class="sig">Verify on-chain. Never trust a badge. The chain is the only author.</p>
+  <p class="creedline">Tenacity Through Integrity</p>
+
+  <div class="pulse-row">
+    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0a0b0e"/>
+      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0a0b0e"/>
+      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
 </footer>
+
+</div>
 <button id="toTop" type="button" aria-label="Back to top">↑</button>
 <script>
 (function(){
@@ -1005,12 +1080,15 @@ details.eros-menu a{color:var(--platinum)}
   }
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
   if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var href=a.getAttribute('href');
+      if(href.length<2)return;
+      var t=document.querySelector(href);
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
 })();
 </script>
-
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#7d858f;border-top:1px solid #2e3138;margin-top:2rem">
-  First Edition · Rev 4b · 2026-10-07 · The Bridge · Save as The_Bridge.html
-</footer>
-</div>
 </body>
 </html>
