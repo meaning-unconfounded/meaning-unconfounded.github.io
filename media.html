@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EROS · Media Index — The Visual Record</title>
+<meta name="description" content="Complete visual inventory of the EROS corpus. Every image and video, grouped by topic, with usage notes and canonical anchors across all books."/>
+<meta name="theme-color" content="#0b0e14"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230b0e14' stroke='%23d8dde3' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23d8dde3'/%3E%3C/svg%3E"/>
+<style>
+:root{
+  --bg:#0b0e14;
+  --bg-raised:#11151c;
+  --card:#161b22;
+  --card-hover:#1a2029;
+  --ink:#e6edf3;
+  --soft:#b8c1cc;
+  --muted:#8b949e;
+  --dim:#6a7280;
+  --line:#30363d;
+  --line-soft:#21262d;
+  --accent:#58a6ff;
+  --accent-soft:rgba(88,166,255,.12);
+  --accent-line:rgba(88,166,255,.35);
+  --magenta:#e040fb;
+  --magenta-soft:rgba(224,64,251,.1);
+  --platinum:#d8dde3;
+  --gold:#d4af37;
+  --green:#00ff88;
+  --cyan:#00d4ff;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  padding:0 0 4rem;
+}
+
+/* ── STANDARD HEADER with pin ── */
+.corpus-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.55rem 1.1rem;
+  background:rgba(11,14,20,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  font-family:var(--sans);
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--platinum);font-weight:700;text-decoration:none;
+}
+.corpus-bar .brand:hover{color:#fff}
+.corpus-bar .pin{
+  width:36px;height:36px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--accent-line);
+  box-shadow:0 0 14px var(--accent-soft),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--bg-raised);
+}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
+  text-decoration:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--accent);background:var(--accent-soft)}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
+  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+5){display:none}
+  .corpus-bar .pin{width:28px;height:28px}
+}
+
+/* ── PAGE ── */
+.page{max-width:1200px;margin:0 auto;padding:1.5rem 1.4rem 2rem}
+h1{font-size:1.9rem;font-weight:600;margin-bottom:.35rem;color:var(--ink);letter-spacing:-.01em}
+.subhead{font-size:.9rem;color:var(--muted);margin-bottom:1.5rem;word-break:break-all}
+.subhead a{color:var(--accent);text-decoration:none}
+.subhead a:hover{text-decoration:underline}
+.lede{
+  font-size:.95rem;color:var(--soft);margin-bottom:2rem;max-width:64rem;
+  padding:1rem 1.15rem;border-left:3px solid var(--accent);
+  background:linear-gradient(90deg,var(--accent-soft),transparent 70%);
+  border-radius:0 10px 10px 0;
+  line-height:1.7;
+}
+.lede b{color:var(--ink);font-weight:600}
+
+/* ── FILTER STRIP ── */
+.filter{
+  position:sticky;top:56px;z-index:850;
+  background:rgba(11,14,20,.94);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:.65rem .35rem;margin:0 -.35rem 1.5rem;
+  border-bottom:1px solid var(--line-soft);
+  display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;
+}
+.filter .search{
+  flex:1;min-width:180px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:8px;padding:.5rem .8rem;color:var(--ink);
+  font-family:var(--sans);font-size:.82rem;outline:none;
+  transition:border-color .2s;
+}
+.filter .search:focus{border-color:var(--accent)}
+.filter .search::placeholder{color:var(--dim)}
+.filter button{
+  background:var(--card);border:1px solid var(--line);
+  color:var(--soft);font-family:var(--sans);font-size:.72rem;
+  padding:.42rem .8rem;border-radius:999px;cursor:pointer;
+  letter-spacing:.05em;transition:all .18s;
+}
+.filter button:hover{color:var(--accent);border-color:var(--accent-line)}
+.filter button.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-line);font-weight:700}
+.filter .stat{
+  margin-left:auto;font-size:.72rem;color:var(--muted);letter-spacing:.06em;
+  padding:.3rem .6rem;
+}
+@media(max-width:720px){
+  .filter{top:52px}
+  .filter .stat{margin-left:0}
+}
+
+/* ── CLUSTER ── */
+.cluster{
+  margin:1.6rem 0;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--bg-raised);
+  overflow:hidden;
+}
+.cluster[open]{box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.cluster > summary{
+  cursor:pointer;list-style:none;
+  padding:1.05rem 1.3rem;
+  display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;
+  font-size:.9rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink);
+  background:linear-gradient(90deg,rgba(88,166,255,.06),transparent 60%);
+  transition:background .2s;
+}
+.cluster > summary::-webkit-details-marker{display:none}
+.cluster > summary::before{
+  content:"▸";color:var(--accent);font-size:.75rem;
+  transition:transform .25s;display:inline-block;
+}
+.cluster[open] > summary::before{transform:rotate(90deg)}
+.cluster > summary:hover{background:linear-gradient(90deg,rgba(88,166,255,.12),transparent 60%)}
+.cluster > summary .c-count{
+  margin-left:auto;font-size:.7rem;color:var(--muted);
+  letter-spacing:.1em;font-weight:400;
+}
+.cluster > summary .c-tag{
+  font-size:.6rem;font-weight:700;letter-spacing:.12em;
+  padding:.18rem .5rem;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);
+  border:1px solid var(--accent-line);
+}
+.cluster > summary .c-desc{
+  flex-basis:100%;font-size:.8rem;font-weight:400;
+  text-transform:none;letter-spacing:0;color:var(--muted);
+  margin-top:.25rem;line-height:1.55;
+}
+.cluster-body{padding:.9rem 1.1rem 1.2rem}
+
+/* ── GRID ── */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:18px;
+}
+
+/* ── CARD ── */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .18s,transform .18s,box-shadow .18s;
+  scroll-margin-top:6rem;
+}
+.card:hover{
+  border-color:var(--accent-line);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 24px var(--accent-soft);
+}
+.card:target{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft),0 0 32px var(--accent-soft);
+}
+.card.flash{animation:card-flash 2.2s ease-out}
+@keyframes card-flash{
+  0%{box-shadow:0 0 0 0 var(--accent-line),0 0 24px var(--accent-soft)}
+  40%{box-shadow:0 0 0 6px var(--accent-soft),0 0 32px var(--accent-soft)}
+  100%{box-shadow:0 0 0 0 transparent,0 0 0 transparent}
+}
+.media-wrap{
+  width:100%;aspect-ratio:1/1;
+  background:#0d1117;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.media-wrap img,.media-wrap video{
+  width:100%;height:100%;object-fit:contain;display:block;
+}
+.media-wrap video{background:#000}
+.card-body{
+  padding:12px 14px 14px;
+  display:flex;flex-direction:column;gap:6px;flex:1;
+}
+.filename{
+  font-size:.82rem;font-weight:700;color:var(--ink);
+  word-break:break-all;line-height:1.3;
+}
+.addr{
+  font-size:.66rem;color:var(--accent);word-break:break-all;
+  line-height:1.3;text-decoration:none;
+  font-family:var(--mono);
+}
+.addr:hover{text-decoration:underline}
+.badge-row{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:1px}
+.badge{
+  display:inline-block;font-size:.58rem;text-transform:uppercase;
+  letter-spacing:.08em;background:var(--line-soft);color:var(--muted);
+  border-radius:4px;padding:2px 7px;font-weight:700;
+}
+.badge.img{background:rgba(88,166,255,.1);color:var(--accent)}
+.badge.vid{background:rgba(224,64,251,.1);color:var(--magenta)}
+.badge.dvd{background:rgba(212,175,55,.1);color:var(--gold)}
+.badge.pin{background:rgba(0,255,136,.1);color:var(--green)}
+.usage{
+  font-size:.76rem;color:var(--soft);line-height:1.5;
+  margin-top:6px;padding-top:8px;border-top:1px solid var(--line-soft);
+}
+.usage b{color:var(--accent);font-weight:700;display:block;margin-bottom:2px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+.in-books{
+  font-size:.68rem;color:var(--muted);line-height:1.5;
+  margin-top:6px;padding-top:8px;border-top:1px dashed var(--line-soft);
+}
+.in-books b{color:var(--platinum);font-weight:700;display:block;margin-bottom:2px;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
+.in-books a{color:var(--accent);text-decoration:none}
+.in-books a:hover{text-decoration:underline}
+
+/* ── MASTER FOOTER ── */
+footer.master{
+  margin-top:3rem;padding:2rem 1rem 1.4rem;
+  border-top:1px solid var(--line);
+  text-align:center;font-family:var(--sans);
+  font-size:.78rem;color:var(--muted);line-height:1.85;
+}
+footer.master .title-row{
+  display:flex;align-items:center;justify-content:center;gap:.85rem;
+  margin-bottom:.6rem;
+}
+footer.master .pin{
+  width:44px;height:44px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--accent-line);
+  box-shadow:0 0 18px var(--accent-soft),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--bg-raised);
+}
+footer.master .title{
+  font-size:1.05rem;color:var(--platinum);letter-spacing:.1em;font-weight:700;
+}
+footer.master .count{
+  font-size:.9rem;color:var(--soft);margin-bottom:1rem;
+}
+footer.master .tier{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
+  max-width:46rem;margin:0 auto 1rem;
+}
+footer.master .tier a{
+  padding:.32rem .72rem;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);
+  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
+  text-decoration:none;transition:all .18s;
+}
+footer.master .tier a:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+footer.master .tier a.primary{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:700}
+footer.master .sig{font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1rem}
+footer.master .line{font-style:italic;color:var(--dim);font-size:.85rem;margin-top:.6rem}
+footer.master .built-on{
+  margin-top:1.4rem;display:flex;align-items:center;justify-content:center;gap:.7rem;
+  padding:.85rem 1.2rem;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:999px;max-width:24rem;margin-left:auto;margin-right:auto;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;
+}
+footer.master .built-on .pin{width:32px;height:32px}
+
+@media print{
+  @page{size:A4;margin:12mm}
+  .corpus-bar,.filter{display:none!important}
+  body{background:#fff!important;color:#111!important}
+  .cluster,.card{border-color:#ccc!important;background:#fff!important;break-inside:avoid}
+  .card .media-wrap{background:#f4f4f4!important}
+  a{color:#111!important}
+  .addr{color:#555!important}
+  .badge{background:#eee!important;color:#333!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ── STANDARD HEADER with pin ── -->
+<header class="corpus-bar">
+  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain"/>
+    <span>✦ EROS · Media Index</span>
+  </a>
+  <nav aria-label="Section navigation">
+    <a href="#clusters">Clusters</a>
+    <a href="#brand">Brand</a>
+    <a href="#cosmology">Cosmology</a>
+    <a href="#operators">Operators</a>
+    <a href="#stories">Stories</a>
+    <a href="#rail-a">Rail A</a>
+    <a href="#rail-b">Rail B</a>
+    <a href="#videos">Videos</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
+  </nav>
+</header>
+
+<main class="page">
+
+<h1>Media Index — Meaning Unconfounded</h1>
+<p class="subhead">Base URL: <a href="https://meaning-unconfounded.github.io/images" target="_blank" rel="noopener">https://meaning-unconfounded.github.io/images</a></p>
+
+<p class="lede">
+  <b>Every image and video used across the EROS corpus.</b> Grouped by topic. Every card carries a stable anchor — a book can deep-link to <code>media.html#eros-green-candle</code> and land on the exact entry. Purpose, tags, and the books each file appears in are recorded, so the index itself becomes a living map of the visual system.
+</p>
+
+<!-- ── FILTER ── -->
+<div class="filter" id="clusters">
+  <input class="search" type="search" id="search" placeholder="Filter by name, purpose, or book…" aria-label="Search media"/>
+  <button data-filter="all" class="active">All</button>
+  <button data-filter="image">Images</button>
+  <button data-filter="video">Videos</button>
+  <button data-filter="divider">Dividers</button>
+  <span class="stat" id="stat">Loading…</span>
+</div>
+
+<!-- ── CLUSTERS ── -->
+<div id="container"></div>
+
+<!-- ── MASTER FOOTER ── -->
+<footer class="master">
+  <div class="title-row">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain"/>
+    <span class="title">MEDIA INDEX</span>
+  </div>
+  <p class="count">The visual record · EROS Library</p>
+
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://t.me/Eros_Revival">Telegram</a>
+  </nav>
+
+  <p class="sig">The map is not the world. The index is not the library.</p>
+  <p class="line">Rev 2 · 2026-10-09 · Save as media.html</p>
+
+  <div class="built-on">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain"/>
+    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  const BASE = 'https://meaning-unconfounded.github.io/images/';
+
+  // ── CLUSTERS ──
+  const clusters = [
+    {
+      id: 'brand',
+      name: 'Brand & Identity',
+      tag: 'logos · seals · pins',
+      desc: 'Logos, seals, palette references, and the PulseChain membership mark. Every book that carries a cover, header, or footer draws from this set.',
+      files: [
+        { n:'eros-logo-colour1.png', t:'image', u:'Primary neon badge. Full EROS heart + PulseChain hex fusion. Hero / cover / Dexscreener.', b:['All books'] },
+        { n:'eros-logo-colour2.png', t:'image', u:'Variant neon badge with stronger rainbow ring. Alternate hero and social assets.', b:['Social · alternate covers'] },
+        { n:'eros-logo-colour3.png', t:'image', u:'Cleanest current colour logo. Header and cover standard across the corpus.', b:['Every book · header'] },
+        { n:'eros-black-logo.jpg', t:'image', u:'Formal metallic black seal. “Tenacity Through Integrity”. Institutional pages and closing seals.', b:['Bridge','Platinum','Gods','Living Egg','Hopeful Future'] },
+        { n:'eros-logo_banner.jpg', t:'image', u:'Wide banner treatment. Mid-book landing bands and social share images.', b:['Platinum','Hopeful Future','All books · share'] },
+        { n:'pulseSystem.jpeg', t:'image', tag:'pin', u:'Official PulseChain mark. Membership pin — header and footer, twice per book.', b:['Every book'] },
+        { n:'pulse_colours.jpeg', t:'image', u:'Colour reference for the PulseChain palette. Thin palette strip between sections.', b:['Platinum','Hopeful Future','Bridge'] },
+        { n:'banner-white-book.png', t:'image', u:'White book banner treatment. Print and cover mockups.', b:['Future books'] },
+        { n:'logo-white-book.png', t:'image', u:'White book logo. Print and cover mockups.', b:['Future books'] }
+      ]
+    },
+    {
+      id: 'cosmology',
+      name: 'Cosmology · The Living Egg',
+      tag: 'enclosure · substrate · lensing',
+      desc: 'The vessel itself — the enclosure, the substrate, the interior fauna, the lensing sky. Feeds Living Egg and the cosmology chapters of every book.',
+      files: [
+        { n:'eros-living-egg.jpg', t:'image', u:'Living Egg cosmology visual. The enclosure as a body.', b:['Living Egg','First Resonance · Prologue'] },
+        { n:'egg-cover.jpg', t:'image', u:'Living Egg cover treatment. The enclosure as cover image.', b:['Living Egg','Narrative','Front Door'] },
+        { n:'egg-custodian.jpg', t:'image', u:'Custodian of the Egg. The figure who tends the enclosure.', b:['Living Egg'] },
+        { n:'egg-enclosure.jpg', t:'image', u:'Enclosure principle visual. Boundary as the condition of meaning.', b:['Living Egg','First Resonance · Ch6'] },
+        { n:'egg-lensing.jpg', t:'image', u:'Lensing principle visual. The instrument is the problem, not the world.', b:['Living Egg','First Resonance · Ch11 video poster'] },
+        { n:'cosmic-octaves.png', t:'image', u:'Cosmic octaves / scale diagram. The Egg at every scale.', b:['Living Egg'] },
+        { n:'eros-egg-plasma-fauna.jpg', t:'image', u:'Plasma fauna inside the Living Egg. Interior life.', b:['Living Egg','First Resonance · Ch11'] },
+        { n:'eros-egg-substrate-light.jpg', t:'image', u:'Substrate light / enclosure interior. The light below the surface.', b:['Living Egg','First Resonance · Ch20'] },
+        { n:'eros-atlantis-rind.jpg', t:'image', u:'Atlantis rind cosmology detail. The prior layer of the shell.', b:['Living Egg','Eros Stories'] },
+        { n:'eros-atlantis-void.jpg', t:'image', u:'Atlantis void. Beyond the rind.', b:['Living Egg','Eros Stories'] },
+        { n:'eros-space.jpg', t:'image', u:'Space / cosmic setting. Wide external view.', b:['First Resonance','Eros Stories'] }
+      ]
+    },
+    {
+      id: 'operators',
+      name: 'Operators · Gods · Thoth',
+      tag: 'four laws · language · craft',
+      desc: 'The four operators, the Thoth tongue layer, and the teaching visuals. Feeds Gods of Eros, Gift of Thoth, and the curriculum chapters of First Resonance.',
+      files: [
+        { n:'eros-gods.jpg', t:'image', u:'Four Operators / Gods of EROS. Chapter plate for the curriculum.', b:['Gods of Eros','First Resonance · Ch12'] },
+        { n:'eros-gods-of-eros-banner.jpg', t:'image', u:'Gods of EROS banner. Book cover band.', b:['Gods of Eros'] },
+        { n:'eros-thoth-banner.jpg', t:'image', u:'Gift of Thoth banner. Book cover band.', b:['Gift of Thoth'] },
+        { n:'eros-thoth-operators-grid.jpg', t:'image', u:'Operators grid from Thoth materials. Four-class know grid.', b:['Gift of Thoth'] },
+        { n:'eros-thoth-spread-spray.jpg', t:'image', u:'Spread / spray teaching visual.', b:['Gift of Thoth'] },
+        { n:'eros-thoth-second-layer.jpg', t:'image', u:'Second layer teaching. Consonant operators.', b:['Gift of Thoth'] },
+        { n:'eros-gift-thoth.jpg', t:'image', u:'Gift of Thoth visual. Teaching / form-building.', b:['Gift of Thoth','First Resonance'] },
+        { n:'eros-33-teacher.jpg', t:'image', u:'33 / teacher numerology. The number that does the work.', b:['Platinum','First Resonance · Story arc'] },
+        { n:'Atropos.jpg', t:'image', u:'Atropos / fate operator. Grandfather&#39;s notebooks visual.', b:['Men of Renown','First Resonance · Ch2','Hopeful Future'] },
+        { n:'eros-gods-light-bond.jpg', t:'image', u:'Gods light bond. The bond between operators.', b:['Gods of Eros','First Resonance · Ch19'] },
+        { n:'eros-gods-two-directions.jpg', t:'image', u:'Two directions of the gods. Signal moving outward and inward.', b:['Gods of Eros','First Resonance · Ch10'] }
+      ]
+    },
+    {
+      id: 'doors',
+      name: 'Doors · Thresholds · Practice',
+      tag: 'visitor · stone · notebook',
+      desc: 'Threshold imagery, notebook practice, and the visitor motif. The doorway is the entry to every book.',
+      files: [
+        { n:'eros-door.jpg', t:'image', u:'The Visitor / doorway motif. Front door / threshold imagery.', b:['Newcomer Dossier','First Resonance · Ch3','Front Door'] },
+        { n:'eros-pin-door.jpg', t:'image', u:'Pin / door threshold. Threshold detail.', b:['First Resonance'] },
+        { n:'eros-notebook-studio.jpg', t:'image', u:'Archivist / notebook practice. Method and stone chapters.', b:['First Resonance · Ch5'] },
+        { n:'eros-willingness.jpg', t:'image', u:'Willingness precept. Abandonment is the sin.', b:['Narrative','Front Door'] },
+        { n:'eros-abandon.jpg', t:'image', u:'Abandon / non-attachment teaching.', b:['Narrative'] },
+        { n:'eros-ticket.jpg', t:'image', u:'Ticket / entry motif. You may already own it.', b:['Narrative','Front Door'] },
+        { n:'eros-begging.jpg', t:'image', u:'Begging vs building contrast. Don&#39;t beg the chart.', b:['Front Door','Narrative'] }
+      ]
+    },
+    {
+      id: 'network',
+      name: 'Network · Demand · Chart',
+      tag: 'web · flywheel · price',
+      desc: 'The liquidity web, the demand equation, and price-adjacent visuals. Feeds Bridge, Platinum, Front Door, Narrative.',
+      files: [
+        { n:'eros-web.jpg', t:'image', u:'Network / liquidity web. Each pool a node, each bond an edge.', b:['Bridge','Platinum','Narrative','Front Door','First Resonance · Ch15'] },
+        { n:'eros-flywheel.jpg', t:'image', u:'Ethical flywheel diagram. Books → media → attention → liquidity.', b:['Narrative','Front Door','First Resonance'] },
+        { n:'eros-demand.jpg', t:'image', u:'Demand equation visual. Attention + community + liquidity.', b:['Bridge','Narrative','First Resonance · Ch16'] },
+        { n:'eros-paint-chart.jpg', t:'image', u:'Chart + creative overlay. Let the chart be the invitation.', b:['Front Door','Narrative'] },
+        { n:'eros-price.jpg', t:'image', u:'Price action visual. Price is a lagging signal.', b:['Front Door','First Resonance'] },
+        { n:'eros-sequence-reprice.jpg', t:'image', u:'Sequence of reprice events.', b:['Illumination Strategy'] },
+        { n:'eros-rebrand.jpg', t:'image', u:'Rebrand moment. Chapter plate.', b:['Narrative','Front Door'] },
+        { n:'eros-green-candle.jpg', t:'image', u:'Peak / market moment. Green candle chart.', b:['First Resonance · Ch18','Platinum · Chart section'] },
+        { n:'eros-pls-ratio.jpg', t:'image', u:'EROS / PLS ratio chart. Elliott waves reading.', b:['Hopeful Future','Front Door'] },
+        { n:'eros-measuring-stick.jpg', t:'image', u:'Measuring stick / standard. Money authority triptych.', b:['Platinum','First Resonance · Ch17'] }
+      ]
+    },
+    {
+      id: 'rail-a',
+      name: 'Rail A · Human Macro · Illumination',
+      tag: 'documented · falsifiable',
+      desc: 'The human continuity rail. Every image is tagged Layer 1 / 2 / 3 in the book itself. Footprints over narratives.',
+      files: [
+        { n:'eros-illumination.jpg', t:'image', u:'Illumination Strategy visual. Macro / institutional layer.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-banner.jpg', t:'image', u:'Illumination Strategy banner. Book cover band.', b:['Illumination Strategy','First Resonance · Appendix'] },
+        { n:'eros-illumination-branches.jpg', t:'image', u:'Illumination branches diagram. Structural inference.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-reserve.jpg', t:'image', u:'Strategic reserve architecture.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-si.jpg', t:'image', u:'Strategic intelligence layer.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-reprice.jpg', t:'image', u:'Reprice mechanism visual.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-footprints.jpg', t:'image', u:'Footprints over confession. Continuity trail.', b:['Illumination Strategy','Platinum · money authority'] },
+        { n:'eros-illumination-instruments.jpg', t:'image', u:'Instruments of the plan. Money authority triptych.', b:['Illumination Strategy','Platinum · money authority'] },
+        { n:'eros-illumination-cog.jpg', t:'image', u:'Cog / mechanism detail. Continuity machinery.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-studio.jpg', t:'image', u:'Studio / working environment.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-ledger.jpg', t:'image', u:'Ledger / accounting layer. Continuity bookkeeping.', b:['Illumination Strategy'] },
+        { n:'eros-illumination-stability.jpg', t:'image', u:'Stability conditions. What holds when the chart turns.', b:['Illumination Strategy'] }
+      ]
+    },
+    {
+      id: 'rail-b',
+      name: 'Rail B · Breakaway Archive · Men of Renown',
+      tag: 'masks · residual · fiction contract',
+      desc: 'The breakaway-archive rail. Held inside a fiction contract. Nordic residual, electric sky, the firmament.',
+      files: [
+        { n:'eros-men-of-renown.jpg', t:'image', u:'Men of Renown banner / chapter plate.', b:['Men of Renown'] },
+        { n:'Men_Of_Renown_banner.jpg', t:'image', u:'Men of Renown book banner.', b:['Men of Renown'] },
+        { n:'eros-nordic-veil.jpg', t:'image', u:'Nordic veil imagery. Residual archive.', b:['Men of Renown'] }
+      ]
+    },
+    {
+      id: 'bridge',
+      name: 'Bridge · Stack · Hopeful Future',
+      tag: 'settlement · base · world · floor',
+      desc: 'The wider architecture — pDAI, Atropa, Dysnomia, EROS, PulseChain, the bridge. Feeds Hopeful Future, Bridge, and Platinum.',
+      files: [
+        { n:'The_Bridge_banner.jpg', t:'image', u:'The Bridge field-manual banner. Tech-book visual.', b:['Bridge','Platinum','First Resonance · Ch14'] },
+        { n:'eros-bridge-trio.jpg', t:'image', u:'Bridge trio visual. Three-in-one bridge architecture.', b:['Bridge','First Resonance · Ch14'] },
+        { n:'hopeful-crossing.png', t:'image', u:'Hopeful Future crossing image. Cross a little, read the address.', b:['Hopeful Future','Platinum · wider stack'] },
+        { n:'hopeful-unity-stack.png', t:'image', u:'Unity stack visual. The five-layer architecture.', b:['Hopeful Future','Platinum · wider stack','First Resonance · Epilogue'] },
+        { n:'Hopeful_Future_Poster.png', t:'image', u:'Hopeful Future poster. Capstone cover.', b:['Hopeful Future'] },
+        { n:'hopeful-pdai-settlement.png', t:'image', u:'pDAI settlement layer visual.', b:['Hopeful Future'] },
+        { n:'hopeful-atropa-dysnomia-base.png', t:'image', u:'Atropa / Dysnomia base layer.', b:['Hopeful Future'] },
+        { n:'eros-hopeful-pulse-gift.jpg', t:'image', u:'Pulse gift / hopeful transmission.', b:['Hopeful Future','First Resonance'] },
+        { n:'eros-hope-evidence.jpg', t:'image', u:'Hopeful Future evidence stack. Facts over promise.', b:['Hopeful Future','Platinum'] }
+      ]
+    },
+    {
+      id: 'stories',
+      name: 'Stories · Fiction Doors',
+      tag: 'sixteen doors · universe',
+      desc: 'The fiction layer. Sixteen doors, plus promo banners and character plates. Feeds Eros Stories and First Resonance.',
+      files: [
+        { n:'eros-sixteen-doors.jpg', t:'image', u:'Sixteen Doors overview. Book cover art.', b:['Eros Stories','First Resonance · Ch21'] },
+        { n:'eros-stories-banner.jpg', t:'image', u:'Eros Stories banner. Book cover band.', b:['Eros Stories'] },
+        { n:'eros-stories-density-craft.jpg', t:'image', u:'Density craft / story texture.', b:['Eros Stories'] },
+        { n:'eros-stories-choir-ridge.jpg', t:'image', u:'Choir Ridge location.', b:['Eros Stories'] },
+        { n:'eros-stories-promo.png', t:'image', u:'Stories promotional graphic.', b:['Eros Stories','Hopeful Future'] },
+        { n:'eros-maria.jpg', t:'image', u:'Maria / substrate character plate.', b:['Front Door','Narrative','Hopeful Future'] },
+        { n:'eros-thoth-operators-grid.jpg', t:'image', u:'Operators grid. Cross-referenced from stories.', b:['Gift of Thoth','Eros Stories'] }
+      ]
+    },
+    {
+      id: 'transform',
+      name: 'Transform · Platinum · Flow Rail',
+      tag: 'rock to river · store → flow',
+      desc: 'The transform thesis. Rock to river, store rail to flow rail, equivalence bots, Genesis. Feeds Platinum Standard, Bridge, Front Door.',
+      files: [
+        { n:'eros-gold-erosx-flow.jpg', t:'image', u:'Gold → ErosX flow diagram. Transformation thesis visual.', b:['Platinum','Bridge','Narrative','First Resonance · Ch13'] },
+        { n:'eros-x.jpg', t:'image', u:'EROS X / transformation mark. The flow rail.', b:['Platinum','Bridge','Narrative'] },
+        { n:'eros-three-goals.jpg', t:'image', u:'Three goals diagram. Price · rebrand · ErosX.', b:['Narrative','Front Door'] },
+        { n:'eros-yin-yang-lp.jpg', t:'image', u:'Balance / LP philosophy. Two assets, one position.', b:['Bridge','Narrative','First Resonance · Ch6'] },
+        { n:'eros-dont-pay-sideline.jpg', t:'image', u:'Don&#39;t pay the sideline. Non-extraction precept.', b:['Newcomer Dossier','First Resonance · Frank Purpose'] },
+        { n:'eros-risk-on-wall.jpg', t:'image', u:'Risk register / wall of risk.', b:['Bridge'] },
+        { n:'titanx-jake.jpg', t:'image', u:'TitanX / Jake reference. Lineage visual.', b:['Bridge','Front Door','Newcomer Dossier'] },
+        { n:'programming_books.jpg', t:'image', u:'Programming books / Shen, K, Logic. Code as bond.', b:['Bridge','Front Door','Narrative','First Resonance','Platinum'] }
+      ]
+    },
+    {
+      id: 'precepts',
+      name: 'Precepts · Closers · Frankness',
+      tag: 'teaching blocks · community',
+      desc: 'Precept visuals and closer images. Frankness, build, call to arms, strength.',
+      files: [
+        { n:'eros-frankness.jpg', t:'image', u:'Frankness precept visual. Frank purpose sections.', b:['First Resonance · Frank Purpose','Front Door','Narrative'] },
+        { n:'eros-call-to-arms.jpg', t:'image', u:'Call to arms / recruitment. Closing invitation pages.', b:['First Resonance · Ch21','Front Door'] },
+        { n:'eros-build-on-eros.jpg', t:'image', u:'Build on EROS. Creation invitation, community chapters.', b:['Newcomer Dossier','Narrative','First Resonance · Ch15','Platinum'] },
+        { n:'eros-complete.jpg', t:'image', u:'Complete Work visual summary.', b:['Front Door','Narrative','First Resonance · Ch18 video poster'] },
+        { n:'eros-books-series.jpg', t:'image', u:'Series overview of the physical-style book covers.', b:['Narrative'] },
+        { n:'eros-the-strong.jpg', t:'image', u:'Hero image. Only the strong walk through.', b:['Every book'] },
+        { n:'eros-strength.jpg', t:'image', u:'Strength / tenacity visual.', b:['Front Door','Narrative','First Resonance · Ch17'] }
+      ]
+    },
+    {
+      id: 'hopeful-extra',
+      name: 'Hopeful Future · Extra Plates',
+      tag: 'duplicate-safe references',
+      desc: 'Additional visual references drawn from the Hopeful Future set. Safe to reuse across the corpus.',
+      files: [
+        { n:'hopeful-crossing.png', t:'image', u:'Bridge crossing diagram (duplicate ref).', b:['Hopeful Future','Platinum'] },
+        { n:'hopeful-pdai-settlement.png', t:'image', u:'pDAI settlement reference (duplicate ref).', b:['Hopeful Future'] },
+        { n:'hopeful-atropa-dysnomia-base.png', t:'image', u:'Atropa base reference (duplicate ref).', b:['Hopeful Future'] }
+      ]
+    },
+    {
+      id: 'dividers',
+      name: 'Dividers · Chapter Breaks',
+      tag: 'not plates — furniture',
+      desc: 'Horizontal rules and banner webps. Use as chapter dividers and section furniture, not as illustration plates.',
+      files: [
+        { n:'hr1.webp', t:'divider', u:'Divider / HR series 1. Chapter break.', b:['First Resonance','Platinum'] },
+        { n:'hr2.webp', t:'divider', u:'Divider / HR series 2. Chapter break.', b:['First Resonance'] },
+        { n:'hr3.webp', t:'divider', u:'Divider / HR series 3. Chapter break.', b:['First Resonance'] },
+        { n:'hr4.webp', t:'divider', u:'Divider / HR series 4. Chapter break.', b:['First Resonance · Ch18'] },
+        { n:'hr5.webp', t:'divider', u:'Divider / HR series 5. Chapter break.', b:['First Resonance'] },
+        { n:'hr6.webp', t:'divider', u:'Divider / HR series 6. Chapter break.', b:['First Resonance'] },
+        { n:'banner1.webp', t:'divider', u:'Banner series 1. Chapter band.', b:['First Resonance · Ch5'] },
+        { n:'banner2.webp', t:'divider', u:'Banner series 2. Chapter band.', b:['First Resonance'] },
+        { n:'banner3.webp', t:'divider', u:'Banner series 3. Chapter band.', b:['First Resonance · Ch15'] },
+        { n:'banner4.webp', t:'divider', u:'Banner series 4. Chapter band.', b:['First Resonance'] },
+        { n:'banner-white-book.png', t:'divider', u:'White book banner. Cover mockups.', b:['Future books'] },
+        { n:'logo-white-book.png', t:'divider', u:'White book logo. Cover mockups.', b:['Future books'] }
+      ]
+    },
+    {
+      id: 'videos',
+      name: 'Videos · Motion',
+      tag: 'explainers · clips · reels',
+      desc: 'Video assets. Explainers, community clips, vision reels, and the cell series.',
+      files: [
+        { n:'Eros_Trillion.mp4', t:'video', u:'Trillion market-cap vision. Peak / price chapters.', b:['Platinum · Arc','First Resonance · Ch18'] },
+        { n:'EROS burn baby burn.mp4', t:'video', u:'Burn baby burn. Community energy. Demand and flywheel.', b:['Bridge · tokenomics','Newcomer Dossier','Front Door'] },
+        { n:'sommi_facts.mp4', t:'video', u:'Sommi winks to camera. Outside voice on the structure.', b:['Hopeful Future','Front Door','Narrative','Bridge'] },
+        { n:'Jake_Letter.mp4', t:'video', u:'Letter to Jake video treatment. Front Door companion.', b:['Front Door'] },
+        { n:'Chiz.mp4', t:'video', u:'Chiz commentary. Community voice on liquidity strategy.', b:['Bridge'] },
+        { n:'ChizExplains.mp4', t:'video', u:'Chiz explains. Full EROS walkthrough — the primary explainer.', b:['Platinum · Mechanism','Narrative','Bridge'] },
+        { n:'Eros414.mp4', t:'video', u:'EROS 414 clip. Animated manifolds, Dysnomia wireframes.', b:['First Resonance · Ch11','Hopeful Future'] },
+        { n:'eros_summary.mp4', t:'video', u:'EROS summary reel. Ninety-second version.', b:['Narrative','Newcomer Dossier'] },
+        { n:'gifted.mp4', t:'video', u:'Gifted / transmission clip.', b:['Hopeful Future','Bridge · world'] },
+        { n:'movie_change.mp4', t:'video', u:'Movie / Hollywood change thesis.', b:['Front Door','Narrative'] },
+        { n:'rainMan.mp4', t:'video', u:'Rainman on pools and white paper. LP mechanics.', b:['Platinum · Build','Bridge','Narrative'] },
+        { n:'cell_apple.mp4', t:'video', u:'Cell series — apple.', b:['Living Egg'] },
+        { n:'cell_atlas.mp4', t:'video', u:'Cell series — atlas.', b:['Living Egg'] },
+        { n:'cell_cosmic.mp4', t:'video', u:'Cell series — cosmic octaves.', b:['Living Egg','Newcomer Dossier','Narrative'] },
+        { n:'cell_facts.mp4', t:'video', u:'Cell series — facts.', b:['Living Egg'] },
+        { n:'cell_historic.mp4', t:'video', u:'Cell series — historic.', b:['Living Egg'] },
+        { n:'cell_similar.mp4', t:'video', u:'Cell series — similar at every scale.', b:['Living Egg','Newcomer Dossier','Narrative'] },
+        { n:'cell_water.mp4', t:'video', u:'Cell series — water above, water below.', b:['Living Egg','Newcomer Dossier','Narrative'] }
+      ]
+    }
+  ];
+
+  // ── RENDER ──
+  const container = document.getElementById('container');
+  const search = document.getElementById('search');
+  const stat = document.getElementById('stat');
+  const buttons = document.querySelectorAll('.filter button');
+  let filterType = 'all';
+
+  function anchorId(name){
+    return name.toLowerCase()
+      .replace(/\.[a-z0-9]+$/, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  function cardHtml(f){
+    const url = BASE + encodeURIComponent(f.n).replace(/%2F/g,'/');
+    const id = anchorId(f.n);
+    const badgeClass = f.t === 'video' ? 'vid' : f.t === 'divider' ? 'dvd' : 'img';
+    const tagBadge = f.tag === 'pin' ? '<span class="badge pin">pin</span>' : '';
+    const mediaHtml = f.t === 'video'
+      ? `<video src="${url}" controls preload="metadata" muted></video>`
+      : `<img src="${url}" alt="${escapeHtml(f.n)}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=&quot;font-size:3rem;opacity:.3&quot;>▢</span>'"/>`;
+    const booksHtml = Array.isArray(f.b) && f.b.length
+      ? f.b.map(b => `<a href="#books">${escapeHtml(b)}</a>`).join(' · ')
+      : '—';
+    return `
+      <article class="card" id="${id}" data-type="${f.t}" data-search="${escapeHtml((f.n+' '+f.u+' '+f.b.join(' ')).toLowerCase())}">
+        <div class="media-wrap">${mediaHtml}</div>
+        <div class="card-body">
+          <div class="filename">${escapeHtml(f.n)}</div>
+          <a class="addr" href="${url}" target="_blank" rel="noopener">${url.replace(BASE,'…/images/')}</a>
+          <div class="badge-row">
+            <span class="badge ${badgeClass}">${f.t}</span>
+            ${tagBadge}
+          </div>
+          <div class="usage"><b>Purpose</b>${escapeHtml(f.u)}</div>
+          <div class="in-books"><b>Appears in</b>${booksHtml}</div>
+        </div>
+      </article>
+    `;
+  }
+
+  function clusterHtml(c){
+    const cards = c.files.map(cardHtml).join('');
+    const count = c.files.length;
+    return `
+      <details class="cluster" id="${c.id}" open>
+        <summary>
+          <span>${escapeHtml(c.name)}</span>
+          <span class="c-tag">${escapeHtml(c.tag)}</span>
+          <span class="c-count">${count} file${count===1?'':'s'}</span>
+          <span class="c-desc">${escapeHtml(c.desc)}</span>
+        </summary>
+        <div class="cluster-body">
+          <div class="grid">${cards}</div>
+        </div>
+      </details>
+    `;
+  }
+
+  function render(){
+    container.innerHTML = clusters.map(clusterHtml).join('');
+    applyFilters();
+  }
+
+  function applyFilters(){
+    const q = search.value.trim().toLowerCase();
+    let visible = 0, total = 0;
+    document.querySelectorAll('.card').forEach(card => {
+      total++;
+      const matchType = filterType === 'all' || card.dataset.type === filterType;
+      const matchSearch = !q || card.dataset.search.includes(q);
+      const ok = matchType && matchSearch;
+      card.style.display = ok ? '' : 'none';
+      if (ok) visible++;
+    });
+    document.querySelectorAll('.cluster').forEach(cl => {
+      const visibleCards = cl.querySelectorAll('.card:not([style*="display: none"])').length;
+      cl.style.display = visibleCards ? '' : 'none';
+    });
+    stat.textContent = `${visible} of ${total} files shown`;
+  }
+
+  search.addEventListener('input', applyFilters);
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterType = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  render();
+
+  // Flash target card if URL has hash
+  if (location.hash) {
+    setTimeout(() => {
+      const el = document.querySelector(location.hash);
+      if (el && el.classList.contains('card')) {
+        const cluster = el.closest('details.cluster');
+        if (cluster) cluster.open = true;
+        el.classList.add('flash');
+        el.scrollIntoView({behavior:'smooth', block:'center'});
+        setTimeout(() => el.classList.remove('flash'), 2400);
+      }
+    }, 200);
+  }
+})();
+</script>
+</body>
+</html>
