@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>The Gift of Thoth · Anatomical Operators · EROS Linguistics</title>
 <meta name="description" content="The second layer of language. Consonants as operators. Words as compressed operations. Language as cognitive architecture — for humans, for education, for machines. EROS Linguistics."/>
+<meta name="theme-color" content="#07090a"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%2307090a' stroke='%235fb8c8' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%235fb8c8'/%3E%3C/svg%3E"/>
 <style>
 :root {
   --bg:#07090a; --surface:#0e1415; --surface2:#151c1e;
@@ -18,7 +20,7 @@
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--bg)}
+html{scroll-behavior:smooth;background:var(--bg);scroll-padding-top:5rem}
 body{
   margin:0; background:
     radial-gradient(ellipse 90% 45% at 50% -5%,rgba(95,184,200,.06),transparent 60%),
@@ -28,6 +30,49 @@ body{
   font-family:var(--serif); font-size:1.05rem; line-height:1.7;
 }
 .wrap{max-width:720px; margin:0 auto; padding:1.25rem 1.15rem 4rem}
+#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--teal),var(--gold),var(--magenta));z-index:9999;transition:width .08s linear}
+
+/* ── STANDARD HEADER with pin ── */
+.corpus-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.55rem 1.1rem;
+  background:rgba(7,9,10,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--teal-line);
+  font-family:var(--sans);
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);font-weight:700;border-bottom:none;text-decoration:none;
+}
+.corpus-bar .brand:hover{color:#8fd0dd;border-bottom:none}
+.corpus-bar .pin{
+  width:36px;height:36px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--teal-line);
+  box-shadow:0 0 14px var(--teal-soft),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
+  border-bottom:none;text-decoration:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--teal);background:var(--teal-soft);border-bottom:none}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
+  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+6){display:none}
+  .corpus-bar .pin{width:28px;height:28px}
+}
+
 header.hero{
   text-align:center; padding:2rem 0 1.5rem;
   border-bottom:1px solid var(--hair); margin-bottom:2rem;
@@ -48,6 +93,7 @@ nav.toc{
 }
 nav.toc strong{color:var(--teal); display:block; margin-bottom:.5rem; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase}
 nav.toc a{color:#5fb8c8;text-decoration:none;border-bottom:1px solid transparent}
+a{color:#5fb8c8;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
 a:link{color:#5fb8c8}
 a:visited{color:#4a8a99}
 a:hover{color:#8fd0dd;border-bottom-color:#8fd0dd}
@@ -113,7 +159,7 @@ p{margin:0 0 1rem; color:var(--soft)}
 }
 .grid3 .cell b{color:var(--teal); display:block; margin-bottom:.25rem; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase}
 .fig{margin:1.4rem 0; text-align:center}
-.fig img{max-width:100%; border-radius:12px; border:1px solid var(--teal-line)}
+.fig img{max-width:100%; border-radius:12px; border:1px solid var(--teal-line); display:block; width:100%}
 .fig .cap{font-family:var(--sans); font-size:.75rem; color:var(--muted); margin-top:.45rem}
 .op-card{
   margin:1.1rem 0; padding:1rem 1.1rem; border-radius:12px;
@@ -170,11 +216,6 @@ p{margin:0 0 1rem; color:var(--soft)}
   border:1px dashed var(--teal-line); border-radius:10px;
   padding:.9rem 1rem; margin:1.2rem 0;
 }
-footer{
-  margin-top:3rem; padding-top:1.4rem; border-top:1px solid var(--hair);
-  text-align:center; font-family:var(--sans); font-size:.75rem; color:var(--muted);
-}
-footer .gold{color:var(--teal)}
 .creed{
   margin:1.5rem 0; padding:1.4rem 1.2rem; text-align:center;
   border:1px solid var(--gold-line); border-radius:14px;
@@ -187,6 +228,7 @@ footer .gold{color:var(--teal)}
 .thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:700;display:block;margin-bottom:.7rem}
 .thesis p{color:var(--ink);margin:0 0 .85rem;font-size:1.02rem;line-height:1.75}
 .thesis p:last-child{margin-bottom:0}
+.thesis a{color:var(--teal)}
 .how{margin:1rem 0 1.5rem;padding:1rem 1.1rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:.95rem}
 .how strong{color:var(--teal);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
 
@@ -198,7 +240,6 @@ footer .gold{color:var(--teal)}
 .meta-block .three-texts b{color:var(--teal);display:block;margin-bottom:.35rem}
 .meta-block .three-texts em{color:var(--soft)}
 
-/* Enhanced additions */
 .discovery{
   margin:1.4rem 0; padding:1.15rem 1.25rem;
   border:1px solid var(--gold-line); border-radius:12px;
@@ -323,70 +364,99 @@ footer .gold{color:var(--teal)}
 }
 .history-chain .arrow{background:transparent; border:none; color:var(--teal); padding:.2rem}
 
-/* ── LINK BANNER · subtle interactive plate ── */
-.link-banner{margin:1.75rem auto 2rem;text-align:center;max-width:100%}
-.link-banner .lb-frame{
-  position:relative;width:100%;
-  aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;
-  background:#0a0418;border:1px solid rgba(160,32,240,.28);
-  box-shadow:0 10px 36px rgba(0,0,0,.4);
-  cursor:pointer;
-  transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease;
+.connect{
+  font-family:var(--sans); font-size:.8rem; color:var(--muted);
+  border:1px dashed var(--teal-line); border-radius:10px;
+  padding:.95rem 1.05rem; background:var(--surface); margin:1.2rem 0;
 }
-.link-banner .lb-frame img{
-  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
-  transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease;
-}
-.link-banner .lb-vignette{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);
-  opacity:.5;transition:opacity .5s ease;
-}
-.link-banner .lb-sheen{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);
-  transform:translateX(-120%);
-  animation:lb-sheen-run 2.2s ease-out 1s 1;
-}
-.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
-  transform:scale(1.012);border-color:rgba(224,64,251,.45);
-  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18);
-}
-.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
-  transform:scale(1.06);filter:saturate(1.12) brightness(1.05);
-}
-.link-banner .lb-frame:hover .lb-vignette{opacity:.75}
-.link-banner figcaption{
-  font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
-  color:#8a7fa6;margin-top:.65rem;opacity:.9;
-}
-@keyframes lb-sheen-run{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-@media (prefers-reduced-motion:reduce){
-  .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-sheen{transition:none!important;animation:none!important}
-  .link-banner .lb-frame:hover img{transform:none}
-}
-/* media separation */
-.media-slot{margin:2rem 0 2.25rem}
-.media-slot + .media-slot{margin-top:2.5rem}
-.yt-wrap{margin:2.25rem 0;padding:1.1rem;border-radius:14px;border:1px solid rgba(125,163,200,.28);background:rgba(14,19,25,.85)}
-.yt-wrap .yt-lab{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#7da3c8;margin-bottom:.65rem;font-weight:700;text-align:center}
-.yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
-.yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
+.connect strong{color:var(--teal); display:block; margin-bottom:.35rem; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase}
+.connect a{color:var(--teal)}
 
-</style>
+/* ── MASTER FOOTER ── */
+footer.master{
+  margin-top:3rem;padding:2rem 0 1.4rem;
+  border-top:1px solid var(--hair);
+  text-align:center;font-family:var(--sans);
+  font-size:.78rem;color:var(--muted);line-height:1.85;
+}
+footer.master .title-row{
+  display:flex;align-items:center;justify-content:center;gap:.85rem;
+  margin-bottom:.6rem;
+}
+footer.master .pin{
+  width:44px;height:44px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--teal-line);
+  box-shadow:0 0 18px var(--teal-soft),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+footer.master .title{
+  font-family:var(--serif);font-size:1.05rem;color:var(--teal);
+  letter-spacing:.1em;font-weight:700;
+}
+footer.master .count{
+  font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem;
+}
+footer.master .tier{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
+  max-width:46rem;margin:0 auto 1rem;
+}
+footer.master .tier a{
+  padding:.32rem .72rem;border-radius:999px;
+  background:var(--surface);border:1px solid var(--hair);
+  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
+  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
+}
+footer.master .tier a:hover{color:var(--teal);border-color:var(--teal);background:var(--teal-soft)}
+footer.master .tier a.primary{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:700}
+footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
+footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(95,184,200,.2)}
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px var(--teal-soft))}
+footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:600}
 
-<style id="eros-collapse">
 details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--teal-line);border-radius:10px;background:var(--teal-soft);padding:.35rem 1rem}
-details.eros-menu>summary{cursor:pointer;list-style:none;font-family:system-ui,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#5fb8c8;padding:.55rem 0;user-select:none}
+details.eros-menu>summary{cursor:pointer;list-style:none;font-family:system-ui,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#5fb8c8;padding:.55rem 0;user-select:none;font-weight:700}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
 details.eros-menu[open]>summary::before{content:"▾ ";}
-details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:rgba(255,255,255,.82)}
+details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
 details.eros-menu a{color:#5fb8c8}
+
+@media print{
+  @page{size:A4;margin:14mm}
+  #progressBar,.corpus-bar,.eros-menu{display:none!important}
+  body{background:#fff!important;color:#111!important}
+  a{color:#111}
+  .fig,.media,.claim,.op-card,.experiment,.scientist,.discovery,.wow,.second-layer,footer.master{break-inside:avoid}
+  h2{break-after:avoid}
+  video{display:none}
+}
 </style>
 </head>
 <body>
+<div id="progressBar"></div>
+
+<!-- ── STANDARD HEADER with pin ── -->
+<header class="corpus-bar">
+  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span>✦ EROS · Thoth</span>
+  </a>
+  <nav aria-label="Section navigation">
+    <a href="#question">Open</a>
+    <a href="#operators">Operators</a>
+    <a href="#density">Density</a>
+    <a href="#grid">Know grid</a>
+    <a href="#tongue">Tongue</a>
+    <a href="#guild">Guild</a>
+    <a href="#break">Falsify</a>
+    <a href="#close">Close</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+  </nav>
+</header>
+
 <div class="wrap">
 
 <header class="hero">
@@ -395,28 +465,29 @@ details.eros-menu a{color:#5fb8c8}
   <p class="byline">Anatomical Operators · The Second Layer of Language</p>
   <p class="maxim">Words have parts · Position is meaning · Communication is bond</p>
   <div class="fig" style="margin-top:1.4rem">
-    <img src="https://meaning-unconfounded.github.io/images/eros-thoth-banner.jpg" alt="The Gift of Thoth — anatomical operators · second layer of language"/>
-    <div class="cap">Thoth’s instrument · Anatomical operators · The second layer of language</div>
+    <img src="https://meaning-unconfounded.github.io/images/eros-thoth-banner.jpg" alt="The Gift of Thoth — anatomical operators · second layer of language" onerror="this.style.display='none'"/>
+    <div class="cap">Thoth's instrument · Anatomical operators · The second layer of language</div>
   </div>
 </header>
 
 <details class="eros-menu" id="eros-library">
-  <summary>EROS library · other books</summary>
+  <summary>EROS library · the other books</summary>
   <div class="menu-body">
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
-
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river · transform</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
-    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
+    <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
 
@@ -425,18 +496,18 @@ details.eros-menu a{color:#5fb8c8}
   <p><strong>Thoth</strong> is the education operator in the EROS stack — teacher, medicine, language, meaning. In myth he is the scribe and the healer; in this book he is the craft of how words are built and how shared language becomes bond. He sits under NaUn (choose / code) and beside Ra-Shen (force / world-engine). <strong>EROS</strong> is the cohesion that binds what Thoth teaches. Without shared operators, communities argue past each other. With them, they can build the same world.</p>
   <p><strong>The discovery.</strong> There is a <strong>second layer of language</strong> beneath the surface one. You have used it your whole life without being taught to look. The first layer says <em>WORD → DEFINITION</em>. The second layer says <em>COMPONENT → FUNCTION → RELATIONSHIP → COMPOSITE MEANING</em>. If that second layer is real — and the demonstrations in this book let you test it in sixty seconds with your own mouth — then language is not a container for thought. It is a cognitive architecture. The first language you learn installs the operating system. A second language runs on different architecture. And a formal description of the second layer would change how humans learn, how AI reasons, and how a guild builds a world.</p>
   <p><strong>Why you should care.</strong> Crypto is full of noise and thin claims. A guild that can name what it is doing — bond, extract, know, be-known — has an edge over groups that only shout tickers. This book gives you that edge: consonants as operators, a four-class know grid, a constructed tongue you can dogfood, and rules so the community grows a language instead of a fog. But the stakes are larger than crypto. <em>Communication is bonding. Bonding is EROS. And EROS is what a species does when it learns to see what its own mouth has been doing all along.</em></p>
-  <p><strong>The stakes.</strong> A leading applied mathematician at the Wolfram Physics Project has independently concluded that AI is bottlenecked by description languages — that current models are limited not by intelligence but by the formal languages we give them to reason in. He is explicit about the Sapir-Whorf hypothesis. He says the same thing the consonant code says from the opposite direction. If a formal description language for meaning exists, both humans and machines can read it. If words are compressed operations, both can see inside them. This volume does not demand belief. It demands one honest run of the method this week.</p>
+  <p><strong>The stakes.</strong> A leading applied mathematician at the Wolfram Physics Project has independently concluded that AI is bottlenecked by description languages — that current models are limited not by intelligence but by the formal languages we give them to reason in. He is explicit about the Sapir-Whorf hypothesis. He says the same thing the consonant code says from the opposite direction. If a formal description language for meaning exists, both humans and machines can read it. If words are compressed operations, both can see inside them. This volume does not demand belief. It demands one honest run of the method this week. Independent convergence with the AI-reasoning argument is documented in <a href="#two-scientists">§7 · The two scientists</a>. The four law-forces Thoth sits inside are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>.</p>
   <p><strong>Who this is for.</strong> Creators, holders, and builders who will write scenes, scripts, posts, games, and comics inside the EROS universe — and anyone who wants English (and future EROS-tongue) treated as applied science, not mystic hand-waving. Egyptian, Hebrew, and English paths appear as tools and examples, not rankings of peoples. Atlantis, Nordic residual, and Anunnaki masks belong in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. The four operators stay in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. This volume is Thoth's instrument only.</p>
 </div>
 
 <div class="how">
   <strong>How to read this book</strong>
   1 · Read the thesis above — who Thoth is and why language is bond.<br/>
-  2 · Feel SPREAD vs SPRAY (§1). That is the whole method in one breath.<br/>
-  3 · Learn the operator cards (§4) and the know grid (§5).<br/>
-  4 · Then the two big implications: information density (§4B) and the convergence with AI reasoning (§4C).<br/>
+  2 · Feel SPREAD vs SPRAY (§2). That is the whole method in one breath.<br/>
+  3 · Learn the operator cards (§5) and the know grid (§8).<br/>
+  4 · Then the two big implications: information density (§6) and the convergence with AI reasoning (§7).<br/>
   5 · Use the guild rules and dogfood dictionary. Post one skeleton this week.<br/>
-  6 · Read §10 (What Could Break This) before you decide whether to believe any of it.
+  6 · Read §13 (What could break this) before you decide whether to believe any of it.
 </div>
 
 <nav class="toc">
@@ -460,9 +531,7 @@ details.eros-menu a{color:#5fb8c8}
   <a href="#medicine-appendix">Appendix · Medicine track</a>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 1 · THE QUESTION -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 1 · QUESTION -->
 <section id="question">
 <h2>1 · The question</h2>
 <p class="lede">You have said these words your whole life. Have you ever looked inside one?</p>
@@ -485,9 +554,7 @@ details.eros-menu a{color:#5fb8c8}
 <p class="q">What word in your life are you willing to look inside?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
 <!-- 2 · OPEN THE DOOR -->
-<!-- ═══════════════════════════════════════════════════════════ -->
 <section id="open">
 <h2>2 · Open the door</h2>
 <p class="lede">Thoth's first lesson is simple: one consonant difference, one letter deeper, and the whole action changes. Feel it before you believe it.</p>
@@ -515,14 +582,13 @@ details.eros-menu a{color:#5fb8c8}
 
 <p>If you felt that distinction, you have already met the thesis. You do not need to accept any of the rest to have experienced the thing this book is about. The rest is a systematic exploration of what that distinction implies at scale.</p>
 
-<div class="claim cyan">
-  <p><strong>
 <div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-thoth-spread-spray.jpg" alt="SPREAD lands · SPRAY continues — the sixty-second proof" loading="lazy"/>
+  <img src="https://meaning-unconfounded.github.io/images/eros-thoth-spread-spray.jpg" alt="SPREAD lands · SPRAY continues — the sixty-second proof" loading="lazy" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">§2 · One consonant difference · D arrives · Y acts</div>
 </div>
 
-What if this is not a trick?</strong></p>
+<div class="claim cyan">
+  <p><strong>What if this is not a trick?</strong></p>
   <p>Coincidence and sound-symbolism already exist in linguistics. This method goes further: it treats consonants as <em>operators in sequence</em>, with position as syntax and the final consonant as a timestamp (land or continue). You do not have to accept the full stack on day one.</p>
   <p><strong>Test before trust.</strong> Write twenty words that begin with B. Count how many name a boundary, a body, a container, or a held edge. Then produce the sound B with your lips — closure, pressure, release. The action and the meaning are the same physics. If the pattern holds for you, the cards below are confirmation, not dogma. If it fails, the guild still needs your counter-examples.</p>
 </div>
@@ -537,26 +603,23 @@ What if this is not a trick?</strong></p>
 <p class="q">What word in your life arrives… and what word only sprays?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
 <!-- 3 · WHERE THIS SITS -->
-<!-- ═══════════════════════════════════════════════════════════ -->
 <section id="where">
 <h2>3 · Where this sits in The Eros Plan</h2>
 
-<p><strong>God stack (pointer).</strong> <em>NaUn</em> — choice, coding, plan. <em>Ra / Shen</em> — physics, heat, motion. <em>Thoth</em> — education, medicine, meaning, tongue. <em>EROS</em> — bond, cohesion, the force that holds. Full treatment: <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a>. You can run operators without adopting the myth; the stack only names whose workshop this manual is.</p>
+<p><strong>God stack (pointer).</strong> <em>NaUn</em> — choice, coding, plan. <em>Ra / Shen</em> — physics, heat, motion. <em>Thoth</em> — education, medicine, meaning, tongue. <em>EROS</em> — bond, cohesion, the force that holds. Full treatment: <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. You can run operators without adopting the myth; the stack only names whose workshop this manual is.</p>
 
-<div class="companion-map" style="margin:1.4rem 0;padding:1.1rem 1.3rem;border:1px solid var(--teal-line);border-radius:12px;background:var(--teal-soft)">
-      <p style="margin:0 0 .6rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#5fb8c8;font-weight:700">Where this sits</p>
-      <p style="margin:0;line-height:1.7;font-size:.98rem">
-        <strong>Thoth's domain</strong> in the operator stack (see <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a>).
-        The world that language describes lives in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a>.
-        Token and demand surface: <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The_Bridge</a> · door to the ecosystem: <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The_Front_Door</a>.
-        This book is the <em>linguistics guild manual</em> — consonants as operators, know/be-known grid, constructed tongue, dogfood dictionary.
-      </p>
-    </div>
+<div class="connect">
+  <strong>Where this sits</strong>
+  <strong>Thoth's domain</strong> in the operator stack (see <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>).
+  The world that language describes lives in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>.
+  Token and demand surface: <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> · door to the ecosystem: <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>.
+  The transform that names the four law-forces as a store-rail engine: <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.
+  This book is the <em>linguistics guild manual</em> — consonants as operators, know/be-known grid, constructed tongue, dogfood dictionary.
+</div>
 
 <div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="The Complete Plan — four volumes"/>
+  <img src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="The Complete Plan — four volumes" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">Instrument · Demand · Story · Production — language serves all four.</div>
 </div>
 
@@ -575,9 +638,7 @@ What if this is not a trick?</strong></p>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
 <!-- 4 · ATOMIC LANGUAGE -->
-<!-- ═══════════════════════════════════════════════════════════ -->
 <section id="atomic">
 <h2>4 · Atomic language</h2>
 <p class="lede">The atom has parts. The cell has parts. The word has parts.</p>
@@ -612,16 +673,14 @@ What if this is not a trick?</strong></p>
 <p class="q">If your project's words were atoms, which particles are missing?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 5 · THE CONSONANT OPERATORS -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 5 · OPERATORS -->
 <section id="operators">
 <h2>5 · The consonant operators</h2>
 
-<div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-thoth-operators-grid.jpg" alt="Consonant operators — constructed linguistics system" loading="lazy"/>
+<figure class="fig">
+  <img src="https://meaning-unconfounded.github.io/images/eros-thoth-operators-grid.jpg" alt="Consonant operators — constructed linguistics system" loading="lazy" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">Operator constellation · Predict first · Cards second</div>
-</div>
+</figure>
 
 <p class="lede">Do not memorize first. Predict first. The cards are the reference after recognition — not the lesson that replaces it.</p>
 <div class="claim">
@@ -631,16 +690,6 @@ What if this is not a trick?</strong></p>
 <p><strong>On the Witness tier.</strong> Where a card says "same geometry across traditions," read it as: the body-gesture of this consonant recurs in multiple writing cultures as a similar force (cut, bind, flow, edge). It is a pointer for comparative work, not a finished anthropology claim. If a card's Witness line is thin, treat Core + Concise + Form as enough to work.</p>
 <p class="lede">Five tiers · not a spreadsheet. Core → Concise → Common → Form → Witness.</p>
 <p style="font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.4rem">Each card carries a small mouth diagram: <span style="color:var(--teal)">teal</span> = unvoiced (air only) · <span style="color:var(--violet)">violet</span> = voiced (cords vibrate). The dot marks where the body makes the sound.</p>
-
-<div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-33-teacher.jpg" alt="33 Master Teacher"/>
-  <div class="cap">Teach the fork. Numbers and letters both instruct.</div>
-</div>
-
-<div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-gift-thoth.jpg" alt="The Gift of Thoth — operators as instrument"/>
-  <div class="cap">eros-gift-thoth.jpg · The instrument, not the lookup table.</div>
-</div>
 
 <p id="three-dim"><strong style="color:var(--teal)">5.1 · Three dimensions of every consonant</strong></p>
 <p>A core label (B = Boundary) is not enough. Every consonant carries meaning from <em>three layers at once</em>. When all three agree, the operator feels pure:</p>
@@ -654,6 +703,11 @@ What if this is not a trick?</strong></p>
 <div class="discovery">
   <span class="dlabel">Recognition test</span>
   <p>Before reading any card, try this: say <strong>FIRE</strong> and <strong>FLAME</strong>. Both start with F. Now say <strong>FLOW</strong> and <strong>FLIGHT</strong>. Now say <strong>FREE</strong>. What do all five words share? The F at the start is breath at the lip-teeth — a stream that keeps moving. Do you feel it? That is F acting as an operator. The card below will name what you already felt.</p>
+</div>
+
+<div class="connect">
+  <strong>Where Thoth's operators meet the four law-forces</strong>
+  In <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>, "operators" means the four law-forces — NaUn, Ra-Shen, Thoth, EROS. Here, "operators" means the consonant forces of the mouth. Same word, two scales: four laws for the world, twenty-two consonants for the tongue. Same discipline that reads a program by its primitives.
 </div>
 
 <p>Jump to a letter:</p>
@@ -907,7 +961,7 @@ What if this is not a trick?</strong></p>
       <path d="M5,24 Q35,30 65,24" fill="none" stroke="currentColor" stroke-width=".9" opacity=".45"/>
       <path d="M5,12 L5,24" stroke="currentColor" stroke-width="1.2" opacity=".7"/>
       <circle cx="9" cy="18" r="4" fill="currentColor" opacity=".8"/>
-      <circle cx="9" cy="18" r="2.4" fill="var(--bg)"/>
+      <circle cx="9" cy="18" r="2.4" fill="#07090a"/>
       <text x="62" y="32" font-family="system-ui" font-size="6" fill="currentColor" opacity=".6">voiced</text>
     </svg>
     <span class="op-core">Connect</span>
@@ -1113,9 +1167,7 @@ What if this is not a trick?</strong></p>
 <p><strong>BUILD</strong> — B (boundary/container) + D (stop/close). Skeleton: <em>make a room and set a floor</em>. Bond test: does the structure invite entry or only exclude?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 6 · HOW MUCH IS INSIDE A WORD -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 6 · DENSITY -->
 <section id="density">
 <h2>6 · How much is inside a word?</h2>
 <p class="lede">You have now met the operators. Here is the question they open.</p>
@@ -1146,9 +1198,8 @@ What if this is not a trick?</strong></p>
   </div>
 </div>
 
-
 <div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-thoth-second-layer.jpg" alt="The second layer — surface labels above, consonant operators below" loading="lazy"/>
+  <img src="https://meaning-unconfounded.github.io/images/eros-thoth-second-layer.jpg" alt="The second layer — surface labels above, consonant operators below" loading="lazy" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">Surface stream · Operator roots · Meaning is structure</div>
 </div>
 
@@ -1190,9 +1241,7 @@ What if this is not a trick?</strong></p>
 <p class="q">If a word contains an operation, what have you been missing every time you said it?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 7 · THE TWO SCIENTISTS -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 7 · TWO SCIENTISTS -->
 <section id="two-scientists">
 <h2>7 · The two scientists</h2>
 <p class="lede">You are not the only one arriving at this. From an entirely different direction — AI capability research — the same structural insight is being discovered.</p>
@@ -1266,12 +1315,15 @@ What if this is not a trick?</strong></p>
   <p>The implications are the same: if the layer is real, it can be taught, practiced, refined, formalized, and encoded. That is the story this book has been telling from page one. You are now at the moment where the two stories meet.</p>
 </div>
 
+<div class="connect">
+  <strong>Where this meets the corpus</strong>
+  The transform thesis in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> applies the same discipline to economics: read a mechanism by its primitives — burn, LP formation, buy-and-burn — not by its slogan. Same move, third substrate. The four law-forces Thoth serves — NaUn, Ra-Shen, Thoth, EROS — are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>.
+</div>
+
 <p class="q">If structure beats surface in AI, why would it not in the language you think with?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 8 · THE FOUR-CLASS KNOW GRID -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 8 · KNOW GRID -->
 <section id="grid">
 <h2>8 · The four-class know grid</h2>
 <p class="lede">Under every slogan sits a postulate. Under every freeze sits a leg of the cycle.</p>
@@ -1286,7 +1338,7 @@ What if this is not a trick?</strong></p>
 <p>If the drill does nothing for you, skip it. The grid still works on text alone.</p>
 
 <div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-frankness.jpg" alt="Frankness — declaration of freedom"/>
+  <img src="https://meaning-unconfounded.github.io/images/eros-frankness.jpg" alt="Frankness — declaration of freedom" loading="lazy" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">Frankness is a know-grid move: Must Be Known, chosen on purpose.</div>
 </div>
 
@@ -1314,9 +1366,7 @@ What if this is not a trick?</strong></p>
 <p class="q">Which leg are you standing on when you write in the chat?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
 <!-- 9 · CONSTRUCTED TONGUE -->
-<!-- ═══════════════════════════════════════════════════════════ -->
 <section id="tongue">
 <h2>9 · The constructed tongue — a working layer</h2>
 
@@ -1457,13 +1507,11 @@ What if this is not a trick?</strong></p>
 <p class="q">Fill the worksheet once. Post the skeleton in chat. The tongue grows where it is used.</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 10 · GUILD RULES -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 10 · GUILD -->
 <section id="guild">
 <h2>10 · Guild rules (Klingon model)</h2>
 <div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-notebook-studio.jpg" alt="Public Notebook Studio"/>
+  <img src="https://meaning-unconfounded.github.io/images/eros-notebook-studio.jpg" alt="Public Notebook Studio" loading="lazy" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">Kit not house. Language is part of the kit Stage 2 will animate.</div>
 </div>
 
@@ -1480,9 +1528,7 @@ What if this is not a trick?</strong></p>
 <p><strong>Contribution example.</strong> Proposed living-edge term: <em>SKRITH</em> — S-spread + K-cut + R-radiate + voiced end. Claimed force: "edge that keeps announcing itself." Bond test: does it clarify a warning, or only sound sharp? If three guild readers can restate the force in their own words and the bond test passes, it may sit on the living edge until canon review.</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 11 · DOGFOOD DICTIONARY -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 11 · DOGFOOD -->
 <section id="dogfood">
 <h2>11 · Dogfood dictionary</h2>
 <p class="lede">Eat your own operators. Define the world you are building.</p>
@@ -1511,9 +1557,7 @@ What if this is not a trick?</strong></p>
 </dl>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 12 · PRACTICE & STAGE 2 -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 12 · PRACTICE -->
 <section id="practice">
 <h2>12 · Practice &amp; Stage 2</h2>
 
@@ -1526,7 +1570,7 @@ What if this is not a trick?</strong></p>
 </ol>
 <p><strong>Stage 2 link.</strong> Comics, scripts, and UI copy need consistent voice. This guild supplies the voice rules; media guilds supply the frames. Start with names and chat skeletons before full conlang.</p>
 <div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="The Front Door"/>
+  <img src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="The Front Door" loading="lazy" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">Enter by work. Language is one of the tools behind the door.</div>
 </div>
 
@@ -1561,9 +1605,7 @@ What if this is not a trick?</strong></p>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- 13 · WHAT COULD BREAK THIS -->
-<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 13 · BREAK -->
 <section id="break">
 <h2>13 · What could break this</h2>
 <p class="lede">A claim that cannot be tested is not a claim. It is a belief. This section exists to make the consonant code falsifiable — and therefore stronger.</p>
@@ -1650,13 +1692,11 @@ What if this is not a trick?</strong></p>
 <p class="q">Which test will you run first?</p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
 <!-- 14 · CLOSE -->
-<!-- ═══════════════════════════════════════════════════════════ -->
 <section id="close">
 <h2>14 · Close</h2>
 <div class="fig">
-  <img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="The Living Egg"/>
+  <img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="The Living Egg" loading="lazy" onerror="this.parentElement.style.display='none'"/>
   <div class="cap">Inwards is forwards — in cosmology and in the word.</div>
 </div>
 
@@ -1688,6 +1728,11 @@ What if this is not a trick?</strong></p>
 
 <div class="frame-note">
   Sources re-homed under Thoth: Meaning Unconfound consonant tiers and SPREAD–SPRAY; Western Influence know-grid and stack; Gods of EROS operator stack. The Gorard interview excerpt is from <em>Theories of Everything</em>, 2026 — cited as independent convergence, not endorsement.
+</div>
+
+<div class="connect">
+  <strong>Where next in the corpus</strong>
+  The four law-forces Thoth serves — NaUn, Ra-Shen, Thoth, EROS — are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The transform that applies the same operator discipline to economics is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. The world the tongue describes is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>. Masks and residual actors — not operators — live in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>.
 </div>
 </section>
 
@@ -1729,28 +1774,76 @@ What if this is not a trick?</strong></p>
 <p class="q">What are you still learning that energy alone cannot teach?</p>
 </section>
 
-<footer>
-  <p><span class="gold">THE GIFT OF THOTH</span> · Anatomical Operators</p>
-  <p>EROS · Tenacity Through Integrity · t.me/Eros_Revival</p>
-  <p style="margin-top:1rem;font-size:.85rem;line-height:1.8;opacity:.9">
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a> ·
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a> ·
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a> ·
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a> ·
+<!-- ── MASTER FOOTER ── -->
+<footer class="master">
+  <div class="title-row">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span class="title">THE GIFT OF THOTH</span>
+  </div>
+  <p class="count">Anatomical operators · The second layer of language · EROS Library</p>
+
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
     <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
-  </p>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://t.me/Eros_Revival">Telegram</a>
+  </nav>
+
+  <p class="sig">The mouth is the first laboratory. Communication is bond.</p>
+  <p class="creedline">Tenacity Through Integrity</p>
+
+  <div class="pulse-row">
+    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07090a"/>
+      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07090a"/>
+      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
 </footer>
 
 </div>
 
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#8a8070;border-top:1px solid rgba(95,184,200,.18);margin-top:2rem">
-  First Edition · Rev 7 · 2026-10-07 · Gift of Thoth · Save as Gift_Of_Thoth.html<br/>
-  <em>The second layer of language · For humans, for education, for machines</em>
-</footer>
+<script>
+(function(){
+  "use strict";
+  var bar=document.getElementById('progressBar');
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    var pct=max>0?(h.scrollTop/max)*100:0;
+    if(bar)bar.style.width=pct+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var href=a.getAttribute('href');
+      if(href.length<2)return;
+      var t=document.querySelector(href);
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+</script>
 </body>
 </html>
