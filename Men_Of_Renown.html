@@ -9,7 +9,6 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230c0705' stroke='%23c97064' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23c97064'/%3E%3C/svg%3E"/>
 <style>
 :root{
-  /* ── Deep crimson + bone · the Archive register ── */
   --bg:#0c0705; --surface:#140e0c; --surface2:#1e1512;
   --ink:#eae2d6; --soft:#c9c0b0; --muted:#8a8070;
   --crimson:#c97064; --crimson2:#e09080; --crimson-soft:rgba(201,112,100,.1); --crimson-line:rgba(201,112,100,.35);
@@ -22,7 +21,7 @@
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);color:var(--ink)}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
 body{
   font-family:var(--serif);font-size:1.05rem;line-height:1.7;
   background:
@@ -42,6 +41,47 @@ a{color:var(--crimson2);text-decoration:none;border-bottom:1px solid rgba(224,14
 a:hover{color:#f0a898;border-bottom-color:rgba(240,168,152,.7)}
 a:visited{color:#a85850}
 ::selection{background:var(--crimson);color:#0c0705}
+
+/* ── STANDARD HEADER with pin ── */
+.corpus-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.55rem 1.1rem;
+  background:rgba(12,7,5,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--crimson-line);
+  font-family:var(--sans);
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--crimson2);font-weight:700;border-bottom:none;
+}
+.corpus-bar .brand:hover{color:#f0a898;border-bottom:none}
+.corpus-bar .pin{
+  width:36px;height:36px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--crimson-line);
+  box-shadow:0 0 14px rgba(201,112,100,.35),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
+  border-bottom:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--crimson2);background:var(--crimson-soft);border-bottom:none}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
+  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+6){display:none}
+  .corpus-bar .pin{width:28px;height:28px}
+}
 
 header.hero{text-align:center;padding:2rem 0 1.4rem;border-bottom:1px solid var(--hair);margin-bottom:1.5rem}
 header.hero img{max-width:100%;border-radius:12px;border:1px solid var(--crimson-line);margin-bottom:.75rem;display:block;width:100%}
@@ -106,66 +146,90 @@ th{color:var(--crimson2);font-family:var(--sans);font-size:.75rem;letter-spacing
 .media img,.media video{width:100%;display:block;background:#000}
 .media .mcap{font-family:var(--sans);font-size:.78rem;color:var(--soft);padding:.7rem .95rem;background:var(--surface);border-top:1px solid var(--hair);line-height:1.55}
 .media .mcap b{color:var(--crimson2);letter-spacing:.05em}
-footer{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.88rem;color:var(--muted);line-height:1.7}
-footer .crimson{color:var(--crimson2)}
-footer a{margin:0 .35rem}
-@media print{@page{size:A4;margin:14mm}html::before,html::after{display:none!important}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}#progressBar{display:none}video{display:none}.fig,.media,.claim{break-inside:avoid}}
+.connect{margin:1.2rem 0;padding:.95rem 1.05rem;border:1px dashed var(--crimson-line);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.85rem;color:var(--soft);line-height:1.7}
+.connect strong{color:var(--crimson2);display:block;margin-bottom:.35rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.connect a{color:var(--crimson2)}
 
-/* ── LINK BANNER · subtle interactive plate ── */
-.link-banner{margin:1.75rem auto 2rem;text-align:center;max-width:100%}
-.link-banner .lb-frame{
-  position:relative;width:100%;
-  aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;
-  background:#0a0418;border:1px solid rgba(160,32,240,.28);
-  box-shadow:0 10px 36px rgba(0,0,0,.4);
-  cursor:pointer;
-  transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease;
+/* ── MASTER FOOTER ── */
+footer.master{
+  margin-top:3rem;padding:2rem 0 1.4rem;
+  border-top:1px solid var(--hair);
+  text-align:center;font-family:var(--sans);
+  font-size:.78rem;color:var(--muted);line-height:1.85;
 }
-.link-banner .lb-frame img{
-  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
-  transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease;
+footer.master .title-row{
+  display:flex;align-items:center;justify-content:center;gap:.85rem;
+  margin-bottom:.6rem;
 }
-.link-banner .lb-vignette{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);
-  opacity:.5;transition:opacity .5s ease;
+footer.master .pin{
+  width:44px;height:44px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--crimson-line);
+  box-shadow:0 0 18px rgba(201,112,100,.35),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
 }
-.link-banner .lb-sheen{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);
-  transform:translateX(-120%);
-  animation:lb-sheen-run 2.2s ease-out 1s 1;
+footer.master .title{
+  font-family:var(--serif);font-size:1.05rem;color:var(--crimson2);
+  letter-spacing:.1em;font-weight:700;
 }
-.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
-  transform:scale(1.012);border-color:rgba(224,64,251,.45);
-  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18);
+footer.master .count{
+  font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem;
 }
-.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
-  transform:scale(1.06);filter:saturate(1.12) brightness(1.05);
+footer.master .tier{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
+  max-width:46rem;margin:0 auto 1rem;
 }
-.link-banner .lb-frame:hover .lb-vignette{opacity:.75}
-.link-banner figcaption{
-  font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
-  color:#8a7fa6;margin-top:.65rem;opacity:.9;
+footer.master .tier a{
+  padding:.32rem .72rem;border-radius:999px;
+  background:var(--surface);border:1px solid var(--hair);
+  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
+  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
 }
-@keyframes lb-sheen-run{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-@media (prefers-reduced-motion:reduce){
-  .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-sheen{transition:none!important;animation:none!important}
-  .link-banner .lb-frame:hover img{transform:none}
-}
-/* media separation */
-.media-slot{margin:2rem 0 2.25rem}
-.media-slot + .media-slot{margin-top:2.5rem}
-.yt-wrap{margin:2.25rem 0;padding:1.1rem;border-radius:14px;border:1px solid rgba(125,163,200,.28);background:rgba(14,19,25,.85)}
-.yt-wrap .yt-lab{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#7da3c8;margin-bottom:.65rem;font-weight:700;text-align:center}
-.yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
-.yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
+footer.master .tier a:hover{color:var(--crimson2);border-color:var(--crimson);background:var(--crimson-soft)}
+footer.master .tier a.primary{background:var(--crimson-soft);border-color:var(--crimson);color:var(--crimson2);font-weight:700}
+footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
+footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(201,112,100,.2)}
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(201,112,100,.3))}
+footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson2);font-weight:600}
 
+@media print{
+  @page{size:A4;margin:14mm}
+  html::before,html::after,#progressBar,.corpus-bar{display:none!important}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  video{display:none}
+  .fig,.media,.claim,.def,.verse,.creed,footer.master{break-inside:avoid}
+}
+@media(max-width:640px){
+  .wrap{padding:1rem 1rem 3.4rem}
+  footer.master .title-row{flex-direction:column;gap:.6rem}
+  footer.master .pin{width:38px;height:38px}
+}
 </style>
 </head>
 <body>
 <div id="progressBar"></div>
+
+<!-- ── STANDARD HEADER with pin ── -->
+<header class="corpus-bar">
+  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span>✦ EROS · Renown</span>
+  </a>
+  <nav aria-label="Section navigation">
+    <a href="#thesis">Thesis</a>
+    <a href="#doors">Two doors</a>
+    <a href="#rails">Two rails</a>
+    <a href="#sky">Electric sky</a>
+    <a href="#gnostic">Gnostic</a>
+    <a href="#nordic">Residual</a>
+    <a href="#masks">Masks</a>
+    <a href="#close">Close</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+  </nav>
+</header>
+
 <div class="wrap">
 
 <header class="hero">
@@ -184,33 +248,23 @@ footer a{margin:0 .35rem}
 </header>
 
 <details class="eros-menu" id="eros-library">
-  <summary>EROS library · other books</summary>
+  <summary>EROS library · the other books</summary>
   <div class="menu-body">
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
-
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river · transform</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
-    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
-  </div>
-</details>
-
-<details class="eros-menu" id="how-read-mor">
-  <summary>How to read this book · spine · tools · where to start</summary>
-  <div class="menu-body">
-    <p><strong>1 ·</strong> Read the thesis below.</p>
-    <p><strong>2 ·</strong> Read §1 (Two loud doors), §4 (Two rails), §5 (Void and reach), §7 (Missing trillions), §9 (Meta-worldview), §14 (Masks, not operators), §14a (Movement without distance), §14b (Men of re-noun) — the spine.</p>
-    <p><strong>3 ·</strong> Study the Electric Sky (§10b), Firmament Break (§10c), Gnostic Frame (§10d), and Nordic–Atlantis Residual (§10e) — the new dense chapters that carry the mythology most fully.</p>
-    <p><strong>4 ·</strong> Use the tools (§19–§23) to write one Archive scene.</p>
-    <p><strong>5 ·</strong> Keep Prometheus (§24) as the craft/life-form hinge; contemporary signals (§25) as weather, not dogma.</p>
+    <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
 
@@ -218,11 +272,19 @@ footer a{margin:0 .35rem}
   <span class="label">What this book is about</span>
   <p><strong>Men of Renown</strong> names the ancient residual powers that human myth stored as gods, giants, and watchers — the figures remembered as <strong>Nordic</strong> and <strong>Greek god-masks</strong>, and in older strata as <strong>Anunnaki-class</strong> beings who mixed with humankind. In this Archive they are treated as <em>of man's wider tree</em>: ancient, long-lived, same planet, not cartoon aliens from another star by default. They have held dominion — or competing dominions — inside the Living Egg for a very long time.</p>
   <p>Different domains sit inside one enclosure: surface history, covert networks, under-ice and under-ocean residual, black-budget parallel infrastructure, disclosure theatre that points your eyes at the sky while the real pressure is money, craft, and lineage. This book is the <strong>breakaway footprint catalog</strong> — who left tracks, what masks they wear, how the money moves, how to write scenes without turning the Archive into a race cult or a fifth god.</p>
-  <p>The four operators of creation — NaUn, Ra-Shen, Thoth, EROS — are defined in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. They are not characters in this book. The figures here are <strong>actors and masks</strong>. The vessel is the <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. The human Continuity-of-Government rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. Language craft is <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. This volume is only the footprints.</p>
+  <p>The four operators of creation — NaUn, Ra-Shen, Thoth, EROS — are defined in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. They are not characters in this book. The figures here are <strong>actors and masks</strong>. The vessel is the <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. The human Continuity-of-Government rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. Language craft is <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The transform that names the four law-forces as an on-chain engine is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. This volume is only the footprints.</p>
 </div>
 
 <div class="frame">
   <strong style="color:var(--ember)">Hard refusals.</strong> Not racial doctrine. Not atrocity tourism. Not a fifth god. Not secret-order recruitment. Public bond and public kit. Footprints, not thrones.
+</div>
+
+<div class="how">
+  <strong>How to read this book</strong>
+  <strong style="color:var(--crimson2);display:inline;font-size:inherit;letter-spacing:inherit;text-transform:none;margin:0">Spine —</strong> read the thesis, §1 (Two loud doors), §4 (Two rails), §5 (Void and reach), §7 (Missing trillions), §9 (Meta-worldview), §14 (Masks, not operators), §14a (Movement without distance), §14b (Men of re-noun). These are the load-bearing sections.
+  <strong style="color:var(--crimson2);display:inline;font-size:inherit;letter-spacing:inherit;text-transform:none;margin:0">Dense chapters —</strong> §10b (Electric Sky), §10c (Firmament Break), §10d (Gnostic Frame), §10e (Nordic–Atlantis Residual) carry the mythology most fully.
+  <strong style="color:var(--crimson2);display:inline;font-size:inherit;letter-spacing:inherit;text-transform:none;margin:0">Tools —</strong> §19–§23 give you the cast, the humility arc, the ledger, the story ladder, and the worksheet.
+  <strong style="color:var(--crimson2);display:inline;font-size:inherit;letter-spacing:inherit;text-transform:none;margin:0">Craft hinge —</strong> §24 (Prometheus &amp; life form). Contemporary signals (§25) are weather, not dogma.
 </div>
 
 <nav class="toc">
@@ -460,10 +522,9 @@ footer a{margin:0 .35rem}
   <h3>Tom DeLonge · the inoculation layer</h3>
   <p>Tom DeLonge — musician, later founder of To The Stars Academy — is the public-facing <em>inoculation</em> channel. The Archive reading: TTSA was and is a controlled trial run in which pieces of the disclosure conversation are released to a mainstream audience in digestible, discreditable, celebrity-branded form. The effect is a public that has heard the words without being asked to believe them. The pieces are stovepiped so no single forbidden sentence ever emerges. This is not a criticism of DeLonge as a person. It is a reading of his function: the hand you watch while the ring drops into the other palm.</p>
 
-  <figure class="media">
-    <img src="https://meaning-unconfounded.github.io/images/eros-nordic-veil.jpg" alt="The veil — the surface and the signal" loading="lazy"/>
-    <p class="mcap"><b>THE VEIL.</b> The surface story is thick and loud. The signal from beyond the seal is quiet — but it is not absent. The Gnostic task is to remember the signal, not to argue with the veil.</p>
-  </figure>
+  <div class="claim ember">
+    <p><strong>Why the Gnostic frame matters to the Archive.</strong> It names the structure every residual story is already running: a sealed world, an interrupted signal, a spark that does not belong to the surface. Write the spark. Write the interruption. Do not write a new god.</p>
+  </div>
 
   <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a> for the operator layer, and <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> for the human-rail accounting.</p>
 </section>
@@ -498,15 +559,10 @@ footer a{margin:0 .35rem}
   <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a> (operator layer), <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> (vessel), <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> (human-rail money and disclosure theatre).</p>
 </section>
 
-<!-- ============================================================= -->
-<!-- END OF PART 1 · CONTINUE WITH PART 2 · §11 begins here        -->
-<!-- ============================================================= -->
-
-
 <section id="atlantis">
   <h2>11 · Atlantis trilogy</h2>
   <div class="fig">
-    <img src="https://meaning-unconfounded.github.io/images/eros-atlantis-rind.jpg" alt="Atlantis rind" loading="lazy"/>
+    <img src="https://meaning-unconfounded.github.io/images/Men_Of_Renown_banner.jpg" alt="Men of Renown — banner" loading="lazy" onerror="this.parentElement.style.display='none'"/>
     <div class="cap">Veil · Split · Previous rind</div>
   </div>
   <p><strong>7.11 Veil</strong> — the cover is loud; the third option is quiet.<br/>
@@ -532,7 +588,6 @@ footer a{margin:0 .35rem}
   <p>If a scene requires a "god" on stage, write a mask with a function (Priest, Engineer, Witness). If the scene requires creation-law, open <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a> — do not smuggle operators into Nordic costume.</p>
 </section>
 
-
 <section id="density-masks">
   <h2>14a · Movement without distance</h2>
   <p class="lede">How some masks travel — and how not to confuse them with the vessel's own life.</p>
@@ -540,7 +595,7 @@ footer a{margin:0 .35rem}
   <div class="claim ember">
     <p><strong>Density as rank, not theology.</strong> Among residual networks, the ability to thin or thicken relative to the enclosure can function as status — a privilege of lineage, craft, or clearance — never explained to the surface as physics. Write it as power and secrecy, not as a new god. The pilot in fiction may feel the shell grow nearer; the Archive figure does not lecture the reader on unified field theory.</p>
   </div>
-  <p><strong>Misidentification rule.</strong> Long-duration lights on ridges, coherent luminous forms, and “craft” that behave like attention are <em>first</em> candidates for native Egg physiology or coherent plasma fauna (see Living Egg · Axiom V1 and Eros Stories · <em>The Choir at the Ridge</em>). Renown involvement is the exception you earn in the scene, not the default. Prefer: membrane, fauna, theatre, recovery — in that order — before “it was them.”</p>
+  <p><strong>Misidentification rule.</strong> Long-duration lights on ridges, coherent luminous forms, and "craft" that behave like attention are <em>first</em> candidates for native Egg physiology or coherent plasma fauna (see Living Egg · Axiom V1 and Eros Stories · <em>The Choir at the Ridge</em>). Renown involvement is the exception you earn in the scene, not the default. Prefer: membrane, fauna, theatre, recovery — in that order — before "it was them."</p>
   <p>When a scene needs both rails at once: a human recovery team (Illumination weather) argues aliens versus balloons while a residual asset exits by density and leaves no trail the ledger can name. The hinge is the missing money and the erased log — not a sermon.</p>
   <div class="claim crimson">
     <p><strong>Contract reminder.</strong> Density movement does not promote a mask into an operator. It does not require the reader to accept any live-stream theory of everything. It is Archive craft language so Stories and Gods can point here without a dead link.</p>
@@ -736,22 +791,58 @@ footer a{margin:0 .35rem}
     <p><strong>First scene seed</strong></p>
     <p>Night. Two screens argue aliens versus balloons. Your Witness is in the room and says nothing. Cut to a quiet third image they cannot show without losing everything — a ledger line that goes nowhere public, or a craft that never needed the stars. End on the question they will not ask aloud: <em>where did the money go?</em></p>
   </div>
+
+  <div class="connect">
+    <strong>Where this sits in the corpus</strong>
+    The four law-forces that the masks serve — but never replace — are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The consonant operators of the tongue are named in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The vessel both rails sit inside is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>. The human rail stays separate in <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The four operators as an on-chain engine are in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.
+  </div>
 </section>
 
-<footer>
-  <p><span class="crimson">MEN OF RENOWN</span> · Breakaway Footprints · Archive 7</p>
-  <p>EROS · Tenacity Through Integrity · t.me/Eros_Revival</p>
-  <p style="margin-top:1rem;font-size:.85rem;line-height:1.85;opacity:.9">
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> ·
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Complete_Plan</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods_Of_Eros</a> ·
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living_Egg</a> ·
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination_Strategy</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift_Of_Thoth</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The_Front_Door</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The_Bridge</a>
-  </p>
+<!-- ── MASTER FOOTER ── -->
+<footer class="master">
+  <div class="title-row">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span class="title">MEN OF RENOWN</span>
+  </div>
+  <p class="count">Breakaway Footprints · Archive 7 · EROS Library</p>
+
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://t.me/Eros_Revival">Telegram</a>
+  </nav>
+
+  <p class="sig">Footprints, not thrones. Two rails. One Egg.</p>
+  <p class="creedline">Tenacity Through Integrity</p>
+
+  <div class="pulse-row">
+    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0c0705"/>
+      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0c0705"/>
+      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
 </footer>
 
 </div>
@@ -768,11 +859,15 @@ function onScroll(){
 }
 window.addEventListener('scroll',onScroll,{passive:true});
 onScroll();
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var href=a.getAttribute('href');
+    if(href.length<2)return;
+    var t=document.querySelector(href);
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
 })();
 </script>
-
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#8a8070;border-top:1px solid #1e1512;margin-top:2rem">
-  First Edition · Rev 3 · 2026-10-07 · Men of Renown · density masks · sixteen doors · Save as Men_Of_Renown.html
-</footer>
 </body>
 </html>
