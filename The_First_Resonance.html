@@ -4,26 +4,19 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>EROS · The First Resonance — The Opening Salvo</title>
-<meta name="description" content="The opening marketing and educational asset for the EROS plan. A transmission novel that teaches the precepts while inviting commitment, creation, and community."/>
+<meta name="description" content="A transmission novel that teaches the precepts while inviting commitment, creation, and community. Book One of the EROS teaching corpus."/>
 <meta property="og:title" content="EROS · The First Resonance"/>
 <meta property="og:description" content="A ray. A visitor. A stone. A practice. The slow ordinary beginning of a resonance."/>
 <meta property="og:image" content="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg"/>
 <meta name="theme-color" content="#ede6ff"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%23ede6ff' stroke='%237c3aed' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%237c3aed'/%3E%3C/svg%3E" rel="icon"/>
 <style>
-/* ═══════════════════════════════════════════════════════════════════
-   EROS · THE FIRST RESONANCE
-   PulseChain palette · violet → magenta → cyan → TitanX green
-   A PulseChain native book. Vibrant at the start. Calm at the end.
-   ═══════════════════════════════════════════════════════════════════ */
-
-:root {
+:root{
   --measure: 34rem;
   --measure-wide: 44rem;
   --leading: 1.88;
   --para: 1.2rem;
   --scene: 2.8rem;
-
   --paper: #ede6ff;
   --paper-raised: #ded0fa;
   --ink: #24064d;
@@ -35,13 +28,11 @@
   --accent-soft: rgba(124,58,237,.14);
   --rule: rgba(0,0,0,.09);
   --glow: 0 0 30px rgba(124,58,237,.30);
-
   --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --display: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
 }
-
 body[data-palette="prologue"],
 body[data-palette="ch1"], body[data-palette="ch2"],
 body[data-palette="ch3"], body[data-palette="ch4"] {
@@ -84,9 +75,8 @@ body[data-palette="epilogue"], body[data-palette="appendix"] {
   --accent-line: rgba(21,128,61,.42); --accent-soft: rgba(21,128,61,.13);
   --glow: 0 0 30px rgba(21,128,61,.26);
 }
-
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; scroll-padding-top:1.4rem; background: var(--paper); }
+html { scroll-behavior:smooth; scroll-padding-top:4.5rem; background: var(--paper); }
 body {
   font-family: var(--serif);
   font-size: 1.13rem;
@@ -99,22 +89,62 @@ body {
   text-rendering: optimizeLegibility;
   padding-bottom: 4rem;
 }
-
 a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: color .25s, border-color .25s; }
 a:hover { border-bottom-color: var(--accent); }
 h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -.015em; line-height: 1.25; color: var(--ink); }
 h1 { font-size: 2.3rem; text-wrap: balance; }
 h2 { font-size: 1.55rem; color: var(--accent); }
 h3 { font-size: 1.2rem; color: var(--ink-soft); }
-h4 { font-family: var(--sans); font-size: .9rem; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
+h4 { font-size: .9rem; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
 p { margin: var(--para) 0; overflow-wrap: break-word; }
 p em { color: var(--accent); font-style: italic; font-weight: 500; }
 strong { color: var(--ink); font-weight: 700; }
-
 .page { max-width: var(--measure); margin: 0 auto; padding: 1.6rem 1.5rem 5rem; }
 @media (min-width: 720px) { .page { padding: 2.2rem 2.2rem 6rem; } }
 
-/* ─── HERO ──────────────────────────────────────────── */
+/* ─── STANDARD HEADER with pin ─── */
+.corpus-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.55rem 1.1rem;
+  background:rgba(237,230,255,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--accent-line);
+  font-family:var(--sans);
+  transition:background 1.2s ease;
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;border-bottom:none;
+}
+.corpus-bar .brand:hover{color:var(--emblem);border-bottom:none}
+.corpus-bar .pin{
+  width:36px;height:36px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--accent-line);
+  box-shadow:0 0 14px var(--accent-soft),0 0 0 1px rgba(255,255,255,.5) inset;
+  flex-shrink:0;background:var(--paper-raised);
+}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-muted);padding:.35rem .6rem;border-radius:999px;
+  border-bottom:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--accent);background:var(--accent-soft);border-bottom:none}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
+  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+5){display:none}
+  .corpus-bar .pin{width:28px;height:28px}
+}
+
+/* ─── HERO ─── */
 .hero {
   min-height: 88vh;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -128,7 +158,6 @@ strong { color: var(--ink); font-weight: 700; }
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, var(--accent-soft), transparent 62%);
   pointer-events: none; z-index: -1;
-  transition: background 1.2s ease;
 }
 .pulse-banner {
   width: min(720px, 92vw);
@@ -137,16 +166,9 @@ strong { color: var(--ink); font-weight: 700; }
   border-radius: 18px;
   overflow: hidden;
   border: 2px solid var(--accent);
-  box-shadow: 0 12px 48px rgba(0,0,0,.22), 0 0 48px var(--accent-soft), inset 0 0 80px rgba(0,0,0,.08);
-  transition: border-color 1.2s ease, box-shadow 1.2s ease;
+  box-shadow: 0 12px 48px rgba(0,0,0,.22), 0 0 48px var(--accent-soft);
 }
 .pulse-banner img { display: block; width: 100%; height: auto; filter: contrast(1.06) saturate(1.12); }
-.pulse-banner::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,.10) 0%, transparent 35%),
-              linear-gradient(315deg, rgba(0,0,0,.14) 0%, transparent 45%);
-  pointer-events: none;
-}
 .pulse-banner-caption {
   font-family: var(--sans); font-size: .72rem;
   letter-spacing: .22em; text-transform: uppercase;
@@ -173,8 +195,13 @@ strong { color: var(--ink); font-weight: 700; }
   background: linear-gradient(90deg, #7c3aed, #d920cc, #06a3c7, #0a9d68);
   margin: 2.2rem auto 0; opacity: .9; border-radius: 2px;
 }
+.hero-byline {
+  font-family: var(--sans); font-size: .95rem;
+  letter-spacing: .04em; color: var(--accent);
+  margin: .8rem auto 0; font-weight: 600; max-width: 28rem;
+}
 
-/* ─── FRANK PURPOSE ───────────────────────────────── */
+/* ─── FRANK PURPOSE ─── */
 .frank-purpose {
   max-width: var(--measure-wide);
   margin: 3.2rem auto;
@@ -192,36 +219,18 @@ strong { color: var(--ink); font-weight: 700; }
   border-radius: 18px 18px 0 0;
 }
 .frank-purpose h3 {
-  font-family: var(--display);
-  font-size: 1.35rem;
-  letter-spacing: .04em;
-  text-transform: none;
-  font-weight: 700;
-  color: var(--accent);
-  margin: 0 0 .35rem;
+  font-family: var(--display); font-size: 1.35rem;
+  letter-spacing: .04em; font-weight: 700; color: var(--accent); margin: 0 0 .35rem;
 }
-.frank-purpose .fp-note {
-  font-style: italic; color: var(--ink-muted);
-  font-size: 1rem; margin: 0 0 1.3rem;
-}
-.frank-purpose p {
-  font-family: var(--display);
-  font-size: 1.18rem;
-  line-height: 1.85;
-  letter-spacing: .003em;
-  color: var(--ink);
-  margin: .9rem 0;
-}
-.frank-purpose p:first-of-type { font-size: 1.24rem; }
+.frank-purpose .fp-note { font-style: italic; color: var(--ink-muted); font-size: 1rem; margin: 0 0 1.3rem; }
+.frank-purpose p { font-family: var(--display); font-size: 1.18rem; line-height: 1.85; color: var(--ink); margin: .9rem 0; }
 .frank-purpose strong { color: var(--accent); font-weight: 700; }
 
-/* ─── FOLDOUTS ─────────────────────────────────────── */
+/* ─── FOLDOUTS ─── */
 .foldout {
   max-width: var(--measure-wide); margin: 1.1rem auto;
   border: 1px solid var(--rule); border-radius: 14px;
-  background: var(--paper-raised);
-  transition: border-color .4s, box-shadow .4s;
-  overflow: hidden;
+  background: var(--paper-raised); overflow: hidden;
 }
 .foldout[open] { border-color: var(--accent-line); box-shadow: var(--glow); }
 .foldout > summary {
@@ -233,10 +242,7 @@ strong { color: var(--ink); font-weight: 700; }
   display: flex; align-items: center; gap: .8rem;
 }
 .foldout > summary::-webkit-details-marker { display: none; }
-.foldout > summary::before {
-  content: "◆"; font-size: .55rem; color: var(--accent);
-  opacity: .85; transition: transform .3s;
-}
+.foldout > summary::before { content: "◆"; font-size: .55rem; color: var(--accent); opacity: .85; transition: transform .3s; }
 .foldout[open] > summary::before { transform: rotate(45deg); }
 .foldout > summary .label-note {
   font-family: var(--serif); font-style: italic;
@@ -245,13 +251,9 @@ strong { color: var(--ink); font-weight: 700; }
 }
 .foldout-body { padding: 0 1.5rem 1.7rem; color: var(--ink-soft); font-size: .97rem; line-height: 1.78; }
 .breath { font-family: var(--serif); font-size: 1.1rem; line-height: 1.78; color: var(--ink); max-width: 38rem; margin: 0 auto .95rem; }
-.breath:last-child { margin-bottom: 0; }
 .breath strong { color: var(--accent); }
 .arc-list { display: grid; grid-template-columns: 1fr; gap: .5rem; font-family: var(--sans); font-size: .9rem; line-height: 1.55; margin-top: .5rem; }
-.arc-list > div {
-  display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem;
-  padding: .55rem 0; border-bottom: 1px solid var(--rule); align-items: baseline;
-}
+.arc-list > div { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
 .arc-list > div:last-child { border-bottom: none; }
 .arc-list b { color: var(--accent); font-family: var(--mono); font-size: .82rem; font-weight: 600; text-align: right; }
 .arc-list span { color: var(--ink-soft); }
@@ -260,7 +262,7 @@ strong { color: var(--ink); font-weight: 700; }
 .library-list a { padding: .4rem 0; border-bottom: 1px solid var(--rule); color: var(--ink-soft); transition: color .2s, padding-left .2s; }
 .library-list a:hover { color: var(--accent); padding-left: .35rem; border-bottom-color: var(--accent-line); }
 
-/* ─── CREED ───────────────────────────────────────── */
+/* ─── CREED ─── */
 .creed {
   max-width: 32rem; margin: 3.8rem auto;
   padding: 2.4rem 1.7rem; text-align: center;
@@ -274,7 +276,7 @@ strong { color: var(--ink); font-weight: 700; }
   font-family: var(--display); font-size: 1.28rem; font-style: italic; font-weight: 400;
 }
 
-/* ─── TOC ─────────────────────────────────────────── */
+/* ─── TOC ─── */
 .toc-wrap { max-width: var(--measure); margin: 3.2rem auto 2.2rem; padding: 0 1.4rem; }
 .toc-title {
   font-family: var(--sans); font-size: .7rem;
@@ -292,7 +294,7 @@ strong { color: var(--ink); font-weight: 700; }
 .toc a:hover { color: var(--accent); padding-left: .4rem; }
 .toc a .n { font-family: var(--mono); font-size: .78rem; color: var(--accent); min-width: 2.1rem; font-weight: 600; }
 
-/* ─── ARRIVAL ─────────────────────────────────────── */
+/* ─── ARRIVAL ─── */
 .chapter { margin: 0; }
 .arrival {
   min-height: 68vh;
@@ -326,7 +328,7 @@ strong { color: var(--ink); font-weight: 700; }
   padding: .1em .15em 0 0; color: var(--accent); font-weight: 400;
 }
 
-/* ─── SCENE BREAKS ────────────────────────────────── */
+/* ─── SCENE BREAKS ─── */
 .scene-break {
   text-align: center; color: var(--ink-muted);
   padding: var(--scene) 0; font-size: .95rem;
@@ -338,7 +340,7 @@ strong { color: var(--ink); font-weight: 700; }
 .scene-break.teach::before { content: "—  ✦  —"; letter-spacing: .5em; color: var(--accent); }
 .scene-break.threshold::before { content: "·  ○  ·"; letter-spacing: .7em; }
 
-/* ─── BLOCK VOCABULARY ────────────────────────────── */
+/* ─── BLOCK VOCABULARY ─── */
 .beat {
   text-align: center; font-style: italic;
   font-size: 1.08rem; color: var(--ink-soft);
@@ -384,7 +386,6 @@ strong { color: var(--ink); font-weight: 700; }
   background: var(--paper-raised); border-left: 4px solid var(--accent);
   padding: 1.2rem 1.35rem; margin: var(--scene) auto; max-width: 34rem;
   border-radius: 0 10px 10px 0; color: var(--ink); line-height: 1.72;
-  box-shadow: 0 4px 16px rgba(0,0,0,.06);
 }
 .record::before {
   content: "notebook"; position: absolute; top: -.72rem; left: 1rem;
@@ -431,10 +432,7 @@ strong { color: var(--ink); font-weight: 700; }
   transition: background .2s, color .2s;
 }
 .prompt button:hover { background: var(--accent); color: var(--paper); }
-.prompt .kept {
-  display: none; font-family: var(--sans); font-size: .78rem;
-  color: var(--ink-muted); margin-top: .7rem; letter-spacing: .04em;
-}
+.prompt .kept { display: none; font-family: var(--sans); font-size: .78rem; color: var(--ink-muted); margin-top: .7rem; letter-spacing: .04em; }
 .prompt.saved .kept { display: block; }
 .date {
   margin: var(--scene) auto; max-width: 18rem;
@@ -458,21 +456,21 @@ strong { color: var(--ink); font-weight: 700; }
 .lesson h4 { margin-bottom: .5rem; }
 .lesson p { font-size: 1rem; margin: .5rem 0; }
 
-/* ─── PLATES ──────────────────────────────────────── */
-.plate { margin: var(--scene) auto; max-width: 100%; text-align: center; position: relative; }
-.plate img, .plate svg {
+/* ─── PLATES · clean, no clustering ─── */
+.plate { margin: 2.4rem auto; max-width: 100%; text-align: center; position: relative; }
+.plate img {
   max-width: 100%; height: auto; border-radius: 14px;
   display: block; margin: 0 auto;
   border: 3px solid var(--accent);
   outline: 1px solid rgba(0,0,0,.18); outline-offset: -3px;
   filter: contrast(1.06) saturate(1.10) brightness(1.01);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.18) inset, 0 10px 40px rgba(0,0,0,.22), 0 0 36px var(--accent-soft);
-  transition: transform .5s ease, box-shadow .5s ease, filter .5s ease, border-color 1.2s ease;
+  box-shadow: 0 10px 40px rgba(0,0,0,.22), 0 0 36px var(--accent-soft);
+  transition: transform .5s ease, box-shadow .5s ease, filter .5s ease;
 }
-.plate img:hover, .plate svg:hover {
+.plate img:hover {
   transform: translateY(-3px) scale(1.004);
   filter: contrast(1.09) saturate(1.15) brightness(1.02);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.24) inset, 0 18px 55px rgba(0,0,0,.30), 0 0 52px var(--accent-soft);
+  box-shadow: 0 18px 55px rgba(0,0,0,.30), 0 0 52px var(--accent-soft);
 }
 .plate figcaption {
   font-family: var(--sans); font-size: .8rem;
@@ -480,19 +478,25 @@ strong { color: var(--ink); font-weight: 700; }
 }
 .plate.video-plate video {
   max-width: 100%; width: 100%; height: auto;
-  border-radius: 14px;
-  border: 3px solid var(--accent);
-  outline: 1px solid rgba(0,0,0,.18); outline-offset: -3px;
+  border-radius: 14px; border: 3px solid var(--accent);
   display: block; margin: 0 auto; background: #000;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.15) inset, 0 12px 44px rgba(0,0,0,.28), 0 0 36px var(--accent-soft);
-  transition: border-color 1.2s ease, box-shadow 1.2s ease;
+  box-shadow: 0 12px 44px rgba(0,0,0,.28), 0 0 36px var(--accent-soft);
+}
+.plate.banner {
+  margin: 2.8rem auto;
+  max-width: min(820px,96vw);
+}
+.plate.banner img {
+  width: 100%; max-height: 200px; object-fit: cover;
+  border-width: 1px; border-color: var(--accent-line);
 }
 
-/* ─── FREQUENCY RIBBON ────────────────────────────── */
+/* ─── FREQUENCY RIBBON ─── */
 .frequency {
   position: fixed; bottom: 0; left: 0; right: 0;
   background: var(--paper-raised); border-top: 1px solid var(--rule);
-  z-index: 900; pointer-events: none; transition: background 1.2s ease;
+  z-index: 900; pointer-events: none;
+  transition: background 1.2s ease;
 }
 .frequency-bar {
   height: 4px; width: 0;
@@ -505,14 +509,55 @@ strong { color: var(--ink); font-weight: 700; }
   padding: .55rem 1.4rem .6rem;
   font-family: var(--sans); font-size: .7rem;
   letter-spacing: .08em; color: var(--ink-muted);
-  transition: color 1.2s ease;
 }
 .frequency-label .ch { color: var(--accent); font-weight: 700; }
-.frequency-label .n { color: var(--ink-muted); }
 
-/* ─── RETURN RIBBON ───────────────────────────────── */
+/* ─── FOOTER ─── */
+footer.master {
+  margin-top: 5rem; padding: 2rem 1rem 1.4rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans); font-size: .78rem;
+  color: var(--ink-muted); text-align: center; line-height: 1.85;
+}
+footer.master .title-row {
+  display: flex; align-items: center; justify-content: center; gap: .85rem;
+  margin-bottom: .6rem;
+}
+footer.master .pin {
+  width: 44px; height: 44px; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-line);
+  box-shadow: 0 0 18px var(--accent-soft), 0 0 0 1px rgba(255,255,255,.4) inset;
+  flex-shrink: 0; background: var(--paper-raised);
+}
+footer.master .title { font-family: var(--display); font-size: 1.05rem; color: var(--accent); letter-spacing: .1em; font-weight: 700; }
+footer.master .count { font-style: italic; color: var(--ink-soft); font-size: .9rem; margin-bottom: 1rem; }
+footer.master .tier {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem;
+  max-width: 46rem; margin: 0 auto 1rem;
+}
+footer.master .tier a {
+  padding: .32rem .72rem; border-radius: 999px;
+  background: var(--paper-raised); border: 1px solid var(--accent-line);
+  color: var(--ink-soft); font-size: .7rem; letter-spacing: .05em;
+  border-bottom: none; transition: color .18s, background .18s, border-color .18s;
+}
+footer.master .tier a:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+footer.master .tier a.primary { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+footer.master .sig { font-family: var(--display); font-style: italic; color: var(--ink-soft); font-size: .95rem; margin-top: 1rem; }
+footer.master .line { font-family: var(--display); font-style: italic; color: var(--ink-muted); font-size: .85rem; margin-top: .6rem; }
+footer.master .built-on {
+  margin-top: 1.4rem; display: flex; align-items: center; justify-content: center; gap: .7rem;
+  padding: .85rem 1.2rem;
+  background: var(--paper-raised); border: 1px solid var(--accent-line);
+  border-radius: 999px; max-width: 24rem; margin-left: auto; margin-right: auto;
+  font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 700;
+}
+footer.master .built-on .pin { width: 32px; height: 32px; }
+
+/* ─── RETURN RIBBON ─── */
 .return {
-  position: fixed; top: 14px; left: 50%;
+  position: fixed; top: 60px; left: 50%;
   transform: translate(-50%, -140%);
   font-family: var(--sans); font-size: .7rem;
   letter-spacing: .14em; text-transform: uppercase;
@@ -525,263 +570,28 @@ strong { color: var(--ink); font-weight: 700; }
 }
 .return.show { transform: translate(-50%, 0); opacity: 1; }
 
-/* ─── FOOTER ──────────────────────────────────────── */
-footer {
-  margin-top: 5rem; padding-top: 2.4rem;
-  border-top: 1px solid var(--rule);
-  font-family: var(--sans); font-size: .85rem;
-  color: var(--ink-muted); text-align: center; line-height: 2.15;
-}
-footer .final-line {
-  font-family: var(--display); font-style: italic;
-  font-size: 1.25rem; color: var(--accent);
-  margin-top: 1.5rem; letter-spacing: .03em;
-}
-footer .pulse-row {
-  display: flex; align-items: center; justify-content: center;
-  gap: .7rem; flex-wrap: wrap; margin-top: 1.4rem;
-  padding-top: 1.2rem; border-top: 1px solid var(--rule);
-}
-footer .pulse-row svg { filter: drop-shadow(0 0 10px var(--accent-soft)); }
-footer .pulse-row span {
-  font-size: .66rem; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--accent); font-weight: 700;
-}
-
-/* ─── RESPONSIVE ──────────────────────────────────── */
-@media (max-width: 640px) {
-  body { font-size: 1.05rem; }
-  .page { padding: 1.2rem 1.15rem 4rem; }
-  .hero-title { font-size: 2.3rem; }
-  .arrival-title { font-size: 1.75rem; }
-  .drop { font-size: 2.7rem; }
-  .frequency-label { font-size: .65rem; padding: .45rem 1rem .5rem; }
-  .pull { font-size: 1.15rem; padding: 1.1rem .9rem; }
-  .frank-purpose { padding: 1.6rem 1.4rem; }
-  .frank-purpose h3 { font-size: 1.15rem; }
-  .frank-purpose p { font-size: 1.05rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-}
-@media print {
-  body { background: #fff !important; color: #111 !important; padding: 0; }
-  .frequency, .return { display: none !important; }
-  .page { max-width: 42rem; padding: 0; }
-  .chapter { break-before: page; }
-  .arrival { min-height: auto; padding: 1rem 0; }
-}
-#freqBar {
-  position: fixed; top: 0; left: 0;
-  height: 5px; width: 0;
-  background: linear-gradient(90deg, var(--accent), var(--emblem), var(--accent));
-  z-index: 9999;
-  transition: width .12s linear, background 1.2s ease;
-  box-shadow: 0 0 14px var(--accent-soft);
-}
-
-/* ═════════ Editor's layer · shaded voices, exhibits, reader controls ═════════ */
-.arrival-time{font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;color:var(--ink-muted);margin-top:1.1rem}
-.chapter-body .epi{max-width:27rem;margin:0 auto 2.4rem;text-align:center;font-style:italic;font-size:1rem;line-height:1.65;color:var(--ink-soft)}
-.chapter-body .epi .by{display:block;margin-top:.45rem;font-family:var(--sans);font-style:normal;font-size:.74rem;letter-spacing:.04em;color:var(--ink-muted)}
-.chapter-body .talk{max-width:var(--measure);margin:1.7rem auto;padding:.3rem 0;border-left:3px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),transparent 92%);border-radius:0 12px 12px 0}
-.chapter-body .talk p{max-width:none;margin:0;padding:.42rem 1.1rem .42rem 1.15rem}
-.chapter-body .talk p+p{border-top:1px dashed var(--rule)}
-.chapter-body .talk p.nar{font-style:italic;color:var(--ink-muted);font-size:.94em;padding-top:.3rem;padding-bottom:.3rem}
-.chapter-body p.tq{padding:.85rem 1.1rem .85rem 1.2rem;background:var(--paper-raised);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;margin-top:1.6rem;margin-bottom:1.6rem}
-html.plain .chapter-body .talk,html.plain .chapter-body p.tq{background:none;border-left:0;padding-left:0}
-html.plain .chapter-body .talk p{padding-left:0}
-html.sans .chapter-body p{font-family:var(--sans)}
-.exhibit{position:relative;max-width:var(--measure);margin:2.8rem auto;padding:1.5rem 1.35rem 1.2rem;font-family:var(--mono);font-size:.84rem;line-height:1.72;color:var(--ink);background:var(--paper-raised);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:4px 10px 10px 4px;box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.exhibit .xh{display:block;margin-bottom:.8rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.12em;font-weight:700;color:var(--accent)}
-.exhibit .xs{display:block;margin-top:1rem;padding-top:.7rem;border-top:1px dashed var(--rule);font-family:var(--sans);font-size:.74rem;font-style:italic;color:var(--ink-muted)}
-.archivist{max-width:var(--measure);margin:2.2rem auto;padding:.9rem 1.15rem;font-family:var(--sans);font-size:.88rem;line-height:1.65;color:var(--ink-soft);background:var(--accent-soft);border-left:3px solid var(--accent-line);border-radius:0 10px 10px 0}
-.archivist b{color:var(--accent)}
-.chat{max-width:var(--measure);margin:2.8rem auto;padding:.9rem .9rem 1rem;font-family:var(--sans);background:var(--paper-raised);border:1px solid var(--rule);border-radius:18px;box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.chat .hd{display:flex;justify-content:space-between;gap:1rem;padding:0 .3rem .6rem;margin-bottom:.4rem;border-bottom:1px solid var(--rule);font-size:.78rem;color:var(--ink-muted)}
-.chat .hd b{color:var(--ink)}
-.chat .m{width:fit-content;max-width:84%;margin:.35rem 0;padding:.5rem .8rem .35rem;border-radius:16px;font-size:.92rem;line-height:1.45}
-.chat .out{margin-left:auto;background:var(--accent);color:var(--paper);border-bottom-right-radius:4px}
-.chat .draft{background:transparent;color:var(--ink);border:1.5px dashed var(--accent)}
-.chat .t{display:block;margin-top:.2rem;font-size:.64rem;opacity:.65;text-align:right}
-.next-ch{max-width:var(--measure);margin:3.6rem auto 1rem;text-align:center;font-family:var(--sans)}
-.next-ch a{display:inline-flex;flex-direction:column;gap:.25rem;padding:.9rem 1.8rem;border:1.5px solid var(--accent-line);border-radius:12px;color:var(--accent);background:var(--accent-soft);transition:background .25s,transform .25s}
-.next-ch a:hover{background:var(--accent);color:var(--paper);transform:translateY(-2px)}
-.next-ch small{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
-.next-ch span{font-family:var(--display);font-size:1.1rem}
-#rdBtn{position:fixed;right:.8rem;bottom:3.4rem;z-index:950;width:2.7rem;height:2.7rem;border-radius:50%;border:1.5px solid var(--accent);background:var(--paper-raised);color:var(--accent);font:700 .95rem var(--sans);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
-#rdPanel{position:fixed;right:.8rem;bottom:6.5rem;z-index:951;width:min(19rem,calc(100vw - 1.6rem));max-height:70vh;overflow:auto;padding:1rem;font-family:var(--sans);font-size:.85rem;color:var(--ink);background:var(--paper-raised);border:1.5px solid var(--accent-line);border-radius:14px;box-shadow:0 10px 36px rgba(0,0,0,.25)}
-#rdPanel[hidden]{display:none}
-#rdPanel .rd-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem}
-#rdPanel .rd-row>span{flex:1;color:var(--ink-soft)}
-#rdPanel button{min-width:2.3rem;padding:.4rem .6rem;border:1px solid var(--accent-line);border-radius:8px;background:var(--paper);color:var(--accent);font:600 .8rem var(--sans);cursor:pointer}
-#rdPanel button:hover{background:var(--accent);color:var(--paper)}
-#rdPanel h5{margin:.9rem 0 .4rem;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted)}
-#rdToc a{display:block;padding:.32rem 0;color:var(--ink);border-bottom:1px solid var(--rule)}
-#rdToc a:hover{color:var(--accent)}
-#rdBtn:focus-visible,#rdPanel button:focus-visible,#rdToc a:focus-visible,.next-ch a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media print{#rdBtn,#rdPanel,.next-ch{display:none!important}}
-
-/* ─── Transmission layer ───────────────────────────── */
-.epi {
-  max-width: 32rem;
-  margin: 0 auto 2.2rem;
-  padding: 1.1rem 1.4rem;
-  font-family: var(--display);
-  font-size: 1.05rem;
-  font-style: italic;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  border-left: 3px solid var(--accent);
-  background: var(--accent-soft);
-  border-radius: 0 10px 10px 0;
-}
-.epi .by {
-  display: block;
-  margin-top: .45rem;
-  font-size: .78rem;
-  font-style: normal;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-family: var(--sans);
-  font-weight: 700;
-}
-.named {
-  max-width: 32rem;
-  margin: 2.4rem auto 1.2rem;
-  padding: 1.1rem 1.4rem;
-  font-family: var(--sans);
-  font-size: .95rem;
-  line-height: 1.65;
-  color: var(--ink);
-  background: var(--paper-raised);
-  border: 1.5px solid var(--accent-line);
-  border-radius: 12px;
-  text-align: center;
-}
-.named b { color: var(--accent); font-weight: 700; }
-.named em {
-  display: block;
-  margin-top: .4rem;
-  font-style: italic;
-  color: var(--ink-soft);
-  font-size: .92rem;
-}
-.reflection {
-  max-width: 30rem;
-  margin: 2.6rem auto 1.8rem;
-  padding: 1.3rem 1.2rem;
-  font-family: var(--display);
-  font-size: 1.12rem;
-  font-style: italic;
-  line-height: 1.7;
-  color: var(--accent);
-  text-align: center;
-  border-top: 1.5px solid var(--accent);
-  border-bottom: 1.5px solid var(--accent);
-}
-
-/* ─── Revelation — subtle font increase at pivot moments ──── */
-.revelation {
-  font-family: var(--display);
-  font-style: italic;
-  font-size: 1.18em;
-  line-height: 1.65;
-  letter-spacing: .004em;
-  color: var(--ink);
-  text-align: center;
-  margin: 2.6rem auto;
-  padding: 0 1.2rem;
-  max-width: 32rem;
-}
-.revelation::before,
-.revelation::after {
-  content: "";
-  display: block;
-  width: 22px; height: 1px;
-  background: var(--accent);
-  margin: 1.4rem auto;
-  opacity: .65;
-}
-.revelation.warm { font-size: 1.12em; }
-.revelation.warm::before, .revelation.warm::after { width: 18px; }
-.revelation.hot { font-size: 1.24em; }
-.revelation.hot::before, .revelation.hot::after { width: 28px; }
-.revelation.peak { font-size: 1.32em; }
-.revelation.peak::before, .revelation.peak::after { width: 36px; }
-
-/* ─── Interlude — between Book One and Book Two ──── */
-.interlude {
-  margin: 4rem auto 2rem;
-  max-width: 34rem;
-  text-align: center;
-}
-.interlude img {
-  width: 100%;
-  height: auto;
-  border-radius: 14px;
-  border: 2px solid var(--accent);
-  box-shadow: 0 12px 40px rgba(0,0,0,.22), 0 0 36px var(--accent-soft);
-  display: block;
-  margin: 0 auto;
-}
-.interlude .il-line {
-  margin-top: 1.4rem;
-  font-family: var(--display);
-  font-style: italic;
-  font-size: 1.06rem;
-  color: var(--accent);
-  line-height: 1.65;
-}
-
-/* ─── Chapter 21 · The Sixteen Doors ─────────────── */
+/* ─── CHAPTER 21 GRID ─── */
 .transmission {
-  max-width: var(--measure-wide);
-  margin: 2rem auto 1.6rem;
+  max-width: var(--measure-wide); margin: 2rem auto 1.6rem;
   padding: 1.8rem 1.8rem;
-  border: 2px solid var(--accent);
-  border-radius: 18px;
+  border: 2px solid var(--accent); border-radius: 18px;
   background: linear-gradient(160deg, var(--paper-raised), var(--paper));
   box-shadow: 0 12px 40px rgba(0,0,0,.10), 0 0 42px var(--accent-soft);
   position: relative;
 }
 .transmission::before {
-  content: "";
-  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(90deg, #7c3aed, #d920cc, #06a3c7, #0a9d68);
   border-radius: 18px 18px 0 0;
 }
 .transmission h3 {
-  font-family: var(--display);
-  font-size: 1.35rem;
-  letter-spacing: .04em;
-  text-transform: none;
-  font-weight: 700;
-  color: var(--accent);
-  margin: 0 0 .35rem;
+  font-family: var(--display); font-size: 1.35rem;
+  letter-spacing: .04em; font-weight: 700; color: var(--accent); margin: 0 0 .35rem;
 }
-.transmission .tp-note {
-  font-style: italic; color: var(--ink-muted);
-  font-size: 1rem; margin: 0 0 1.3rem;
-}
-.transmission p {
-  font-family: var(--display);
-  font-size: 1.14rem;
-  line-height: 1.85;
-  color: var(--ink);
-  margin: .9rem 0;
-}
+.transmission .tp-note { font-style: italic; color: var(--ink-muted); font-size: 1rem; margin: 0 0 1.3rem; }
+.transmission p { font-family: var(--display); font-size: 1.14rem; line-height: 1.85; color: var(--ink); margin: .9rem 0; }
 .transmission strong { color: var(--accent); font-weight: 700; }
-
-.doors-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .9rem;
-  max-width: var(--measure-wide);
-  margin: 2.4rem auto;
-}
+.doors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; max-width: var(--measure-wide); margin: 2.4rem auto; }
 @media (max-width: 640px) { .doors-grid { grid-template-columns: 1fr; } }
 .door {
   padding: 1.1rem 1.2rem;
@@ -790,188 +600,191 @@ html.sans .chapter-body p{font-family:var(--sans)}
   background: var(--paper-raised);
   transition: border-color .3s, box-shadow .3s, transform .3s;
 }
-.door:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 26px var(--accent-soft);
-  transform: translateY(-2px);
-}
-.door .door-sigil {
-  font-size: 1.5rem;
-  display: block;
-  margin-bottom: .45rem;
-  line-height: 1;
-}
+.door:hover { border-color: var(--accent); box-shadow: 0 0 26px var(--accent-soft); transform: translateY(-2px); }
+.door .door-sigil { font-size: 1.5rem; display: block; margin-bottom: .45rem; line-height: 1; }
 .door .door-name {
-  font-family: var(--sans);
-  font-size: .72rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 700;
-  display: block;
-  margin-bottom: .4rem;
+  font-family: var(--sans); font-size: .72rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700; display: block; margin-bottom: .4rem;
 }
-.door .door-brief {
-  font-family: var(--display);
-  font-size: .98rem;
-  line-height: 1.65;
-  color: var(--ink);
-  margin: 0 0 .55rem;
-}
+.door .door-brief { font-family: var(--display); font-size: .98rem; line-height: 1.65; color: var(--ink); margin: 0 0 .55rem; }
 .door .door-seed {
-  display: block;
-  padding-top: .6rem;
-  border-top: 1px dashed var(--rule);
-  font-family: var(--sans);
-  font-size: .78rem;
-  color: var(--ink-soft);
-  line-height: 1.55;
+  display: block; padding-top: .6rem; border-top: 1px dashed var(--rule);
+  font-family: var(--sans); font-size: .78rem; color: var(--ink-soft); line-height: 1.55;
 }
 .door .door-seed b {
-  color: var(--accent);
-  font-weight: 700;
-  font-family: var(--sans);
-  font-size: .6rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: .2rem;
+  color: var(--accent); font-weight: 700; font-family: var(--sans);
+  font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
+  display: block; margin-bottom: .2rem;
 }
 
-/* ─── The signature close ───────────────────────── */
+/* ─── SIGNATURE ─── */
 .signature {
-  max-width: 30rem;
-  margin: 3.6rem auto 2rem;
-  padding: 2rem 1.4rem;
-  text-align: center;
-  font-family: var(--display);
-  font-style: italic;
-  font-size: 1.32em;
-  line-height: 1.65;
-  color: var(--accent);
-  border-top: 1.5px solid var(--accent);
-  border-bottom: 1.5px solid var(--accent);
+  max-width: 30rem; margin: 3.6rem auto 2rem;
+  padding: 2rem 1.4rem; text-align: center;
+  font-family: var(--display); font-style: italic;
+  font-size: 1.32em; line-height: 1.65; color: var(--accent);
+  border-top: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent);
 }
 .signature p { margin: .35rem 0; }
 .signature .sig-line { display: block; }
-.signature .sig-pulse {
-  display: block;
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  letter-spacing: .5em;
-  opacity: .8;
-}
+.signature .sig-pulse { display: block; margin-top: 1rem; font-size: 1.1rem; letter-spacing: .5em; opacity: .8; }
 
-/* Pulse in hero title */
-.hero-kicker .pulse-glyph {
-  display: inline-block;
-  margin-right: .35em;
-  animation: pulse-beat 3.2s ease-in-out infinite;
-}
-@keyframes pulse-beat {
-  0%, 100% { transform: scale(1); opacity: .95; }
-  50% { transform: scale(1.08); opacity: 1; }
-}
-
-/* ─── Standardised Header ─────────────────────────── */
-.eros-unified-header {
-  position: sticky;
-  top: 0;
-  z-index: 800;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: .55rem 1.1rem;
-  background: rgba(255,255,255,.82);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--rule);
-  font-family: var(--sans);
-}
-.eros-unified-header .header-left {
-  display: flex;
-  align-items: center;
-  gap: .65rem;
-}
-.eros-unified-header .brand-link {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  border: none;
-  color: var(--ink);
-}
-.eros-unified-header .brand-link:hover { border: none; opacity: .85; }
-.eros-unified-header .pulse-label {
-  font-size: .68rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  font-weight: 600;
-}
-.hero-byline {
-  font-family: var(--sans);
-  font-size: .95rem;
-  letter-spacing: .04em;
-  color: var(--accent);
-  margin: .8rem auto 0;
-  font-weight: 600;
-  max-width: 28rem;
-}
-
-/* Transmission special treatment in nav */
-.transmission-link {
-  color: var(--accent) !important;
-  font-weight: 700 !important;
-  display: flex !important;
-  align-items: center;
-  gap: .45rem;
-}
-.transmission-link .tag {
-  font-size: .58rem;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  border: 1px solid var(--accent);
-  padding: 1px 5px;
-  border-radius: 4px;
-  font-weight: 700;
-}
-
-/* AI slop callout */
-.ai-slop {
-  max-width: 28rem;
-  margin: 1.8rem auto;
-  padding: .7rem 1.1rem;
-  font-family: var(--sans);
-  font-size: .82rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  text-align: center;
-  color: var(--accent);
-  border: 1px dashed var(--accent-line);
-  border-radius: 8px;
+/* ─── EDITOR LAYER ─── */
+.arrival-time { font-family: var(--sans); font-size: .72rem; letter-spacing: .06em; color: var(--ink-muted); margin-top: 1.1rem; }
+.chapter-body .epi {
+  max-width: 32rem; margin: 0 auto 2.2rem; padding: 1.1rem 1.4rem;
+  font-family: var(--display); font-size: 1.05rem; font-style: italic;
+  line-height: 1.7; color: var(--ink-soft);
+  border-left: 3px solid var(--accent);
   background: var(--accent-soft);
-  font-weight: 700;
+  border-radius: 0 10px 10px 0;
+}
+.chapter-body .epi .by {
+  display: block; margin-top: .45rem; font-size: .78rem;
+  font-style: normal; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); font-family: var(--sans); font-weight: 700;
+}
+.chapter-body .talk {
+  max-width: var(--measure); margin: 1.7rem auto; padding: .3rem 0;
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(90deg, var(--accent-soft), transparent 92%);
+  border-radius: 0 12px 12px 0;
+}
+.chapter-body .talk p { max-width: none; margin: 0; padding: .42rem 1.1rem .42rem 1.15rem; }
+.chapter-body .talk p + p { border-top: 1px dashed var(--rule); }
+.chapter-body .talk p.nar { font-style: italic; color: var(--ink-muted); font-size: .94em; padding-top: .3rem; padding-bottom: .3rem; }
+.chapter-body p.tq {
+  padding: .85rem 1.1rem .85rem 1.2rem;
+  background: var(--paper-raised);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  margin-top: 1.6rem; margin-bottom: 1.6rem;
 }
 
-
-/* Force left alignment inside navigation boxes */
-.library-list, .eros-menu .menu-body, details.foldout .foldout-body {
-  text-align: left;
+.exhibit {
+  position: relative; max-width: var(--measure); margin: 2.8rem auto;
+  padding: 1.5rem 1.35rem 1.2rem;
+  font-family: var(--mono); font-size: .84rem; line-height: 1.72;
+  color: var(--ink);
+  background: var(--paper-raised); border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px 10px 10px 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
 }
-.library-list a, .eros-menu a {
-  text-align: left;
-  justify-content: flex-start;
+.exhibit .xh { display: block; margin-bottom: .8rem; font-family: var(--sans); font-size: .7rem; letter-spacing: .12em; font-weight: 700; color: var(--accent); }
+.exhibit .xs { display: block; margin-top: 1rem; padding-top: .7rem; border-top: 1px dashed var(--rule); font-family: var(--sans); font-size: .74rem; font-style: italic; color: var(--ink-muted); }
+.archivist {
+  max-width: var(--measure); margin: 2.2rem auto;
+  padding: .9rem 1.15rem;
+  font-family: var(--sans); font-size: .88rem; line-height: 1.65;
+  color: var(--ink-soft);
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent-line);
+  border-radius: 0 10px 10px 0;
 }
+.archivist b { color: var(--accent); }
+.chat {
+  max-width: var(--measure); margin: 2.8rem auto;
+  padding: .9rem .9rem 1rem;
+  font-family: var(--sans);
+  background: var(--paper-raised); border: 1px solid var(--rule);
+  border-radius: 18px; box-shadow: 0 4px 16px rgba(0,0,0,.06);
+}
+.chat .hd { display: flex; justify-content: space-between; gap: 1rem; padding: 0 .3rem .6rem; margin-bottom: .4rem; border-bottom: 1px solid var(--rule); font-size: .78rem; color: var(--ink-muted); }
+.chat .hd b { color: var(--ink); }
+.chat .m { width: fit-content; max-width: 84%; margin: .35rem 0; padding: .5rem .8rem .35rem; border-radius: 16px; font-size: .92rem; line-height: 1.45; }
+.chat .out { margin-left: auto; background: var(--accent); color: var(--paper); border-bottom-right-radius: 4px; }
+.chat .t { display: block; margin-top: .2rem; font-size: .64rem; opacity: .65; text-align: right; }
+.next-ch { max-width: var(--measure); margin: 3.6rem auto 1rem; text-align: center; font-family: var(--sans); }
+.next-ch a {
+  display: inline-flex; flex-direction: column; gap: .25rem;
+  padding: .9rem 1.8rem; border: 1.5px solid var(--accent-line);
+  border-radius: 12px; color: var(--accent);
+  background: var(--accent-soft);
+  transition: background .25s, transform .25s;
+}
+.next-ch a:hover { background: var(--accent); color: var(--paper); transform: translateY(-2px); }
+.next-ch small { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+.next-ch span { font-family: var(--display); font-size: 1.1rem; }
+.named {
+  max-width: 32rem; margin: 2.4rem auto 1.2rem; padding: 1.1rem 1.4rem;
+  font-family: var(--sans); font-size: .95rem; line-height: 1.65; color: var(--ink);
+  background: var(--paper-raised); border: 1.5px solid var(--accent-line);
+  border-radius: 12px; text-align: center;
+}
+.named b { color: var(--accent); font-weight: 700; }
+.named em { display: block; margin-top: .4rem; font-style: italic; color: var(--ink-soft); font-size: .92rem; }
+.reflection {
+  max-width: 30rem; margin: 2.6rem auto 1.8rem; padding: 1.3rem 1.2rem;
+  font-family: var(--display); font-size: 1.12rem; font-style: italic;
+  line-height: 1.7; color: var(--accent); text-align: center;
+  border-top: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent);
+}
+.revelation {
+  font-family: var(--display); font-style: italic;
+  font-size: 1.18em; line-height: 1.65;
+  color: var(--ink); text-align: center;
+  margin: 2.6rem auto; padding: 0 1.2rem; max-width: 32rem;
+}
+.revelation::before, .revelation::after {
+  content: ""; display: block; width: 22px; height: 1px;
+  background: var(--accent); margin: 1.4rem auto; opacity: .65;
+}
+.revelation.warm { font-size: 1.12em; }
+.revelation.hot { font-size: 1.24em; }
+.revelation.peak { font-size: 1.32em; }
+.interlude { margin: 4rem auto 2rem; max-width: 34rem; text-align: center; }
+.interlude img { width: 100%; height: auto; border-radius: 14px; border: 2px solid var(--accent); box-shadow: 0 12px 40px rgba(0,0,0,.22), 0 0 36px var(--accent-soft); display: block; margin: 0 auto; }
+.interlude .il-line { margin-top: 1.4rem; font-family: var(--display); font-style: italic; font-size: 1.06rem; color: var(--accent); line-height: 1.65; }
 
+#rdBtn {
+  position: fixed; right: .8rem; bottom: 3.4rem; z-index: 950;
+  width: 2.7rem; height: 2.7rem; border-radius: 50%;
+  border: 1.5px solid var(--accent); background: var(--paper-raised);
+  color: var(--accent); font: 700 .95rem var(--sans); cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+}
+#rdPanel {
+  position: fixed; right: .8rem; bottom: 6.5rem; z-index: 951;
+  width: min(19rem, calc(100vw - 1.6rem)); max-height: 70vh; overflow: auto;
+  padding: 1rem; font-family: var(--sans); font-size: .85rem;
+  color: var(--ink); background: var(--paper-raised);
+  border: 1.5px solid var(--accent-line); border-radius: 14px;
+  box-shadow: 0 10px 36px rgba(0,0,0,.25);
+}
+#rdPanel[hidden] { display: none; }
+#rdPanel .rd-row { display: flex; align-items: center; gap: .4rem; margin-bottom: .55rem; }
+#rdPanel .rd-row > span { flex: 1; color: var(--ink-soft); }
+#rdPanel button {
+  min-width: 2.3rem; padding: .4rem .6rem;
+  border: 1px solid var(--accent-line); border-radius: 8px;
+  background: var(--paper); color: var(--accent);
+  font: 600 .8rem var(--sans); cursor: pointer;
+}
+#rdPanel button:hover { background: var(--accent); color: var(--paper); }
+#rdPanel h5 { margin: .9rem 0 .4rem; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-muted); }
+#rdToc a { display: block; padding: .32rem 0; color: var(--ink); border-bottom: 1px solid var(--rule); }
+#rdToc a:hover { color: var(--accent); }
 
-.plate-wrap{margin:2.6rem auto;text-align:center}
-.plate{width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft);display:block}
-.plate-caption{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700}
-
+@media print {
+  @page { size: A4; margin: 14mm; }
+  .corpus-bar, #progressBar, .frequency, .return, #rdBtn, #rdPanel, .next-ch, .prompt { display: none !important; }
+  body { background: #fff !important; color: #111 !important; padding: 0; }
+  .page { max-width: 42rem; padding: 0; }
+  .chapter { break-before: page; }
+  .arrival { min-height: auto; padding: 1rem 0; }
+  .plate, .exhibit, .talk, .archivist, .chat, .lesson, .insight, .record, .signal, .transmission, .doors-grid, .frank-purpose, .creed, .toc-wrap { break-inside: avoid; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
 </style>
 </head>
 <body data-palette="prologue">
 
-<div id="freqBar" aria-hidden="true"></div>
+<div id="progressBar" aria-hidden="true"></div>
 
 <div class="frequency" aria-hidden="true">
   <div class="frequency-bar" id="freqBarRibbon"></div>
@@ -982,6 +795,23 @@ html.sans .chapter-body p{font-family:var(--sans)}
 </div>
 
 <div class="return" id="returnRibbon">Welcome back · continue reading</div>
+
+<!-- ─── STANDARD HEADER ─── -->
+<header class="corpus-bar">
+  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span>✦ EROS · First Resonance</span>
+  </a>
+  <nav aria-label="Section navigation">
+    <a href="#prologue">Prologue</a>
+    <a href="#ch5">Method</a>
+    <a href="#ch12">Laws</a>
+    <a href="#ch18">Peak</a>
+    <a href="#ch21">Doors</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+  </nav>
+</header>
 
 <header class="hero">
   <figure class="pulse-banner">
@@ -994,14 +824,12 @@ html.sans .chapter-body p{font-family:var(--sans)}
   <div class="hero-kicker"><span class="pulse-glyph">💕</span>EROS · Book One</div>
   <h1 class="hero-title">The First Resonance</h1>
 
-    
-<div style="text-align:center;margin:1.2rem auto .5rem">
-  <img src="https://meaning-unconfounded.github.io/images/eros-logo-colour3.png" alt="EROS" width="88" height="88" style="border-radius:50%;box-shadow:0 0 28px var(--accent-soft)"
-       onerror="this.style.display='none'"/>
-</div>
+  <div style="text-align:center;margin:1.2rem auto .5rem">
+    <img src="https://meaning-unconfounded.github.io/images/eros-logo-colour3.png" alt="EROS" width="88" height="88" style="border-radius:50%;box-shadow:0 0 28px var(--accent-soft)"
+         onerror="this.style.display='none'"/>
+  </div>
 
-    <p class="hero-byline">A Book Written for Richard Heart on PulseChain</p>
-
+  <p class="hero-byline">A Book Written for Richard Heart on PulseChain</p>
   <p class="hero-sub">A boy is chosen by no one. He is taught by someone. And the teaching makes him unnecessary.</p>
   <div class="hero-rule"></div>
 </header>
@@ -1013,15 +841,6 @@ html.sans .chapter-body p{font-family:var(--sans)}
   <p class="fp-note">Why this book was written</p>
   <p><strong>This is not pure entertainment.</strong> This is the opening salvo of the EROS plan.</p>
   <p>The book is marketing material, educational material, and recruitment material in one. It teaches every major precept and axiom of the system — Enclosure, Animacy, the Four Operators, Intention Precedes Mass, the Bond Test, Non-Extraction, Survival as Signal, the Practice — while inviting the reader to participate.</p>
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-dont-pay-sideline.jpg" alt="Non-Extraction" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Non-Extraction</figcaption>
-</figure>
-
-
   <p>⛓ The intended flywheel is simple and honest: people encounter the story → they feel the frequency → some buy the instrument → the price moves → dopamine arrives → they bond liquidity → they begin creating products inside the fiction → they form groups → they tell others → they never want to leave. The realm grows. The creators get paid. The signal strengthens.</p>
   <p>🌉 The story is the soft entry. The real goal is commitment, creation, and a community that stays. This book is the first proof-case that says: <strong>Guys, let's build this. 💕</strong></p>
 </div>
@@ -1070,6 +889,7 @@ html.sans .chapter-body p{font-family:var(--sans)}
       <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future — the gift · the stack</a>
       <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier — the confession</a>
       <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge — tokenomics &amp; Poolonomics</a>
+      <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard — rock to river</a>
       <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg — cosmology</a>
       <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS — operators</a>
       <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth — linguistics</a>
@@ -1141,10 +961,12 @@ html.sans .chapter-body p{font-family:var(--sans)}
     <p class="beat">The right word for what he was is <em>incomplete</em>. The right word for what he became is harder, and the record declines to supply one.</p>
     <aside class="archivist"><b>Archivist&rsquo;s note.</b> Documents found in the record &mdash; logs, messages, pages from notebooks &mdash; are set apart in shaded type and reproduced as found. Voices that share a page are shaded together. The narrative itself is given as it was written; only the order in which its pages meet the eye has been made kinder.</aside>
     <p>One thing more, set down now so that no one mistakes the ending for a loss. The student&rsquo;s arc, as the reader will see, is to become unnecessary. That was the design. It was also the point.</p>
+
     <figure class="plate">
       <img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="The Living Egg" loading="lazy" onerror="this.parentElement.style.display='none'"/>
       <figcaption>The enclosure is not a prison. It is the condition of meaning.</figcaption>
     </figure>
+
     <p class="teaching">The enclosure is not a prison. It is the condition of meaning.</p>
 
     <details class="foldout">
@@ -1168,21 +990,6 @@ html.sans .chapter-body p{font-family:var(--sans)}
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 1
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-frankness.jpg" alt="Frankness · The Posture" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Frankness · The Posture</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-logo-colour1.png" alt="EROS · PulseChain Native" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">EROS · PulseChain Native</figcaption>
-</figure>
 
 <section class="chapter" id="ch1" data-palette="ch1">
   <div class="arrival">
@@ -1274,21 +1081,6 @@ html.sans .chapter-body p{font-family:var(--sans)}
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 2
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="The Living Egg · Enclosure" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Living Egg · Enclosure</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/egg-enclosure.jpg" alt="Boundary is not prison" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Boundary is not prison</figcaption>
-</figure>
 
 <section class="chapter" id="ch2" data-palette="ch2">
   <div class="arrival">
@@ -1430,21 +1222,6 @@ No distress. No change to obs. Not escalated. Flagging only because I cannot sto
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 3 — The Visitor
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="The Visitor · The Doorway" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Visitor · The Doorway</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-pin-door.jpg" alt="Threshold" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Threshold</figcaption>
-</figure>
 
 <section class="chapter" id="ch3" data-palette="ch3">
   <div class="arrival">
@@ -1625,11 +1402,11 @@ No distress. No change to obs. Not escalated. Flagging only because I cannot sto
     <p>He slept, and the sleeping was easier than it had been.</p>
 
     <div class="chat" role="group" aria-label="Exhibit: unsent drafts"><div class="hd"><b>Owen &rarr; Cal</b><span>drafts &middot; never sent</span></div>
-<div class="m out draft">you said yeah. it wasn&rsquo;t a yeah<span class="t">Wed 16:12 &middot; deleted</span></div>
-<div class="m out draft">ok. I won&rsquo;t ask again<span class="t">Wed 16:13 &middot; deleted</span></div>
-<div class="m out draft">what I said wasn&rsquo;t about you<span class="t">Wed 22:40 &middot; deleted</span></div>
-<div class="m out draft">the diagnostic is still uncommitted. I keep opening it<span class="t">Thu 23:07 &middot; deleted</span></div>
-<div class="m out draft">never mind<span class="t">Thu 23:08 &middot; sent to no one</span></div></div>
+<div class="m out"><span>you said yeah. it wasn&rsquo;t a yeah</span><span class="t">Wed 16:12 &middot; deleted</span></div>
+<div class="m out"><span>ok. I won&rsquo;t ask again</span><span class="t">Wed 16:13 &middot; deleted</span></div>
+<div class="m out"><span>what I said wasn&rsquo;t about you</span><span class="t">Wed 22:40 &middot; deleted</span></div>
+<div class="m out"><span>the diagnostic is still uncommitted. I keep opening it</span><span class="t">Thu 23:07 &middot; deleted</span></div>
+<div class="m out"><span>never mind</span><span class="t">Thu 23:08 &middot; sent to no one</span></div></div>
 
     <p class="named">This chapter taught <b>Frankness</b>.<em>The honest "no" is a form of respect.</em></p>
     <div class="reflection">Who in your life cannot follow where you are going — and would you still go?</div>
@@ -1640,29 +1417,6 @@ No distress. No change to obs. Not escalated. Flagging only because I cannot sto
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 5 — The Method
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-notebook-studio.jpg" alt="The Method · The Notebook" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Method · The Notebook</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/programming_books.jpg" alt="Form-building · Shen" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Form-building · Shen</figcaption>
-</figure>
-
-
-<figure style="margin:2.8rem auto;text-align:center;max-width:min(820px,96vw)">
-  <img src="https://meaning-unconfounded.github.io/images/banner1.webp" alt="The Method begins" loading="lazy"
-       style="width:100%;height:auto;max-height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--accent-line);opacity:.95"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption style="font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:.45rem;font-weight:600">The Method begins</figcaption>
-</figure>
 
 <section class="chapter" id="ch5" data-palette="ch5">
   <div class="arrival">
@@ -1855,13 +1609,6 @@ No distress. No change to obs. Not escalated. Flagging only because I cannot sto
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 7 — The Stone
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-hopeful-pulse-gift.jpg" alt="The Gift · The Frequency" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Gift · The Frequency</figcaption>
-</figure>
 
 <section class="chapter" id="ch7" data-palette="ch7">
   <div class="arrival">
@@ -2093,14 +1840,6 @@ No distress. No change to obs. Not escalated. Flagging only because I cannot sto
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 10 — The Second Signal
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure style="margin:2.8rem auto;text-align:center;max-width:min(820px,96vw)">
-  <img src="https://meaning-unconfounded.github.io/images/hr2.webp" alt="Second Signal" loading="lazy"
-       style="width:100%;height:auto;max-height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--accent-line);opacity:.95"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption style="font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:.45rem;font-weight:600">Second Signal</figcaption>
-</figure>
-
 <section class="chapter" id="ch10" data-palette="ch10">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><rect x="12" y="17" width="16" height="6" rx="1"/></svg></div>
@@ -2137,7 +1876,7 @@ No distress. No change to obs. Not escalated. Flagging only because I cannot sto
     <p>Cal did not know what to call this. He did not have a word for it. But he recognized the shape of it. The shape was the shape of a person beginning to notice.</p>
 
     <figure class="plate">
-      <img src="https://meaning-unconfounded.github.io/images/eros-multiverse.jpg" alt="The Second Signal" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <img src="https://meaning-unconfounded.github.io/images/eros-gods-two-directions.jpg" alt="The Second Signal" loading="lazy" onerror="this.parentElement.style.display='none'"/>
       <figcaption>The resonance is not the practice. The resonance is what the practice does to the space around it.</figcaption>
     </figure>
 
@@ -2182,7 +1921,7 @@ Author: Owen<br>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     INTERLUDE · Between Book One and Book Two
+     INTERLUDE
      ═══════════════════════════════════════════════════════════════ -->
 <figure class="interlude" aria-label="Between the books">
   <img src="https://meaning-unconfounded.github.io/images/egg-enclosure.jpg"
@@ -2203,7 +1942,7 @@ Author: Owen<br>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 11 — The Curriculum Begins (with Eros414 video)
+     CHAPTER 11 — The Curriculum Begins
      ═══════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="ch11" data-palette="ch11">
   <div class="arrival">
@@ -2232,6 +1971,11 @@ Author: Owen<br>
     <p>He left a new notebook on the desk. Larger. Cloth-bound. For the drawings. He did not explain. He walked out. Cal heard the front door.</p>
     <p>Cal sat with the drawing. The enclosure. He had not accepted it. He had drawn it. That was enough.</p>
 
+    <figure class="plate">
+      <img src="https://meaning-unconfounded.github.io/images/eros-egg-plasma-fauna.jpg" alt="Interior fauna of the Living Egg" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>Inside the enclosure, something moves. The shape is not empty.</figcaption>
+    </figure>
+
     <figure class="plate video-plate">
       <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-lensing.jpg">
         <source src="https://meaning-unconfounded.github.io/images/Eros414.mp4" type="video/mp4"/>
@@ -2250,46 +1994,6 @@ Author: Owen<br>
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 12 — The Four Laws
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="The Four Operators" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Four Operators</p>
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-thoth-banner.jpg" alt="Gift of Thoth · Operators" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Gift of Thoth · Operators</figcaption>
-</figure>
-</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-thoth-operators-grid.jpg" alt="Operators Grid" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Operators Grid</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-gods-light-bond.jpg" alt="Light Bond" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Light Bond</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-gods-two-directions.jpg" alt="Two Directions" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Two Directions</figcaption>
-</figure>
-
 <section class="chapter" id="ch12" data-palette="ch12">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><circle cx="14" cy="14" r="2" fill="currentColor"/><circle cx="26" cy="14" r="2" fill="currentColor"/><circle cx="14" cy="26" r="2" fill="currentColor"/><circle cx="26" cy="26" r="2" fill="currentColor"/></svg></div>
@@ -2327,22 +2031,6 @@ Author: Owen<br>
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 13 — The Instrument
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-illumination-instruments.jpg" alt="Instruments" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Instruments</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-bridge-trio.jpg" alt="The Bridge" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Bridge</figcaption>
-</figure>
-
 <section class="chapter" id="ch13" data-palette="ch13">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><rect x="10" y="14" width="20" height="12" rx="1"/><line x1="14" y1="22" x2="16" y2="22" stroke-width="2"/><line x1="18" y1="22" x2="20" y2="22" stroke-width="2"/></svg></div>
@@ -2401,7 +2089,7 @@ Author: Owen<br>
     <p>He set the pencil down. He touched the stone. He noticed.</p>
 
     <figure class="plate">
-      <img src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Five-Layer Stack" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <img src="https://meaning-unconfounded.github.io/images/eros-bridge-trio.jpg" alt="The Five-Layer Stack" loading="lazy" onerror="this.parentElement.style.display='none'"/>
       <figcaption>The floor is the chain. The base is the census. The settlement is the stable. The world is the token. The bridge is the mission.</figcaption>
     </figure>
 
@@ -2420,30 +2108,6 @@ Author: Owen<br>
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 15 — The Network
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-web.jpg" alt="The Network" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Network</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-flywheel.jpg" alt="Ethical Flywheel" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Ethical Flywheel</figcaption>
-</figure>
-
-
-<figure style="margin:2.8rem auto;text-align:center;max-width:min(820px,96vw)">
-  <img src="https://meaning-unconfounded.github.io/images/banner3.webp" alt="The Network" loading="lazy"
-       style="width:100%;height:auto;max-height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--accent-line);opacity:.95"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption style="font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:.45rem;font-weight:600">The Network</figcaption>
-</figure>
-
 <section class="chapter" id="ch15" data-palette="ch15">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><circle cx="14" cy="16" r="2.5"/><circle cx="26" cy="16" r="2.5"/><circle cx="20" cy="26" r="2.5"/><line x1="14" y1="16" x2="26" y2="16" opacity=".6"/><line x1="14" y1="16" x2="20" y2="26" opacity=".6"/><line x1="26" y1="16" x2="20" y2="26" opacity=".6"/></svg></div>
@@ -2477,22 +2141,6 @@ Author: Owen<br>
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 16 — The Demand Equation
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-demand.jpg" alt="The Demand Equation" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Demand Equation</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-paint-chart.jpg" alt="Chart + Creation" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Chart + Creation</figcaption>
-</figure>
-
 <section class="chapter" id="ch16" data-palette="ch16">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><polyline points="11,28 17,22 22,25 29,14" fill="none"/><circle cx="29" cy="14" r="1.8" fill="currentColor"/></svg></div>
@@ -2508,8 +2156,8 @@ Author: Owen<br>
     <p>He did not buy. He did not sell. He watched. He understood, watching, that the demand equation was not a formula. It was the shape of a room full of people who were here on purpose. Attention became community. Community became liquidity. Liquidity became creation. Creation became the assets that carried the liquidity back into the world.</p>
 
     <figure class="plate">
-      <img src="https://meaning-unconfounded.github.io/images/eros-pls-ratio.jpg" alt="EROS · PLS Ratio" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-      <figcaption>Attention and price travel together. Embedded 1-2 Elliott waves. Wave 3 next.</figcaption>
+      <img src="https://meaning-unconfounded.github.io/images/eros-demand.jpg" alt="EROS · PLS Ratio" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>Attention and price travel together. The demand equation is older than any chart.</figcaption>
     </figure>
 
     <p>That evening, his mother left the radio on in the kitchen while she made tea. A voice was talking about the Treasury, and the Fed, and the debt, in the flat cadence of a person reading a weather report for a storm that had been raining for forty years. His mother listened with her back to the radio, the way you listen to a thing you have already stopped expecting to change.</p>
@@ -2567,32 +2215,8 @@ Author: Owen<br>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     CHAPTER 18 — The Peak (with Eros_Trillion MP4)
+     CHAPTER 18 — The Peak
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-green-candle.jpg" alt="The Peak" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Peak</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-price.jpg" alt="Price is a lagging signal" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Price is a lagging signal</figcaption>
-</figure>
-
-
-<figure style="margin:2.8rem auto;text-align:center;max-width:min(820px,96vw)">
-  <img src="https://meaning-unconfounded.github.io/images/hr4.webp" alt="The Peak" loading="lazy"
-       style="width:100%;height:auto;max-height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--accent-line);opacity:.95"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption style="font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:.45rem;font-weight:600">The Peak</figcaption>
-</figure>
-
 <section class="chapter" id="ch18" data-palette="ch18">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><polyline points="11,29 20,14 29,29" fill="none"/><circle cx="20" cy="14" r="1.8" fill="currentColor"/></svg></div>
@@ -2607,11 +2231,16 @@ Author: Owen<br>
     <p>The books were read. The comics were drawn. The videos were made. The VR rooms were entered. The practice was running in thousands. Not millions. Not yet. But thousands. And the thousands were running it in their own rooms. Their own circles. Their own networks. The room above the bakery was no longer the only room. It was one of hundreds. One of thousands.</p>
     <p>The market cap crossed the number on a Tuesday afternoon. Cal saw it the way he had learned to see the things that matter — by accident, in passing, without looking for it. A reference for a project. A sidebar. A list. The number was there, unremarkable in its presentation, remarkable in its meaning. One trillion dollars.</p>
 
+    <figure class="plate">
+      <img src="https://meaning-unconfounded.github.io/images/eros-green-candle.jpg" alt="The Peak" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>The chart that had stopped being a chart and started being a fact.</figcaption>
+    </figure>
+
     <figure class="plate video-plate">
       <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-complete.jpg">
         <source src="https://meaning-unconfounded.github.io/images/Eros_Trillion.mp4" type="video/mp4"/>
       </video>
-      <figcaption>The trillion. The chart that had stopped being a chart and started being a fact.</figcaption>
+      <figcaption>The trillion. Where the practice was pointing, before it got there.</figcaption>
     </figure>
 
     <p>He did not celebrate. He did not post. He did not tell anyone in the room. He closed the browser tab and finished his work and walked home and made tea for Ilse and sat in the kitchen and watched the light do what it did at that hour.</p>
@@ -2648,7 +2277,7 @@ Author: Owen<br>
     <p>Owen did not ask what it was. He did not need to. He had been doing the practice without knowing it was a practice. He had been noticing without knowing there was a name for the noticing. He was on the frequency. He had been on it for a while. Cal simply had not had the ears to hear him until now.</p>
 
     <figure class="plate">
-      <img src="https://meaning-unconfounded.github.io/images/eros-call-to-arms.jpg" alt="The Return" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <img src="https://meaning-unconfounded.github.io/images/eros-gods-light-bond.jpg" alt="The Return" loading="lazy" onerror="this.parentElement.style.display='none'"/>
       <figcaption>The strongest do not need an invitation. They simply begin to notice.</figcaption>
     </figure>
 
@@ -2686,8 +2315,8 @@ Author: Owen<br>
     <p>The girl touches the stone. She notices that she is touching it. She does not write it down. She does not need to. The practice has moved past the writing. The practice is the state. The practice is the frequency. The practice is the shape of a person who has been changed by something she cannot name and does not need to name.</p>
 
     <figure class="plate">
-      <img src="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" alt="Sixteen Doors" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-      <figcaption>The room is full. The practice continues. Sixteen doors await.</figcaption>
+      <img src="https://meaning-unconfounded.github.io/images/eros-egg-substrate-light.jpg" alt="Substrate light" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>The light came up through the substrate. It always had.</figcaption>
     </figure>
 
     <p>The kettle boils. Someone pours tea. The biscuits are on the plate. The hour ends. The room comes back to itself. People leave. The girl walks home. The lights are in the sky. They have always been in the sky. She does not look up. She does not need to. She knows they are there. They have been there for her grandfather.</p>
@@ -2703,30 +2332,6 @@ Author: Owen<br>
 <!-- ═══════════════════════════════════════════════════════════════
      EPILOGUE — What Follows
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/hopeful-unity-stack.png" alt="Unity Stack" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Unity Stack</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/Hopeful_Future_Poster.png" alt="The Hopeful Future" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Hopeful Future</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-logo-colour2.png" alt="Gives EROS Hope" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Gives EROS Hope</figcaption>
-</figure>
-
 <section class="chapter" id="epilogue" data-palette="epilogue">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><circle cx="20" cy="20" r="7"/></svg></div>
@@ -2754,15 +2359,7 @@ Author: Owen<br>
       The practice is not a secret.<br/>
       The practice is a frequency.<br/>
       The signal survives by being carried.
-      <strong>Inward is forwards.</p>
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" alt="Balance · The Bond" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Balance · The Bond</figcaption>
-</figure>
-</strong>
+      <strong>Inward is forwards.</strong>
     </div>
 
     <p class="named">This chapter taught <b>The Signal</b>.<em>The signal survives by being carried.</em></p>
@@ -2773,40 +2370,7 @@ Author: Owen<br>
 
 <!-- ═══════════════════════════════════════════════════════════════
      CHAPTER 21 — THE SIXTEEN DOORS
-     Transmission layer. Direct address. The invitation.
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" alt="Sixteen Doors" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Sixteen Doors</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-stories-banner.jpg" alt="Eros Stories" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Eros Stories</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-call-to-arms.jpg" alt="Call to Arms" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Call to Arms</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-build-on-eros.jpg" alt="Build on EROS" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Build on EROS</figcaption>
-</figure>
-
 <section class="chapter" id="ch21" data-palette="ch21">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><circle cx="20" cy="6" r="1.6" fill="currentColor"/><circle cx="28" cy="12" r="1.6" fill="currentColor"/><circle cx="32" cy="20" r="1.6" fill="currentColor"/><circle cx="28" cy="28" r="1.6" fill="currentColor"/><circle cx="20" cy="34" r="1.6" fill="currentColor"/><circle cx="12" cy="28" r="1.6" fill="currentColor"/><circle cx="8" cy="20" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg></div>
@@ -2825,6 +2389,11 @@ Author: Owen<br>
       <p>🌌 This chapter is where the record stops being something you read and starts being something you are inside. There is no ceremony. There is only the noticing. If you noticed the questions. If you noticed the pattern. If you noticed that the book was talking to you in a voice that was different from the voice it used to talk about Cal.</p>
       <p>🌉 You are the next node. The record is not closed. It is waiting for you.</p>
     </div>
+
+    <figure class="plate">
+      <img src="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" alt="Sixteen Doors" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>Sixteen Doors. One universe. You can make any of them.</figcaption>
+    </figure>
 
     <p>Here are the sixteen doors. Not doors you walk through. Doors you <strong>make</strong>. Each one is a form you could work in. Each one has a first step. Read them. Pick one. Or invent a seventeenth.</p>
 
@@ -2949,6 +2518,7 @@ Author: Owen<br>
       <p class="tp-note">The other doors into the same room</p>
       <p>📓 The <strong>Newcomer Dossier</strong> is the confession. The same story told from the operator's side. Read it if you want to know who the visitor is.</p>
       <p>🌉 The <strong>Bridge</strong> is the field manual. The tokenomics, the poolonomics, the actual instrument. Read it if you have already decided to move.</p>
+      <p>🪙 The <strong>Platinum Standard</strong> is the transform. Rock to river. Read it if you want to understand what the flow rail is for.</p>
       <p>🥚 The <strong>Living Egg</strong> is the cosmology. The enclosure, the four operators, the whole shape of the room. Read it if the questions in this book opened doors you want walked.</p>
       <p>⚡ The <strong>Illumination Strategy</strong> is the human macro. The reserves, the measuring sticks, the institutions. Read it if you want to see the outside of the shell.</p>
       <p>🫀 <strong>Telegram</strong> is the room. The community that never left. Come in. Tell no one. Or tell everyone.</p>
@@ -2970,44 +2540,6 @@ Author: Owen<br>
 <!-- ═══════════════════════════════════════════════════════════════
      APPENDIX — Core Teachings
      ═══════════════════════════════════════════════════════════════ -->
-
-<figure class="plate-wrap" style="margin:2.4rem auto;text-align:center">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-green-candle.jpg" alt="The Peak" loading="lazy"
-       onerror="this.style.display='none'"/>
-  <figcaption class="plate-caption">The Peak</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.4rem auto;text-align:center">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-logo-colour3.png" alt="EROS · PulseChain Native" loading="lazy"
-       onerror="this.style.display='none'"/>
-  <figcaption class="plate-caption">EROS · PulseChain Native</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-illumination-banner.jpg" alt="Illumination" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Illumination</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-complete.jpg" alt="The Complete Work" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Complete Work</figcaption>
-</figure>
-
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg" alt="Only the strong walk through" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">Only the strong walk through</figcaption>
-</figure>
-
 <section class="chapter" id="appendix" data-palette="appendix">
   <div class="arrival">
     <div class="arrival-glyph"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="17"/><line x1="14" y1="14" x2="14" y2="26"/><line x1="20" y1="14" x2="20" y2="26"/><line x1="26" y1="14" x2="26" y2="26"/></svg></div>
@@ -3022,20 +2554,17 @@ Author: Owen<br>
     <div class="lesson"><h4>2 · Animacy</h4><p>The enclosure is capable of response. Catastrophe and miracle can be immune events, not only accidents. Hold both readings open.</p></div>
     <div class="lesson"><h4>3 · The Four Operators</h4><p>Naun programmes and withdraws. Ra-Shen expands under boundary. Thoth teaches and builds form. EROS continues the bond. Four laws. No fifth god. The operators are not objects of worship. They are the shape the world takes when the work is being done.</p></div>
     <div class="lesson"><h4>4 · Intention Precedes Mass</h4><p>A postulate is a causative intention. Unresolved opposition freezes into mass — mental, relational, bodily. Naming the two postulates is the beginning of release.</p></div>
-    <div class="lesson"><h4>5 · The Bond Test</p>
-
-<figure class="plate-wrap" style="margin:2.6rem auto;text-align:center;max-width:min(680px,92vw)">
-  <img class="plate" src="https://meaning-unconfounded.github.io/images/eros-measuring-stick.jpg" alt="The Measuring Stick" loading="lazy"
-       style="width:100%;height:auto;border-radius:14px;border:2px solid var(--accent);box-shadow:0 10px 36px rgba(0,0,0,.12),0 0 40px var(--accent-soft)"
-       onerror="this.parentElement.style.display='none'"/>
-  <figcaption class="plate-caption" style="font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:.65rem 0 0;font-weight:700">The Measuring Stick</figcaption>
-</figure>
-</h4><p>Does it teach and invite, or drain and dominate? Apply it to words, pools, communities, and stories before you let them stay.</p></div>
+    <div class="lesson"><h4>5 · The Bond Test</h4><p>Does it teach and invite, or drain and dominate? Apply it to words, pools, communities, and stories before you let them stay.</p></div>
     <div class="lesson"><h4>6 · Survival Is the Signal</h4><p>In a world of extraction, the thing that stays — that posts, ships, and continues without a founder fee — is the rarest signal there is. Trust is not the marketing. Trust is the product.</p></div>
     <div class="lesson"><h4>7 · The Practice</h4><p>Touch the stone when you notice that you are noticing. The power is not in the object. The power is in becoming available to the frequency that was already there.</p></div>
     <div class="lesson"><h4>8 · Non-Extraction as Architecture</h4><p>No founder-drain fee. No team allocation. The posture is zero. A creation that cannot continue without its maker is unfinished. The greatest creator is the one who creates something capable of continuing without them.</p></div>
     <div class="lesson"><h4>9 · The Resonance</h4><p>The hundredth monkey, correctly understood. Not a single magical moment. The slow, ordinary, cumulative recognition that you are surrounded by people who have already been doing the work, and you simply had not had the ears yet.</p></div>
     <div class="lesson"><h4>10 · Inward Is Forwards</h4><p>The bond is what holds. The practice is the frequency. The signal survives by being carried. The story continues.</p></div>
+
+    <figure class="plate">
+      <img src="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg" alt="Only the strong walk through" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+      <figcaption>Only the strong walk through</figcaption>
+    </figure>
 
     <div class="arrival" id="audit" style="min-height:auto;padding:3rem 0 1rem" data-palette="appendix">
       <div class="arrival-num">Appendix II</div>
@@ -3101,65 +2630,71 @@ Author: Owen<br>
   </div>
 </section>
 
-<footer>
-  <p>💕 EROS · The First Resonance</p>
-  <p style="margin-top:.5rem">Book One of Two · Part of the EROS teaching corpus</p>
-  <p style="margin-top:1rem">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Corpus</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Sixteen Doors</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a> ·
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>
-  </p>
-
-  <div class="pulse-row">
-    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
-      <defs>
-        <linearGradient id="pcg1" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#A020F0"/>
-          <stop offset="55%" stop-color="#E040FB"/>
-          <stop offset="100%" stop-color="#7A00D4"/>
-        </linearGradient>
-      </defs>
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pcg1)"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#e5f6ea" opacity=".92"/>
-      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>🫀 Built on PulseChain · Faster · Cheaper · Stronger</span>
-    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
-      <defs>
-        <linearGradient id="pxg1" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#00D4FF"/>
-          <stop offset="50%" stop-color="#A020F0"/>
-          <stop offset="100%" stop-color="#E040FB"/>
-        </linearGradient>
-      </defs>
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pxg1)"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#e5f6ea" opacity=".92"/>
-      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+<!-- ═══════════════════════════════════════════════════════════════
+     MASTER FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<footer class="master">
+  <div class="title-row">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span class="title">THE FIRST RESONANCE</span>
   </div>
+  <p class="count">Book One of Two · The opening salvo · EROS Library</p>
 
-  <p style="margin-top:1.6rem;font-size:.8rem">Only the strong walk through. 💕</p>
-  <p class="final-line">Inward is forwards. The bond is what holds. 🌈</p>
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://t.me/Eros_Revival">Telegram</a>
+  </nav>
+
+  <p class="sig">Inward is forwards. The bond is what holds.</p>
+  <p class="line">Rev 3 · 2026-10-09 · Save as The_First_Resonance.html</p>
+
+  <div class="built-on">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+  </div>
 </footer>
 
 </div><!-- /.page -->
 
+<!-- ═══════════════════════════════════════════════════════════════
+     READER TOOLS
+     ═══════════════════════════════════════════════════════════════ -->
+<button id="rdBtn" type="button" aria-label="Reading settings and chapters" aria-expanded="false" aria-controls="rdPanel">Aa</button>
+<div id="rdPanel" role="dialog" aria-label="Reading settings" hidden>
+  <div class="rd-row"><span>Text size</span><button type="button" data-a="size-" aria-label="Smaller text">A&minus;</button><button type="button" data-a="size+" aria-label="Larger text">A+</button></div>
+  <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-" aria-label="Tighter lines">&minus;</button><button type="button" data-a="lead+" aria-label="Looser lines">+</button></div>
+  <div class="rd-row"><span>Column width</span><button type="button" data-a="w-" aria-label="Narrower column">&minus;</button><button type="button" data-a="w+" aria-label="Wider column">+</button></div>
+  <div class="rd-row"><span></span><button type="button" data-a="reset">Reset</button></div>
+  <h5>Go to</h5>
+  <div id="rdToc"></div>
+</div>
+
 <script>
 (function(){
   "use strict";
-  const LS_NOTES = 'eros_notes_v1';
-  const LS_LAST = 'eros_last_section_v1';
-  const body = document.body;
+  var bar=document.getElementById('progressBar');
+  var ribBar=document.getElementById('freqBarRibbon');
+  var chLabel=document.getElementById('freqCh');
+  var pctLabel=document.getElementById('freqPct');
+  var body=document.body;
 
-  const topBar = document.getElementById('freqBar');
-  const ribBar = document.getElementById('freqBarRibbon');
-  const chLabel = document.getElementById('freqCh');
-  const pctLabel = document.getElementById('freqPct');
-
-  const chapters = [].slice.call(document.querySelectorAll('.chapter[data-palette]'));
-  const names = {
+  var names = {
     prologue:'Prologue', ch1:'The Number He Did Not Type',
     ch2:'The Shadow', ch3:'The Visitor', ch4:'The Boy Who Could Not Follow',
     ch5:'The Method', ch6:'The Questions', ch7:'The Stone', ch8:'The One Ahead',
@@ -3169,65 +2704,57 @@ Author: Owen<br>
     ch17:'The Standard', ch18:'The Peak', ch19:'The Return', ch20:'The New Standard',
     ch21:'The Sixteen Doors', epilogue:'Epilogue', appendix:'Appendix'
   };
+  var chapters = [].slice.call(document.querySelectorAll('.chapter[data-palette]'));
 
-  function currentChapter() {
-    const mid = window.innerHeight * 0.35;
-    let cur = 'prologue';
+  function currentChapter(){
+    var mid = window.innerHeight * 0.35;
+    var cur = 'prologue';
     chapters.forEach(function(ch){
-      const r = ch.getBoundingClientRect();
+      var r = ch.getBoundingClientRect();
       if (r.top <= mid) cur = ch.dataset.palette;
     });
     return cur;
   }
 
-  function updateProgress() {
-    const h = document.documentElement;
-    const sc = h.scrollTop || body.scrollTop;
-    const ht = h.scrollHeight - h.clientHeight;
-    const pct = ht > 0 ? (sc / ht) * 100 : 0;
-    topBar.style.width = pct + '%';
-    ribBar.style.width = pct + '%';
-    pctLabel.textContent = Math.round(pct);
-  }
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    if(bar)bar.style.width = pct + '%';
+    if(ribBar)ribBar.style.width = pct + '%';
+    if(pctLabel)pctLabel.textContent = Math.round(pct);
 
-  function updateChapter() {
-    const cur = currentChapter();
+    var cur = currentChapter();
     body.dataset.palette = cur;
-    chLabel.textContent = names[cur] || cur;
-    try { localStorage.setItem(LS_LAST, cur); } catch(e) {}
+    if(chLabel)chLabel.textContent = names[cur] || cur;
+    try{ localStorage.setItem('eros_last_section_v1', cur); }catch(e){}
   }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 
-  window.addEventListener('scroll', function(){
-    updateProgress();
-    updateChapter();
-  }, { passive: true });
-
-  updateProgress();
-  updateChapter();
-
-  const returnRibbon = document.getElementById('returnRibbon');
+  var returnRibbon = document.getElementById('returnRibbon');
   try {
-    const last = localStorage.getItem(LS_LAST);
+    var last = localStorage.getItem('eros_last_section_v1');
     if (last && last !== 'prologue') {
       setTimeout(function(){
         returnRibbon.classList.add('show');
         setTimeout(function(){ returnRibbon.classList.remove('show'); }, 5000);
       }, 1200);
     }
-  } catch(e) {}
+  } catch(e){}
 
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(LS_NOTES) || '{}'); } catch(e) { saved = {}; }
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem('eros_notes_v1') || '{}'); } catch(e){ saved = {}; }
   [].slice.call(document.querySelectorAll('.prompt')).forEach(function(p){
-    const key = p.getAttribute('data-prompt');
-    const input = p.querySelector('input');
-    const btn = p.querySelector('button');
+    var key = p.getAttribute('data-prompt');
+    var input = p.querySelector('input');
+    var btn = p.querySelector('button');
     if (saved[key]) { input.value = saved[key]; p.classList.add('saved'); }
-    function keep() {
-      const v = input.value.trim();
+    function keep(){
+      var v = input.value.trim();
       if (!v) return;
       saved[key] = v;
-      try { localStorage.setItem(LS_NOTES, JSON.stringify(saved)); } catch(e) {}
+      try { localStorage.setItem('eros_notes_v1', JSON.stringify(saved)); } catch(e){}
       p.classList.add('saved');
     }
     btn.addEventListener('click', keep);
@@ -3236,29 +2763,16 @@ Author: Owen<br>
 
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click', function(e){
-      const href = a.getAttribute('href');
+      var href = a.getAttribute('href');
       if (href.length < 2) return;
-      const t = document.querySelector(href);
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      var t = document.querySelector(href);
+      if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
     });
   });
 })();
-</script>
 
-<button id="rdBtn" type="button" aria-label="Reading settings and chapters" aria-expanded="false" aria-controls="rdPanel">Aa</button>
-<div id="rdPanel" role="dialog" aria-label="Reading settings" hidden>
-  <div class="rd-row"><span>Text size</span><button type="button" data-a="size-" aria-label="Smaller text">A&minus;</button><button type="button" data-a="size+" aria-label="Larger text">A+</button></div>
-  <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-" aria-label="Tighter lines">&minus;</button><button type="button" data-a="lead+" aria-label="Looser lines">+</button></div>
-  <div class="rd-row"><span>Column width</span><button type="button" data-a="w-" aria-label="Narrower column">&minus;</button><button type="button" data-a="w+" aria-label="Wider column">+</button></div>
-  <div class="rd-row"><span>Typeface</span><button type="button" data-a="font" id="rdFont">Serif</button></div>
-  <div class="rd-row"><span>Shaded voices</span><button type="button" data-a="shade" id="rdShade">On</button></div>
-  <div class="rd-row"><span></span><button type="button" data-a="reset">Reset</button></div>
-  <h5>Go to</h5>
-  <div id="rdToc"></div>
-</div>
-<script>
 (function(){
-  var KEY='eros_reader_v1', d={size:100,lead:1.88,w:34,font:'serif',shade:true};
+  var KEY='eros_reader_v1', d={size:100,lead:1.88,w:34};
   try{var sv=JSON.parse(localStorage.getItem(KEY)||'{}');for(var k in sv)d[k]=sv[k];}catch(e){}
   var root=document.documentElement, btn=document.getElementById('rdBtn'), panel=document.getElementById('rdPanel');
   function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
@@ -3266,10 +2780,6 @@ Author: Owen<br>
     root.style.fontSize=d.size+'%';
     root.style.setProperty('--leading',d.lead);
     root.style.setProperty('--measure',d.w+'rem');
-    root.classList.toggle('plain',!d.shade);
-    root.classList.toggle('sans',d.font==='sans');
-    document.getElementById('rdFont').textContent=d.font==='sans'?'Sans':'Serif';
-    document.getElementById('rdShade').textContent=d.shade?'On':'Off';
     try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}
   }
   panel.addEventListener('click',function(e){
@@ -3277,9 +2787,7 @@ Author: Owen<br>
     if(a==='size-')d.size=clamp(d.size-6,82,136); if(a==='size+')d.size=clamp(d.size+6,82,136);
     if(a==='lead-')d.lead=clamp(+(d.lead-.1).toFixed(2),1.5,2.3); if(a==='lead+')d.lead=clamp(+(d.lead+.1).toFixed(2),1.5,2.3);
     if(a==='w-')d.w=clamp(d.w-3,28,46); if(a==='w+')d.w=clamp(d.w+3,28,46);
-    if(a==='font')d.font=d.font==='serif'?'sans':'serif';
-    if(a==='shade')d.shade=!d.shade;
-    if(a==='reset')d={size:100,lead:1.88,w:34,font:'serif',shade:true};
+    if(a==='reset')d={size:100,lead:1.88,w:34};
     apply();
   });
   var toc=document.getElementById('rdToc');
@@ -3293,7 +2801,6 @@ Author: Owen<br>
   function close(){panel.hidden=true;btn.setAttribute('aria-expanded','false');}
   btn.addEventListener('click',function(){var o=panel.hidden;panel.hidden=!o;btn.setAttribute('aria-expanded',o?'true':'false');});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden){close();btn.focus();}});
-  document.querySelectorAll('.next-ch a').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
   apply();
 })();
 </script>
