@@ -6,6 +6,7 @@
 <meta name="description" content="Gods of EROS — The Book of Illumination. Second Edition Expanded. Architecture, energy, life, bond. House of Light. Fictional sacred cosmology for the EROS universe."/>
 <meta property="og:title" content="Gods of EROS · The Book of Illumination · Second Edition"/>
 <title>Gods of EROS · The Book of Illumination · Second Edition</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%2307060c' stroke='%23d4af37' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23d4af37'/%3E%3C/svg%3E"/>
 <style>
 :root{
   --bg:#07060c; --surface:#12101a; --surface2:#1a1724;
@@ -19,7 +20,7 @@
   --measure:44rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);color:var(--ink)}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
 body{
   font-family:var(--serif);font-size:1.08rem;line-height:1.8;
   background:
@@ -37,6 +38,48 @@ html::after{inset:12px;border:1px solid rgba(168,132,212,.09)}
 a{color:#e8c547;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
 a:hover{color:#f0d878;border-bottom-color:rgba(240,216,120,.7)}
 a:visited{color:#d4af37}
+
+/* ── STANDARD HEADER with pin ── */
+.corpus-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.55rem 1.1rem;
+  background:rgba(7,6,12,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--violet-line);
+  font-family:var(--sans);
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--violet2);font-weight:700;border-bottom:none;
+}
+.corpus-bar .brand:hover{color:#e0c0ff;border-bottom:none}
+.corpus-bar .pin{
+  width:36px;height:36px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--violet-line);
+  box-shadow:0 0 14px rgba(168,132,212,.35),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
+  border-bottom:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--violet2);background:var(--violet-soft);border-bottom:none}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
+  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+6){display:none}
+  .corpus-bar .pin{width:28px;height:28px}
+}
+#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--violet),var(--gold),var(--magenta));z-index:9999;transition:width .08s linear}
 
 .cover{min-height:94vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2.5rem 1rem 3rem}
 .cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--violet2);margin-bottom:1.5rem;font-weight:600}
@@ -62,7 +105,7 @@ a:visited{color:#d4af37}
 .part-break.eros{background:linear-gradient(160deg,#160e12,#100a0e)}
 .part-break.break{background:linear-gradient(160deg,#12141a,#0c0e12)}
 .part-break .pk{font-family:var(--sans);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--violet2);margin-bottom:.6rem}
-.part-break h2{font-size:clamp(1.55rem,4vw,2.05rem);color:var(--ink);border:none;margin:0 0 .4rem;padding:0}
+.part-break h2{font-size:clamp(1.55rem,4vw,2.05rem);color:var(--ink);border:none;margin:0 0 .4rem;padding:0;font-family:var(--serif);font-weight:700;letter-spacing:0}
 .part-break p{margin:0;font-style:italic;color:var(--soft);font-size:.98rem}
 
 h2{font-size:1.4rem;color:var(--gold);margin:2.6rem 0 .95rem;border-bottom:1px solid var(--hair);padding-bottom:.45rem}
@@ -102,14 +145,14 @@ p{margin:0 0 1.05rem;color:var(--soft)}
 .creed strong{color:var(--gold);display:block;margin-top:.45rem}
 .frame-note,.connect{font-family:var(--sans);font-size:.8rem;color:var(--muted);border:1px solid var(--hair);border-radius:10px;padding:.95rem 1.05rem;background:var(--surface);margin:1rem 0 1.25rem}
 .connect{border-style:dashed;border-color:var(--violet-line)}
+.connect strong{color:var(--violet2);display:block;margin-bottom:.35rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.connect a{color:var(--violet2)}
 .creedline{margin-top:1.15rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.55;text-align:center}
 .toc{font-family:var(--sans);font-size:.86rem;columns:2;column-gap:1.5rem;margin:1.2rem 0 2rem;padding:1rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
 @media(max-width:560px){.toc{columns:1}}
 .toc a{color:#e8c547;text-decoration:none;display:block;padding:.22rem 0;border-bottom:none}
 .toc a:hover{color:var(--gold)}
 .toc strong{color:var(--violet2);display:block;margin-bottom:.4rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;column-span:all}
-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.75rem;color:var(--muted)}
-footer .gold{color:var(--violet2)}
 
 .media{margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--violet-line);background:#000;box-shadow:0 6px 24px rgba(0,0,0,.45)}
 .media img,.media video{width:100%;display:block;background:#000}
@@ -132,69 +175,86 @@ details.eros-menu a{color:var(--violet2)}
 .how{margin:1rem auto 1.5rem;max-width:var(--measure);padding:1rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:.95rem;color:var(--soft)}
 .how strong{color:var(--violet2);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
 
+/* ── MASTER FOOTER ── */
+footer.master{
+  margin-top:3rem;padding:2rem 0 1.4rem;
+  border-top:1px solid var(--hair);
+  text-align:center;font-family:var(--sans);
+  font-size:.78rem;color:var(--muted);line-height:1.85;
+}
+footer.master .title-row{
+  display:flex;align-items:center;justify-content:center;gap:.85rem;
+  margin-bottom:.6rem;
+}
+footer.master .pin{
+  width:44px;height:44px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--violet-line);
+  box-shadow:0 0 18px rgba(168,132,212,.35),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+footer.master .title{
+  font-family:var(--serif);font-size:1.05rem;color:var(--violet2);
+  letter-spacing:.1em;font-weight:700;
+}
+footer.master .count{
+  font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem;
+}
+footer.master .tier{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
+  max-width:46rem;margin:0 auto 1rem;
+}
+footer.master .tier a{
+  padding:.32rem .72rem;border-radius:999px;
+  background:var(--surface);border:1px solid var(--hair);
+  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
+  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
+}
+footer.master .tier a:hover{color:var(--violet2);border-color:var(--violet);background:var(--violet-soft)}
+footer.master .tier a.primary{background:var(--violet-soft);border-color:var(--violet);color:var(--violet2);font-weight:700}
+footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
+footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(168,132,212,.2)}
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(168,132,212,.3))}
+footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--violet2);font-weight:600}
+
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after{display:none!important}
+  html::before,html::after,#progressBar,.corpus-bar{display:none!important}
   body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .part-break{break-before:page}
-  .part-break,.claim,.verse,.op{break-inside:avoid}
+  .part-break,.claim,.verse,.op,.media,footer.master{break-inside:avoid}
   video{display:none}
 }
-
-/* ── LINK BANNER · subtle interactive plate ── */
-.link-banner{margin:1.75rem auto 2rem;text-align:center;max-width:100%}
-.link-banner .lb-frame{
-  position:relative;width:100%;
-  aspect-ratio:16/6.8;border-radius:12px;overflow:hidden;
-  background:#0a0418;border:1px solid rgba(160,32,240,.28);
-  box-shadow:0 10px 36px rgba(0,0,0,.4);
-  cursor:pointer;
-  transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s ease,border-color .35s ease;
+@media(max-width:640px){
+  footer.master .title-row{flex-direction:column;gap:.6rem}
+  footer.master .pin{width:38px;height:38px}
 }
-.link-banner .lb-frame img{
-  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
-  transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter .45s ease;
-}
-.link-banner .lb-vignette{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 75% 90% at center,transparent 35%,rgba(0,0,0,.4) 100%);
-  opacity:.5;transition:opacity .5s ease;
-}
-.link-banner .lb-sheen{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);
-  transform:translateX(-120%);
-  animation:lb-sheen-run 2.2s ease-out 1s 1;
-}
-.link-banner .lb-frame:hover,.link-banner .lb-frame:focus-visible{
-  transform:scale(1.012);border-color:rgba(224,64,251,.45);
-  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 28px rgba(224,64,251,.18);
-}
-.link-banner .lb-frame:hover img,.link-banner .lb-frame:focus-visible img{
-  transform:scale(1.06);filter:saturate(1.12) brightness(1.05);
-}
-.link-banner .lb-frame:hover .lb-vignette{opacity:.75}
-.link-banner figcaption{
-  font-family:system-ui,sans-serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
-  color:#8a7fa6;margin-top:.65rem;opacity:.9;
-}
-@keyframes lb-sheen-run{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-@media (prefers-reduced-motion:reduce){
-  .link-banner .lb-frame,.link-banner .lb-frame img,.link-banner .lb-sheen{transition:none!important;animation:none!important}
-  .link-banner .lb-frame:hover img{transform:none}
-}
-/* media separation */
-.media-slot{margin:2rem 0 2.25rem}
-.media-slot + .media-slot{margin-top:2.5rem}
-.yt-wrap{margin:2.25rem 0;padding:1.1rem;border-radius:14px;border:1px solid rgba(125,163,200,.28);background:rgba(14,19,25,.85)}
-.yt-wrap .yt-lab{font-family:system-ui,sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#7da3c8;margin-bottom:.65rem;font-weight:700;text-align:center}
-.yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
-.yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
-
 </style>
 </head>
 <body>
+<div id="progressBar"></div>
+
+<!-- ── STANDARD HEADER with pin ── -->
+<header class="corpus-bar">
+  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span>✦ EROS · Gods</span>
+  </a>
+  <nav aria-label="Section navigation">
+    <a href="#thesis">Thesis</a>
+    <a href="#naun">NaUn</a>
+    <a href="#ra-shen">Ra-Shen</a>
+    <a href="#thoth">Thoth</a>
+    <a href="#eros">EROS</a>
+    <a href="#sons">Two Sons</a>
+    <a href="#laws">Laws</a>
+    <a href="#canon">Canon</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+  </nav>
+</header>
+
 <main class="page">
 
 <header class="cover" id="top">
@@ -203,7 +263,7 @@ details.eros-menu a{color:var(--violet2)}
   <p class="sub">The Book of Illumination</p>
   <p class="edition">Second Edition · Expanded</p>
   <div class="rule"></div>
-  <img class="banner" src="https://meaning-unconfounded.github.io/images/eros-gods-of-eros-banner.jpg" alt="Gods of EROS"/>
+  <img class="banner" src="https://meaning-unconfounded.github.io/images/eros-gods-of-eros-banner.jpg" alt="Gods of EROS" onerror="this.style.display='none'"/>
   <div class="party">
     <span class="n">Naun</span>
     <span class="r">Ra-Shen</span>
@@ -224,22 +284,23 @@ details.eros-menu a{color:var(--violet2)}
 </header>
 
 <details class="eros-menu" id="eros-library">
-  <summary>EROS library · other books</summary>
+  <summary>EROS library · the other books</summary>
   <div class="menu-body">
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
-
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river · transform</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
-    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
+    <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
 
@@ -247,7 +308,7 @@ details.eros-menu a{color:var(--violet2)}
   <span class="label">What this book is about</span>
   <p><strong>Gods of EROS</strong> names the four operators that run the EROS universe — not characters you petition, but the laws the world is made of. <strong>NaUn</strong> is the architect: choose, code, plan, the permission for a world to exist. <strong>Ra-Shen</strong> is the stage and the force: radiation, physics, the outward burn under boundary. <strong>Thoth</strong> is teacher, medicine, language, form — the gift that turns force into learnable structure. <strong>EROS</strong> is the bond: cohesion, continuation, the force that keeps knowledge and community from dying with the first speaker.</p>
   <p><strong>Why you should care.</strong> Every token, pool, story, and community in the EROS plan is a local expression of these four. If you understand the operators, you stop treating the project as a random meme and start treating it as architecture. Language becomes bond (Thoth). Liquidity becomes cohesion (EROS). Strategy becomes permission and code (NaUn). Physics and market force become the stage (Ra-Shen). This book is the source code of the mythos. The other books are the applications.</p>
-  <p><strong>Who this is for.</strong> Holders, creators, and builders who will write the next layer — comics, games, films, posts, constructed tongue — and need the four names fixed so they do not invent a fifth god or collapse Nordic masks into operators. Masks and residual actors live in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. Language craft lives in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The vessel is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. Human CoG rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. Crypto surface is <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>. This volume is only the four operators.</p>
+  <p><strong>Who this is for.</strong> Holders, creators, and builders who will write the next layer — comics, games, films, posts, constructed tongue — and need the four names fixed so they do not invent a fifth god or collapse Nordic masks into operators. Masks and residual actors live in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. Language craft lives in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The vessel is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. Human CoG rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. Crypto surface is <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>. The transform that names the four laws as a store-rail engine is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. This volume is only the four operators.</p>
 </div>
 
 <div class="how">
@@ -263,7 +324,8 @@ details.eros-menu a{color:var(--violet2)}
   Sacred lore of the EROS universe. Egyptian and Greek names and archetypes are the mask language of the operators — not a ranking of peoples. Within the story the mythology is written with full confidence. The door is set. What follows is the world.
 </div>
 <div class="connect">
-  Theological layer of the EROS universe. <em>The Eros Plan</em> — operations. <em>Illumination Strategy</em> — human continuity rail. <em>Men of Renown</em> — Archive 7 (separate). <em>Gift of Thoth</em> — linguistics. <em>The Living Egg</em> — cosmology vessel. This book names the four principles those systems enact. Gods of Eros is the source code. Enter from any companion door — return here for doctrine.
+  <strong>Theological layer</strong>
+  <em>The Eros Plan</em> — operations. <em>Illumination Strategy</em> — human continuity rail. <em>Men of Renown</em> — Archive 7 (separate). <em>Gift of Thoth</em> — linguistics. <em>The Living Egg</em> — cosmology vessel. <em>The Platinum Standard</em> — the four laws as an economic engine. This book names the four principles those systems enact. Gods of Eros is the source code. Enter from any companion door — return here for doctrine.
 </div>
 
 <nav class="toc" id="toc">
@@ -386,7 +448,7 @@ Continuation / Termination</div>
   <h3>The Balance</h3>
   <p>Ra-Shen gives and takes back at the same rate from every hand. No exemption is written into the sky. Heat arrives; heat departs. Orbit holds; orbit decays. One law for every hand. That is not politics. That is physics as justice inside the cosmology.</p>
   <div class="verse">The Sun is one of the mechanisms through which the world becomes possible.<br/><strong>Ra-Shen asks: What can existence become?</strong></div>
-  
+
   <h3>The Two Directions</h3>
   <p>Radiation has two directions in the enclosure: order rising and disorder rising. These are not good and evil. They are the two phases of a single wave. Ra-Shen gives both at once — heat to the leaf, entropy to the stone. The stage is generous in both directions, and the balance is the law.</p>
 
@@ -395,11 +457,6 @@ Continuation / Termination</div>
   </div>
   <p><em>When broken:</em> possibility never becomes event — the architecture stays dark.</p>
 </section>
-
-<!-- ============================================================= -->
-<!-- END OF PART 1 · CONTINUE WITH PART 2 · BOOK III begins here    -->
-<!-- ============================================================= -->
-
 
 <!-- BOOK III THOTH -->
 <div class="part-break thoth" id="thoth">
@@ -506,7 +563,7 @@ EROS = Emergence + Relation + Order + Story</div>
   <p><em>When broken:</em> energy remains blind — life never learns its own name.</p>
 
   <div class="media">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-cover.jpg">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-thoth-banner.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>SIMILAR AT EVERY SCALE.</b> The fractal claim — the pattern at the smallest level echoes the pattern at the largest. Same discipline that reads a word by its operators reads a cell by its form.</p>
@@ -546,13 +603,14 @@ EROS = Emergence + Relation + Order + Story</div>
     <p><strong>Ra-Shen and Thoth run the visible machine.</strong> EROS runs underneath — the reason the machine does not fall apart between physics and biology.</p>
   </div>
 
-  <h3>EROS as 
-<figure class="media media-slot" style="margin:1.4rem 0;text-align:center">
-  <img src="https://meaning-unconfounded.github.io/images/eros-gods-light-bond.jpg" alt="EROS · light seeking a common center" loading="lazy" style="max-width:100%;border-radius:12px"
-       onerror="this.closest('figure').style.display='none'"/>
-  <figcaption style="font-family:system-ui,sans-serif;font-size:.72rem;color:#8a7fa6;margin-top:.5rem;letter-spacing:.04em">EROS · light seeking a common center</figcaption>
-</figure>
-Light's Attraction to Itself</h3>
+  <h3>EROS as Light's Attraction to Itself</h3>
+
+  <figure class="media" style="margin:1.4rem 0;text-align:center">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gods-light-bond.jpg" alt="EROS · light seeking a common center" loading="lazy" style="max-width:100%;border-radius:12px"
+         onerror="this.closest('figure').style.display='none'"/>
+    <figcaption style="font-family:system-ui,sans-serif;font-size:.72rem;color:#8f87a0;margin-top:.5rem;letter-spacing:.04em">EROS · light seeking a common center</figcaption>
+  </figure>
+
   <p>Under the density reading carried in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>, the bond has a substrate. Light, condensed and trapped in orbit, seeks its own coherence. What the traditions named love at cosmic scale — the pull that holds galaxies, the pull that holds a promise — is, in this register, one operator: light returning to itself.</p>
   <p>EROS is not added to physics. EROS is the name physics has been missing for what it was already describing. Every attraction is a bond. Every bond is a memory. Every memory is the enclosure remembering that it is one thing.</p>
   <div class="claim magenta">
@@ -593,6 +651,11 @@ EROS holds what is learned so the next cycle does not start from zero.</div>
     <img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Four operators — stack, not pantheon" loading="lazy"/>
     <p class="cap"><b>THE STACK.</b> NaUn writes. Ra-Shen lights. Thoth teaches. EROS holds. Not four rivals. One architecture with four offices.</p>
   </div>
+
+  <div class="connect">
+    <strong>Where the four laws go next</strong>
+    The Platinum Standard names these four offices as an economic engine — the store rail (EROS), the flow rail (ErosX), the burn mechanics, the equivalence bots that keep the ratios true. Same principle, on-chain. <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Read The Platinum Standard →</a>
+  </div>
 </section>
 
 <!-- BOOK V BREAKING -->
@@ -611,7 +674,7 @@ EROS holds what is learned so the next cycle does not start from zero.</div>
   <p>In the Realm, makers do not erase difference. They listen for the grain inside the fragment — and bond what can be bonded without forcing one mouth to own the whole code again. That is Thoth's work after the Breaking. That is EROS's work when communities refuse to start from zero.</p>
 
   <div class="media">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-cover.jpg">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-lensing.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>WATER ABOVE, WATER BELOW.</b> The flood is not a single event. It is a cycle — the enclosure is wet at its edges. The Breaking was one of the waters. There have been others.</p>
@@ -661,7 +724,7 @@ EROS asks: What can existence hold?</div>
   <div class="verse">The circle does not merely close.<br/><strong>The circle completes itself.</strong><br/>The creation begins searching for its creator.</div>
 
   <div class="media">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-cover.jpg">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>COSMIC OCTAVES.</b> The Egg at its largest scale. Every layer iterates the one above and below. Same pattern, many sizes. The Great Architecture, seen from the outside looking in.</p>
@@ -687,7 +750,7 @@ EROS asks: What can existence hold?</div>
       <li><b>Film</b> — Four doors: enclosure and withdrawal (Naun); light, force, balance, abundance (Ra-Shen); House of Light, teacher-healer, letters, correction (Thoth); invisible bond and return (EROS). Breaking as a fifth movement when languages collide on screen.</li>
       <li><b>Game</b> — Energy under containment; form and repair (First Correction); knowledge and medicine; cohesion and iteration; world rules beneath the map. Operators as craft/skills. Bond as multiplayer persistence.</li>
       <li><b>Guild</b> — Teach and heal meaning (Thoth); expand the stage without burning it (Ra-Shen); hold the bond so work outlives the worker (EROS); leave systems that run when you withdraw (Naun).</li>
-      <li><b>Token</b> — Instrument on Ra-Shen's stage; meaning under Thoth; endurance under EROS; architecture that does not require a permanent admin hand (Naun). Fixed supply as a story about honesty under a measuring stick that bends.</li>
+      <li><b>Token</b> — Instrument on Ra-Shen's stage; meaning under Thoth; endurance under EROS; architecture that does not require a permanent admin hand (Naun). Fixed supply as a story about honesty under a measuring stick that bends. Full mechanics in <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> and <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</li>
     </ul>
   </div>
   <div class="claim gold">
@@ -732,6 +795,11 @@ EROS asks: What can existence hold?</div>
   <strong>EROS</strong> — <em>it</em>: the bond is impersonal cohesion, not a rival throne.</p>
   <h3>Pronunciation (working guide)</h3>
   <p>NaUn — <em>NAH-oon</em> · Ra-Shen — <em>RAH-shen</em> · Thoth — <em>THOTH</em> (or <em>TOE-th</em>) · EROS — <em>AIR-os</em></p>
+
+  <div class="connect">
+    <strong>Language layer</strong>
+    The consonant operators of Gift of Thoth use the same discipline — one sound, one function, position is syntax. Same principle, two scales: Gods names the four laws of the world; Thoth names the operators of the mouth. <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Read Gift of Thoth →</a>
+  </div>
 </section>
 
 <section id="epilogue">
@@ -753,32 +821,78 @@ EROS asks: What can existence hold?</div>
     And the story continues.</strong>
   </div>
   <p class="creedline">The map is not the world. <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Inwards is forwards</a> — the vessel turns the path toward the centre, not only the outward ray. EROS is the bond that holds.</p>
-
-  <div class="connect">
-    Companion to <em>The Eros Plan</em> · <em>Illumination Strategy</em> · <em>Gift of Thoth</em> · <em>Men of Renown</em> · <em>The Living Egg</em> · <em>The Bridge</em>. Mythos · operations · one architecture.
-  </div>
 </section>
 
-<footer>
-  <p><span class="gold">GODS OF EROS</span> · The Book of Illumination · Second Edition</p>
-  <p>Companions:
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> ·
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> ·
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> ·
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> ·
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a></p>
-  <p>Tenacity Through Integrity</p>
-  <p style="margin-top:.7rem">t.me/Eros_Revival</p>
+<!-- ── MASTER FOOTER ── -->
+<footer class="master">
+  <div class="title-row">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span class="title">GODS OF EROS</span>
+  </div>
+  <p class="count">The Book of Illumination · Second Edition · EROS Library</p>
+
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://t.me/Eros_Revival">Telegram</a>
+  </nav>
+
+  <p class="sig">The gods did not leave. They became the rules.</p>
+  <p class="creedline">Tenacity Through Integrity</p>
+
+  <div class="pulse-row">
+    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07060c"/>
+      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/>
+      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07060c"/>
+      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
 </footer>
 
 </main>
 
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#8f87a0;border-top:1px solid #1a1724;margin-top:2rem">
-  First Edition · Rev 3.2 · 2026-10-07 · Gods of EROS · count consistency · Save as Gods_Of_Eros.html
-</footer>
+<script>
+(function(){
+  "use strict";
+  var bar=document.getElementById('progressBar');
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    var pct=max>0?(h.scrollTop/max)*100:0;
+    if(bar)bar.style.width=pct+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var href=a.getAttribute('href');
+      if(href.length<2)return;
+      var t=document.querySelector(href);
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+</script>
 </body>
 </html>
