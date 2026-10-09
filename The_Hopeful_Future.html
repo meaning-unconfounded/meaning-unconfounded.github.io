@@ -35,7 +35,7 @@
   --measure:48rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:1rem}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
 body{
   font-family:var(--serif);font-size:1.08rem;line-height:1.82;
   background:
@@ -57,6 +57,47 @@ a:visited{color:#b070d0}
 ::selection{background:var(--pulse);color:#fff}
 h1,h2,h3{text-wrap:balance}
 p,li{overflow-wrap:break-word}
+
+/* ── STANDARD HEADER with pin ── */
+.corpus-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+  padding:.55rem 1.1rem;
+  background:rgba(4,1,8,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--pulse-line);
+  font-family:var(--sans);
+}
+.corpus-bar .brand{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--magenta);font-weight:700;border-bottom:none;
+}
+.corpus-bar .brand:hover{color:#f0a8ff;border-bottom:none}
+.corpus-bar .pin{
+  width:36px;height:36px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--pulse-line);
+  box-shadow:0 0 14px var(--pulse-soft),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar nav a{
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
+  border-bottom:none;transition:color .15s,background .15s;
+}
+.corpus-bar nav a:hover{color:var(--magenta);background:var(--pulse-soft);border-bottom:none}
+@media(max-width:720px){
+  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
+  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
+  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+}
+@media(max-width:520px){
+  .corpus-bar nav a:nth-child(n+6){display:none}
+  .corpus-bar .pin{width:28px;height:28px}
+}
 
 /* ── COVER ── */
 .cover{min-height:86vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem 1.4rem}
@@ -387,33 +428,71 @@ li code,.claim code{font-family:var(--mono);font-size:.78rem;color:var(--platinu
 .coda .creed .green{color:var(--green)}
 .coda .creed .magenta{color:var(--magenta)}
 
-/* ── FOOTER ── */
-footer{
-  margin-top:3rem;padding-top:1.4rem;
+/* ── MASTER FOOTER ── */
+footer.master{
+  margin-top:3rem;padding-top:1.6rem;
   border-top:1px solid var(--hair);
   text-align:center;font-family:var(--sans);
   font-size:.78rem;color:var(--muted);line-height:1.85;
 }
-footer .pulse{color:var(--magenta)}
-footer a{margin:0 .35rem;color:var(--magenta);border-bottom:none}
-footer a:hover{border-bottom:1px solid rgba(224,64,251,.5)}
-footer .creedline{
-  margin-top:1.4rem;font-family:var(--sans);font-size:.68rem;
+footer.master .title-row{
+  display:flex;align-items:center;justify-content:center;gap:.85rem;
+  margin-bottom:.6rem;
+}
+footer.master .pin{
+  width:44px;height:44px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--pulse-line);
+  box-shadow:0 0 18px var(--pulse-soft),0 0 0 1px rgba(255,255,255,.05) inset;
+  flex-shrink:0;background:var(--surface);
+}
+footer.master .title{
+  font-family:var(--serif);font-size:1.05rem;color:var(--magenta);
+  letter-spacing:.1em;font-weight:700;
+}
+footer.master .count{
+  font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem;
+}
+footer.master .tier{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
+  max-width:46rem;margin:0 auto 1rem;
+}
+footer.master .tier a{
+  padding:.32rem .72rem;border-radius:999px;
+  background:var(--surface);border:1px solid var(--hair);
+  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
+  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
+}
+footer.master .tier a:hover{color:var(--magenta);border-color:var(--magenta);background:var(--pulse-soft)}
+footer.master .tier a.primary{background:var(--pulse-soft);border-color:var(--magenta);color:var(--magenta);font-weight:700}
+footer.master .sig{
+  font-family:var(--serif);font-style:italic;color:var(--soft);
+  font-size:.92rem;margin-top:1.2rem;
+}
+footer.master .line{
+  font-family:var(--serif);font-style:italic;color:var(--muted);
+  font-size:.85rem;margin-top:.6rem;
+}
+footer.master .creedline{
+  margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;
   letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
 }
-footer .pulse-row{
+footer.master .pulse-row{
   display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;
   margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(160,32,240,.2);
 }
-footer .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3))}
-footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);font-weight:600}
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3))}
+footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);font-weight:600}
+footer.master .sig-last{
+  margin-top:1rem;font-size:.72rem;opacity:.75;
+}
 
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after{display:none!important}
-  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .part-break,.claim,.verse,.plate,.movement,.capstone,figure.svg-plate,.scoreboard,.stages,.gift-grid{break-inside:avoid}
-  #progressBar{display:none}
+  html::before,html::after,.corpus-bar,#progressBar{display:none!important}
+  body{background:#040108!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part-break,.claim,.verse,.plate,.movement,.capstone,figure.svg-plate,.scoreboard,.stages,.gift-grid,footer.master{break-inside:avoid}
+  .corpus-bar{display:none!important}
   video{display:none}
 }
 @media(max-width:640px){
@@ -421,6 +500,8 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
   .page{padding:1rem 1rem 4rem}
   .cover .hex-row{flex-wrap:wrap}
   .frank p{font-size:1.08rem}
+  footer.master .title-row{flex-direction:column;gap:.6rem}
+  footer.master .pin{width:38px;height:38px}
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
@@ -490,6 +571,27 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
 </head>
 <body>
 <div id="progressBar"></div>
+
+<!-- ── STANDARD HEADER with pin ── -->
+<header class="corpus-bar">
+  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span>✦ EROS · Hopeful Future</span>
+  </a>
+  <nav aria-label="Section navigation">
+    <a href="#gift">Gift</a>
+    <a href="#stack">Stack</a>
+    <a href="#pdai">pDAI</a>
+    <a href="#atropa">Atropa</a>
+    <a href="#eros">EROS</a>
+    <a href="#pulsechain">Floor</a>
+    <a href="#bridge">Bridge</a>
+    <a href="#standard">Standard</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+  </nav>
+</header>
+
 <div class="page" id="top">
 
 <!-- ═══════════ COVER ═══════════ -->
@@ -597,14 +699,16 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — token &amp; poolonomics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river · transform</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — token &amp; poolonomics</p>
-    <p style="margin:.4rem 0 0"><a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
+    <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
 
@@ -686,7 +790,7 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
 <div class="movement gift" id="place">
   <span class="mov-label">Where this book sits</span>
   <h3>One page to place it in the library</h3>
-  <p>The <strong>Narrative</strong> is the on-ramp. <strong>The Bridge</strong> is the field manual for the instrument and its pools. <strong>This book</strong> is the map between them: the gift, then the stack — how settlement (pDAI), the base (Atropa · Dysnomia), the world (EROS) and the floor (PulseChain) relate, and how the right people make the difference between a market and a home.</p>
+  <p>The <strong>Narrative</strong> is the on-ramp. <strong>The Bridge</strong> is the field manual for the instrument and its pools. <strong>The Platinum Standard</strong> is the transform — rock to river, store rail to flow rail. <strong>This book</strong> is the map between them: the gift, then the stack — how settlement (pDAI), the base (Atropa · Dysnomia), the world (EROS) and the floor (PulseChain) relate, and how the right people make the difference between a market and a home.</p>
   <p><strong>Ten minutes:</strong> The Gift, The Stack, The Standard, the Coda. &nbsp;<strong>One hour:</strong> add the bridge chapter and the pDAI section. &nbsp;<strong>Full:</strong> the whole book, then The Bridge.</p>
 </div>
 
@@ -709,7 +813,7 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
     <tr><th>🎁 The gift</th><td>The people. Creative causative builders who find a home and hold because they made it. The reason the rest of the stack is worth carrying.</td></tr>
   </table>
 
-  <div class="pull">Two rails run through it: the <strong>store rail</strong> (EROS — burn, bond, stake) and the <strong>flow rail</strong> (ErosX — spend, movement). A third pattern is the <strong>teachable burn</strong> (33Eros — burn, seed LP, buy-burn). The two rails are live-and-spec respectively. Both are the operational layer of the world.</div>
+  <div class="pull">Two rails run through it: the <strong>store rail</strong> (EROS — burn, bond, stake) and the <strong>flow rail</strong> (ErosX — spend, movement). A third pattern is the <strong>teachable burn</strong> (33Eros — burn, seed LP, buy-burn). The two rails are live-and-spec respectively. Both are the operational layer of the world. Full treatment in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</div>
 </section>
 
 <!-- ═══════════ 🥇 pDAI ═══════════ -->
@@ -779,6 +883,10 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
   <p>The gates the thesis names as blocking its own route today: all 17 Aave Portal unbacked caps sit at zero; sETH2 token logic reads revert; ordinary Maker PSM is disabled with Vat live set to zero; the sampled Aave DAI reserve held zero pDAI cash at the saved checkpoint. These are the gates. The thesis names them itself.</p>
 
   <div class="pull dollar">Why pDAI matters is not that it will hit a dollar tomorrow. It matters that <em>if</em> the graph ever needs a settlement unit, the thesis describing how it would work is already written — with its own gates, its own confidence numbers, its own falsifiers. That is a serious object. That is why pDAI comes first.</div>
+
+  <div class="claim dollar">
+    <p><strong>Companion reading.</strong> The money-authority triptych in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html#standard">The Platinum Standard → The Standard</a> — measuring stick, instruments, footprints — is the visual companion to this section. Same discipline: state the claim, name the layer, say how confident you are, move on.</p>
+  </div>
 
   <h3>The contract trail</h3>
 
@@ -933,8 +1041,8 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
 
   <table class="facts">
     <tr><th>EROS 💕 · the store rail</th><td>Fixed supply, 5% flow fee, burn, stake, lock, core LP. Heavy by design. Membership in a liquidity web. Live today.</td></tr>
-    <tr><th>ErosX · the flow rail</th><td>Tax-light companion for spend, movement, in-world use, cross-community transfers. <em>Design discussion, not a deployed product.</em></td></tr>
-    <tr><th>33Eros · the teachable burn</th><td>The burn / seed-LP / buy-burn transform pattern — a template other builders can copy. <em>Design discussion.</em></td></tr>
+    <tr><th>ErosX · the flow rail</th><td>Tax-light companion for spend, movement, in-world use, cross-community transfers. <em>Design discussion, not a deployed product.</em> → <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Full treatment in The Platinum Standard</a></td></tr>
+    <tr><th>33Eros · the teachable burn</th><td>The burn / seed-LP / buy-burn transform pattern — a template other builders can copy. <em>Design discussion.</em> → <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html#33eros">Full treatment in The Platinum Standard</a></td></tr>
   </table>
 
   <h3>What EROS builds · the world</h3>
@@ -1349,19 +1457,17 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
     <div class="plate-label">Plate III</div>
     <div class="plate-title">The Inside</div>
     <p class="plate-cap">Gold spikes. Rails stutter. On a secondary screen, a burn address ticks — each tick a transaction, each tick a person choosing to stay coupled when exiting would be easier.</p>
-
-<div class="yt-wrap media-slot">
-  <p class="yt-lab">Watch · Gold · Measuring stick · Continuity</p>
-  <div class="yt-frame">
-    <iframe src="https://www.youtube.com/embed/S_0f4twDjYY" title="Gold, continuity, and the measuring stick" loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-  </div>
-  <p class="yt-cap">Footprints over confession. Public instruments. Verify the layer yourself.</p>
-</div>
-
-
   </figure>
+
+  <div class="yt-wrap media-slot">
+    <p class="yt-lab">Watch · Gold · Measuring stick · Continuity</p>
+    <div class="yt-frame">
+      <iframe src="https://www.youtube.com/embed/S_0f4twDjYY" title="Gold, continuity, and the measuring stick" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+    <p class="yt-cap">Footprints over confession. Public instruments. Verify the layer yourself.</p>
+  </div>
 
   <figure class="plate">
     <img src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories · sixteen doors"
@@ -1474,7 +1580,7 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
 
   <div class="claim platinum">
     <p><strong>pDAI is a hypothesis.</strong> Its own thesis calls its $1 target an observational research hypothesis. Its own H2 confidence for full route execution at the pinned snapshot is 1%. The gates are named: Portal caps at zero, sETH2 reads reverting, Maker PSM disabled, Aave DAI reserve empty. This is not a hidden weakness. It is the thesis's own most important fact.</p>
-    <p><strong>ErosX and 33Eros are design discussions.</strong> Not deployed products. Their specs are described; their deploys are open. Judge them when verified mainnet code appears.</p>
+    <p><strong>ErosX and 33Eros are design discussions.</strong> Not deployed products. Their specs are described; their deploys are open. Judge them when verified mainnet code appears. Full treatment: <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</p>
     <p><strong>The fiction is fiction.</strong> The Living Egg, the four operators, the sixteen doors — pure fiction, real instrument. The cosmology is a story about the shape of a world the instrument can live in. It is not a claim about physics.</p>
     <p><strong>Renounce is a feature and a risk.</strong> A renounced contract has no privileged pause. That is what makes it trustworthy. It is also what makes it unamendable.</p>
     <p><strong>No price targets. No guaranteed returns.</strong> The milestones are stated goals. The risks are real: contract, bridge, thin liquidity, impermanent loss, concentration, regulatory, execution burnout, narrative fatigue.</p>
@@ -1513,7 +1619,7 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
     <p class="plate-cap">Not merged. Not partnered. Coordinated by discipline. Given, not sold.</p>
   </figure>
 
-  <p class="cap-label">The Unities of EROS</p>
+  <p class="cap-label">Postulates · laws · unities</p>
   <h2>Whatever holds together without extraction is the same force.</h2>
 
   <div class="first-principle">
@@ -1600,24 +1706,38 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
   </p>
 </section>
 
-<!-- ═══════════ FOOTER ═══════════ -->
-<footer>
-  <p><span class="pulse">THE HOPEFUL FUTURE</span> · Gift Edition</p>
-  <p>The gift · pDAI · Atropa · Dysnomia · EROS · PulseChain · The bridge</p>
-  <p style="margin-top:.9rem;font-size:.82rem;line-height:1.9">
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> ·
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> ·
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> ·
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> ·
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> ·
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
-  </p>
-  <p style="margin-top:.85rem;font-size:.78rem;line-height:1.85">
-    <a href="https://atropa-terminal.vercel.app/" target="_blank" rel="noopener">Atropa Terminal</a> ·
-    <a href="https://9iron-pdai-thesis.vercel.app/" target="_blank" rel="noopener">pDAI thesis</a> ·
-    <a href="https://bridge.pulsechain.com" target="_blank" rel="noopener">PulseChain Bridge</a>
-  </p>
+<!-- ═══════════ MASTER FOOTER ═══════════ -->
+<footer class="master">
+  <div class="title-row">
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <span class="title">THE HOPEFUL FUTURE</span>
+  </div>
+  <p class="count">Gift Edition · The gift · pDAI · Atropa · Dysnomia · EROS · PulseChain · The bridge</p>
+
+  <nav class="tier" aria-label="Library">
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://t.me/Eros_Revival">Telegram</a>
+  </nav>
+
+  <p class="sig">Inward is forwards. The bond is what holds.</p>
+  <p class="line">Rev 9 · 2026-10-09 · Save as The_Hopeful_Future.html</p>
+
   <p class="creedline">Faster · Cheaper · Stronger · Inward is forwards · The bond is what holds</p>
 
   <div class="pulse-row">
@@ -1634,7 +1754,7 @@ footer .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppe
     </svg>
   </div>
 
-  <p style="margin-top:1rem;font-size:.72rem;opacity:.7">Tenacity Through Integrity</p>
+  <p class="sig-last">Tenacity Through Integrity</p>
 </footer>
 
 </div>
@@ -1662,8 +1782,5 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 })();
 </script>
 
-<footer style="text-align:center;padding:2rem 1rem;font-family:system-ui,sans-serif;font-size:.8rem;color:#8a7fa6;border-top:1px solid #160a2c;margin-top:2rem">
-  First Edition · Rev 8 · 2026-10-08 · The Hopeful Future · Gift Edition · Save as The_Hopeful_Future.html
-</footer>
 </body>
 </html>
