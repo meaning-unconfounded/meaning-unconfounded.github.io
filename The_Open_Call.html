@@ -70,10 +70,48 @@ a:hover{color:var(--gold2);border-bottom-color:var(--gold2)}
   .corpus-bar nav a:nth-child(n+4){display:none}
 }
 
+/* ── MEDIA EMBEDS ── */
+.media-embed {
+  margin: 2rem auto;
+  max-width: 40rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: linear-gradient(160deg, var(--gold-soft), var(--surface));
+  border: 1px solid var(--gold-line);
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(138,106,29,.06), 0 4px 20px rgba(138,106,29,.08);
+  text-align: center;
+}
+.media-embed .media-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: .62rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: .9rem;
+}
+.media-embed audio,
+.media-embed video {
+  width: 100%;
+  border-radius: 8px;
+  outline: none;
+  background: var(--surface2);
+}
+.media-embed video {
+  max-height: 420px;
+  object-fit: contain;
+}
+@media (max-width: 520px) {
+  .media-embed { padding: 1rem; margin: 1.5rem auto; }
+  .media-embed .media-label { font-size: .58rem; margin-bottom: .6rem; }
+}
+/* ── END MEDIA EMBEDS ── */
+
 /* ── IMPROVED COVER SECTION ── */
 header.cover {
   text-align: center;
-  padding: 5rem 1.5rem 4rem; /* Generous breathing room */
+  padding: 5rem 1.5rem 4rem;
   border-bottom: 1px solid var(--gold-line);
   margin-bottom: 3rem;
 }
@@ -87,7 +125,7 @@ header.cover .kick {
   font-weight: 700;
 }
 header.cover h1 {
-  font-size: clamp(2.2rem, 6vw, 3.5rem); /* Bigger, bolder title */
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--ink);
@@ -111,12 +149,12 @@ header.cover .rule {
 header.cover .audience {
   font-family: var(--serif);
   font-size: 1.05rem;
-  line-height: 2.0; /* More line height for readability */
+  line-height: 2.0;
   color: var(--soft);
   max-width: 42rem;
   margin: 0 auto;
   font-style: italic;
-  background: var(--surface); /* Card-like background */
+  background: var(--surface);
   padding: 2rem 1.5rem;
   border-radius: 12px;
   border: 1px solid var(--hair2);
@@ -126,7 +164,6 @@ header.cover .audience b {
   font-style: normal;
   font-weight: 700;
 }
-/* Mobile adjustments for the cover */
 @media(max-width: 640px) {
   header.cover { padding: 3rem 1rem 2.5rem; }
   header.cover h1 { font-size: 2rem; }
@@ -316,7 +353,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   body{background:#fff!important;color:#111;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:#111;border-bottom:none}
-  .claim,.pull,.demand,.sequence,.media-list,.audience-close,.final,.hopeful-call,.creator-notes{break-inside:avoid}
+  .claim,.pull,.demand,.sequence,.media-list,.audience-close,.final,.hopeful-call,.creator-notes,.media-embed{break-inside:avoid}
   h2{break-after:avoid}
 }
 @media(max-width:640px){body{font-size:1rem}.page{padding:1.2rem 1.1rem 3.5rem}}
@@ -356,6 +393,15 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
     To everyone who has stayed through the quiet seasons, continued building, kept learning, and refused to walk away.
   </p>
 </header>
+
+<!-- AUDIO PLAYER — HIGH UP, RIGHT AFTER COVER -->
+<div class="media-embed">
+  <span class="media-label">Listen to the call</span>
+  <audio controls preload="metadata">
+    <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
 
 <section id="situation">
   <p class="big">We need to talk about what comes next. <strong>Not about price. About work.</strong></p>
@@ -563,6 +609,15 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   <p><strong>Where can people investigate further?</strong> Link the official documentation and community resources.</p>
   <p style="margin-top:1rem;font-style:italic;color:var(--muted)">Do not confuse explanation with endorsement. Do not promise price appreciation. Do not hide risks. If the project is worth discussing, it is worth discussing honestly. That honesty is what separates a useful educational channel from another promotional feed.</p>
 </aside>
+
+<!-- VIDEO PLAYER — AT THE BOTTOM, BEFORE FOOTER -->
+<div class="media-embed">
+  <span class="media-label">Watch the call</span>
+  <video controls preload="metadata" playsinline>
+    <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp4" type="video/mp4">
+    Your browser does not support the video element.
+  </video>
+</div>
 
 <footer class="master">
   <p class="title">AN OPEN CALL</p>
