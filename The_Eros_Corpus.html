@@ -78,6 +78,44 @@ a:hover{color:var(--gold2);border-bottom-color:var(--gold2)}
   .corpus-bar nav a:nth-child(n+5){display:none}
 }
 
+/* ── MEDIA EMBEDS ── */
+.media-embed {
+  margin: 2rem auto;
+  max-width: 40rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: linear-gradient(160deg, var(--gold-soft), var(--surface));
+  border: 1px solid var(--gold-line);
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(138,106,29,.06), 0 4px 20px rgba(138,106,29,.08);
+  text-align: center;
+}
+.media-embed .media-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: .62rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: .9rem;
+}
+.media-embed audio,
+.media-embed video {
+  width: 100%;
+  border-radius: 8px;
+  outline: none;
+  background: var(--surface2);
+}
+.media-embed video {
+  max-height: 420px;
+  object-fit: contain;
+}
+@media (max-width: 520px) {
+  .media-embed { padding: 1rem; margin: 1.5rem auto; }
+  .media-embed .media-label { font-size: .58rem; margin-bottom: .6rem; }
+}
+/* ── END MEDIA EMBEDS ── */
+
 header.cover{text-align:center;padding:2.5rem 1rem 2rem}
 header.cover .kick{font-family:var(--sans);font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:700}
 header.cover h1{font-size:clamp(2rem,5.5vw,3rem);font-weight:700;letter-spacing:.02em;color:var(--ink);line-height:1.15;margin-bottom:.5rem}
@@ -404,7 +442,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   body{background:#fff!important;color:#111;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:#111;border-bottom:none}
-  .svg-map,.book-card,.claim,.frank,.loop-viz,.path,.rails,.table-wrap,details.fold,.cta,.cover-call,.hopeful-call{break-inside:avoid}
+  .svg-map,.book-card,.claim,.frank,.loop-viz,.path,.rails,.table-wrap,details.fold,.cta,.cover-call,.hopeful-call,.media-embed{break-inside:avoid}
   h2{break-after:avoid}
   header.cover{padding:.5rem 0 1rem}
   header.cover h1{font-size:1.9rem}
@@ -413,6 +451,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   .loop-viz video{display:none}
   .loop-viz{background:var(--surface);border:1px solid var(--hair)}
   .loop-viz .loop-overlay{position:static;padding:1rem;background:none}
+  .media-embed{background:#fff;border:1px solid #ccc}
 }
 @media(max-width:640px){body{font-size:1rem}.page{padding:1.2rem 1.1rem 4rem}table.ref{font-size:.85rem}}
 </style>
@@ -457,6 +496,15 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
     <span class="hc-sub">Fourteen books. One stack. Settlement · base · world · floor · bridge.<br/>What you point people at once they look.</span>
   </aside>
 </header>
+
+<!-- AUDIO PLAYER — HIGH UP, RIGHT AFTER COVER -->
+<div class="media-embed">
+  <span class="media-label">Listen to the open call</span>
+  <audio controls preload="metadata">
+    <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
 
 <section id="what">
   <h2>What this page is</h2>
@@ -967,6 +1015,15 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   <a class="enter" href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Or · Eros Narrative</a>
   <a class="enter" href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Or · Hopeful Future</a>
   <a class="enter" href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Or · First Resonance</a>
+</div>
+
+<!-- VIDEO PLAYER — AT THE BOTTOM, BEFORE FOOTER -->
+<div class="media-embed">
+  <span class="media-label">Watch the open call</span>
+  <video controls preload="metadata" playsinline>
+    <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp4" type="video/mp4">
+    Your browser does not support the video element.
+  </video>
 </div>
 
 <footer class="master">
