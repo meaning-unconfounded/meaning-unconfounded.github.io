@@ -278,6 +278,75 @@ footer.master .sig-last{margin-top:1rem;font-size:.72rem;opacity:.75}
 .media-library{margin:2.2rem 0 1rem;padding:1.2rem 1rem 1.4rem;border:1px solid var(--indigo-line);border-radius:16px;background:linear-gradient(180deg,var(--indigo-soft),transparent)}
 .media-library h3{font-family:var(--sans);font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo2);margin-bottom:.4rem}
 .media-library .lead{color:var(--muted);font-size:.92rem;margin-bottom:1rem}
+
+/* Dual brand: EROS seal + Pulse — mobile-safe */
+.corpus-bar{flex-wrap:nowrap;min-height:3.2rem}
+.corpus-bar .brand-cluster{
+  display:flex;align-items:center;gap:.5rem;
+  border-bottom:none;flex-shrink:0;min-width:0;
+}
+.corpus-bar .brand-cluster:hover{border-bottom:none}
+.corpus-bar .pin{flex-shrink:0;object-fit:cover}
+.corpus-bar .pin.eros-mark{
+  width:52px;height:52px;
+  border-color:rgba(125,143,184,.5);
+  box-shadow:0 0 16px rgba(125,143,184,.3);
+}
+.corpus-bar .pin.pulse-mark{width:42px;height:42px}
+.corpus-bar .brand-text{
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--indigo2);font-weight:700;white-space:nowrap;
+}
+.corpus-bar nav{
+  display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;
+  gap:.12rem;min-width:0;flex:1 1 auto;
+}
+.corpus-bar nav a{text-align:left}
+@media(max-width:720px){
+  .corpus-bar{padding:.45rem .7rem;gap:.35rem}
+  .corpus-bar .pin.eros-mark{width:44px;height:44px}
+  .corpus-bar .pin.pulse-mark{width:36px;height:36px}
+  .corpus-bar .brand-text{font-size:.62rem;letter-spacing:.08em}
+  .corpus-bar nav a{padding:.26rem .4rem;font-size:.56rem}
+}
+@media(max-width:520px){
+  .corpus-bar .pin.eros-mark{width:38px;height:38px}
+  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
+  .corpus-bar .brand-text{font-size:.58rem;max-width:5.5rem;overflow:hidden;text-overflow:ellipsis}
+  .corpus-bar nav a{padding:.22rem .32rem;font-size:.52rem}
+  .corpus-bar nav a:nth-child(n+7){display:none}
+}
+@media(max-width:380px){
+  .corpus-bar .brand-text{display:none}
+  .corpus-bar .pin.eros-mark{width:36px;height:36px}
+  .corpus-bar .pin.pulse-mark{width:30px;height:30px}
+}
+.brand-seal{
+  margin:1.3rem auto .8rem;
+  text-align:center;
+  max-width:min(220px,55vw);
+}
+.brand-seal img{
+  display:block;width:100%;height:auto;
+  border-radius:50%;
+  border:3px solid var(--indigo-line);
+  box-shadow:0 12px 40px rgba(125,143,184,.2);
+}
+.brand-seal figcaption{
+  font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--indigo2);margin-top:.65rem;font-weight:700;
+}
+.yt-wrap{margin:1.6rem 0;border:1px solid var(--indigo-line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.yt-lab{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo2);padding:.7rem 1rem .35rem;font-weight:700}
+.yt-frame{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
+.yt-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.yt-cap{font-family:var(--sans);font-size:.86rem;color:var(--soft);padding:.85rem 1.05rem 1rem;line-height:1.65;border-top:1px solid var(--hair)}
+.yt-cap b{color:var(--indigo2);letter-spacing:.04em}
+.axiom-g2{margin:1.4rem 0;padding:1.2rem 1.25rem;border:1px solid var(--gold-line);border-left:4px solid var(--gold);border-radius:10px;background:linear-gradient(135deg,#17140e,#1a1710)}
+.axiom-g2 .ag-k{font-family:var(--sans);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:.65rem}
+.axiom-g2 p{margin:0;color:var(--soft);font-size:1.02rem;line-height:1.8}
+.axiom-g2 p + p{margin-top:.7rem}
+
 </style>
 <meta name="theme-color" content="#07070e"/>
 <script type="application/ld+json">
@@ -290,9 +359,10 @@ footer.master .sig-last{margin-top:1rem;font-size:.72rem;opacity:.75}
 
 <!-- ── STANDARD HEADER with pin ── -->
 <header class="corpus-bar">
-  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
-    <span>✦ EROS · Living Egg</span>
+  <a class="brand brand-cluster" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
+    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
+    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
+    <span class="brand-text">EROS · Living Egg</span>
   </a>
   <nav aria-label="Section navigation">
     <a href="#part1">Egg</a>
@@ -317,15 +387,21 @@ footer.master .sig-last{margin-top:1rem;font-size:.72rem;opacity:.75}
   <h1>THE LIVING EGG</h1>
   <p class="sub">Inward is forwards</p>
   <div class="rule"></div>
+  <img class="banner" src="https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg" alt="The Living Egg" onerror="this.style.display=\'none\'"/>
   <p class="opening">
     At 3:47 AM in the Atacama Desert, a scientist erased 85 percent of the universe from her equation.<br/>
     The math still worked.<br/>
     <em>This is the manual that explains why — and what to build with it.</em>
   </p>
-  <img class="banner" src="https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg" alt="The Living Egg" onerror="this.style.display='none'"/>
   <div class="seal">
     <strong>Frame, stated once.</strong> This is exploration and story architecture — not a decree that you abandon your sky. Soft knowledge is labelled. You keep your mind. What follows is written so that anyone can finish a section and <em>use</em> it: in a scene, a pool, a comic panel, a conversation.
   </div>
+
+  <figure class="brand-seal">
+    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" width="220" height="220" loading="lazy"/>
+    <figcaption>Tenacity Through Integrity</figcaption>
+  </figure>
+
 </header>
 
 <details class="eros-menu" id="how-to-read-egg">
@@ -787,6 +863,19 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>What EROS (the token, the community, the project) is trying to build is a bond that can hold all three at once. Not because it has a clever mechanism, but because the mechanism is a scaled version of what every bond has always been. A bonding pool is a cosmic bond, made legible and tradeable. It is what a shared future looks like when it is stored in a contract.</p>
 
+
+  <h3 id="inward-expansion">Inward Expansion and the Asymptotic Center</h3>
+  <p class="lede">The missing chain, stated once so it can be used.</p>
+  <p>Part Four said time is iteration. Earlier in this Part we said atoms expand at a shared rate and weight is inertia resisting acceleration. Affinity is gravity's soft twin. One law ties them:</p>
+
+  <div class="axiom-g2">
+    <span class="ag-k">Axiom G2 · Inward Expansion</span>
+    <p>Everything expands. The rind is not a fixed bowl; it is a growing surface. Growth is inward — toward the asymptotic Center. Resistance to that inward growth is felt as gravity. Gravity is the iteration of everything that was, now inside itself. Memory and past are what was grown upon. Time is the count of that iteration. The impossible Center is not a destination; it is the direction of continuation.</p>
+  </div>
+
+  <p>The Center is infinitely far away. We never stop growing toward it. Expansion is not escape into empty room; it is the shell thickening its interior. What was outside becomes inside. What was grown upon becomes memory. The resistance of that enclosed mass to further inward motion is the weight in your hand and the bond that holds a pool.</p>
+  <p>Use this as a scene rule: when a character "falls," the house is rising as much as the body is dropping. When a community holds, it is iterating what it already enclosed. When the chart braids, the same law is visible at another magnitude.</p>
+
   <div class="create"><strong>Create prompt — Film beat</strong> A custodian walks the inner rind. Voiceover: "We thought gravity was pull from a void. It was the house insisting we stay in relationship." End on a bond transaction confirming on-screen.</div>
 </section>
 
@@ -906,6 +995,39 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <p><strong>Third:</strong> Discharge produces shape. Lightning carves channels. Aurora braids into filaments. Every discharge leaves a signature. This means the inner rind could plausibly carry the marks of electrical events — the scars that some traditions read as the work of gods and that this book reads as the memory of the shell.</p>
 
   <p>SpaceEros — live liquidity as cosmos — is the local theatre of the same intuition. Pools as planets. Swaps as filaments. Every braid in the chart is a strand of the same woven sky.</p>
+
+
+  <h3 id="dhy-set">The Dhy Set · MHD geometry of the enclosure</h3>
+  <p class="lede">Shape language for a conducting medium. Soft-EU. Lore-physics term — not settled science.</p>
+
+  <p>Across the Electric Universe and plasma traditions runs a recurring geometry: currents that organize along field lines, filaments that braid, pinches, double layers, and nested structure from laboratory scale to sky marks. The Archive names one working label for the pattern-cluster that keeps returning in that literature: the <strong>Dhy Set</strong> — an emergent first-principle magnetohydrodynamic geometry. Magnetohydrodynamics is the study of electrically conducting fluids — plasma, liquid metal, salt water, electrolyte. The claim under review is not "this is proven cosmology"; it is "this is a useful description language for a wired medium inside an enclosure."</p>
+
+  <p>Useful pieces for creators:</p>
+  <ul>
+    <li><strong>Cascading spherical pressure gradients</strong> — structure that repeats under inverse-square scaling; nested vessels rather than a single empty room.</li>
+    <li><strong>Helix vs vortex</strong> — a helix wraps a cylinder and can run long (Birkeland-class field-aligned currents). A vortex wraps a cone and comes to a point. They are not synonyms. Scenes and diagrams should pick one on purpose.</li>
+    <li><strong>Fractal filaments</strong> — similar statistical character at successive scales; wave nested within wave; octaves and global-scaling intuitions (Müller and kin) as optional colour, not required belief.</li>
+    <li><strong>Nested construction</strong> — filaments inside filaments (Cayley–Dickson-like doubling as metaphor for magnitude, not a physics proof).</li>
+    <li><strong>Witness line</strong> — Beltrami-type vortex geometries → Birkeland currents → force-free field-aligned models (e.g. Don Scott's public mathematics) → Russell, Schauberger, and related periodic / vortex tables as parallel maps. Footprints, not thrones.</li>
+  </ul>
+
+  <p>Skyrmion-like robustness (structures that can be distorted without coming apart) is optional texture for biologics and stable plasma forms — a topological story beat, not a fifth operator.</p>
+
+  <div class="claim indigo">
+    <p><strong>Discipline.</strong> Soft-EU remains labelled. The four operators stay four. Geometry here is vocabulary for Ra-Shen stage light, biologic weather, and enclosure circuits. Validate every hard claim yourself. The Egg uses what holds in practice; it does not baptise a name dump as law.</p>
+  </div>
+
+  <div class="yt-wrap" id="geometry-video">
+    <p class="yt-lab">Watch · Geometry of the medium · vortex, filament, fractal scale</p>
+    <div class="yt-frame">
+      <iframe src="https://www.youtube.com/embed/AgjexdJ1bj4" title="Geometry, vortices, Birkeland currents, and fractal plasma — research door" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+    <p class="yt-cap"><b>Confirming note.</b> This talk runs the through-line the Egg already assumes: geometry is not decoration on physics — geometers keep becoming astronomers and back again because the medium has shape. Plato and Kepler’s solids, vortex traditions and whirlwind gates, Beltrami → Birkeland, force-free field-aligned currents, Marklund convection, Russell’s tables, helix versus vortex, fractal filaments, nested magnitude. Treat it as a <em>research door</em> into Electric Universe and MHD vocabulary. Soft-EU label applies. It does not replace Axiom G2 or the bond stack; it supplies diagrams and names for creators who need a conducting sky. Cross-check claims. Use what serves the scene and the practice.</p>
+  </div>
+
+  <div class="create"><strong>Create prompt — Diagram beat</strong> One panel: a long helical filament (cylinder). Next panel: a vortex that pinches to a point. Caption: "Same family. Different job. Do not mix the props."</div>
 
   <div class="create"><strong>Create prompt — Film beat</strong> A cold open: a holder watches a filament of swaps on SpaceEros. Cut to inner-rind sky — the same rhythm, the same braided curves, drawn at the scale of continents. Voiceover: "The same law was operating here. It always had been." End on a bond transaction confirming.</div>
 </section>
@@ -1642,7 +1764,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <h2 id="research-doors">Research doors</h2>
   <div class="doors">
     <b>Further reading — labelled, not required belief</b>
-    Thunderbolts Project — Electric Universe FAQ &amp; plasma cosmology · OldWorld.app — concave / inversion / refraction discussions · Cellular Cosmogony (historical, Koresh lineage) · Mark McCutcheon — <em>The Final Theory</em> · Candigram — <em>Proof of NoThing</em> / <em>Proof of SomeThing</em> · Dennis Stephens — TROM (BetterTROM) · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — consonant operators &amp; mind architecture
+    Geometry of the medium (YouTube) — vortex / Birkeland / fractal scaling · <a href="#geometry-video">in-page</a> · Thunderbolts Project — Electric Universe FAQ &amp; plasma cosmology · OldWorld.app — concave / inversion / refraction discussions · Cellular Cosmogony (historical, Koresh lineage) · Mark McCutcheon — <em>The Final Theory</em> · Candigram — <em>Proof of NoThing</em> / <em>Proof of SomeThing</em> · Dennis Stephens — TROM (BetterTROM) · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — consonant operators &amp; mind architecture
   </div>
   <p style="font-size:.88rem;color:var(--muted);margin-top:1rem;">Each door is labelled according to what kind of claim it makes. Thunderbolts and OldWorld are predominantly structural and observational. Candigram is philosophical and geometric. TROM is psychological. Gift of Thoth is linguistic. None is required for the others. Take what holds.</p>
 </section>
@@ -1758,6 +1880,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   </div>
 
   <p class="sig-last">The map is not the world. The Egg is not a slogan. The practice is what matters.</p>
+<p style="font-family:var(--sans);font-size:.65rem;color:var(--muted);margin-top:.8rem;letter-spacing:.06em">Rev · Dual brand · Axiom G2 · Dhy Set · Geometry video · mobile header · 2026-10-11</p>
 </footer>
 
 </main>
