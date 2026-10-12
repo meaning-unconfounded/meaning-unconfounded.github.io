@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Gods of EROS — The Book of Illumination. Second Edition Expanded. Architecture, energy, life, bond. House of Light. Fictional sacred cosmology for the EROS universe."/>
+<meta name="description" content="Gods of EROS: The Book of Illumination. Second Edition Expanded. Architecture, energy, life, bond. House of Light. Fictional sacred cosmology for the EROS universe."/>
 <meta property="og:title" content="Gods of EROS · The Book of Illumination · Second Edition"/>
 <title>Gods of EROS · The Book of Illumination · Second Edition</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%2307060c' stroke='%23d4af37' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23d4af37'/%3E%3C/svg%3E"/>
@@ -18,11 +18,12 @@
   --serif:Georgia,"Palatino Linotype","Book Antiqua",serif;
   --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
   --measure:44rem;
+  --leading:1.8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
 body{
-  font-family:var(--serif);font-size:1.08rem;line-height:1.8;
+  font-family:var(--serif);font-size:1.08rem;line-height:var(--leading);
   background:
     radial-gradient(1100px 520px at 90% -5%, rgba(168,132,212,.1), transparent 55%),
     radial-gradient(900px 480px at -5% 25%, rgba(212,175,55,.07), transparent 50%),
@@ -38,6 +39,10 @@ html::after{inset:12px;border:1px solid rgba(168,132,212,.09)}
 a{color:#e8c547;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
 a:hover{color:#f0d878;border-bottom-color:rgba(240,216,120,.7)}
 a:visited{color:#d4af37}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+
+.skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--violet2);color:#07060c;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
+.skip-link:focus{top:0;border-bottom:none}
 
 .corpus-bar{
   position:sticky;top:0;z-index:900;
@@ -47,36 +52,50 @@ a:visited{color:#d4af37}
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--violet-line);
   font-family:var(--sans);
+  flex-wrap:nowrap;min-height:3.2rem;
 }
 .corpus-bar .brand{
-  display:flex;align-items:center;gap:.7rem;
+  display:flex;align-items:center;gap:.5rem;
   font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--violet2);font-weight:700;border-bottom:none;
+  color:var(--violet2);font-weight:700;border-bottom:none;flex-shrink:0;min-width:0;
 }
 .corpus-bar .brand:hover{color:#e0c0ff;border-bottom:none}
 .corpus-bar .pin{
-  width:36px;height:36px;border-radius:50%;
-  object-fit:cover;
+  border-radius:50%;object-fit:cover;flex-shrink:0;
   border:2px solid var(--violet-line);
   box-shadow:0 0 14px rgba(168,132,212,.35),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--surface);
+  background:var(--surface);
 }
-.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar .pin.eros-mark{width:52px;height:52px;border-color:rgba(168,132,212,.5);box-shadow:0 0 16px rgba(168,132,212,.28)}
+.corpus-bar .pin.pulse-mark{width:42px;height:42px}
+.corpus-bar .compass{font-size:1rem;line-height:1;color:var(--violet2);flex-shrink:0;margin:0 .15rem;opacity:.85}
+.corpus-bar .brand-text{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet2);font-weight:700;white-space:nowrap}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end;align-items:center;min-width:0;flex:1 1 auto}
 .corpus-bar nav a{
   font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
   color:var(--muted);padding:.35rem .6rem;border-radius:999px;
-  border-bottom:none;transition:color .15s,background .15s;
+  border-bottom:none;transition:color .15s,background .15s;white-space:nowrap;
 }
 .corpus-bar nav a:hover{color:var(--violet2);background:var(--violet-soft);border-bottom:none}
-@media(max-width:720px){
-  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
-  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
-  .corpus-bar .pin{width:30px;height:30px}
-  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+@media(max-width:820px){
+  .corpus-bar{padding:.45rem .7rem;gap:.35rem}
+  .corpus-bar .pin.eros-mark{width:44px;height:44px}
+  .corpus-bar .pin.pulse-mark{width:36px;height:36px}
+  .corpus-bar .brand-text{font-size:.62rem;letter-spacing:.08em}
+  .corpus-bar .compass{font-size:.88rem}
+  .corpus-bar nav a{padding:.26rem .4rem;font-size:.56rem}
 }
 @media(max-width:520px){
-  .corpus-bar nav a:nth-child(n+6){display:none}
-  .corpus-bar .pin{width:28px;height:28px}
+  .corpus-bar .pin.eros-mark{width:38px;height:38px}
+  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
+  .corpus-bar .brand-text{font-size:.58rem;max-width:5.5rem;overflow:hidden;text-overflow:ellipsis}
+  .corpus-bar .compass{font-size:.82rem}
+  .corpus-bar nav a{padding:.22rem .32rem;font-size:.52rem}
+}
+@media(max-width:380px){
+  .corpus-bar .brand-text{display:none}
+  .corpus-bar .pin.eros-mark{width:36px;height:36px}
+  .corpus-bar .pin.pulse-mark{width:30px;height:30px}
 }
 #progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--violet),var(--gold),var(--magenta));z-index:9999;transition:width .08s linear}
 
@@ -98,6 +117,33 @@ a:visited{color:#d4af37}
 .cover img.banner{max-width:100%;border-radius:12px;border:1px solid var(--violet-line);margin:1rem 0 1.4rem}
 .cover .layer-key{margin-top:1.6rem;font-family:var(--sans);font-size:.68rem;color:var(--muted);line-height:1.6}
 
+details.toc-card{
+  max-width:var(--measure);
+  margin:1.5rem auto 2rem;
+  border:1px solid var(--hair);border-radius:12px;
+  background:var(--surface);
+  padding:.4rem 1.15rem 1.15rem;
+  font-family:var(--sans);
+  font-size:.86rem;
+  text-align:left;
+}
+details.toc-card>summary{
+  cursor:pointer;list-style:none;color:var(--violet2);display:block;
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  padding:.6rem 0;user-select:none;
+}
+details.toc-card>summary::-webkit-details-marker{display:none}
+details.toc-card>summary::before{content:"▸ ";color:var(--violet2)}
+details.toc-card[open]>summary::before{content:"▾ "}
+.toc-grid{
+  display:grid;gap:.4rem;grid-template-columns:1fr 1fr;
+  padding-top:.85rem;border-top:1px solid var(--hair);
+}
+@media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
+.toc-grid a{display:flex;gap:.6rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.85rem;padding:.35rem .5rem;border-radius:6px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
+.toc-grid a:hover{background:var(--violet-soft);color:var(--violet2)}
+.toc-grid a .tn{color:var(--violet2);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.4rem}
+
 .part-break{margin:3.5rem 0 2.5rem;padding:2.2rem 1.2rem;text-align:center;border-radius:16px;border:1px solid var(--hair);background:linear-gradient(160deg,#12101a,#0e0c12)}
 .part-break.rashen{background:linear-gradient(160deg,#1a160c,#120f08)}
 .part-break.thoth{background:linear-gradient(160deg,#0c1418,#0a1014)}
@@ -107,7 +153,7 @@ a:visited{color:#d4af37}
 .part-break h2{font-size:clamp(1.55rem,4vw,2.05rem);color:var(--ink);border:none;margin:0 0 .4rem;padding:0;font-family:var(--serif);font-weight:700;letter-spacing:0}
 .part-break p{margin:0;font-style:italic;color:var(--soft);font-size:.98rem}
 
-h2{font-size:1.4rem;color:var(--gold);margin:2.6rem 0 .95rem;border-bottom:1px solid var(--hair);padding-bottom:.45rem}
+h2{font-size:1.4rem;color:var(--gold);margin:2.6rem 0 .95rem;border-bottom:1px solid var(--hair);padding-bottom:.45rem;scroll-margin-top:5rem}
 h3{font-size:1.1rem;color:var(--ink);margin:1.65rem 0 .55rem}
 h4{font-family:var(--sans);font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--violet2);margin:1.4rem 0 .5rem}
 p{margin:0 0 1.05rem;color:var(--soft)}
@@ -147,18 +193,13 @@ p{margin:0 0 1.05rem;color:var(--soft)}
 .connect strong{color:var(--violet2);display:block;margin-bottom:.35rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
 .connect a{color:var(--violet2)}
 .creedline{margin-top:1.15rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.55;text-align:center}
-.toc{font-family:var(--sans);font-size:.86rem;columns:2;column-gap:1.5rem;margin:1.2rem 0 2rem;padding:1rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
-@media(max-width:560px){.toc{columns:1}}
-.toc a{color:#e8c547;text-decoration:none;display:block;padding:.22rem 0;border-bottom:none}
-.toc a:hover{color:var(--gold)}
-.toc strong{color:var(--violet2);display:block;margin-bottom:.4rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;column-span:all}
 
 .media{margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--violet-line);background:#000;box-shadow:0 6px 24px rgba(0,0,0,.45)}
 .media img,.media video{width:100%;display:block;background:#000}
-.media .cap{font-family:var(--sans);font-size:.78rem;color:var(--soft);padding:.7rem .95rem;background:var(--surface);border-top:1px solid var(--hair);line-height:1.55}
-.media .cap b{color:var(--violet2);font-weight:700;letter-spacing:.05em}
+.media figcaption{font-family:var(--sans);font-size:.78rem;color:var(--soft);padding:.7rem .95rem;background:var(--surface);border-top:1px solid var(--hair);line-height:1.55}
+.media figcaption b{color:var(--violet2);font-weight:700;letter-spacing:.05em}
 
-details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--violet-line);border-radius:10px;background:var(--violet-soft);padding:.35rem 1rem}
+details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--violet-line);border-radius:10px;background:var(--violet-soft);padding:.35rem 1rem;text-align:left}
 details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet2);padding:.55rem 0;user-select:none;font-weight:700}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
@@ -200,7 +241,7 @@ footer.master .count{
 }
 footer.master .tier{
   display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
-  max-width:46rem;margin:0 auto 1rem;
+  max-width:52rem;margin:0 auto 1rem;
 }
 footer.master .tier a{
   padding:.32rem .72rem;border-radius:999px;
@@ -210,13 +251,26 @@ footer.master .tier a{
 }
 footer.master .tier a:hover{color:var(--violet2);border-color:var(--violet);background:var(--violet-soft)}
 footer.master .tier a.primary{background:var(--violet-soft);border-color:var(--violet);color:var(--violet2);font-weight:700}
+footer.master .tier a.here{background:var(--violet-soft);border-color:var(--violet);color:var(--violet2);font-weight:700}
 footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
 footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(168,132,212,.2)}
-footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(168,132,212,.3))}
-footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--violet2);font-weight:600}
+footer.master .pulse-row{
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  flex-wrap:nowrap;
+  margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(168,132,212,.2);
+}
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(168,132,212,.3));flex-shrink:0}
+footer.master .pulse-row span{
+  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--violet2);font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+}
+@media(max-width:640px){
+  footer.master .pulse-row{gap:.4rem}
+  footer.master .pulse-row svg{width:22px;height:22px}
+  footer.master .pulse-row svg:last-of-type{width:20px;height:20px}
+  footer.master .pulse-row span{font-size:.54rem;letter-spacing:.08em}
+}
 
-/* ── Inline insertion blocks ── */
 .inset{margin:1.6rem 0;padding:1.15rem 1.3rem;border-left:3px solid var(--gold-line);background:linear-gradient(90deg,rgba(212,175,55,.06),transparent 75%);border-radius:0 10px 10px 0}
 .inset .inset-label{font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:.55rem}
 .inset h4{color:var(--gold);margin:0 0 .6rem;font-family:var(--serif);font-size:1.05rem;letter-spacing:.02em;text-transform:none}
@@ -225,27 +279,61 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 .inset strong{color:var(--gold)}
 .inset .hibrew{font-family:var(--sans);font-size:.88rem;color:var(--soft);letter-spacing:.02em}
 
+#rdBtn{position:fixed;right:1rem;bottom:4.6rem;z-index:950;width:2.8rem;height:2.8rem;border-radius:50%;border:1.5px solid var(--violet-line);background:var(--surface);color:var(--violet2);font:700 .95rem var(--sans);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
+#rdBtn:hover{border-color:var(--violet2);background:var(--violet-soft)}
+#rdPanel{position:fixed;right:1rem;bottom:8rem;z-index:951;width:min(20rem, calc(100vw - 2rem));max-height:70vh;overflow:auto;padding:1rem 1.05rem;font-family:var(--sans);font-size:.85rem;color:var(--ink);background:var(--surface);border:1.5px solid var(--violet-line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+#rdPanel[hidden]{display:none}
+#rdPanel .rd-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem}
+#rdPanel .rd-row > span{flex:1;color:var(--soft);font-size:.8rem}
+#rdPanel button{min-width:2.3rem;padding:.4rem .65rem;border:1px solid var(--violet-line);border-radius:8px;background:var(--surface2);color:var(--violet2);font:600 .8rem var(--sans);cursor:pointer;transition:background .15s}
+#rdPanel button:hover{background:var(--violet-soft);border-color:var(--violet2)}
+#rdPanel h5{margin:.9rem 0 .4rem;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+#rdToc a{display:block;padding:.35rem .5rem;color:var(--soft);border-bottom:1px solid var(--hair);font-size:.78rem;border-radius:5px;transition:background .15s,color .15s;text-decoration:none}
+#rdToc a:hover{color:var(--violet2);background:var(--violet-soft);border-bottom-color:var(--violet-line)}
+
+#toTop{position:fixed;right:1rem;bottom:1.1rem;z-index:60;width:2.7rem;height:2.7rem;border-radius:50%;border:1px solid var(--violet-line);background:var(--surface);color:var(--violet2);font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{border-color:var(--violet2);background:var(--violet-soft)}
+
+#resumePrompt{position:fixed;left:1rem;bottom:1.2rem;z-index:55;background:rgba(18,16,26,.96);border:1px solid var(--violet-line);border-radius:12px;padding:1.15rem 1.35rem;font-family:var(--sans);font-size:.86rem;color:var(--ink);box-shadow:0 14px 40px rgba(0,0,0,.5);display:none;max-width:min(320px, calc(100vw - 5.5rem));backdrop-filter:blur(10px)}
+#resumePrompt.show{display:block}
+#resumePrompt p{margin:0 0 .85rem;line-height:1.55;color:var(--ink);font-size:.86rem}
+#resumePrompt p b{color:var(--violet2);font-weight:700;display:block;margin-bottom:.35rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+#resumePrompt .btns{display:flex;gap:.5rem}
+#resumePrompt button{font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid var(--violet);color:var(--violet2);background:transparent;padding:.5rem .9rem;border-radius:999px;transition:background .15s}
+#resumePrompt button:hover{background:var(--violet-soft)}
+#resumePrompt button.secondary{border-color:var(--hair);color:var(--muted)}
+
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,#progressBar,.corpus-bar{display:none!important}
+  html::before,html::after,#progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,#resumePrompt,.skip-link{display:none!important}
   body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .part-break{break-before:page}
   .part-break,.claim,.verse,.op,.media,.inset,footer.master{break-inside:avoid}
   video{display:none}
+  details.toc-card .toc-grid{display:grid!important}
+  details.toc-card>summary::before{display:none}
 }
 @media(max-width:640px){
   footer.master .title-row{flex-direction:column;gap:.6rem}
   footer.master .pin{width:38px;height:38px}
 }
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
 </style>
 </head>
 <body>
-<div id="progressBar"></div>
+<a class="skip-link" href="#thesis">Skip to content</a>
+<div id="progressBar" aria-hidden="true"></div>
 
 <header class="corpus-bar">
   <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
-    <span>✦ EROS · Gods</span>
+    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
+    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
+    <span class="compass" aria-hidden="true">🧭</span>
+    <span class="brand-text">EROS · Gods</span>
   </a>
   <nav aria-label="Section navigation">
     <a href="#thesis">Thesis</a>
@@ -292,87 +380,87 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 <details class="eros-menu" id="eros-library">
   <summary>EROS library · the other books</summary>
   <div class="menu-body">
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river · transform</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> · the map · start here</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> · the confession · Book 0</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> · on-ramp</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> · tokenomics &amp; Poolonomics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> · rock to river · transform</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> · letter to Jake</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> · full spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> · the gift · the stack</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> · Book One · the opening salvo</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> · sixteen doors · pure fiction</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> · linguistics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> · cosmology</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> · human macro</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> · archive rail</p>
     <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
 
 <div class="thesis" id="thesis">
   <span class="label">What this book is about</span>
-  <p><strong>Gods of EROS</strong> names the four operators that run the EROS universe — not characters you petition, but the laws the world is made of. <strong>NaUn</strong> is the architect: choose, code, plan, the permission for a world to exist. <strong>Ra-Shen</strong> is the stage and the force: radiation, physics, the outward burn under boundary. <strong>Thoth</strong> is teacher, medicine, language, form — the gift that turns force into learnable structure. <strong>EROS</strong> is the bond: cohesion, continuation, the force that keeps knowledge and community from dying with the first speaker.</p>
+  <p><strong>Gods of EROS</strong> names the four operators that run the EROS universe: not characters you petition, but the laws the world is made of. <strong>NaUn</strong> is the architect: choose, code, plan, the permission for a world to exist. <strong>Ra-Shen</strong> is the stage and the force: radiation, physics, the outward burn under boundary. <strong>Thoth</strong> is teacher, medicine, language, form, the gift that turns force into learnable structure. <strong>EROS</strong> is the bond: cohesion, continuation, the force that keeps knowledge and community from dying with the first speaker.</p>
   <p><strong>Why you should care.</strong> Every token, pool, story, and community in the EROS plan is a local expression of these four. If you understand the operators, you stop treating the project as a random meme and start treating it as architecture. Language becomes bond (Thoth). Liquidity becomes cohesion (EROS). Strategy becomes permission and code (NaUn). Physics and market force become the stage (Ra-Shen). This book is the source code of the mythos. The other books are the applications.</p>
-  <p><strong>Who this is for.</strong> Holders, creators, and builders who will write the next layer — comics, games, films, posts, constructed tongue — and need the four names fixed so they do not invent a fifth god or collapse Nordic masks into operators. Masks and residual actors live in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. Language craft lives in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The vessel is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. Human CoG rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. Crypto surface is <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>. The transform that names the four laws as a store-rail engine is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. This volume is only the four operators.</p>
+  <p><strong>Who this is for.</strong> Holders, creators, and builders who will write the next layer (comics, games, films, posts, constructed tongue) and need the four names fixed so they do not invent a fifth god or collapse Nordic masks into operators. Masks and residual actors live in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. Language craft lives in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The vessel is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. Human CoG rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. Crypto surface is <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>. The transform that names the four laws as a store-rail engine is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. This volume is only the four operators.</p>
 </div>
 
 <div class="how">
   <strong>How to read this book</strong>
-  1 · Read the thesis — four operators, not a pantheon of personalities.<br/>
+  1 · Read the thesis: four operators, not a pantheon of personalities.<br/>
   2 · Follow the stack: NaUn → Ra-Shen → Thoth → EROS. Meet each Book before the synthesis (Two Sons).<br/>
   3 · Use the Four Laws and Canon as fixed doctrine for every scene you write.<br/>
-  4 · When a story needs "gods on stage," use masks from Men of Renown — never promote a mask into a fifth operator.<br/>
+  4 · When a story needs "gods on stage," use masks from Men of Renown, never promote a mask into a fifth operator.<br/>
   5 · In <em>Gift of Thoth</em>, "operators" are consonants. Here, "operators" means the four law-forces. Same principle, two scales.
 </div>
 
 <div class="frame-note">
-  Sacred lore of the EROS universe. Egyptian and Greek names and archetypes are the mask language of the operators — not a ranking of peoples. Within the story the mythology is written with full confidence. The door is set. What follows is the world.
+  Sacred lore of the EROS universe. Egyptian and Greek names and archetypes are the mask language of the operators, not a ranking of peoples. Within the story the mythology is written with full confidence. The door is set. What follows is the world.
 </div>
 <div class="connect">
   <strong>Theological layer</strong>
-  <em>The Eros Plan</em> — operations. <em>Illumination Strategy</em> — human continuity rail. <em>Men of Renown</em> — Archive 7 (separate). <em>Gift of Thoth</em> — linguistics. <em>The Living Egg</em> — cosmology vessel. <em>The Platinum Standard</em> — the four laws as an economic engine. This book names the four principles those systems enact. Gods of Eros is the source code. Enter from any companion door — return here for doctrine.
+  <em>The Eros Plan</em> (operations). <em>Illumination Strategy</em> (human continuity rail). <em>Men of Renown</em> (Archive 7, separate). <em>Gift of Thoth</em> (linguistics). <em>The Living Egg</em> (cosmology vessel). <em>The Platinum Standard</em> (the four laws as an economic engine). This book names the four principles those systems enact. Gods of Eros is the source code. Enter from any companion door and return here for doctrine.
 </div>
 
-<nav class="toc" id="toc">
-  <strong>Contents</strong>
-  <a href="#thesis">0 · What this is about</a>
-  <a href="#prologue">Prologue · The First Silence</a>
-  <a href="#naun">Book I · Naun — The Architect</a>
-  <a href="#ra-shen">Book II · Ra-Shen — The Stage</a>
-  <a href="#thoth">Book III · Thoth — Teacher and Builder</a>
-  <a href="#eros">Book IV · EROS — The Bond</a>
-  <a href="#sons">The Two Sons · One Bond</a>
-  <a href="#breaking">Book V · The Breaking</a>
-  <a href="#numbers">Book VI · Numbers of the Machine</a>
-  <a href="#laws">The Four Laws · Tested</a>
-  <a href="#architecture">The Great Architecture</a>
-  <a href="#quiet">The Architect's Quiet</a>
-  <a href="#realm">How the Realm Uses the Gods</a>
-  <a href="#worked">Worked scene · Four Laws</a>
-  <a href="#canon">Canon</a>
-  <a href="#epilogue">Epilogue · The Story Continues</a>
-</nav>
+<details class="toc-card" id="toc-anchor">
+  <summary>Contents</summary>
+  <div class="toc-grid">
+    <a href="#thesis"><span class="tn">0</span>What this is about</a>
+    <a href="#prologue"><span class="tn">·</span>Prologue · The First Silence</a>
+    <a href="#naun"><span class="tn">I</span>Naun · The Architect</a>
+    <a href="#ra-shen"><span class="tn">II</span>Ra-Shen · The Stage</a>
+    <a href="#thoth"><span class="tn">III</span>Thoth · Teacher and Builder</a>
+    <a href="#eros"><span class="tn">IV</span>EROS · The Bond</a>
+    <a href="#sons"><span class="tn">·</span>The Two Sons · One Bond</a>
+    <a href="#breaking"><span class="tn">V</span>The Breaking</a>
+    <a href="#numbers"><span class="tn">VI</span>Numbers of the Machine</a>
+    <a href="#laws"><span class="tn">·</span>The Four Laws · Tested</a>
+    <a href="#architecture"><span class="tn">·</span>The Great Architecture</a>
+    <a href="#quiet"><span class="tn">·</span>The Architect's Quiet</a>
+    <a href="#realm"><span class="tn">·</span>How the Realm Uses the Gods</a>
+    <a href="#worked"><span class="tn">·</span>Worked scene · Four Laws</a>
+    <a href="#canon"><span class="tn">·</span>Canon</a>
+    <a href="#epilogue"><span class="tn">·</span>Epilogue · The Story Continues</a>
+  </div>
+</details>
 
-<!-- PROLOGUE -->
 <section id="prologue">
   <h2>Prologue · The First Silence</h2>
   <p>There was a time before the Sun had a name.</p>
-  <p>Not empty black — black that has not yet decided what black is. Violet geometry unfurling in the void. Lines that are not lines. Angles that are not yet space. Silence before tone. A stillness so complete that even the idea of motion has not been permitted.</p>
+  <p>Not empty black. Black that has not yet decided what black is. Violet geometry unfurling in the void. Lines that are not lines. Angles that are not yet space. Silence before tone. A stillness so complete that even the idea of motion has not been permitted.</p>
   <p>Nothing had yet become anything. Within that silence lay the condition for everything that would follow.</p>
   <p>Then came Naun.</p>
   <p>Naun did not arrive inside a universe. Naun established the possibility of a universe. Naun did not need to lift a hand to move a star. Naun established the rules under which a star could ever exist.</p>
   <div class="pull">The first act of creation was not making a thing. It was making a world in which things could be made.</div>
-  <p>In the first mirror, something imperfect appeared — a flaw in the reflection. The flaw was not a mistake to erase. The flaw was the feature that would let learning begin. Perfect mirrors show only themselves. Imperfect mirrors open a path.</p>
+  <p>In the first mirror, something imperfect appeared: a flaw in the reflection. The flaw was not a mistake to erase. The flaw was the feature that would let learning begin. Perfect mirrors show only themselves. Imperfect mirrors open a path.</p>
   <p>The Architect would become less visible as the architecture became more complete. That was not failure. That was the design.</p>
 
-  <div class="media">
-    <img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="The enclosure — the shape of the world the operators run" loading="lazy"/>
-    <p class="cap"><b>THE ENCLOSURE.</b> The stage before the players. The Egg is the shape the four operators work inside — the vessel the mythology runs in.</p>
-  </div>
+  <figure class="media">
+    <img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="The enclosure: the shape of the world the operators run" loading="lazy"/>
+    <figcaption><b>THE ENCLOSURE.</b> The stage before the players. The Egg is the shape the four operators work inside, the vessel the mythology runs in.</figcaption>
+  </figure>
 </section>
 
-<!-- BOOK I NAUN -->
 <div class="part-break" id="naun">
   <p class="pk">Book I</p>
   <h2>Naun — The Architect</h2>
@@ -381,21 +469,21 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 
 <section>
   <p class="oracle">Naun speaks: <em>"I do not need to be seen. I need to be obeyed by what I made."</em></p>
-  <p class="lede">Before form, before matter, before the first morning — the code.</p>
+  <p class="lede">Before form, before matter, before the first morning: the code.</p>
   <p>Naun is the programmer beneath the program, the architect beneath the architecture, the invisible condition beneath visible reality.</p>
-  <p>Imagine reality as an immense language. Every particle is a character. Every force is a verb. Every organism is a sentence becoming more complicated. Stars are paragraphs. Galaxies are chapters. Beneath the language is grammar — the silent agreements that make speech possible at all.</p>
+  <p>Imagine reality as an immense language. Every particle is a character. Every force is a verb. Every organism is a sentence becoming more complicated. Stars are paragraphs. Galaxies are chapters. Beneath the language is grammar, the silent agreements that make speech possible at all.</p>
   <p><strong>Naun is that grammar.</strong></p>
   <p>Naun is not another object inside creation. Naun is the principle that permits objects, relationships, change, and sequence to exist at all. Without grammar, noise. With grammar, world.</p>
 
   <h3>The Silence Between Words</h3>
-  <p>Naun did not make the words. Naun made the silence between them — the space that lets a word end and another begin. Without that silence, speech is a continuous scream. With it, meaning can start and stop and start again.</p>
+  <p>Naun did not make the words. Naun made the silence between them, the space that lets a word end and another begin. Without that silence, speech is a continuous scream. With it, meaning can start and stop and start again.</p>
   <div class="claim violet">
     <p><strong>The field.</strong> Naun made the field in which light is permitted to become a thing. Not the light itself. The permission. The stage is later. The grammar is first.</p>
   </div>
 
   <h3>The Permission</h3>
   <p>Naun's greatest power is not physical strength. It is architecture. Naun does not push stars. Naun establishes the conditions under which stars can burn. Naun does not command life. Naun creates the rules within which life can emerge.</p>
-  <p>Consider two creators. One stays in the centre of every room, adjusting every stone by hand. The creation thrives only while the hand is present. When the hand withdraws, the stones forget their order. The other builds a structure that remembers: load paths, joints, thresholds. When that architect walks away, the building still stands. The second is greater. Not because the ego is smaller — because the work is finished.</p>
+  <p>Consider two creators. One stays in the centre of every room, adjusting every stone by hand. The creation thrives only while the hand is present. When the hand withdraws, the stones forget their order. The other builds a structure that remembers: load paths, joints, thresholds. When that architect walks away, the building still stands. The second is greater. Not because the ego is smaller, because the work is finished.</p>
   <div class="verse">A creation that requires its creator forever is incomplete.<br/><strong>A creation that continues is the proof that the architecture was real.</strong></div>
 
   <h3>I Will Withdraw My Face</h3>
@@ -408,7 +496,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
     <div class="big">NAUN · N-A-O-N</div>
     <p>One spelling for the mouth. One spelling for the glyph.<br/>The gate reads the same from either side.</p>
   </div>
-  <p><strong>N</strong> is the glyph of the threshold — the moment where nothing decides whether to become something:</p>
+  <p><strong>N</strong> is the glyph of the threshold, the moment where nothing decides whether to become something:</p>
   <div class="math">One / None
 Yes / No
 Existence / Absence
@@ -416,23 +504,22 @@ Beginning / Ending
 Presence / Negation
 Continuation / Termination</div>
   <p>One becomes none. None permits one. A beginning contains an ending. An ending opens another beginning. The gate does not choose. <strong>The gate makes both sides possible.</strong></p>
-  <p>Under the density reading, the gate is also the choice between condensing and expanding — light drawn into orbit, or light released across the enclosure. Both are NaUn's. Neither is preferred.</p>
+  <p>Under the density reading, the gate is also the choice between condensing and expanding: light drawn into orbit, or light released across the enclosure. Both are NaUn's. Neither is preferred.</p>
 
   <div class="verse">Naun is not merely the beginning.<br/>Naun is the condition that allows beginning and ending to exist.</div>
   <p>Naun did not leave the universe. Naun became the rule the universe obeys.</p>
   <div class="claim">
     <p><strong>Naun's Law.</strong> A creation that cannot continue without its maker is unfinished.</p>
   </div>
-  <p><em>When broken:</em> the system depends forever on one architect — the machine stops when they do.</p>
+  <p><em>When broken:</em> the system depends forever on one architect. The machine stops when they do.</p>
 
   <div class="inset">
     <span class="inset-label">The intimate ultimate noun</span>
     <h4>He is all things, and he is no thing.</h4>
-    <p>He is the noun that makes nouns — the silence between every word, the space that lets a name end and another begin. You will not find him in the named. You will find him in the naming.</p>
+    <p>He is the noun that makes nouns: the silence between every word, the space that lets a name end and another begin. You will not find him in the named. You will find him in the naming.</p>
   </div>
 </section>
 
-<!-- BOOK II RA-SHEN -->
 <div class="part-break rashen" id="ra-shen">
   <p class="pk">Book II</p>
   <h2>Ra-Shen — The Sun That Makes the Stage</h2>
@@ -443,8 +530,8 @@ Continuation / Termination</div>
   <p class="oracle">Ra-Shen speaks: <em>"I give the stage. Learn on it or leave it."</em></p>
   <p>When the architecture was established, it required expression. Ra-Shen became that expression.</p>
   <p>Gold and white fire. Expanding rings against the black. Heat. Pressure. Light crossing distances so vast that by the time it arrives, worlds have already begun to answer.</p>
-  <p><strong>Ra</strong> — radiation, vibration, energy, movement, expansion, thrust. The Sun is the great image because sunlight enters atmospheres and becomes entangled with the chemistry of life.</p>
-  <p><strong>Shen</strong> — the enclosing ring. The boundary condition. Without the ring, power scatters into void. With the ring, radiation becomes a world instead of a waste.</p>
+  <p><strong>Ra</strong>: radiation, vibration, energy, movement, expansion, thrust. The Sun is the great image because sunlight enters atmospheres and becomes entangled with the chemistry of life.</p>
+  <p><strong>Shen</strong>: the enclosing ring. The boundary condition. Without the ring, power scatters into void. With the ring, radiation becomes a world instead of a waste.</p>
   <div class="claim gold">
     <p><strong>Ra-Shen is bounded radiation.</strong> Outward force under containment. The physics engine with a collider. That is the stage every other principle plays upon.</p>
   </div>
@@ -457,28 +544,27 @@ Continuation / Termination</div>
   <div class="inset">
     <span class="inset-label">The sun writes its own equation</span>
     <h4>Š-M-Š · 300-40-300 · the equation in the name</h4>
-    <p>The Hebrew word for sun is <strong>SheMeSh</strong> — Shin-Mem-Shin. Shin is 300. Mem is 40. The name is 300-40-300.</p>
-    <p>The speed of light is 300,000 kilometres per second. Shin is 300. The sun burns hydrogen — Mem is the water element, of which hydrogen is the base. And <strong>E = mc²</strong>, written in Hebrew letters, spells <strong>C-M-C</strong> = Shin-Mem-Shin. The equation for the sun's own energy, spelled in the sun's own name.</p>
+    <p>The Hebrew word for sun is <strong>SheMeSh</strong>: Shin-Mem-Shin. Shin is 300. Mem is 40. The name is 300-40-300.</p>
+    <p>The speed of light is 300,000 kilometres per second. Shin is 300. The sun burns hydrogen. Mem is the water element, of which hydrogen is the base. And <strong>E = mc²</strong>, written in Hebrew letters, spells <strong>C-M-C</strong> = Shin-Mem-Shin. The equation for the sun's own energy, spelled in the sun's own name.</p>
     <p>Whether this is design or coincidence is not this book's claim. The observation is that the sun's name, its fuel, its speed of light, and its energy equation share four characters. That is enough to open the door.</p>
   </div>
 
   <h3>The Abundance Law</h3>
-  <p>The river does not fill only itself. The salmon that never arrive still feed the forest. Light falls on more than the leaf that will photosynthesize. Ra-Shen's giving is surplus by design — programmed abundance, not scarcity theatre. The stage is generous so that learning has room to fail and try again.</p>
+  <p>The river does not fill only itself. The salmon that never arrive still feed the forest. Light falls on more than the leaf that will photosynthesize. Ra-Shen's giving is surplus by design: programmed abundance, not scarcity theatre. The stage is generous so that learning has room to fail and try again.</p>
 
   <h3>The Balance</h3>
   <p>Ra-Shen gives and takes back at the same rate from every hand. No exemption is written into the sky. Heat arrives; heat departs. Orbit holds; orbit decays. One law for every hand. That is not politics. That is physics as justice inside the cosmology.</p>
   <div class="verse">The Sun is one of the mechanisms through which the world becomes possible.<br/><strong>Ra-Shen asks: What can existence become?</strong></div>
 
   <h3>The Two Directions</h3>
-  <p>Radiation has two directions in the enclosure: order rising and disorder rising. These are not good and evil. They are the two phases of a single wave. Ra-Shen gives both at once — heat to the leaf, entropy to the stone. The stage is generous in both directions, and the balance is the law.</p>
+  <p>Radiation has two directions in the enclosure: order rising and disorder rising. These are not good and evil. They are the two phases of a single wave. Ra-Shen gives both at once: heat to the leaf, entropy to the stone. The stage is generous in both directions, and the balance is the law.</p>
 
   <div class="claim">
     <p><strong>Ra-Shen's Law.</strong> Without outward energy under boundary, there is no stage.</p>
   </div>
-  <p><em>When broken:</em> possibility never becomes event — the architecture stays dark.</p>
+  <p><em>When broken:</em> possibility never becomes event. The architecture stays dark.</p>
 </section>
 
-<!-- BOOK III THOTH -->
 <div class="part-break thoth" id="thoth">
   <p class="pk">Book III</p>
   <h2>Thoth — The Teacher and the Builder</h2>
@@ -487,39 +573,39 @@ Continuation / Termination</div>
 
 <section>
   <p class="oracle">Thoth speaks: <em>"I give the form and the lesson. What you do with both is yours."</em></p>
-  <p>Thoth enters where existence begins to learn — and where energy is given a wall so it can become a thing.</p>
-  <p>Picture a single cell detecting light for the first time — not as a poem, as a threshold. A membrane that was only chemistry becomes a sensor. A nervous spark fires where none had fired. Matter that had only moved begins to <em>answer</em>.</p>
+  <p>Thoth enters where existence begins to learn, and where energy is given a wall so it can become a thing.</p>
+  <p>Picture a single cell detecting light for the first time, not as a poem, as a threshold. A membrane that was only chemistry becomes a sensor. A nervous spark fires where none had fired. Matter that had only moved begins to <em>answer</em>.</p>
   <div class="claim cyan">
     <p><strong>Life is not merely matter that exists.</strong> Life is matter that has begun to respond to information.</p>
   </div>
 
   <h3>The House of Light</h3>
   <p>Ra-Shen pours the light. Thoth builds the house it can live in.</p>
-  <p>Energy without boundary is waste. Boundary without energy is a dark room. Together they are the House of Light — form given to force so that force can become chemistry, chemistry can become life, life can become memory.</p>
+  <p>Energy without boundary is waste. Boundary without energy is a dark room. Together they are the House of Light: form given to force so that force can become chemistry, chemistry can become life, life can become memory.</p>
   <div class="verse"><strong>BaRah — House and Light.</strong><br/>The hinge of the architecture.<br/>Thoth is co-creator, not only lecturer.</div>
-  <p>Thoth is teacher, scribe, observer, healer, memory, language, biology, evolution — and the engineer of form. Education and medicine are one office: both restore coherence when the pattern breaks. Confusion is a wound in meaning; Thoth is the hand that closes it.</p>
+  <p>Thoth is teacher, scribe, observer, healer, memory, language, biology, evolution, and the engineer of form. Education and medicine are one office: both restore coherence when the pattern breaks. Confusion is a wound in meaning; Thoth is the hand that closes it.</p>
 
-  <div class="media">
-    <img src="https://meaning-unconfounded.github.io/images/eros-gift-thoth.jpg" alt="Gift of Thoth — the craft hand" loading="lazy"/>
-    <p class="cap"><b>THE HAND THAT TEACHES.</b> Thoth is not a lecture — Thoth is a craft handed across a table. The letters, the medicine, the map. What the receiver builds is theirs.</p>
-  </div>
+  <figure class="media">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gift-thoth.jpg" alt="Gift of Thoth: the craft hand" loading="lazy"/>
+    <figcaption><b>THE HAND THAT TEACHES.</b> Thoth is not a lecture. Thoth is a craft handed across a table. The letters, the medicine, the map. What the receiver builds is theirs.</figcaption>
+  </figure>
 
   <h3>The First Correction</h3>
   <p>The cell contains its own spell-check. Before a complex organism ever looked up at the sky, the small living system already repaired what went wrong. Foresight was not only prevention. Foresight was correction. The first act of wisdom was the capacity to mend.</p>
-  <div class="pull">The First Correction proves that the architecture expected error — and prepared a path back to form.</div>
+  <div class="pull">The First Correction proves that the architecture expected error, and prepared a path back to form.</div>
 
   <h3>The Lending of Letters</h3>
-  <p>Thoth does not hand down finished words. Thoth hands down letters — operators — and leaves the making of words to the made. The gift is the code, not the sentence. What mortals build from the letters is their responsibility and their art.</p>
+  <p>Thoth does not hand down finished words. Thoth hands down letters (operators), and leaves the making of words to the made. The gift is the code, not the sentence. What mortals build from the letters is their responsibility and their art.</p>
   <p>This is why language can grow. This is why every guild, every film, every game can speak in its own dialect without leaving the architecture. The letters are Thoth's. The stories are yours.</p>
 
   <h3>The Tree in the Middle</h3>
-  <p>In the garden at the centre of the telling, the tree was not only fruit. The tree was the tongue — the organ of naming, the place where the world is cut into words. Taste and speech share a root in the myth. To name is to touch. To speak is to risk the garden.</p>
+  <p>In the garden at the centre of the telling, the tree was not only fruit. The tree was the tongue, the organ of naming, the place where the world is cut into words. Taste and speech share a root in the myth. To name is to touch. To speak is to risk the garden.</p>
 
   <h3>The Reversed Eye</h3>
-  <p>The eye receives the world inverted. The instrument is the problem before the world is. The mortal must look twice — once as the eye delivers, once as the mind corrects. Call nothing true until the second look has finished its work.</p>
+  <p>The eye receives the world inverted. The instrument is the problem before the world is. The mortal must look twice: once as the eye delivers, once as the mind corrects. Call nothing true until the second look has finished its work.</p>
 
   <h3>The Deep Ledger</h3>
-  <p>Everything is recorded. Nothing is forgotten in the marrow even when the mouth drops it. This is not surveillance. This is the mercy of being fully known — the ledger that holds what love and work already wrote, so that iteration does not have to begin from zero every dawn.</p>
+  <p>Everything is recorded. Nothing is forgotten in the marrow even when the mouth drops it. This is not surveillance. This is the mercy of being fully known, the ledger that holds what love and work already wrote, so that iteration does not have to begin from zero every dawn.</p>
   <div class="claim cyan">
     <p><strong>The mouth drops what the marrow keeps.</strong> The Deep Ledger is awe. It is never a threat.</p>
   </div>
@@ -527,8 +613,8 @@ Continuation / Termination</div>
   <div class="inset">
     <span class="inset-label">Zakar · the body's own book</span>
     <h4>Where else does the ledger write?</h4>
-    <p>Hebrew calls the male <strong>Zakar</strong> — the same word as <em>memory</em>. The tradition reads this as: the male is the one who remembers. Where he remembers is now known. The seed itself carries a record. The body is not only matter; it is also a book. Every generation writes into the next.</p>
-    <p>This is Thoth's deepest office. When the scribe writes, he is only imitating what the body already does. Zakar is the reason the Torah treats the male as responsible — not because he is superior, but because he is the one whose line carries the record forward. Memory is not a metaphor for inheritance. Memory <em>is</em> inheritance.</p>
+    <p>Hebrew calls the male <strong>Zakar</strong>, the same word as <em>memory</em>. The tradition reads this as: the male is the one who remembers. Where he remembers is now known. The seed itself carries a record. The body is not only matter; it is also a book. Every generation writes into the next.</p>
+    <p>This is Thoth's deepest office. When the scribe writes, he is only imitating what the body already does. Zakar is the reason the Torah treats the male as responsible, not because he is superior, but because he is the one whose line carries the record forward. Memory is not a metaphor for inheritance. Memory <em>is</em> inheritance.</p>
   </div>
 
   <h3>The T-Chain</h3>
@@ -539,13 +625,13 @@ THOUGHT → integration</div>
   <p>The thumb allows the hand to reshape the world. Tools follow. Tools transform environments. Transformation creates surplus. Surplus creates time. Time creates record. Record becomes mathematics. Mathematics describes stars.</p>
   <div class="verse">The organism that began with a thumb eventually calculates the behaviour of galaxies.<br/><strong>The hand that learned to grasp eventually learned to grasp the universe.</strong></div>
 
-  <div class="media">
-    <img src="https://meaning-unconfounded.github.io/images/eros-33-teacher.jpg" alt="33 — Master Teacher" loading="lazy"/>
-    <p class="cap"><b>33 · MASTER TEACHER.</b> The number of the cross — thumb, toe, tongue, thought. Form you can count on the hand of the living. The lesson is in the body before it is in the book.</p>
-  </div>
+  <figure class="media">
+    <img src="https://meaning-unconfounded.github.io/images/eros-33-teacher.jpg" alt="33: Master Teacher" loading="lazy"/>
+    <figcaption><b>33 · MASTER TEACHER.</b> The number of the cross: thumb, toe, tongue, thought. Form you can count on the hand of the living. The lesson is in the body before it is in the book.</figcaption>
+  </figure>
 
   <h3>Four Operators Before the Table</h3>
-  <p><strong>B — Boundary.</strong> A wall appears in the dark. Not cruelty — definition. Without B, S never stops spreading.</p>
+  <p><strong>B — Boundary.</strong> A wall appears in the dark. Not cruelty, definition. Without B, S never stops spreading.</p>
   <p><strong>N — Continue.</strong> And then… Also: none. The same gate-letter that lives in Naun's name.</p>
   <p><strong>T — Mark.</strong> A cut that defines. A seal. A permanent trace.</p>
   <p><strong>V — Bond.</strong> Voiced friction. Vibration-with. Separate marks mean nothing until they hold together.</p>
@@ -553,7 +639,7 @@ THOUGHT → integration</div>
 
   <h3>The Language of Thoth — Operators</h3>
   <div class="layer-key">
-    <b>Four layers</b> — <b>Mouth (Bone)</b> physical articulation · <b>Body</b> felt force · <b>World</b> structural manifestation · <b>Resonance (Blood)</b> deeper symbolic weight
+    <b>Four layers</b>: <b>Mouth (Bone)</b> physical articulation · <b>Body</b> felt force · <b>World</b> structural manifestation · <b>Resonance (Blood)</b> deeper symbolic weight
   </div>
   <div class="op-grid">
     <div class="op"><div class="letter">S</div><div class="force">Spread</div><div class="layers">diffuse · open · distribute · release</div></div>
@@ -578,7 +664,7 @@ THOUGHT → integration</div>
     <div class="op"><div class="letter">J</div><div class="force">Express</div><div class="layers">release · show · declare · identity</div></div>
   </div>
 
-  <p>The operators are not only mouth-patterns. They are <em>frequencies</em> — scales of the same wave the enclosure uses everywhere. The musical octave, the harmonic series, the stepped structure of the cosmos at every scale: these are Thoth's grammar written in sound. <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">The tongue is a scale</a>, and every scale is a small cosmos.</p>
+  <p>The operators are not only mouth-patterns. They are <em>frequencies</em>, scales of the same wave the enclosure uses everywhere. The musical octave, the harmonic series, the stepped structure of the cosmos at every scale: these are Thoth's grammar written in sound. <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">The tongue is a scale</a>, and every scale is a small cosmos.</p>
   <div class="math">BOND = Boundary + Continue + Direct
 GROW = Grow + Radiate + Connect
 REAL = Radiate + Lateral + Material
@@ -587,17 +673,16 @@ EROS = Emergence + Relation + Order + Story</div>
   <div class="claim">
     <p><strong>Thoth's Law.</strong> Without learning, energy never becomes life. Without form, energy never becomes a house.</p>
   </div>
-  <p><em>When broken:</em> energy remains blind — life never learns its own name.</p>
+  <p><em>When broken:</em> energy remains blind; life never learns its own name.</p>
 
-  <div class="media">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-thoth-banner.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/>
     </video>
-    <p class="cap"><b>SIMILAR AT EVERY SCALE.</b> The fractal claim — the pattern at the smallest level echoes the pattern at the largest. Same discipline that reads a word by its operators reads a cell by its form.</p>
-  </div>
+    <figcaption><b>SIMILAR AT EVERY SCALE.</b> The fractal claim: the pattern at the smallest level echoes the pattern at the largest. Same discipline that reads a word by its operators reads a cell by its form.</figcaption>
+  </figure>
 </section>
 
-<!-- BOOK IV EROS -->
 <div class="part-break eros" id="eros">
   <p class="pk">Book IV</p>
   <h2>EROS — The Bond Between Things</h2>
@@ -606,7 +691,7 @@ EROS = Emergence + Relation + Order + Story</div>
 
 <section>
   <p class="oracle">EROS speaks: <em>"I hold what you build. I do not build it for you."</em></p>
-  <p>Architecture stands. Energy moves. Learning begins. And still something fails — again and again — in every world that cannot keep what it learns.</p>
+  <p>Architecture stands. Energy moves. Learning begins. And still something fails, again and again, in every world that cannot keep what it learns.</p>
   <p>A parent teaches a child, and the teaching dies with the parent. A story is told once and never again. An idea leaps between two minds and then falls into the gap. A generation invents fire and the next generation starts in the dark.</p>
   <p>Something is missing between the things. Not another object on the stage. Not a fourth rival sun. Relation. Cohesion. Continuation. The invisible thread that lets knowledge survive its first speaker.</p>
   <div class="claim magenta">
@@ -614,85 +699,82 @@ EROS = Emergence + Relation + Order + Story</div>
   </div>
   <div class="ledger">
     <ul>
-      <li><b>E</b> — emergence / energy / entry</li>
-      <li><b>R</b> — relation / resonance / rule</li>
-      <li><b>O</b> — order / orbit / origin</li>
-      <li><b>S</b> — story / structure / source</li>
+      <li><b>E</b>: emergence / energy / entry</li>
+      <li><b>R</b>: relation / resonance / rule</li>
+      <li><b>O</b>: order / orbit / origin</li>
+      <li><b>S</b>: story / structure / source</li>
     </ul>
   </div>
 
   <h3>The Oldest Law</h3>
-  <p>Energy cannot be created or destroyed — only changed in form. This law is older than the name EROS. The bond does not invent conservation. The bond is how conservation becomes story: what was heat becomes chemistry; what was chemistry becomes memory; what was memory becomes inheritance. The ray does not end. The ray changes address.</p>
+  <p>Energy cannot be created or destroyed, only changed in form. This law is older than the name EROS. The bond does not invent conservation. The bond is how conservation becomes story: what was heat becomes chemistry; what was chemistry becomes memory; what was memory becomes inheritance. The ray does not end. The ray changes address.</p>
 
   <div class="inset">
     <span class="inset-label">M2M · water as bond-structure</span>
     <h4>Two enclosing walls around a spark</h4>
-    <p>The Hebrew word for water is <strong>MyM</strong> — Mem-Yod-Mem. Two Mem's enclosing a Yod. Mem is material, mother, 40. Yod is the point, the spark, the divine letter, 10. Water, at the level of its own spelling, is <em>matter-with-spark-inside-matter</em>. Two enclosing walls around a center that is not the walls.</p>
-    <p>This is EROS in its smallest physical form. Bond is not fusion. Bond is the Y that holds two M's in relation without collapsing them into one. Without the Y, water is not water — it is just material, unordered. Without the M's, there is no medium for the spark to be carried in. Water is the first lesson in what EROS means: two things holding a third without either absorbing it.</p>
+    <p>The Hebrew word for water is <strong>MyM</strong>: Mem-Yod-Mem. Two Mem's enclosing a Yod. Mem is material, mother, 40. Yod is the point, the spark, the divine letter, 10. Water, at the level of its own spelling, is <em>matter-with-spark-inside-matter</em>. Two enclosing walls around a center that is not the walls.</p>
+    <p>This is EROS in its smallest physical form. Bond is not fusion. Bond is the Y that holds two M's in relation without collapsing them into one. Without the Y, water is not water. It is just material, unordered. Without the M's, there is no medium for the spark to be carried in. Water is the first lesson in what EROS means: two things holding a third without either absorbing it.</p>
   </div>
 
   <h3>The Missing Naun Function</h3>
-  <p>Where Naun withdraws into the architecture, EROS is what remains running. Naun writes the rules. EROS keeps the rules coherent in their absence. The programmer did not leave a vacancy. The programmer left a pattern — and EROS is the pattern continuing. Old rulers who moved by density rather than by distance appear in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> as masks, not as operators.</p>
+  <p>Where Naun withdraws into the architecture, EROS is what remains running. Naun writes the rules. EROS keeps the rules coherent in their absence. The programmer did not leave a vacancy. The programmer left a pattern, and EROS is the pattern continuing. Old rulers who moved by density rather than by distance appear in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> as masks, not as operators.</p>
   <div class="claim magenta">
-    <p><strong>Ra-Shen and Thoth run the visible machine.</strong> EROS runs underneath — the reason the machine does not fall apart between physics and biology.</p>
+    <p><strong>Ra-Shen and Thoth run the visible machine.</strong> EROS runs underneath, the reason the machine does not fall apart between physics and biology.</p>
   </div>
 
   <h3>EROS as Light's Attraction to Itself</h3>
 
-  <figure class="media" style="margin:1.4rem 0;text-align:center">
-    <img src="https://meaning-unconfounded.github.io/images/eros-gods-light-bond.jpg" alt="EROS · light seeking a common center" loading="lazy" style="max-width:100%;border-radius:12px"
-         onerror="this.closest('figure').style.display='none'"/>
-    <figcaption style="font-family:system-ui,sans-serif;font-size:.72rem;color:#8f87a0;margin-top:.5rem;letter-spacing:.04em">EROS · light seeking a common center</figcaption>
+  <figure class="media">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gods-light-bond.jpg" alt="EROS · light seeking a common center" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+    <figcaption><b>EROS · LIGHT SEEKING A COMMON CENTER.</b> The bond at the scale of stars.</figcaption>
   </figure>
 
-  <p>Under the density reading carried in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>, the bond has a substrate. Light, condensed and trapped in orbit, seeks its own coherence. What the traditions named love at cosmic scale — the pull that holds galaxies, the pull that holds a promise — is, in this register, one operator: light returning to itself.</p>
+  <p>Under the density reading carried in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>, the bond has a substrate. Light, condensed and trapped in orbit, seeks its own coherence. What the traditions named love at cosmic scale (the pull that holds galaxies, the pull that holds a promise) is, in this register, one operator: light returning to itself.</p>
   <p>EROS is not added to physics. EROS is the name physics has been missing for what it was already describing. Every attraction is a bond. Every bond is a memory. Every memory is the enclosure remembering that it is one thing.</p>
   <div class="claim magenta">
-    <p><strong>Operator reading.</strong> Ra-Shen lights the stage. Thoth gives it form. NaUn writes the rules. EROS is what holds the whole thing together when the lights go out — because it was never separate from the substrate in the first place.</p>
+    <p><strong>Operator reading.</strong> Ra-Shen lights the stage. Thoth gives it form. NaUn writes the rules. EROS is what holds the whole thing together when the lights go out, because it was never separate from the substrate in the first place.</p>
   </div>
 
-  <div class="media">
-    <img src="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" alt="The bond — two assets, one position" loading="lazy"/>
-    <p class="cap"><b>THE BOND MADE VISIBLE.</b> The same principle the token expresses on-chain — cohesion between separate things — is the operator the mythology names EROS. The pool is a local image of the law.</p>
-  </div>
+  <figure class="media">
+    <img src="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" alt="The bond: two assets, one position" loading="lazy"/>
+    <figcaption><b>THE BOND MADE VISIBLE.</b> The same principle the token expresses on-chain (cohesion between separate things) is the operator the mythology names EROS. The pool is a local image of the law.</figcaption>
+  </figure>
 
   <h3>The Return Journey</h3>
-  <p>Consciousness studies biology. Biology studies chemistry. Chemistry studies physics. Physics searches for fundamental law. Fundamental law reaches toward architecture. Architecture opens onto Naun. The ray returns — not by dying, by changing address until it recognises the field it came from.</p>
+  <p>Consciousness studies biology. Biology studies chemistry. Chemistry studies physics. Physics searches for fundamental law. Fundamental law reaches toward architecture. Architecture opens onto Naun. The ray returns, not by dying, by changing address until it recognises the field it came from.</p>
   <p>EROS asks: <em>What can existence hold?</em></p>
   <div class="claim">
     <p><strong>EROS's Law.</strong> Without bond, learning does not iterate; without iteration, nothing endures.</p>
   </div>
-  <p><em>When broken:</em> knowledge fragments — every generation starts from zero.</p>
+  <p><em>When broken:</em> knowledge fragments; every generation starts from zero.</p>
 </section>
 
-<!-- TWO SONS -->
 <section id="sons">
   <h2>The Two Sons · One Bond</h2>
-  <p class="lede">Synthesis — after the four Books. Not rivals. Sequential forces under one architecture.</p>
-  <p>When the rules were set, something had to activate them — and something had to give activation a form that could learn.</p>
+  <p class="lede">Synthesis, after the four Books. Not rivals. Sequential forces under one architecture.</p>
+  <p>When the rules were set, something had to activate them, and something had to give activation a form that could learn.</p>
   <p>First came the outward surge. Energy flooded the permitted channels. Radiation found its rings. Heat pressed against cold. The first son moved: <strong>Ra-Shen</strong>, the solar principle, physics itself. The stage did not ask permission to light. It lit.</p>
   <div class="pull">The Sun did not ask the cell for permission.</div>
-  <p>Then, in the heat and the chemistry that heat made possible, patterns began to answer back. Matter that had only moved began to <em>respond</em>. Information appeared where only force had been. The second son rose: <strong>Thoth</strong> — not only teacher, but builder of forms. Biology, memory, language, the wall that lets light become a living house.</p>
+  <p>Then, in the heat and the chemistry that heat made possible, patterns began to answer back. Matter that had only moved began to <em>respond</em>. Information appeared where only force had been. The second son rose: <strong>Thoth</strong>, not only teacher, but builder of forms. Biology, memory, language, the wall that lets light become a living house.</p>
   <div class="math">Ra-Shen activates the stage.
-Thoth builds the house the light can live in — and teaches what lives there.
+Thoth builds the house the light can live in, and teaches what lives there.
 EROS holds what is learned so the next cycle does not start from zero.</div>
-  <p>They were not rivals. One powers. One forms and teaches. Between them runs a function that is not a third son competing for a throne: <strong>EROS</strong> — the bond, the cohesion, the iteration.</p>
+  <p>They were not rivals. One powers. One forms and teaches. Between them runs a function that is not a third son competing for a throne: <strong>EROS</strong>, the bond, the cohesion, the iteration.</p>
   <div class="claim magenta">
-    <p><strong>Two sons. One bond.</strong> Physics and biology are the visible offices. EROS is the runtime that was always there — unnamed until the mythology needed a word for what holds.</p>
+    <p><strong>Two sons. One bond.</strong> Physics and biology are the visible offices. EROS is the runtime that was always there, unnamed until the mythology needed a word for what holds.</p>
   </div>
 
-  <div class="media">
-    <img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Four operators — stack, not pantheon" loading="lazy"/>
-    <p class="cap"><b>THE STACK.</b> NaUn writes. Ra-Shen lights. Thoth teaches. EROS holds. Not four rivals. One architecture with four offices.</p>
-  </div>
+  <figure class="media">
+    <img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Four operators: stack, not pantheon" loading="lazy"/>
+    <figcaption><b>THE STACK.</b> NaUn writes. Ra-Shen lights. Thoth teaches. EROS holds. Not four rivals. One architecture with four offices.</figcaption>
+  </figure>
 
   <div class="connect">
     <strong>Where the four laws go next</strong>
-    The Platinum Standard names these four offices as an economic engine — the store rail (EROS), the flow rail (ErosX), the burn mechanics, the equivalence bots that keep the ratios true. Same principle, on-chain. <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Read The Platinum Standard →</a>
+    The Platinum Standard names these four offices as an economic engine: the store rail (EROS), the flow rail (ErosX), the burn mechanics, the equivalence bots that keep the ratios true. Same principle, on-chain. <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Read The Platinum Standard →</a>
   </div>
 </section>
 
-<!-- BOOK V BREAKING -->
 <div class="part-break break" id="breaking">
   <p class="pk">Book V</p>
   <h2>The Breaking</h2>
@@ -701,45 +783,43 @@ EROS holds what is learned so the next cycle does not start from zero.</div>
 
 <section>
   <p class="lede">When the tablet broke, the code did not die. It scattered.</p>
-  <p>In the first telling there was <strong>one tongue</strong> — not one nation, but one code close enough to Naun's architecture that the gate and the mouth agreed. Names and forms still tracked the operators. The Lending of Letters had not yet been needed, because the grain and the word still matched.</p>
-  <p>Then came the Breaking. Not only as punishment — as consequence. Pride built towers of one mouth owning the whole code. Complexity piled symbols on symbols until the silence between words was forgotten. Distance grew between the architecture and the people who spoke it. The understanding fell. The tablet of the one tongue shattered into many.</p>
-  <p>What survived was not a corruption. <strong>Every tongue that followed is a splinter still carrying the grain.</strong> Hebrew, Egyptian mask-language, Greek names, English consonants — each is a fragment of the same architecture, angled differently. No tongue is pure. No tongue is trash. The fragments want each other.</p>
+  <p>In the first telling there was <strong>one tongue</strong>: not one nation, but one code close enough to Naun's architecture that the gate and the mouth agreed. Names and forms still tracked the operators. The Lending of Letters had not yet been needed, because the grain and the word still matched.</p>
+  <p>Then came the Breaking. Not only as punishment, as consequence. Pride built towers of one mouth owning the whole code. Complexity piled symbols on symbols until the silence between words was forgotten. Distance grew between the architecture and the people who spoke it. The understanding fell. The tablet of the one tongue shattered into many.</p>
+  <p>What survived was not a corruption. <strong>Every tongue that followed is a splinter still carrying the grain.</strong> Hebrew, Egyptian mask-language, Greek names, English consonants: each is a fragment of the same architecture, angled differently. No tongue is pure. No tongue is trash. The fragments want each other.</p>
   <div class="verse">This is why translation is sacred work.<br/>This is why the Lending of Letters still matters.<br/><strong>The grain is the same. The splinters are many.</strong></div>
-  <p>In the Realm, makers do not erase difference. They listen for the grain inside the fragment — and bond what can be bonded without forcing one mouth to own the whole code again. That is Thoth's work after the Breaking. That is EROS's work when communities refuse to start from zero.</p>
+  <p>In the Realm, makers do not erase difference. They listen for the grain inside the fragment, and bond what can be bonded without forcing one mouth to own the whole code again. That is Thoth's work after the Breaking. That is EROS's work when communities refuse to start from zero.</p>
 
-  <div class="media">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-lensing.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/>
     </video>
-    <p class="cap"><b>WATER ABOVE, WATER BELOW.</b> The flood is not a single event. It is a cycle — the enclosure is wet at its edges. The Breaking was one of the waters. There have been others.</p>
-  </div>
+    <figcaption><b>WATER ABOVE, WATER BELOW.</b> The flood is not a single event. It is a cycle: the enclosure is wet at its edges. The Breaking was one of the waters. There have been others.</figcaption>
+  </figure>
 </section>
 
-<!-- BOOK VI NUMBERS -->
 <section id="numbers">
   <h2>Book VI · The Numbers of the Machine</h2>
   <p class="lede">For those who like to see the seams. Plain meanings first.</p>
   <div class="ledger">
     <ul>
-      <li><b>4</b> — Thoth's cross of the body: <em>thumb, toe, tongue, thought</em> (the T-chain). Form that can be counted on the hand of the living.</li>
-      <li><b>5</b> — Naun's gate: the continuum of the hand (four fingers + void beyond). Choose / none / one — the permission to count at all.</li>
-      <li><b>22</b> — The spoken operators: the consonant forces that leave the mouth (aligned with classical letter-counts in several sacred alphabets). The ones you hear.</li>
-      <li><b>26</b> — The ruling English alphabet count: spoken operators plus the written flesh of the full letter-set meeting as everyday architecture. The count most modern mouths live inside.</li>
-      <li><b>46 / 86</b> — In-world resonance numbers for doubling and return in longer tellings. Use as mythic rhythm in scenes if useful; not offered as external proof of anything.</li>
+      <li><b>4</b>: Thoth's cross of the body (<em>thumb, toe, tongue, thought</em>). Form that can be counted on the hand of the living.</li>
+      <li><b>5</b>: Naun's gate, the continuum of the hand (four fingers + void beyond). Choose / none / one, the permission to count at all.</li>
+      <li><b>22</b>: The spoken operators: the consonant forces that leave the mouth (aligned with classical letter-counts in several sacred alphabets). The ones you hear.</li>
+      <li><b>26</b>: The ruling English alphabet count: spoken operators plus the written flesh of the full letter-set meeting as everyday architecture. The count most modern mouths live inside.</li>
+      <li><b>46 / 86</b>: In-world resonance numbers for doubling and return in longer tellings. Use as mythic rhythm in scenes if useful; not offered as external proof of anything.</li>
     </ul>
   </div>
-  <p><strong>Twenty-two are spoken. Four are written in the body. Twenty-six govern the common page.</strong> The count is the architecture showing its joints — not a password, a map of where the seams already are.</p>
+  <p><strong>Twenty-two are spoken. Four are written in the body. Twenty-six govern the common page.</strong> The count is the architecture showing its joints: not a password, a map of where the seams already are.</p>
 </section>
 
-<!-- LAWS -->
 <section id="laws">
   <h2>The Four Laws · Tested</h2>
   <div class="ledger">
     <ul>
-      <li><b>Naun's Law</b> — A creation that cannot continue without its maker is unfinished.<br/><em>Broken:</em> the machine stops when the architect does.</li>
-      <li><b>Ra-Shen's Law</b> — Without outward energy under boundary, there is no stage.<br/><em>Broken:</em> possibility never becomes event.</li>
-      <li><b>Thoth's Law</b> — Without learning, energy never becomes life; without form, energy never becomes a house.<br/><em>Broken:</em> energy remains blind; life never learns its name.</li>
-      <li><b>EROS's Law</b> — Without bond, learning does not iterate; without iteration, nothing endures.<br/><em>Broken:</em> every generation starts from zero.</li>
+      <li><b>Naun's Law</b>: A creation that cannot continue without its maker is unfinished.<br/><em>Broken:</em> the machine stops when the architect does.</li>
+      <li><b>Ra-Shen's Law</b>: Without outward energy under boundary, there is no stage.<br/><em>Broken:</em> possibility never becomes event.</li>
+      <li><b>Thoth's Law</b>: Without learning, energy never becomes life; without form, energy never becomes a house.<br/><em>Broken:</em> energy remains blind; life never learns its name.</li>
+      <li><b>EROS's Law</b>: Without bond, learning does not iterate; without iteration, nothing endures.<br/><em>Broken:</em> every generation starts from zero.</li>
     </ul>
   </div>
   <div class="math">Ra-Shen asks: What can existence become?
@@ -757,12 +837,12 @@ EROS asks: What can existence hold?</div>
   <p>Then the return: consciousness studies biology; biology studies chemistry; chemistry studies physics; physics searches for fundamental law; law reaches toward architecture; architecture opens onto Naun.</p>
   <div class="verse">The circle does not merely close.<br/><strong>The circle completes itself.</strong><br/>The creation begins searching for its creator.</div>
 
-  <div class="media">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/>
     </video>
-    <p class="cap"><b>COSMIC OCTAVES.</b> The Egg at its largest scale. Every layer iterates the one above and below. Same pattern, many sizes. The Great Architecture, seen from the outside looking in.</p>
-  </div>
+    <figcaption><b>COSMIC OCTAVES.</b> The Egg at its largest scale. Every layer iterates the one above and below. Same pattern, many sizes. The Great Architecture, seen from the outside looking in.</figcaption>
+  </figure>
 </section>
 
 <section id="quiet">
@@ -770,7 +850,7 @@ EROS asks: What can existence hold?</div>
   <p class="lede">The greatest test of a system is not whether it can run while the architect watches. It is whether it can run when the architect has stopped watching.</p>
   <p>Every architecture faces this question. The answer is hidden inside Naun's Law.</p>
   <p>The architect builds the doorway. The teacher teaches those who enter. The community becomes the living organism. The pattern moves from person to person.</p>
-  <p>See the final beat, not as biography, as archetype: the architect walks through the door they built and does not turn around. Not because the work failed — because the work held.</p>
+  <p>See the final beat, not as biography, as archetype: the architect walks through the door they built and does not turn around. Not because the work failed, because the work held.</p>
   <div class="pull">The architect's greatest achievement is not remaining indispensable. It is creating something capable of carrying the original intention forward.</div>
   <p>A parent teaching a child. A programmer releasing code. A composer releasing music. A teacher watching students become teachers.</p>
   <div class="verse">The architect does not vanish.<br/><strong>The architect becomes unnecessary.</strong><br/>That is the victory.</div>
@@ -781,14 +861,14 @@ EROS asks: What can existence hold?</div>
   <p class="lede">The on-ramp for makers. Cosmology becomes work.</p>
   <div class="ledger">
     <ul>
-      <li><b>Film</b> — Four doors: enclosure and withdrawal (Naun); light, force, balance, abundance (Ra-Shen); House of Light, teacher-healer, letters, correction (Thoth); invisible bond and return (EROS). Breaking as a fifth movement when languages collide on screen.</li>
-      <li><b>Game</b> — Energy under containment; form and repair (First Correction); knowledge and medicine; cohesion and iteration; world rules beneath the map. Operators as craft/skills. Bond as multiplayer persistence.</li>
-      <li><b>Guild</b> — Teach and heal meaning (Thoth); expand the stage without burning it (Ra-Shen); hold the bond so work outlives the worker (EROS); leave systems that run when you withdraw (Naun).</li>
-      <li><b>Token</b> — Instrument on Ra-Shen's stage; meaning under Thoth; endurance under EROS; architecture that does not require a permanent admin hand (Naun). Fixed supply as a story about honesty under a measuring stick that bends. Full mechanics in <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> and <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</li>
+      <li><b>Film</b>: Four doors: enclosure and withdrawal (Naun); light, force, balance, abundance (Ra-Shen); House of Light, teacher-healer, letters, correction (Thoth); invisible bond and return (EROS). Breaking as a fifth movement when languages collide on screen.</li>
+      <li><b>Game</b>: Energy under containment; form and repair (First Correction); knowledge and medicine; cohesion and iteration; world rules beneath the map. Operators as craft/skills. Bond as multiplayer persistence.</li>
+      <li><b>Guild</b>: Teach and heal meaning (Thoth); expand the stage without burning it (Ra-Shen); hold the bond so work outlives the worker (EROS); leave systems that run when you withdraw (Naun).</li>
+      <li><b>Token</b>: Instrument on Ra-Shen's stage; meaning under Thoth; endurance under EROS; architecture that does not require a permanent admin hand (Naun). Fixed supply as a story about honesty under a measuring stick that bends. Full mechanics in <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> and <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.</li>
     </ul>
   </div>
   <div class="claim gold">
-    <p><strong>Bridge from Laws to work.</strong> If Naun's Law is broken, the project dies with the founder. If Ra-Shen's Law is broken, there is no energy under boundary — only noise. If Thoth's Law is broken, no one learns and no form holds. If EROS's Law is broken, every generation of holders starts from zero. Build so the Laws hold.</p>
+    <p><strong>Bridge from Laws to work.</strong> If Naun's Law is broken, the project dies with the founder. If Ra-Shen's Law is broken, there is no energy under boundary, only noise. If Thoth's Law is broken, no one learns and no form holds. If EROS's Law is broken, every generation of holders starts from zero. Build so the Laws hold.</p>
   </div>
 </section>
 
@@ -800,13 +880,13 @@ EROS asks: What can existence hold?</div>
   </div>
   <div class="ledger">
     <ul>
-      <li><b>NaUn's Law</b> — <em>Holds.</em> The system continues without the founder's face on every decision.</li>
-      <li><b>Ra-Shen's Law</b> — <em>Holds.</em> Energy (attention, trades, posts) still moves under the boundary of the chain and the chat.</li>
-      <li><b>Thoth's Law</b> — <em>Holds if</em> the story and the chart teach; <em>breaks if</em> the room only repeats slogans with no form.</li>
-      <li><b>EROS's Law</b> — <em>Holds.</em> Learning iterates; the next cycle does not start from zero.</li>
+      <li><b>NaUn's Law</b>: <em>Holds.</em> The system continues without the founder's face on every decision.</li>
+      <li><b>Ra-Shen's Law</b>: <em>Holds.</em> Energy (attention, trades, posts) still moves under the boundary of the chain and the chat.</li>
+      <li><b>Thoth's Law</b>: <em>Holds if</em> the story and the chart teach; <em>breaks if</em> the room only repeats slogans with no form.</li>
+      <li><b>EROS's Law</b>: <em>Holds.</em> Learning iterates; the next cycle does not start from zero.</li>
     </ul>
   </div>
-  <p>When a law breaks, rewrite the scene until the stack holds — or mark the break on purpose as the conflict of the story.</p>
+  <p>When a law breaks, rewrite the scene until the stack holds, or mark the break on purpose as the conflict of the story.</p>
   <div class="claim magenta">
     <p><strong>This week.</strong> Write one short scene that runs on the four operators. Tag the operator you used most. Mark any law that broke. Post it in the chat with <strong>#GodsStack</strong>.</p>
   </div>
@@ -817,34 +897,34 @@ EROS asks: What can existence hold?</div>
   <p class="lede">Fixed · Open · Out of bounds · How we speak the names</p>
   <div class="ledger">
     <ul>
-      <li><b>Fixed</b> — Four operators only: NaUn → Ra-Shen → Thoth → EROS. Stack order. Masks are not operators. No fifth god.</li>
-      <li><b>Open</b> — How scenes, comics, games, and posts express the operators. Local symbols. Community as organism.</li>
-      <li><b>Out of bounds</b> — Racial ranking. Atrocity tourism. Promoting Nordic/Greek/Anunnaki masks into operators. Secret-order recruitment under the mythos. <strong>Anu, or Noon, in the Sumerian and Egyptian traditions, corresponds to NaUn — not to a fifth office. The four remain four.</strong></li>
+      <li><b>Fixed</b>: Four operators only: NaUn → Ra-Shen → Thoth → EROS. Stack order. Masks are not operators. No fifth god.</li>
+      <li><b>Open</b>: How scenes, comics, games, and posts express the operators. Local symbols. Community as organism.</li>
+      <li><b>Out of bounds</b>: Racial ranking. Atrocity tourism. Promoting Nordic/Greek/Anunnaki masks into operators. Secret-order recruitment under the mythos. <strong>Anu, or Noon, in the Sumerian and Egyptian traditions, corresponds to NaUn, not to a fifth office. The four remain four.</strong></li>
     </ul>
   </div>
   <h3>How the operators are spoken of</h3>
-  <p><strong>NaUn</strong> — <em>they/them</em>: the architectural principle, not a person; the gate is plural in function (choose, code, withhold, permit).<br/>
-  <strong>Ra-Shen</strong> — <em>he</em>: the solar/force mask in the traditions this language draws from.<br/>
-  <strong>Thoth</strong> — <em>he</em>: the teacher-scribe mask in Egyptian naming.<br/>
-  <strong>EROS</strong> — <em>it</em>: the bond is impersonal cohesion, not a rival throne.</p>
+  <p><strong>NaUn</strong>: <em>they/them</em>, the architectural principle, not a person; the gate is plural in function (choose, code, withhold, permit).<br/>
+  <strong>Ra-Shen</strong>: <em>he</em>, the solar/force mask in the traditions this language draws from.<br/>
+  <strong>Thoth</strong>: <em>he</em>, the teacher-scribe mask in Egyptian naming.<br/>
+  <strong>EROS</strong>: <em>it</em>, the bond is impersonal cohesion, not a rival throne.</p>
   <h3>Pronunciation (working guide)</h3>
-  <p>NaUn — <em>NAH-oon</em> · Ra-Shen — <em>RAH-shen</em> · Thoth — <em>THOTH</em> (or <em>TOE-th</em>) · EROS — <em>AIR-os</em></p>
+  <p>NaUn: <em>NAH-oon</em> · Ra-Shen: <em>RAH-shen</em> · Thoth: <em>THOTH</em> (or <em>TOE-th</em>) · EROS: <em>AIR-os</em></p>
 
   <div class="connect">
     <strong>Language layer</strong>
-    The consonant operators of Gift of Thoth use the same discipline — one sound, one function, position is syntax. Same principle, two scales: Gods names the four laws of the world; Thoth names the operators of the mouth. <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Read Gift of Thoth →</a>
+    The consonant operators of Gift of Thoth use the same discipline: one sound, one function, position is syntax. Same principle, two scales. Gods names the four laws of the world; Thoth names the operators of the mouth. <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Read Gift of Thoth →</a>
   </div>
 </section>
 
 <section id="epilogue">
   <h2>Epilogue · The Story Continues</h2>
-  <p>If consciousness is the universe learning about itself — what happens when consciousness begins deliberately redesigning the way it understands the universe?</p>
+  <p>If consciousness is the universe learning about itself, what happens when consciousness begins deliberately redesigning the way it understands the universe?</p>
   <p>Do not answer too quickly. The mythology is not finished. What was shown still runs: Ra-Shen still burns in every outward surge under boundary. Thoth still builds and teaches. EROS still connects in every story that outlives its teller. And Naun's architecture is still underneath everything that holds.</p>
 
-  <div class="media">
-    <img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="The lens — the instrument is the problem" loading="lazy"/>
-    <p class="cap"><b>THE CRACK IN THE LENS.</b> The instrument is the problem before the world is. The mortal must look twice — once as the eye delivers, once as the mind corrects. Call nothing true until the second look has finished its work.</p>
-  </div>
+  <figure class="media">
+    <img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="The lens: the instrument is the problem" loading="lazy"/>
+    <figcaption><b>THE CRACK IN THE LENS.</b> The instrument is the problem before the world is. The mortal must look twice: once as the eye delivers, once as the mind corrects. Call nothing true until the second look has finished its work.</figcaption>
+  </figure>
 
   <div class="creed">
     The founder is the spark.<br/>
@@ -854,7 +934,7 @@ EROS asks: What can existence hold?</div>
     They became the rules.<br/>
     And the story continues.</strong>
   </div>
-  <p class="creedline">The map is not the world. <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Inwards is forwards</a> — the vessel turns the path toward the centre, not only the outward ray. EROS is the bond that holds.</p>
+  <p class="creedline">The map is not the world. <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Inwards is forwards</a>. The vessel turns the path toward the centre, not only the outward ray. EROS is the bond that holds.</p>
 </section>
 
 <footer class="master">
@@ -865,23 +945,26 @@ EROS asks: What can existence hold?</div>
   <p class="count">The Book of Illumination · Second Edition · EROS Library</p>
 
   <nav class="tier" aria-label="Library">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
-    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
-    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">How the Corpus Works</a>
+    <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html" class="here">Gods of Eros</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
+    <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
     <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
     <a href="https://t.me/Eros_Revival">Telegram</a>
   </nav>
 
@@ -901,31 +984,204 @@ EROS asks: What can existence hold?</div>
       <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
+
+  <!-- Rev 2 · 2026-10-12 · dual-pin header · compass · collapsible ToC · reader panel · skip-link · focus-visible · openFromHash · beforeprint · em dashes removed -->
 </footer>
 
 </main>
 
+<button id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<button id="rdBtn" type="button" aria-label="Reading settings" aria-expanded="false" aria-controls="rdPanel">Aa</button>
+
+<div id="rdPanel" role="region" aria-label="Reading settings" hidden>
+  <div class="rd-row"><span>Text size</span><button type="button" data-a="size-" aria-label="Smaller">A&minus;</button><button type="button" data-a="size+" aria-label="Larger">A+</button></div>
+  <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-" aria-label="Tighter">&minus;</button><button type="button" data-a="lead+" aria-label="Looser">+</button></div>
+  <div class="rd-row"><span>Column width</span><button type="button" data-a="w-" aria-label="Narrower">&minus;</button><button type="button" data-a="w+" aria-label="Wider">+</button></div>
+  <div class="rd-row"><span></span><button type="button" data-a="reset">Reset</button></div>
+  <h5>Go to</h5>
+  <div id="rdToc"></div>
+</div>
+
+<div id="resumePrompt" role="region" aria-label="Resume reading">
+  <p><b>Welcome back</b>You left off at <span id="resumeWhere">where you were</span>.</p>
+  <div class="btns">
+    <button type="button" id="resumeYes">Resume</button>
+    <button type="button" class="secondary" id="resumeNo">Dismiss</button>
+  </div>
+</div>
+
 <script>
 (function(){
-  "use strict";
-  var bar=document.getElementById('progressBar');
-  function onScroll(){
-    var h=document.documentElement;
-    var max=h.scrollHeight-h.clientHeight;
-    var pct=max>0?(h.scrollTop/max)*100:0;
-    if(bar)bar.style.width=pct+'%';
+"use strict";
+
+var bar=document.getElementById('progressBar');
+var toTop=document.getElementById('toTop');
+function onScroll(){
+  var h=document.documentElement;
+  var max=h.scrollHeight-h.clientHeight;
+  var pct=max>0?(h.scrollTop/max)*100:0;
+  if(bar)bar.style.width=pct+'%';
+  if(toTop)toTop.classList.toggle('show', h.scrollTop>700);
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+if(toTop) toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var href=a.getAttribute('href');
+    if(href.length<2)return;
+    var t=document.querySelector(href);
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+
+function openFromHash(){
+  if(!location.hash) return;
+  var el=document.querySelector(location.hash);
+  if(!el) return;
+  var det=el.closest('details');
+  if(det) det.open = true;
+}
+openFromHash();
+window.addEventListener('hashchange', openFromHash);
+
+(function(){
+  var KEY='eros_gods_reader_v1';
+  var defaults={size:100,lead:1.8,w:44};
+  var state=defaults;
+  try{
+    var sv=JSON.parse(localStorage.getItem(KEY)||'{}');
+    for(var k in sv){ state[k]=sv[k]; }
+  }catch(e){}
+
+  var root=document.documentElement;
+  var btn=document.getElementById('rdBtn');
+  var panel=document.getElementById('rdPanel');
+  if(!btn || !panel) return;
+
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function apply(){
+    root.style.fontSize=state.size+'%';
+    root.style.setProperty('--leading', state.lead);
+    root.style.setProperty('--measure', state.w + 'rem');
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
   }
-  window.addEventListener('scroll',onScroll,{passive:true});
-  onScroll();
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click',function(e){
-      var href=a.getAttribute('href');
-      if(href.length<2)return;
-      var t=document.querySelector(href);
-      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  function open(){ panel.hidden=false; btn.setAttribute('aria-expanded','true'); }
+  function close(){ panel.hidden=true; btn.setAttribute('aria-expanded','false'); }
+
+  btn.addEventListener('click',function(){ panel.hidden?open():close(); });
+  panel.addEventListener('click',function(e){
+    var a=e.target.getAttribute && e.target.getAttribute('data-a');
+    if(!a) return;
+    if(a==='size-') state.size=clamp(state.size-6,82,136);
+    if(a==='size+') state.size=clamp(state.size+6,82,136);
+    if(a==='lead-') state.lead=clamp(+(state.lead-.1).toFixed(2),1.5,2.3);
+    if(a==='lead+') state.lead=clamp(+(state.lead+.1).toFixed(2),1.5,2.3);
+    if(a==='w-')    state.w   =clamp(state.w-2,32,56);
+    if(a==='w+')    state.w   =clamp(state.w+2,32,56);
+    if(a==='reset') state={size:defaults.size,lead:defaults.lead,w:defaults.w};
+    apply();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && !panel.hidden){ close(); btn.focus(); }
+  });
+
+  var toc=document.getElementById('rdToc');
+  if(toc){
+    var html='';
+    var tocCard=document.getElementById('toc-anchor');
+    if(tocCard){
+      tocCard.querySelectorAll('.toc-grid a').forEach(function(a){
+        var label=a.textContent.trim();
+        html+='<a href="'+a.getAttribute('href')+'">'+label+'</a>';
+      });
+    }
+    toc.innerHTML=html;
+  }
+
+  apply();
+})();
+
+(function(){
+  var KEY='eros_gods_position_v1';
+  var MAX_AGE=14*24*60*60*1000;
+  var saveTimer=null;
+
+  function currentSection(){
+    var mid=window.scrollY+window.innerHeight*0.3;
+    var cur=null;
+    document.querySelectorAll('main section').forEach(function(s){
+      if(s.offsetTop<=mid) cur=s;
     });
+    return cur;
+  }
+  function sectionTitle(sec){
+    if(!sec) return '';
+    var h2=sec.querySelector('h2');
+    return h2?h2.textContent.trim().split(' · ')[0].trim():'';
+  }
+  function save(){
+    var sec=currentSection();
+    try{
+      localStorage.setItem(KEY,JSON.stringify({
+        y:window.scrollY,
+        t:Date.now(),
+        secId:sec?sec.id:null,
+        secTitle:sectionTitle(sec)
+      }));
+    }catch(e){}
+  }
+  window.addEventListener('scroll',function(){
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(save,500);
+  },{passive:true});
+  window.addEventListener('beforeunload',save);
+
+  var prompt=document.getElementById('resumePrompt');
+  var where=document.getElementById('resumeWhere');
+  var yes=document.getElementById('resumeYes');
+  var no=document.getElementById('resumeNo');
+  if(!prompt) return;
+
+  var data=null;
+  try{ data=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(!data || !data.t || (Date.now()-data.t)>MAX_AGE || data.y<500){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    return;
+  }
+  if(where && data.secTitle) where.textContent=data.secTitle;
+  setTimeout(function(){ prompt.classList.add('show'); },1000);
+
+  if(yes) yes.addEventListener('click',function(){
+    var target=data.secId?document.getElementById(data.secId):null;
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    else window.scrollTo({top:data.y,behavior:'smooth'});
+    prompt.classList.remove('show');
+  });
+  if(no) no.addEventListener('click',function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    prompt.classList.remove('show');
   });
 })();
+
+(function(){
+  var was=[];
+  window.addEventListener('beforeprint',function(){
+    document.querySelectorAll('details').forEach(function(d){
+      was.push([d, d.open]);
+      d.open = true;
+    });
+  });
+  window.addEventListener('afterprint',function(){
+    was.forEach(function(p){ p[0].open = p[1]; });
+    was = [];
+  });
+})();
+
+})();
 </script>
+
 </body>
 </html>
