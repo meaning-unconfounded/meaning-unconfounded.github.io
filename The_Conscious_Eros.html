@@ -37,8 +37,17 @@
   --chip-thoth:#0d9488;
   --chip-renown:#a05048;
   --chip-plan:#c9a227;
+  --chip-codex:#c9915a;
   --hair:rgba(168,132,212,.18);
   --hair2:rgba(168,132,212,.09);
+  --accent:var(--violet);
+  --accent2:var(--violet2);
+  --accent-line:var(--violet-line);
+  --accent-soft:var(--violet-soft);
+  --platinum:#C8C3D6;
+  --platinum2:#E0DCEC;
+  --platinum-soft:rgba(200,195,214,.08);
+  --platinum-line:rgba(200,195,214,.28);
   --serif:Georgia,"Iowan Old Style","Palatino Linotype","Book Antiqua",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -76,7 +85,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
   position:sticky;top:6px;z-index:900;
   display:flex;align-items:center;justify-content:space-between;gap:.6rem;
   padding:.6rem 1.15rem;
-  background:rgba(27,32,40,.94);
+  background:color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border:1px solid var(--violet-line);
   border-radius:10px;font-family:var(--sans);
@@ -113,9 +122,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
   .corpus-bar .compass{font-size:.85rem}
   .corpus-bar nav a{padding:.26rem .4rem;font-size:.54rem}
 }
-@media(max-width:520px){
-  .corpus-bar nav a:nth-child(n+4){display:none}
-}
 
 .cover{min-height:72vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2.5rem 1.25rem 3rem}
 .cover .kick{font-family:var(--sans);font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;color:var(--violet);margin-bottom:1.5rem;font-weight:600}
@@ -146,14 +152,13 @@ code{font-family:var(--mono);font-size:.78rem;color:var(--violet2);background:rg
 
 .claim{margin:1.5rem 0;padding:var(--pad-y) var(--pad-x);border:1px solid var(--hair);border-radius:14px;background:var(--surface)}
 .claim.gold{border-color:var(--gold-line);background:linear-gradient(135deg,#2A2820,#2E2A22)}
-.claim.steel{border-color:var(--steel-line);background:linear-gradient(135deg,#1E242C,#242C36)}
 .claim.violet{border-color:var(--violet-line);background:linear-gradient(135deg,#28202E,#2E2638)}
-.claim.copper{border-color:var(--violet-line);background:linear-gradient(135deg,#2E2620,#342C24)}
+.claim.platinum{border-color:var(--platinum-line);background:linear-gradient(135deg,#1A1622,#1E1A28)}
 .claim p{margin:0}.claim p+p{margin-top:.85rem}
 .claim strong{color:var(--violet2)}
 .claim.gold strong{color:var(--gold2)}
-.claim.steel strong{color:var(--steel)}
 .claim.violet strong{color:var(--violet)}
+.claim.platinum strong{color:var(--platinum2)}
 
 .thesis-card{
   margin:1.75rem 0 1.5rem;
@@ -207,9 +212,11 @@ code{font-family:var(--mono);font-size:.78rem;color:var(--violet2);background:rg
 .pull{margin:1.6rem 0;padding:1.1rem 0 1.1rem 1.35rem;border-left:3px solid var(--violet);background:linear-gradient(90deg,var(--violet-soft),transparent 75%);font-style:italic;font-size:1.06rem;color:var(--soft);line-height:1.8}
 .math{margin:1.5rem 0;padding:1.35rem 1.5rem;border-radius:12px;background:var(--surface2);border:1px solid var(--hair);font-family:var(--mono);font-size:.85rem;line-height:1.95;color:var(--soft);white-space:pre-line;overflow-x:auto}
 .math b{color:var(--violet2);font-weight:700}
-.axiom{margin:1.4rem 0;padding:1.25rem 1.5rem;border:1px solid var(--violet-line);border-left:4px solid var(--violet);border-radius:10px;background:var(--violet-soft)}
+.axiom{margin:1.4rem 0;padding:1.25rem 1.5rem;border:1px solid var(--violet-line);border-left:4px solid var(--violet);border-radius:10px;background:var(--violet-soft);position:relative;border-radius:2px 12px 12px 2px;padding-left:1.75rem}
 .axiom .k{font-family:var(--sans);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--violet2);font-weight:700;display:block;margin-bottom:.65rem}
+.axiom .k::before{content:"◆ ";color:var(--violet)}
 .axiom p{margin:0;color:var(--ink)}
+.axiom p strong{color:var(--violet2)}
 
 .chip{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--sans);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:.18rem .55rem;border-radius:999px;border:1px solid currentColor;margin:0 .15rem;vertical-align:middle}
 .chip.egg{color:var(--chip-egg)}
@@ -218,6 +225,7 @@ code{font-family:var(--mono);font-size:.78rem;color:var(--violet2);background:rg
 .chip.thoth{color:var(--chip-thoth)}
 .chip.renown{color:var(--chip-renown)}
 .chip.plan{color:var(--chip-plan)}
+.chip.codex{color:var(--chip-codex)}
 
 .table-wrap{overflow-x:auto;margin:1.75rem 0;border:1px solid var(--violet-line);border-radius:12px;background:var(--surface)}
 table.ref{width:100%;border-collapse:collapse;font-size:.88rem;line-height:1.7;min-width:520px}
@@ -233,7 +241,7 @@ table.ref td strong{color:var(--violet2)}
 
 figure.plate{margin:2rem 0;border:1px solid var(--violet-line);border-radius:12px;background:#0A0610;overflow:hidden;box-shadow:0 10px 32px rgba(0,0,0,.45)}
 figure.plate img,figure.plate video{display:block;width:100%;height:auto;background:#0A0610;max-height:520px;object-fit:cover}
-figure.plate .cap{padding:.95rem 1.15rem;font-family:var(--sans);font-size:.8rem;color:var(--soft);line-height:1.6;background:var(--surface);border-top:1px solid var(--violet-line)}
+figure.plate .cap{padding:.95rem 1.15rem;font-family:var(--sans);font-size:.8rem;color:var(--soft);line-height:1.6;background:var(--surface);border-top:1px solid var(--violet-line);margin:0}
 figure.plate .cap b{color:var(--violet2);font-weight:700;letter-spacing:.04em}
 
 .coda{margin:4rem 0 0;padding:3rem 1.5rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(168,132,212,.05),transparent 60%)}
@@ -296,7 +304,6 @@ details.appendix[open] summary .chev{transform:rotate(90deg)}
 details.appendix .abody{padding:.5rem 1.35rem 1.35rem;border-top:1px solid var(--hair)}
 details.appendix .abody p,details.appendix .abody li{font-size:.95rem}
 
-/* ══════ Footer with triangle sectioned library ══════ */
 footer.master{
   margin-top:3.5rem;padding:2.5rem 0 1.75rem;
   border-top:1px solid var(--hair);
@@ -406,19 +413,12 @@ footer.master .pulse-row span{font-size:.6rem;letter-spacing:.14em;text-transfor
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
 
-:root{--platinum:#C8C3D6;--platinum2:#E0DCEC;--platinum-soft:rgba(200,195,214,.08);--platinum-line:rgba(200,195,214,.28)}
-.claim.platinum{border-color:var(--platinum-line);background:linear-gradient(135deg,#1A1622,#1E1A28)}
-.claim.platinum strong{color:var(--platinum2)}
-.claim.violet{border-color:var(--violet-line);background:linear-gradient(135deg,#1E1224,#261830)}
-.claim.gold{border-color:var(--gold-line);background:linear-gradient(135deg,#2A2820,#2E2A22)}
-.claim p+p{margin-top:.85rem}
 .part-break.bedrock{background:linear-gradient(160deg,#1E1224,#10060E)}
 .part-break.house{background:linear-gradient(160deg,#141620,#0A0C12)}
 .part-break.living{background:linear-gradient(160deg,#101A1E,#070E12)}
 .part-break.appendix{background:linear-gradient(160deg,#1A1420,#0E0A14)}
 .lt{font-family:var(--sans);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
 
-/* ===== POLISH LAYER ===== */
 .eyebrow{display:flex;align-items:center;gap:.7rem;font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.6rem}
 .eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--accent-line),transparent)}
 section.ch>h2{border-bottom:none;padding-bottom:0;margin-top:0;line-height:1.25}
@@ -431,13 +431,12 @@ section.ch>.lede:first-of-type::first-letter{float:left;font-size:3.5rem;line-he
   :root{--bg:#fff;--surface:#fff;--surface2:#f4f2f7;--ink:#111;--soft:#2a2a2a;--muted:#555;--dim:#777;
     --accent:#4a3a70;--accent2:#3a2a60;--accent-line:#9a90b8;--accent-soft:#f1eef7;--hair:#bbb;--hair2:#ddd;
     --violet:#4a3a70;--violet2:#3a2a60;--violet-line:#9a90b8;--violet-soft:#f1eef7;
-    --copper:#8a5a2a;--copper2:#6a4018;--copper-line:#c9a37a;--copper-soft:#faf3ea;
     --gold:#7a5a10;--gold2:#6a4c08;--gold-line:#c8aa60;--gold-soft:#fbf6e6;
     --platinum:#555;--platinum2:#333;--platinum-line:#aaa;--platinum-soft:#f3f3f3;
     --steel:#456;--steel-line:#9ab;--steel-soft:#f0f3f6}
   html,body{background:#fff!important;color:#111!important}
   body{font-size:10.5pt;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .claim,.claim.platinum,.claim.violet,.claim.gold,.claim.surface2,.thesis-card,.tg-quote,.axiom,.verse,.pull,.math,.connect,.part-break,.part-break *,details.howto,details.eros-menu,details.toc-card,details.appendix,.table-wrap,figure.plate .cap{background:#fff!important;box-shadow:none!important}
+  .claim,.claim.platinum,.claim.violet,.claim.gold,.thesis-card,.tg-quote,.axiom,.verse,.pull,.math,.connect,.part-break,.part-break *,details.howto,details.eros-menu,details.toc-card,details.appendix,.table-wrap,figure.plate .cap{background:#fff!important;box-shadow:none!important}
   .part-break{border:1.5pt solid #333!important;margin:0 0 14pt!important;page-break-before:always}
   .part-break h2,.part-break p,.part-break .pk{color:#111!important}
   .cover h1,.cover .sub,.cover .kick,.cover .opening{color:#111!important;text-shadow:none!important}
@@ -454,8 +453,6 @@ section.ch>.lede:first-of-type::first-letter{float:left;font-size:3.5rem;line-he
   a{color:#222!important;text-decoration:none!important}
 }
 
-:root{--accent:var(--violet);--accent2:var(--violet2);--accent-line:var(--violet-line);--accent-soft:var(--violet-soft)}
-/* Bedrock identity: strata, rings, ghost numerals */
 body{background:
   repeating-linear-gradient(180deg,transparent 0 119px,rgba(168,132,212,.035) 119px 120px),
   radial-gradient(1100px 520px at 90% -5%,rgba(168,132,212,.12),transparent 55%),
@@ -470,9 +467,6 @@ body{background:
 .part-break::after{content:attr(data-n);position:absolute;right:1.2rem;top:-.9rem;font-size:8rem;font-weight:700;line-height:1;color:var(--violet);opacity:.09;font-family:var(--serif)}
 .part-break .pk::before{content:"";display:inline-block;width:2.2rem;height:1px;background:var(--violet);vertical-align:middle;margin-right:.8rem}
 .part-break p{padding:0}
-.axiom{position:relative;border-radius:2px 12px 12px 2px;padding-left:1.75rem}
-.axiom .k::before{content:"◆ ";color:var(--violet)}
-.axiom p strong{color:var(--violet2)}
 .tg-quote{border-radius:0}
 .thesis-card{border-radius:2px 18px 2px 18px}
 @media print{.part-break::after{color:#999;opacity:.25}.cover::before{display:none}.cover h1{-webkit-text-fill-color:#111;background:none}}
@@ -481,7 +475,7 @@ body{background:
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<div id="progressBar"></div>
+<div id="progressBar" aria-hidden="true"></div>
 <header class="corpus-bar">
   <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
     <img class="pin" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="30" height="30" loading="lazy"/>
@@ -507,12 +501,12 @@ body{background:
   <div class="thesis-card"><span class="thesis-tag">Education Thesis</span><p class="thesis-body">Life and postulates are primary. <strong>Matter, energy, space, time, gravity, temperature, and every civilisation inside the enclosure are effects.</strong></p></div>
   <p class="lede">Everything the rest of the corpus treats as foundational is downstream of this book. The Living Egg names the house. This book names the ground the house stands on. Life is awareness, memory, and choice. Postulates are the source-level commands life generates. When those postulates conflict, they freeze into what a body feels as mass. When they align, iteration continues and the body feels light. Two truths that cannot be false generate the entire architecture. The four mechanisms follow as logical necessities. The inversion that puts life before physics corrects an error carried by four centuries of standard thought. The enclosure is then read as a bounded interior. Gravity becomes the motion of the rind. The wired sky, the plasma fauna, the biologics thesis, and the practice of the living enclosure arrive as the final movement. Every other book in the corpus is a branch of this one.</p>
   <div class="claim gold"><p><strong>Ecosystem thesis.</strong> EROS is a bonding protocol. The books teach the mechanics. The token is the participation layer. The community produces the assets. This is the foundation book.</p></div>
-  <details class="eros-menu" id="eros-library"><summary>EROS library</summary><div class="menu-body"><p><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a>, the map</p><p><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>, the confession</p><p><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>, on-ramp</p><p><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>, tokenomics and Poolonomics</p><p><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>, rock to river</p><p><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>, letter to Jake</p><p><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>, the spine</p><p><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>, the gift and the stack</p><p><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>, Book One</p><p><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>, sixteen doors</p><p><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>, the house</p><p><a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>, the mechanics</p><p><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>, four operators</p><p><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>, linguistics</p><p><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>, human macro</p><p><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>, archive rail</p><p><a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a></p><p><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a> · <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a></p></div></details>
+  <details class="eros-menu" id="eros-library"><summary>EROS library</summary><div class="menu-body"><p><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a>, the map</p><p><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>, the confession</p><p><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>, on-ramp</p><p><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>, tokenomics and Poolonomics</p><p><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>, rock to river</p><p><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>, letter to Jake</p><p><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>, the spine</p><p><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>, the gift and the stack</p><p><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>, Book One</p><p><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>, sixteen doors</p><p><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>, the house</p><p><a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>, the mechanics</p><p><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>, four operators</p><p><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>, linguistics</p><p><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>, human macro</p><p><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>, archive rail</p><p><a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>, the next work</p><p><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a> · <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a></p></div></details>
   <details class="howto"><summary>How to read this book</summary><div class="howto-body">
     <p>This is the foundation book of the corpus. It states the primary propositions every other book stands on.</p>
     <p>Three movements. Movement I states the bedrock. Movement II describes the enclosure. Movement III describes the living enclosure.</p>
     <p>Every claim is tagged at its layer: <span class="lt" style="color:var(--violet2)">Axiom</span>, <span class="lt" style="color:var(--platinum2)">Derivation</span>, <span class="lt" style="color:var(--gold2)">Witness</span>, <span class="lt" style="color:var(--muted)">Hypothesis</span>.</p>
-    <p>Cross-links to other books are marked with chips: <span class="chip egg">Living Egg</span> <span class="chip gods">Gods of Eros</span> <span class="chip thoth">Gift of Thoth</span> <span class="chip renown">Men of Renown</span> <span class="chip plan">Eros Plan</span></p>
+    <p>Cross-links to other books are marked with chips: <span class="chip egg">Living Egg</span> <span class="chip gods">Gods of Eros</span> <span class="chip thoth">Gift of Thoth</span> <span class="chip renown">Men of Renown</span> <span class="chip plan">Eros Plan</span> <span class="chip codex">Iteration Codex</span></p>
     <p>The Aa button at bottom-right opens the reader panel: text size, line spacing, column width, go-to list. Reading position is remembered.</p></div></details>
   <details class="toc-card"><summary>Contents</summary><div class="toc-grid">
     <a href="#bedrock"><span class="tn">I</span>The Bedrock</a><a href="#house"><span class="tn">II</span>The House</a><a href="#living"><span class="tn">III</span>The Living Enclosure</a><a href="#appendix"><span class="tn">◈</span>Appendix</a></div></details>
@@ -687,7 +681,7 @@ body{background:
   <h2>A body's relationship to the enclosure determines its experience of the enclosure</h2>
   <p>Two things are true at once: the enclosure has its own geometry, and the body has its own position within that geometry. The relationship between them is a <strong>ratio</strong>.</p>
   <p>Change the ratio and the felt experience of the enclosure changes. Nothing physical has to move. The relationship itself is what shifts.</p>
-  <p>This is the foundation of the <span class="chip plan">Iteration Codex</span>'s treatment of rate and state. Both axes are ways of describing the ratio a body carries against the shell.</p>
+  <p>This is the foundation of the <span class="chip codex">Iteration Codex</span>'s treatment of rate and state. Both axes are ways of describing the ratio a body carries against the shell.</p>
   <figure class="plate"><img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="The instrument is the problem" loading="lazy" onerror="this.closest('figure').style.display='none'"/><figcaption class="cap"><b>The instrument is the problem.</b> Every telescope is calibrated as if light went straight. Every one of them.</figcaption></figure>
 </section>
 <section class="ch" id="iteration-limits">
@@ -741,7 +735,7 @@ body{background:
   <p>A body stands on the ground. The ground is expanding upward. The body is expanding outward and downward. When the two expansions meet, the ground pushes the body. The push is what the body feels as weight.</p>
   <div class="math">Weight = a body's inertia, resisting the rind's inward motion.&#10;Not a separate force. A differential between two motions.</div>
   <p>A body that slows its own expansion relative to the rind falls out of phase. Inertia lags. The push feels greater. The body feels heavier. A body that speeds its expansion to match the rind drops the differential to zero. Inertia rides with the rind. The body feels lighter without losing mass.</p>
-  <p>This is the derivation of the two axes treated in the <span class="chip plan">Iteration Codex</span>. The rate axis is the body's iteration speed against the rind. The state axis is the body's structural arrangement against the shell.</p>
+  <p>This is the derivation of the two axes treated in the <span class="chip codex">Iteration Codex</span>. The rate axis is the body's iteration speed against the rind. The state axis is the body's structural arrangement against the shell.</p>
   <h4>The terms are operations</h4>
   <p>Under this book's reading, the scientific terms of mechanics are not metaphors for mathematical operations. They are the operations.</p>
   <div class="table-wrap"><table class="ref"><thead><tr><th>Term</th><th>Operation</th><th>Physical meaning</th></tr></thead><tbody><tr><td><strong>Inertia</strong></td><td>Division</td><td>Resistance to change. A quantity held against a denominator of time.</td></tr><tr><td><strong>Acceleration</strong></td><td>Multiplication</td><td>Growth over time. Quantity compounded per iteration.</td></tr><tr><td><strong>Force</strong></td><td>Addition</td><td>Energy accumulated, pushing outward or inward.</td></tr><tr><td><strong>Movement</strong></td><td>Subtraction</td><td>Energy expended. Distance traversed. Loss of potential.</td></tr></tbody></table></div>
@@ -884,7 +878,7 @@ body{background:
 <section class="ch" id="bond-living">
   <span class="eyebrow">12.2 · The Bond Test on the Living Enclosure</span>
   <h2>Every use of the biologics thesis runs through the bond test</h2>
-  <p>The bond test, carried from the Craft section of the <span class="chip plan">Iteration Codex</span>, applies here too. The question is not whether the thesis is true. The question is what the thesis does.</p>
+  <p>The bond test, carried from the Craft section of the <span class="chip codex">Iteration Codex</span>, applies here too. The question is not whether the thesis is true. The question is what the thesis does.</p>
   <ul><li>If the biologics thesis produces fear, it is being used to extract.</li><li>If the biologics thesis produces dominion, the desire to manipulate the enclosure for personal gain, it is being used to extract.</li><li>If the biologics thesis produces curiosity, humility, and a willingness to relate to the live whole, it is being used to bond.</li></ul>
   <p>The claim itself is neutral. The posture of the reader is what the practice tests.</p>
   <figure class="plate"><video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-lensing.jpg"><source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"></video><figcaption class="cap"><b>Water above, water below.</b> The enclosure is wet at its edges.</figcaption></figure>
@@ -926,6 +920,7 @@ body{background:
   <div class="connect"><strong>The tongue. Language as structure</strong><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> describes how the mouth executes the code.</div>
   <div class="connect"><strong>Human macro rail</strong><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> reads the institutional layer as continuous strategic process.</div>
   <div class="connect"><strong>Archive rail</strong><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> holds the breakaway material inside a fiction contract.</div>
+  <div class="connect"><strong>The next work</strong><a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a> is where the corpus asks its readers to distribute what they have read.</div>
 </section>
 <section class="ch" id="glossary">
   <span class="eyebrow">A.5 · Glossary</span>
@@ -953,7 +948,7 @@ body{background:
 <button id="toTop" type="button" aria-label="Back to top">↑</button>
 <button id="rdBtn" type="button" aria-label="Reading settings" aria-expanded="false" aria-controls="rdPanel">Aa</button>
 
-<div id="rdPanel" role="dialog" aria-label="Reading settings" hidden>
+<div id="rdPanel" role="region" aria-label="Reading settings" hidden>
   <div class="rd-row"><span>Text size</span><button type="button" data-a="size-">A&minus;</button><button type="button" data-a="size+">A+</button></div>
   <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-">&minus;</button><button type="button" data-a="lead+">+</button></div>
   <div class="rd-row"><span>Column width</span><button type="button" data-a="w-">&minus;</button><button type="button" data-a="w+">+</button></div>
@@ -962,7 +957,7 @@ body{background:
   <div id="rdToc"></div>
 </div>
 
-<div id="resumePrompt" role="dialog" aria-label="Resume reading">
+<div id="resumePrompt" role="region" aria-label="Resume reading">
   <p><b>Welcome back</b>You left off at <span id="resumeWhere">where you were</span>.</p>
   <div class="btns">
     <button type="button" id="resumeYes">Resume</button>
