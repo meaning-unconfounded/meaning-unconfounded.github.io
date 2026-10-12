@@ -33,11 +33,12 @@
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --measure:48rem;
+  --leading:1.82;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
 body{
-  font-family:var(--serif);font-size:1.08rem;line-height:1.82;
+  font-family:var(--serif);font-size:1.08rem;line-height:var(--leading);
   background:
     radial-gradient(1100px 520px at 88% -5%, rgba(160,32,240,.16), transparent 55%),
     radial-gradient(900px 480px at -5% 25%, rgba(255,179,71,.05), transparent 50%),
@@ -51,9 +52,12 @@ html::after{inset:12px;border:1px solid rgba(255,179,71,.14)}
 @media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
 .page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.2rem 5rem}
 #progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--pulse),var(--magenta),var(--gift),var(--gold));z-index:9999;transition:width .08s linear}
+.skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--pulse);color:#fff;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s}
+.skip-link:focus{top:0}
 a{color:var(--magenta);text-decoration:none;border-bottom:1px solid rgba(224,64,251,.28);transition:color .15s,border-color .15s}
 a:hover{color:#f0a8ff;border-bottom-color:rgba(240,168,255,.7)}
 a:visited{color:#b070d0}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--magenta);outline-offset:2px;border-radius:4px}
 ::selection{background:var(--pulse);color:#fff}
 h1,h2,h3{text-wrap:balance}
 p,li{overflow-wrap:break-word}
@@ -66,36 +70,46 @@ p,li{overflow-wrap:break-word}
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--pulse-line);
   font-family:var(--sans);
+  flex-wrap:nowrap;min-height:3.2rem;
 }
-.corpus-bar .brand{
-  display:flex;align-items:center;gap:.7rem;
-  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--magenta);font-weight:700;border-bottom:none;
-}
+.corpus-bar .brand{display:flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);font-weight:700;border-bottom:none;flex-shrink:0;min-width:0}
 .corpus-bar .brand:hover{color:#f0a8ff;border-bottom:none}
 .corpus-bar .pin{
-  width:36px;height:36px;border-radius:50%;
-  object-fit:cover;
+  border-radius:50%;object-fit:cover;flex-shrink:0;
   border:2px solid var(--pulse-line);
   box-shadow:0 0 14px var(--pulse-soft),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--surface);
+  background:var(--surface);
 }
-.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
+.corpus-bar .pin.eros-mark{width:52px;height:52px;border-color:rgba(160,32,240,.5);box-shadow:0 0 16px rgba(160,32,240,.3)}
+.corpus-bar .pin.pulse-mark{width:42px;height:42px}
+.corpus-bar .compass{font-size:1rem;line-height:1;color:var(--magenta);flex-shrink:0;margin:0 .15rem}
+.corpus-bar .brand-text{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);font-weight:700;white-space:nowrap}
+.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end;align-items:center;min-width:0;flex:1 1 auto}
 .corpus-bar nav a{
   font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
   color:var(--muted);padding:.35rem .6rem;border-radius:999px;
-  border-bottom:none;transition:color .15s,background .15s;
+  border-bottom:none;transition:color .15s,background .15s;white-space:nowrap;
 }
 .corpus-bar nav a:hover{color:var(--magenta);background:var(--pulse-soft);border-bottom:none}
-@media(max-width:720px){
-  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
-  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
-  .corpus-bar .pin{width:30px;height:30px}
-  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+@media(max-width:820px){
+  .corpus-bar{padding:.45rem .7rem;gap:.35rem}
+  .corpus-bar .pin.eros-mark{width:44px;height:44px}
+  .corpus-bar .pin.pulse-mark{width:36px;height:36px}
+  .corpus-bar .brand-text{font-size:.62rem;letter-spacing:.08em}
+  .corpus-bar .compass{font-size:.88rem}
+  .corpus-bar nav a{padding:.26rem .4rem;font-size:.56rem}
 }
 @media(max-width:520px){
-  .corpus-bar nav a:nth-child(n+6){display:none}
-  .corpus-bar .pin{width:28px;height:28px}
+  .corpus-bar .pin.eros-mark{width:38px;height:38px}
+  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
+  .corpus-bar .brand-text{font-size:.58rem;max-width:5.5rem;overflow:hidden;text-overflow:ellipsis}
+  .corpus-bar .compass{font-size:.82rem}
+  .corpus-bar nav a{padding:.22rem .32rem;font-size:.52rem}
+}
+@media(max-width:380px){
+  .corpus-bar .brand-text{display:none}
+  .corpus-bar .pin.eros-mark{width:36px;height:36px}
+  .corpus-bar .pin.pulse-mark{width:30px;height:30px}
 }
 
 .cover{min-height:86vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem 1.4rem}
@@ -157,9 +171,28 @@ details.eros-menu[open]>summary::before{content:"▾ ";}
 details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
 details.eros-menu a{color:var(--magenta)}
 
-.toc-card{margin:2rem auto 1.5rem;padding:1.4rem 1.4rem;border:1px solid var(--hair);border-radius:14px;background:var(--surface);font-family:var(--sans)}
-.toc-card .tk{font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--magenta);margin-bottom:1rem;text-align:center;font-weight:700}
-.toc-grid{display:grid;gap:.5rem;grid-template-columns:1fr 1fr}
+/* ── Collapsible Contents card ── */
+details.toc-card{
+  margin:2rem auto 1.5rem;
+  border:1px solid var(--hair);border-radius:14px;
+  background:var(--surface);
+  padding:.4rem 1.4rem 1.4rem;
+  font-family:var(--sans);
+  max-width:var(--measure);
+}
+details.toc-card>summary{
+  cursor:pointer;list-style:none;
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--magenta);padding:.6rem 0;
+  user-select:none;font-weight:700;
+}
+details.toc-card>summary::-webkit-details-marker{display:none}
+details.toc-card>summary::before{content:"▸ ";color:var(--magenta)}
+details.toc-card[open]>summary::before{content:"▾ "}
+.toc-grid{
+  display:grid;gap:.5rem;grid-template-columns:1fr 1fr;
+  padding-top:.85rem;border-top:1px solid var(--hair);
+}
 @media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
 .toc-grid a{display:flex;gap:.7rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.88rem;padding:.4rem .6rem;border-radius:8px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
 .toc-grid a:hover{background:var(--pulse-soft);color:var(--magenta)}
@@ -302,7 +335,6 @@ figure.svg-plate .plate-label{font-family:var(--sans);font-size:.66rem;letter-sp
 figure.svg-plate .plate-title{font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin-bottom:.55rem}
 figure.svg-plate .plate-cap{font-size:.92rem;color:var(--soft);font-style:italic;line-height:1.6;max-width:36rem;margin:0 auto}
 
-/* ── Compounding loop figure (upgrade) ── */
 .loop-viz{
   position:relative;
   margin:2rem auto;
@@ -339,22 +371,9 @@ figure.svg-plate .plate-cap{font-size:.92rem;color:var(--soft);font-style:italic
   letter-spacing:.005em;
 }
 .loop-viz .loop-overlay .lo-line:last-child{margin-bottom:0}
-.loop-viz .loop-overlay .lo-truth{
-  font-size:.94rem;
-  color:#1c1a16;
-}
-.loop-viz .loop-overlay .lo-mech{
-  font-size:.86rem;
-  color:#4a463d;
-  font-weight:600;
-}
-.loop-viz .loop-overlay .lo-call{
-  font-size:.8rem;
-  color:#8a6a1d;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  margin-top:.55rem;
-}
+.loop-viz .loop-overlay .lo-truth{font-size:.94rem;color:#1c1a16}
+.loop-viz .loop-overlay .lo-mech{font-size:.86rem;color:#4a463d;font-weight:600}
+.loop-viz .loop-overlay .lo-call{font-size:.8rem;color:#8a6a1d;letter-spacing:.1em;text-transform:uppercase;margin-top:.55rem}
 @media(max-width:480px){
   .loop-viz .loop-overlay{padding:1.6rem .85rem .85rem}
   .loop-viz .loop-overlay .lo-truth{font-size:.82rem}
@@ -500,7 +519,7 @@ footer.master .count{
 }
 footer.master .tier{
   display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
-  max-width:46rem;margin:0 auto 1rem;
+  max-width:52rem;margin:0 auto 1rem;
 }
 footer.master .tier a{
   padding:.32rem .72rem;border-radius:999px;
@@ -510,40 +529,107 @@ footer.master .tier a{
 }
 footer.master .tier a:hover{color:var(--magenta);border-color:var(--magenta);background:var(--pulse-soft)}
 footer.master .tier a.primary{background:var(--pulse-soft);border-color:var(--magenta);color:var(--magenta);font-weight:700}
+footer.master .tier a.here{background:var(--pulse-soft);border-color:var(--magenta);color:var(--magenta);font-weight:700}
 footer.master .sig{
   font-family:var(--serif);font-style:italic;color:var(--soft);
   font-size:.92rem;margin-top:1.2rem;
-}
-footer.master .line{
-  font-family:var(--serif);font-style:italic;color:var(--muted);
-  font-size:.85rem;margin-top:.6rem;
 }
 footer.master .creedline{
   margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;
   letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
 }
 footer.master .pulse-row{
-  display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  flex-wrap:nowrap;
   margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(160,32,240,.2);
 }
-footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3))}
-footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);font-weight:600}
-footer.master .sig-last{
-  margin-top:1rem;font-size:.72rem;opacity:.75;
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));flex-shrink:0}
+footer.master .pulse-row span{
+  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
 }
+@media(max-width:640px){
+  footer.master .pulse-row{gap:.4rem}
+  footer.master .pulse-row svg{width:22px;height:22px}
+  footer.master .pulse-row svg:last-of-type{width:20px;height:20px}
+  footer.master .pulse-row span{font-size:.54rem;letter-spacing:.08em}
+}
+
+/* ── Reader panel + To-top + Resume ── */
+#rdBtn{
+  position:fixed;right:1rem;bottom:4.4rem;z-index:950;
+  width:2.8rem;height:2.8rem;border-radius:50%;
+  border:1.5px solid var(--pulse-line);background:var(--surface);
+  color:var(--magenta);font:700 .95rem var(--sans);cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,background .2s;
+}
+#rdBtn:hover{border-color:var(--magenta);background:var(--pulse-soft)}
+#rdPanel{
+  position:fixed;right:1rem;bottom:7.8rem;z-index:951;
+  width:min(20rem, calc(100vw - 2rem));max-height:70vh;overflow:auto;
+  padding:1rem 1.05rem;font-family:var(--sans);font-size:.85rem;
+  color:var(--ink);background:var(--surface);
+  border:1.5px solid var(--pulse-line);border-radius:14px;
+  box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+#rdPanel[hidden]{display:none}
+#rdPanel .rd-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem}
+#rdPanel .rd-row > span{flex:1;color:var(--soft);font-size:.8rem}
+#rdPanel button{
+  min-width:2.3rem;padding:.4rem .65rem;
+  border:1px solid var(--pulse-line);border-radius:8px;
+  background:var(--surface2);color:var(--magenta);
+  font:600 .8rem var(--sans);cursor:pointer;
+  transition:background .15s;
+}
+#rdPanel button:hover{background:var(--pulse-soft);border-color:var(--magenta)}
+#rdPanel h5{margin:.9rem 0 .4rem;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+#rdToc a{display:block;padding:.35rem .5rem;color:var(--soft);border-bottom:1px solid var(--hair);font-size:.78rem;border-radius:5px;transition:background .15s,color .15s;text-decoration:none}
+#rdToc a:hover{color:var(--magenta);background:var(--pulse-soft);border-bottom-color:var(--pulse-line)}
+
+#toTop{
+  position:fixed;right:1rem;bottom:1.1rem;z-index:60;
+  width:2.7rem;height:2.7rem;border-radius:50%;
+  border:1px solid var(--pulse-line);background:var(--surface);
+  color:var(--magenta);font-size:1.1rem;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  display:flex;align-items:center;justify-content:center;
+}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{border-color:var(--magenta);background:var(--pulse-soft)}
+
+#resumePrompt{
+  position:fixed;left:1rem;bottom:1.2rem;z-index:55;
+  background:rgba(14,6,32,.96);
+  border:1px solid var(--pulse-line);border-radius:12px;
+  padding:1.15rem 1.35rem;font-family:var(--sans);font-size:.86rem;
+  color:var(--ink);box-shadow:0 14px 40px rgba(0,0,0,.5);
+  display:none;max-width:min(320px, calc(100vw - 5.5rem));
+  backdrop-filter:blur(10px);
+}
+#resumePrompt.show{display:block}
+#resumePrompt p{margin:0 0 .85rem;line-height:1.55;color:var(--ink);font-size:.86rem}
+#resumePrompt p b{color:var(--magenta);font-weight:700;display:block;margin-bottom:.35rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+#resumePrompt .btns{display:flex;gap:.5rem}
+#resumePrompt button{font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid var(--pulse);color:var(--magenta);background:transparent;padding:.5rem .9rem;border-radius:999px;transition:background .15s}
+#resumePrompt button:hover{background:var(--pulse-soft)}
+#resumePrompt button.secondary{border-color:var(--hair);color:var(--muted)}
 
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,.corpus-bar,#progressBar{display:none!important}
+  html::before,html::after,.corpus-bar,#progressBar,#toTop,#rdBtn,#rdPanel,#resumePrompt,.skip-link{display:none!important}
   body{background:#040108!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .part-break,.claim,.verse,.plate,.movement,.capstone,figure.svg-plate,.scoreboard,.stages,.gift-grid,footer.master,.loop-viz{break-inside:avoid}
-  .corpus-bar{display:none!important}
   video{display:none}
   .loop-viz{background:var(--surface);border:1px solid var(--hair)}
   .loop-viz .loop-overlay{position:static;padding:1rem;background:none;color:var(--ink)}
   .loop-viz .loop-overlay .lo-truth{color:var(--ink)}
   .loop-viz .loop-overlay .lo-mech{color:var(--soft)}
   .loop-viz .loop-overlay .lo-call{color:var(--gold)}
+  details.toc-card .toc-grid{display:grid!important}
+  details.toc-card>summary::before{display:none}
 }
 @media(max-width:640px){
   body{font-size:1rem}
@@ -619,12 +705,15 @@ footer.master .sig-last{
 </style>
 </head>
 <body>
-<div id="progressBar"></div>
+<div id="progressBar" aria-hidden="true"></div>
+<a class="skip-link" href="#top">Skip to content</a>
 
 <header class="corpus-bar">
   <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
-    <span>✦ EROS · Hopeful Future</span>
+    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
+    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
+    <span class="compass" aria-hidden="true">🧭</span>
+    <span class="brand-text">EROS · Hopeful Future</span>
   </a>
   <nav aria-label="Section navigation">
     <a href="#gift">Gift</a>
@@ -737,7 +826,6 @@ footer.master .sig-last{
   <summary>EROS library · the other books</summary>
   <div class="menu-body">
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
-
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
@@ -755,8 +843,8 @@ footer.master .sig-last{
   </div>
 </details>
 
-<nav class="toc-card" aria-label="Contents">
-  <div class="tk">Contents</div>
+<details class="toc-card" id="toc-anchor">
+  <summary>Contents</summary>
   <div class="toc-grid">
     <a href="#gift"><span class="tn">🎁</span>The gift — what we bring</a>
     <a href="#stack"><span class="tn">◈</span>The stack — bottom to top</a>
@@ -773,7 +861,7 @@ footer.master .sig-last{
     <a href="#unity"><span class="tn">❦</span>The Unity Thesis</a>
     <a href="#coda"><span class="tn">❦</span>Coda · the hopeful future</a>
   </div>
-</nav>
+</details>
 
 <div class="part-break gift" id="gift">
   <p class="pk">🎁 Before the stack · The gift</p>
@@ -1170,6 +1258,7 @@ footer.master .sig-last{
   </div>
 </section>
 
+<!-- ═══════════════════ PART · THE BRIDGE ═══════════════════ -->
 <div class="part-break green" id="bridge">
   <p class="pk">⛓ Fifth · The Mission</p>
   <h2>The bridge</h2>
@@ -1250,6 +1339,7 @@ footer.master .sig-last{
   <div class="pull gift">Bridge the coins.<br/>Bond the pairs.<br/>Bring the right people.<br/><strong>That is the mission.</strong></div>
 </section>
 
+<!-- ═══════════════════ PART · THE CROSSING ═══════════════════ -->
 <div class="part-break green" id="crossing">
   <p class="pk">🌉 Fifth, continued · The Crossing</p>
   <h2>EROS 💕 Crossing the bridge 🌉</h2>
@@ -1342,7 +1432,7 @@ footer.master .sig-last{
   </div>
 </section>
 
-<!-- ═══════════════ THE COMPOUNDING LOOP (NEW) ═══════════════ -->
+<!-- ═══════════════════ PART · THE COMPOUNDING LOOP ═══════════════════ -->
 <div class="part-break gold" id="loop">
   <p class="pk">◉ Sixth · The Compounding Loop</p>
   <h2>Being found</h2>
@@ -1413,6 +1503,7 @@ footer.master .sig-last{
   </div>
 </section>
 
+<!-- ═══════════════════ PART · PLATES ═══════════════════ -->
 <div class="part-break" id="plates">
   <p class="pk">Interlude · Renderings</p>
   <h2>Three plates from the Stories</h2>
@@ -1583,6 +1674,7 @@ footer.master .sig-last{
   </figure>
 </section>
 
+<!-- ═══════════════════ PART · SCOREBOARD ═══════════════════ -->
 <div class="part-break" id="scoreboard">
   <p class="pk">◆ The Scoreboard</p>
   <h2>What we are watching for</h2>
@@ -1651,6 +1743,7 @@ footer.master .sig-last{
   </div>
 </section>
 
+<!-- ═══════════════════ PART · STANDARD ═══════════════════ -->
 <div class="part-break" id="standard">
   <p class="pk">✦ The Standard</p>
   <h2>What is stated, what is not</h2>
@@ -1706,6 +1799,7 @@ footer.master .sig-last{
   </div>
 </section>
 
+<!-- ═══════════════════ PART · UNITY THESIS ═══════════════════ -->
 <div class="part-break gift" id="unity">
   <p class="pk">Capstone</p>
   <h2>The Unity Thesis</h2>
@@ -1771,6 +1865,7 @@ footer.master .sig-last{
   </div>
 </section>
 
+<!-- ═══════════════════ CODA ═══════════════════ -->
 <section class="coda" id="coda">
   <p class="coda-kick">Coda · The hopeful future</p>
   <p>The gift holds. The settlement holds. The base holds. The world holds. The floor holds. The bridge holds. And the right people are what make it all a home.</p>
@@ -1807,37 +1902,39 @@ footer.master .sig-last{
   </p>
 </section>
 
+<!-- ═══════════════════ MASTER FOOTER ═══════════════════ -->
 <footer class="master">
   <div class="title-row">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="44" height="44" loading="lazy"/>
     <span class="title">THE HOPEFUL FUTURE</span>
   </div>
   <p class="count">Gift Edition · The gift · pDAI · Atropa · Dysnomia · EROS · PulseChain · The bridge</p>
 
   <nav class="tier" aria-label="Library">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
-    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
-    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">How the Corpus Works</a>
+    <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
+    <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html" class="here">The Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
     <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
     <a href="https://t.me/Eros_Revival">Telegram</a>
   </nav>
 
   <p class="sig">Inward is forwards. The bond is what holds.</p>
-  <p class="line">Rev 10 · 2026-10-10 · Save as The_Hopeful_Future.html</p>
-
   <p class="creedline">Faster · Cheaper · Stronger · Inward is forwards · The bond is what holds</p>
 
   <div class="pulse-row">
@@ -1854,31 +1951,226 @@ footer.master .sig-last{
     </svg>
   </div>
 
-  <p class="sig-last">Tenacity Through Integrity</p>
+  <!-- Rev 11 · 2026-10-12 · ToC collapsible · reader panel · footer tier full names · 🧭 compass · pulse-row nowrap -->
 </footer>
 
+</div>
+
+<!-- ═══════════════════ READER CONTROLS ═══════════════════ -->
+<button id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<button id="rdBtn" type="button" aria-label="Reading settings and chapters" aria-expanded="false" aria-controls="rdPanel">Aa</button>
+
+<div id="rdPanel" role="region" aria-label="Reading settings" hidden>
+  <div class="rd-row"><span>Text size</span><button type="button" data-a="size-" aria-label="Smaller text">A&minus;</button><button type="button" data-a="size+" aria-label="Larger text">A+</button></div>
+  <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-" aria-label="Tighter lines">&minus;</button><button type="button" data-a="lead+" aria-label="Looser lines">+</button></div>
+  <div class="rd-row"><span>Column width</span><button type="button" data-a="w-" aria-label="Narrower column">&minus;</button><button type="button" data-a="w+" aria-label="Wider column">+</button></div>
+  <div class="rd-row"><span></span><button type="button" data-a="reset">Reset</button></div>
+  <h5>Go to</h5>
+  <div id="rdToc"></div>
+</div>
+
+<div id="resumePrompt" role="region" aria-label="Resume reading">
+  <p><b>Welcome back</b>You left off at <span id="resumeWhere">where you were</span>.</p>
+  <div class="btns">
+    <button type="button" id="resumeYes">Resume</button>
+    <button type="button" class="secondary" id="resumeNo">Dismiss</button>
+  </div>
 </div>
 
 <script>
 (function(){
 "use strict";
-var bar=document.getElementById('progressBar');
-function onScroll(){
-  var h=document.documentElement;
-  var max=h.scrollHeight-h.clientHeight;
-  var pct=max>0?(h.scrollTop/max)*100:0;
-  if(bar)bar.style.width=pct+'%';
+
+function each(list, fn){
+  Array.prototype.forEach.call(list, fn);
 }
-window.addEventListener('scroll',onScroll,{passive:true});
-onScroll();
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    var href=a.getAttribute('href');
-    if(href.length<2)return;
-    var target=document.querySelector(href);
-    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* 1 · Progress bar + to-top */
+var bar = document.getElementById('progressBar');
+var toTop = document.getElementById('toTop');
+function onScrollProgress(){
+  var h = document.documentElement;
+  var max = h.scrollHeight - h.clientHeight;
+  var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  if(bar) bar.style.width = pct + '%';
+  if(toTop) toTop.classList.toggle('show', h.scrollTop > 700);
+}
+window.addEventListener('scroll', onScrollProgress, {passive:true});
+onScrollProgress();
+if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+/* 2 · Smooth anchor scrolling */
+each(document.querySelectorAll('a[href^="#"]'), function(a){
+  a.addEventListener('click', function(e){
+    var href = a.getAttribute('href');
+    if(href.length < 2) return;
+    var t = document.querySelector(href);
+    if(t){
+      e.preventDefault();
+      t.scrollIntoView({behavior:'smooth', block:'start'});
+    }
   });
 });
+
+/* 3 · Open <details> on hash navigation */
+function openFromHash(){
+  if(!location.hash) return;
+  var el = document.querySelector(location.hash);
+  if(!el) return;
+  var det = el.closest('details');
+  if(det) det.open = true;
+}
+openFromHash();
+window.addEventListener('hashchange', openFromHash);
+
+/* 4 · Reader controls */
+(function(){
+  var KEY = 'eros_hopeful_reader_v1';
+  var defaults = {size:100, lead:1.82, w:48};
+  var state = defaults;
+  try {
+    var sv = JSON.parse(localStorage.getItem(KEY) || '{}');
+    for(var k in sv){ state[k] = sv[k]; }
+  } catch(e){}
+
+  var root = document.documentElement;
+  var btn = document.getElementById('rdBtn');
+  var panel = document.getElementById('rdPanel');
+  if(!btn || !panel) return;
+
+  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+  function apply(){
+    root.style.fontSize = state.size + '%';
+    root.style.setProperty('--leading', state.lead);
+    root.style.setProperty('--measure', state.w + 'rem');
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function open(){ panel.hidden = false; btn.setAttribute('aria-expanded','true'); }
+  function close(){ panel.hidden = true; btn.setAttribute('aria-expanded','false'); }
+
+  btn.addEventListener('click', function(){
+    if(panel.hidden) open(); else close();
+  });
+
+  panel.addEventListener('click', function(e){
+    var a = e.target.getAttribute && e.target.getAttribute('data-a');
+    if(!a) return;
+    if(a === 'size-') state.size = clamp(state.size - 6, 82, 136);
+    if(a === 'size+') state.size = clamp(state.size + 6, 82, 136);
+    if(a === 'lead-') state.lead = clamp(+(state.lead - .1).toFixed(2), 1.5, 2.3);
+    if(a === 'lead+') state.lead = clamp(+(state.lead + .1).toFixed(2), 1.5, 2.3);
+    if(a === 'w-')    state.w    = clamp(state.w - 3, 30, 60);
+    if(a === 'w+')    state.w    = clamp(state.w + 3, 30, 60);
+    if(a === 'reset') state = {size:defaults.size, lead:defaults.lead, w:defaults.w};
+    apply();
+  });
+
+  /* Build the ToC from the ToC card's own link list */
+  var toc = document.getElementById('rdToc');
+  if(toc){
+    var html = '';
+    var tocCard = document.getElementById('toc-anchor');
+    if(tocCard){
+      each(tocCard.querySelectorAll('.toc-grid a'), function(a){
+        var label = a.textContent.trim();
+        html += '<a href="' + a.getAttribute('href') + '">' + label + '</a>';
+      });
+    }
+    toc.innerHTML = html;
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !panel.hidden){ close(); btn.focus(); }
+  });
+
+  apply();
+})();
+
+/* 5 · Reading position memory */
+var SCROLL_KEY = 'eros_hopeful_position_v1';
+var SCROLL_MAX_AGE = 14 * 24 * 60 * 60 * 1000;
+var saveTimer = null;
+
+function currentSection(){
+  var mid = window.scrollY + window.innerHeight * 0.3;
+  var cur = null;
+  each(document.querySelectorAll('main.page > section, .part-break, .capstone, .coda'), function(s){
+    if(s.offsetTop <= mid) cur = s;
+  });
+  return cur;
+}
+function sectionTitle(sec){
+  if(!sec) return '';
+  var h2 = sec.querySelector('h2');
+  return h2 ? h2.textContent.trim().split(' · ')[0].trim() : '';
+}
+function savePosition(){
+  var sec = currentSection();
+  try {
+    localStorage.setItem(SCROLL_KEY, JSON.stringify({
+      y: window.scrollY,
+      t: Date.now(),
+      secId: sec ? sec.id : null,
+      secTitle: sectionTitle(sec)
+    }));
+  } catch(e){}
+}
+window.addEventListener('scroll', function(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(savePosition, 500);
+}, {passive:true});
+window.addEventListener('beforeunload', savePosition);
+
+(function(){
+  var prompt = document.getElementById('resumePrompt');
+  var where = document.getElementById('resumeWhere');
+  var yes = document.getElementById('resumeYes');
+  var no = document.getElementById('resumeNo');
+  if(!prompt) return;
+
+  var data = null;
+  try { data = JSON.parse(localStorage.getItem(SCROLL_KEY) || 'null'); } catch(e){}
+
+  if(!data || !data.t || (Date.now() - data.t) > SCROLL_MAX_AGE || data.y < 500){
+    try { localStorage.removeItem(SCROLL_KEY); } catch(e){}
+    return;
+  }
+  if(where && data.secTitle) where.textContent = data.secTitle;
+
+  setTimeout(function(){ prompt.classList.add('show'); }, 1000);
+
+  if(yes) yes.addEventListener('click', function(){
+    var target = data.secId ? document.getElementById(data.secId) : null;
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    } else {
+      window.scrollTo({top: data.y, behavior:'smooth'});
+    }
+    prompt.classList.remove('show');
+  });
+  if(no) no.addEventListener('click', function(){
+    try { localStorage.removeItem(SCROLL_KEY); } catch(e){}
+    prompt.classList.remove('show');
+  });
+})();
+
+})();
+</script>
+
+<script>
+(function(){
+  var was=[];
+  window.addEventListener('beforeprint',function(){
+    document.querySelectorAll('details').forEach(function(d){
+      was.push([d, d.open]);
+      d.open = true;
+    });
+  });
+  window.addEventListener('afterprint',function(){
+    was.forEach(function(p){ p[0].open = p[1]; });
+    was = [];
+  });
 })();
 </script>
 
