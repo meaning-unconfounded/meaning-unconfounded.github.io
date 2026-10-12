@@ -8,96 +8,491 @@
 <meta name="theme-color" content="#f2ede0"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%23f2ede0' stroke='%238a6a1d' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%238a6a1d'/%3E%3C/svg%3E"/>
 <style>
-:root{
-  --bg:#f2ede0; --bg2:#ebe5d5; --surface:#fbf8f0; --surface2:#e8e1cf;
-  --ink:#1c1a16; --soft:#4a463d; --muted:#7a7568;
-  --gold:#8a6a1d; --gold2:#a8842c; --gold-soft:rgba(138,106,29,.08); --gold-line:rgba(138,106,29,.28);
-  --crimson:#a05048; --crimson-soft:rgba(160,80,72,.08); --crimson-line:rgba(160,80,72,.28);
-  --indigo:#546a94; --indigo-soft:rgba(84,106,148,.08); --indigo-line:rgba(84,106,148,.28);
-  --violet:#6e5292; --violet-soft:rgba(110,82,146,.08); --violet-line:rgba(110,82,146,.28);
-  --steel:#547896; --steel-soft:rgba(84,120,150,.08); --steel-line:rgba(84,120,150,.28);
-  --amber:#9a6a1e; --amber-soft:rgba(154,106,30,.08); --amber-line:rgba(154,106,30,.28);
-  --teal:#3e7a7e; --teal-soft:rgba(62,122,126,.08); --teal-line:rgba(62,122,126,.28);
-  --gift:#c97a2c; --gift2:#b86820; --gift-soft:rgba(201,122,44,.08); --gift-line:rgba(201,122,44,.28);
-  --platinum:#7a7089; --platinum-soft:rgba(122,112,137,.08); --platinum-line:rgba(122,112,137,.32);
-  --hair:rgba(28,26,22,.12); --hair2:rgba(28,26,22,.06);
-  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --measure:52rem;
+/* ═══════════════════════════════════════════════════════════════
+   EROS CORPUS — Shared Design System (Quiet Luxury / Heritage)
+   Dominant: warm ivory parchment
+   Support: soft charcoal / stone
+   Accent: antique gold (used sparingly)
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --bg: #f2ede0;
+  --bg2: #ebe5d5;
+  --surface: #fbf8f0;
+  --surface2: #e8e1cf;
+  --surface3: #f5f0e4;
+  --ink: #1c1a16;
+  --soft: #4a463d;
+  --muted: #7a7568;
+  --gold: #8a6a1d;
+  --gold2: #a8842c;
+  --gold3: #c6a15b;
+  --gold-soft: rgba(138,106,29,.09);
+  --gold-line: rgba(138,106,29,.28);
+  --gold-glow: rgba(138,106,29,.14);
+  --crimson: #a05048;
+  --crimson-soft: rgba(160,80,72,.08);
+  --crimson-line: rgba(160,80,72,.28);
+  --indigo: #546a94;
+  --indigo-soft: rgba(84,106,148,.08);
+  --indigo-line: rgba(84,106,148,.28);
+  --violet: #6e5292;
+  --violet-soft: rgba(110,82,146,.08);
+  --violet-line: rgba(110,82,146,.28);
+  --steel: #547896;
+  --steel-soft: rgba(84,120,150,.08);
+  --steel-line: rgba(84,120,150,.28);
+  --amber: #9a6a1e;
+  --amber-soft: rgba(154,106,30,.08);
+  --amber-line: rgba(154,106,30,.28);
+  --teal: #3e7a7e;
+  --teal-soft: rgba(62,122,126,.08);
+  --teal-line: rgba(62,122,126,.28);
+  --gift: #c97a2c;
+  --gift2: #b86820;
+  --gift-soft: rgba(201,122,44,.08);
+  --gift-line: rgba(201,122,44,.28);
+  --platinum: #7a7089;
+  --platinum-soft: rgba(122,112,137,.08);
+  --platinum-line: rgba(122,112,137,.32);
+  --hair: rgba(28,26,22,.12);
+  --hair2: rgba(28,26,22,.06);
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --measure: 52rem;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(28,26,22,.06);
+  --shadow: 0 4px 18px rgba(28,26,22,.07);
+  --shadow-lg: 0 12px 36px rgba(28,26,22,.10);
+  --transition: 180ms ease;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);color:var(--ink)}
-body{
-  font-family:var(--serif);font-size:1.05rem;line-height:1.7;
+
+/* Dark mode (optional, stored in localStorage) */
+[data-theme="dark"] {
+  --bg: #141311;
+  --bg2: #1c1a17;
+  --surface: #1f1d1a;
+  --surface2: #2a2723;
+  --surface3: #24211e;
+  --ink: #f0ebe0;
+  --soft: #c8c2b4;
+  --muted: #9a9488;
+  --gold: #c6a15b;
+  --gold2: #d4b46e;
+  --gold3: #e0c48a;
+  --gold-soft: rgba(198,161,91,.12);
+  --gold-line: rgba(198,161,91,.32);
+  --gold-glow: rgba(198,161,91,.18);
+  --hair: rgba(240,235,224,.12);
+  --hair2: rgba(240,235,224,.06);
+  --crimson: #c87870;
+  --crimson-soft: rgba(200,120,112,.12);
+  --crimson-line: rgba(200,120,112,.32);
+  --indigo: #7a94c4;
+  --indigo-soft: rgba(122,148,196,.12);
+  --indigo-line: rgba(122,148,196,.32);
+  --violet: #9a7ec4;
+  --violet-soft: rgba(154,126,196,.12);
+  --violet-line: rgba(154,126,196,.32);
+  --steel: #7aa0b8;
+  --steel-soft: rgba(122,160,184,.12);
+  --steel-line: rgba(122,160,184,.32);
+  --amber: #c49a4a;
+  --amber-soft: rgba(196,154,74,.12);
+  --amber-line: rgba(196,154,74,.32);
+  --teal: #5aa8ac;
+  --teal-soft: rgba(90,168,172,.12);
+  --teal-line: rgba(90,168,172,.32);
+  --gift: #d99a4a;
+  --gift2: #e0a85c;
+  --gift-soft: rgba(217,154,74,.12);
+  --gift-line: rgba(217,154,74,.32);
+  --platinum: #a09ab0;
+  --platinum-soft: rgba(160,154,176,.12);
+  --platinum-line: rgba(160,154,176,.32);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--ink);
+}
+body {
+  font-family: var(--serif);
+  font-size: 1.06rem;
+  line-height: 1.72;
   background:
-    radial-gradient(900px 420px at 90% -5%, rgba(138,106,29,.06), transparent 55%),
-    radial-gradient(700px 380px at 5% 40%, rgba(84,106,148,.05), transparent 50%),
+    radial-gradient(1000px 480px at 92% -8%, var(--gold-soft), transparent 55%),
+    radial-gradient(800px 420px at 4% 35%, rgba(84,106,148,.05), transparent 50%),
     var(--bg);
-  min-height:100vh; color:var(--ink);
-  -webkit-font-smoothing:antialiased;
+  min-height: 100vh;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s ease, color .3s ease;
 }
-html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
-html::before{inset:8px;border:1px solid rgba(138,106,29,.16)}
-html::after{inset:12px;border:1px solid rgba(138,106,29,.07)}
-@media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
-.page{max-width:var(--measure);margin:0 auto;padding:1.5rem 1.4rem 5rem}
-#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--violet),var(--crimson),var(--gift));z-index:9999;transition:width .08s linear}
-a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(138,106,29,.28);transition:color .15s,border-color .15s}
-a:hover{color:var(--gold2);border-bottom-color:var(--gold2)}
-::selection{background:var(--gold);color:var(--surface)}
-
-.corpus-bar{
-  position:sticky;top:0;z-index:850;
-  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
-  padding:.55rem 1.1rem;
-  background:rgba(242,237,224,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--gold-line);
-  font-family:var(--sans);
-}
-.corpus-bar .brand{
-  display:flex;align-items:center;gap:.5rem;
-  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);font-weight:700;border-bottom:none;
-}
-.corpus-bar .brand:hover{color:var(--gold2);border-bottom:none}
-.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
-.corpus-bar nav a{
-  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
-  border-bottom:none;transition:color .15s,background .15s;
-}
-.corpus-bar nav a:hover{color:var(--gold);background:var(--gold-soft);border-bottom:none}
-@media(max-width:720px){
-  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
-  .corpus-bar .brand{font-size:.66rem}
-  .corpus-bar nav a{padding:.3rem .45rem;font-size:.6rem}
-}
-@media(max-width:520px){
-  .corpus-bar nav a:nth-child(n+5){display:none}
+[data-theme="dark"] body {
+  background:
+    radial-gradient(1000px 480px at 92% -8%, var(--gold-soft), transparent 55%),
+    radial-gradient(800px 420px at 4% 35%, rgba(122,148,196,.06), transparent 50%),
+    var(--bg);
 }
 
-/* ── MEDIA EMBEDS ── */
+/* Decorative page border */
+html::before, html::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: 9990;
+}
+html::before { inset: 8px; border: 1px solid var(--gold-line); opacity: .7; }
+html::after  { inset: 13px; border: 1px solid var(--gold-line); opacity: .35; }
+@media (max-width: 600px) {
+  html::before { inset: 4px; }
+  html::after  { inset: 8px; }
+}
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 1.6rem 1.5rem 5.5rem;
+}
+
+/* Progress bar */
+#progressBar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2.5px;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--violet), var(--crimson), var(--gift));
+  z-index: 9999;
+  transition: width .08s linear;
+}
+
+/* Links */
+a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-line);
+  transition: color var(--transition), border-color var(--transition);
+}
+a:hover { color: var(--gold2); border-bottom-color: var(--gold2); }
+::selection { background: var(--gold); color: var(--surface); }
+
+/* ─── Sticky corpus bar ─── */
+.corpus-bar {
+  position: sticky;
+  top: 0;
+  z-index: 850;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: .55rem 1.15rem;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--gold-line);
+  font-family: var(--sans);
+}
+.corpus-bar .brand-cluster {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+.corpus-bar .brand-cluster:hover { border-bottom: none; }
+.corpus-bar .pin {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold-line);
+  box-shadow: 0 0 12px var(--gold-glow);
+  flex-shrink: 0;
+  background: var(--surface);
+}
+.corpus-bar .pin.eros-mark {
+  width: 50px; height: 50px;
+  border-color: rgba(224,64,251,.4);
+  box-shadow: 0 0 16px rgba(224,64,251,.22);
+}
+.corpus-bar .pin.pulse-mark {
+  width: 40px; height: 40px;
+  border-color: rgba(160,32,240,.35);
+  box-shadow: 0 0 12px rgba(160,32,240,.18);
+}
+.corpus-bar .brand-text {
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.corpus-bar nav {
+  display: flex;
+  gap: .12rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+.corpus-bar nav a {
+  font-size: .64rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: .32rem .55rem;
+  border-radius: 999px;
+  border-bottom: none;
+  transition: color var(--transition), background var(--transition);
+}
+.corpus-bar nav a:hover,
+.corpus-bar nav a.active {
+  color: var(--gold);
+  background: var(--gold-soft);
+  border-bottom: none;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-line);
+  background: var(--gold-soft);
+  color: var(--gold);
+  cursor: pointer;
+  font-size: .85rem;
+  transition: background var(--transition), transform var(--transition);
+  flex-shrink: 0;
+  margin-left: .35rem;
+}
+.theme-toggle:hover { background: var(--gold-line); transform: scale(1.06); }
+.theme-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Mobile nav */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--gold-line);
+  border-radius: 8px;
+  padding: .4rem .55rem;
+  color: var(--gold);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.nav-toggle:hover { background: var(--gold-soft); }
+
+@media (max-width: 820px) {
+  .corpus-bar { padding: .5rem .9rem; }
+  .corpus-bar .brand-text { font-size: .64rem; }
+  .corpus-bar .pin.eros-mark { width: 44px; height: 44px; }
+  .corpus-bar .pin.pulse-mark { width: 36px; height: 36px; }
+}
+@media (max-width: 720px) {
+  .nav-toggle { display: inline-flex; align-items: center; gap: .3rem; }
+  .corpus-bar nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--gold-line);
+    padding: .6rem .8rem .9rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: .15rem;
+    box-shadow: var(--shadow);
+  }
+  .corpus-bar nav.open { display: flex; }
+  .corpus-bar nav a {
+    font-size: .72rem;
+    padding: .55rem .8rem;
+    border-radius: 8px;
+  }
+  .corpus-bar .theme-toggle { margin-left: 0; }
+}
+
+/* ─── Cover ─── */
+header.cover {
+  text-align: center;
+  padding: 2.2rem 1rem 1.8rem;
+}
+header.cover .map-badge {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: .6rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  border: 1px solid var(--gold-line);
+  border-radius: 999px;
+  padding: .32rem .9rem;
+  margin-bottom: .9rem;
+  font-weight: 700;
+  background: var(--gold-soft);
+}
+header.cover .kick {
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+header.cover h1 {
+  font-size: clamp(1.9rem, 5.2vw, 2.85rem);
+  font-weight: 700;
+  letter-spacing: .015em;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: .45rem;
+}
+header.cover .sub {
+  font-style: italic;
+  color: var(--soft);
+  font-size: 1.1rem;
+  max-width: 36rem;
+  margin: 0 auto .45rem;
+  line-height: 1.65;
+}
+header.cover .honest-line {
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin: 0 auto 1.1rem;
+  font-weight: 700;
+}
+header.cover .rule {
+  width: min(180px, 45%);
+  height: 1px;
+  margin: 0 auto 1.4rem;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+header.cover .onesentence {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 1.02rem;
+  color: var(--soft);
+  line-height: 1.7;
+}
+
+/* Brand seal */
+.brand-seal {
+  margin: 1.5rem auto 1.1rem;
+  text-align: center;
+  max-width: min(260px, 68vw);
+}
+.brand-seal img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid var(--gold-line);
+  box-shadow: 0 12px 40px var(--gold-glow);
+}
+.brand-seal figcaption {
+  font-family: var(--sans);
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: .7rem;
+  font-weight: 700;
+}
+
+/* Cover call-outs */
+.cover-call, .hopeful-call {
+  margin: 1.15rem auto 0;
+  max-width: 36rem;
+  padding: .8rem 1.05rem;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--gold-soft), var(--surface));
+  font-family: var(--sans);
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.cover-call:hover, .hopeful-call:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.cover-call .cc-k, .hopeful-call .hc-k {
+  display: block;
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  font-weight: 700;
+  margin-bottom: .4rem;
+}
+.cover-call .cc-l, .hopeful-call .hc-l {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--gold);
+  border-bottom: none;
+  padding: .1rem .25rem;
+  transition: color var(--transition), transform var(--transition);
+}
+.cover-call .cc-l::after, .hopeful-call .hc-l::after {
+  content: "→";
+  font-family: var(--sans);
+  font-size: .88rem;
+  transition: transform var(--transition);
+}
+.cover-call .cc-l:hover, .hopeful-call .hc-l:hover {
+  color: var(--gold2);
+  border-bottom: none;
+  transform: translateX(2px);
+}
+.cover-call .cc-l:hover::after, .hopeful-call .hc-l:hover::after {
+  transform: translateX(3px);
+}
+.cover-call .cc-sub, .hopeful-call .hc-sub {
+  display: block;
+  font-size: .68rem;
+  letter-spacing: .05em;
+  color: var(--muted);
+  margin-top: .4rem;
+  font-style: italic;
+}
+
+/* ─── Media embeds ─── */
 .media-embed {
-  margin: 2rem auto;
-  max-width: 40rem;
-  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 1.8rem auto;
+  max-width: 38rem;
+  padding: 1.15rem 1.4rem 1.35rem;
   background: linear-gradient(160deg, var(--gold-soft), var(--surface));
   border: 1px solid var(--gold-line);
-  border-radius: 14px;
-  box-shadow: 0 0 0 1px rgba(138,106,29,.06), 0 4px 20px rgba(138,106,29,.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm), 0 0 0 1px var(--gold-soft);
   text-align: center;
 }
 .media-embed .media-label {
   display: block;
   font-family: var(--sans);
-  font-size: .62rem;
-  letter-spacing: .24em;
+  font-size: .6rem;
+  letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--gold);
   font-weight: 700;
-  margin-bottom: .9rem;
+  margin-bottom: .8rem;
 }
 .media-embed audio,
 .media-embed video {
@@ -107,403 +502,684 @@ a:hover{color:var(--gold2);border-bottom-color:var(--gold2)}
   background: var(--surface2);
 }
 .media-embed video {
-  max-height: 420px;
+  max-height: 400px;
   object-fit: contain;
 }
-@media (max-width: 520px) {
-  .media-embed { padding: 1rem; margin: 1.5rem auto; }
-  .media-embed .media-label { font-size: .58rem; margin-bottom: .6rem; }
-}
-/* ── END MEDIA EMBEDS ── */
 
-header.cover{text-align:center;padding:2.5rem 1rem 2rem}
-header.cover .kick{font-family:var(--sans);font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:700}
-header.cover h1{font-size:clamp(2rem,5.5vw,3rem);font-weight:700;letter-spacing:.02em;color:var(--ink);line-height:1.15;margin-bottom:.5rem}
-header.cover .sub{font-style:italic;color:var(--soft);font-size:1.12rem;max-width:38rem;margin:0 auto .55rem;line-height:1.7}
-header.cover .honest-line{font-family:var(--sans);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin:0 auto 1.2rem;font-weight:700}
-header.cover .rule{width:min(200px,50%);height:1px;margin:0 auto 1.5rem;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-header.cover .onesentence{max-width:38rem;margin:0 auto;font-size:1.02rem;color:var(--soft);line-height:1.75}
-header.cover .map-badge{display:inline-block;font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);border:1px solid var(--gold-line);border-radius:999px;padding:.35rem .95rem;margin-bottom:1rem;font-weight:700;background:var(--gold-soft)}
-
-/* Cover call-out to The Open Call */
-.cover-call{
-  margin:1.3rem auto 0;
-  max-width:38rem;
-  padding:.85rem 1.1rem;
-  border:1px solid var(--gold-line);
-  border-radius:12px;
-  background:linear-gradient(135deg,var(--gold-soft),var(--surface));
-  font-family:var(--sans);
-  text-align:center;
+/* ─── Typography ─── */
+h2 {
+  font-size: 1.32rem;
+  color: var(--gold);
+  margin: 2.6rem 0 .85rem;
+  border-bottom: 1px solid var(--gold-line);
+  padding-bottom: .45rem;
+  letter-spacing: .01em;
+  font-weight: 700;
+  scroll-margin-top: 4.5rem;
 }
-.cover-call .cc-k{
-  display:block;
-  font-size:.6rem;
-  letter-spacing:.24em;
-  text-transform:uppercase;
-  color:var(--gold2);
-  font-weight:700;
-  margin-bottom:.5rem;
+h3 {
+  font-size: 1.08rem;
+  color: var(--ink);
+  margin: 1.6rem 0 .5rem;
+  font-weight: 700;
 }
-.cover-call .cc-l{
-  display:inline-flex;
-  align-items:center;
-  gap:.5rem;
-  font-family:var(--serif);
-  font-size:1.05rem;
-  font-weight:700;
-  color:var(--gold);
-  border-bottom:none;
-  padding:.15rem .35rem;
-  transition:color .15s,transform .15s;
-}
-.cover-call .cc-l::after{
-  content:"→";
-  font-family:var(--sans);
-  font-size:.9rem;
-  transition:transform .15s;
-}
-.cover-call .cc-l:hover{
-  color:var(--gold2);
-  border-bottom:none;
-  transform:translateX(2px);
-}
-.cover-call .cc-l:hover::after{
-  transform:translateX(3px);
-}
-.cover-call .cc-sub{
-  display:block;
-  font-family:var(--sans);
-  font-size:.7rem;
-  letter-spacing:.06em;
-  color:var(--muted);
-  margin-top:.5rem;
-  font-style:italic;
-}
-@media(max-width:520px){
-  .cover-call{padding:.75rem .85rem;margin-top:1rem}
-  .cover-call .cc-l{font-size:.98rem}
-  .cover-call .cc-sub{font-size:.66rem}
+p { margin: 0 0 .95rem; color: var(--soft); }
+.lede {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 1.1rem;
+  line-height: 1.7;
 }
 
-/* Cover call-out to The Hopeful Future */
-.hopeful-call{
-  margin:1rem auto 0;
-  max-width:38rem;
-  padding:.85rem 1.1rem;
-  border:1px solid var(--gold-line);
-  border-radius:12px;
-  background:linear-gradient(135deg,var(--gold-soft),var(--surface));
-  font-family:var(--sans);
-  text-align:center;
+/* ─── Claim / Frank boxes ─── */
+.claim {
+  margin: 1.3rem 0;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
-.hopeful-call .hc-k{
-  display:block;
-  font-size:.6rem;
-  letter-spacing:.24em;
-  text-transform:uppercase;
-  color:var(--gold2);
-  font-weight:700;
-  margin-bottom:.5rem;
+.claim.gold { border-color: var(--gold-line); background: var(--gold-soft); }
+.claim.crimson { border-color: var(--crimson-line); background: var(--crimson-soft); }
+.claim.indigo { border-color: var(--indigo-line); background: var(--indigo-soft); }
+.claim.violet { border-color: var(--violet-line); background: var(--violet-soft); }
+.claim.teal { border-color: var(--teal-line); background: var(--teal-soft); }
+.claim.gift { border-color: var(--gift-line); background: var(--gift-soft); }
+.claim.platinum { border-color: var(--platinum-line); background: var(--platinum-soft); }
+.claim p:last-child { margin-bottom: 0; }
+.claim strong { color: var(--gold); }
+.claim.crimson strong { color: var(--crimson); }
+.claim.indigo strong { color: var(--indigo); }
+.claim.violet strong { color: var(--violet); }
+.claim.gift strong { color: var(--gift2); }
+.claim.platinum strong { color: var(--platinum); }
+
+.frank {
+  margin: 1.3rem 0 1.5rem;
+  padding: 1.3rem 1.4rem;
+  border: 1px solid var(--gold-line);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--gold-soft), var(--surface));
+  box-shadow: var(--shadow-sm);
 }
-.hopeful-call .hc-l{
-  display:inline-flex;
-  align-items:center;
-  gap:.5rem;
-  font-family:var(--serif);
-  font-size:1.05rem;
-  font-weight:700;
-  color:var(--gold);
-  border-bottom:none;
-  padding:.15rem .35rem;
-  transition:color .15s,transform .15s;
+.frank p {
+  font-size: 1.01rem;
+  line-height: 1.72;
+  color: var(--soft);
+  margin: 0 0 .8rem;
 }
-.hopeful-call .hc-l::after{
-  content:"→";
-  font-family:var(--sans);
-  font-size:.9rem;
-  transition:transform .15s;
+.frank p:last-child { margin-bottom: 0; }
+.frank p.lead-line {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: .9rem;
 }
-.hopeful-call .hc-l:hover{
-  color:var(--gold2);
-  border-bottom:none;
-  transform:translateX(2px);
-}
-.hopeful-call .hc-l:hover::after{
-  transform:translateX(3px);
-}
-.hopeful-call .hc-sub{
-  display:block;
-  font-family:var(--sans);
-  font-size:.7rem;
-  letter-spacing:.06em;
-  color:var(--muted);
-  margin-top:.5rem;
-  font-style:italic;
-}
-@media(max-width:520px){
-  .hopeful-call{padding:.75rem .85rem;margin-top:1rem}
-  .hopeful-call .hc-l{font-size:.98rem}
-  .hopeful-call .hc-sub{font-size:.66rem}
+.frank strong { color: var(--ink); }
+.frank em.k {
+  color: var(--gold);
+  font-style: normal;
+  font-weight: 700;
+  font-family: var(--sans);
+  font-size: .8rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
 }
 
-h2{font-size:1.35rem;color:var(--gold);margin:2.8rem 0 .9rem;border-bottom:1px solid var(--gold-line);padding-bottom:.5rem;letter-spacing:.01em;font-weight:700}
-h3{font-size:1.1rem;color:var(--ink);margin:1.8rem 0 .55rem;font-weight:700}
-p{margin:0 0 1rem;color:var(--soft)}
-.lede{font-size:1.12rem;font-style:italic;color:var(--ink);margin-bottom:1.2rem;line-height:1.7}
-
-.claim{margin:1.4rem 0;padding:1.15rem 1.3rem;border:1px solid var(--gold-line);border-radius:12px;background:var(--surface)}
-.claim.gold{border-color:var(--gold-line);background:var(--gold-soft)}
-.claim.crimson{border-color:var(--crimson-line);background:var(--crimson-soft)}
-.claim.indigo{border-color:var(--indigo-line);background:var(--indigo-soft)}
-.claim.violet{border-color:var(--violet-line);background:var(--violet-soft)}
-.claim.teal{border-color:var(--teal-line);background:var(--teal-soft)}
-.claim.gift{border-color:var(--gift-line);background:var(--gift-soft)}
-.claim.platinum{border-color:var(--platinum-line);background:var(--platinum-soft)}
-.claim p:last-child{margin-bottom:0}
-.claim strong{color:var(--gold)}
-.claim.crimson strong{color:var(--crimson)}
-.claim.indigo strong{color:var(--indigo)}
-.claim.violet strong{color:var(--violet)}
-.claim.gift strong{color:var(--gift2)}
-.claim.platinum strong{color:var(--platinum)}
-
-.frank{
-  margin:1.4rem 0 1.6rem;
-  padding:1.35rem 1.5rem;
-  border:1px solid var(--gold-line);
-  border-left:4px solid var(--gold);
-  border-radius:12px;
-  background:linear-gradient(180deg,var(--gold-soft),var(--surface));
+/* Loop viz */
+.loop-viz {
+  position: relative;
+  margin: 1.8rem auto 1.6rem;
+  max-width: 34rem;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
-.frank p{font-size:1.02rem;line-height:1.75;color:var(--soft);margin:0 0 .85rem}
-.frank p:last-child{margin-bottom:0}
-.frank p.lead-line{font-size:1.12rem;font-style:italic;color:var(--ink);margin-bottom:1rem}
-.frank strong{color:var(--ink)}
-.frank em.k{color:var(--gold);font-style:normal;font-weight:700;font-family:var(--sans);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase}
-
-.loop-viz{
-  position:relative;
-  margin:2rem auto 1.8rem;
-  max-width:34rem;
-  border:1px solid var(--gold-line);
-  border-radius:14px;
-  overflow:hidden;
-  background:#fbf8f0;
-  box-shadow:0 10px 30px rgba(138,106,29,.09);
+.loop-viz video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
 }
-.loop-viz video{
-  display:block;
-  width:100%;
-  height:auto;
-  background:#fbf8f0;
+.loop-viz .loop-overlay {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 2.2rem 1.15rem 1rem;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--surface) 55%, transparent) 30%,
+    color-mix(in srgb, var(--surface) 95%, transparent) 60%,
+    var(--surface) 100%);
+  text-align: center;
+  pointer-events: none;
 }
-.loop-viz .loop-overlay{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  padding:2.4rem 1.2rem 1.1rem;
-  background:linear-gradient(180deg,
-    rgba(251,248,240,0) 0%,
-    rgba(251,248,240,.55) 32%,
-    rgba(251,248,240,.95) 62%,
-    rgba(251,248,240,1) 100%);
-  text-align:center;
-  pointer-events:none;
+.loop-viz .loop-overlay .lo-line {
+  margin: 0 0 .28rem;
+  font-family: var(--sans);
+  font-weight: 700;
+  line-height: 1.4;
 }
-.loop-viz .loop-overlay .lo-line{
-  margin:0 0 .3rem;
-  font-family:var(--sans);
-  font-weight:700;
-  line-height:1.45;
-  letter-spacing:.005em;
-}
-.loop-viz .loop-overlay .lo-line:last-child{margin-bottom:0}
-.loop-viz .loop-overlay .lo-truth{
-  font-size:.94rem;
-  color:var(--ink);
-}
-.loop-viz .loop-overlay .lo-mech{
-  font-size:.86rem;
-  color:var(--soft);
-  font-weight:600;
-}
-.loop-viz .loop-overlay .lo-call{
-  font-size:.8rem;
-  color:var(--gold);
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  margin-top:.55rem;
-}
-@media(max-width:480px){
-  .loop-viz .loop-overlay{padding:1.6rem .85rem .85rem}
-  .loop-viz .loop-overlay .lo-truth{font-size:.82rem}
-  .loop-viz .loop-overlay .lo-mech{font-size:.74rem}
-  .loop-viz .loop-overlay .lo-call{font-size:.68rem;letter-spacing:.08em}
+.loop-viz .loop-overlay .lo-truth { font-size: .92rem; color: var(--ink); }
+.loop-viz .loop-overlay .lo-mech { font-size: .84rem; color: var(--soft); font-weight: 600; }
+.loop-viz .loop-overlay .lo-call {
+  font-size: .76rem;
+  color: var(--gold);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-top: .5rem;
 }
 
-.svg-map{margin:1.8rem 0;padding:1.4rem;border:1px solid var(--hair);border-radius:14px;background:var(--surface)}
-.svg-map svg{width:100%;height:auto;display:block}
-.svg-map .cap{font-family:var(--sans);font-size:.72rem;color:var(--muted);text-align:center;margin-top:.7rem;letter-spacing:.04em;font-style:italic}
-
-.table-wrap{overflow-x:auto;margin:1.4rem 0;border:1px solid var(--hair);border-radius:10px;background:var(--surface)}
-table.ref{width:100%;border-collapse:collapse;font-size:.92rem;line-height:1.55;min-width:560px}
-table.ref th{background:var(--surface2);color:var(--gold);font-family:var(--sans);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:.75rem .9rem;text-align:left;border-bottom:1px solid var(--hair);font-weight:700;white-space:nowrap}
-table.ref td{padding:.8rem .9rem;border-bottom:1px solid var(--hair2);vertical-align:top;color:var(--soft)}
-table.ref tr:last-child td{border-bottom:none}
-table.ref td strong{color:var(--ink)}
-table.ref td a{color:var(--gold)}
-
-.book-card{margin:1rem 0;padding:1.05rem 1.2rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);border-left-width:4px}
-.book-card.n0{border-left-color:var(--amber)}
-.book-card.n1{border-left-color:var(--amber)}
-.book-card.n2{border-left-color:var(--teal)}
-.book-card.platinum{border-left-color:var(--platinum)}
-.book-card.n3{border-left-color:var(--gold)}
-.book-card.n4{border-left-color:var(--steel)}
-.book-card.n5{border-left-color:var(--crimson)}
-.book-card.n6{border-left-color:var(--violet)}
-.book-card.n7{border-left-color:var(--teal)}
-.book-card.n8{border-left-color:var(--crimson)}
-.book-card.n9{border-left-color:var(--indigo)}
-.book-card.gift{border-left-color:var(--gift)}
-.book-card.resonance{border-left-color:var(--violet)}
-.book-card.n11{border-left-color:var(--violet)}
-.book-card .bc-head{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin-bottom:.4rem}
-.book-card .bc-title{font-weight:700;color:var(--ink);font-size:1.05rem}
-.book-card .bc-title a{color:var(--ink);border-bottom:none}
-.book-card .bc-title a:hover{color:var(--gold)}
-.book-card .bc-tag{font-family:var(--sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--surface2);padding:.22rem .6rem;border-radius:999px;font-weight:700;white-space:nowrap}
-.book-card p{font-size:.95rem;margin:0;line-height:1.65}
-
-details.fold{margin:.7rem 0;border:1px solid var(--hair);border-radius:10px;background:var(--surface);overflow:hidden}
-details.fold>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:.85rem 1rem;font-weight:700;transition:background .15s}
-details.fold>summary::-webkit-details-marker{display:none}
-details.fold>summary::before{content:"▸ ";color:var(--gold2);margin-right:.15rem}
-details.fold[open]>summary{background:var(--gold-soft)}
-details.fold[open]>summary::before{content:"▾ "}
-details.fold .body{padding:.4rem 1.1rem 1.1rem;border-top:1px solid var(--hair2)}
-details.fold .body p{font-size:.95rem;margin:.55rem 0}
-details.fold .body ul{margin:.35rem 0 .6rem 1.2rem}
-details.fold .body li{margin:.3rem 0;font-size:.95rem;color:var(--soft);line-height:1.6}
-
-.rails{margin:1.6rem 0;display:grid;gap:1rem}
-@media(min-width:720px){.rails{grid-template-columns:1fr 1fr}}
-.rail{padding:1.1rem 1.3rem;border-radius:12px;border:1px solid;line-height:1.65}
-.rail.rail-a{border-color:var(--steel-line);background:var(--steel-soft)}
-.rail.rail-b{border-color:var(--crimson-line);background:var(--crimson-soft)}
-.rail .rk{font-family:var(--sans);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:.5rem;display:block}
-.rail.rail-a .rk{color:var(--steel)}
-.rail.rail-b .rk{color:var(--crimson)}
-.rail h4{font-family:var(--serif);font-size:1.05rem;color:var(--ink);margin:0 0 .55rem;font-weight:700}
-.rail p{font-size:.93rem;margin:0 0 .55rem;color:var(--soft)}
-.rail p:last-child{margin-bottom:0}
-
-.path{margin:1.5rem 0;padding:1.2rem 1.4rem;border:1px solid var(--gold-line);border-radius:12px;background:var(--gold-soft)}
-.path .pk{font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:.7rem}
-.path ol{margin:.2rem 0 0 1.2rem;color:var(--soft)}
-.path li{margin:.5rem 0;line-height:1.65}
-.path li strong{color:var(--ink)}
-.path li em{color:var(--muted);font-style:normal;font-size:.92em}
-
-.legend{margin:1rem 0;padding:1rem 1.2rem;border:1px dashed var(--gold-line);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.82rem;color:var(--soft);line-height:1.7}
-.legend b{color:var(--gold)}
-.legend .row{display:flex;gap:.6rem;align-items:baseline;margin:.3rem 0}
-.legend .swatch{width:.7rem;height:.7rem;border-radius:50%;flex-shrink:0;margin-top:.35rem}
-
-.cta{margin:2rem 0 0;text-align:center;padding:1.6rem 1.2rem;border:1px solid var(--gold-line);border-radius:14px;background:var(--gold-soft)}
-.cta .cc{font-family:var(--sans);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;font-weight:700}
-.cta .cl{font-size:1.12rem;font-style:italic;color:var(--ink);margin-bottom:1rem;line-height:1.7}
-.cta a.enter{display:inline-block;padding:.7rem 1.4rem;border-radius:999px;background:var(--gold);color:var(--surface);font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:none;margin:.3rem .3rem 0}
-.cta a.enter:hover{background:var(--gold2);color:var(--surface)}
-
-footer.master{
-  margin-top:3rem;padding:2rem 1rem 1.2rem;
-  border-top:1px solid var(--gold-line);
-  text-align:center;font-family:var(--sans);
-  font-size:.78rem;color:var(--muted);line-height:1.85;
+/* SVG map */
+.svg-map {
+  margin: 1.6rem 0;
+  padding: 1.3rem;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
-footer.master .title{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spacing:.08em;font-weight:700;margin-bottom:.3rem}
-footer.master .count{font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem}
-footer.master .tier{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;max-width:46rem;margin:0 auto 1rem}
-footer.master .tier a{
-  padding:.32rem .72rem;border-radius:999px;
-  background:var(--surface);border:1px solid var(--hair);
-  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
-  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
+.svg-map svg { width: 100%; height: auto; display: block; }
+.svg-map .cap {
+  font-family: var(--sans);
+  font-size: .7rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: .65rem;
+  letter-spacing: .04em;
+  font-style: italic;
 }
-footer.master .tier a:hover{color:var(--gold);border-color:var(--gold-line);background:var(--gold-soft)}
-footer.master .tier a.primary{background:var(--gold-soft);border-color:var(--gold-line);color:var(--gold);font-weight:700}
-footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1rem}
-footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.85rem;margin-top:.6rem}
 
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1.3rem 0;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+table.ref {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+  line-height: 1.55;
+  min-width: 540px;
+}
+table.ref th {
+  background: var(--surface2);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .7rem .85rem;
+  text-align: left;
+  border-bottom: 1px solid var(--hair);
+  font-weight: 700;
+  white-space: nowrap;
+}
+table.ref td {
+  padding: .75rem .85rem;
+  border-bottom: 1px solid var(--hair2);
+  vertical-align: top;
+  color: var(--soft);
+}
+table.ref tr:last-child td { border-bottom: none; }
+table.ref td strong { color: var(--ink); }
+table.ref td a { color: var(--gold); }
+
+/* ─── Book cards (grid) ─── */
+.books-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .85rem;
+  margin: 1.2rem 0;
+}
+@media (min-width: 640px) {
+  .books-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.book-card {
+  margin: 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  background: var(--surface);
+  border-left-width: 4px;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.book-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--gold-line);
+}
+.book-card.n0, .book-card.n1 { border-left-color: var(--amber); }
+.book-card.n2 { border-left-color: var(--teal); }
+.book-card.platinum { border-left-color: var(--platinum); }
+.book-card.n3 { border-left-color: var(--gold); }
+.book-card.n4 { border-left-color: var(--steel); }
+.book-card.n5 { border-left-color: var(--crimson); }
+.book-card.n6 { border-left-color: var(--violet); }
+.book-card.n7 { border-left-color: var(--teal); }
+.book-card.n8 { border-left-color: var(--crimson); }
+.book-card.n9 { border-left-color: var(--indigo); }
+.book-card.gift { border-left-color: var(--gift); }
+.book-card.resonance { border-left-color: var(--violet); }
+.book-card.n11 { border-left-color: var(--violet); }
+
+.book-card .bc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-bottom: .35rem;
+}
+.book-card .bc-title {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 1.02rem;
+}
+.book-card .bc-title a {
+  color: var(--ink);
+  border-bottom: none;
+}
+.book-card .bc-title a:hover { color: var(--gold); }
+.book-card .bc-tag {
+  font-family: var(--sans);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface2);
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.book-card p {
+  font-size: .92rem;
+  margin: 0;
+  line-height: 1.6;
+  color: var(--soft);
+}
+
+/* Paths */
+.path {
+  margin: 1.3rem 0;
+  padding: 1.15rem 1.3rem;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius);
+  background: var(--gold-soft);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+.path:hover { box-shadow: var(--shadow); }
+.path .pk {
+  font-family: var(--sans);
+  font-size: .64rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  display: block;
+  margin-bottom: .6rem;
+}
+.path ol { margin: .15rem 0 0 1.15rem; color: var(--soft); }
+.path li { margin: .45rem 0; line-height: 1.6; }
+.path li strong { color: var(--ink); }
+.path li em { color: var(--muted); font-style: normal; font-size: .9em; }
+
+/* Rails */
+.rails {
+  margin: 1.4rem 0;
+  display: grid;
+  gap: .9rem;
+}
+@media (min-width: 700px) {
+  .rails { grid-template-columns: 1fr 1fr; }
+}
+.rail {
+  padding: 1.05rem 1.2rem;
+  border-radius: var(--radius);
+  border: 1px solid;
+  line-height: 1.6;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.rail:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.rail.rail-a { border-color: var(--steel-line); background: var(--steel-soft); }
+.rail.rail-b { border-color: var(--crimson-line); background: var(--crimson-soft); }
+.rail .rk {
+  font-family: var(--sans);
+  font-size: .64rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: .4rem;
+  display: block;
+}
+.rail.rail-a .rk { color: var(--steel); }
+.rail.rail-b .rk { color: var(--crimson); }
+.rail h4 {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  color: var(--ink);
+  margin: 0 0 .45rem;
+  font-weight: 700;
+}
+.rail p { font-size: .9rem; margin: 0 0 .45rem; color: var(--soft); }
+.rail p:last-child { margin-bottom: 0; }
+
+/* Folds */
+details.fold {
+  margin: .65rem 0;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+details.fold > summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--sans);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: .8rem 1rem;
+  font-weight: 700;
+  transition: background var(--transition);
+}
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary::before {
+  content: "▸ ";
+  color: var(--gold2);
+  margin-right: .12rem;
+}
+details.fold[open] > summary { background: var(--gold-soft); }
+details.fold[open] > summary::before { content: "▾ "; }
+details.fold .body {
+  padding: .35rem 1.05rem 1.05rem;
+  border-top: 1px solid var(--hair2);
+}
+details.fold .body p { font-size: .93rem; margin: .5rem 0; }
+details.fold .body ul { margin: .3rem 0 .55rem 1.15rem; }
+details.fold .body li {
+  margin: .28rem 0;
+  font-size: .93rem;
+  color: var(--soft);
+  line-height: 1.55;
+}
+
+/* Legend */
+.legend {
+  margin: 1rem 0;
+  padding: .95rem 1.1rem;
+  border: 1px dashed var(--gold-line);
+  border-radius: 10px;
+  background: var(--surface);
+  font-family: var(--sans);
+  font-size: .8rem;
+  color: var(--soft);
+  line-height: 1.65;
+}
+.legend b { color: var(--gold); }
+
+/* CTA */
+.cta {
+  margin: 2rem 0 0;
+  text-align: center;
+  padding: 1.5rem 1.2rem;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius-lg);
+  background: var(--gold-soft);
+  box-shadow: var(--shadow-sm);
+}
+.cta .cc {
+  font-family: var(--sans);
+  font-size: .66rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .6rem;
+  font-weight: 700;
+}
+.cta .cl {
+  font-size: 1.08rem;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: .95rem;
+  line-height: 1.65;
+}
+.cta a.enter {
+  display: inline-block;
+  padding: .65rem 1.3rem;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--surface);
+  font-family: var(--sans);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  border-bottom: none;
+  margin: .25rem .25rem 0;
+  transition: background var(--transition), transform var(--transition);
+}
+.cta a.enter:hover {
+  background: var(--gold2);
+  color: var(--surface);
+  transform: translateY(-1px);
+}
+
+/* Path chooser (engagement) */
+.path-chooser {
+  margin: 1.8rem 0;
+  padding: 1.3rem 1.3rem 1.1rem;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, var(--gold-soft), var(--surface));
+  box-shadow: var(--shadow-sm);
+}
+.path-chooser .pc-label {
+  font-family: var(--sans);
+  font-size: .62rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: .7rem;
+  text-align: center;
+}
+.path-chooser .pc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .6rem;
+}
+@media (min-width: 560px) {
+  .path-chooser .pc-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+.path-chooser .pc-card {
+  display: block;
+  padding: .85rem .9rem;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--surface);
+  text-align: center;
+  border-bottom: none;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  color: var(--ink);
+}
+.path-chooser .pc-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-line);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  border-bottom: none;
+}
+.path-chooser .pc-card .pc-t {
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+.path-chooser .pc-card .pc-d {
+  font-size: .84rem;
+  color: var(--soft);
+  line-height: 1.4;
+}
+
+/* Footer */
+footer.master {
+  margin-top: 2.8rem;
+  padding: 1.8rem 1rem 1.1rem;
+  border-top: 1px solid var(--gold-line);
+  text-align: center;
+  font-family: var(--sans);
+  font-size: .76rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+footer.master .title {
+  font-family: var(--serif);
+  font-size: .98rem;
+  color: var(--gold);
+  letter-spacing: .08em;
+  font-weight: 700;
+  margin-bottom: .25rem;
+}
+footer.master .count {
+  font-style: italic;
+  color: var(--soft);
+  font-size: .88rem;
+  margin-bottom: .9rem;
+}
+footer.master .tier {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .28rem;
+  max-width: 46rem;
+  margin: 0 auto .9rem;
+}
+footer.master .tier a {
+  padding: .3rem .68rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  color: var(--soft);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  border-bottom: none;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+footer.master .tier a:hover {
+  color: var(--gold);
+  border-color: var(--gold-line);
+  background: var(--gold-soft);
+}
+footer.master .tier a.primary {
+  background: var(--gold-soft);
+  border-color: var(--gold-line);
+  color: var(--gold);
+  font-weight: 700;
+}
+footer.master .sig {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--soft);
+  font-size: .9rem;
+  margin-top: .9rem;
+}
+footer.master .line {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--muted);
+  font-size: .82rem;
+  margin-top: .5rem;
+}
+
+/* Back to top */
+.back-top {
+  position: fixed;
+  bottom: 1.4rem;
+  right: 1.4rem;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--surface);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .25s, visibility .25s, transform .25s, background var(--transition);
+  z-index: 800;
+}
+.back-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-top:hover { background: var(--gold2); }
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Fade-in on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Print */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  html::before, html::after, #progressBar, .corpus-bar, .back-top, .theme-toggle, .nav-toggle { display: none !important; }
+  body { background: #fff !important; color: #111; font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+  a { color: #111; border-bottom: none; }
+  .svg-map, .book-card, .claim, .frank, .loop-viz, .path, .rails, .table-wrap, details.fold, .cta, .cover-call, .hopeful-call, .media-embed, .path-chooser { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  header.cover { padding: .5rem 0 1rem; }
+  header.cover h1 { font-size: 1.85rem; }
+  .loop-viz video { display: none; }
+  .loop-viz { background: #fff; border: 1px solid #ccc; }
+  .loop-viz .loop-overlay { position: static; padding: 1rem; background: none; }
+  .media-embed { background: #fff; border: 1px solid #ccc; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 1rem; }
+  .page { padding: 1.15rem 1.05rem 4.5rem; }
+  table.ref { font-size: .84rem; }
+}
+
+/* ===== POLISH LAYER (heritage) ===== */
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px;border-radius:3px}
+#main-nav a.on{color:var(--gold2);border-bottom-color:var(--gold2)}
+h2{break-inside:avoid;break-after:avoid}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}html{scroll-behavior:auto}}
 @media print{
-  @page{size:A4;margin:14mm}
-  html::before,html::after,#progressBar,.corpus-bar{display:none!important}
-  body{background:#fff!important;color:#111;font-size:10.5pt}
-  .page{max-width:none;padding:0}
-  a{color:#111;border-bottom:none}
-  .svg-map,.book-card,.claim,.frank,.loop-viz,.path,.rails,.table-wrap,details.fold,.cta,.cover-call,.hopeful-call,.media-embed{break-inside:avoid}
-  h2{break-after:avoid}
-  header.cover{padding:.5rem 0 1rem}
-  header.cover h1{font-size:1.9rem}
-  .corpus-bar{display:none!important}
-  footer.master .tier a{border:1px solid #ccc;background:#fff}
-  .loop-viz video{display:none}
-  .loop-viz{background:var(--surface);border:1px solid var(--hair)}
-  .loop-viz .loop-overlay{position:static;padding:1rem;background:none}
-  .media-embed{background:#fff;border:1px solid #ccc}
-}
-@media(max-width:640px){body{font-size:1rem}.page{padding:1.2rem 1.1rem 4rem}table.ref{font-size:.85rem}}
-
-.corpus-bar .brand-cluster{
-  display:flex;align-items:center;gap:.55rem;
-  border-bottom:none;
-}
-.corpus-bar .brand-cluster:hover{border-bottom:none}
-.corpus-bar .pin{
-  width:40px;height:40px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--gold-line);
-  box-shadow:0 0 12px rgba(138,106,29,.2);
-  flex-shrink:0;background:var(--surface);
-}
-.corpus-bar .pin.eros-mark{width:52px;height:52px;border-color:rgba(224,64,251,.45);box-shadow:0 0 16px rgba(224,64,251,.28)}
-.corpus-bar .pin.pulse-mark{
-  width:42px;height:42px;
-  border-color:rgba(160,32,240,.4);
-  box-shadow:0 0 14px rgba(160,32,240,.22);
-}
-.corpus-bar .brand-text{
-  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);font-weight:700;
-}
-@media(max-width:720px){
-  .corpus-bar .pin.eros-mark{width:44px;height:44px}
-  .corpus-bar .pin.pulse-mark{width:36px;height:36px}
-  .corpus-bar .brand-text{font-size:.64rem}
-}
-@media(max-width:520px){
-  .corpus-bar .pin.eros-mark{width:40px;height:40px}
-  .corpus-bar .pin.pulse-mark{width:34px;height:34px}
-  .corpus-bar .brand-text{font-size:.6rem}
-}
-/* Hero brand seal */
-.brand-seal{
-  margin:1.6rem auto 1.2rem;
-  text-align:center;
-  max-width:min(280px,72vw);
-}
-.brand-seal img{
-  display:block;width:100%;height:auto;
-  border-radius:50%;
-  border:3px solid var(--gold-line);
-  box-shadow:0 12px 40px rgba(138,106,29,.18);
-}
-.brand-seal figcaption{
-  font-family:var(--sans);font-size:.72rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--gold);margin-top:.75rem;font-weight:700;
+  :root,[data-theme="dark"]{--bg:#fff;--bg2:#fff;--surface:#fff;--surface2:#f4f1e8;--surface3:#fff;--ink:#111;--soft:#2b2b2b;--muted:#555;
+    --gold:#6e5214;--gold2:#5a4210;--gold3:#8a6a1d;--gold-soft:#faf6e8;--gold-line:#c9b27a;--hair:#bbb;--hair2:#ddd;
+    --crimson:#7a3a34;--crimson-soft:#fbf1ef;--crimson-line:#c99;--steel:#345;--steel-soft:#eff3f6;--steel-line:#9ab;--shadow:none;--shadow-sm:none;--shadow-lg:none}
+  html,body{background:#fff!important;color:#111!important}
+  body{line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .reveal,.reveal:not(.visible){opacity:1!important;transform:none!important;visibility:visible!important}
+  details>*{display:block!important}details>summary{display:block!important}
+  details.fold>summary::after,details.fold>summary::before{display:none!important}
+  .media-embed,audio,iframe,video,.nav-toggle,.theme-toggle,.back-top{display:none!important}
+  *{box-shadow:none!important;text-shadow:none!important}
+  .claim,.demand,.pull,.final,.hopeful-call,.creator-notes,.book-card,.path,.pc-card,.rail,.table-wrap,details.fold,.cta,.cover-call{background:#fff!important;border-color:#999!important}
+  h1,h2,h3,h4,strong,b,.kick{color:#1a1608!important;-webkit-text-fill-color:#1a1608!important}
+  a{color:#111!important;text-decoration:none!important}
+  .page>section,.page>div{page-break-inside:auto}
+  img,svg{max-width:100%}
 }
 
+/* Corpus: atlas / index */
+.page{counter-reset:sec}
+.page>section>h2:first-child,.page>h2{counter-increment:sec}
+.page>section>h2:first-child::before,.page>h2::before{content:counter(sec,upper-roman) ".";display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.3em;font-weight:700;color:var(--gold3);margin-bottom:.35rem}
+@media print{.page>section>h2:first-child::before,.page>h2::before{color:#8a6a1d}}
+
+header.cover h1{letter-spacing:.14em;background:linear-gradient(180deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+header.cover{position:relative}
+header.cover::after{content:"";display:block;width:min(340px,70%);height:7px;margin:1.6rem auto 0;border-top:1px solid var(--gold-line);border-bottom:1px solid var(--gold-line)}
+.book-card{transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
+.book-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+.bc-tag{font-family:var(--mono);letter-spacing:.12em}
+details.fold>summary{transition:background var(--transition)}
+.page>section:first-of-type .lede::first-letter,.page>section:first-of-type>p:first-of-type::first-letter{float:left;font-size:3.6rem;line-height:.82;padding:.35rem .6rem 0 0;color:var(--gold);font-weight:700;font-style:normal}
+@media print{header.cover h1{background:none;-webkit-text-fill-color:#1a1608}header.cover::after{display:none}.book-card{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -511,11 +1187,12 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
 
 <header class="corpus-bar">
   <a class="brand brand-cluster" href="#top">
-    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
-    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
+    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="50" height="50"/>
+    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="40" height="40"/>
     <span class="brand-text">EROS · Corpus Map</span>
   </a>
-  <nav aria-label="Section navigation">
+  <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" id="navToggle">Menu</button>
+  <nav id="main-nav" aria-label="Section navigation">
     <a href="#why">Why now</a>
     <a href="#map">Map</a>
     <a href="#paths">Paths</a>
@@ -524,6 +1201,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
     <a href="#urls">URLs</a>
     <a href="media.html">Media</a>
     <a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">Telegram</a>
+    <button class="theme-toggle" id="themeToggle" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
   </nav>
 </header>
 
@@ -538,7 +1216,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   <div class="rule"></div>
 
   <figure class="brand-seal">
-    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" width="280" height="280" loading="eager"/>
+    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" width="260" height="260" loading="eager"/>
     <figcaption>Tenacity Through Integrity</figcaption>
   </figure>
 
@@ -557,8 +1235,27 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </aside>
 </header>
 
-<!-- AUDIO PLAYER — HIGH UP, RIGHT AFTER COVER -->
-<div class="media-embed">
+<!-- Path chooser for engagement -->
+<div class="path-chooser reveal">
+  <p class="pc-label">Choose your entry</p>
+  <div class="pc-grid">
+    <a class="pc-card" href="#paths">
+      <div class="pc-t">Path A · Builder</div>
+      <div class="pc-d">Mechanics first. Token, rails, then the spine.</div>
+    </a>
+    <a class="pc-card" href="#paths">
+      <div class="pc-t">Path B · Architect</div>
+      <div class="pc-d">The full stack. Plan → operators → gift.</div>
+    </a>
+    <a class="pc-card" href="#paths">
+      <div class="pc-t">Path C · Lore</div>
+      <div class="pc-d">Story first. Fiction, cosmology, mythos.</div>
+    </a>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<div class="media-embed reveal">
   <span class="media-label">Listen to the open call</span>
   <audio controls preload="metadata">
     <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp3" type="audio/mpeg">
@@ -566,7 +1263,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </audio>
 </div>
 
-<section id="what">
+<section id="what" class="reveal">
   <h2>What this page is</h2>
   <p class="lede">The library is not a pile of books. It is a stack with a shape.</p>
   <p>There is a spine and there are rails. There is a story layer and there is a money layer and there is a cosmology that holds both. There is a human-continuity rail and a breakaway-archive rail, and they are deliberately kept separate. There is fiction and there is documented history, and they are labelled. There is one token and there is one library, and they rhyme on purpose.</p>
@@ -577,19 +1274,14 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </div>
 </section>
 
-<!-- ═══════════════ WHY THE LIBRARY EXISTS NOW ═══════════════ -->
-<section id="why">
+<section id="why" class="reveal">
   <h2>Why this library exists now</h2>
 
   <div class="frank">
     <p class="lead-line">Fourteen books are complete. The foundation is built. Almost nobody will read them yet — and that is normal.</p>
-
     <p>Attention follows price. That is the mechanism by which any library like this one gets discovered. When the chart is quiet, the room is quiet. When the chart moves, strangers arrive, holders speak, and people who never bothered to investigate start asking questions. This is not a verdict on the work. It is the weather.</p>
-
     <p>So if you are here before the run, you are early. That is arithmetic, not a sales pitch. The doors are open, the material is finished, and the room is still small enough that one person's contribution changes the shape of what is here. After the run, the ratio of readers to writers changes, and the room has to be run differently. <strong>The best time to take a position — in the work, not only the token — is while the position is still available to take.</strong></p>
-
     <p>The recommendation is direct. <em class="k">Don't wait for agreement.</em> <em class="k">Don't wait for the chart to confirm what you already suspect.</em> Read one book tonight. Find one thing to contribute. Get in early while getting in early still means something.</p>
-
     <p>We cannot command the price. We can make sure that when people look — whenever that is — what they find is real.</p>
   </div>
 
@@ -605,139 +1297,105 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </figure>
 </section>
 
-<!-- ═══════════════ CORPUS MAP ═══════════════ -->
-<section id="map">
+<section id="map" class="reveal">
   <h2>The corpus map</h2>
   <p>Fourteen books arranged by layer. The spine is central. The rails branch. The gift sits at the top of the stack. The story layer is the roof. The door sits at the bottom.</p>
 
   <div class="svg-map">
     <svg viewBox="0 0 720 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EROS corpus map">
       <rect width="720" height="680" fill="#fbf8f0"/>
-
       <g font-family="Georgia,serif" text-anchor="middle">
         <rect x="40" y="30" width="640" height="60" rx="12" fill="#ede6f2" stroke="#6e5292" stroke-width="1.4"/>
         <text x="360" y="56" fill="#6e5292" font-size="13" font-weight="bold" letter-spacing="2">STORY LAYER</text>
         <text x="360" y="76" fill="#4a463d" font-size="12" font-style="italic">Eros Stories · The First Resonance — the narrative roof</text>
       </g>
-
       <g font-family="Georgia,serif" text-anchor="middle">
         <rect x="40" y="115" width="640" height="62" rx="12" fill="#f5ead9" stroke="#c97a2c" stroke-width="1.6"/>
         <text x="360" y="139" fill="#c97a2c" font-size="13" font-weight="bold" letter-spacing="2">THE GIFT · THE STACK</text>
         <text x="360" y="159" fill="#1c1a16" font-size="13" font-weight="bold">The Hopeful Future</text>
-        <text x="360" y="172" fill="#7a7568" font-size="9.5" font-style="italic">settlement · base · world · floor · bridge</text>
       </g>
-
       <g font-family="Georgia,serif" text-anchor="middle">
-        <rect x="40" y="200" width="200" height="70" rx="12" fill="#f0e8dc" stroke="#8a6a1d" stroke-width="1.4"/>
-        <text x="140" y="230" fill="#8a6a1d" font-size="12" font-weight="bold" letter-spacing="1.6">Gods of Eros</text>
-        <text x="140" y="248" fill="#4a463d" font-size="10.5" font-style="italic">four operators</text>
-        <text x="140" y="262" fill="#7a7568" font-size="9.5">source code</text>
-
-        <rect x="260" y="200" width="200" height="70" rx="12" fill="#eaf0f2" stroke="#3e7a7e" stroke-width="1.4"/>
-        <text x="360" y="230" fill="#3e7a7e" font-size="12" font-weight="bold" letter-spacing="1.6">Gift of Thoth</text>
-        <text x="360" y="248" fill="#4a463d" font-size="10.5" font-style="italic">language as bond</text>
-        <text x="360" y="262" fill="#7a7568" font-size="9.5">craft layer</text>
-
-        <rect x="480" y="200" width="200" height="70" rx="12" fill="#e6eaf2" stroke="#546a94" stroke-width="1.4"/>
-        <text x="580" y="230" fill="#546a94" font-size="12" font-weight="bold" letter-spacing="1.6">Living Egg</text>
-        <text x="580" y="248" fill="#4a463d" font-size="10.5" font-style="italic">the vessel</text>
-        <text x="580" y="262" fill="#7a7568" font-size="9.5">cosmology anchor</text>
+        <rect x="40" y="200" width="300" height="90" rx="12" fill="#e8f0f2" stroke="#547896" stroke-width="1.4"/>
+        <text x="190" y="230" fill="#547896" font-size="12" font-weight="bold" letter-spacing="1.5">RAIL A · HUMAN</text>
+        <text x="190" y="252" fill="#1c1a16" font-size="13" font-weight="bold">Illumination Strategy</text>
+        <text x="190" y="272" fill="#4a463d" font-size="11">Continuity · footprints</text>
       </g>
-
       <g font-family="Georgia,serif" text-anchor="middle">
-        <text x="360" y="295" fill="#7a7568" font-size="10" letter-spacing="3" font-family="system-ui">TWO RAILS · ONE EGG</text>
-
-        <rect x="40" y="308" width="310" height="90" rx="12" fill="#eaf0f4" stroke="#547896" stroke-width="1.4"/>
-        <text x="195" y="334" fill="#547896" font-size="12" font-weight="bold" letter-spacing="1.6">Rail A · Human Stage</text>
-        <text x="195" y="354" fill="#1c1a16" font-size="13" font-weight="bold">Illumination Strategy</text>
-        <text x="195" y="372" fill="#4a463d" font-size="10.5" font-style="italic">CoG · macro · disclosure weather · AI · money</text>
-        <text x="195" y="388" fill="#7a7568" font-size="9.5">documented footprints, falsifiable</text>
-
-        <rect x="370" y="308" width="310" height="90" rx="12" fill="#f2e8e6" stroke="#a05048" stroke-width="1.4"/>
-        <text x="525" y="334" fill="#a05048" font-size="12" font-weight="bold" letter-spacing="1.6">Rail B · Breakaway Archive</text>
-        <text x="525" y="354" fill="#1c1a16" font-size="13" font-weight="bold">Men of Renown</text>
-        <text x="525" y="372" fill="#4a463d" font-size="10.5" font-style="italic">Nordic residual · masks · electric sky · firmament</text>
-        <text x="525" y="388" fill="#7a7568" font-size="9.5">archive &amp; fiction frame, not fee proof</text>
+        <rect x="380" y="200" width="300" height="90" rx="12" fill="#f5e8e6" stroke="#a05048" stroke-width="1.4"/>
+        <text x="530" y="230" fill="#a05048" font-size="12" font-weight="bold" letter-spacing="1.5">RAIL B · ARCHIVE</text>
+        <text x="530" y="252" fill="#1c1a16" font-size="13" font-weight="bold">Men of Renown</text>
+        <text x="530" y="272" fill="#4a463d" font-size="11">Lore · fiction contract</text>
       </g>
-
       <g font-family="Georgia,serif" text-anchor="middle">
-        <text x="360" y="422" fill="#7a7568" font-size="10" letter-spacing="3" font-family="system-ui">INSTRUMENT &amp; SPINE</text>
-
-        <rect x="40" y="434" width="151" height="78" rx="11" fill="#e8eef2" stroke="#3e7a7e" stroke-width="1.4"/>
-        <text x="115" y="460" fill="#3e7a7e" font-size="11" font-weight="bold" letter-spacing="1">The Bridge</text>
-        <text x="115" y="478" fill="#4a463d" font-size="9.5" font-style="italic">crypto field manual</text>
-        <text x="115" y="495" fill="#7a7568" font-size="8.5">Poolonomics · risks</text>
-
-        <rect x="203" y="434" width="151" height="78" rx="11" fill="#ebe7f0" stroke="#7a7089" stroke-width="1.6"/>
-        <text x="278" y="460" fill="#5a5170" font-size="11" font-weight="bold" letter-spacing="1">Platinum Standard</text>
-        <text x="278" y="478" fill="#4a463d" font-size="9.5" font-style="italic">transform · flow rail</text>
-        <text x="278" y="495" fill="#7a7568" font-size="8.5">rock → river</text>
-
-        <rect x="366" y="434" width="151" height="78" rx="11" fill="#f0e8dc" stroke="#8a6a1d" stroke-width="1.4"/>
-        <text x="441" y="460" fill="#8a6a1d" font-size="11" font-weight="bold" letter-spacing="1">Front Door</text>
-        <text x="441" y="478" fill="#4a463d" font-size="9.5" font-style="italic">letter to Jake</text>
-        <text x="441" y="495" fill="#7a7568" font-size="8.5">TitanX path</text>
-
-        <rect x="529" y="434" width="151" height="78" rx="11" fill="#f0e8dc" stroke="#8a6a1d" stroke-width="1.4"/>
-        <text x="604" y="460" fill="#8a6a1d" font-size="11" font-weight="bold" letter-spacing="1">Eros Plan</text>
-        <text x="604" y="478" fill="#4a463d" font-size="9.5" font-style="italic">the spine</text>
-        <text x="604" y="495" fill="#7a7568" font-size="8.5">4 volumes · 1 page</text>
+        <rect x="40" y="315" width="640" height="70" rx="12" fill="#f0ebe0" stroke="#8a6a1d" stroke-width="1.8"/>
+        <text x="360" y="342" fill="#8a6a1d" font-size="13" font-weight="bold" letter-spacing="2">SPINE</text>
+        <text x="360" y="364" fill="#1c1a16" font-size="14" font-weight="bold">The Eros Plan · Instrument · Demand · Story · Production</text>
       </g>
-
       <g font-family="Georgia,serif" text-anchor="middle">
-        <rect x="120" y="540" width="200" height="60" rx="12" fill="#f2ede0" stroke="#9a6a1e" stroke-width="1.4"/>
-        <text x="220" y="566" fill="#9a6a1e" font-size="12" font-weight="bold" letter-spacing="1.4">Eros Narrative</text>
-        <text x="220" y="584" fill="#4a463d" font-size="10.5" font-style="italic">on-ramp · 10 minutes</text>
-
-        <rect x="400" y="540" width="200" height="60" rx="12" fill="#f2ede0" stroke="#9a6a1e" stroke-width="1.4"/>
-        <text x="500" y="566" fill="#9a6a1e" font-size="12" font-weight="bold" letter-spacing="1.4">Newcomer Dossier</text>
-        <text x="500" y="584" fill="#4a463d" font-size="10.5" font-style="italic">Book 0 · the confession</text>
+        <rect x="40" y="410" width="200" height="70" rx="10" fill="#ede8f5" stroke="#6e5292" stroke-width="1.3"/>
+        <text x="140" y="438" fill="#6e5292" font-size="12" font-weight="bold">Gods of Eros</text>
+        <text x="140" y="458" fill="#4a463d" font-size="11">Operators</text>
       </g>
-
-      <text x="360" y="645" text-anchor="middle" fill="#7a7568" font-family="system-ui" font-size="10" letter-spacing="3">ONE ARCHITECTURE · MANY DOORS</text>
+      <g font-family="Georgia,serif" text-anchor="middle">
+        <rect x="260" y="410" width="200" height="70" rx="10" fill="#e6f0ef" stroke="#3e7a7e" stroke-width="1.3"/>
+        <text x="360" y="438" fill="#3e7a7e" font-size="12" font-weight="bold">Gift of Thoth</text>
+        <text x="360" y="458" fill="#4a463d" font-size="11">Tongue · Craft</text>
+      </g>
+      <g font-family="Georgia,serif" text-anchor="middle">
+        <rect x="480" y="410" width="200" height="70" rx="10" fill="#e8ecf4" stroke="#546a94" stroke-width="1.3"/>
+        <text x="580" y="438" fill="#546a94" font-size="12" font-weight="bold">Living Egg</text>
+        <text x="580" y="458" fill="#4a463d" font-size="11">Cosmology</text>
+      </g>
+      <g font-family="Georgia,serif" text-anchor="middle">
+        <rect x="40" y="510" width="200" height="60" rx="10" fill="#f5f0e4" stroke="#9a6a1e" stroke-width="1.3"/>
+        <text x="140" y="535" fill="#9a6a1e" font-size="12" font-weight="bold">The Bridge</text>
+        <text x="140" y="552" fill="#4a463d" font-size="11">Field manual</text>
+      </g>
+      <g font-family="Georgia,serif" text-anchor="middle">
+        <rect x="260" y="510" width="200" height="60" rx="10" fill="#eeeaf2" stroke="#7a7089" stroke-width="1.3"/>
+        <text x="360" y="535" fill="#7a7089" font-size="12" font-weight="bold">Platinum Standard</text>
+        <text x="360" y="552" fill="#4a463d" font-size="11">Transform</text>
+      </g>
+      <g font-family="Georgia,serif" text-anchor="middle">
+        <rect x="480" y="510" width="200" height="60" rx="10" fill="#f5ead9" stroke="#c97a2c" stroke-width="1.3"/>
+        <text x="580" y="535" fill="#c97a2c" font-size="12" font-weight="bold">Front Door</text>
+        <text x="580" y="552" fill="#4a463d" font-size="11">Letter · TitanX</text>
+      </g>
+      <g font-family="Georgia,serif" text-anchor="middle">
+        <rect x="40" y="595" width="640" height="55" rx="12" fill="#f8f4ea" stroke="#8a6a1d" stroke-width="1.5"/>
+        <text x="360" y="620" fill="#8a6a1d" font-size="12" font-weight="bold" letter-spacing="1.5">DOOR · Newcomer Dossier · Eros Narrative</text>
+        <text x="360" y="638" fill="#4a463d" font-size="11">Start here</text>
+      </g>
     </svg>
-    <p class="cap">Every book is a door into the same architecture. The gift sits at the top of the stack. The spine is central. The rails branch. The story layer is the roof. The door sits at the bottom.</p>
-  </div>
-
-  <div class="legend">
-    <div class="row"><span class="swatch" style="background:#9a6a1e"></span><span><b>Door books</b> — where to enter. Narrative, Dossier.</span></div>
-    <div class="row"><span class="swatch" style="background:#8a6a1d"></span><span><b>Instrument &amp; spine</b> — the crypto surface and the master map. Bridge, Platinum Standard, Front Door, Eros Plan.</span></div>
-    <div class="row"><span class="swatch" style="background:#7a7089"></span><span><b>Platinum Standard</b> — the transform / flow rail. Rock → river.</span></div>
-    <div class="row"><span class="swatch" style="background:#547896"></span><span><b>Rail A</b> — human continuity, macro, money. Illumination Strategy.</span></div>
-    <div class="row"><span class="swatch" style="background:#a05048"></span><span><b>Rail B</b> — breakaway archive, masks, residual. Men of Renown.</span></div>
-    <div class="row"><span class="swatch" style="background:#8a6a1d"></span><span><b>Mythos &amp; tongue</b> — operators, language. Gods, Thoth.</span></div>
-    <div class="row"><span class="swatch" style="background:#546a94"></span><span><b>Cosmology floor</b> — the vessel that holds everything. Living Egg.</span></div>
-    <div class="row"><span class="swatch" style="background:#c97a2c"></span><span><b>The gift</b> — the capstone that ties settlement, base, world, floor and bridge. Hopeful Future.</span></div>
-    <div class="row"><span class="swatch" style="background:#6e5292"></span><span><b>Story layer</b> — sixteen doors and a narrative on-ramp. Eros Stories · The First Resonance.</span></div>
+    <p class="cap">Layer map · Story roof · Gift · Rails · Spine · Operators · Instrument · Door</p>
   </div>
 </section>
 
-<section id="paths">
-  <h2>Three paths</h2>
-  <p>There is no single correct order. There are three clean ways in, depending on what you are looking for.</p>
+<section id="paths" class="reveal">
+  <h2>Three paths into the library</h2>
+  <p class="lede">You do not have to read everything. You have to start somewhere that matches why you arrived.</p>
 
   <div class="path">
-    <span class="pk">Path A · The Newcomer Path</span>
-    <p><em>Time: one evening. You know nothing yet. You want to know what EROS is and why it exists.</em></p>
+    <span class="pk">Path A · The Builder Path</span>
+    <p><em>Time: one focused evening. You want the mechanics and the risks right before anything else.</em></p>
     <ol>
-      <li><strong>Newcomer Dossier</strong> — the confession. Ten minutes. Sets the tone: no price promises, real structure.</li>
-      <li><strong>Eros Narrative</strong> — the ten-minute map. Sets the architecture: crypto first, story second.</li>
-      <li><strong>The Bridge</strong> — the field manual. What an LP is. How the fee works. What to verify.</li>
-      <li><strong>The Platinum Standard</strong> — the transform. Rock to river. What the flow rail is for.</li>
-      <li><strong>The Hopeful Future</strong> — the gift and the stack. Where settlement, base, world, floor and bridge fit together. Newest capstone.</li>
-      <li><strong>The Front Door</strong> — the letter to Jake. Why the community matters more than any founder.</li>
-      <li><strong>Eros Stories</strong> — if the fiction pulls you, start walking through doors.</li>
+      <li><strong>Newcomer Dossier</strong> — the confession and the tone.</li>
+      <li><strong>Eros Narrative</strong> — the ten-minute map.</li>
+      <li><strong>The Bridge</strong> — the field manual. LP, pools, risk, playbook.</li>
+      <li><strong>The Platinum Standard</strong> — the transform thesis (design discussion).</li>
+      <li><strong>The Eros Plan</strong> — the spine. Where every other book sits.</li>
+      <li><strong>The Hopeful Future</strong> — the gift and the stack.</li>
     </ol>
   </div>
 
   <div class="path">
-    <span class="pk">Path B · The Builder Path</span>
-    <p><em>Time: a weekend. You are crypto-literate. You want the full architecture so you can build inside it.</em></p>
+    <span class="pk">Path B · The Architect Path</span>
+    <p><em>Time: a weekend. You want the full architecture so you can build inside it.</em></p>
     <ol>
       <li><strong>The Bridge</strong> — get the mechanics and the risks right first.</li>
-      <li><strong>The Platinum Standard</strong> — the transform / flow rail, and where it can travel next.</li>
-      <li><strong>TheErosPlan</strong> — the spine. Four volumes on one page. Instrument → Demand → Story → Production.</li>
-      <li><strong>The Hopeful Future</strong> — the gift, the stack, the scoreboard, the crossing.</li>
+      <li><strong>The Platinum Standard</strong> — the transform / flow rail.</li>
+      <li><strong>The Eros Plan</strong> — the spine. Four volumes on one page.</li>
+      <li><strong>The Hopeful Future</strong> — the gift, the stack, the scoreboard.</li>
       <li><strong>Gods of Eros</strong> — the four operators as source code.</li>
       <li><strong>Gift of Thoth</strong> — the tongue that keeps the culture legible.</li>
       <li><strong>Living Egg</strong> — the vessel. Inward is forwards.</li>
@@ -751,18 +1409,18 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
     <p><em>Time: as long as you want. You are here for story, not for token.</em></p>
     <ol>
       <li><strong>Eros Stories</strong> — sixteen doors. Read whichever door pulls you first.</li>
-      <li><strong>The First Resonance</strong> — the novel. The narrative on-ramp that opens onto the doors.</li>
+      <li><strong>The First Resonance</strong> — the novel. The narrative on-ramp.</li>
       <li><strong>Living Egg</strong> — the world the stories live inside.</li>
       <li><strong>Gods of Eros</strong> — the four operators.</li>
       <li><strong>Men of Renown</strong> — the archive and the residual.</li>
       <li><strong>Gift of Thoth</strong> — the language.</li>
-      <li><strong>The Hopeful Future</strong> — for the newest thread tying the story to the stack.</li>
-      <li><strong>Gods of Eros → TheErosPlan</strong> — if you want to build inside the world.</li>
+      <li><strong>The Hopeful Future</strong> — the newest thread tying story to stack.</li>
+      <li><strong>Gods of Eros → The Eros Plan</strong> — if you want to build inside the world.</li>
     </ol>
   </div>
 </section>
 
-<section id="rails">
+<section id="rails" class="reveal">
   <h2>The two rails — and why they stay separate</h2>
   <p class="lede">The corpus deliberately refuses to merge its two deepest investigations into one conspiracy sludge.</p>
 
@@ -786,7 +1444,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </div>
 </section>
 
-<section id="frame">
+<section id="frame" class="reveal">
   <h2>What is fact, what is fiction</h2>
   <p class="lede">The corpus tells the truth about what it is.</p>
   <p>The <strong>Eros token</strong> is real. The contracts are on-chain. The airdrop happened. The liquidity is live. The fee split is documented. The renounce is verifiable.</p>
@@ -799,124 +1457,126 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   <p>The corpus does not blur these categories. It labels them everywhere. That is the integrity.</p>
 </section>
 
-<section id="books">
+<section id="books" class="reveal">
   <h2>The fourteen books</h2>
   <p>Short descriptions to help you choose. Every book is linked at the canonical URL. Order below follows the layering of the map: door → instrument → rails → mythos → cosmology → gift → story.</p>
 
-  <div class="book-card n0">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">EROS Newcomer Dossier</a></div>
-      <span class="bc-tag">Book 0 · Door</span>
+  <div class="books-grid">
+    <div class="book-card n0">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">EROS Newcomer Dossier</a></div>
+        <span class="bc-tag">Book 0 · Door</span>
+      </div>
+      <p>The confession. The one page that names the wound — the begged coin, the abandoned founder — and states plainly that EROS is built so no one has to say it again. Frankness as architecture. Ten minutes.</p>
     </div>
-    <p>The confession. The one page that names the wound — the begged coin, the abandoned founder — and states plainly that EROS is built so no one has to say it again. Frankness as architecture. Ten minutes.</p>
-  </div>
 
-  <div class="book-card n1">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a></div>
-      <span class="bc-tag">On-ramp · Door</span>
+    <div class="book-card n1">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a></div>
+        <span class="bc-tag">On-ramp · Door</span>
+      </div>
+      <p>The ten-minute map. Crypto first, story second, extraction never. Covers the instrument, the demand equation, the story layer, the production guild. The cleanest single entry into the corpus.</p>
     </div>
-    <p>The ten-minute map. Crypto first, story second, extraction never. Covers the instrument, the demand equation, the story layer, the production guild. The cleanest single entry into the corpus.</p>
-  </div>
 
-  <div class="book-card n2">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a></div>
-      <span class="bc-tag">Instrument · Field manual</span>
+    <div class="book-card n2">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a></div>
+        <span class="bc-tag">Instrument · Field manual</span>
+      </div>
+      <p>The crypto field manual. What an LP is, pool vs wallet supply, liquidity bonding, impermanent loss, risks, playbook. Platinum register. The manual you can actually verify.</p>
     </div>
-    <p>The crypto field manual. What an LP is, pool vs wallet supply, liquidity bonding, impermanent loss, risks, playbook. Platinum register. The manual you can actually verify.</p>
-  </div>
 
-  <div class="book-card platinum">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a></div>
-      <span class="bc-tag">Instrument · Transform</span>
+    <div class="book-card platinum">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a></div>
+        <span class="bc-tag">Instrument · Transform</span>
+      </div>
+      <p>The transform thesis. EROS is the rock — fixed supply, burn sink climbing, store rail. ErosX and 33EROS are the river — the flow rail. Stated as a design discussion with its own open questions, not a promise.</p>
     </div>
-    <p>The transform thesis. EROS is the rock — fixed supply, burn sink climbing, store rail. ErosX and 33EROS are the river — the flow rail. The 33/33/33 mechanism, the equivalence bots, the Genesis phase, and the path to omnichain. Stated as a design discussion with its own open questions, not a promise.</p>
-  </div>
 
-  <div class="book-card n3">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a></div>
-      <span class="bc-tag">Letter · TitanX</span>
+    <div class="book-card n3">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a></div>
+        <span class="bc-tag">Letter · TitanX</span>
+      </div>
+      <p>The letter to Jake Sharpe. A proposal from the people who built the roads while the founder was away. Two years of receipts. The case for making one free airdrop the front door into an ecosystem that was almost forgotten.</p>
     </div>
-    <p>The letter to Jake Sharpe. A proposal from the people who built the roads while the founder was away. Two years of receipts. The case for making one free airdrop the front door into an ecosystem that was almost forgotten.</p>
-  </div>
 
-  <div class="book-card n4">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a></div>
-      <span class="bc-tag">Spine · Master map</span>
+    <div class="book-card n4">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a></div>
+        <span class="bc-tag">Spine · Master map</span>
+      </div>
+      <p>The spine. Four volumes on one page: Instrument, Demand, Story, Production. The book that tells you where every other book sits. If you only read one book, read this one after the Dossier.</p>
     </div>
-    <p>The spine. Four volumes on one page: Instrument, Demand, Story, Production. The book that tells you where every other book sits. If you only read one book, read this one after the Dossier.</p>
-  </div>
 
-  <div class="book-card n5">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a></div>
-      <span class="bc-tag">Rail A · Human macro</span>
+    <div class="book-card n5">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a></div>
+        <span class="bc-tag">Rail A · Human macro</span>
+      </div>
+      <p>The human continuity rail. Central banking, strategic assets, military machinery, disclosure theatre, the missing trillions. Method: footprints over narratives. Every claim tagged Layer 1 / 2 / 3. Falsifiable.</p>
     </div>
-    <p>The human continuity rail. Central banking, strategic assets, military machinery, disclosure theatre, the missing trillions. Method: footprints over narratives. Every claim tagged Layer 1 / 2 / 3. Falsifiable. Steel-blue register.</p>
-  </div>
 
-  <div class="book-card n6">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a></div>
-      <span class="bc-tag">Rail B · Archive</span>
+    <div class="book-card n6">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a></div>
+        <span class="bc-tag">Rail B · Archive</span>
+      </div>
+      <p>The breakaway archive. Nordic residual, Greek god-masks, Anunnaki-class lore, electric sky, firmament break, Gnostic frame. Held inside a fiction contract. Masks, not operators.</p>
     </div>
-    <p>The breakaway archive. Nordic residual, Greek god-masks, Anunnaki-class lore, electric sky, firmament break, Gnostic frame. Held inside a fiction contract. Masks, not operators. Crimson register.</p>
-  </div>
 
-  <div class="book-card n7">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a></div>
-      <span class="bc-tag">Mythos · Operators</span>
+    <div class="book-card n7">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a></div>
+        <span class="bc-tag">Mythos · Operators</span>
+      </div>
+      <p>The four operators as source code: NaUn, Ra-Shen, Thoth, EROS. Not a pantheon. Not a fifth god. The principles the fiction is built on. The theology of the corpus.</p>
     </div>
-    <p>The four operators as source code: NaUn, Ra-Shen, Thoth, EROS. Not a pantheon. Not a fifth god. The principles the fiction is built on. Violet-gold register. The theology of the corpus.</p>
-  </div>
 
-  <div class="book-card n8">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a></div>
-      <span class="bc-tag">Tongue · Craft</span>
+    <div class="book-card n8">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a></div>
+        <span class="bc-tag">Tongue · Craft</span>
+      </div>
+      <p>The linguistics layer. Consonants as operators. The four-class know grid. The constructed tongue. Language as bond. Craft book for anyone who will write inside the corpus.</p>
     </div>
-    <p>The linguistics layer. Consonants as operators. The four-class know grid. The constructed tongue. Language as bond. Teal register. Craft book for anyone who will write inside the corpus.</p>
-  </div>
 
-  <div class="book-card n9">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a></div>
-      <span class="bc-tag">Cosmology floor</span>
+    <div class="book-card n9">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a></div>
+        <span class="bc-tag">Cosmology floor</span>
+      </div>
+      <p>The vessel. Inward is forwards. Enclosure, iteration, expansion, affinity, bond. The cosmological anchor every other book points at. Long-form lawbook.</p>
     </div>
-    <p>The vessel. Inward is forwards. Enclosure, iteration, expansion, affinity, bond. The cosmological anchor every other book points at. Deep indigo register. Long-form lawbook.</p>
-  </div>
 
-  <div class="book-card gift">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a></div>
-      <span class="bc-tag">Gift · Stack · Capstone</span>
+    <div class="book-card gift">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a></div>
+        <span class="bc-tag">Gift · Stack · Capstone</span>
+      </div>
+      <p>The gift book. Not extraction — everything DeFi should have been. The full stack on PulseChain: pDAI, Atropa · Dysnomia, EROS, the bridge. The scoreboard, the crossing, the unity thesis.</p>
     </div>
-    <p>The gift book. Not extraction — everything DeFi should have been. The full stack on PulseChain: pDAI (settlement), Atropa · Dysnomia (base), EROS (world), the bridge (mission). The scoreboard, the crossing, the sixteen plates, the unity thesis. The capstone the whole corpus points at.</p>
-  </div>
 
-  <div class="book-card resonance">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a></div>
-      <span class="bc-tag">Story · Book One</span>
+    <div class="book-card resonance">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a></div>
+        <span class="bc-tag">Story · Book One</span>
+      </div>
+      <p>The opening salvo. A transmission novel. A sixteen-year-old coder, a ray of light, a visitor at 4:47, a notebook, and a practice that spreads by resonance. Twenty-one chapters.</p>
     </div>
-    <p>The opening salvo. A transmission novel. A sixteen-year-old coder, a ray of light, a visitor at 4:47, a notebook, and a practice that spreads by resonance rather than recruitment. Twenty-one chapters teaching every precept of the corpus while walking a story. The narrative on-ramp that opens onto the sixteen doors.</p>
-  </div>
 
-  <div class="book-card n11">
-    <div class="bc-head">
-      <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a></div>
-      <span class="bc-tag">Fiction · Sixteen doors</span>
+    <div class="book-card n11">
+      <div class="bc-head">
+        <div class="bc-title"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a></div>
+        <span class="bc-tag">Fiction · Sixteen doors</span>
+      </div>
+      <p>Pure fiction. Sixteen doors into one universe. Gods, Atlantis, cosmology, military continuity, AI, the Living Egg. The story layer of the corpus. Read one door tonight.</p>
     </div>
-    <p>Pure fiction. Sixteen doors into one universe. Gods, Atlantis, cosmology, military continuity, AI, the Living Egg. The story layer of the corpus. Multi-hue register. Read one door tonight.</p>
   </div>
 </section>
 
-<section id="first">
+<section id="first" class="reveal">
   <h2>Where to begin — one recommendation</h2>
   <p>If you are opening this library for the first time and you want a single correct move:</p>
 
@@ -929,31 +1589,22 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </div>
 </section>
 
-<!-- ═══════════════ PARTICIPATE ═══════════════ -->
-<details class="fold" id="participate">
+<details class="fold reveal" id="participate">
   <summary>How to participate · an open call to the ecosystem</summary>
   <div class="body">
     <p><em>Fourteen books are complete. The next work is not another book. It is distribution — making sure the right people find the ones that exist, and building the audience that will be here when attention arrives.</em></p>
-
     <p>This is a call to a specific kind of reader. Jake Sharp Mastermind members. TitanX founders and developers. PulseChain holders. Holders of HEX, PLS, PLSX, INC, ProofX, pDAI, Atropa, Dysnomia, Bear. Some of you are developers. Some are founders. Some have stayed through every quiet season and never left.</p>
-
     <p><strong>The problem is not a lack of work. It is a lack of distribution.</strong> White papers are written. Contracts are deployed. Architecture is laid. TitanX. DragonX. Helios. PulseChain, PulseX, INC, ProofX. pDAI, Atropa, Dysnomia, Bear. HEX. PLS. Every one of these is a system someone built on purpose, with receipts, for a reason. And still — not enough people are talking about any of it. The substance is here. The voices are missing.</p>
-
     <p><strong>The ask.</strong> A YouTube channel. A camera. A white paper on the screen. Two videos a week, six months minimum. Start with TitanX. Then DragonX. Then Helios. Then PulseChain and its primitives. Then pDAI, Atropa, Dysnomia, Bear. Then HEX, PLS. Then go around again. It does not matter if almost no one watches the first few months. What matters is that a catalogue is building — that when the market turns there is a body of work behind you and not an empty channel.</p>
-
     <p><strong>The timing.</strong> You get loud at the bottom. You do not get loud at the top. Those who start now will be six or twelve or eighteen months ahead when the crowd arrives. Those who wait will be starting from scratch while everyone else is already running. This is the entire edge. It is available to anyone willing to begin this week.</p>
-
     <p><strong>The ethic.</strong> Build bridges, not billboards. Cover each project on its own. When someone asks about another, point them at the source — the website, the Telegram, the paper. Do not sell. Do not pivot. The bridges are built by showing up honestly for one subject at a time.</p>
-
     <p><strong>The offer.</strong> Scripts, frameworks, editing advice, cross-posts, replays — these exist and are available from people who have been at this for years. The work has to be yours. That is what makes it worth something.</p>
-
     <p style="margin-top:.9rem"><strong>Start with TitanX. One white paper. One video. Then another.</strong></p>
-
     <p style="margin-top:.7rem;font-size:.9rem;color:var(--muted);font-style:italic">Full version — the complete open call, with the video format, the six-month outline, and the ethic in full: <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>.</p>
   </div>
 </details>
 
-<details class="fold">
+<details class="fold reveal">
   <summary>Library · quick links to every book</summary>
   <div class="body">
     <p><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a> · <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a> · <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a> · <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a> · <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a> · <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a> · <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a> · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a> · <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a></p>
@@ -961,7 +1612,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </div>
 </details>
 
-<section id="urls">
+<section id="urls" class="reveal">
   <h2>Canonical URLs</h2>
   <p>Every book, at its permanent home. These are the only URLs you should be sharing.</p>
 
@@ -985,16 +1636,16 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
         <tr><td><strong>The First Resonance</strong></td><td>Story · Book One</td><td><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The_First_Resonance.html</a></td></tr>
         <tr><td><strong>Eros Stories</strong></td><td>Story · Fiction</td><td><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros_Stories.html</a></td></tr>
         <tr><td><strong>The Open Call</strong></td><td>Call · Ecosystem</td><td><a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The_Open_Call.html</a></td></tr>
-        <tr><td><strong>SpaceEros</strong></td><td>Live tool — not a book</td><td><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros.html</a></td></tr>
-        <tr><td><strong>Media Index</strong></td><td>Reference · future book</td><td><a href="https://meaning-unconfounded.github.io/media.html">media.html</a></td></tr>
+        <tr><td><strong>SpaceEros</strong></td><td>Live tool</td><td><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros.html</a></td></tr>
+        <tr><td><strong>Media Index</strong></td><td>Reference</td><td><a href="https://meaning-unconfounded.github.io/media.html">media.html</a></td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<section id="companions">
+<section id="companions" class="reveal">
   <h2>Companion volumes</h2>
-  <p>The fourteen books above are the corpus. The list below is a short reference for the four operators, for the tongue, for the vessel, for the transform, and for the media index — in case you want the deeper layer.</p>
+  <p>The fourteen books above are the corpus. The list below is a short reference for the four operators, for the tongue, for the vessel, for the transform, and for the media index.</p>
 
   <details class="fold">
     <summary>The four operators · NaUn · Ra-Shen · Thoth · EROS</summary>
@@ -1038,7 +1689,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   <details class="fold">
     <summary>The transform · rock → river · store rail → flow rail</summary>
     <div class="body">
-      <p>EROS is the rock — fixed supply, burn sink, store rail. ErosX and 33EROS are the river — the flow rail, the transform, the omnichain layer. Equivalence bots (market-cap equivalence arbitrage agents) connect the pairs. The Genesis phase builds the foundation before the permanent mechanism begins.</p>
+      <p>EROS is the rock — fixed supply, burn sink, store rail. ErosX and 33EROS are the river — the flow rail, the transform, the omnichain layer. Equivalence bots connect the pairs. The Genesis phase builds the foundation before the permanent mechanism begins.</p>
       <p>Full treatment: <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. Field mechanics: <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>.</p>
     </div>
   </details>
@@ -1054,7 +1705,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   <details class="fold">
     <summary>Media index · the visual record</summary>
     <div class="body">
-      <p>Every image and video used across the corpus, with usage notes and known placement. The visual system as its own living reference — in time, its own book.</p>
+      <p>Every image and video used across the corpus, with usage notes and known placement. The visual system as its own living reference.</p>
       <p>Reference: <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>.</p>
     </div>
   </details>
@@ -1068,7 +1719,7 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </details>
 </section>
 
-<div class="cta">
+<div class="cta reveal">
   <p class="cc">The Door Is Open</p>
   <p class="cl">Pick one book. Read it tonight. The corpus will find you from there.</p>
   <a class="enter" href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Begin · Newcomer Dossier</a>
@@ -1077,8 +1728,8 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   <a class="enter" href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Or · First Resonance</a>
 </div>
 
-<!-- VIDEO PLAYER — AT THE BOTTOM, BEFORE FOOTER -->
-<div class="media-embed">
+<!-- VIDEO -->
+<div class="media-embed reveal">
   <span class="media-label">Watch the open call</span>
   <video controls preload="metadata" playsinline>
     <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp4" type="video/mp4">
@@ -1112,33 +1763,126 @@ footer.master .line{font-family:var(--serif);font-style:italic;color:var(--muted
   </nav>
 
   <p class="sig">The map is not the world. This page is the map.</p>
-  <p class="line">First Edition · Rev 9 · Dual brand seal · EROS + Pulse header · 2026-10-10 · Save as The_Eros_Corpus.html</p>
+  <p class="line">First Edition · Rev 10 · Design system upgrade · Quiet luxury · 2026-10-12 · Save as The_Eros_Corpus.html</p>
 </footer>
 
 </div>
 
+<button class="back-top" id="backTop" aria-label="Back to top" title="Back to top">↑</button>
+
 <script>
 (function(){
 "use strict";
-var bar=document.getElementById('progressBar');
+
+/* Progress bar */
+var bar = document.getElementById('progressBar');
 function onScroll(){
-  var h=document.documentElement;
-  var max=h.scrollHeight-h.clientHeight;
-  var pct=max>0?(h.scrollTop/max)*100:0;
-  if(bar)bar.style.width=pct+'%';
+  var h = document.documentElement;
+  var max = h.scrollHeight - h.clientHeight;
+  var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  if (bar) bar.style.width = pct + '%';
+  /* Back to top */
+  var bt = document.getElementById('backTop');
+  if (bt) {
+    if (h.scrollTop > 600) bt.classList.add('visible');
+    else bt.classList.remove('visible');
+  }
 }
-window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
 
+/* Smooth internal links */
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    var href=a.getAttribute('href');
-    if(href.length<2)return;
-    var t=document.querySelector(href);
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  a.addEventListener('click', function(e){
+    var href = a.getAttribute('href');
+    if (href.length < 2) return;
+    var t = document.querySelector(href);
+    if (t) {
+      e.preventDefault();
+      t.scrollIntoView({behavior:'smooth', block:'start'});
+      /* Close mobile nav */
+      var nav = document.getElementById('main-nav');
+      var toggle = document.getElementById('navToggle');
+      if (nav && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    }
   });
 });
+
+/* Mobile nav toggle */
+var navToggle = document.getElementById('navToggle');
+var mainNav = document.getElementById('main-nav');
+if (navToggle && mainNav) {
+  navToggle.addEventListener('click', function(){
+    var open = mainNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}
+
+/* Theme toggle */
+var themeToggle = document.getElementById('themeToggle');
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  try { localStorage.setItem('eros-theme', t); } catch(e){}
+  if (themeToggle) themeToggle.textContent = t === 'dark' ? '☀' : '◐';
+}
+var saved = null;
+try { saved = localStorage.getItem('eros-theme'); } catch(e){}
+if (saved === 'dark' || saved === 'light') setTheme(saved);
+else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+else setTheme('light');
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    setTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+}
+
+/* Back to top */
+var backTop = document.getElementById('backTop');
+if (backTop) {
+  backTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+}
+
+/* Active nav highlighting */
+var sections = document.querySelectorAll('section[id], details[id]');
+var navLinks = document.querySelectorAll('.corpus-bar nav a[href^="#"]');
+if ('IntersectionObserver' in window && sections.length && navLinks.length) {
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        var id = entry.target.id;
+        navLinks.forEach(function(link){
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(function(s){ observer.observe(s); });
+}
+
+/* Reveal on scroll */
+var reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && reveals.length) {
+  var revObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revObs.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  reveals.forEach(function(el){ revObs.observe(el); });
+} else {
+  reveals.forEach(function(el){ el.classList.add('visible'); });
+}
 })();
 </script>
+<script>(function(){var l=[].slice.call(document.querySelectorAll('#main-nav a[href^="#"]')),t=l.map(function(a){return document.querySelector(a.getAttribute('href'))});function m(){var y=window.scrollY+140,c=-1;t.forEach(function(e,i){if(e&&e.getBoundingClientRect().top+window.scrollY<=y)c=i});l.forEach(function(a,i){a.classList.toggle('on',i===c)})}window.addEventListener('scroll',m,{passive:true});m();var w=[];window.addEventListener('beforeprint',function(){document.querySelectorAll('details').forEach(function(d){w.push([d,d.open]);d.open=true});document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('visible')})});window.addEventListener('afterprint',function(){w.forEach(function(p){p[0].open=p[1]});w=[]})})();</script>
 </body>
 </html>
