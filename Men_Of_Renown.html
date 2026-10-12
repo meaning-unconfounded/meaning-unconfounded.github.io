@@ -19,11 +19,13 @@
   --hair:rgba(201,112,100,.18); --hair2:rgba(201,112,100,.09);
   --serif:Georgia,"Times New Roman",serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --leading:1.78;
+  --measure:720px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
 body{
-  font-family:var(--serif);font-size:1.05rem;line-height:1.78;
+  font-family:var(--serif);font-size:1.05rem;line-height:var(--leading);
   background:
     radial-gradient(1100px 520px at 85% -5%, rgba(201,112,100,.1), transparent 55%),
     radial-gradient(900px 480px at -5% 30%, rgba(232,165,90,.06), transparent 50%),
@@ -40,7 +42,11 @@ html::after{inset:12px;border:1px solid rgba(201,112,100,.08)}
 a{color:var(--crimson2);text-decoration:none;border-bottom:1px solid rgba(224,144,128,.28);transition:color .15s,border-color .15s}
 a:hover{color:#f0a898;border-bottom-color:rgba(240,168,152,.7)}
 a:visited{color:#a85850}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--crimson2);outline-offset:2px;border-radius:4px}
 ::selection{background:var(--crimson);color:#0c0705}
+
+.skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--crimson2);color:#0c0705;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
+.skip-link:focus{top:0;border-bottom:none}
 
 .corpus-bar{
   position:sticky;top:0;z-index:900;
@@ -64,6 +70,7 @@ a:visited{color:#a85850}
   box-shadow:0 0 14px rgba(201,112,100,.35),0 0 0 1px rgba(255,255,255,.05) inset;
   flex-shrink:0;background:var(--surface);
 }
+.corpus-bar .compass{font-size:1rem;line-height:1;color:var(--crimson2);flex-shrink:0;margin:0 .15rem;opacity:.85}
 .corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
 .corpus-bar nav a{
   font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
@@ -75,11 +82,12 @@ a:visited{color:#a85850}
   .corpus-bar{padding:.5rem .8rem;gap:.4rem}
   .corpus-bar .brand{font-size:.68rem;gap:.5rem}
   .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar .compass{font-size:.88rem}
   .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
 }
 @media(max-width:520px){
-  .corpus-bar nav a:nth-child(n+6){display:none}
   .corpus-bar .pin{width:28px;height:28px}
+  .corpus-bar .compass{font-size:.82rem}
 }
 
 header.hero{text-align:center;padding:2rem 0 1.4rem;border-bottom:1px solid var(--hair);margin-bottom:1.5rem}
@@ -89,13 +97,40 @@ h1{font-size:clamp(1.55rem,4vw,2.1rem);color:var(--crimson2);margin:.15rem 0 .4r
 .byline{color:var(--bone-soft);font-style:italic;font-size:1.04rem;margin:0 0 .65rem}
 .maxim{display:inline-block;margin:.28rem .18rem;padding:.45rem .8rem;border:1px solid var(--ember-line);border-radius:999px;font-family:var(--sans);font-size:.68rem;letter-spacing:.06em;color:var(--ember);text-transform:uppercase}
 
-details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--crimson-line);border-radius:10px;background:var(--crimson-soft);padding:.35rem 1rem}
+details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--crimson-line);border-radius:10px;background:var(--crimson-soft);padding:.35rem 1rem;text-align:left}
 details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--crimson2);padding:.55rem 0;user-select:none;font-weight:700}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
 details.eros-menu[open]>summary::before{content:"▾ ";}
 details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
 details.eros-menu a{color:var(--crimson2)}
+
+details.toc-card{
+  margin:1.3rem auto 1.7rem;
+  border:1px solid var(--hair);border-radius:12px;
+  background:var(--surface);
+  padding:.4rem 1.05rem 1.05rem;
+  font-family:var(--sans);
+  max-width:100%;
+  text-align:left;
+}
+details.toc-card>summary{
+  cursor:pointer;list-style:none;
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--crimson2);padding:.6rem 0;
+  user-select:none;font-weight:700;
+}
+details.toc-card>summary::-webkit-details-marker{display:none}
+details.toc-card>summary::before{content:"▸ ";color:var(--crimson2)}
+details.toc-card[open]>summary::before{content:"▾ "}
+.toc-grid{
+  display:grid;gap:.4rem;grid-template-columns:1fr 1fr;
+  padding-top:.85rem;border-top:1px solid var(--hair);
+}
+@media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
+.toc-grid a{display:flex;gap:.6rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.85rem;padding:.35rem .5rem;border-radius:6px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
+.toc-grid a:hover{background:var(--crimson-soft);color:var(--crimson2);border-bottom:none}
+.toc-grid a .tn{color:var(--crimson2);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.4rem}
 
 .thesis{margin:1.4rem 0 1.6rem;padding:1.25rem 1.3rem;border:1px solid var(--crimson-line);border-radius:14px;background:linear-gradient(160deg,var(--crimson-soft),rgba(154,122,184,.05));text-align:left}
 .thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson2);font-weight:700;display:block;margin-bottom:.7rem}
@@ -106,14 +141,7 @@ details.eros-menu a{color:var(--crimson2)}
 .how{margin:1rem 0 1.5rem;padding:1rem 1.1rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:.95rem;color:var(--soft)}
 .how strong{color:var(--crimson2);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
 
-nav.toc{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:.95rem 1.05rem;margin:1.3rem 0 1.7rem;font-family:var(--sans);font-size:.84rem}
-nav.toc strong{color:var(--crimson2);display:block;margin-bottom:.4rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
-nav.toc a{color:var(--crimson2);text-decoration:none;display:block;padding:.22rem 0;border-bottom:none}
-nav.toc a:hover{color:var(--ember)}
-nav.toc .cols{columns:2;column-gap:1.2rem}
-@media(max-width:520px){nav.toc .cols{columns:1}}
-
-h2{font-size:1.28rem;color:var(--crimson2);margin:2.4rem 0 .85rem;border-bottom:1px solid var(--hair);padding-bottom:.4rem;letter-spacing:.01em}
+h2{font-size:1.28rem;color:var(--crimson2);margin:2.4rem 0 .85rem;border-bottom:1px solid var(--hair);padding-bottom:.4rem;letter-spacing:.01em;scroll-margin-top:5rem}
 h3{font-size:1.08rem;color:var(--ink);margin:1.7rem 0 .55rem}
 p{margin:0 0 1rem;color:var(--soft);line-height:1.78}
 .lede{font-size:1.08rem;color:var(--bone-soft);font-style:italic;margin-bottom:1rem;line-height:1.78}
@@ -175,7 +203,7 @@ footer.master .count{
 }
 footer.master .tier{
   display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
-  max-width:46rem;margin:0 auto 1rem;
+  max-width:52rem;margin:0 auto 1rem;
 }
 footer.master .tier a{
   padding:.32rem .72rem;border-radius:999px;
@@ -185,18 +213,35 @@ footer.master .tier a{
 }
 footer.master .tier a:hover{color:var(--crimson2);border-color:var(--crimson);background:var(--crimson-soft)}
 footer.master .tier a.primary{background:var(--crimson-soft);border-color:var(--crimson);color:var(--crimson2);font-weight:700}
+footer.master .tier a.here{background:var(--crimson-soft);border-color:var(--crimson);color:var(--crimson2);font-weight:700}
 footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
 footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(201,112,100,.2)}
-footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(201,112,100,.3))}
-footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson2);font-weight:600}
+footer.master .pulse-row{
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  flex-wrap:nowrap;
+  margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(201,112,100,.2);
+}
+footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(201,112,100,.3));flex-shrink:0}
+footer.master .pulse-row span{
+  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson2);font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+}
+@media(max-width:640px){
+  footer.master .pulse-row{gap:.4rem}
+  footer.master .pulse-row svg{width:22px;height:22px}
+  footer.master .pulse-row svg:last-of-type{width:20px;height:20px}
+  footer.master .pulse-row span{font-size:.54rem;letter-spacing:.08em}
+}
 
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,#progressBar,.corpus-bar{display:none!important}
-  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  video{display:none}
+  html::before,html::after,#progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
+  body{background:#0c0705!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  video,iframe{display:none!important}
+  .yt-wrap{display:none!important}
   .fig,.media,.claim,.def,.verse,.creed,footer.master{break-inside:avoid}
+  details.toc-card .toc-grid{display:grid!important}
+  details.toc-card>summary::before{display:none}
 }
 @media(max-width:640px){
   .wrap{padding:1rem 1rem 3.4rem}
@@ -204,22 +249,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   footer.master .pin{width:38px;height:38px}
 }
 
-.frame-block{margin:1.5rem 0;padding:1.25rem 1.3rem;border:1px solid var(--crimson-line);border-radius:12px;background:var(--surface);line-height:1.8}
-.frame-block .fk{font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crimson2);font-weight:700;display:block;margin-bottom:.7rem}
-.frame-block p{margin:0 0 .8rem;color:var(--soft);font-size:.98rem}
-.frame-block p:last-child{margin-bottom:0}
-.frame-block ul{margin:.4rem 0 .6rem 1.15rem;color:var(--soft)}
-.frame-block li{margin:.3rem 0;font-size:.95rem}
-.perms{margin:1.4rem 0;padding:1.15rem 1.25rem;border:1px dashed var(--ember-line);border-radius:12px;background:var(--ember-soft)}
-.perms .fk{font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ember);font-weight:700;display:block;margin-bottom:.7rem}
-.perms ul{margin:.3rem 0 0 1.1rem;color:var(--soft)}
-.perms li{margin:.35rem 0;font-size:.94rem;line-height:1.65}
-.usecases{margin:1.5rem 0}
-.usecases .uc{margin:.9rem 0;padding:.95rem 1.1rem;border-left:3px solid var(--crimson);background:var(--crimson-soft);border-radius:0 10px 10px 0}
-.usecases .uc strong{color:var(--crimson2);font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.4rem}
-.usecases .uc p{margin:0;font-size:.94rem;color:var(--soft);line-height:1.7}
-.part-label{font-family:var(--sans);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);font-weight:700;margin:2.8rem 0 .7rem;padding-bottom:.45rem;border-bottom:1px solid var(--ember-line)}
-.exit-line{font-style:italic;color:var(--muted);font-size:.88rem;margin:1.6rem 0 2rem;text-align:center;line-height:1.65}
+.part-label{font-family:var(--sans);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);font-weight:700;margin:2.8rem 0 .7rem;padding-bottom:.45rem;border-bottom:1px solid var(--ember-line);scroll-margin-top:5rem}
 .dense-flag{font-style:italic;color:var(--muted);font-size:.88rem;margin:0 0 1rem;padding:.6rem .9rem;border-left:2px solid var(--hair);background:var(--surface);line-height:1.6}
 .workshop{font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;color:var(--ember);margin:.5rem 0 .3rem}
 .yt-wrap{margin:1.6rem 0;border:1px solid var(--crimson-line);border-radius:12px;overflow:hidden;background:var(--surface)}
@@ -233,7 +263,6 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 .appendix h3{color:var(--crimson2);margin:0 0 .7rem;font-size:1.05rem}
 .appendix .note{font-size:.88rem;color:var(--muted);font-style:italic;margin-bottom:.9rem}
 
-/* Dual brand: EROS seal + Pulse — mobile-safe */
 .corpus-bar{
   flex-wrap:nowrap;
   min-height:3.2rem;
@@ -272,15 +301,16 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   .corpus-bar{padding:.45rem .7rem;gap:.35rem}
   .corpus-bar .pin.eros-mark{width:44px;height:44px}
   .corpus-bar .pin.pulse-mark{width:36px;height:36px}
+  .corpus-bar .compass{font-size:.88rem}
   .corpus-bar .brand-text{font-size:.62rem;letter-spacing:.08em}
   .corpus-bar nav a{padding:.26rem .4rem;font-size:.56rem}
 }
 @media(max-width:520px){
   .corpus-bar .pin.eros-mark{width:38px;height:38px}
   .corpus-bar .pin.pulse-mark{width:32px;height:32px}
+  .corpus-bar .compass{font-size:.82rem}
   .corpus-bar .brand-text{font-size:.58rem;max-width:4.8rem;overflow:hidden;text-overflow:ellipsis}
   .corpus-bar nav a{padding:.22rem .32rem;font-size:.52rem}
-  .corpus-bar nav a:nth-child(n+6){display:none}
 }
 @media(max-width:380px){
   .corpus-bar .brand-text{display:none}
@@ -303,19 +333,64 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   text-transform:uppercase;color:var(--crimson2);margin-top:.55rem;font-weight:700;
 }
 
+#rdBtn{
+  position:fixed;right:1rem;bottom:4.4rem;z-index:950;
+  width:2.8rem;height:2.8rem;border-radius:50%;
+  border:1.5px solid var(--crimson-line);background:var(--surface);
+  color:var(--crimson2);font:700 .95rem var(--sans);cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,background .2s;
+}
+#rdBtn:hover{border-color:var(--crimson2);background:var(--crimson-soft)}
+#rdPanel{
+  position:fixed;right:1rem;bottom:7.8rem;z-index:951;
+  width:min(20rem, calc(100vw - 2rem));max-height:70vh;overflow:auto;
+  padding:1rem 1.05rem;font-family:var(--sans);font-size:.85rem;
+  color:var(--ink);background:var(--surface);
+  border:1.5px solid var(--crimson-line);border-radius:14px;
+  box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+#rdPanel[hidden]{display:none}
+#rdPanel .rd-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem}
+#rdPanel .rd-row > span{flex:1;color:var(--soft);font-size:.8rem}
+#rdPanel button{
+  min-width:2.3rem;padding:.4rem .65rem;
+  border:1px solid var(--crimson-line);border-radius:8px;
+  background:var(--surface2);color:var(--crimson2);
+  font:600 .8rem var(--sans);cursor:pointer;
+  transition:background .15s;
+}
+#rdPanel button:hover{background:var(--crimson-soft);border-color:var(--crimson2)}
+#rdPanel h5{margin:.9rem 0 .4rem;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+#rdToc a{display:block;padding:.35rem .5rem;color:var(--soft);border-bottom:1px solid var(--hair);font-size:.78rem;border-radius:5px;transition:background .15s,color .15s;text-decoration:none}
+#rdToc a:hover{color:var(--crimson2);background:var(--crimson-soft);border-bottom-color:var(--crimson-line)}
+
+#toTop{
+  position:fixed;right:1rem;bottom:1.1rem;z-index:60;
+  width:2.7rem;height:2.7rem;border-radius:50%;
+  border:1px solid var(--crimson-line);background:var(--surface);
+  color:var(--crimson2);font-size:1.1rem;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  display:flex;align-items:center;justify-content:center;
+}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{border-color:var(--crimson2);background:var(--crimson-soft)}
 </style>
 </head>
 <body>
-<div id="progressBar"></div>
+<div id="progressBar" aria-hidden="true"></div>
+<a class="skip-link" href="#top">Skip to content</a>
 
 <header class="corpus-bar">
   <a class="brand brand-cluster" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
     <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
     <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
+    <span class="compass" aria-hidden="true">🧭</span>
     <span class="brand-text">EROS · Renown</span>
   </a>
   <nav aria-label="Section navigation">
-    <a href="#frame">Frame</a>
+    <a href="#material">Material</a>
     <a href="#doors">Doors</a>
     <a href="#rails">Rails</a>
     <a href="#sky">Sky</a>
@@ -326,7 +401,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   </nav>
 </header>
 
-<div class="wrap">
+<div class="wrap" id="top">
 
 <header class="hero">
   <div class="kicker">EROS · Archive 7</div>
@@ -371,80 +446,53 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   </div>
 </details>
 
-<!-- ═══════════════ PART I · THE FRAME ═══════════════ -->
-<p class="part-label" id="frame">Part I · The Frame</p>
-
-<div class="frame-block">
-  <span class="fk">Welcome</span>
-  <p>You do not need any prior context to read this. You do not need to believe any of it.</p>
-</div>
-
-<div class="frame-block">
-  <span class="fk">What this is</span>
-  <p>This is an archive of fragments. Testimonies, mythologies, physics hypotheses, ritual structures, historical incidents — collected because they share a shape. The shape is: there are systems operating beneath the visible one, and they are older than the surface story. Whether any individual fragment is true is not the question. The shape is the question. The shape is what makes this material useful — to writers building the sixteen doors, to designers building parallel systems inside the EROS universe, and to anyone who wants to understand why the corpus has a Rail A and a Rail B at all. Nothing here is asked of you. Take what serves the work. Leave what does not.</p>
-</div>
-
-<div class="frame-block">
-  <span class="fk">Who this is for</span>
-  <ul>
-    <li>Writers building the Eros Stories universe</li>
-    <li>Designers building parallel systems in the game / VR / hybrid-asset layer</li>
-    <li>Readers who want to know why the corpus keeps two rails separate</li>
-    <li>Anyone curious about the deep material behind Illumination Strategy</li>
-  </ul>
-</div>
-
-<div class="frame-block">
-  <span class="fk">What this is not</span>
-  <ul>
-    <li>Not a recruitment</li>
-    <li>Not a claim about you</li>
-    <li>Not a secret</li>
-    <li>Not required reading for any other book in the corpus</li>
-  </ul>
-</div>
-
-<div class="perms">
-  <span class="fk">What this book allows</span>
-  <ul>
-    <li>You may disbelieve every claim in this book. The material does not require assent.</li>
-    <li>You may take only what you find useful — a single metaphor, a single scene, a single mechanism.</li>
-    <li>You may use the material for your own work — stories, art, systems, arguments — without attribution.</li>
-    <li>You may stop reading at any point.</li>
-    <li>You may disagree publicly. The Archive does not want converts.</li>
-    <li>You may ask questions in the Telegram room without first having read the whole file.</li>
-    <li>You may share any fragment without sharing the whole.</li>
-  </ul>
-</div>
-
-<div class="usecases">
-  <div class="uc">
-    <strong>For writers</strong>
-    <p>The sixteen doors need three kinds of scenes: contact, cover-up, and residual. This file provides the raw material for all three. Every section in Part II names a scene shape.</p>
+<details class="toc-card" id="toc-anchor">
+  <summary>Contents</summary>
+  <div class="toc-grid">
+    <a href="#thesis"><span class="tn">—</span>What this book is about</a>
+    <a href="#doors"><span class="tn">1</span>The two loud doors</a>
+    <a href="#where"><span class="tn">2</span>Where this sits</a>
+    <a href="#egg"><span class="tn">3</span>The Egg</a>
+    <a href="#rails"><span class="tn">4</span>Two rails · one Egg</a>
+    <a href="#void"><span class="tn">5</span>The void and the reach</a>
+    <a href="#before"><span class="tn">6</span>The world before</a>
+    <a href="#money"><span class="tn">7</span>The missing trillions</a>
+    <a href="#functions"><span class="tn">8</span>Four functions</a>
+    <a href="#meta"><span class="tn">9</span>Meta-worldview</a>
+    <a href="#convergences"><span class="tn">10</span>Nine convergences</a>
+    <a href="#sky"><span class="tn">10b</span>The Electric Sky</a>
+    <a href="#firmament"><span class="tn">10c</span>The Firmament Break</a>
+    <a href="#geometers"><span class="tn">10b+</span>Geometers of the Vortex</a>
+    <a href="#gnostic"><span class="tn">10d</span>The Gnostic Frame</a>
+    <a href="#nordic"><span class="tn">10e</span>Nordic–Atlantis Residual</a>
+    <a href="#hermes"><span class="tn">10f</span>Hermes · the missing third</a>
+    <a href="#plasma"><span class="tn">10g</span>Plasma Life</a>
+    <a href="#cosmo-cover"><span class="tn">10h</span>Cosmological cover-up</a>
+    <a href="#atlantis"><span class="tn">11</span>Atlantis trilogy</a>
+    <a href="#roswell"><span class="tn">12</span>Roswell template</a>
+    <a href="#contactee"><span class="tn">13</span>Contactee theatre</a>
+    <a href="#masks"><span class="tn">14</span>Masks, not operators</a>
+    <a href="#density-masks"><span class="tn">14a</span>Movement without distance</a>
+    <a href="#renoun"><span class="tn">14b</span>Men of re-noun</a>
+    <a href="#interface"><span class="tn">15</span>The interface above</a>
+    <a href="#mirror"><span class="tn">16</span>The mirror</a>
+    <a href="#lexicon"><span class="tn">17</span>Lexicon</a>
+    <a href="#contract"><span class="tn">18</span>Creator contract</a>
+    <a href="#cast"><span class="tn">19</span>Cast</a>
+    <a href="#humility"><span class="tn">20</span>Humility arc</a>
+    <a href="#ledger"><span class="tn">21</span>Ledger of years</a>
+    <a href="#ladder"><span class="tn">22</span>Story ladder</a>
+    <a href="#worksheet"><span class="tn">23</span>Worksheet</a>
+    <a href="#prometheus"><span class="tn">24</span>Prometheus, Thoth</a>
+    <a href="#signals"><span class="tn">25</span>Contemporary signals</a>
+    <a href="#appendices"><span class="tn">—</span>Appendices</a>
+    <a href="#close"><span class="tn">—</span>Close</a>
   </div>
-  <div class="uc">
-    <strong>For designers</strong>
-    <p>The hybrid asset layer needs distinct visual and mechanical languages. Two rails, one Egg, three causes, four operators, seven archetypes. The file provides the semantic grammar for designing them.</p>
-  </div>
-  <div class="uc">
-    <strong>For world-builders</strong>
-    <p>The corpus has always claimed Rail A and Rail B are separate. This file is where you learn why and what each rail actually contains. Useful if you are building anything that touches either.</p>
-  </div>
-  <div class="uc">
-    <strong>For readers</strong>
-    <p>The file explains the two-rail structure the entire corpus is built on. If you have ever wondered why the Illumination material and the Men of Renown material are kept apart, this is the answer.</p>
-  </div>
-  <div class="uc">
-    <strong>For anyone</strong>
-    <p>The material is offered as inspiration for parallel systems in your work, not just the EROS universe. Take the shapes. Leave the claims.</p>
-  </div>
-</div>
+</details>
 
 <div class="community">
   There is a room where people discuss this material. It is not required. The door is open. <a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">t.me/Eros_Revival</a>
 </div>
-
-<p class="exit-line">If at any point this file stops serving you, close it. The corpus will still be there.</p>
 
 <div class="thesis" id="thesis">
   <span class="label">What this book is about</span>
@@ -573,8 +621,6 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
     <li><strong>Disclosure weather</strong> — celebrity inoculation, hearings, podcasts; stovepipe pieces, never the one sentence.</li>
   </ol>
 </section>
-
-<p class="exit-line">Halfway through Part II. Close the file whenever it stops serving you.</p>
 
 <section id="sky">
   <h2>10b · The Electric Sky — the sky that spoke</h2>
@@ -891,8 +937,6 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> for the human-rail accounting of the same subject; <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> for the vessel reading that the file's physics layer points toward.</p>
 </section>
 
-<p class="exit-line">End of the deep material. The Kit below is the manual — how to use everything above.</p>
-
 <section id="atlantis">
   <h2>11 · Atlantis trilogy</h2>
   <div class="fig">
@@ -1103,7 +1147,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 <section id="signals">
   <h2>25 · Contemporary signals · the room is louder</h2>
 
-  <div class="yt-wrap media-slot">
+  <div class="yt-wrap">
     <p class="yt-lab">Watch · Thoughts &amp; Bolts · DeLonge, Atlantis, Roswell</p>
     <div class="yt-frame">
       <iframe src="https://www.youtube.com/embed/dANm8ZLkoDY" title="Tom DeLonge's UFO story connects Atlantis to Roswell — Thoughts and Bolts" loading="lazy"
@@ -1199,23 +1243,26 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <p class="count">Breakaway Footprints · Archive 7 · EROS Library · Consolidated Edition</p>
 
   <nav class="tier" aria-label="Library">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
-    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html" class="primary">Renown</a>
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
-    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">How the Corpus Works</a>
+    <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
+    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
+    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
+    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
+    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
+    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html" class="here">Men of Renown</a>
+    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
+    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
+    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
+    <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
+    <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
+    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
+    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
+    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
     <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
     <a href="https://t.me/Eros_Revival">Telegram</a>
   </nav>
 
@@ -1235,32 +1282,149 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
       <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-  <p style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.85rem;margin-top:1rem">Rev 6.1 · Dual brand · Geometers + geometry video · header mobile-safe · 2026-10-11 · Save as Men_Of_Renown.html</p>
+
+  <!-- Rev 6.6 · 2026-10-12 · frame section removed · exit-lines removed · resume memory removed -->
 </footer>
 
+</div>
+
+<button id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<button id="rdBtn" type="button" aria-label="Reading settings and chapters" aria-expanded="false" aria-controls="rdPanel">Aa</button>
+
+<div id="rdPanel" role="region" aria-label="Reading settings" hidden>
+  <div class="rd-row"><span>Text size</span><button type="button" data-a="size-" aria-label="Smaller text">A&minus;</button><button type="button" data-a="size+" aria-label="Larger text">A+</button></div>
+  <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-" aria-label="Tighter lines">&minus;</button><button type="button" data-a="lead+" aria-label="Looser lines">+</button></div>
+  <div class="rd-row"><span>Column width</span><button type="button" data-a="w-" aria-label="Narrower column">&minus;</button><button type="button" data-a="w+" aria-label="Wider column">+</button></div>
+  <div class="rd-row"><span></span><button type="button" data-a="reset">Reset</button></div>
+  <h5>Go to</h5>
+  <div id="rdToc"></div>
 </div>
 
 <script>
 (function(){
 "use strict";
-var bar=document.getElementById('progressBar');
-function onScroll(){
-  var h=document.documentElement;
-  var max=h.scrollHeight-h.clientHeight;
-  var pct=max>0?(h.scrollTop/max)*100:0;
-  if(bar)bar.style.width=pct+'%';
+
+function each(list, fn){ Array.prototype.forEach.call(list, fn); }
+
+/* 1 · Progress bar + to-top */
+var bar = document.getElementById('progressBar');
+var toTop = document.getElementById('toTop');
+function onScrollProgress(){
+  var h = document.documentElement;
+  var max = h.scrollHeight - h.clientHeight;
+  var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  if(bar) bar.style.width = pct + '%';
+  if(toTop) toTop.classList.toggle('show', h.scrollTop > 700);
 }
-window.addEventListener('scroll',onScroll,{passive:true});
-onScroll();
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    var href=a.getAttribute('href');
-    if(href.length<2)return;
-    var t=document.querySelector(href);
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+window.addEventListener('scroll', onScrollProgress, {passive:true});
+onScrollProgress();
+if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+/* 2 · Smooth anchor scrolling */
+each(document.querySelectorAll('a[href^="#"]'), function(a){
+  a.addEventListener('click', function(e){
+    var href = a.getAttribute('href');
+    if(href.length < 2) return;
+    var t = document.querySelector(href);
+    if(t){
+      e.preventDefault();
+      t.scrollIntoView({behavior:'smooth', block:'start'});
+    }
   });
 });
+
+/* 3 · Open <details> on hash navigation */
+function openFromHash(){
+  if(!location.hash) return;
+  var el = document.querySelector(location.hash);
+  if(!el) return;
+  var det = el.closest('details');
+  if(det) det.open = true;
+}
+openFromHash();
+window.addEventListener('hashchange', openFromHash);
+
+/* 4 · Reader controls */
+(function(){
+  var KEY = 'eros_renown_reader_v1';
+  var defaults = {size:100, lead:1.78, w:45};
+  var state = defaults;
+  try {
+    var sv = JSON.parse(localStorage.getItem(KEY) || '{}');
+    for(var k in sv){ state[k] = sv[k]; }
+  } catch(e){}
+
+  var root = document.documentElement;
+  var btn = document.getElementById('rdBtn');
+  var panel = document.getElementById('rdPanel');
+  if(!btn || !panel) return;
+
+  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+  function apply(){
+    root.style.fontSize = state.size + '%';
+    root.style.setProperty('--leading', state.lead);
+    root.style.setProperty('--measure', state.w + 'rem');
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function open(){ panel.hidden = false; btn.setAttribute('aria-expanded','true'); }
+  function close(){ panel.hidden = true; btn.setAttribute('aria-expanded','false'); }
+
+  btn.addEventListener('click', function(){
+    if(panel.hidden) open(); else close();
+  });
+
+  panel.addEventListener('click', function(e){
+    var a = e.target.getAttribute && e.target.getAttribute('data-a');
+    if(!a) return;
+    if(a === 'size-') state.size = clamp(state.size - 6, 82, 136);
+    if(a === 'size+') state.size = clamp(state.size + 6, 82, 136);
+    if(a === 'lead-') state.lead = clamp(+(state.lead - .1).toFixed(2), 1.5, 2.3);
+    if(a === 'lead+') state.lead = clamp(+(state.lead + .1).toFixed(2), 1.5, 2.3);
+    if(a === 'w-')    state.w    = clamp(state.w - 3, 28, 52);
+    if(a === 'w+')    state.w    = clamp(state.w + 3, 28, 52);
+    if(a === 'reset') state = {size:defaults.size, lead:defaults.lead, w:defaults.w};
+    apply();
+  });
+
+  var toc = document.getElementById('rdToc');
+  if(toc){
+    var html = '';
+    var tocCard = document.getElementById('toc-anchor');
+    if(tocCard){
+      each(tocCard.querySelectorAll('.toc-grid a'), function(a){
+        var label = a.textContent.trim();
+        html += '<a href="' + a.getAttribute('href') + '">' + label + '</a>';
+      });
+    }
+    toc.innerHTML = html;
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !panel.hidden){ close(); btn.focus(); }
+  });
+
+  apply();
+})();
+
 })();
 </script>
+
+<script>
+(function(){
+  var was=[];
+  window.addEventListener('beforeprint',function(){
+    document.querySelectorAll('details').forEach(function(d){
+      was.push([d, d.open]);
+      d.open = true;
+    });
+  });
+  window.addEventListener('afterprint',function(){
+    was.forEach(function(p){ p[0].open = p[1]; });
+    was = [];
+  });
+})();
+</script>
+
 </body>
 </html>
