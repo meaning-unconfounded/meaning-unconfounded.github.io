@@ -9,11 +9,13 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230a0418' stroke='%23d8dde3' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23d8dde3'/%3E%3C/svg%3E"/>
 <style>
 :root{
-  --measure:44rem;
+  --measure:46rem;
+  --measure-wide:52rem;
   --leading:1.8;
   --paper:#0a0418;
   --paper-raised:#140a24;
   --paper-deep:#060110;
+  --surface:#140a24;
   --ink:#f4ecff;
   --soft:#c8bce0;
   --muted:#8a7fa6;
@@ -21,19 +23,28 @@
   --magenta:#E040FB;
   --cyan:#00D4FF;
   --gold:#D4AF37;
+  --gold2:#E8C547;
+  --gold-soft:rgba(212,175,55,.09);
+  --gold-line:rgba(212,175,55,.32);
   --green:#00FF88;
   --platinum:#d8dde3;
+  --platinum2:#e8eced;
   --platinum-soft:rgba(216,221,227,.08);
-  --platinum-line:rgba(216,221,227,.28);
+  --platinum-line:rgba(216,221,227,.32);
+  --silver:#c8c3d6;
+  --silver2:#e0dcec;
+  --silver-line:rgba(200,195,214,.32);
   --accent:#A020F0;
   --accent-line:rgba(160,32,240,.4);
   --accent-soft:rgba(160,32,240,.12);
+  --hair:rgba(216,221,227,.18);
+  --hair2:rgba(216,221,227,.09);
   --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--paper);color:var(--ink);scroll-padding-top:5rem}
+html{scroll-behavior:smooth;background:var(--paper);color:var(--ink);scroll-padding-top:7rem}
 body{
   font-family:var(--serif);font-size:1.08rem;line-height:var(--leading);
   background:radial-gradient(1100px 520px at 88% -5%,rgba(160,32,240,.16),transparent 55%),
@@ -50,64 +61,48 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--magenta);color:#0a0418;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
 .page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.3rem 5rem}
-@media(min-width:720px){.page{padding:1.5rem 2rem 6rem}}
+@media(min-width:720px){.page{padding:1.5rem 2rem 6rem;max-width:var(--measure-wide)}}
 
 #progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--pulse),var(--magenta),var(--cyan),var(--platinum));z-index:9999;transition:width .08s linear}
 
-/* ── STANDARD HEADER · dual pin + compass ── */
-.corpus-bar{
-  position:sticky;top:0;z-index:850;
-  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
-  padding:.55rem 1.1rem;
-  background:rgba(10,4,24,.94);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--accent-line);
-  font-family:var(--sans);
-  flex-wrap:nowrap;min-height:3.2rem;
-}
-.corpus-bar .brand{
-  display:flex;align-items:center;gap:.5rem;
-  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--magenta);font-weight:700;border-bottom:none;flex-shrink:0;min-width:0;
-}
-.corpus-bar .brand:hover{color:#f0a8ff;border-bottom:none}
-.corpus-bar .pin{
-  border-radius:50%;object-fit:cover;flex-shrink:0;
-  border:2px solid var(--accent-line);
-  box-shadow:0 0 14px rgba(160,32,240,.45),0 0 0 1px rgba(216,221,227,.15) inset;
-  background:var(--paper-raised);
-}
-.corpus-bar .pin.eros-mark{width:52px;height:52px;border-color:rgba(160,32,240,.5);box-shadow:0 0 16px rgba(160,32,240,.35)}
-.corpus-bar .pin.pulse-mark{width:42px;height:42px}
-.corpus-bar .compass{font-size:1rem;line-height:1;color:var(--magenta);flex-shrink:0;margin:0 .15rem}
-.corpus-bar .brand-text{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);font-weight:700;white-space:nowrap}
-.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end;align-items:center;min-width:0;flex:1 1 auto}
-.corpus-bar nav a{
-  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
-  border-bottom:none;transition:color .15s,background .15s;white-space:nowrap;
-}
-.corpus-bar nav a:hover{color:var(--magenta);background:var(--accent-soft);border-bottom:none}
-@media(max-width:820px){
-  .corpus-bar{padding:.45rem .7rem;gap:.35rem}
-  .corpus-bar .pin.eros-mark{width:44px;height:44px}
-  .corpus-bar .pin.pulse-mark{width:36px;height:36px}
-  .corpus-bar .brand-text{font-size:.62rem;letter-spacing:.08em}
-  .corpus-bar .compass{font-size:.88rem}
-  .corpus-bar nav a{padding:.26rem .4rem;font-size:.56rem}
-}
-@media(max-width:520px){
+/* ── TEXT-WRAP RULES ── */
+h1,h2,h3,h4{text-wrap:balance;orphans:2;widows:2}
+p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
+.pull,.claim p,.easy p,.tg .a,.honest p,.steps li,.arc li,.gain p,.slippage p,.slippage-b p,.mech .steps-in,.media .cap,.plate figcaption,.stack-pair figcaption,.triptych figcaption{text-wrap:pretty;orphans:2;widows:2}
+.cover h1,.cover .subtitle,.cover .byline,.public-link .pl-t,.telegram-post .tp-title,.telegram-post .tp-head,footer.master .sig,footer.master .count,footer.master .title,figure.brand-seal figcaption,.aw-q{text-wrap:balance;orphans:2;widows:2}
+
+/* ── HEADER v2 ── */
+.corpus-bar{position:sticky;top:0;z-index:900;background:rgba(10,4,24,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
+.corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
+.corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none;border-bottom:none}
+.corpus-bar .pin{border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface);display:block}
+.corpus-bar .pin.eros-mark{width:44px;height:44px;box-shadow:0 0 14px rgba(232,122,158,.24),0 0 0 1px rgba(255,255,255,.04) inset}
+.corpus-bar .pin.pulse-mark{width:38px;height:38px}
+.corpus-bar .compass{font-size:1.1rem;line-height:1;color:var(--gold2);flex-shrink:0;opacity:.9;margin-left:.05rem}
+.corpus-bar .title-cluster{display:flex;align-items:center;gap:.7rem;min-width:0;flex-shrink:1}
+.corpus-bar .title-rule{flex:0 0 auto;height:1px;width:clamp(24px,5vw,60px);background:linear-gradient(90deg,transparent,var(--gold-line))}
+.corpus-bar .brand-text{font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.corpus-bar nav.chapter-strip{display:flex;align-items:center;gap:.1rem .2rem;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:none;padding:.55rem .2rem .65rem;margin:0 -.2rem;mask-image:linear-gradient(90deg,transparent 0, #000 3%, #000 97%, transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0, #000 3%, #000 97%, transparent 100%)}
+.corpus-bar nav.chapter-strip::-webkit-scrollbar{display:none}
+.corpus-bar nav.chapter-strip a{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.34rem .68rem;border-radius:999px;text-decoration:none;transition:color .25s ease, background .25s ease, box-shadow .25s ease;white-space:nowrap;flex-shrink:0;border-bottom:none}
+.corpus-bar nav.chapter-strip a:hover{color:var(--gold2);background:var(--gold-soft)}
+.corpus-bar nav.chapter-strip a.active{color:var(--gold2);background:var(--gold-soft);box-shadow:inset 0 0 0 1px var(--gold-line);font-weight:700;letter-spacing:.1em}
+@media(max-width:720px){
+  .corpus-bar{padding:.6rem .85rem 0}
   .corpus-bar .pin.eros-mark{width:38px;height:38px}
   .corpus-bar .pin.pulse-mark{width:32px;height:32px}
-  .corpus-bar .brand-text{font-size:.58rem;max-width:5.5rem;overflow:hidden;text-overflow:ellipsis}
-  .corpus-bar .compass{font-size:.82rem}
-  .corpus-bar nav a{padding:.22rem .32rem;font-size:.52rem}
+  .corpus-bar .compass{font-size:1rem}
+  .corpus-bar .brand-text{font-size:.85rem;letter-spacing:.18em}
+  .corpus-bar .title-rule{width:20px}
+  .corpus-bar nav.chapter-strip{padding:.5rem .2rem .6rem}
+  .corpus-bar nav.chapter-strip a{font-size:.58rem;padding:.3rem .58rem}
 }
-@media(max-width:380px){
-  .corpus-bar .brand-text{display:none}
-  .corpus-bar .pin.eros-mark{width:36px;height:36px}
-  .corpus-bar .pin.pulse-mark{width:30px;height:30px}
+@media(max-width:420px){
+  .corpus-bar .pin.eros-mark{width:34px;height:34px}
+  .corpus-bar .pin.pulse-mark{width:28px;height:28px}
+  .corpus-bar .compass{font-size:.9rem}
+  .corpus-bar .brand-text{font-size:.75rem;letter-spacing:.14em}
+  .corpus-bar .title-rule{width:14px}
 }
 
 /* ── COVER ── */
@@ -143,7 +138,7 @@ details.eros-menu .menu-body{padding:.5rem 0 .75rem;font-size:.9rem;line-height:
 details.eros-menu .menu-body p{margin:.35rem 0}
 details.eros-menu .menu-body a{color:var(--magenta)}
 
-/* ── CONTENTS CARD (collapsible) ── */
+/* ── TOC ── */
 details.toc-card{
   margin:1.4rem 0 2rem;
   border:1px solid var(--accent-line);border-radius:14px;
@@ -169,8 +164,74 @@ details.toc-card[open]>summary::before{content:"▾ "}
 .toc-grid a:hover{background:var(--accent-soft);color:var(--magenta);border-bottom:none}
 .toc-grid a .tn{color:var(--magenta);font-weight:700;font-size:.72rem;letter-spacing:.05em;flex-shrink:0;min-width:2.6rem}
 
+/* ── PUBLIC LINK ── */
+.public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--cyan);border-radius:14px;background:linear-gradient(135deg,rgba(0,212,255,.10),rgba(10,4,24,.6));font-family:var(--sans)}
+.public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:.6rem}
+.public-link .pl-t{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:700;margin-bottom:.5rem;line-height:1.35}
+.public-link .pl-d{font-size:.94rem;color:var(--soft);line-height:1.7;margin-bottom:.9rem}
+.public-link .pl-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.public-link a.pl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.05rem;border-radius:999px;background:rgba(0,212,255,.12);border:1px solid var(--cyan);color:var(--cyan);font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:none;transition:background .18s,color .18s,border-color .18s}
+.public-link a.pl-btn:hover{background:rgba(0,212,255,.22);color:#b8e8f8;border-color:#b8e8f8}
+
+/* ── CONNECT ── */
+.connect{margin:1.8rem 0;padding:1.3rem 1.5rem;border:1px dashed rgba(0,212,255,.4);border-radius:12px;background:var(--paper-raised);font-family:var(--sans);font-size:.94rem;color:var(--soft);line-height:1.78}
+.connect strong{display:block;color:var(--cyan);font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.55rem}
+.connect a{color:var(--cyan);border-bottom:1px solid rgba(0,212,255,.4)}
+
+/* ── TELEGRAM POST ── */
+.telegram-post{margin:2.6rem 0;padding:1.8rem 1.9rem;border:1px solid var(--platinum-line);border-radius:16px;background:linear-gradient(160deg,var(--platinum-soft),rgba(10,4,24,.7));font-family:var(--sans);font-size:1.04rem;line-height:1.85;color:var(--soft)}
+.telegram-post .tp-head{font-family:var(--sans);font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--platinum2);font-weight:700;margin-bottom:1.15rem;padding-bottom:.8rem;border-bottom:1px dashed var(--platinum-line)}
+.telegram-post .tp-title{font-family:var(--serif);font-size:1.32rem;font-weight:700;color:var(--ink);letter-spacing:.06em;line-height:1.35;margin:0 0 1.15rem;word-break:keep-all;overflow-wrap:normal}
+@media(max-width:560px){.telegram-post .tp-title{font-size:1.18rem}}
+.telegram-post p{margin:0 0 1rem;color:var(--soft);font-family:var(--sans);font-size:1.04rem;line-height:1.85}
+.telegram-post strong{color:var(--platinum2);font-weight:700}
+.telegram-post .tp-bullet{display:block;margin:.95rem 0;padding:.9rem 1.25rem;background:rgba(0,0,0,.25);border-left:3px solid var(--platinum);border-radius:0 10px 10px 0;font-family:var(--sans);font-size:.98rem;color:var(--soft);line-height:1.75}
+.telegram-post .tp-hashtags{margin-top:1.4rem;padding-top:1rem;border-top:1px dashed var(--platinum-line);font-size:.82rem;letter-spacing:.06em;color:var(--muted);font-family:var(--mono)}
+
+/* ── APPLICATION & WORLD BUILDING ── */
+section.apply-world{
+  margin:3.2rem auto 2.4rem;
+  max-width:40rem;
+  padding:2rem 1.4rem 1.8rem;
+  border-top:1px solid var(--hair);
+  border-bottom:1px solid var(--hair);
+  text-align:center;
+}
+section.apply-world .aw-label{
+  font-family:var(--sans);
+  font-size:.66rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--platinum2);
+  font-weight:700;
+  display:block;
+  margin-bottom:1.2rem;
+}
+section.apply-world p{
+  font-family:var(--sans);
+  font-size:.94rem;
+  line-height:1.78;
+  color:var(--soft);
+  margin:0 0 .9rem;
+}
+section.apply-world p:last-of-type{margin-bottom:1.35rem}
+section.apply-world .aw-q{
+  font-family:var(--serif);
+  font-size:1.14rem;
+  font-style:italic;
+  color:var(--ink);
+  margin:0;
+}
+
+/* ── BRAND SEALS ── */
+figure.brand-seal{margin:2.6rem auto 2rem;text-align:center;max-width:min(220px,55vw);display:block}
+figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(212,175,55,.12);background:var(--surface)}
+figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-top:.9rem;font-weight:700}
+figure.brand-seal.silver img{border-color:var(--silver-line);box-shadow:0 12px 40px rgba(200,195,214,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(200,195,214,.14)}
+figure.brand-seal.silver figcaption{color:var(--silver2)}
+
 /* ── SECTIONS ── */
-section{margin:3.2rem 0;scroll-margin-top:3.5rem}
+section{margin:3.2rem 0;scroll-margin-top:7rem}
 .section-label{font-family:var(--sans);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--magenta);font-weight:700;margin-bottom:.9rem;display:block}
 h2{font-weight:500;font-size:clamp(1.4rem,3.5vw,1.85rem);color:var(--ink);margin-bottom:1.2rem;line-height:1.25}
 h3{font-family:var(--sans);font-size:1.05rem;color:var(--ink);margin-bottom:.6rem;font-weight:600}
@@ -184,7 +245,7 @@ em{color:var(--magenta);font-style:italic}
 .easy .tag{font-family:var(--sans);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.5rem;display:block}
 .easy p{color:var(--ink);font-size:1.06rem;margin:0;max-width:none}
 
-/* ── SLIPPAGE · VARIANT A ── */
+/* ── SLIPPAGE A ── */
 .slippage{margin:1.8rem 0;padding:1.3rem 1.5rem;border:2px solid var(--cyan);background:rgba(0,212,255,.08);border-radius:12px;position:relative}
 .slippage::before{content:"⚠";position:absolute;top:-.85rem;left:1.2rem;background:var(--paper);padding:0 .55rem;color:var(--cyan);font-size:1.2rem}
 .slippage h3{color:var(--cyan);font-family:var(--sans);font-size:.95rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem}
@@ -192,7 +253,7 @@ em{color:var(--magenta);font-style:italic}
 .slippage p+p{margin-top:.6rem}
 .slippage strong{color:var(--cyan);font-weight:700}
 
-/* ── SLIPPAGE · VARIANT B ── */
+/* ── SLIPPAGE B ── */
 .slippage-b{margin:2.4rem 0;padding:0;border:none;background:none;position:relative;text-align:center}
 .slippage-b::before,
 .slippage-b::after{content:"";display:block;height:1px;width:60%;margin:0 auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
@@ -207,7 +268,7 @@ em{color:var(--magenta);font-style:italic}
 
 /* ── STEPS ── */
 .steps{margin:1.8rem 0;padding:0;counter-reset:step;list-style:none}
-.steps li{counter-increment:step;position:relative;padding:1rem 1.15rem 1rem 3.2rem;margin:.5rem 0;border:1px solid var(--accent-line);background:var(--paper-raised);border-radius:12px;color:var(--soft);line-height:1.7}
+.steps li{counter-increment:step;position:relative;padding:1rem 1.15rem 1rem 3.2rem;margin:.5rem 0;border:1px solid var(--accent-line);background:var(--paper-raised);border-radius:12px;color:var(--soft);line-height:1.7;max-width:none}
 .steps li::before{content:counter(step);position:absolute;left:.85rem;top:1.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--accent-soft);color:var(--magenta);font-family:var(--sans);font-size:.82rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 .steps li strong{color:var(--ink);display:block;margin-bottom:.15rem}
 
@@ -222,7 +283,7 @@ em{color:var(--magenta);font-style:italic}
 
 /* ── ARC ── */
 .arc{margin:1.8rem 0;padding:0;list-style:none;counter-reset:arc}
-.arc li{counter-increment:arc;position:relative;padding:1.05rem 1.15rem 1.05rem 3.2rem;margin:.5rem 0;border-left:3px solid var(--magenta);background:linear-gradient(90deg,rgba(224,64,251,.06),transparent 80%);border-radius:0 10px 10px 0;color:var(--soft);line-height:1.7}
+.arc li{counter-increment:arc;position:relative;padding:1.05rem 1.15rem 1.05rem 3.2rem;margin:.5rem 0;border-left:3px solid var(--magenta);background:linear-gradient(90deg,rgba(224,64,251,.06),transparent 80%);border-radius:0 10px 10px 0;color:var(--soft);line-height:1.7;max-width:none}
 .arc li::before{content:counter(arc,decimal-leading-zero);position:absolute;left:.9rem;top:1.1rem;font-family:var(--mono);font-size:.78rem;color:var(--magenta);font-weight:600}
 .arc li strong{color:var(--ink);display:block;font-family:var(--sans);font-size:.92rem;letter-spacing:.02em;margin-bottom:.15rem}
 
@@ -240,16 +301,14 @@ em{color:var(--magenta);font-style:italic}
 .mech.cyan{border-color:rgba(0,212,255,.35)}
 .mech.gold{border-color:rgba(212,175,55,.35)}
 .mech.platinum{border-color:var(--platinum-line)}
+.mech.platinum .steps-in b{color:var(--platinum2)}
 
-/* ── MEDIA · glossy borders ── */
+/* ── MEDIA ── */
 .media{
   margin:2rem 0;border-radius:14px;overflow:hidden;
   border:1px solid var(--accent-line);
   background:#000;
-  box-shadow:
-    0 8px 28px rgba(0,0,0,.45),
-    0 0 0 1px rgba(216,221,227,.06),
-    0 0 32px rgba(160,32,240,.12);
+  box-shadow:0 8px 28px rgba(0,0,0,.45),0 0 0 1px rgba(216,221,227,.06),0 0 32px rgba(160,32,240,.12);
   position:relative;
 }
 .media::after{
@@ -270,15 +329,12 @@ em{color:var(--magenta);font-style:italic}
   width:100%;height:auto;display:block;border-radius:12px;
   border:1px solid var(--accent-line);
   background:#000;
-  box-shadow:
-    0 8px 26px rgba(0,0,0,.4),
-    0 0 0 1px rgba(216,221,227,.05),
-    0 0 28px rgba(160,32,240,.12);
+  box-shadow:0 8px 26px rgba(0,0,0,.4),0 0 0 1px rgba(216,221,227,.05),0 0 28px rgba(160,32,240,.12);
 }
 .plate figcaption{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.6rem;font-style:italic;letter-spacing:.04em}
 
 /* ── PULL ── */
-.pull{margin:1.8rem 0;padding:1.1rem 1.3rem;border-left:3px solid var(--magenta);background:linear-gradient(90deg,var(--accent-soft),transparent 80%);font-style:italic;color:var(--ink);font-size:1.06rem;border-radius:0 10px 10px 0}
+.pull{margin:1.8rem 0;padding:1.1rem 1.3rem;border-left:3px solid var(--magenta);background:linear-gradient(90deg,var(--accent-soft),transparent 80%);font-style:italic;color:var(--ink);font-size:1.06rem;border-radius:0 10px 10px 0;max-width:none}
 
 /* ── CLAIM ── */
 .claim{margin:1.6rem 0;padding:1.15rem 1.3rem;border:1px solid var(--accent-line);background:var(--accent-soft);border-radius:12px}
@@ -290,7 +346,7 @@ em{color:var(--magenta);font-style:italic}
 .claim.green{border-color:rgba(0,255,136,.35);background:rgba(0,255,136,.06)}
 .claim.green strong{color:var(--green)}
 .claim.platinum{border-color:var(--platinum-line);background:var(--platinum-soft)}
-.claim.platinum strong{color:var(--platinum)}
+.claim.platinum strong{color:var(--platinum2)}
 .claim.cyan{border-color:rgba(0,212,255,.35);background:rgba(0,212,255,.06)}
 .claim.cyan strong{color:var(--cyan)}
 
@@ -302,31 +358,29 @@ em{color:var(--magenta);font-style:italic}
 .honest p:last-child{margin:0}
 .honest strong{color:var(--ink)}
 .honest ul{margin:.4rem 0 .9rem 1.2rem;color:var(--soft)}
-.honest li{margin:.3rem 0;line-height:1.65}
+.honest li{margin:.3rem 0;line-height:1.65;max-width:none}
+
+/* ── GATES ── */
+.gate{margin:1.1rem 0;padding:1.2rem 1.4rem;border:1px solid var(--platinum-line);border-radius:14px;background:linear-gradient(160deg,var(--platinum-soft),rgba(10,4,24,.5))}
+.gate .gate-n{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--platinum2);font-weight:700;margin-bottom:.35rem;display:block}
+.gate h3{color:var(--ink);font-family:var(--serif);font-size:1.08rem;margin-bottom:.5rem;letter-spacing:0}
+.gate p{margin:0;color:var(--soft);font-size:.98rem;line-height:1.72;max-width:none}
 
 /* ── STACK PAIR ── */
 .stack-pair{display:grid;grid-template-columns:1fr;gap:1.2rem;margin:2rem 0}
 @media(min-width:720px){.stack-pair{grid-template-columns:1fr 1fr}}
 .stack-pair figure{margin:0}
-.stack-pair img{
-  width:100%;height:auto;display:block;border-radius:12px;
-  border:1px solid var(--accent-line);
-  box-shadow:0 8px 22px rgba(0,0,0,.4),0 0 24px rgba(160,32,240,.1);
-}
+.stack-pair img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--accent-line);box-shadow:0 8px 22px rgba(0,0,0,.4),0 0 24px rgba(160,32,240,.1)}
 .stack-pair figcaption{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:.55rem;font-style:italic;text-align:center;line-height:1.5}
 
 /* ── TRIPTYCH ── */
 .triptych{display:grid;grid-template-columns:1fr;gap:1rem;margin:2rem 0}
 @media(min-width:720px){.triptych{grid-template-columns:repeat(3,1fr)}}
 .triptych figure{margin:0}
-.triptych img{
-  width:100%;height:auto;display:block;border-radius:10px;
-  border:1px solid rgba(212,175,55,.35);
-  box-shadow:0 6px 20px rgba(0,0,0,.4),0 0 20px rgba(212,175,55,.1);
-}
+.triptych img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid rgba(212,175,55,.35);box-shadow:0 6px 20px rgba(0,0,0,.4),0 0 20px rgba(212,175,55,.1)}
 .triptych figcaption{font-family:var(--sans);font-size:.72rem;color:var(--muted);margin-top:.5rem;font-style:italic;text-align:center;letter-spacing:.04em;line-height:1.5}
 
-/* ── MID-BOOK BAND · with clear pill caption ── */
+/* ── MID BOOK BAND ── */
 .band-mid{
   margin:3rem -1.3rem;position:relative;
   border-top:1px solid var(--accent-line);
@@ -337,16 +391,8 @@ em{color:var(--magenta);font-style:italic}
   display:flex;align-items:center;justify-content:center;
 }
 @media(min-width:720px){.band-mid{margin:3rem -2rem;min-height:260px}}
-.band-mid img{
-  position:absolute;inset:0;
-  display:block;width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  opacity:.75;
-}
-.band-mid::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(6,1,16,.55) 0%,rgba(6,1,16,.35) 30%,rgba(6,1,16,.35) 70%,rgba(6,1,16,.65) 100%);
-}
+.band-mid img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.75}
+.band-mid::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,1,16,.55) 0%,rgba(6,1,16,.35) 30%,rgba(6,1,16,.35) 70%,rgba(6,1,16,.65) 100%)}
 .band-mid .band-cap{
   position:relative;z-index:2;
   display:inline-block;
@@ -372,7 +418,7 @@ em{color:var(--magenta);font-style:italic}
   .band-mid .band-cap{font-size:.68rem;letter-spacing:.14em;padding:.7rem 1rem}
 }
 
-/* ── PALETTE STRIP · with clear pill label ── */
+/* ── PALETTE STRIP ── */
 .palette-strip{
   margin:3rem -1.3rem;
   height:64px;
@@ -383,16 +429,8 @@ em{color:var(--magenta);font-style:italic}
   display:flex;align-items:center;justify-content:center;
 }
 @media(min-width:720px){.palette-strip{margin:3rem -2rem;height:72px}}
-.palette-strip img{
-  position:absolute;inset:0;
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  opacity:.6;display:block;
-  filter:saturate(1.15) brightness(.85);
-}
-.palette-strip::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(10,4,24,.55) 0%,transparent 40%,transparent 60%,rgba(10,4,24,.55) 100%);
-}
+.palette-strip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.6;display:block;filter:saturate(1.15) brightness(.85)}
+.palette-strip::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,4,24,.55) 0%,transparent 40%,transparent 60%,rgba(10,4,24,.55) 100%)}
 .palette-strip .lbl{
   position:relative;z-index:2;
   padding:.45rem 1rem;
@@ -410,78 +448,49 @@ em{color:var(--magenta);font-style:italic}
   .palette-strip .lbl{font-size:.58rem;letter-spacing:.18em;padding:.35rem .8rem}
 }
 
-/* ── CLOSING SEAL ── */
-.seal-closing{margin:3rem auto 2rem;text-align:center;position:relative;padding:2rem 1rem}
-.seal-closing::before{
-  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:340px;height:340px;max-width:80vw;max-height:80vw;
-  background:radial-gradient(circle,rgba(160,32,240,.18) 0%,rgba(160,32,240,.06) 45%,transparent 72%);
-  pointer-events:none;z-index:0;
+/* ── SHARE STRIP ── */
+.part-break{
+  margin:2.6rem 0 1.8rem;padding:2rem 1.2rem;text-align:center;
+  border-radius:14px;border:1px solid var(--platinum-line);
+  background:linear-gradient(160deg,var(--platinum-soft),var(--paper-raised));
 }
-.seal-closing .frame{
-  position:relative;z-index:1;
-  display:inline-block;
-  padding:.5rem;
-  border-radius:50%;
-  background:conic-gradient(from 140deg,rgba(216,221,227,.5),rgba(160,32,240,.45),rgba(0,212,255,.35),rgba(212,175,55,.4),rgba(216,221,227,.5));
-  box-shadow:0 0 48px rgba(160,32,240,.28);
-}
-.seal-closing img{
-  display:block;width:128px;height:128px;border-radius:50%;
-  object-fit:cover;background:var(--paper-deep);
-}
-.seal-closing .cap{
-  margin-top:1.2rem;
-  font-family:var(--sans);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--platinum);opacity:.9;
-  font-weight:600;
-}
+.part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--platinum2);margin-bottom:.5rem;font-weight:700}
+.part-break h2{font-size:clamp(1.4rem,3.6vw,1.85rem);color:var(--ink);border:none;margin:0 0 .35rem;padding:0;font-family:var(--serif);font-weight:700;line-height:1.2}
+.part-break p{margin:0 auto;font-style:italic;color:var(--soft);font-size:.94rem;max-width:none}
 
-/* ── MASTER FOOTER ── */
-footer.master{
-  margin-top:3rem;padding:2rem 1rem 1.4rem;
-  border-top:1px solid var(--accent-line);
-  text-align:center;font-family:var(--sans);
-  font-size:.78rem;color:var(--muted);line-height:1.85;
+/* ── CODA ── */
+.coda{margin:3rem 0 0;padding:2.6rem 1.4rem 1.4rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(216,221,227,.06),transparent 60%)}
+.coda p{font-size:1.12rem;font-style:italic;line-height:1.8;color:var(--ink);max-width:36rem;margin:0 auto 1rem}
+.coda p.coda-soft{font-size:1.05rem;color:var(--soft);margin-bottom:1.6rem}
+.coda .creedline{margin-top:1.1rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.55;text-align:center}
+
+/* ── FOOTER v2 ── */
+footer.master{margin-top:3.6rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
+footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
+footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface)}
+footer.master .pin.eros{width:56px;height:56px;border-color:var(--gold-line);box-shadow:0 0 14px rgba(232,122,158,.20),0 0 0 1px rgba(255,255,255,.04) inset}
+footer.master .title{font-size:1.02rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);font-weight:700}
+footer.master .count{margin:.45rem 0 1.4rem;color:var(--soft);font-size:.94rem}
+footer.master .lib-stack{display:flex;flex-direction:column;gap:.85rem;max-width:44rem;margin:0 auto 1.6rem;text-align:left}
+footer.master .lib-section{padding:.7rem .95rem;border-radius:10px;background:rgba(0,0,0,.2)}
+footer.master .lib-label{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:.5rem}
+footer.master .lib-links{display:flex;flex-wrap:wrap;gap:.4rem .85rem}
+footer.master .lib-links a{color:var(--muted);border-bottom:none;font-size:.88rem}
+footer.master .lib-links a:hover{color:var(--gold2)}
+footer.master .lib-links a.here{color:var(--platinum2);font-weight:600}
+footer.master .sig{margin:1.4rem 0 .7rem;color:var(--soft);font-style:italic;font-size:1.02rem}
+footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-top:1rem;font-size:.86rem;color:var(--muted)}
+footer.master .pulse-row svg{flex-shrink:0}
+@media(max-width:640px){
+  footer.master .pulse-row{gap:.4rem}
+  footer.master .pulse-row svg{width:22px;height:22px}
+  footer.master .pulse-row svg:last-of-type{width:20px;height:20px}
+  footer.master .pulse-row span{font-size:.54rem;letter-spacing:.08em}
+  footer.master .title-row{gap:.6rem}
+  footer.master .pin{width:40px;height:40px}
+  footer.master .pin.eros{width:46px;height:46px}
 }
-footer.master .title-row{
-  display:flex;align-items:center;justify-content:center;gap:.85rem;
-  margin-bottom:.6rem;
-}
-footer.master .pin{
-  width:44px;height:44px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--accent-line);
-  box-shadow:0 0 18px rgba(160,32,240,.4),0 0 0 1px rgba(216,221,227,.15) inset;
-  flex-shrink:0;
-  background:var(--paper-raised);
-}
-footer.master .title{font-family:var(--serif);font-size:1.05rem;color:var(--magenta);letter-spacing:.1em;font-weight:700}
-footer.master .count{font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem}
-footer.master .tier{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
-  max-width:52rem;margin:0 auto 1rem;
-}
-footer.master .tier a{
-  padding:.32rem .72rem;border-radius:999px;
-  background:var(--paper-raised);border:1px solid var(--accent-line);
-  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
-  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
-}
-footer.master .tier a:hover{color:var(--magenta);border-color:var(--magenta);background:var(--accent-soft);border-bottom:none}
-footer.master .tier a.primary{background:var(--accent-soft);border-color:var(--magenta);color:var(--magenta);font-weight:700}
-footer.master .tier a.here{background:var(--accent-soft);border-color:var(--magenta);color:var(--magenta);font-weight:700}
-footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1rem}
-footer.master .built-on{
-  margin-top:1.4rem;display:flex;align-items:center;justify-content:center;gap:.7rem;
-  padding:.85rem 1.2rem;
-  background:var(--paper-raised);
-  border:1px solid var(--accent-line);
-  border-radius:999px;
-  max-width:24rem;margin-left:auto;margin-right:auto;
-  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta);font-weight:700;
-}
-footer.master .built-on .pin{width:32px;height:32px}
 
 /* ── READER PANEL ── */
 #rdBtn{
@@ -528,43 +537,25 @@ footer.master .built-on .pin{width:32px;height:32px}
 #toTop.show{opacity:1;pointer-events:auto}
 #toTop:hover{border-color:var(--magenta);background:var(--accent-soft)}
 
-#resumePrompt{
-  position:fixed;left:1rem;bottom:1.2rem;z-index:55;
-  background:rgba(20,10,36,.96);
-  border:1px solid var(--accent-line);border-radius:12px;
-  padding:1.15rem 1.35rem;font-family:var(--sans);font-size:.86rem;
-  color:var(--ink);box-shadow:0 14px 40px rgba(0,0,0,.5);
-  display:none;max-width:min(320px, calc(100vw - 5.5rem));
-  backdrop-filter:blur(10px);
-}
-#resumePrompt.show{display:block}
-#resumePrompt p{margin:0 0 .85rem;line-height:1.55;color:var(--ink);font-size:.86rem}
-#resumePrompt p b{color:var(--magenta);font-weight:700;display:block;margin-bottom:.35rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
-#resumePrompt .btns{display:flex;gap:.5rem}
-#resumePrompt button{font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid var(--pulse);color:var(--magenta);background:transparent;padding:.5rem .9rem;border-radius:999px;transition:background .15s}
-#resumePrompt button:hover{background:var(--accent-soft)}
-#resumePrompt button.secondary{border-color:var(--accent-line);color:var(--muted)}
-
 @media print{
   @page{size:A4;margin:14mm}
-  #progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,#resumePrompt,.skip-link{display:none!important}
+  #progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
   body{background:#0a0418!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:inherit;border-bottom:none}
-  .media,.plate,.mech,.claim,.easy,.slippage,.slippage-b,.steps,.arc,.grid-2,.honest,.tg,.pull,.stack-pair,.triptych,.seal-closing,.band-mid,.palette-strip,details.toc-card,details.eros-menu{break-inside:avoid}
+  .media,.plate,.mech,.claim,.easy,.slippage,.slippage-b,.steps,.arc,.grid-2,.honest,.tg,.pull,.stack-pair,.triptych,.band-mid,.palette-strip,details.toc-card,details.eros-menu,.public-link,.telegram-post,.connect,.gate,section.apply-world,figure.brand-seal{break-inside:avoid}
   h2{break-after:avoid}
   .cover{min-height:auto;padding:1rem 0 1.5rem}
   .cover h1{font-size:2rem}
   video{display:none}
   .band-mid,.palette-strip{margin-left:0;margin-right:0}
-  footer.master .built-on{max-width:none}
+  figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
 }
 @media(max-width:640px){
   body{font-size:1.02rem}
   .page{padding:1rem 1.1rem 4rem}
-  .corpus-bar{padding:.5rem .8rem}
   .slippage{padding:1.1rem 1.2rem}
   .mech{padding:1.15rem 1.2rem}
   .band-mid,.palette-strip{margin-left:-1.1rem;margin-right:-1.1rem}
@@ -582,21 +573,38 @@ footer.master .built-on .pin{width:32px;height:32px}
 <a class="skip-link" href="#easy">Skip to content</a>
 
 <header class="corpus-bar">
-  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
-    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
-    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
-    <span class="compass" aria-hidden="true">🧭</span>
-    <span class="brand-text">EROS · Platinum</span>
-  </a>
-  <nav aria-label="Section navigation">
+  <div class="brand-row">
+    <a class="logo-cluster" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" aria-label="The Platinum Standard · top">
+      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
+      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+      <span class="compass" aria-hidden="true">🧭</span>
+    </a>
+    <div class="title-cluster">
+      <span class="title-rule" aria-hidden="true"></span>
+      <span class="brand-text">The Platinum Standard</span>
+    </div>
+  </div>
+  <nav class="chapter-strip" aria-label="Chapter navigation">
     <a href="#easy">Thesis</a>
-    <a href="#actually">How to</a>
+    <a href="#slippage">Slippage</a>
+    <a href="#actually">How</a>
     <a href="#gain">Gain</a>
     <a href="#arc">Arc</a>
+    <a href="#stack">Stack</a>
+    <a href="#record">Record</a>
     <a href="#mechanism">Mechanism</a>
+    <a href="#gates">Gates</a>
+    <a href="#33eros">33EROS</a>
     <a href="#bots">Bots</a>
+    <a href="#triangle">Triangle</a>
+    <a href="#poolonomics">Webs</a>
+    <a href="#examples">Scale</a>
+    <a href="#build">Build</a>
+    <a href="#standard">Standard</a>
+    <a href="#chart">Chart</a>
     <a href="#honest">Status</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
+    <a href="#telegram">Share</a>
+    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
   </nav>
 </header>
 
@@ -626,6 +634,7 @@ footer.master .built-on .pin{width:32px;height:32px}
     <p><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
     <p><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
     <p><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
+    <p><a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a> — toroidal reading</p>
     <p><a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a> — the bedrock</p>
     <p><a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a> — the mechanics</p>
     <p><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
@@ -649,19 +658,33 @@ footer.master .built-on .pin{width:32px;height:32px}
     <a href="#stack"><span class="tn">VI</span>Where the transform sits</a>
     <a href="#record"><span class="tn">VII</span>From the record</a>
     <a href="#mechanism"><span class="tn">VIII</span>Two transform paths</a>
-    <a href="#33eros"><span class="tn">IX</span>33EROS · the gamified rail</a>
-    <a href="#bots"><span class="tn">X</span>Equivalence bots</a>
-    <a href="#triangle"><span class="tn">XI</span>The triangular market</a>
-    <a href="#poolonomics"><span class="tn">XII</span>333 webs · TitanX</a>
-    <a href="#slippage-reminder"><span class="tn">XIII</span>Remember this number</a>
-    <a href="#examples"><span class="tn">XIV</span>Human scale</a>
-    <a href="#build"><span class="tn">XV</span>Building on the rock</a>
-    <a href="#standard"><span class="tn">XVI</span>Why a standard matters</a>
-    <a href="#chart"><span class="tn">XVII</span>The chart</a>
-    <a href="#honest"><span class="tn">XVIII</span>What is live · what is proposed</a>
-    <a href="#close"><span class="tn">XIX</span>The point</a>
+    <a href="#gates"><span class="tn">IX</span>The transformation gates</a>
+    <a href="#33eros"><span class="tn">X</span>33EROS · the gamified rail</a>
+    <a href="#bots"><span class="tn">XI</span>Equivalence bots</a>
+    <a href="#triangle"><span class="tn">XII</span>The triangular market</a>
+    <a href="#poolonomics"><span class="tn">XIII</span>333 webs · TitanX</a>
+    <a href="#slippage-reminder"><span class="tn">XIV</span>Remember this number</a>
+    <a href="#examples"><span class="tn">XV</span>Human scale</a>
+    <a href="#build"><span class="tn">XVI</span>Building on the rock</a>
+    <a href="#standard"><span class="tn">XVII</span>Why a standard matters</a>
+    <a href="#chart"><span class="tn">XVIII</span>The chart</a>
+    <a href="#honest"><span class="tn">XIX</span>What is live · what is proposed</a>
+    <a href="#telegram"><span class="tn">📱</span>Share Layer</a>
+    <a href="#apply"><span class="tn">◇</span>Application &amp; World Building</a>
+    <a href="#coda"><span class="tn">❦</span>The point</a>
   </div>
 </details>
+
+<!-- ═══════ PUBLIC LINK · TOP ═══════ -->
+<aside class="public-link">
+  <span class="pl-k">🖇️ Public Studio · Live</span>
+  <p class="pl-t">Explore the transform in NotebookLM 📚</p>
+  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone with the link can view, ask questions in chat, and generate custom study materials. Sources are locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
 
 <!-- ═══════ THESIS ═══════ -->
 <section id="easy">
@@ -874,6 +897,49 @@ footer.master .built-on .pin{width:32px;height:32px}
   </figure>
 </section>
 
+<!-- ═══ BLACK SEAL · pivot at the transformation gates ═══ -->
+<figure class="brand-seal silver">
+  <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+  <figcaption>Tenacity Through Integrity</figcaption>
+</figure>
+
+<!-- ═══════ THE GATES ═══════ -->
+<section id="gates">
+  <span class="section-label">Earned, not scheduled</span>
+  <h2>The transformation gates</h2>
+  <p class="lede">The transform code is written. The reason it does not deploy on a date is simple: three community gates hold it back, and none of them is a calendar promise.</p>
+
+  <p>This is the discipline the whole book rests on. If the code deployed quietly into a thin market, it would be a marketing event — not a mechanism. If it deploys when the community has built the conditions the mechanism needs, it becomes what it was designed to be. The difference is the entire thesis.</p>
+
+  <div class="gate">
+    <span class="gate-n">Gate One</span>
+    <h3>Market cap over all-time high</h3>
+    <p>EROS must reclaim and exceed its previous ceiling. The rock has to be heavy before the flow rail runs on it. A non-tax currency built on a light standard has no depth under it — the first large holder to move would slip the pools. The gate is not a price target. It is a statement of the weight the standard needs to carry the river.</p>
+  </div>
+
+  <div class="gate">
+    <span class="gate-n">Gate Two</span>
+    <h3>333 bonded liquidity pools</h3>
+    <p>Depth has to be real before a frictionless currency can move through it without slipping. The number is stated, not implied. When 333 qualifying LP pools are live across the EROS ecosystem, the web is dense enough that the equivalence bots can close gaps between any two pools in a few trades. Below that, the graph has holes. Above it, the graph is self-reinforcing. The threshold is a design choice, not an arbitrary number.</p>
+  </div>
+
+  <div class="gate">
+    <span class="gate-n">Gate Three</span>
+    <h3>Transformation code, including privacy</h3>
+    <p>The conversion from EROS to ErosX must ship with one specific feature: the option to receive the ErosX at a <em>different</em> wallet address on PulseChain's EVM. The receiving wallet can be different from the originating wallet. This is a named development priority, not a nice-to-have — it is what makes the flow rail usable at the scale the ecosystem is aiming for.</p>
+  </div>
+
+  <h3>On the privacy claim, stated honestly</h3>
+  <p>Receiving ErosX at a different wallet address does not, by itself, guarantee transaction anonymity or conceal the on-chain link between wallets. The design goal is a receiving-wallet option. It is not a claim of total privacy. The claim is not stronger than it needs to be, and it will not be dressed up as more than it is.</p>
+
+  <h3>What ErosX is designed for</h3>
+  <p>ErosX is non-tax by design. The 5% flow fee stays on EROS — the rock. ErosX is the frictionless rail: spend, movement, in-world use, cross-community transfers, V3-style liquidity pools. It can be transferred around as a currency without the tax drag that makes EROS unsuited to those roles. EROS holds the store value; ErosX carries the movement. Two layers of one standard, each doing its own job.</p>
+
+  <div class="claim platinum">
+    <p><strong>The gates in one line.</strong> The rock gets heavier. The web gets deeper. The code ships with the wallet option. Then ErosX moves — frictionless, non-tax, free to enter a V3-style pool, free to arrive at a wallet the sender chose.</p>
+  </div>
+</section>
+
 <!-- ═══════ 33EROS ═══════ -->
 <section id="33eros">
   <span class="section-label">The gamified rail</span>
@@ -1023,6 +1089,11 @@ footer.master .built-on .pin{width:32px;height:32px}
   </figure>
 
   <p>If you write code, the builders' door is open. The EROS universe needs architects at the metal level — people who model systems, design languages, and build engines rather than frontends. <em>The Book of Shen</em>, <em>An Introduction to Array Programming in K</em>, and <em>Logic, Proof and Computation</em> sit under this head. Reach the room at <a href="https://t.me/Eros_Revival">t.me/Eros_Revival</a> and say what you want to build.</p>
+
+  <div class="connect">
+    <strong>Companion depth · the physics inside the standard</strong>
+    The phrase <em>inward is forwards</em> — the direction of continuation — comes from the toroidal reading of the enclosure in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>. The cosmology it sits inside is in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>. The philosophy of bond-over-extract that governs both is in <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>. This book is the instrument. Those books are the shape it points at.
+  </div>
 </section>
 
 <!-- ═══════ MONEY AUTHORITY · triptych ═══════ -->
@@ -1094,16 +1165,18 @@ footer.master .built-on .pin{width:32px;height:32px}
       <li>X28 omnichain expansion for ErosX</li>
       <li>BuildFi launchpad integration</li>
       <li>The 33-day hybrid NFT leaderboard</li>
+      <li>The privacy option — receive ErosX at a different wallet address</li>
     </ul>
 
     <h3 class="honest-h3">How code arrives</h3>
-    <p>Community milestones first. 333 qualifying LP pools. Transformed-supply thresholds. Market conditions. When verified mainnet code exists with public parameters, the design discussion becomes a deployed mechanism. Until then, every ratio and timeline in this book is an illustration — useful as education, not to be treated as settled fact.</p>
+    <p>Community milestones first. Market cap over all-time high. 333 qualifying LP pools. The transformation code with the receiving-wallet option. When verified mainnet code exists with public parameters, the design discussion becomes a deployed mechanism. Until then, every ratio and timeline in this book is an illustration — useful as education, not to be treated as settled fact.</p>
 
     <h3 class="honest-h3">Falsification tests</h3>
     <ul>
       <li>If the transform contracts never deploy with published parameters, the thesis stays a story.</li>
       <li>If the Chaos Engine is predictable, fairness fails.</li>
       <li>If a human must press a button for Genesis, the trustless claim fails.</li>
+      <li>If the receiving-wallet option never ships with the code, the flow rail's core promise is unmet.</li>
       <li>If extraction returns, the ethical core is broken.</li>
     </ul>
   </div>
@@ -1126,61 +1199,156 @@ footer.master .built-on .pin{width:32px;height:32px}
   <div class="pull">Fiction is the doorway. The instrument is the floor. The transform is what you do inside the room.</div>
 </section>
 
-<!-- ═══════ CLOSING SEAL ═══════ -->
-<div class="seal-closing" aria-hidden="true">
-  <div class="frame">
-    <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-  </div>
-  <p class="cap">Tenacity through integrity</p>
+<!-- ═══════ SHARE LAYER ═══════ -->
+<div class="part-break" id="telegram">
+  <p class="pk">Share Layer</p>
+  <h2>The Rock · The River · The Gates</h2>
+  <p>Short-form · to share · to seed · to invite</p>
 </div>
+
+<article class="telegram-post">
+  <p class="tp-head">Post One · ⛰️ The Rock and the River</p>
+  <p class="tp-title">⛰️ Gold Is Inflationary. EROS Is Not.</p>
+  <p>If the price of gold rises, people mine more gold. The supply expands. EROS has a fixed original supply and a burn address that only grows.</p>
+  <span class="tp-bullet">⛰️ <strong>The rock.</strong> EROS — scarce, fixed, renounced. The thing you measure the rest of the graph against.</span>
+  <span class="tp-bullet">🌊 <strong>The river.</strong> ErosX and 33EROS — the flow that moves. Non-tax, V3-compatible, built for spend.</span>
+  <span class="tp-bullet">🪨 <strong>The transform.</strong> Deposit EROS. Receive the derivative 1:1. The contract burns, deepens LP, and buy-and-burns the flow token.</span>
+  <p>You do not spend the rock. You build the river on top of it.</p>
+  <p class="tp-hashtags">#EROS #PlatinumStandard #RockAndRiver #PulseChain</p>
+</article>
+
+<article class="telegram-post">
+  <p class="tp-head">Post Two · 🔀 Two Paths · One Engine</p>
+  <p class="tp-title">🔀 Two Transform Paths. One Rock.</p>
+  <p>Same deposit. Two destinations. Same destination — burn, bond, deepen.</p>
+  <span class="tp-bullet">🔀 <strong>Path One · EROS → ErosX.</strong> Liquidity rail. 10% burn, 80% LP, 10% buy-and-burn. Built for depth so large size can move.</span>
+  <span class="tp-bullet">🔀 <strong>Path Two · EROS → 33EROS.</strong> Burn + game rail. 33% burn, 33% LP, 33% buy-and-burn, 1% to a 33-day leaderboard.</span>
+  <span class="tp-bullet">⚙️ <strong>The Chaos Engine.</strong> Three-body randomness times every burn. No front-run. No pattern. Fairness is a design requirement.</span>
+  <p>Three tokens. Three pairs. One triangle. Each rotation burns more EROS, deepens more LP, adds more volume to the web.</p>
+  <p class="tp-hashtags">#EROS #PlatinumStandard #TheTransform #ErosX #33EROS</p>
+</article>
+
+<article class="telegram-post">
+  <p class="tp-head">Post Three · 🚦 Earned, Not Scheduled</p>
+  <p class="tp-title">🚦 Three Gates Hold the Transform</p>
+  <p>The transform code is written. It does not deploy on a date. It deploys when the community has built the conditions the mechanism needs.</p>
+  <span class="tp-bullet">🚦 <strong>Gate One.</strong> Market cap over all-time high. The rock has to be heavy before the river runs on it.</span>
+  <span class="tp-bullet">🚦 <strong>Gate Two.</strong> 333 bonded liquidity pools. Depth has to be real before a frictionless currency can move through it without slipping.</span>
+  <span class="tp-bullet">🚦 <strong>Gate Three.</strong> Transformation code with the receiving-wallet option — receive ErosX at a different address on PulseChain's EVM.</span>
+  <p>ErosX is non-tax by design. The rock holds the store value. The river carries the movement. The gates decide when.</p>
+  <p class="tp-hashtags">#EROS #PlatinumStandard #EarnedNotScheduled #ErosX #PulseChain</p>
+</article>
+
+<!-- ═══════ CODA BANNER ═══════ -->
+<aside class="public-link">
+  <span class="pl-k">📚 Explore further</span>
+  <p class="pl-t">Open the public NotebookLM Studio</p>
+  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone can view, ask questions in chat, and generate custom study materials. Sources locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
+
+<!-- ═══════ AWB ═══════ -->
+<section class="apply-world" id="apply">
+  <span class="aw-label">Application &amp; World Building</span>
+  <p>The concepts in this book are not limited to the page. What can you build from them?</p>
+  <p>Can you apply them to a character, a weapon, an economy, a casino, a structure, an atom, a molecule, a law, a scientific theory, or an entire universe?</p>
+  <p>Can you extend the science, fiction, lore, and law of our shared world through code, narrative, and creative assets?</p>
+  <p class="aw-q">Take what you have learned. What can you create?</p>
+</section>
+
+<!-- ═══════ CODA · pink seal ═══════ -->
+<section class="coda" id="coda">
+  <p>The rock does not care which river is loud this week.</p>
+  <p class="coda-soft">The standard holds whether the chart is up or down. The river carries what the rock has already earned. What gets built next is what the community decides to build.</p>
+  <p>Hold the rock. Play the river. Write the next chapter.</p>
+
+  <figure class="brand-seal">
+    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+    <figcaption>Tenacity Through Integrity</figcaption>
+  </figure>
+
+  <p class="creedline">From rock to river · The transformation thesis</p>
+</section>
 
 <!-- ═══════ MASTER FOOTER ═══════ -->
 <footer class="master">
   <div class="title-row">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="44" height="44" loading="lazy"/>
+    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
     <span class="title">THE PLATINUM STANDARD</span>
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
   </div>
   <p class="count">From rock to river · The transformation thesis · EROS Library</p>
-
-  <nav class="tier" aria-label="Library">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">How the Corpus Works</a>
-    <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
-    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html" class="here">The Platinum Standard</a>
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
-    <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
-    <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
-    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
-    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
-    <a href="https://t.me/Eros_Revival">Telegram</a>
-  </nav>
-
-  <p class="sig">Inward is forwards. The bond is what holds.</p>
-
-  <div class="built-on">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
-    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+  <div class="lib-stack">
+    <div class="lib-section">
+      <span class="lib-label">Entry</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a>
+        <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Science</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>
+        <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">System</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
+        <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+        <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html" class="here">The Platinum Standard</a>
+        <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">World</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
+        <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
+        <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>
+        <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Story</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
+        <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Tools</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+        <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
+        <a href="https://notebooklm.link.google/67J7szcyZuaT">NotebookLM 📚</a>
+        <a href="https://t.me/Eros_Revival">Telegram 🖇️</a>
+      </div>
+    </div>
   </div>
-
-  <!-- Rev 5 · 2026-10-12 · dual pin + compass · collapsible ToC · reader panel · library menu · footer tier full names · 28 months · rev line removed -->
+  <p class="sig">Inward is forwards. The bond is what holds.</p>
+  <p class="creedline">Built on PulseChain · Faster · Cheaper · Stronger</p>
+  <div class="pulse-row">
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseChain"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0a0418"/><path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Built on PulseChain</span>
+    <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0a0418"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <!-- Rev 6 · 2026-10-13 · header v2 · black seal (silver ring) at the transformation gates · pink seal (gold ring) at coda · notebooklm+telegram banners top and coda · application & world building block (platinum accent) · lib-stack footer with all six tiers · no resume, no position memory · toroidal cross-link to Enclosure at the build section · telegram share block (rock · river · gates) · text-wrap rules applied globally · ErosX transformation gates added as new section · privacy feature named honestly -->
 </footer>
 
 </main>
 
-<!-- ═══════ READER CONTROLS ═══════ -->
 <button id="toTop" type="button" aria-label="Back to top">↑</button>
-
 <button id="rdBtn" type="button" aria-label="Reading settings and chapters" aria-expanded="false" aria-controls="rdPanel">Aa</button>
 
 <div id="rdPanel" role="region" aria-label="Reading settings" hidden>
@@ -1190,14 +1358,6 @@ footer.master .built-on .pin{width:32px;height:32px}
   <div class="rd-row"><span></span><button type="button" data-a="reset">Reset</button></div>
   <h5>Go to</h5>
   <div id="rdToc"></div>
-</div>
-
-<div id="resumePrompt" role="region" aria-label="Resume reading">
-  <p><b>Welcome back</b>You left off at <span id="resumeWhere">where you were</span>.</p>
-  <div class="btns">
-    <button type="button" id="resumeYes">Resume</button>
-    <button type="button" class="secondary" id="resumeNo">Dismiss</button>
-  </div>
 </div>
 
 <script>
@@ -1244,10 +1404,55 @@ function openFromHash(){
 openFromHash();
 window.addEventListener('hashchange', openFromHash);
 
-/* 4 · Reader controls */
+/* 4 · Chapter strip auto-tracking */
+(function(){
+  var strip = document.querySelector('.corpus-bar nav.chapter-strip');
+  if(!strip) return;
+  var links = Array.prototype.slice.call(strip.querySelectorAll('a[href^="#"]'));
+  var pairs = links.map(function(a){
+    var id = a.getAttribute('href');
+    if(id.indexOf('#') !== 0) return null;
+    var sec = document.querySelector(id);
+    return sec ? {link:a, sec:sec} : null;
+  }).filter(function(p){return p;});
+  var currentIndex = -1;
+  function update(){
+    var probe = window.scrollY + 200;
+    var idx = -1;
+    for(var i=0;i<pairs.length;i++){ if(pairs[i].sec.offsetTop <= probe) idx=i; }
+    if(idx===currentIndex) return;
+    currentIndex = idx;
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(idx<0){ scrollStrip(0); return; }
+    var active = pairs[idx].link;
+    active.classList.add('active');
+    var targetLeft = active.offsetLeft - (strip.clientWidth/2) + (active.clientWidth/2);
+    scrollStrip(targetLeft);
+  }
+  function scrollStrip(left){
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var maxLeft = strip.scrollWidth - strip.clientWidth;
+    var clamped = Math.max(0, Math.min(maxLeft, left));
+    if(reduced){ strip.scrollLeft = clamped; }
+    else { strip.scrollTo({left:clamped, behavior:'smooth'}); }
+  }
+  var rafPending = false;
+  function onScrollTrack(){
+    if(rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(function(){ rafPending = false; update(); });
+  }
+  window.addEventListener('scroll', onScrollTrack, {passive:true});
+  window.addEventListener('resize', onScrollTrack);
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', update); }
+  else { update(); }
+  setTimeout(update, 300);
+})();
+
+/* 5 · Reader controls */
 (function(){
   var KEY = 'eros_platinum_reader_v1';
-  var defaults = {size:100, lead:1.8, w:44};
+  var defaults = {size:100, lead:1.8, w:46};
   var state = defaults;
   try {
     var sv = JSON.parse(localStorage.getItem(KEY) || '{}');
@@ -1280,8 +1485,8 @@ window.addEventListener('hashchange', openFromHash);
     if(a === 'size+') state.size = clamp(state.size + 6, 82, 136);
     if(a === 'lead-') state.lead = clamp(+(state.lead - .1).toFixed(2), 1.5, 2.3);
     if(a === 'lead+') state.lead = clamp(+(state.lead + .1).toFixed(2), 1.5, 2.3);
-    if(a === 'w-')    state.w    = clamp(state.w - 3, 32, 56);
-    if(a === 'w+')    state.w    = clamp(state.w + 3, 32, 56);
+    if(a === 'w-')    state.w    = clamp(state.w - 3, 34, 72);
+    if(a === 'w+')    state.w    = clamp(state.w + 3, 34, 72);
     if(a === 'reset') state = {size:defaults.size, lead:defaults.lead, w:defaults.w};
     apply();
   });
@@ -1306,78 +1511,7 @@ window.addEventListener('hashchange', openFromHash);
   apply();
 })();
 
-/* 5 · Reading position memory */
-var SCROLL_KEY = 'eros_platinum_position_v1';
-var SCROLL_MAX_AGE = 14 * 24 * 60 * 60 * 1000;
-var saveTimer = null;
-
-function currentSection(){
-  var mid = window.scrollY + window.innerHeight * 0.3;
-  var cur = null;
-  each(document.querySelectorAll('main.page > section[id]'), function(s){
-    if(s.offsetTop <= mid) cur = s;
-  });
-  return cur;
-}
-function sectionTitle(sec){
-  if(!sec) return '';
-  var h2 = sec.querySelector('h2');
-  return h2 ? h2.textContent.trim() : '';
-}
-function savePosition(){
-  var sec = currentSection();
-  try {
-    localStorage.setItem(SCROLL_KEY, JSON.stringify({
-      y: window.scrollY,
-      t: Date.now(),
-      secId: sec ? sec.id : null,
-      secTitle: sectionTitle(sec)
-    }));
-  } catch(e){}
-}
-window.addEventListener('scroll', function(){
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(savePosition, 500);
-}, {passive:true});
-window.addEventListener('beforeunload', savePosition);
-
-(function(){
-  var prompt = document.getElementById('resumePrompt');
-  var where = document.getElementById('resumeWhere');
-  var yes = document.getElementById('resumeYes');
-  var no = document.getElementById('resumeNo');
-  if(!prompt) return;
-
-  var data = null;
-  try { data = JSON.parse(localStorage.getItem(SCROLL_KEY) || 'null'); } catch(e){}
-
-  if(!data || !data.t || (Date.now() - data.t) > SCROLL_MAX_AGE || data.y < 500){
-    try { localStorage.removeItem(SCROLL_KEY); } catch(e){}
-    return;
-  }
-  if(where && data.secTitle) where.textContent = data.secTitle;
-
-  setTimeout(function(){ prompt.classList.add('show'); }, 1000);
-
-  if(yes) yes.addEventListener('click', function(){
-    var target = data.secId ? document.getElementById(data.secId) : null;
-    if(target){
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-    } else {
-      window.scrollTo({top: data.y, behavior:'smooth'});
-    }
-    prompt.classList.remove('show');
-  });
-  if(no) no.addEventListener('click', function(){
-    try { localStorage.removeItem(SCROLL_KEY); } catch(e){}
-    prompt.classList.remove('show');
-  });
-})();
-
-})();
-</script>
-
-<script>
+/* 6 · Print handler */
 (function(){
   var was=[];
   window.addEventListener('beforeprint',function(){
@@ -1390,6 +1524,8 @@ window.addEventListener('beforeunload', savePosition);
     was.forEach(function(p){ p[0].open = p[1]; });
     was = [];
   });
+})();
+
 })();
 </script>
 
