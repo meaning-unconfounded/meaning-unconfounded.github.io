@@ -17,20 +17,26 @@
 <title>Living Egg · Cosmogony of EROS · Manual of Law</title>
 <style>
 :root{
-  --bg:#07070e; --surface:#0e1018; --surface2:#151824;
-  --ink:#eaeaf2; --soft:#b8bcd0; --muted:#7d82a0;
-  --indigo:#7d8fb8; --indigo2:#a0b0d0; --indigo-soft:rgba(125,143,184,.1); --indigo-line:rgba(125,143,184,.35);
+  --bg:#07070e; --bg2:#0a0c14; --surface:#0e1018; --surface2:#151824; --surface3:#1c2030;
+  --ink:#eaeaf2; --soft:#b8bcd0; --muted:#7d82a0; --dim:#525a72;
+  --indigo:#7d8fb8; --indigo2:#a0b0d0; --indigo3:#c0d0e8;
+  --indigo-soft:rgba(125,143,184,.10); --indigo-line:rgba(125,143,184,.35);
   --bone:#e8e2d6; --bone-soft:#c9c2b0;
-  --gold:#d4af37; --gold2:#e8c547; --gold-soft:rgba(212,175,55,.08); --gold-line:rgba(212,175,55,.28);
-  --magenta:#d4788a; --cyan:#6a9eaf; --violet:#9a7ab8;
+  --gold:#d4af37; --gold2:#e8c547; --gold3:#f0d87a;
+  --gold-soft:rgba(212,175,55,.09); --gold-line:rgba(212,175,55,.32);
+  --silver:#c8c3d6; --silver2:#e0dcec; --silver-line:rgba(200,195,214,.32);
+  --magenta:#d4788a; --magenta2:#e89aa8; --magenta-soft:rgba(212,120,138,.10); --magenta-line:rgba(212,120,138,.35);
+  --cyan:#6a9eaf; --cyan2:#88b8c8; --cyan-soft:rgba(106,158,175,.10); --cyan-line:rgba(106,158,175,.35);
+  --violet:#9a7ab8; --violet2:#c0a0e0; --violet-soft:rgba(154,122,184,.10); --violet-line:rgba(154,122,184,.35);
   --hair:rgba(125,143,184,.18); --hair2:rgba(125,143,184,.09);
-  --serif:Georgia,"Palatino Linotype","Book Antiqua",serif;
-  --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
-  --measure:48rem;
+  --serif:Georgia,"Palatino Linotype","Book Antiqua","Iowan Old Style",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --measure:48rem; --measure-wide:54rem;
   --leading:1.82;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:7rem}
 body{
   font-family:var(--serif);font-size:1.08rem;line-height:var(--leading);
   background:
@@ -38,418 +44,260 @@ body{
     radial-gradient(900px 480px at -5% 30%, rgba(106,158,175,.07), transparent 50%),
     radial-gradient(700px 420px at 100% 85%, rgba(154,122,184,.06), transparent 45%),
     var(--bg);
-  min-height:100vh;
+  min-height:100vh;-webkit-font-smoothing:antialiased;
 }
 html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
 html::before{inset:8px;border:1px solid rgba(125,143,184,.2)}
 html::after{inset:12px;border:1px solid rgba(125,143,184,.09)}
 @media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
 .page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.2rem 5rem}
-#progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--indigo),var(--violet),var(--gold));z-index:9999;transition:width .08s linear}
+@media(min-width:720px){.page{padding:1.5rem 1.6rem 6rem;max-width:var(--measure-wide)}}
+#progressBar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--indigo),var(--violet),var(--gold));z-index:9999;transition:width .08s linear}
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--indigo);color:#07070e;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s}
 .skip-link:focus{top:0}
-a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--indigo2);outline-offset:2px;border-radius:4px}
-::selection{background:var(--indigo);color:#07070e}
-h1,h2,h3{text-wrap:balance}
-p,li{overflow-wrap:break-word}
-a{color:var(--indigo2);text-decoration:none;border-bottom:1px solid rgba(160,176,208,.28);transition:color .15s,border-color .15s}
-a:hover{color:#c0d0e8;border-bottom-color:rgba(192,208,232,.7)}
+a{color:var(--indigo2);text-decoration:none;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
+a:hover{color:var(--indigo3);border-bottom-color:rgba(192,208,232,.7)}
 a:visited{color:#8fa0c4}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:4px}
+::selection{background:var(--indigo);color:#07070e}
 
-.corpus-bar{
-  position:sticky;top:0;z-index:900;
-  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
-  padding:.55rem 1.1rem;
-  background:rgba(7,7,14,.94);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--indigo-line);
-  font-family:var(--sans);
-}
-.corpus-bar .brand{
-  display:flex;align-items:center;gap:.7rem;
-  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--indigo2);font-weight:700;border-bottom:none;
-}
-.corpus-bar .brand:hover{color:#c0d0e8;border-bottom:none}
-.corpus-bar .pin{
-  width:36px;height:36px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--indigo-line);
-  box-shadow:0 0 14px rgba(125,143,184,.35),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--surface);
-}
-.corpus-bar .compass{font-size:1rem;line-height:1;color:var(--indigo2);flex-shrink:0;margin:0 .15rem}
-.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
-.corpus-bar nav a{
-  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
-  border-bottom:none;transition:color .15s,background .15s;
-}
-.corpus-bar nav a:hover{color:var(--indigo2);background:var(--indigo-soft);border-bottom:none}
+/* ── HEADER v2 ── */
+.corpus-bar{position:sticky;top:0;z-index:900;background:rgba(7,7,14,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
+.corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
+.corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none;border-bottom:none}
+.corpus-bar .pin{border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface);display:block}
+.corpus-bar .pin.eros-mark{width:44px;height:44px;box-shadow:0 0 14px rgba(232,122,158,.24),0 0 0 1px rgba(255,255,255,.04) inset}
+.corpus-bar .pin.pulse-mark{width:38px;height:38px}
+.corpus-bar .compass{font-size:1.1rem;line-height:1;color:var(--gold2);flex-shrink:0;opacity:.9;margin-left:.05rem}
+.corpus-bar .title-cluster{display:flex;align-items:center;gap:.7rem;min-width:0;flex-shrink:1}
+.corpus-bar .title-rule{flex:0 0 auto;height:1px;width:clamp(24px,5vw,60px);background:linear-gradient(90deg,transparent,var(--gold-line))}
+.corpus-bar .brand-text{font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.corpus-bar nav.chapter-strip{display:flex;align-items:center;gap:.1rem .2rem;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:none;padding:.55rem .2rem .65rem;margin:0 -.2rem;mask-image:linear-gradient(90deg,transparent 0, #000 3%, #000 97%, transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0, #000 3%, #000 97%, transparent 100%)}
+.corpus-bar nav.chapter-strip::-webkit-scrollbar{display:none}
+.corpus-bar nav.chapter-strip a{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.34rem .68rem;border-radius:999px;text-decoration:none;transition:color .25s ease, background .25s ease, box-shadow .25s ease;white-space:nowrap;flex-shrink:0;border-bottom:none}
+.corpus-bar nav.chapter-strip a:hover{color:var(--indigo2);background:var(--indigo-soft)}
+.corpus-bar nav.chapter-strip a.active{color:var(--indigo2);background:var(--indigo-soft);box-shadow:inset 0 0 0 1px var(--indigo-line);font-weight:700;letter-spacing:.1em}
 @media(max-width:720px){
-  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
-  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
-  .corpus-bar .pin{width:30px;height:30px}
+  .corpus-bar{padding:.6rem .85rem 0}
+  .corpus-bar .pin.eros-mark{width:38px;height:38px}
+  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
+  .corpus-bar .compass{font-size:1rem}
+  .corpus-bar .brand-text{font-size:.85rem;letter-spacing:.18em}
+  .corpus-bar .title-rule{width:20px}
+  .corpus-bar nav.chapter-strip{padding:.5rem .2rem .6rem}
+  .corpus-bar nav.chapter-strip a{font-size:.58rem;padding:.3rem .58rem}
+}
+@media(max-width:420px){
+  .corpus-bar .pin.eros-mark{width:34px;height:34px}
+  .corpus-bar .pin.pulse-mark{width:28px;height:28px}
   .corpus-bar .compass{font-size:.9rem}
-  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
-}
-@media(max-width:520px){
-  .corpus-bar .pin{width:28px;height:28px}
-  .corpus-bar .compass{font-size:.82rem}
+  .corpus-bar .brand-text{font-size:.75rem;letter-spacing:.14em}
+  .corpus-bar .title-rule{width:14px}
 }
 
-.cover{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem 2.2rem}
-.cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--indigo);margin-bottom:1.2rem;font-weight:600}
-.cover h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:700;letter-spacing:.06em;color:var(--indigo2);text-shadow:0 0 48px rgba(125,143,184,.28);margin-bottom:.3rem;line-height:1.1}
-.cover .sub{font-style:italic;font-size:1.05rem;color:var(--bone-soft);margin-bottom:1rem;letter-spacing:.02em}
-.cover .rule{width:min(260px,60%);height:1px;margin:0 auto 1.4rem;background:linear-gradient(90deg,transparent,var(--indigo),transparent)}
-.cover .opening{font-size:1.08rem;color:var(--soft);max-width:38rem;line-height:1.8;margin-bottom:1.4rem}
-.cover .opening em{color:var(--indigo2)}
-.cover .seal{padding:1.05rem 1.2rem;border:1px solid var(--indigo-line);border-radius:12px;background:linear-gradient(150deg,#0e1018,#151824);font-size:.93rem;color:var(--soft);max-width:36rem;box-shadow:0 10px 36px rgba(0,0,0,.4);text-align:left}
-.cover .seal strong{color:var(--indigo2)}
-.cover img.banner{max-width:100%;border-radius:12px;border:1px solid var(--indigo-line);margin:1rem 0 1.4rem}
-.modes{margin:1.4rem auto;max-width:40rem;display:grid;gap:.6rem;text-align:left;width:100%}
-.modes div{display:flex;gap:.7rem;align-items:baseline;font-family:var(--sans);font-size:.86rem;color:var(--soft)}
-.modes div b{color:var(--indigo2);flex-shrink:0;font-weight:700;letter-spacing:.05em;min-width:7.5rem}
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4{text-wrap:balance}
+p,li{overflow-wrap:break-word;text-wrap:pretty}
+h2{font-size:1.4rem;color:var(--indigo2);margin:2.6rem 0 1rem;border-bottom:1px solid var(--hair);padding-bottom:.5rem;scroll-margin-top:7rem;line-height:1.3;orphans:2;widows:2}
+h3{font-size:1.1rem;color:var(--ink);margin:1.7rem 0 .6rem;line-height:1.35;orphans:2;widows:2}
+h4{font-family:var(--sans);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta2);margin:1.5rem 0 .5rem;orphans:2;widows:2}
+p{margin:0 0 1.05rem;color:var(--soft);orphans:2;widows:2}
+.lede{font-size:1.12rem;color:var(--bone-soft);font-style:italic;margin-bottom:1.1rem;line-height:1.78;orphans:2;widows:2}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--indigo3);font-style:italic}
+ul,ol{margin:.4rem 0 1.2rem 1.3rem}
+li{margin-bottom:.45rem;color:var(--soft);line-height:1.78;orphans:2;widows:2}
+li::marker{color:var(--indigo2)}
+code{font-family:var(--mono);font-size:.78rem;color:var(--gold2);background:rgba(0,0,0,.35);border:1px solid var(--gold-line);padding:.12rem .42rem;border-radius:4px;word-break:break-all}
 
-details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--indigo-line);border-radius:10px;background:var(--indigo-soft);padding:.35rem 1rem}
+/* ── BLOCKS ── */
+.verse{margin:1.6rem 0;padding:1.25rem 1.35rem;text-align:center;border:1px solid var(--gold-line);border-radius:12px;background:linear-gradient(160deg,#15120c,#1a160f);font-size:1.04rem;line-height:1.8;color:var(--soft);font-style:italic;orphans:2;widows:2}
+.verse strong{color:var(--gold);font-style:normal}
+.pull{margin:1.5rem 0;padding:.95rem 0 .95rem 1.15rem;border-left:3px solid var(--indigo);background:linear-gradient(90deg,var(--indigo-soft),transparent 70%);font-style:italic;font-size:1.05rem;color:var(--soft);orphans:2;widows:2}
+.claim{margin:1.35rem 0;padding:1.1rem 1.2rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);orphans:2;widows:2}
+.claim.gold{border-color:var(--gold-line);background:linear-gradient(135deg,#17140e,#1a1710)}
+.claim.cyan{border-color:var(--cyan-line);background:linear-gradient(135deg,#0e1518,#121a1c)}
+.claim.magenta{border-color:var(--magenta-line);background:linear-gradient(135deg,#171014,#1a1216)}
+.claim.violet{border-color:var(--violet-line);background:linear-gradient(135deg,#15121a,#1a1520)}
+.claim.indigo{border-color:var(--indigo-line);background:linear-gradient(135deg,#0e1018,#151824)}
+.claim p{margin:0;orphans:2;widows:2}
+.claim p+p{margin-top:.6rem}
+.claim strong{color:var(--indigo2)}
+.claim.gold strong{color:var(--gold)}
+.claim.cyan strong{color:var(--cyan2)}
+.claim.magenta strong{color:var(--magenta2)}
+.claim.violet strong{color:var(--violet2)}
+.math{margin:1.25rem 0;padding:1.1rem 1.2rem;border-radius:10px;background:var(--surface2);border:1px solid var(--hair);font-family:var(--sans);font-size:.88rem;line-height:1.85;color:var(--soft);white-space:pre-line;overflow-x:auto}
+.oracle{font-style:italic;margin:0 0 1rem;padding:.65rem 1rem;border-left:2px solid var(--indigo);color:var(--indigo2);font-size:1.02rem;orphans:2;widows:2}
+.ledger{margin:1.2rem 0;padding:1.05rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+.ledger ul{margin:.2rem 0 0 1.1rem}
+.ledger li{margin-bottom:.4rem;line-height:1.72}
+.ledger b{color:var(--indigo2)}
+.grid{display:grid;gap:.9rem;margin:1.35rem 0}
+@media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}}
+.grid>div{border:1px solid var(--hair);background:var(--surface);border-radius:10px;padding:1rem 1.1rem;orphans:2;widows:2}
+.grid>div b{display:block;font-family:var(--sans);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo2);font-weight:700;margin-bottom:.4rem}
+.grid>div p{font-size:.92rem;line-height:1.68;margin:0;font-family:var(--sans);color:var(--soft)}
+.create{margin:1.3rem 0;padding:1rem 1.1rem;border:1px dashed var(--violet-line);border-radius:10px;background:var(--violet-soft);font-family:var(--sans);font-size:.86rem;color:var(--soft);line-height:1.7;orphans:2;widows:2}
+.create strong{color:var(--violet2);display:block;margin-bottom:.3rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+.axiom{margin:1.15rem 0;padding:.95rem 1.1rem;border-left:3px solid var(--violet);background:rgba(154,122,184,.06);font-family:var(--sans);font-size:.92rem;color:var(--soft);line-height:1.72;orphans:2;widows:2}
+.axiom b{color:var(--violet2);font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.3rem}
+.creed{margin:1.5rem 0;padding:1.5rem 1.25rem;border:1px solid var(--gold-line);border-radius:14px;background:linear-gradient(160deg,#15120c,#1a160f);text-align:center;font-size:1.04rem;line-height:1.95;color:var(--soft);box-shadow:0 10px 32px rgba(0,0,0,.35);orphans:2;widows:2}
+.creed strong{color:var(--gold);display:block;margin-top:.35rem}
+.creedline{margin-top:1.1rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.55;text-align:center;orphans:2;widows:2}
+.coda{margin:4.2rem 0 0;padding:3rem 1.25rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(125,143,184,.05),transparent 60%)}
+.coda p{font-size:1.14rem;font-style:italic;line-height:1.78;color:var(--ink);max-width:34rem;margin:0 auto 1rem;orphans:2;widows:2}
+
+/* ── FIGURES ── */
+figure.plate{margin:2.2rem auto;max-width:100%;text-align:center}
+figure.plate img{display:block;width:100%;max-width:100%;height:auto;margin:0 auto;border-radius:14px;border:1px solid var(--indigo-line);box-shadow:0 14px 44px rgba(0,0,0,.5)}
+figure.plate.narrow{max-width:34rem}
+figure.plate.medium{max-width:42rem}
+figure.plate figcaption{font-family:var(--sans);font-size:.84rem;color:var(--muted);margin-top:.9rem;line-height:1.6;padding:0 .8rem;orphans:2;widows:2}
+figure.plate figcaption b{color:var(--indigo2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.74rem;display:inline-block;margin-right:.4rem}
+figure.media{margin:1.6rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--indigo-line);background:#000;box-shadow:0 10px 32px rgba(0,0,0,.45)}
+figure.media img,figure.media video{display:block;width:100%;height:auto;background:#000;max-height:min(56vh,480px);object-fit:contain}
+figure.media figcaption{font-family:var(--sans);font-size:.8rem;color:var(--soft);padding:.8rem 1rem;background:var(--surface);border-top:1px solid var(--hair);line-height:1.6;orphans:2;widows:2}
+figure.media figcaption b{color:var(--indigo2);font-weight:700;letter-spacing:.04em}
+
+figure.brand-seal{margin:2.4rem auto 1.8rem;text-align:center;max-width:min(220px,55vw);display:block}
+figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(212,175,55,.12);background:var(--surface)}
+figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-top:.9rem;font-weight:700}
+figure.brand-seal.silver img{border-color:var(--silver-line);box-shadow:0 12px 40px rgba(200,195,214,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(200,195,214,.14)}
+figure.brand-seal.silver figcaption{color:var(--silver2)}
+
+/* ── TOC + MENU ── */
+details.toc-card{margin:1.6rem auto 2.4rem;border:1px solid var(--hair);border-radius:14px;background:var(--surface);padding:.5rem 1.35rem 1.35rem;font-family:var(--sans);max-width:100%;text-align:left}
+details.toc-card>summary{cursor:pointer;list-style:none;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--indigo2);padding:.7rem 0;user-select:none;font-weight:700}
+details.toc-card>summary::-webkit-details-marker{display:none}
+details.toc-card>summary::before{content:"▸ ";color:var(--indigo2)}
+details.toc-card[open]>summary::before{content:"▾ "}
+.toc-grid{display:grid;gap:.5rem;grid-template-columns:1fr 1fr;padding-top:1rem;border-top:1px solid var(--hair);text-align:left}
+@media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
+.toc-grid a{display:flex;gap:.7rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.9rem;padding:.4rem .6rem;border-radius:8px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
+.toc-grid a:hover{background:var(--indigo-soft);color:var(--indigo2);border-bottom:none}
+.toc-grid a .tn{color:var(--indigo2);font-weight:700;font-size:.74rem;letter-spacing:.06em;flex-shrink:0;min-width:2.6rem}
+
+details.eros-menu{max-width:100%;margin:1rem 0;border:1px solid var(--indigo-line);border-radius:10px;background:var(--indigo-soft);padding:.35rem 1rem;text-align:left}
 details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo2);padding:.55rem 0;user-select:none;font-weight:700}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
 details.eros-menu[open]>summary::before{content:"▾ ";}
-details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
+details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.92rem;line-height:1.7;color:var(--soft)}
 details.eros-menu a{color:var(--indigo2)}
 
-figure.hero{margin:1rem 0 1.5rem;text-align:center}
-figure.hero img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--indigo-line);box-shadow:0 12px 44px rgba(0,0,0,.55)}
-figure.plate{margin:1.6rem 0;text-align:center}
-figure.plate img{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--hair);box-shadow:0 12px 40px rgba(0,0,0,.45)}
-figure.plate figcaption{font-family:var(--sans);font-size:.75rem;color:var(--muted);margin-top:.55rem;letter-spacing:.04em;line-height:1.5;font-style:italic}
+/* ── COVER ── */
+.cover{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem 2.4rem}
+.cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--indigo);margin-bottom:1.2rem;font-weight:600}
+.cover h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.1rem,6vw,3.4rem);letter-spacing:.06em;color:var(--indigo2);text-shadow:0 0 48px rgba(125,143,184,.28);margin-bottom:.3rem;line-height:1.1}
+.cover .sub{font-style:italic;font-size:1.05rem;color:var(--bone-soft);margin-bottom:1rem;letter-spacing:.02em}
+.cover .rule{width:min(260px,60%);height:1px;margin:0 auto 1.4rem;background:linear-gradient(90deg,transparent,var(--indigo),transparent)}
+.cover .banner{max-width:100%;border-radius:12px;border:1px solid var(--indigo-line);margin:0 0 1.4rem;display:block;width:100%}
+.cover .opening{font-size:1.08rem;color:var(--soft);max-width:38rem;line-height:1.8;margin-bottom:1.4rem}
+.cover .opening em{color:var(--indigo2)}
+.cover .seal{padding:1.05rem 1.2rem;border:1px solid var(--indigo-line);border-radius:12px;background:linear-gradient(150deg,#0e1018,#151824);font-size:.93rem;color:var(--soft);max-width:36rem;box-shadow:0 10px 36px rgba(0,0,0,.4);text-align:left;line-height:1.75}
+.cover .seal strong{color:var(--indigo2)}
+.cover .layer-key{margin-top:1.5rem;font-family:var(--sans);font-size:.7rem;color:var(--muted);line-height:1.7;letter-spacing:.04em;orphans:2;widows:2}
+.cover .layer-key span{display:inline-block;margin:.15rem .55rem}
 
-.univers-carousel{position:relative;width:100%;max-width:100%;margin:1.6rem auto;overflow:hidden;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.5);background:#0a0a1a;border:1px solid var(--hair)}
-.univers-track{display:flex;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
-.univers-slide{flex:0 0 100%;min-width:0;aspect-ratio:16/9;background:#0a0a1a;display:flex;align-items:center;justify-content:center}
-.univers-slide img{width:100%;height:100%;object-fit:contain;display:block;background:#0a0a1a}
-.univers-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.8rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all .3s}
-.univers-btn:hover{background:rgba(125,143,184,.25);border-color:var(--indigo);color:var(--indigo2)}
-.univers-btn.prev{left:16px}.univers-btn.next{right:16px}
-.univers-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
-.univers-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .3s}
-.univers-dot.active{background:var(--indigo2);box-shadow:0 0 16px rgba(125,143,184,.5);transform:scale(1.2)}
-.univers-dot:hover{background:rgba(255,255,255,.6)}
-@media(max-width:640px){.univers-btn{width:34px;height:34px;font-size:1.2rem}.univers-btn.prev{left:8px}.univers-btn.next{right:8px}}
+.modes{margin:1.4rem auto;max-width:40rem;display:grid;gap:.6rem;text-align:left;width:100%}
+.modes div{display:flex;gap:.7rem;align-items:baseline;font-family:var(--sans);font-size:.86rem;color:var(--soft);orphans:2;widows:2}
+.modes div b{color:var(--indigo2);flex-shrink:0;font-weight:700;letter-spacing:.05em;min-width:7.5rem}
 
-.banner-hero{position:relative;margin:3rem 0 2.2rem;border-radius:14px;overflow:hidden;border:1px solid var(--hair);box-shadow:0 12px 40px rgba(0,0,0,.5)}
-.banner-hero img{display:block;width:100%;height:auto;object-fit:cover}
-.banner-hero .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.6));text-align:center;padding:1.5rem}
-.banner-hero .bk{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--indigo2);margin-bottom:.5rem;text-shadow:0 2px 12px rgba(0,0,0,.9)}
-.banner-hero .bt{font-family:var(--serif);font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;color:#f3efe2;letter-spacing:.04em;text-shadow:0 2px 18px rgba(0,0,0,.95);line-height:1.2}
-.banner-hero .bs{font-style:italic;color:var(--bone-soft);margin-top:.4rem;font-size:1rem;text-shadow:0 2px 12px rgba(0,0,0,.95)}
+/* ── PART BREAKS ── */
+.part-break{margin:3.4rem 0 2.4rem;padding:2.2rem 1.4rem;text-align:center;border-radius:16px;border:1px solid var(--hair);background:linear-gradient(160deg,#0e1018,#0a0c14);scroll-margin-top:7rem}
+.part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--indigo2);margin-bottom:.45rem;font-weight:700}
+.part-break h2{font-size:clamp(1.4rem,3.6vw,2rem);color:var(--ink);border:none;margin:0 0 .3rem;padding:0;letter-spacing:.02em;font-family:var(--serif);font-weight:700;line-height:1.2;orphans:2;widows:2}
+.part-break p{margin:0;font-style:italic;color:var(--soft);font-size:.95rem;orphans:2;widows:2}
 
-.divider-sm{max-width:var(--measure);margin:2.6rem auto;padding:0}
-.divider-sm img{display:block;width:100%;height:44px;object-fit:cover;object-position:center;border-radius:3px;opacity:.85;transition:opacity .25s}
-.divider-sm img:hover{opacity:1}
-@media(max-width:640px){.divider-sm img{height:32px}}
+/* ── WITNESS ── */
+.witness{margin:2.4rem 0;padding:1.35rem 1.5rem;border-left:3px solid var(--cyan);background:linear-gradient(90deg,rgba(106,158,175,.08),transparent 80%);border-radius:0 12px 12px 0;font-style:italic;color:var(--soft);orphans:2;widows:2}
+.witness .vk{font-family:var(--sans);font-style:normal;font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan2);display:block;margin-bottom:.55rem;font-weight:700}
+.witness p{font-size:1.02rem;line-height:1.78;margin:0 0 .75rem;orphans:2;widows:2}
+.witness p:last-child{margin-bottom:0}
 
-.plate-gallery{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.6rem 0}
-@media(max-width:640px){.plate-gallery{grid-template-columns:1fr}}
-.plate-gallery figure{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--hair);background:var(--surface)}
-.plate-gallery img{display:block;width:100%;height:auto}
-.plate-gallery figcaption{font-family:var(--sans);font-size:.68rem;color:var(--muted);padding:.5rem .8rem;letter-spacing:.04em;text-align:center;background:var(--surface)}
-
-.part-break{margin:3rem 0 2rem;padding:2rem 1.2rem;text-align:center;border-radius:16px;border:1px solid var(--hair);background:linear-gradient(160deg,#0e1018,#0a0c14)}
-.part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--indigo2);margin-bottom:.45rem}
-.part-break h2{font-size:clamp(1.4rem,3.6vw,2rem);color:var(--ink);border:none;margin:0 0 .3rem;padding:0;letter-spacing:.02em;font-family:var(--serif);font-weight:700}
-.part-break p{margin:0;font-style:italic;color:var(--soft);font-size:.95rem}
-
-h2{font-size:1.35rem;color:var(--indigo2);margin:2.4rem 0 .9rem;border-bottom:1px solid var(--hair);padding-bottom:.42rem;letter-spacing:.01em}
-h3{font-size:1.08rem;color:var(--ink);margin:1.5rem 0 .45rem;letter-spacing:.01em}
-h4{font-family:var(--sans);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);margin:1.4rem 0 .4rem}
-p{margin:0 0 .95rem;color:var(--soft)}
-.lede{font-size:1.12rem;color:var(--bone-soft);font-style:italic;margin-bottom:1rem;line-height:1.75}
-ul,ol{margin:.25rem 0 1rem 1.3rem}li{margin-bottom:.35rem;color:var(--soft)}li::marker{color:var(--indigo2)}
-.verse{margin:1.4rem 0;padding:1.15rem 1.2rem;text-align:center;border:1px solid var(--gold-line);border-radius:12px;background:linear-gradient(160deg,#15120c,#1a160f);font-size:1.04rem;line-height:1.8;color:var(--soft);font-style:italic}
-.verse strong{color:var(--gold);font-style:normal}
-.pull{margin:1.4rem 0;padding:.85rem 0 .85rem 1.1rem;border-left:3px solid var(--indigo);background:linear-gradient(90deg,var(--indigo-soft),transparent 70%);font-style:italic;font-size:1.05rem;color:var(--soft)}
-.claim{margin:1.3rem 0;padding:1.05rem 1.15rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
-.claim.gold{border-color:var(--gold-line);background:linear-gradient(135deg,#17140e,#1a1710)}
-.claim.cyan{border-color:rgba(106,158,175,.4);background:linear-gradient(135deg,#0e1518,#121a1c)}
-.claim.magenta{border-color:rgba(212,120,138,.4);background:linear-gradient(135deg,#171014,#1a1216)}
-.claim.violet{border-color:rgba(154,122,184,.4);background:linear-gradient(135deg,#15121a,#1a1520)}
-.claim.indigo{border-color:var(--indigo-line);background:linear-gradient(135deg,#0e1018,#151824)}
-.claim p{margin:0}.claim strong{color:var(--indigo2)}.claim.gold strong{color:var(--gold)}.claim p+p{margin-top:.55rem}
-.math{margin:1.2rem 0;padding:1.05rem 1.15rem;border-radius:10px;background:var(--surface2);border:1px solid var(--hair);font-family:var(--sans);font-size:.87rem;line-height:1.8;color:var(--soft);white-space:pre-line}
-.oracle{font-style:italic;margin:0 0 1rem;padding:.6rem 1rem;border-left:2px solid var(--indigo);color:var(--indigo2);font-size:1.02rem}
-.ledger{margin:1.2rem 0;padding:1rem 1.1rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
-.ledger ul{margin:.2rem 0 0 1.1rem}.ledger li{margin-bottom:.4rem;line-height:1.7}.ledger b{color:var(--indigo2)}
-.grid{display:grid;gap:.9rem;margin:1.4rem 0}
-@media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}}
-.grid>div{border:1px solid var(--hair);background:var(--surface);border-radius:10px;padding:1rem 1.1rem}
-.grid>div b{display:block;font-family:var(--sans);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo2);font-weight:700;margin-bottom:.4rem}
-.grid>div p{font-size:.92rem;line-height:1.68;margin:0;font-family:var(--sans);color:var(--soft)}
-.create{margin:1.3rem 0;padding:1rem 1.1rem;border:1px dashed var(--indigo-line);border-radius:10px;background:var(--indigo-soft);font-family:var(--sans);font-size:.86rem;color:var(--muted);line-height:1.7}
-.create strong{color:var(--indigo2);display:block;margin-bottom:.3rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
-.axiom{margin:1.1rem 0;padding:.9rem 1.05rem;border-left:3px solid var(--violet);background:rgba(154,122,184,.06);font-family:var(--sans);font-size:.91rem;color:var(--soft);line-height:1.7}
-.axiom b{color:var(--violet);font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.3rem}
-.creed{margin:1.5rem 0;padding:1.5rem 1.2rem;border:1px solid var(--gold-line);border-radius:14px;background:linear-gradient(160deg,#15120c,#1a160f);text-align:center;font-size:1.04rem;line-height:1.95;color:var(--soft);box-shadow:0 10px 32px rgba(0,0,0,.35)}
-.creed strong{color:var(--gold);display:block;margin-top:.35rem}
-.creedline{margin-top:1rem;font-family:var(--sans);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);line-height:1.55;text-align:center}
-.coda{margin:4.2rem 0 0;padding:3rem 1.25rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(125,143,184,.05),transparent 60%)}
-.coda p{font-size:1.14rem;font-style:italic;line-height:1.75;color:var(--ink);max-width:34rem;margin:0 auto 1rem}
-.vance{margin:2.4rem 0;padding:1.3rem 1.5rem;border-left:3px solid var(--cyan);background:linear-gradient(90deg,rgba(106,158,175,.08),transparent 80%);border-radius:0 12px 12px 0;font-style:italic;color:var(--soft)}
-.vance .vk{font-family:var(--sans);font-style:normal;font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:.55rem}
-.vance p{font-size:1.02rem;line-height:1.78;margin:0 0 .75rem}
-.vance p:last-child{margin-bottom:0}
-.script{margin:1.3rem 0;padding:1.1rem 1.2rem;background:var(--surface2);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;font-family:var(--sans);font-size:.88rem;line-height:1.75;color:var(--soft)}
-.script strong{color:var(--cyan);display:block;margin-bottom:.4rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
-.script .panel{display:block;margin:.7rem 0 .3rem;color:var(--indigo2);font-weight:600;font-size:.82rem;letter-spacing:.04em}
-
-/* ── Collapsible Contents card ── */
-details.toc-card{
-  margin:2rem auto 1rem;
-  border:1px solid var(--hair);border-radius:14px;
-  background:var(--surface);
-  padding:.4rem 1.15rem 1.15rem;
-  font-family:var(--sans);
-  max-width:var(--measure);
-}
-details.toc-card>summary{
-  cursor:pointer;list-style:none;
-  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--indigo2);padding:.6rem 0;
-  user-select:none;font-weight:700;
-}
-details.toc-card>summary::-webkit-details-marker{display:none}
-details.toc-card>summary::before{content:"▸ ";color:var(--indigo2)}
-details.toc-card[open]>summary::before{content:"▾ "}
-.toc-grid{
-  display:grid;gap:.5rem;grid-template-columns:1fr 1fr;
-  padding-top:.85rem;border-top:1px solid var(--hair);
-}
-@media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
-.toc-grid a{display:flex;gap:.6rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.87rem;padding:.35rem .55rem;border-radius:8px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
-.toc-grid a:hover{background:var(--indigo-soft);color:var(--indigo2)}
-.toc-grid a .tn{color:var(--indigo2);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.4rem}
-
-.frame-note,.connect{font-family:var(--sans);font-size:.81rem;color:var(--muted);border:1px solid var(--hair);border-radius:10px;padding:1rem 1.15rem;background:var(--surface);margin:1.2rem 0 1.3rem;line-height:1.7}
-.connect{border-style:dashed;border-color:var(--indigo-line)}
-.connect strong{color:var(--indigo2);display:block;margin-bottom:.35rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+/* ── CONNECT ── */
+.connect{margin:1.5rem 0;padding:1.15rem 1.35rem;border:1px dashed var(--indigo-line);border-radius:12px;background:var(--surface);font-family:var(--sans);font-size:.83rem;color:var(--soft);line-height:1.72;orphans:2;widows:2}
+.connect strong{display:block;color:var(--indigo2);font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
 .connect a{color:var(--indigo2)}
-.doors{margin:1.5rem 0;padding:1.2rem 1.25rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-family:var(--sans);font-size:.85rem;color:var(--muted);line-height:1.75}
-.doors b{color:var(--indigo2);display:block;margin-bottom:.55rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
-.doors a{color:var(--cyan)}
 
-footer.master{
-  margin-top:3rem;padding:2rem 0 1.4rem;
-  border-top:1px solid var(--hair);
-  text-align:center;font-family:var(--sans);
-  font-size:.78rem;color:var(--muted);line-height:1.85;
-}
-footer.master .title-row{
-  display:flex;align-items:center;justify-content:center;gap:.85rem;
-  margin-bottom:.6rem;
-}
-footer.master .pin{
-  width:44px;height:44px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--indigo-line);
-  box-shadow:0 0 18px rgba(125,143,184,.35),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--surface);
-}
-footer.master .title{
-  font-family:var(--serif);font-size:1.05rem;color:var(--indigo2);
-  letter-spacing:.1em;font-weight:700;
-}
-footer.master .count{
-  font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem;
-}
-footer.master .tier{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
-  max-width:52rem;margin:0 auto 1rem;
-}
-footer.master .tier a{
-  padding:.32rem .72rem;border-radius:999px;
-  background:var(--surface);border:1px solid var(--hair);
-  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
-  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
-}
-footer.master .tier a:hover{color:var(--indigo2);border-color:var(--indigo);background:var(--indigo-soft)}
-footer.master .tier a.primary{background:var(--indigo-soft);border-color:var(--indigo);color:var(--indigo2);font-weight:700}
-footer.master .tier a.here{background:var(--indigo-soft);border-color:var(--indigo);color:var(--indigo2);font-weight:700}
-footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
-footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:nowrap;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(125,143,184,.2)}
-footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(125,143,184,.3));flex-shrink:0}
-footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo2);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-@media(max-width:640px){
-  footer.master .pulse-row{gap:.4rem}
-  footer.master .pulse-row svg{width:22px;height:22px}
-  footer.master .pulse-row svg:last-of-type{width:20px;height:20px}
-  footer.master .pulse-row span{font-size:.54rem;letter-spacing:.08em}
-}
+/* ── PUBLIC LINK ── */
+.public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--cyan-line);border-radius:14px;background:linear-gradient(135deg,rgba(106,158,175,.10),rgba(7,7,14,.6));font-family:var(--sans)}
+.public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan2);font-weight:700;margin-bottom:.6rem}
+.public-link .pl-t{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:700;margin-bottom:.5rem;line-height:1.35;orphans:2;widows:2}
+.public-link .pl-d{font-size:.94rem;color:var(--soft);line-height:1.7;margin-bottom:.9rem;orphans:2;widows:2}
+.public-link .pl-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.public-link a.pl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.05rem;border-radius:999px;background:var(--cyan-soft);border:1px solid var(--cyan-line);color:var(--cyan2);font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:none;transition:background .18s,color .18s,border-color .18s}
+.public-link a.pl-btn:hover{background:rgba(106,158,175,.22);color:#b8d8e8;border-color:var(--cyan2)}
 
-#rdBtn{
-  position:fixed;right:1rem;bottom:4.4rem;z-index:950;
-  width:2.8rem;height:2.8rem;border-radius:50%;
-  border:1.5px solid var(--indigo-line);background:var(--surface);
-  color:var(--indigo2);font:700 .95rem var(--sans);cursor:pointer;
-  box-shadow:0 4px 16px rgba(0,0,0,.4);
-  display:flex;align-items:center;justify-content:center;
-  transition:border-color .2s,background .2s;
-}
-#rdBtn:hover{border-color:var(--indigo2);background:var(--indigo-soft)}
-#rdPanel{
-  position:fixed;right:1rem;bottom:7.8rem;z-index:951;
-  width:min(20rem, calc(100vw - 2rem));max-height:70vh;overflow:auto;
-  padding:1rem 1.05rem;font-family:var(--sans);font-size:.85rem;
-  color:var(--ink);background:var(--surface);
-  border:1.5px solid var(--indigo-line);border-radius:14px;
-  box-shadow:0 12px 40px rgba(0,0,0,.5);
-}
-#rdPanel[hidden]{display:none}
-#rdPanel .rd-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem}
-#rdPanel .rd-row > span{flex:1;color:var(--soft);font-size:.8rem}
-#rdPanel button{
-  min-width:2.3rem;padding:.4rem .65rem;
-  border:1px solid var(--indigo-line);border-radius:8px;
-  background:var(--surface2);color:var(--indigo2);
-  font:600 .8rem var(--sans);cursor:pointer;
-  transition:background .15s;
-}
-#rdPanel button:hover{background:var(--indigo-soft);border-color:var(--indigo2)}
-#rdPanel h5{margin:.9rem 0 .4rem;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
-#rdToc a{display:block;padding:.35rem .5rem;color:var(--soft);border-bottom:1px solid var(--hair);font-size:.78rem;border-radius:5px;transition:background .15s,color .15s;text-decoration:none}
-#rdToc a:hover{color:var(--indigo2);background:var(--indigo-soft);border-bottom-color:var(--indigo-line)}
-#rdToc a.vol-h{color:var(--indigo2);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;padding:.55rem .5rem .35rem;pointer-events:none;border-bottom:none}
+/* ── TELEGRAM ── */
+.telegram-post{margin:2.4rem 0;padding:1.7rem 1.8rem;border:1px solid var(--indigo-line);border-radius:16px;background:linear-gradient(160deg,rgba(125,143,184,.05),rgba(7,7,14,.7));font-family:var(--sans);font-size:1.02rem;line-height:1.85;color:var(--soft)}
+.telegram-post .tp-head{font-family:var(--sans);font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--indigo2);font-weight:700;margin-bottom:1.05rem;padding-bottom:.75rem;border-bottom:1px dashed var(--indigo-line);orphans:2;widows:2}
+.telegram-post .tp-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);letter-spacing:.05em;line-height:1.35;margin:0 0 1.05rem;word-break:keep-all;overflow-wrap:normal;orphans:2;widows:2}
+@media(max-width:560px){.telegram-post .tp-title{font-size:1.16rem}}
+.telegram-post p{margin:0 0 .95rem;color:var(--soft);font-family:var(--sans);font-size:1.02rem;line-height:1.85;orphans:2;widows:2}
+.telegram-post strong{color:var(--indigo2);font-weight:700}
+.telegram-post .tp-bullet{display:block;margin:.9rem 0;padding:.85rem 1.2rem;background:rgba(0,0,0,.25);border-left:3px solid var(--indigo);border-radius:0 10px 10px 0;font-family:var(--sans);font-size:.96rem;color:var(--soft);line-height:1.75;orphans:2;widows:2}
+.telegram-post .tp-hashtags{margin-top:1.3rem;padding-top:.95rem;border-top:1px dashed var(--indigo-line);font-size:.8rem;letter-spacing:.06em;color:var(--muted);font-family:var(--mono);orphans:2;widows:2}
 
-#toTop{
-  position:fixed;right:1rem;bottom:1.1rem;z-index:60;
-  width:2.7rem;height:2.7rem;border-radius:50%;
-  border:1px solid var(--indigo-line);background:var(--surface);
-  color:var(--indigo2);font-size:1.1rem;cursor:pointer;
-  opacity:0;pointer-events:none;transition:opacity .3s;
-  display:flex;align-items:center;justify-content:center;
-}
+/* ── APPLICATION & WORLD BUILDING ── */
+section.apply-world{margin:3.2rem auto 2.4rem;max-width:40rem;padding:2rem 1.4rem 1.8rem;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center}
+section.apply-world .aw-label{font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--indigo2);font-weight:700;display:block;margin-bottom:1.2rem;orphans:2;widows:2}
+section.apply-world p{font-family:var(--sans);font-size:.94rem;line-height:1.78;color:var(--soft);margin:0 0 .9rem;orphans:2;widows:2}
+section.apply-world p:last-of-type{margin-bottom:1.35rem}
+section.apply-world .aw-q{font-family:var(--serif);font-size:1.14rem;font-style:italic;color:var(--ink);margin:0;orphans:2;widows:2}
+
+/* ── FOOTER ── */
+footer.master{margin-top:3.4rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
+footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
+footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface)}
+footer.master .pin.eros{width:56px;height:56px;border-color:var(--gold-line);box-shadow:0 0 14px rgba(232,122,158,.20),0 0 0 1px rgba(255,255,255,.04) inset}
+footer.master .title{font-size:1.02rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);font-weight:700}
+footer.master .count{margin:.45rem 0 1.4rem;color:var(--soft);font-size:.94rem;orphans:2;widows:2}
+footer.master .lib-stack{display:flex;flex-direction:column;gap:.85rem;max-width:44rem;margin:0 auto 1.6rem;text-align:left}
+footer.master .lib-section{padding:.7rem .95rem;border-radius:10px;background:rgba(0,0,0,.2)}
+footer.master .lib-label{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:.5rem}
+footer.master .lib-links{display:flex;flex-wrap:wrap;gap:.4rem .85rem}
+footer.master .lib-links a{color:var(--muted);border-bottom:none;font-size:.88rem}
+footer.master .lib-links a:hover{color:var(--gold2)}
+footer.master .lib-links a.here{color:var(--indigo2);font-weight:600}
+footer.master .sig{margin:1.4rem 0 .7rem;color:var(--soft);font-style:italic;font-size:1.02rem;orphans:2;widows:2}
+footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem;orphans:2;widows:2}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-top:1rem;font-size:.86rem;color:var(--muted);orphans:2;widows:2}
+
+/* ── FLOATING ── */
+#toTop,#rdBtn{position:fixed;right:1.2rem;z-index:800;width:50px;height:50px;border-radius:50%;background:var(--surface);color:var(--indigo2);border:1px solid var(--indigo-line);font-family:var(--sans);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(0,0,0,.5);transition:opacity .2s,transform .2s,border-color .2s}
+#rdBtn{bottom:1.2rem;font-weight:700;font-size:1rem}
+#toTop{bottom:4.8rem;opacity:0;pointer-events:none}
 #toTop.show{opacity:1;pointer-events:auto}
-#toTop:hover{border-color:var(--indigo2);background:var(--indigo-soft)}
+#toTop:hover,#rdBtn:hover{border-color:var(--indigo2)}
+#rdPanel{position:fixed;right:1.2rem;bottom:4.8rem;z-index:810;width:min(320px,calc(100vw - 2.4rem));background:var(--surface2);border:1px solid var(--indigo-line);border-radius:14px;padding:1.2rem;box-shadow:0 12px 44px rgba(0,0,0,.6);font-family:var(--sans);font-size:.94rem}
+#rdPanel[hidden]{display:none}
+#rdPanel .rd-row{display:flex;align-items:center;justify-content:space-between;gap:.55rem;padding:.45rem 0}
+#rdPanel .rd-row>span{flex:1;color:var(--soft);font-size:.86rem}
+#rdPanel button{background:var(--surface);color:var(--ink);border:1px solid var(--hair);border-radius:8px;padding:.35rem .7rem;cursor:pointer;font-size:.88rem}
+#rdPanel button:hover{color:var(--indigo2);border-color:var(--indigo)}
+#rdPanel h5{margin:1.1rem 0 .5rem;color:var(--muted);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
+#rdToc{display:flex;flex-direction:column;gap:.25rem;max-height:200px;overflow-y:auto}
+#rdToc a{color:var(--muted);font-size:.88rem;border-bottom:none;padding:.22rem 0}
+#rdToc a:hover{color:var(--indigo2)}
 
-#resumePrompt{
-  position:fixed;left:1rem;bottom:1.2rem;z-index:55;
-  background:rgba(14,16,24,.96);
-  border:1px solid var(--indigo-line);border-radius:12px;
-  padding:1.15rem 1.35rem;font-family:var(--sans);font-size:.86rem;
-  color:var(--ink);box-shadow:0 14px 40px rgba(0,0,0,.5);
-  display:none;max-width:min(320px, calc(100vw - 5.5rem));
-  backdrop-filter:blur(10px);
-}
-#resumePrompt.show{display:block}
-#resumePrompt p{margin:0 0 .85rem;line-height:1.55;color:var(--ink);font-size:.86rem}
-#resumePrompt p b{color:var(--indigo2);font-weight:700;display:block;margin-bottom:.35rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
-#resumePrompt .btns{display:flex;gap:.5rem}
-#resumePrompt button{font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;cursor:pointer;border:1px solid var(--indigo);color:var(--indigo2);background:transparent;padding:.5rem .9rem;border-radius:999px;transition:background .15s}
-#resumePrompt button:hover{background:var(--indigo-soft)}
-#resumePrompt button.secondary{border-color:var(--hair);color:var(--muted)}
-
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-}
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after{display:none!important}
-  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #progressBar,#rdBtn,#rdPanel,#toTop,#resumePrompt,.skip-link,.corpus-bar{display:none}
-  .univers-carousel,.banner-hero{page-break-inside:avoid}
+  html::before,html::after,#progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
+  body{background:#fff!important;color:#111!important;font-size:10.5pt}
+  .page{max-width:none;padding:0}
+  a{color:#111;border-bottom:none}
+  .claim,.verse,.pull,.axiom,.math,.ledger,.grid,.create,.witness,.connect,.telegram-post,.public-link,.part-break,.creed,.coda,figure.plate,figure.media,figure.brand-seal,footer.master{break-inside:avoid}
+  section.apply-world{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
   video{display:none}
-  details.toc-card[open] .toc-grid,
+  figure.plate img{max-height:80mm;object-fit:contain;box-shadow:none!important}
+  figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
 }
-@media(max-width:640px){
-  body{font-size:1rem}
-  .page{padding:1rem 1rem 4rem}
-  footer.master .title-row{flex-direction:column;gap:.6rem}
-  footer.master .pin{width:38px;height:38px}
-}
-
-.media-block{margin:1.6rem 0 1.8rem;border:1px solid var(--indigo-line);border-radius:14px;overflow:hidden;background:var(--surface)}
-.media-block video{display:block;width:100%;max-height:min(56vh,420px);background:#000}
-.media-block img{display:block;width:100%;height:auto}
-.media-block figcaption{padding:.7rem 1rem .9rem;font-size:.88rem;color:var(--soft);line-height:1.5;border-top:1px solid var(--hair)}
-.media-block figcaption b{color:var(--indigo2)}
-.video-grid{display:grid;grid-template-columns:1fr;gap:1.1rem;margin:1.4rem 0}
-@media(min-width:720px){.video-grid.two{grid-template-columns:1fr 1fr}}
-.media-library{margin:2.2rem 0 1rem;padding:1.2rem 1rem 1.4rem;border:1px solid var(--indigo-line);border-radius:16px;background:linear-gradient(180deg,var(--indigo-soft),transparent)}
-.media-library h3{font-family:var(--sans);font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo2);margin-bottom:.4rem}
-.media-library .lead{color:var(--muted);font-size:.92rem;margin-bottom:1rem}
-
-.corpus-bar{flex-wrap:nowrap;min-height:3.2rem}
-.corpus-bar .brand-cluster{
-  display:flex;align-items:center;gap:.5rem;
-  border-bottom:none;flex-shrink:0;min-width:0;
-}
-.corpus-bar .brand-cluster:hover{border-bottom:none}
-.corpus-bar .pin{flex-shrink:0;object-fit:cover}
-.corpus-bar .pin.eros-mark{
-  width:52px;height:52px;
-  border-color:rgba(125,143,184,.5);
-  box-shadow:0 0 16px rgba(125,143,184,.3);
-}
-.corpus-bar .pin.pulse-mark{width:42px;height:42px}
-.corpus-bar .brand-text{
-  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--indigo2);font-weight:700;white-space:nowrap;
-}
-.corpus-bar nav{
-  display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;
-  gap:.12rem;min-width:0;flex:1 1 auto;
-}
-.corpus-bar nav a{text-align:left}
-@media(max-width:720px){
-  .corpus-bar{padding:.45rem .7rem;gap:.35rem}
-  .corpus-bar .pin.eros-mark{width:44px;height:44px}
-  .corpus-bar .pin.pulse-mark{width:36px;height:36px}
-  .corpus-bar .brand-text{font-size:.62rem;letter-spacing:.08em}
-  .corpus-bar .compass{font-size:.88rem}
-  .corpus-bar nav a{padding:.26rem .4rem;font-size:.56rem}
-}
-@media(max-width:520px){
-  .corpus-bar .pin.eros-mark{width:38px;height:38px}
-  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
-  .corpus-bar .brand-text{font-size:.58rem;max-width:5.5rem;overflow:hidden;text-overflow:ellipsis}
-  .corpus-bar .compass{font-size:.82rem}
-  .corpus-bar nav a{padding:.22rem .32rem;font-size:.52rem}
-}
-@media(max-width:380px){
-  .corpus-bar .brand-text{display:none}
-  .corpus-bar .pin.eros-mark{width:36px;height:36px}
-  .corpus-bar .pin.pulse-mark{width:30px;height:30px}
-}
-.brand-seal{
-  margin:1.3rem auto .8rem;
-  text-align:center;
-  max-width:min(220px,55vw);
-}
-.brand-seal img{
-  display:block;width:100%;height:auto;
-  border-radius:50%;
-  border:3px solid var(--indigo-line);
-  box-shadow:0 12px 40px rgba(125,143,184,.2);
-}
-.brand-seal figcaption{
-  font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--indigo2);margin-top:.65rem;font-weight:700;
-}
-.yt-wrap{margin:1.6rem 0;border:1px solid var(--indigo-line);border-radius:12px;overflow:hidden;background:var(--surface)}
-.yt-lab{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--indigo2);padding:.7rem 1rem .35rem;font-weight:700}
-.yt-frame{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
-.yt-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.yt-cap{font-family:var(--sans);font-size:.86rem;color:var(--soft);padding:.85rem 1.05rem 1rem;line-height:1.65;border-top:1px solid var(--hair)}
-.yt-cap b{color:var(--indigo2);letter-spacing:.04em}
-.axiom-g2{margin:1.4rem 0;padding:1.2rem 1.25rem;border:1px solid var(--gold-line);border-left:4px solid var(--gold);border-radius:10px;background:linear-gradient(135deg,#17140e,#1a1710)}
-.axiom-g2 .ag-k{font-family:var(--sans);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:.65rem}
-.axiom-g2 p{margin:0;color:var(--soft);font-size:1.02rem;line-height:1.8}
-.axiom-g2 p + p{margin-top:.7rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 <meta name="theme-color" content="#07070e"/>
 <script type="application/ld+json">
@@ -461,28 +309,42 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 <a class="skip-link" href="#opening">Skip to content</a>
 
 <header class="corpus-bar">
-  <a class="brand brand-cluster" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
-    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
-    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
-    <span class="compass" aria-hidden="true">🧭</span>
-    <span class="brand-text">EROS · Living Egg</span>
-  </a>
-  <nav aria-label="Section navigation">
+  <div class="brand-row">
+    <a class="logo-cluster" href="#top" aria-label="The Living Egg · top">
+      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
+      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+      <span class="compass" aria-hidden="true">🧭</span>
+    </a>
+    <div class="title-cluster">
+      <span class="title-rule" aria-hidden="true"></span>
+      <span class="brand-text">The Living Egg</span>
+    </div>
+  </div>
+  <nav class="chapter-strip" aria-label="Chapter navigation">
     <a href="#part1">Egg</a>
     <a href="#part2">Light</a>
     <a href="#part3">Bedrock</a>
     <a href="#part4">Time</a>
     <a href="#part5">Affinity</a>
     <a href="#part6">Postulates</a>
+    <a href="#part7">Plasma</a>
+    <a href="#part8">Life</a>
     <a href="#part9">Operators</a>
+    <a href="#part10">Tongue</a>
     <a href="#part11">Manual</a>
+    <a href="#part12">Witness</a>
+    <a href="#part13">Surface</a>
+    <a href="#part14">Hidden</a>
+    <a href="#part15">Third</a>
+    <a href="#part16">Precedence</a>
     <a href="#part17">Practice</a>
+    <a href="#part18">Next</a>
+    <a href="#telegram">Share</a>
     <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
   </nav>
 </header>
 
-<main class="page">
+<main class="page" id="top">
 
 <header class="cover">
   <p class="kick">The EROS Universe · Cosmogony &amp; Manual of Law</p>
@@ -498,12 +360,13 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <div class="seal">
     <strong>Frame, stated once.</strong> This is exploration and story architecture — not a decree that you abandon your sky. Soft knowledge is labelled. You keep your mind. What follows is written so that anyone can finish a section and <em>use</em> it: in a scene, a pool, a comic panel, a conversation.
   </div>
-
-  <figure class="brand-seal">
-    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" width="220" height="220" loading="lazy"/>
-    <figcaption>Tenacity Through Integrity</figcaption>
-  </figure>
-
+  <p class="layer-key">
+    <span>· Enclosure</span>
+    <span>· Iteration as time</span>
+    <span>· Expansion as affinity</span>
+    <span>· Postulates before mass</span>
+    <span>· Life at home in the shell</span>
+  </p>
 </header>
 
 <details class="eros-menu" id="how-to-read-egg">
@@ -516,10 +379,10 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
       <div><b>As truth</b><span>Testable claims about enclosure, iteration, bond, and why "nothing" cannot do creative work.</span></div>
       <div><b>As education</b><span>Soft physics and mind-architecture you can explain to a friend in one sitting.</span></div>
       <div><b>As story</b><span>Membrane weather, custodians, a sky that confuses on purpose.</span></div>
-      <div><b>As manual</b><span>Eleven laws, fifty-one creator items for film, comic, game, Telegram.</span></div>
+      <div><b>As manual</b><span>Eleven laws, fifty-one creator seeds for film, comic, game, Telegram.</span></div>
       <div><b>As thesis</b><span>Why affinity, cohesion, and EROS are one law at every scale.</span></div>
     </div>
-    <p style="margin-top:1rem"><strong>Job of this book.</strong> The Living Egg is the <em>result</em> — the created shell, postulates, attributes, and law-reality you can build inside. <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a> is the source code. <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> is persons and story on the ancient rail. <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a> is the human macro stage. <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> is PulseChain tokenomics and Poolonomics education. <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> names the four law-forces as an on-chain engine. <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Letter to Jake</a> is the TitanX door.</p>
+    <p style="margin-top:1rem"><strong>Job of this book.</strong> The Living Egg is the <em>result</em> — the created shell, postulates, attributes, and law-reality you can build inside. <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a> is the source code. <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a> is the toroidal reading of the same vessel. <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a> is the bedrock under the house. <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a> is the working mechanics. <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> is persons and story on the ancient rail. <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a> is the human macro stage. <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> is PulseChain tokenomics and Poolonomics education. <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> names the four law-forces as an on-chain engine. <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Letter to Jake</a> is the TitanX door.</p>
   </div>
 </details>
 
@@ -537,6 +400,9 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a> — toroidal reading</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a> — bedrock</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a> — mechanics</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a> — archive rail</p>
     <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
@@ -547,7 +413,8 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <summary>How this book relates · companion map</summary>
   <div class="menu-body">
     <p>This is the cosmology floor every other EROS book points to. <strong>Inward is forwards</strong> is defined and worked here — not as fee proof, as vessel law.</p>
-    <p>Companions: <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> (operators) · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> (tongue) · <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Complete Plan</a> (spine) · <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> (on-ramp) · <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum Standard</a> (transform).</p>
+    <p>The toroidal geometry of the same vessel — two lobes, one crossover, the Isotope as fold — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>. That book is the shape; this one is the body inside it.</p>
+    <p>Companions: <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> (operators) · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> (tongue) · <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a> (bedrock) · <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a> (mechanics) · <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Complete Plan</a> (spine) · <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a> (on-ramp) · <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum Standard</a> (transform).</p>
     <p>Long-form lawbook — read in sittings. Creators: Part XI kit + Part XVII practice.</p>
   </div>
 </details>
@@ -555,6 +422,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 <details class="toc-card" id="toc-anchor">
   <summary>Contents</summary>
   <div class="toc-grid">
+    <a href="#opening"><span class="tn">·</span>Prologue · The Crack in the Lens</a>
     <a href="#part1"><span class="tn">I</span>The Egg</a>
     <a href="#part2"><span class="tn">II</span>Light &amp; Lensing</a>
     <a href="#part3"><span class="tn">III</span>Bedrock · Why Something</a>
@@ -576,9 +444,21 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
     <a href="#part18"><span class="tn">XVIII</span>The Next Order</a>
     <a href="#eros-crypto"><span class="tn">◈</span>EROS Crypto</a>
     <a href="#research-doors"><span class="tn">◈</span>Research Doors</a>
+    <a href="#telegram"><span class="tn">📱</span>Share Layer</a>
+    <a href="#apply"><span class="tn">◇</span>Application &amp; World Building</a>
     <a href="#coda"><span class="tn">❦</span>Coda</a>
   </div>
 </details>
+
+<aside class="public-link">
+  <span class="pl-k">🖇️ Public Studio · Live</span>
+  <p class="pl-t">Explore this cosmology in NotebookLM 📚</p>
+  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone with the link can view, ask questions in chat, and generate custom study materials. Sources are locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
 
 <section id="opening">
   <h2>Prologue · The Crack in the Lens</h2>
@@ -597,7 +477,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 
   <div class="pull"><em>"What if the math is right, but the geometry is wrong?"</em></div>
 
-  <figure class="media-block">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/>
     </video>
@@ -615,7 +495,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
       <li><b>As truth</b> — a set of testable claims about enclosure, iteration, bond, and why "nothing" cannot do creative work.</li>
       <li><b>As education</b> — soft physics and mind-architecture you can explain to a friend in one sitting.</li>
       <li><b>As story</b> — membrane weather, custodians, and a sky that confuses on purpose.</li>
-      <li><b>As manual</b> — eleven canon laws and fifty-one prompts for film, comic, game, Telegram.</li>
+      <li><b>As manual</b> — eleven canon laws and fifty-one creator seeds for film, comic, game, Telegram.</li>
       <li><b>As matter thesis</b> — why affinity, cohesion, and EROS are one law at every scale.</li>
     </ul>
   </div>
@@ -624,23 +504,20 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 
   <p>What you are about to read is a spine. It runs through the mouth, the mind, the market, and the sky. Once you can feel it, you will find it in places you had stopped noticing.</p>
 
-  <p>This edition is the full reference. Eighteen Parts. Fifty-one creator items. A complete consonant reference. Historical analysis. The daily practice. One reading of the substrate — light, condensation, and the attraction of light to light — is developed in Part V. If you are reading this on the way to something else, the Prologue and Parts I–VI will carry the essential spine. If you are a maker — a writer, a coder, a podcaster, a community-builder — the later Parts will give you the operating system.</p>
+  <p>This edition is the full reference. Eighteen Parts. Fifty-one creator seeds. A complete consonant reference. Historical analysis. The daily practice. One reading of the substrate — light, condensation, and the attraction of light to light — is developed in Part V. If you are reading this on the way to something else, the Prologue and Parts I–VI will carry the essential spine. If you are a maker — a writer, a coder, a podcaster, a community-builder — the later Parts will give you the operating system.</p>
 
   <div class="axiom"><b>Frame</b> Belief needs axioms that creators can obey without a central committee. Physics stories need laws they can lean on. Games and films need heuristics they can share. This volume supplies that floor. Where the claim is physical, the mouth and the body are the court. Where the claim is structural, the axioms are. Where the claim is speculative, it is labelled. You are the examiner.</div>
 
   <div class="connect">
     <strong>Where this sits in the corpus</strong>
-    The source code of the operators is <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The tongue is <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The persons and residual are <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. The human macro rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The token surface is <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>. The transform engine is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. The wider five-layer stack is <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>.
+    The source code of the operators is <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The tongue is <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The persons and residual are <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. The human macro rail is <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The token surface is <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>. The transform engine is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. The wider five-layer stack is <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>. The toroidal reading of the same vessel is <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>. The bedrock under the house is <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>. The working mechanics are <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>.
   </div>
 </section>
 
-<div class="banner-hero" id="part1">
-  <img src="https://meaning-unconfounded.github.io/images/banner1.webp" alt="Part One — The Egg" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-  <div class="overlay">
-    <span class="bk">Part One</span>
-    <span class="bt">The Egg</span>
-    <span class="bs">Enclosure · membrane · Center · the universe is here</span>
-  </div>
+<div class="part-break" id="part1">
+  <p class="pk">Part One</p>
+  <h2>The Egg</h2>
+  <p>Enclosure · membrane · Center · the universe is here</p>
 </div>
 
 <section>
@@ -656,7 +533,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 
   <p>The enclosure is not a cage. It is a set of conditions. Every game has conditions. Every game has a board. The board is not the enemy of play — it is what makes play possible. What the outward model has trained us to believe is that the board has no edges, and therefore no meaning. What the enclosure returns is the edges — and with them, the meaning.</p>
 
-  <figure class="media-block">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_atlas.mp4" type="video/mp4"/>
     </video>
@@ -680,7 +557,7 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <p>You do not need to accept the Egg to understand what is being asked. You need only notice that the outward model has not been able to answer a single question about what anything is <em>for</em>. And if the geometry has an inside, then the answer was never missing — it was simply facing the other way.</p>
 </section>
 
-<div class="vance">
+<div class="witness">
   <span class="vk">The Witness · I</span>
   <p>She keeps the deleted variable for another two hours. Then she writes the new reading down in a notebook, closes the notebook, and goes home. She does not tell anyone. Not yet. Not until she has checked the parallax.</p>
 </div>
@@ -706,17 +583,24 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
 
   <p>The Egg's boundary is that kind of boundary. Not a wall — a membrane. Semi-permeable. Selective. Alive. The membrane is where exchange happens. Where signals cross. Where an interior becomes a <em>thing</em> in the first place. The enclosure is not what keeps you out. It is what makes <em>in</em> possible.</p>
 
-  <div class="create"><strong>Create prompt — Comic</strong> Panel 1: dead rock in a void. Panel 2: same rock, now with visible pulse-lines. Panel 3: a custodian figure laying a hand on the shell. Caption: "It was never dead. We were the ones who couldn't feel it."</div>
+  <div class="create"><strong>Create seed — Comic</strong> Panel 1: dead rock in a void. Panel 2: same rock, now with visible pulse-lines. Panel 3: a custodian figure laying a hand on the shell. Caption: "It was never dead. We were the ones who couldn't feel it."</div>
+
+  <div class="connect">
+    <strong>Companion depth · the toroidal shape of the shell</strong>
+    The Egg is a torus — two lobes, one crossover, one direction of continuation. The full toroidal reading of this vessel, the Isotope as fold, and the geometry the shell takes when seen whole, is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>. That book is the shape. This one is the body inside it.
+  </div>
 </section>
 
-<div class="banner-hero" id="part2">
-  <img src="https://meaning-unconfounded.github.io/images/banner2.webp" alt="Part Two — Light and Lensing" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-  <div class="overlay">
-    <span class="bk">Part Two</span>
-    <span class="bt">Light &amp; Lensing</span>
-    <span class="bs">Optics · inversion · soft glass · stacked measurement</span>
-  </div>
+<div class="part-break" id="part2">
+  <p class="pk">Part Two</p>
+  <h2>Light &amp; Lensing</h2>
+  <p>Optics · inversion · soft glass · stacked measurement</p>
 </div>
+
+<figure class="plate medium">
+  <img src="https://meaning-unconfounded.github.io/images/inside2.jpeg" alt="Toroidal figure-eight — one lobe of the Living Egg" loading="lazy"/>
+  <figcaption><b>Part II · The Vessel</b> One lobe of the Living Egg. Two worlds joined at the Isotope. The enclosure we inhabit.</figcaption>
+</figure>
 
 <section>
   <h2>Glass in the sky</h2>
@@ -726,11 +610,6 @@ footer.master .pulse-row span{font-size:.62rem;letter-spacing:.14em;text-transfo
   <p>Anyone who has stood on a hot road at noon has watched the horizon wobble. Anyone who has watched a ship disappear hull-first at sea has watched a plane do the same. Anyone who has seen the moon rise swollen and orange has watched the atmosphere bend a small rock into a large one.</p>
 
   <p>That is one layer. Add the ionosphere. Add the magnetosphere. Add plasma, dust, water vapour, ice crystals, and — this is the part nobody counts — the institution that tells you what the light is <em>supposed</em> to mean. Each is a lens. A species looking up from the bottom of that stack does not see the void. It sees the stack.</p>
-
-  <figure class="plate">
-    <img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="Plate III — Light and lensing" loading="lazy" onerror="this.style.display='none'"/>
-    <figcaption>Plate III · Light &amp; Lensing — the view that confuses</figcaption>
-  </figure>
 
   <div class="claim indigo">
     <p><strong>Axiom L1 — Lensing.</strong> Some observations attributed to infinite void may be membrane-regime optics or narrative compression. Instruments still measure; interpretation still chooses a geometry.</p>
@@ -750,10 +629,20 @@ Reading: the sky may be reporting the lens, not the distance.</div>
 
   <p>What this does not mean: it does not mean the sky is fake. It does not mean the stars are lights painted on a dome. It does not mean we are inside a snow globe. What it means is that the geometry of the shell — whatever its exact shape — is not directly observable through any measurement that presumes straight light. To see the true geometry, you have to <em>model</em> the light, not just collect it.</p>
 
+  <figure class="plate medium">
+    <img src="https://meaning-unconfounded.github.io/images/egg-lensing.jpg" alt="The instrument is the problem — lensing" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+    <figcaption><b>The Instrument Is the Problem</b> Every telescope on Earth is calibrated as if light went straight. Every one of them.</figcaption>
+  </figure>
+
   <div class="axiom"><b>Heuristic H2</b> Bent light before big void. Confusion can be optical or institutional; villains may exploit either.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the toroidal shape of the lens</strong>
+    The fold of the enclosure adds a second inversion to every ray. The toroidal reading of light and lensing — how the crossover curves every line of sight — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part II.
+  </div>
 </section>
 
-<div class="vance">
+<div class="witness">
   <span class="vk">The Witness · II</span>
   <p>She held a fragment of the observatory's geodesic dome up to a laser pointer. The beam curved. Not dramatically — barely. But it curved. And she stood there, at 4:15 in the morning, thinking: <em>every telescope on Earth is calibrated as if light went straight. Every one of them.</em></p>
 </div>
@@ -777,16 +666,19 @@ Reading: the sky may be reporting the lens, not the distance.</div>
 
   <p>Nine layers. A photon of light crosses all nine before it reaches you. Some bend the light. Some bend the meaning. Which is which is a question almost nobody has been trained to ask.</p>
 
-  <div class="create"><strong>Create prompt — Game</strong> Mission control watches "star" positions behave like fixed shell markings under changing observer angle. The software has no category for it. The player must decide: trust the instrument, or trust the geometry.</div>
+  <div class="create"><strong>Create seed — Game</strong> Mission control watches "star" positions behave like fixed shell markings under changing observer angle. The software has no category for it. The player must decide: trust the instrument, or trust the geometry.</div>
 </section>
-
-<div class="divider-sm" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/hr1.webp" alt="" loading="lazy" onerror="this.style.display='none'"/></div>
 
 <div class="part-break" id="part3">
   <p class="pk">Part Three</p>
   <h2>Bedrock · Why Something</h2>
   <p>Absolute nothing is impossible · existence was never optional</p>
 </div>
+
+<figure class="plate">
+  <img src="https://meaning-unconfounded.github.io/images/inside3.jpeg" alt="Funnel / wormhole interior — the impossibility of the void" loading="lazy"/>
+  <figcaption><b>The Funnel</b> The inward geometry narrows. The void is not a legal address; the fold is what the picture cannot escape.</figcaption>
+</figure>
 
 <section>
   <h2>Zero apples. Not zero everything.</h2>
@@ -797,7 +689,7 @@ Reading: the sky may be reporting the lens, not the distance.</div>
 
   <p>This is not a trick. It is the floor.</p>
 
-  <figure class="media-block">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_apple.mp4" type="video/mp4"/>
     </video>
@@ -825,7 +717,12 @@ Reading: the sky may be reporting the lens, not the distance.</div>
 
   <div class="pull">Existence did not come into being so much as it was never permitted to fail.</div>
 
-  <div class="create"><strong>Create prompt — Telegram</strong> (1) You can have zero apples. (2) You cannot have zero everything. (3) The void was never a legal address. — Inward is forwards.</div>
+  <div class="create"><strong>Create seed — Telegram</strong> (1) You can have zero apples. (2) You cannot have zero everything. (3) The void was never a legal address. — Inward is forwards.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the bedrock derivation</strong>
+    The two primary truths — X(1 − X) = 0 and X + (1 − X) = 1 — and the full derivation of the bedrock are in <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>, Movement I. That book is the floor under the house. The toroidal reading of the bedrock — why neither lobe of the torus can be a void — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part IV.
+  </div>
 </section>
 
 <div class="part-break" id="part4">
@@ -866,16 +763,24 @@ Reading: the sky may be reporting the lens, not the distance.</div>
 
   <div class="axiom"><b>Heuristic H3</b> Show change stored, not only clocks. A world without iteration is a still frame, not a cosmos.</div>
 
-  <div class="create"><strong>Create prompt — Short film beat</strong> A character's watch stops. Not broken — the moment it froze. Cut to them twenty years later, unchanged in one specific room. Voiceover: "Some things don't age. They just keep being the day they stopped."</div>
-</section>
+  <div class="create"><strong>Create seed — Short film beat</strong> A character's watch stops. Not broken — the moment it froze. Cut to them twenty years later, unchanged in one specific room. Voiceover: "Some things don't age. They just keep being the day they stopped."</div>
 
-<div class="divider-sm" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/hr2.webp" alt="" loading="lazy" onerror="this.style.display='none'"/></div>
+  <div class="connect">
+    <strong>Companion depth · the toroidal reading of time</strong>
+    In the toroidal frame, the crossover of the figure-eight is the one iteration that never completes — the count that continues without finishing. That is why the Center is a direction, not a destination. Full treatment in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part V. The working mechanics — rate and state — are in <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>, Part I.
+  </div>
+</section>
 
 <div class="part-break" id="part5">
   <p class="pk">Part Five</p>
   <h2>Expansion, Weight &amp; Affinity</h2>
   <p>Shared growth · ratio · inertia · bonding as gravity</p>
 </div>
+
+<figure class="plate">
+  <img src="https://meaning-unconfounded.github.io/images/inside4.jpeg" alt="Dual-lobe structure — two expansions meeting" loading="lazy"/>
+  <figcaption><b>Two Expansions Meeting</b> The larger body and the smaller body are both growing. Weight is the differential.</figcaption>
+</figure>
 
 <section>
   <h2>All grow at the same rate</h2>
@@ -886,7 +791,7 @@ Reading: the sky may be reporting the lens, not the distance.</div>
 
   <p>The elegance of this reading is that it does not need a separate attractive force. Gravity is not a thing that reaches across a void. It is what you feel when the body you are standing on is expanding toward you, and you are expanding away from it, and the difference in size makes one direction win.</p>
 
-  <figure class="media-block">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/>
     </video>
@@ -918,11 +823,6 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>If the substrate is light, the force that binds is not a separate thing. It is light's attraction to light — the enclosure's tendency to seek its own coherence. This is what the Egg has been calling <em>affinity</em>. It is what physics names gravity at one scale, and what EROS names bond at another. Three names, one operator.</p>
 
-  <figure class="plate">
-    <img src="https://meaning-unconfounded.github.io/images/eros-egg-substrate-light.jpg" alt="Light condenses · affinity" loading="lazy" onerror="this.style.display='none'"/>
-    <figcaption>Light condenses · affinity</figcaption>
-  </figure>
-
   <div class="claim indigo">
     <p><strong>Reading G1-b — Attraction of light to light.</strong> Under this reading, gravity and EROS are one operator at different scales: the enclosure's substrate drawn toward its own coherence. Inward is forwards because the substrate is always already moving toward itself. Offered as a lens; the structural claim is what the book leans on.</p>
   </div>
@@ -938,9 +838,14 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <p>This gives the lore a way to talk about ages without moral dualism. Stories that follow may treat a polarity shift as an event, a ritual, a turn. The Egg itself does not require one. It only requires that the enclosure be capable of change at the scale of eras — because it is alive, and everything alive has weather.</p>
 
   <div class="axiom"><b>Axiom B1 — Cohesion</b> Systems that cannot store relationship decay to zero when stimulus stops. Design for stored bond.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the two axes</strong>
+    Expansion, ratio, and inertia are the floor. The working mechanics — rate and state, the five forms (Anchor-Drop, Phase-Glide, Crystal Expansion, The Compact, Stutter-Step) — are in <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>. The toroidal reading of inward expansion — why the direction of continuation is the fold — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part VI.
+  </div>
 </section>
 
-<div class="vance">
+<div class="witness">
   <span class="vk">The Witness · III</span>
   <p>She pulled up the declassified aerodynamic data from the 1970s. The Concorde. The SR-71. At cruising speed — Mach 2.04, sixty thousand feet — the Concorde held a <strong>nose-up attitude of about 5 degrees</strong> relative to the horizon.</p>
   <p>On a ball Earth, she realized, you would have to constantly angle the nose <em>downward</em> to follow the curvature. But the Concorde flew nose-up. Not by accident. By necessity. On an inner surface, the ground curves upward around you. To follow that upward curve at speed, you pitch the nose <em>up</em> toward the center.</p>
@@ -963,23 +868,28 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <p class="lede">The missing chain, stated once so it can be used.</p>
   <p>Part Four said time is iteration. Earlier in this Part we said atoms expand at a shared rate and weight is inertia resisting acceleration. Affinity is gravity's soft twin. One law ties them:</p>
 
-  <div class="axiom-g2">
-    <span class="ag-k">Axiom G2 · Inward Expansion</span>
-    <p>Everything expands. The rind is not a fixed bowl; it is a growing surface. Growth is inward — toward the asymptotic Center. Resistance to that inward growth is felt as gravity. Gravity is the iteration of everything that was, now inside itself. Memory and past are what was grown upon. Time is the count of that iteration. The impossible Center is not a destination; it is the direction of continuation.</p>
+  <div class="axiom-g2" style="margin:1.4rem 0;padding:1.2rem 1.25rem;border:1px solid var(--gold-line);border-left:4px solid var(--gold);border-radius:10px;background:linear-gradient(135deg,#17140e,#1a1710)">
+    <span style="font-family:var(--sans);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:.65rem">Axiom G2 · Inward Expansion</span>
+    <p style="margin:0;color:var(--soft);font-size:1.02rem;line-height:1.8">Everything expands. The rind is not a fixed bowl; it is a growing surface. Growth is inward — toward the asymptotic Center. Resistance to that inward growth is felt as gravity. Gravity is the iteration of everything that was, now inside itself. Memory and past are what was grown upon. Time is the count of that iteration. The impossible Center is not a destination; it is the direction of continuation.</p>
   </div>
 
   <p>The Center is infinitely far away. We never stop growing toward it. Expansion is not escape into empty room; it is the shell thickening its interior. What was outside becomes inside. What was grown upon becomes memory. The resistance of that enclosed mass to further inward motion is the weight in your hand and the bond that holds a pool.</p>
   <p>Use this as a scene rule: when a character "falls," the house is rising as much as the body is dropping. When a community holds, it is iterating what it already enclosed. When the chart braids, the same law is visible at another magnitude.</p>
 
-  <div class="create"><strong>Create prompt — Film beat</strong> A custodian walks the inner rind. Voiceover: "We thought gravity was pull from a void. It was the house insisting we stay in relationship." End on a bond transaction confirming on-screen.</div>
+  <div class="create"><strong>Create seed — Film beat</strong> A custodian walks the inner rind. Voiceover: "We thought gravity was pull from a void. It was the house insisting we stay in relationship." End on a bond transaction confirming on-screen.</div>
 </section>
 
-<!-- ═══════════════════ PART VI · POSTULATES ═══════════════════ -->
 <div class="part-break" id="part6">
   <p class="pk">Part Six</p>
   <h2>Postulates, Mass &amp; the Refactored Mind</h2>
   <p>Intention · conflict · stored mass · TROM bridge</p>
 </div>
+
+<!-- ═══ BLACK SEAL · pivot at the postulates section ═══ -->
+<figure class="brand-seal silver">
+  <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+  <figcaption>Tenacity Through Integrity</figcaption>
+</figure>
 
 <section>
   <h2>Intention precedes mass</h2>
@@ -1049,17 +959,24 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <div class="axiom"><b>Heuristic H4</b> Math does not invent the world; it tracks relations after intention and conflict have done their work.</div>
 
-  <div class="create"><strong>Create prompt — Game loop</strong> Player character has a visible weight in a specific body part that changes as they resolve postulates. Success does not mean winning the fight — it means the weight lifts. Failure state: unbonding (liquidity exit), not HP zero.</div>
+  <div class="create"><strong>Create seed — Game loop</strong> Player character has a visible weight in a specific body part that changes as they resolve postulates. Success does not mean winning the fight — it means the weight lifts. Failure state: unbonding (liquidity exit), not HP zero.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the mechanics of postulates and release</strong>
+    The four basics, the freeze, the body-as-map, and the release procedure are in <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>, Movement I §§3–4 and Movement II §6. The toroidal reading — the freeze as a local torus, the crossover as stored postulate — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part VII.
+  </div>
 </section>
 
-<div class="divider-sm" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/hr3.webp" alt="" loading="lazy" onerror="this.style.display='none'"/></div>
-
-<!-- ═══════════════════ PART VII · PLASMA ═══════════════════ -->
 <div class="part-break" id="part7">
   <p class="pk">Part Seven</p>
   <h2>Plasma, Filaments &amp; Electric Sky</h2>
   <p>Soft EU layer · circuits · Ra-Shen stage light</p>
 </div>
+
+<figure class="plate">
+  <img src="https://meaning-unconfounded.github.io/images/inside5.jpeg" alt="Vortex centre — the wired sky" loading="lazy"/>
+  <figcaption><b>The Wired Sky</b> Looking into the point. Currents run field-aligned through a conducting medium.</figcaption>
+</figure>
 
 <section>
   <h2>A wired medium</h2>
@@ -1068,7 +985,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>Use this softly. It is vocabulary for Ra-Shen and for biologics/electric-sky scenes. Labelled hypothesis, not settled physics. What it gives the lore is a mechanism that is <em>visible in a story</em>. A void gives you emptiness. A circuit gives you drama: currents that can be interrupted, filaments that can fray, discharges that announce themselves as aurora or lightning. If the sky is a wired medium, the sky can be <em>read</em> — and anything readable can be written to.</p>
 
-  <figure class="media-block">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/>
     </video>
@@ -1111,27 +1028,21 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
     <p><strong>Discipline.</strong> Soft-EU remains labelled. The four operators stay four. Geometry here is vocabulary for Ra-Shen stage light, biologic weather, and enclosure circuits. Validate every hard claim yourself. The Egg uses what holds in practice; it does not baptise a name dump as law.</p>
   </div>
 
-  <div class="yt-wrap" id="geometry-video">
-    <p class="yt-lab">Watch · Geometry of the medium · vortex, filament, fractal scale</p>
-    <div class="yt-frame">
-      <iframe src="https://www.youtube.com/embed/AgjexdJ1bj4" title="Geometry, vortices, Birkeland currents, and fractal plasma — research door" loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    </div>
-    <p class="yt-cap"><b>Confirming note.</b> This talk runs the through-line the Egg already assumes: geometry is not decoration on physics — geometers keep becoming astronomers and back again because the medium has shape. Plato and Kepler’s solids, vortex traditions and whirlwind gates, Beltrami → Birkeland, force-free field-aligned currents, Marklund convection, Russell’s tables, helix versus vortex, fractal filaments, nested magnitude. Treat it as a <em>research door</em> into Electric Universe and MHD vocabulary. Soft-EU label applies. It does not replace Axiom G2 or the bond stack; it supplies diagrams and names for creators who need a conducting sky. Cross-check claims. Use what serves the scene and the practice.</p>
+  <div class="create"><strong>Create seed — Diagram beat</strong> One panel: a long helical filament (cylinder). Next panel: a vortex that pinches to a point. Caption: "Same family. Different job. Do not mix the props."</div>
+
+  <div class="create"><strong>Create seed — Film beat</strong> A cold open: a holder watches a filament of swaps on SpaceEros. Cut to inner-rind sky — the same rhythm, the same braided curves, drawn at the scale of continents. Voiceover: "The same law was operating here. It always had been." End on a bond transaction confirming.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the wired shell and the Archive</strong>
+    The full plasma reading as a wired medium — Peratt's laboratory work, the geometry-of-the-medium video, the Firmament Break, and the Archive fragments — is in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>, §§10b–10c. The toroidal reading of the wired sky is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part VIII.
   </div>
-
-  <div class="create"><strong>Create prompt — Diagram beat</strong> One panel: a long helical filament (cylinder). Next panel: a vortex that pinches to a point. Caption: "Same family. Different job. Do not mix the props."</div>
-
-  <div class="create"><strong>Create prompt — Film beat</strong> A cold open: a holder watches a filament of swaps on SpaceEros. Cut to inner-rind sky — the same rhythm, the same braided curves, drawn at the scale of continents. Voiceover: "The same law was operating here. It always had been." End on a bond transaction confirming.</div>
 </section>
 
-<div class="vance">
+<div class="witness">
   <span class="vk">The Witness · IV</span>
   <p>She read the telemetry one last time. It did not reconcile — not because the math was wrong, but because the narrative didn't fit the math. She closed the file. She didn't know what happened. She knew what the geometry said. And the geometry said inward.</p>
 </div>
 
-<!-- ═══════════════════ PART VIII · LIFE INSIDE ═══════════════════ -->
 <div class="part-break" id="part8">
   <p class="pk">Part Eight</p>
   <h2>Life Inside · Fermi · Custodians</h2>
@@ -1145,7 +1056,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>Inside a closed shell, "everywhere" assumes a map where "here" and "there" are far apart. In a finite enclosure, "here" and "there" are <em>layers of the same body</em>. The question quietly dissolves. What is left is not silence. It is <em>depth</em> — a cavity deep enough that looking across it with a radio telescope is like looking across your own abdomen with a hand lens.</p>
 
-  <figure class="media-block">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_facts.mp4" type="video/mp4"/>
     </video>
@@ -1154,9 +1065,9 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>What that changes: some of the traffic that appears in the sky may not be visitors. Some of it may be physiology. Repair. Regulation. Immune response. A body does not have to be understood by its cells. It only has to keep them alive.</p>
 
-  <figure class="plate">
-    <img src="https://meaning-unconfounded.github.io/images/eros-egg-plasma-fauna.jpg" alt="Coherent fauna · ridge" loading="lazy" onerror="this.style.display='none'"/>
-    <figcaption>Coherent fauna · ridge</figcaption>
+  <figure class="plate medium">
+    <img src="https://meaning-unconfounded.github.io/images/egg-custodian.jpg" alt="Custodian — the shell's own attention" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+    <figcaption><b>The Custodian</b> Not a visitor from a distant star. The shell's own attention, made visible at the site of stress.</figcaption>
   </figure>
 
   <div class="claim magenta">
@@ -1186,17 +1097,24 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <div class="axiom"><b>Heuristic H5</b> Custodians want membrane integrity. Human factions want extract, disclose, or deny. Conflict writes itself.</div>
 
-  <div class="create"><strong>Create prompt — Telegram post</strong> "Where is everybody? — The question assumes there is an 'out there' for them to be in. We live in a closed egg. The silence is not a mystery. It is the sound of an enclosed resonance chamber."</div>
+  <div class="create"><strong>Create seed — Telegram post</strong> "Where is everybody? — The question assumes there is an 'out there' for them to be in. We live in a closed egg. The silence is not a mystery. It is the sound of an enclosed resonance chamber."</div>
+
+  <div class="connect">
+    <strong>Companion depth · the third cause and native fauna</strong>
+    The Hessdalen lights, Teodorani's Intelligent Plasma Hypothesis, the Adelanto stationary sphere, and the third-cause category as a whole are in <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>, §§10g and 10h. The toroidal reading of native life at the crossover is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part IX.
+  </div>
 </section>
 
-<div class="divider-sm" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/hr4.webp" alt="" loading="lazy" onerror="this.style.display='none'"/></div>
-
-<!-- ═══════════════════ PART IX · FOUR PRINCIPLES ═══════════════════ -->
 <div class="part-break" id="part9">
   <p class="pk">Part Nine</p>
   <h2>Four Principles in the Shell</h2>
   <p>Operating system of the Egg</p>
 </div>
+
+<figure class="plate">
+  <img src="https://meaning-unconfounded.github.io/images/inside6.jpeg" alt="Four principles — the operating system of the shell" loading="lazy"/>
+  <figcaption><b>The Operating System</b> Four functions, one architecture. Not a pantheon. The shape the world takes when the work is being done.</figcaption>
+</figure>
 
 <section>
   <h2>Gods as process, not persons</h2>
@@ -1231,14 +1149,18 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>Full theology: <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. Consonant operators: <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. In this book they are the Egg's operating system — not a pantheon to be worshipped, but a shape to be recognized. Recognition is the whole work.</p>
 
-  <div class="create"><strong>Create prompt — Comic page</strong> Four panels, one principle per panel. Naun holds the frame. Ra-Shen burns through it. Thoth reads the marks. EROS braids the two together. Final caption: "None of them is a person. All of them are the shape the world takes when the work is being done."</div>
+  <div class="create"><strong>Create seed — Comic page</strong> Four panels, one principle per panel. Naun holds the frame. Ra-Shen burns through it. Thoth reads the marks. EROS braids the two together. Final caption: "None of them is a person. All of them are the shape the world takes when the work is being done."</div>
+
+  <div class="connect">
+    <strong>Companion depth · the four operators</strong>
+    The full narrative theology — NaUn as Architect, Ra-Shen as bounded radiation, Thoth as teacher-healer, EROS as the bond — with the two sons, the breaking, and the canon, is in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The toroidal reading of the four at the crossover is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part X.
+  </div>
 </section>
 
-<!-- ═══════════════════ PART X · CONSONANT BRIDGE ═══════════════════ -->
 <div class="part-break" id="part10">
   <p class="pk">Part Ten</p>
   <h2>The Consonant Bridge</h2>
-  <p>From the mouth to the axioms · Western Influence meets The Living Egg</p>
+  <p>From the mouth to the axioms · language as structure</p>
 </div>
 
 <section>
@@ -1284,18 +1206,17 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <div class="axiom"><b>Bridge law</b> When you say <em>matter</em>, you are naming M. When you say <em>boundary</em>, you are naming B. When you say <em>continue</em>, you are naming N. The Egg is not a theory laid on top of language. It is the shape language has always been saying.</div>
 
   <p style="font-size:.9rem;color:var(--muted);margin-top:1.2rem;"><em>Full consonant reference — 22 operators, five tiers, statistical confidence — in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. This page is the bridge, not the field guide.</em></p>
+
+  <div class="connect">
+    <strong>Companion depth · the mouth-as-cosmos bridge</strong>
+    The toroidal reading of the mouth — every consonant as a small torus, the fold of the tongue and palate as the smallest crossover — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XI. That book is the shape. This page is the bridge.
+  </div>
 </section>
 
-<div class="divider-sm" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/hr5.webp" alt="" loading="lazy" onerror="this.style.display='none'"/></div>
-
-<!-- ═══════════════════ PART XI · MANUAL OF LAW ═══════════════════ -->
-<div class="banner-hero" id="part11">
-  <img src="https://meaning-unconfounded.github.io/images/banner3.webp" alt="Part Eleven — Manual of Law" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-  <div class="overlay">
-    <span class="bk">Part Eleven</span>
-    <span class="bt">Manual of Law for Makers</span>
-    <span class="bs">Canon laws · heuristics · fifty-one creator items</span>
-  </div>
+<div class="part-break" id="part11">
+  <p class="pk">Part Eleven</p>
+  <h2>Manual of Law for Makers</h2>
+  <p>Canon laws · heuristics · fifty-one creator seeds</p>
 </div>
 
 <section>
@@ -1319,11 +1240,11 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
     </ul>
   </div>
 
-  <div class="divider-sm" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/hr6.webp" alt="" loading="lazy" onerror="this.style.display='none'"/></div>
+  <h3>Fifty-one creator seeds</h3>
 
-  <h3>Fifty-one creator items</h3>
+  <p>These are seeds, not assignments. Use what serves you. Skip what does not. Nothing here is required reading for the cosmology; it is material for whoever wants to build inside it.</p>
 
-  <h4>Character sketches (4)</h4>
+  <h4>Character sketches</h4>
 
   <p><strong>1 · Naun — the Architect.</strong> He does not speak. He does not appear. He is felt only in the shape of things that hold. In every scene where a law cannot be broken, Naun is present — but only as the wall that the character ran into. Never as a person. When a writer needs Naun on screen, they should show the wall, not the builder. Naun's face is the fact that the room has a ceiling.</p>
 
@@ -1333,7 +1254,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p><strong>4 · EROS — the Bond.</strong> EROS does not have a character. EROS is a relationship. When two characters stay together despite overwhelming pressure — that is EROS. When a community keeps a promise nobody is enforcing — that is EROS. When a token survives a cycle of speculation and remains — that is EROS. EROS is not a being. EROS is a shape two beings take when they decide to hold.</p>
 
-  <h4>Scene breakdowns (3)</h4>
+  <h4>Scene breakdowns</h4>
 
   <p><strong>5 · Membrane crisis.</strong> A tear opens in the inner rind. Custodians move to repair it. A human faction wants to exploit it for strategic advantage. The scene plays out in parallel: the custodian's hands working, the faction meeting arguing. Both scenes have the same rhythm — the same cuts, the same pauses. The viewer slowly realizes the two scenes are the same scene, in different registers. The custodian closes the tear. The faction closes the meeting. Neither knows about the other. Cut to black.</p>
 
@@ -1341,31 +1262,31 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p><strong>7 · The notebook.</strong> A young scientist inherits her grandmother's notebooks. They contain decodings — consonant tables, postulate diagrams, notes in the margin about "the geometry." She does not understand them at first. By the end of the film, she realizes the notebooks are not a theory. They are a <em>practice</em>. What her grandmother left her was not a claim about the sky. It was a way of reading.</p>
 
-  <h4>Sample comic scripts (2)</h4>
+  <h4>Sample comic scripts</h4>
 
-  <div class="script">
-    <strong>Comic 1 · The Official Map (8 panels)</strong>
-    <span class="panel">Panel 1</span> A standard classroom. A teacher points at a diagram of the solar system on a chalkboard. The diagram is clean, bright, familiar.
-    <span class="panel">Panel 2</span> Same room, different angle. A small child in the back row is drawing something in the corner of her notebook — a curved shell with markings on it.
-    <span class="panel">Panel 3</span> The teacher's diagram, but with one mark changed: the outermost ring has a slight wobble. The teacher does not notice.
-    <span class="panel">Panel 4</span> The child's drawing, in full. It is the same shell, but from the inside. There are small figures on the inner curve.
-    <span class="panel">Panel 5</span> Close on the child's eye. She is looking at the chalkboard. Then at her drawing. Then at the chalkboard.
-    <span class="panel">Panel 6</span> The teacher erases the diagram and draws a new one. Same diagram, slightly different.
-    <span class="panel">Panel 7</span> The child closes her notebook. The drawing is gone. She looks up.
-    <span class="panel">Panel 8</span> Wide shot. The classroom. The teacher. The children. And, behind the chalkboard, if you look closely, the faint outline of a curved wall. Caption: "Some diagrams are drawn on chalkboards. Some are drawn on us."
+  <div class="ledger">
+    <p><strong>Comic 1 · The Official Map (8 panels)</strong></p>
+    <p>Panel 1 — A standard classroom. A teacher points at a diagram of the solar system on a chalkboard. The diagram is clean, bright, familiar.</p>
+    <p>Panel 2 — Same room, different angle. A small child in the back row is drawing something in the corner of her notebook — a curved shell with markings on it.</p>
+    <p>Panel 3 — The teacher's diagram, but with one mark changed: the outermost ring has a slight wobble. The teacher does not notice.</p>
+    <p>Panel 4 — The child's drawing, in full. It is the same shell, but from the inside. There are small figures on the inner curve.</p>
+    <p>Panel 5 — Close on the child's eye. She is looking at the chalkboard. Then at her drawing. Then at the chalkboard.</p>
+    <p>Panel 6 — The teacher erases the diagram and draws a new one. Same diagram, slightly different.</p>
+    <p>Panel 7 — The child closes her notebook. The drawing is gone. She looks up.</p>
+    <p>Panel 8 — Wide shot. The classroom. The teacher. The children. And, behind the chalkboard, if you look closely, the faint outline of a curved wall. Caption: "Some diagrams are drawn on chalkboards. Some are drawn on us."</p>
   </div>
 
-  <div class="script">
-    <strong>Comic 2 · The Silent K (6 panels)</strong>
-    <span class="panel">Panel 1</span> A woman stands in a doorway. She is about to speak. Her mouth is open.
-    <span class="panel">Panel 2</span> The words she does not say rise around her — visible as blocks of text in mid-air, frozen.
-    <span class="panel">Panel 3</span> The blocks form a wall in front of her. Solid, impassable.
-    <span class="panel">Panel 4</span> She reaches toward the wall. Her hand passes through the space where the words would have been. The wall does not have a surface.
-    <span class="panel">Panel 5</span> She closes her mouth. The wall remains. She walks around it.
-    <span class="panel">Panel 6</span> She opens her mouth and speaks. The wall becomes a door. Caption: "The wall was not silence. The wall was a boundary that had been built but never opened. All it needed was a voice."
+  <div class="ledger">
+    <p><strong>Comic 2 · The Silent K (6 panels)</strong></p>
+    <p>Panel 1 — A woman stands in a doorway. She is about to speak. Her mouth is open.</p>
+    <p>Panel 2 — The words she does not say rise around her — visible as blocks of text in mid-air, frozen.</p>
+    <p>Panel 3 — The blocks form a wall in front of her. Solid, impassable.</p>
+    <p>Panel 4 — She reaches toward the wall. Her hand passes through the space where the words would have been. The wall does not have a surface.</p>
+    <p>Panel 5 — She closes her mouth. The wall remains. She walks around it.</p>
+    <p>Panel 6 — She opens her mouth and speaks. The wall becomes a door. Caption: "The wall was not silence. The wall was a boundary that had been built but never opened. All it needed was a voice."</p>
   </div>
 
-  <h4>Short-film treatments (3)</h4>
+  <h4>Short-film treatments</h4>
 
   <p><strong>8 · Cold open (3 minutes).</strong> A trader watches a chart of swaps on SpaceEros. The chart is braided — filaments branching and reconnecting. Cut to an exterior shot of an inner-rind sky. The same braid appears, drawn at a scale of continents. Voiceover: "We thought gravity was pull from a void. It was the house insisting we stay in relationship." Cut to a single transaction: a bond being confirmed. Cut to black. Credits.</p>
 
@@ -1373,7 +1294,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p><strong>10 · The custodian (4 minutes).</strong> A figure walks along the inner rind. There is no dialogue. The figure places a hand on the shell. We see the shell for the first time in extreme close-up — not rock, not sand, but something between tissue and mineral. The figure removes their hand. There is a soft red mark where the hand was. The figure walks on. Cut to a distant, quiet shot of the shell. Caption: "The repair is not noticed. The repair is not announced. The repair simply is."</p>
 
-  <h4>Game designs (3)</h4>
+  <h4>Game designs</h4>
 
   <p><strong>11 · Core loop · Outer Game.</strong> The player character explores the shell, bonds (stakes liquidity) with other characters, repairs membrane damage, and unlocks Center lore. The core loop: explore, bond, repair, unlock. Each cycle advances one of four axes (enclosure, iteration, expansion, bond) by one point. The player does not fight enemies — the player manages maintenance. Failure state is not death. Failure state is <em>unbonding</em>: the player's pool dissolves and other characters continue without them.</p>
 
@@ -1381,55 +1302,67 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p><strong>13 · Endgame · The Center.</strong> In the final act, the player must travel toward the Center. The Center is not a physical location — it is a depth of understanding. As the player approaches, the environment shifts: fewer things to do, fewer enemies to fight, fewer mechanics to engage. The game gradually simplifies. At the very end, there is no mechanic at all. There is only a room, and a character, and a decision. The decision is not "win or lose." The decision is "hold or release." Both are valid. Both are endings.</p>
 
-  <h4>Telegram / short-form posts (36)</h4>
+  <h4>Telegram / short-form posts</h4>
 
-  <p>One per week for a full year. Grouped here for reference; use them at your own cadence.</p>
+  <p>One per week for a full year, if you want that rhythm. Grouped here as seeds; use them at your own cadence.</p>
 
-  <div class="create"><strong>Post 1</strong> "Weight is affinity. A pool is a promise kept in public. Inward is forwards."</div>
-  <div class="create"><strong>Post 2</strong> "The math was never the problem. The geometry was."</div>
-  <div class="create"><strong>Post 3</strong> "You are not a passenger on a random rock. You are a local author of the universal text."</div>
-  <div class="create"><strong>Post 4</strong> "You can have zero apples. You cannot have zero everything."</div>
-  <div class="create"><strong>Post 5</strong> "A reminder: what holds when the stimulus stops is the only thing that was ever real."</div>
-  <div class="create"><strong>Post 6</strong> "The sky is not silent. The sky is a lens. Learn to read the glass and the silence becomes a signal."</div>
-  <div class="create"><strong>Post 7</strong> "Two thousand years of outward training is undone by a habit. Read the sky as a lid."</div>
-  <div class="create"><strong>Post 8</strong> "You do not have to believe the Egg. You only have to notice that the outward model never answered a single question about meaning."</div>
-  <div class="create"><strong>Post 9</strong> "Bond or decay. There is no third option for a system that cannot store relationship."</div>
-  <div class="create"><strong>Post 10</strong> "Intention sets the board. Conflict stores mass. Math is logistics after."</div>
-  <div class="create"><strong>Post 11</strong> "The frozen structure in your body is not you. It is a room you built and forgot to open."</div>
-  <div class="create"><strong>Post 12</strong> "Inward is forwards. The path to the future is the path to the center."</div>
-  <div class="create"><strong>Post 13</strong> "Every charged memory is a moment that never finished. Help it finish."</div>
-  <div class="create"><strong>Post 14</strong> "You cannot fail at being alive. Existence cannot not-exist. It is the one place you are always safe."</div>
-  <div class="create"><strong>Post 15</strong> "The enlargement of a good thing is not a virtue. The coherence of a thing is."</div>
-  <div class="create"><strong>Post 16</strong> "The Center is not a place. It is a depth of understanding."</div>
-  <div class="create"><strong>Post 17</strong> "Fix the postulate, not the symptom. The mass lifts when the code is rewritten."</div>
-  <div class="create"><strong>Post 18</strong> "The mouth is the first instrument. Speak a word and you are executing the Egg."</div>
-  <div class="create"><strong>Post 19</strong> "Not a glance — a lawbook for a living world."</div>
-  <div class="create"><strong>Post 20</strong> "Bond pools are stored postulates. That is what EROS means."</div>
-  <div class="create"><strong>Post 21</strong> "Everything in this book collapses to one question: what holds when the stimulus stops?"</div>
-  <div class="create"><strong>Post 22</strong> "Read the sky as a membrane, not a void. Read the earth as skin, not floor. Read the horizon as a curve, not a limit."</div>
-  <div class="create"><strong>Post 23</strong> "The body is not the problem. The body is the map. The resolution is at the source level."</div>
-  <div class="create"><strong>Post 24</strong> "You are the shape the world takes when the work is being done. Not a passenger. A shape."</div>
-  <div class="create"><strong>Post 25</strong> "If a system cannot store relationship, it decays. Design for stored bond."</div>
-  <div class="create"><strong>Post 26</strong> "A frozen postulate does not age. That is why it feels as present at sixty as at sixteen."</div>
-  <div class="create"><strong>Post 27</strong> "The most radical thing you can do is remember you are already home."</div>
-  <div class="create"><strong>Post 28</strong> "Ra-Shen is what happens when fire has a hearth. Discipline is not the enemy of power. Discipline is what makes power usable."</div>
-  <div class="create"><strong>Post 29</strong> "The membrane is not a cage. The membrane is why there is an inside at all."</div>
-  <div class="create"><strong>Post 30</strong> "Thoth is every time you wrote down what you learned so someone else could pick it up. That is a god, functioning."</div>
-  <div class="create"><strong>Post 31</strong> "The equivalence principle is not a coincidence. It is a description. You are not pulled down. The floor is rising."</div>
-  <div class="create"><strong>Post 32</strong> "Our kind of being was not created from a void. It was never permitted to fail."</div>
-  <div class="create"><strong>Post 33</strong> "A closed egg does not need visitors to be interesting. It needs to be read."</div>
-  <div class="create"><strong>Post 34</strong> "Do not fake a cosmos to pump a bag. Build a cosmos worth entering."</div>
-  <div class="create"><strong>Post 35</strong> "Your next hour: pick one law. Write three sentences that obey it. Publish or pin them. That is how the world thickens."</div>
-  <div class="create"><strong>Post 36</strong> "The engine continues. The invitation is open. Inward is forwards."</div>
+  <div class="create"><strong>Post 1</strong> Weight is affinity. A pool is a promise kept in public. Inward is forwards.</div>
+  <div class="create"><strong>Post 2</strong> The math was never the problem. The geometry was.</div>
+  <div class="create"><strong>Post 3</strong> You are not a passenger on a random rock. You are a local author of the universal text.</div>
+  <div class="create"><strong>Post 4</strong> You can have zero apples. You cannot have zero everything.</div>
+  <div class="create"><strong>Post 5</strong> What holds when the stimulus stops is the only thing that was ever real.</div>
+  <div class="create"><strong>Post 6</strong> The sky is not silent. The sky is a lens. Learn to read the glass and the silence becomes a signal.</div>
+  <div class="create"><strong>Post 7</strong> Two thousand years of outward training is undone by a habit. Read the sky as a lid.</div>
+  <div class="create"><strong>Post 8</strong> You do not have to believe the Egg. You only have to notice that the outward model never answered a single question about meaning.</div>
+  <div class="create"><strong>Post 9</strong> Bond or decay. There is no third option for a system that cannot store relationship.</div>
+  <div class="create"><strong>Post 10</strong> Intention sets the board. Conflict stores mass. Math is logistics after.</div>
+  <div class="create"><strong>Post 11</strong> The frozen structure in your body is not you. It is a room you built and forgot to open.</div>
+  <div class="create"><strong>Post 12</strong> Inward is forwards. The path to the future is the path to the center.</div>
+  <div class="create"><strong>Post 13</strong> Every charged memory is a moment that never finished. Help it finish.</div>
+  <div class="create"><strong>Post 14</strong> You cannot fail at being alive. Existence cannot not-exist. It is the one place you are always safe.</div>
+  <div class="create"><strong>Post 15</strong> The enlargement of a good thing is not a virtue. The coherence of a thing is.</div>
+  <div class="create"><strong>Post 16</strong> The Center is not a place. It is a depth of understanding.</div>
+  <div class="create"><strong>Post 17</strong> Fix the postulate, not the symptom. The mass lifts when the code is rewritten.</div>
+  <div class="create"><strong>Post 18</strong> The mouth is the first instrument. Speak a word and you are executing the Egg.</div>
+  <div class="create"><strong>Post 19</strong> Not a glance — a lawbook for a living world.</div>
+  <div class="create"><strong>Post 20</strong> Bond pools are stored postulates. That is what EROS means.</div>
+  <div class="create"><strong>Post 21</strong> Everything in this book collapses to one question: what holds when the stimulus stops?</div>
+  <div class="create"><strong>Post 22</strong> Read the sky as a membrane, not a void. Read the earth as skin, not floor. Read the horizon as a curve, not a limit.</div>
+  <div class="create"><strong>Post 23</strong> The body is not the problem. The body is the map. The resolution is at the source level.</div>
+  <div class="create"><strong>Post 24</strong> You are the shape the world takes when the work is being done. Not a passenger. A shape.</div>
+  <div class="create"><strong>Post 25</strong> If a system cannot store relationship, it decays. Design for stored bond.</div>
+  <div class="create"><strong>Post 26</strong> A frozen postulate does not age. That is why it feels as present at sixty as at sixteen.</div>
+  <div class="create"><strong>Post 27</strong> The most radical thing you can do is remember you are already home.</div>
+  <div class="create"><strong>Post 28</strong> Ra-Shen is what happens when fire has a hearth. Discipline is not the enemy of power. Discipline is what makes power usable.</div>
+  <div class="create"><strong>Post 29</strong> The membrane is not a cage. The membrane is why there is an inside at all.</div>
+  <div class="create"><strong>Post 30</strong> Thoth is every time you wrote down what you learned so someone else could pick it up. That is a god, functioning.</div>
+  <div class="create"><strong>Post 31</strong> The equivalence principle is not a coincidence. It is a description. You are not pulled down. The floor is rising.</div>
+  <div class="create"><strong>Post 32</strong> Our kind of being was not created from a void. It was never permitted to fail.</div>
+  <div class="create"><strong>Post 33</strong> A closed egg does not need visitors to be interesting. It needs to be read.</div>
+  <div class="create"><strong>Post 34</strong> Do not fake a cosmos to pump a bag. Build a cosmos worth entering.</div>
+  <div class="create"><strong>Post 35</strong> Your next hour: pick one law. Write three sentences that obey it. Publish or pin them. That is how the world thickens.</div>
+  <div class="create"><strong>Post 36</strong> The engine continues. The invitation is open. Inward is forwards.</div>
 
   <h3>From the archive</h3>
   <p>Four plates from the wider EROS body of work. Free to seed into your own comics, decks, posts. Creators keep their material; the cohesion engine sorts and shares.</p>
 
-  <div class="plate-gallery">
-    <figure><img src="https://meaning-unconfounded.github.io/images/1a.png" alt="Archive plate 1a" loading="lazy" onerror="this.style.display='none'"/><figcaption>Archive · 1a</figcaption></figure>
-    <figure><img src="https://meaning-unconfounded.github.io/images/1b.png" alt="Archive plate 1b" loading="lazy" onerror="this.style.display='none'"/><figcaption>Archive · 1b</figcaption></figure>
-    <figure><img src="https://meaning-unconfounded.github.io/images/1c.png" alt="Archive plate 1c" loading="lazy" onerror="this.style.display='none'"/><figcaption>Archive · 1c</figcaption></figure>
-    <figure><img src="https://meaning-unconfounded.github.io/images/1d.png" alt="Archive plate 1d" loading="lazy" onerror="this.style.display='none'"/><figcaption>Archive · 1d</figcaption></figure>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.6rem 0">
+    <figure style="margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--hair);background:var(--surface)">
+      <img src="https://meaning-unconfounded.github.io/images/1a.png" alt="Archive plate 1a" loading="lazy" style="display:block;width:100%;height:auto" onerror="this.style.display='none'"/>
+      <figcaption style="font-family:var(--sans);font-size:.68rem;color:var(--muted);padding:.5rem .8rem;letter-spacing:.04em;text-align:center;background:var(--surface)">Archive · 1a</figcaption>
+    </figure>
+    <figure style="margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--hair);background:var(--surface)">
+      <img src="https://meaning-unconfounded.github.io/images/1b.png" alt="Archive plate 1b" loading="lazy" style="display:block;width:100%;height:auto" onerror="this.style.display='none'"/>
+      <figcaption style="font-family:var(--sans);font-size:.68rem;color:var(--muted);padding:.5rem .8rem;letter-spacing:.04em;text-align:center;background:var(--surface)">Archive · 1b</figcaption>
+    </figure>
+    <figure style="margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--hair);background:var(--surface)">
+      <img src="https://meaning-unconfounded.github.io/images/1c.png" alt="Archive plate 1c" loading="lazy" style="display:block;width:100%;height:auto" onerror="this.style.display='none'"/>
+      <figcaption style="font-family:var(--sans);font-size:.68rem;color:var(--muted);padding:.5rem .8rem;letter-spacing:.04em;text-align:center;background:var(--surface)">Archive · 1c</figcaption>
+    </figure>
+    <figure style="margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--hair);background:var(--surface)">
+      <img src="https://meaning-unconfounded.github.io/images/1d.png" alt="Archive plate 1d" loading="lazy" style="display:block;width:100%;height:auto" onerror="this.style.display='none'"/>
+      <figcaption style="font-family:var(--sans);font-size:.68rem;color:var(--muted);padding:.5rem .8rem;letter-spacing:.04em;text-align:center;background:var(--surface)">Archive · 1d</figcaption>
+    </figure>
   </div>
 
   <div class="claim gold" style="margin-top:1.7rem;">
@@ -1438,18 +1371,14 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <div class="connect">
     <strong>Where the manual feeds the corpus</strong>
-    The eleven canon laws and the fifty-one creator items are a production kit — usable by <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>, <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>, and any film, comic, or game built inside the EROS universe. The four law-forces are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The transform that applies the same discipline to economics is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.
+    The eleven canon laws and the fifty-one creator seeds are a production kit — usable by <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>, <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>, and any film, comic, or game built inside the EROS universe. The four law-forces are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The transform that applies the same discipline to economics is <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. The toroidal shape of the canon laws — each as a small torus — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XII.
   </div>
 </section>
 
-<!-- ═══════════════════ PART XII · THE WITNESS ═══════════════════ -->
-<div class="banner-hero" id="part12">
-  <img src="https://meaning-unconfounded.github.io/images/banner4.webp" alt="Part Twelve — The Witness" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-  <div class="overlay">
-    <span class="bk">Part Twelve</span>
-    <span class="bt">The Witness</span>
-    <span class="bs">Dr. Elara Vance · the complete narrative · extended Q&amp;A</span>
-  </div>
+<div class="part-break" id="part12">
+  <p class="pk">Part Twelve</p>
+  <h2>The Witness</h2>
+  <p>Dr. Elara Vance · the complete narrative · extended Q&amp;A</p>
 </div>
 
 <section>
@@ -1471,8 +1400,6 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p><strong>The Leap of Faith.</strong> Dr. Vance does not publish her findings. She does not announce them to the world. She does not try to convince anyone. She understands the history of science: the Earth is flat, then the Earth is a sphere. The Earth is the center, then the Sun is the center. The Sun is the center, then the Sun is a random star in a random galaxy. Outward universe, then inward egg. Each step was "proven a lie." Each lie was progress. Science is not the accumulation of final truths. Science is the <strong>continual contraction of ignorance</strong>. She realizes that the greatest leap in science is the simplest theory — and the simplest theory is that we are already home. We are not lost in an infinite, cold void. We are the warm, breathing boundary of creation. She writes in her journal: <em>"We will not go to Mars. Mars comes to us, as a pixel in the grand projection. We will not meet aliens. We are the aliens. We are the only ones here. And we are already floating in heaven."</em></p>
 </section>
-
-<div class="divider-sm" aria-hidden="true"><img src="https://meaning-unconfounded.github.io/images/hr6.webp" alt="" loading="lazy" onerror="this.style.display='none'"/></div>
 
 <section>
   <h2>Extended Q&amp;A · Twenty questions</h2>
@@ -1497,7 +1424,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
       <li><b>14 · Why has nobody noticed this before?</b><br/>Two reasons. First, the outward model works beautifully at local scales — so there was never pressure to change it. Second, the geometry of an inverted shell <em>reads</em> as convex to any instrument calibrated on straight light. You do not notice the difference from the inside unless you check the assumptions.</li>
       <li><b>15 · Is this a religious book?</b><br/>No. It is a manual of law. The four principles are processes, not persons. There is no worship in this book. There is only recognition.</li>
       <li><b>16 · Is this a political book?</b><br/>No. It is about the shape of the world, not about who should govern it. Where the book touches on power, it does so to note that surface conflicts often sit on top of deeper cosmological disagreement.</li>
-      <li><b>17 · What do I do with this, practically?</b><br/>Three things. First, run the axiom system on your own life and notice where it holds. Second, use the creator prompts to build something — a comic, a scene, a post. Third, bond with someone. EROS is not a theory. EROS is a practice.</li>
+      <li><b>17 · What do I do with this, practically?</b><br/>Three things. First, run the axiom system on your own life and notice where it holds. Second, use the creator seeds to build something — a comic, a scene, a post. Third, bond with someone. EROS is not a theory. EROS is a practice.</li>
       <li><b>18 · What if I disagree with the physics?</b><br/>You are free to. The book repeatedly labels the physical claims as model, not as proof. The mind architecture and the axioms are more robust than any specific physical reading. Use what holds. Set aside what does not.</li>
       <li><b>19 · What if I think this is all nonsense?</b><br/>Then you should test the parts you can test. The consonant code, the postulate resolution, the iteration-as-time reading — these are checkable against your own experience. The larger cosmology is not required for any of them.</li>
       <li><b>20 · What is the one-line answer?</b><br/>Inward is forwards. The universe is not an empty room you are escaping from. It is a body you are inside. Read it.</li>
@@ -1505,7 +1432,6 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   </div>
 </section>
 
-<!-- ═══════════════════ PART XIII · PARALLEL SURFACE ═══════════════════ -->
 <div class="part-break" id="part13">
   <p class="pk">Part Thirteen</p>
   <h2>Parallel Surface &amp; Invitation</h2>
@@ -1517,9 +1443,9 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>Macro footprints continue — strategic assets, continuity, disclosure language. Cosmogony continues as media and practice. They rhyme: both are fights over the map of the real. Insights, not orders. Parallel rails: crypto, education, entertainment, investigation.</p>
 
-  <figure class="plate">
-    <img src="https://meaning-unconfounded.github.io/images/cosmic-octaves.png" alt="Cosmic octaves" loading="lazy" onerror="this.style.display='none'"/>
-    <figcaption>Cosmic octaves — the same law at every scale</figcaption>
+  <figure class="plate medium">
+    <img src="https://meaning-unconfounded.github.io/images/inside7.jpeg" alt="Cosmic octaves — the same law at every scale" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+    <figcaption><b>Cosmic Octaves</b> The same law at every scale</figcaption>
   </figure>
 
   <div class="creed">
@@ -1537,19 +1463,23 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   </div>
   <p class="creedline">Cosmogony · Axioms · Physics · Lore · Production</p>
 
-  <p>You do not have to believe the Egg to build inside the manual. Start smaller. One scene. One post. One pool action. Check the wallet you forgot. Bridge what you hold. Bond liquidity. Write the panel the number funded. Disagree in public without dissolving the bond.</p>
+  <p>You do not have to believe the Egg to build inside the manual. Start smaller, if you want. One scene. One post. One pool action. Check the wallet you forgot. Bridge what you hold. Bond liquidity. Write the panel the number funded. Disagree in public without dissolving the bond.</p>
 
   <p>The front door on PulseChain was never only a pool. It was practice for a species learning unity without a throne. Crypto as education. Media as classroom. EROS as the name of the binding.</p>
 
-  <div class="create"><strong>Your next hour</strong> Pick one law from Part XI. Write three sentences that obey it. Publish or pin them. That is how the world thickens.</div>
+  <div class="create"><strong>One optional hour</strong> Pick one law from Part XI. Write three sentences that obey it. Publish or pin them if it fits. That is how the world thickens.</div>
 </section>
 
-<!-- ═══════════════════ PART XIV · WHY IT WAS HIDDEN ═══════════════════ -->
 <div class="part-break" id="part14">
   <p class="pk">Part Fourteen</p>
   <h2>Why It Was Hidden</h2>
   <p>Four hundred years of knowing and not-knowing</p>
 </div>
+
+<figure class="plate">
+  <img src="https://meaning-unconfounded.github.io/images/inside8.jpeg" alt="Deep funnel — the outward model still cannot close" loading="lazy"/>
+  <figcaption><b>Deep Funnel</b> The outward story keeps a hinge it cannot close.</figcaption>
+</figure>
 
 <section>
   <h2>How the outward model was built</h2>
@@ -1558,7 +1488,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <p>They did. Several times. And each time, they were absorbed, rebranded, or quietly dismissed.</p>
 
-  <figure class="media-block">
+  <figure class="media">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_historic.mp4" type="video/mp4"/>
     </video>
@@ -1639,9 +1569,13 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <div class="pull">Do not outsource your eyes to an agency. Do not outsource them to a counter-agency either. Keep the hinge. Test the shell.</div>
 
   <div class="axiom"><b>Heuristic H7</b> When a civilisation claims a frontier and then fails for decades to inhabit it, ask whether the map was wrong — or whether the frontier was never the open field the poster sold.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the human macro rail</strong>
+    The institutional layer — central banking, strategic assets, military machinery, disclosure theatre — is documented in <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The breakaway archive rail is <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>. The toroidal reading of the outward model's institutional lock is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XIV.
+  </div>
 </section>
 
-<!-- ═══════════════════ PART XV · THE THIRD OPTION ═══════════════════ -->
 <div class="part-break" id="part15">
   <p class="pk">Part Fifteen</p>
   <h2>The Third Option</h2>
@@ -1675,10 +1609,14 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <div class="axiom"><b>Axiom I1 — Iterative Origin</b> The universe is neither created from nothing nor eternally static. It is an ongoing iteration — each state the output of the prior, the input for the next. "Beginning" and "end" are local readings of a global process.</div>
 
-  <div class="create"><strong>Create prompt — Short film treatment</strong> A character sits in a room. On one wall is a diagram of the created universe (a circle with a beginning and an end). On the other wall is a diagram of the eternal universe (a straight line to infinity). She turns to a third wall. On it is a spiral — no beginning, no end, but each turn is a new level. She touches the third diagram. The room begins to dissolve.</div>
+  <div class="create"><strong>Create seed — Short film treatment</strong> A character sits in a room. On one wall is a diagram of the created universe (a circle with a beginning and an end). On the other wall is a diagram of the eternal universe (a straight line to infinity). She turns to a third wall. On it is a spiral — no beginning, no end, but each turn is a new level. She touches the third diagram. The room begins to dissolve.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the toroidal shape of the third option</strong>
+    In the toroidal frame, the two lobes of the figure-eight are not a "before" and an "after." They are two simultaneous faces of the same ongoing process, joined at a crossover that is neither the beginning nor the end. Full treatment in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XVI.
+  </div>
 </section>
 
-<!-- ═══════════════════ PART XVI · PRECEDENCE CORRECTION ═══════════════════ -->
 <div class="part-break" id="part16">
   <p class="pk">Part Sixteen</p>
   <h2>Precedence Correction</h2>
@@ -1718,10 +1656,14 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <div class="axiom"><b>Axiom L1* — Life first</b> Life (awareness, memory, choice) is generative. Postulates are its products. Mass and physics are downstream — what frozen postulates and their iterated regularities look like when life looks at itself. Math is the grammar of that looking.</div>
 
-  <div class="create"><strong>Create prompt — Comic page</strong> Panel 1: a physicist stares at an equation on a whiteboard. Panel 2: the equation is nested inside a larger equation. Panel 3: the larger equation is nested inside a still-larger one, which is drawn as a mouth. Panel 4: the mouth is speaking the equation. Caption: "The math was never the source. The math was the grammar."</div>
+  <div class="create"><strong>Create seed — Comic page</strong> Panel 1: a physicist stares at an equation on a whiteboard. Panel 2: the equation is nested inside a larger equation. Panel 3: the larger equation is nested inside a still-larger one, which is drawn as a mouth. Panel 4: the mouth is speaking the equation. Caption: "The math was never the source. The math was the grammar."</div>
+
+  <div class="connect">
+    <strong>Companion depth · the precedence correction</strong>
+    The full argument — the observer problem, the fine-tuning problem, the four consequences — is in <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>, Movement I §4.0 and Movement II §4.4. The toroidal reading of the same correction — the crossover as the direction life is already moving — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XVII.
+  </div>
 </section>
 
-<!-- ═══════════════════ PART XVII · DAILY PRACTICE ═══════════════════ -->
 <div class="part-break" id="part17">
   <p class="pk">Part Seventeen</p>
   <h2>The Daily Practice</h2>
@@ -1731,7 +1673,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 <section>
   <h2>Three practices for the first month</h2>
 
-  <p>Reading a cosmology is not the same as living one. A cosmology that is only read is decorative. A cosmology that is practised is transformative. Here are three daily practices that take five minutes each — a structure for the first month of living inside the Egg.</p>
+  <p>Reading a cosmology is not the same as living one. A cosmology that is only read is decorative. A cosmology that is practised is transformative. Below is one shape the practice can take — three daily moves, five minutes each. If any of them does not fit your life, drop it. The practice is not a schedule; it is a discipline.</p>
 
   <h3>Practice 1 · The morning decode (5 minutes)</h3>
 
@@ -1763,10 +1705,14 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <div class="pull">A cosmology that is only read is decorative. A cosmology that is practised is transformative.</div>
 
-  <div class="create"><strong>Create prompt — Telegram post</strong> "Pick one word every morning. Break it into consonants. Feel where each is made. Do not look it up. Let the word tell you what it means from the shape of the mouth. Thirty days of this and words stop being arbitrary."</div>
+  <div class="create"><strong>Create seed — Telegram post</strong> "Pick one word every morning. Break it into consonants. Feel where each is made. Do not look it up. Let the word tell you what it means from the shape of the mouth. Thirty days of this and words stop being arbitrary."</div>
+
+  <div class="connect">
+    <strong>Companion depth · the toroidal addition to the practice</strong>
+    Once a week, close your eyes and picture the shape of the fold. Not a sphere. Not a wall. A torus — two lobes, a crossover, one direction of continuation. Picture yourself standing on the inner surface of one lobe, facing the crossover. Nothing needs to happen. The picture is the practice. Full treatment in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XVIII. The working mechanics of rate and state that turn this into action are in <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>, Part V.
+  </div>
 </section>
 
-<!-- ═══════════════════ PART XVIII · NEXT ORDER ═══════════════════ -->
 <div class="part-break" id="part18">
   <p class="pk">Part Eighteen</p>
   <h2>The Next Order</h2>
@@ -1802,10 +1748,9 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
 
   <div class="pull">A map is not the territory. But a bad map makes the territory unwalkable. The next order is a better map.</div>
 
-  <div class="create"><strong>Create prompt — Short film treatment</strong> A young person walks through a city at dawn. There is nothing dramatic happening. Shops are opening. Buses are running. People are going to work. On the walls, on the buses, on the shop windows, there are faint markings — consonant diagrams, axiom numbers, small symbols from this book. They are everywhere. Nobody notices them. The camera follows one person. At the end, she stops. She looks at one of the markings. She recognizes it. The film cuts to black. Caption: "The next order is not coming. The next order is already here. We are learning to read it."</div>
+  <div class="create"><strong>Create seed — Short film treatment</strong> A young person walks through a city at dawn. There is nothing dramatic happening. Shops are opening. Buses are running. People are going to work. On the walls, on the buses, on the shop windows, there are faint markings — consonant diagrams, axiom numbers, small symbols from this book. They are everywhere. Nobody notices them. The camera follows one person. At the end, she stops. She looks at one of the markings. She recognizes it. The film cuts to black. Caption: "The next order is not coming. The next order is already here. We are learning to read it."</div>
 </section>
 
-<!-- ═══════════════════ EROS CRYPTO ═══════════════════ -->
 <section>
   <h2 id="eros-crypto">EROS crypto · the bond you can hold</h2>
 
@@ -1851,193 +1796,233 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <p>Price can open a door. Bond and belief keep people in the room. Cosmology is one sticky layer: a law-reality worth building scenes, games, and pools inside. Studio work is optional. Buy, hold, LP, stake, lock, and trade remain valid without writing a single panel.</p>
   <p><strong>Metal-up taste:</strong> builders who want syntax-to-systems depth use stacks such as Shen, array languages, and formal logic texts — full prepare path lives under Demand in <em>The Bridge</em>. Here the point is simpler: the Egg is a manual of law for creators. Use the eleven laws and postulates in film, comic, game, and Telegram the way a studio uses a series bible.</p>
   <div class="pull">Stage One seals education. Stage Two turns books into motion. The Egg does not wait for Stage Two to be useful — every axiom is already a scene rule.</div>
+
+  <div class="connect">
+    <strong>Companion depth · the token and the transform</strong>
+    The field manual for LP mechanics, risks, and playbook: <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>. The rock-to-river transform: <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>. The wider stack: <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>. The toroidal reading of the token as the fold held open by choice is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XX.
+  </div>
 </section>
 
-<!-- ═══════════════════ RESEARCH DOORS ═══════════════════ -->
 <section>
   <h2 id="research-doors">Research doors</h2>
-  <div class="doors">
-    <b>Further reading — labelled, not required belief</b>
-    Geometry of the medium (YouTube) — vortex / Birkeland / fractal scaling · <a href="#geometry-video">in-page</a> · Thunderbolts Project — Electric Universe FAQ &amp; plasma cosmology · OldWorld.app — concave / inversion / refraction discussions · Cellular Cosmogony (historical, Koresh lineage) · Mark McCutcheon — <em>The Final Theory</em> · Candigram — <em>Proof of NoThing</em> / <em>Proof of SomeThing</em> · Dennis Stephens — TROM (BetterTROM) · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — consonant operators &amp; mind architecture
+  <div class="connect">
+    <strong>Further reading — labelled, not required belief</strong>
+    Geometry of the medium — vortex, filament, fractal scaling · Thunderbolts Project — Electric Universe FAQ &amp; plasma cosmology · OldWorld.app — concave / inversion / refraction discussions · Cellular Cosmogony (historical, Koresh lineage) · Mark McCutcheon — <em>The Final Theory</em> · Candigram — <em>Proof of NoThing</em> / <em>Proof of SomeThing</em> · Dennis Stephens — TROM (BetterTROM) · <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — consonant operators &amp; mind architecture
   </div>
   <p style="font-size:.88rem;color:var(--muted);margin-top:1rem;">Each door is labelled according to what kind of claim it makes. Thunderbolts and OldWorld are predominantly structural and observational. Candigram is philosophical and geometric. TROM is psychological. Gift of Thoth is linguistic. None is required for the others. Take what holds.</p>
+</section>
+
+<div class="part-break" id="telegram">
+  <p class="pk">Share Layer</p>
+  <h2>The Three Movements</h2>
+  <p>Short-form · to share · to seed · to invite</p>
+</div>
+
+<article class="telegram-post">
+  <p class="tp-head">Post One · 🌀 The Egg</p>
+  <p class="tp-title">🌀 The Living Egg 🌍</p>
+  <p>What if the world we experience is only one side of a much greater structure?</p>
+  <p>Imagine a cellular world enclosed within a toroidal universe — an immense figure eight, with two lobes connected through an infinitely narrowing centre.</p>
+  <span class="tp-bullet">🌍 <strong>We inhabit one lobe.</strong> Continents, oceans, inner heavens, the familiar rhythms of light, warmth and cold.</span>
+  <span class="tp-bullet">♾️ <strong>At the heart lies the ISOTOPE</strong> — the mysterious point where distance approaches infinity's limit. Each mathematical division brings us closer, yet the final point remains unreachable through any finite sequence of steps.</span>
+  <p>But what lies beyond it? Another world? A parallel dimension? A reality operating under entirely different rules?</p>
+  <p><strong>THE LIVING EGG — ONE WORLD. TWO LOBES. ONE UNRESOLVED MYSTERY.</strong></p>
+  <p class="tp-hashtags">#EROS #LivingEgg #CellularCosmology #ErosIllumination</p>
+</article>
+
+<article class="telegram-post">
+  <p class="tp-head">Post Two · ⚖️ Weight as Affinity</p>
+  <p class="tp-title">⚖️ Everything Expands. Weight Is the Differential.</p>
+  <p>Everything inside the enclosure expands at a shared rate. Nothing can measure its own growth, because the ruler grows with the table.</p>
+  <span class="tp-bullet">⚖️ <strong>What a body calls weight</strong> is the meeting of two expansions — its own inertia against the floor rising to meet it.</span>
+  <span class="tp-bullet">⚖️ <strong>Time is not a river.</strong> It is a count of state-changes. Slow the rate and the body feels heavy. Match it and the body feels light.</span>
+  <span class="tp-bullet">⚖️ <strong>Mass never changes.</strong> Only the ratio does. Open the structure and it floats. Close it and it sinks.</span>
+  <p>Weight is affinity. A pool is a promise kept in public. Inward is forwards.</p>
+  <p class="tp-hashtags">#EROS #LivingEgg #InwardIsForwards #Affinity</p>
+</article>
+
+<article class="telegram-post">
+  <p class="tp-head">Post Three · 🧵 Bond, Not Extract</p>
+  <p class="tp-title">🧵 The Bond You Can Hold</p>
+  <p>Everything in this book collapses to one question: what holds when the stimulus stops?</p>
+  <span class="tp-bullet">🧵 <strong>The answer is bond.</strong> Relationship stored so the world does not dissolve.</span>
+  <span class="tp-bullet">🧵 <strong>A bonding pool is a stored postulate.</strong> We stay coupled across time, and we accept the cost of exit if we leave.</span>
+  <span class="tp-bullet">🧵 <strong>Holding is a practice.</strong> Every time you stay when exiting would be easier — that is EROS, doing what it does.</span>
+  <p><strong>EROS — TENACITY THROUGH INTEGRITY.</strong></p>
+  <p class="tp-hashtags">#EROS #LivingEgg #BondNotExtract #Poolonomics</p>
+</article>
+
+<div class="cosmology-incision" id="cosmology-infinity" style="margin:3rem 0;padding:2.2rem 2rem;border:1px solid var(--cyan-line);border-radius:18px;background:linear-gradient(160deg,rgba(106,158,175,.08),rgba(7,7,14,.6))">
+  <h3 style="color:var(--cyan2);margin:0 0 1.3rem;font-size:1.36rem;orphans:2;widows:2">🌌 THE LIVING EGG — COSMOLOGY TO INFINITY</h3>
+  <p style="margin:0 0 1.2rem;color:var(--soft);line-height:1.85;font-size:1.08rem;orphans:2;widows:2">For centuries, cosmology has evolved through competing models, from ancient cosmographies and the Copernican revolution to modern theories of space, motion and gravity. Each attempted to explain the structure of existence.</p>
+  <p style="margin:0 0 1.2rem;color:var(--soft);line-height:1.85;font-size:1.08rem;orphans:2;widows:2">The Living Egg is the next conceptual upgrade: a synthesis of Cellular Cosmology, Conscious Eros, the toroidal parallel universe and the Isotope — the infinitely approached centre where one reality may connect to another.</p>
+  <p style="margin:0 0 1.2rem;color:var(--soft);line-height:1.85;font-size:1.08rem;orphans:2;widows:2">Its central proposition is that expansion, time, motion and gravity are expressions of one underlying process: <strong style="color:var(--cyan2)">iteration</strong>. In this speculative framework, existence continually expands while retaining what came before. The Earth appears to rise beneath us; inertia and friction shape motion; and every successive moment contains the history of the moment before it.</p>
+  <p style="margin:0 0 1.2rem;color:var(--soft);line-height:1.85;font-size:1.08rem;orphans:2;widows:2">We do not leave the past behind — we grow beyond it. Like memory, each iteration carries continuity within change.</p>
+  <p style="margin:0 0 1.2rem;color:var(--soft);line-height:1.85;font-size:1.08rem;orphans:2;widows:2">The Living Egg is Cosmology to Infinity: a unified framework in which space, time, gravity, consciousness and existence are explored as interconnected expressions of an ever-evolving whole.</p>
+  <p style="margin:0;color:var(--soft);line-height:1.85;font-size:1.08rem;orphans:2;widows:2"><strong style="color:var(--cyan2)">This is the book's final conceptual upgrade: not merely another model of the universe, but a theory of how the universe, and everything within it, continues to become.</strong></p>
+</div>
+
+<figure class="plate medium">
+  <img src="https://meaning-unconfounded.github.io/images/inside9.jpeg" alt="Landscape plate — the enclosure seen from within" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+  <figcaption><b>From Foundation to Infinity</b> Every scale an iteration of the one above.</figcaption>
+</figure>
+
+<aside class="public-link">
+  <span class="pl-k">📚 Explore further</span>
+  <p class="pl-t">Open the public NotebookLM Studio</p>
+  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone can view, ask questions in chat, and generate custom study materials. Sources locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════════
+     APPLICATION & WORLD BUILDING · closing call-out
+     ══════════════════════════════════════════════ -->
+<section class="apply-world" id="apply">
+  <span class="aw-label">Application &amp; World Building</span>
+  <p>The concepts in this book are not limited to the page. What can you build from them?</p>
+  <p>Can you apply them to a character, a weapon, an economy, a casino, a structure, an atom, a molecule, a law, a scientific theory, or an entire universe?</p>
+  <p>Can you extend the science, fiction, lore, and law of our shared world through code, narrative, and creative assets?</p>
+  <p class="aw-q">Take what you have learned. What can you create?</p>
 </section>
 
 <section class="coda" id="coda">
   <p>Not a glance — a lawbook for a living world.</p>
   <p><em>The whole universe is here. Inward is forwards.</em></p>
   <p>Education seals first. Media moves next. The work of building the world does not wait for perfect weather on the chart.</p>
-  <p class="creedline">THE LIVING EGG · Cosmogony of EROS · Manual of Law · Full Reference Edition</p>
-</section>
-
-<!-- ═══════════════════ MEDIA LIBRARY ═══════════════════ -->
-<section class="media-library" id="egg-media-library">
-  <h3>Egg media library</h3>
-  <p class="lead">Cosmology shorts for creators. Watch in place above, or use this shelf as a full set. Same files live under <code>images/</code> for NotebookLM and Telegram.</p>
-  <div class="video-grid two">
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/cell_facts.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Facts</b> — Bedrock claims, short.</figcaption>
-    </figure>
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-cover.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/cell_historic.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Historic</b> — Outward model timeline.</figcaption>
-    </figure>
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Cosmic</b> — Sky as layered depth.</figcaption>
-    </figure>
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-lensing.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Water</b> — Medium and current.</figcaption>
-    </figure>
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Self-similar</b> — Fractal growth.</figcaption>
-    </figure>
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/egg-cover.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/cell_apple.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Apple</b> — Postulate before mass.</figcaption>
-    </figure>
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/cell_atlas.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Atlas</b> — Enclosure map.</figcaption>
-    </figure>
-    <figure class="media-block">
-      <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
-        <source src="https://meaning-unconfounded.github.io/images/sommi_facts.mp4" type="video/mp4"/>
-      </video>
-      <figcaption><b>Sommi · Facts</b> — Crypto-facing short — bond and integrity (also used in <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>).</figcaption>
-    </figure>
+  <div class="creed">
+    The Egg is the body.<br/>
+    Inward is forwards.<br/>
+    Nothing absolute cannot obtain.<br/>
+    Iteration is time.<br/>
+    Intention precedes mass.<br/>
+    Affinity is weight's soft name.<br/>
+    Bond stores the future.<br/>
+    Life is at home.<br/>
+    Light confuses until we learn the lens.<br/>
+    The operators became the rules.<br/>
+    <strong>EROS is the bond that holds.</strong>
   </div>
-  <p style="margin-top:1rem;font-size:.88rem;color:var(--muted)">Jake Letter and longer Sommi sit primarily in <em>Letter to Jake</em> and <em>The Bridge</em>; they may be linked from the full plan later.</p>
+  <p class="creedline">Cosmogony · Axioms · Physics · Practice · Production</p>
+  <figure class="brand-seal">
+    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+    <figcaption>Tenacity Through Integrity</figcaption>
+  </figure>
 </section>
 
-<!-- ═══════════════════ MASTER FOOTER ═══════════════════ -->
 <footer class="master">
   <div class="title-row">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="44" height="44" loading="lazy"/>
+    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
     <span class="title">THE LIVING EGG</span>
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
   </div>
   <p class="count">Cosmogony of EROS · Manual of Law · EROS Library</p>
-
-  <nav class="tier" aria-label="Library">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">How the Corpus Works</a>
-    <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
-    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html" class="here">The Living Egg</a>
-    <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
-    <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
-    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
-    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
-    <a href="https://t.me/Eros_Revival">Telegram</a>
-  </nav>
-
+  <div class="lib-stack">
+    <div class="lib-section">
+      <span class="lib-label">Entry</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a>
+        <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Science</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Living_Egg.html" class="here">The Living Egg</a>
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>
+        <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">System</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
+        <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+        <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
+        <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">World</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
+        <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
+        <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>
+        <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Story</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
+        <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Tools</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+        <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
+        <a href="https://notebooklm.link.google/67J7szcyZuaT">NotebookLM 📚</a>
+        <a href="https://t.me/Eros_Revival">Telegram 🖇️</a>
+      </div>
+    </div>
+  </div>
   <p class="sig">Inward is forwards. The universe is not an empty room you are escaping from. It is a body you are inside.</p>
   <p class="creedline">Tenacity Through Integrity</p>
-
   <div class="pulse-row">
-    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07070e"/>
-      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
-    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07070e"/>
-      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseChain"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07070e"/><path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Built on PulseChain</span>
+    <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07070e"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
-
-  <!-- Rev 2 · 2026-10-11 · Axiom G2 · Dhy Set · geometry video · compass · reader panel · footer tier full names · 51 creator items -->
+  <!-- Rev 3 · 2026-10-13 · header v2 · inside2-9 distributed at natural Part breaks · black seal at postulates pivot · pink seal at coda · notebooklm+telegram banners · application & world building block · lib-stack footer · no resume · toroidal cross-links to Enclosure · telegram share block · softened practice language · 51 creator seeds (not assignments) -->
 </footer>
 
 </main>
 
 <button id="toTop" type="button" aria-label="Back to top">↑</button>
-
 <button id="rdBtn" type="button" aria-label="Reading settings and chapters" aria-expanded="false" aria-controls="rdPanel">Aa</button>
 
 <div id="rdPanel" role="region" aria-label="Reading settings" hidden>
-  <div class="rd-row"><span>Text size</span><button type="button" data-a="size-" aria-label="Smaller text">A&minus;</button><button type="button" data-a="size+" aria-label="Larger text">A+</button></div>
-  <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-" aria-label="Tighter lines">&minus;</button><button type="button" data-a="lead+" aria-label="Looser lines">+</button></div>
-  <div class="rd-row"><span>Column width</span><button type="button" data-a="w-" aria-label="Narrower column">&minus;</button><button type="button" data-a="w+" aria-label="Wider column">+</button></div>
+  <div class="rd-row"><span>Text size</span><button type="button" data-a="size-">A&minus;</button><button type="button" data-a="size+">A+</button></div>
+  <div class="rd-row"><span>Line spacing</span><button type="button" data-a="lead-">&minus;</button><button type="button" data-a="lead+">+</button></div>
+  <div class="rd-row"><span>Column width</span><button type="button" data-a="w-">&minus;</button><button type="button" data-a="w+">+</button></div>
   <div class="rd-row"><span></span><button type="button" data-a="reset">Reset</button></div>
   <h5>Go to</h5>
   <div id="rdToc"></div>
 </div>
 
-<div id="resumePrompt" role="region" aria-label="Resume reading">
-  <p><b>Welcome back</b>You left off at <span id="resumeWhere">where you were</span>.</p>
-  <div class="btns">
-    <button type="button" id="resumeYes">Resume</button>
-    <button type="button" class="secondary" id="resumeNo">Dismiss</button>
-  </div>
-</div>
-
 <script>
 (function(){
 "use strict";
-
-function each(list, fn){
-  Array.prototype.forEach.call(list, fn);
-}
-
-/* 1 · Progress bar + to-top */
 var bar = document.getElementById('progressBar');
 var toTop = document.getElementById('toTop');
-function onScrollProgress(){
+function onScroll(){
   var h = document.documentElement;
   var max = h.scrollHeight - h.clientHeight;
   var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
   if(bar) bar.style.width = pct + '%';
   if(toTop) toTop.classList.toggle('show', h.scrollTop > 700);
 }
-window.addEventListener('scroll', onScrollProgress, {passive:true});
-onScrollProgress();
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
 if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-/* 2 · Smooth anchor scrolling */
-each(document.querySelectorAll('a[href^="#"]'), function(a){
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click', function(e){
     var href = a.getAttribute('href');
     if(href.length < 2) return;
     var t = document.querySelector(href);
-    if(t){
-      e.preventDefault();
-      t.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
   });
 });
 
-/* 3 · Open <details> on hash navigation */
 function openFromHash(){
   if(!location.hash) return;
   var el = document.querySelector(location.hash);
@@ -2048,9 +2033,52 @@ function openFromHash(){
 openFromHash();
 window.addEventListener('hashchange', openFromHash);
 
-/* 4 · Reader controls */
 (function(){
-  var KEY = 'eros_egg_reader_v1';
+  var strip = document.querySelector('.corpus-bar nav.chapter-strip');
+  if(!strip) return;
+  var links = Array.prototype.slice.call(strip.querySelectorAll('a[href^="#"]'));
+  var pairs = links.map(function(a){
+    var id = a.getAttribute('href');
+    if(id.indexOf('#') !== 0) return null;
+    var sec = document.querySelector(id);
+    return sec ? {link:a, sec:sec} : null;
+  }).filter(function(p){return p;});
+  var currentIndex = -1;
+  function update(){
+    var probe = window.scrollY + 200;
+    var idx = -1;
+    for(var i=0;i<pairs.length;i++){ if(pairs[i].sec.offsetTop<=probe) idx=i; }
+    if(idx===currentIndex) return;
+    currentIndex = idx;
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(idx<0){ scrollStrip(0); return; }
+    var active = pairs[idx].link;
+    active.classList.add('active');
+    var targetLeft = active.offsetLeft - (strip.clientWidth/2) + (active.clientWidth/2);
+    scrollStrip(targetLeft);
+  }
+  function scrollStrip(left){
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var maxLeft = strip.scrollWidth - strip.clientWidth;
+    var clamped = Math.max(0, Math.min(maxLeft, left));
+    if(reduced){ strip.scrollLeft = clamped; }
+    else { strip.scrollTo({left:clamped, behavior:'smooth'}); }
+  }
+  var rafPending = false;
+  function onScrollTrack(){
+    if(rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(function(){ rafPending = false; update(); });
+  }
+  window.addEventListener('scroll', onScrollTrack, {passive:true});
+  window.addEventListener('resize', onScrollTrack);
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', update); }
+  else { update(); }
+  setTimeout(update, 300);
+})();
+
+(function(){
+  var KEY = 'eros_egg_reader_v2';
   var defaults = {size:100, lead:1.82, w:48};
   var state = defaults;
   try {
@@ -2073,9 +2101,7 @@ window.addEventListener('hashchange', openFromHash);
   function open(){ panel.hidden = false; btn.setAttribute('aria-expanded','true'); }
   function close(){ panel.hidden = true; btn.setAttribute('aria-expanded','false'); }
 
-  btn.addEventListener('click', function(){
-    if(panel.hidden) open(); else close();
-  });
+  btn.addEventListener('click', function(){ panel.hidden ? open() : close(); });
 
   panel.addEventListener('click', function(e){
     var a = e.target.getAttribute && e.target.getAttribute('data-a');
@@ -2090,15 +2116,13 @@ window.addEventListener('hashchange', openFromHash);
     apply();
   });
 
-  /* Build the ToC */
   var toc = document.getElementById('rdToc');
   if(toc){
     var html = '';
-    /* Volume headers (part-breaks) first, then chapters within each */
     var main = document.querySelector('main.page');
-    var nodes = main ? main.querySelectorAll('h2[id], h2') : [];
+    var nodes = main ? main.querySelectorAll('h2') : [];
     var seen = {};
-    each(nodes, function(h){
+    nodes.forEach(function(h){
       var parent = h.closest('[id]');
       var pid = parent ? parent.id : null;
       if(!pid || seen[pid]) return;
@@ -2117,83 +2141,11 @@ window.addEventListener('hashchange', openFromHash);
   apply();
 })();
 
-/* 5 · Reading position memory */
-var SCROLL_KEY = 'eros_egg_position_v1';
-var SCROLL_MAX_AGE = 14 * 24 * 60 * 60 * 1000;
-var saveTimer = null;
-
-function currentSection(){
-  var mid = window.scrollY + window.innerHeight * 0.3;
-  var cur = null;
-  each(document.querySelectorAll('main section[id], main .part-break[id], main .banner-hero[id]'), function(s){
-    if(s.offsetTop <= mid) cur = s;
-  });
-  return cur;
-}
-function sectionTitle(sec){
-  if(!sec) return '';
-  var h2 = sec.querySelector('h2');
-  return h2 ? h2.textContent.trim().split(' · ')[0].trim() : '';
-}
-function savePosition(){
-  var sec = currentSection();
-  try {
-    localStorage.setItem(SCROLL_KEY, JSON.stringify({
-      y: window.scrollY,
-      t: Date.now(),
-      secId: sec ? sec.id : null,
-      secTitle: sectionTitle(sec)
-    }));
-  } catch(e){}
-}
-window.addEventListener('scroll', function(){
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(savePosition, 500);
-}, {passive:true});
-window.addEventListener('beforeunload', savePosition);
-
-(function(){
-  var prompt = document.getElementById('resumePrompt');
-  var where = document.getElementById('resumeWhere');
-  var yes = document.getElementById('resumeYes');
-  var no = document.getElementById('resumeNo');
-  if(!prompt) return;
-
-  var data = null;
-  try { data = JSON.parse(localStorage.getItem(SCROLL_KEY) || 'null'); } catch(e){}
-
-  if(!data || !data.t || (Date.now() - data.t) > SCROLL_MAX_AGE || data.y < 500){
-    try { localStorage.removeItem(SCROLL_KEY); } catch(e){}
-    return;
-  }
-  if(where && data.secTitle) where.textContent = data.secTitle;
-
-  setTimeout(function(){ prompt.classList.add('show'); }, 1000);
-
-  if(yes) yes.addEventListener('click', function(){
-    var target = data.secId ? document.getElementById(data.secId) : null;
-    if(target){
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-    } else {
-      window.scrollTo({top: data.y, behavior:'smooth'});
-    }
-    prompt.classList.remove('show');
-  });
-  if(no) no.addEventListener('click', function(){
-    try { localStorage.removeItem(SCROLL_KEY); } catch(e){}
-    prompt.classList.remove('show');
-  });
-})();
-
-})();
-</script>
-
-<script>
 (function(){
   var was=[];
   window.addEventListener('beforeprint',function(){
     document.querySelectorAll('details').forEach(function(d){
-      was.push([d, d.open]);
+      was.push([d,d.open]);
       d.open = true;
     });
   });
@@ -2201,6 +2153,7 @@ window.addEventListener('beforeunload', savePosition);
     was.forEach(function(p){ p[0].open = p[1]; });
     was = [];
   });
+})();
 })();
 </script>
 
