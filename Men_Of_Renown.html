@@ -9,229 +9,274 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230c0705' stroke='%23c97064' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23c97064'/%3E%3C/svg%3E"/>
 <style>
 :root{
-  --bg:#0c0705; --surface:#140e0c; --surface2:#1e1512;
-  --ink:#eae2d6; --soft:#c9c0b0; --muted:#8a8070;
-  --crimson:#c97064; --crimson2:#e09080; --crimson-soft:rgba(201,112,100,.1); --crimson-line:rgba(201,112,100,.35);
+  --bg:#0c0705; --bg2:#140a08; --surface:#140e0c; --surface2:#1e1512; --surface3:#2a1e18;
+  --ink:#eae2d6; --soft:#c9c0b0; --muted:#8a8070; --dim:#5a5248;
+  --crimson:#c97064; --crimson2:#e09080; --crimson3:#f0a898;
+  --crimson-soft:rgba(201,112,100,.10); --crimson-line:rgba(201,112,100,.35);
   --bone:#e8e2d6; --bone-soft:#c9c0b0;
-  --ember:#e8a55a; --ember-soft:rgba(232,165,90,.08); --ember-line:rgba(232,165,90,.3);
-  --gold:#c9a860; --gold2:#d4af37;
-  --cyan:#6a9eaf; --magenta:#c9a0f2; --violet:#9a7ab8;
+  --ember:#e8a55a; --ember2:#f0b878; --ember-soft:rgba(232,165,90,.08); --ember-line:rgba(232,165,90,.32);
+  --gold:#d4af37; --gold2:#e8c547; --gold3:#f0d87a;
+  --gold-soft:rgba(212,175,55,.09); --gold-line:rgba(212,175,55,.32);
+  --silver:#c8c3d6; --silver2:#e0dcec; --silver-line:rgba(200,195,214,.32);
+  --cyan:#6a9eaf; --cyan2:#88b8c8; --cyan-soft:rgba(106,158,175,.10); --cyan-line:rgba(106,158,175,.35);
+  --magenta:#c9a0f2; --magenta2:#dcc0f8; --magenta-soft:rgba(201,160,242,.10); --magenta-line:rgba(201,160,242,.35);
+  --violet:#9a7ab8; --violet2:#c0a0e0; --violet-soft:rgba(154,122,184,.10); --violet-line:rgba(154,122,184,.35);
   --hair:rgba(201,112,100,.18); --hair2:rgba(201,112,100,.09);
-  --serif:Georgia,"Times New Roman",serif;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --leading:1.78;
-  --measure:720px;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype","Book Antiqua",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --measure:44rem; --measure-wide:50rem;
+  --leading:1.8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:5rem}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink);scroll-padding-top:7rem}
 body{
   font-family:var(--serif);font-size:1.05rem;line-height:var(--leading);
   background:
-    radial-gradient(1100px 520px at 85% -5%, rgba(201,112,100,.1), transparent 55%),
+    radial-gradient(1100px 520px at 85% -5%, rgba(201,112,100,.10), transparent 55%),
     radial-gradient(900px 480px at -5% 30%, rgba(232,165,90,.06), transparent 50%),
     radial-gradient(700px 420px at 100% 90%, rgba(154,122,184,.05), transparent 45%),
     var(--bg);
-  min-height:100vh;
+  min-height:100vh;-webkit-font-smoothing:antialiased;
 }
 html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
 html::before{inset:8px;border:1px solid rgba(201,112,100,.18)}
 html::after{inset:12px;border:1px solid rgba(201,112,100,.08)}
 @media(max-width:600px){html::before{inset:5px}html::after{inset:8px}}
-.wrap{max-width:720px;margin:0 auto;padding:1.25rem 1.15rem 4rem}
+.page{max-width:var(--measure);margin:0 auto;padding:1.25rem 1.2rem 5rem}
+@media(min-width:720px){.page{padding:1.5rem 1.7rem 6rem;max-width:var(--measure-wide)}}
 #progressBar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--crimson),var(--ember),var(--magenta));z-index:9999;transition:width .08s linear}
 a{color:var(--crimson2);text-decoration:none;border-bottom:1px solid rgba(224,144,128,.28);transition:color .15s,border-color .15s}
-a:hover{color:#f0a898;border-bottom-color:rgba(240,168,152,.7)}
+a:hover{color:var(--crimson3);border-bottom-color:rgba(240,168,152,.7)}
 a:visited{color:#a85850}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--crimson2);outline-offset:2px;border-radius:4px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:4px}
 ::selection{background:var(--crimson);color:#0c0705}
 
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--crimson2);color:#0c0705;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
 
-.corpus-bar{
-  position:sticky;top:0;z-index:900;
-  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
-  padding:.55rem 1.1rem;
-  background:rgba(12,7,5,.94);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--crimson-line);
-  font-family:var(--sans);
-}
-.corpus-bar .brand{
-  display:flex;align-items:center;gap:.7rem;
-  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--crimson2);font-weight:700;border-bottom:none;
-}
-.corpus-bar .brand:hover{color:#f0a898;border-bottom:none}
-.corpus-bar .pin{
-  width:36px;height:36px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--crimson-line);
-  box-shadow:0 0 14px rgba(201,112,100,.35),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--surface);
-}
-.corpus-bar .compass{font-size:1rem;line-height:1;color:var(--crimson2);flex-shrink:0;margin:0 .15rem;opacity:.85}
-.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
-.corpus-bar nav a{
-  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
-  border-bottom:none;transition:color .15s,background .15s;
-}
-.corpus-bar nav a:hover{color:var(--crimson2);background:var(--crimson-soft);border-bottom:none}
+/* ── HEADER v2 ── */
+.corpus-bar{position:sticky;top:0;z-index:900;background:rgba(12,7,5,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
+.corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
+.corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none;border-bottom:none}
+.corpus-bar .pin{border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface);display:block}
+.corpus-bar .pin.eros-mark{width:44px;height:44px;box-shadow:0 0 14px rgba(232,122,158,.24),0 0 0 1px rgba(255,255,255,.04) inset}
+.corpus-bar .pin.pulse-mark{width:38px;height:38px}
+.corpus-bar .compass{font-size:1.1rem;line-height:1;color:var(--gold2);flex-shrink:0;opacity:.9;margin-left:.05rem}
+.corpus-bar .title-cluster{display:flex;align-items:center;gap:.7rem;min-width:0;flex-shrink:1}
+.corpus-bar .title-rule{flex:0 0 auto;height:1px;width:clamp(24px,5vw,60px);background:linear-gradient(90deg,transparent,var(--gold-line))}
+.corpus-bar .brand-text{font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.corpus-bar nav.chapter-strip{display:flex;align-items:center;gap:.1rem .2rem;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:none;padding:.55rem .2rem .65rem;margin:0 -.2rem;mask-image:linear-gradient(90deg,transparent 0, #000 3%, #000 97%, transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0, #000 3%, #000 97%, transparent 100%)}
+.corpus-bar nav.chapter-strip::-webkit-scrollbar{display:none}
+.corpus-bar nav.chapter-strip a{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.34rem .68rem;border-radius:999px;text-decoration:none;transition:color .25s ease, background .25s ease, box-shadow .25s ease;white-space:nowrap;flex-shrink:0;border-bottom:none}
+.corpus-bar nav.chapter-strip a:hover{color:var(--gold2);background:var(--gold-soft)}
+.corpus-bar nav.chapter-strip a.active{color:var(--gold2);background:var(--gold-soft);box-shadow:inset 0 0 0 1px var(--gold-line);font-weight:700;letter-spacing:.1em}
 @media(max-width:720px){
-  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
-  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
-  .corpus-bar .pin{width:30px;height:30px}
-  .corpus-bar .compass{font-size:.88rem}
-  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+  .corpus-bar{padding:.6rem .85rem 0}
+  .corpus-bar .pin.eros-mark{width:38px;height:38px}
+  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
+  .corpus-bar .compass{font-size:1rem}
+  .corpus-bar .brand-text{font-size:.85rem;letter-spacing:.18em}
+  .corpus-bar .title-rule{width:20px}
+  .corpus-bar nav.chapter-strip{padding:.5rem .2rem .6rem}
+  .corpus-bar nav.chapter-strip a{font-size:.58rem;padding:.3rem .58rem}
 }
-@media(max-width:520px){
-  .corpus-bar .pin{width:28px;height:28px}
-  .corpus-bar .compass{font-size:.82rem}
+@media(max-width:420px){
+  .corpus-bar .pin.eros-mark{width:34px;height:34px}
+  .corpus-bar .pin.pulse-mark{width:28px;height:28px}
+  .corpus-bar .compass{font-size:.9rem}
+  .corpus-bar .brand-text{font-size:.75rem;letter-spacing:.14em}
+  .corpus-bar .title-rule{width:14px}
 }
 
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4{text-wrap:balance}
+p,li{overflow-wrap:break-word;text-wrap:pretty}
+h2{font-size:1.28rem;color:var(--crimson2);margin:2.5rem 0 .9rem;border-bottom:1px solid var(--hair);padding-bottom:.5rem;scroll-margin-top:7rem;line-height:1.3;orphans:2;widows:2}
+h3{font-size:1.08rem;color:var(--ink);margin:1.7rem 0 .6rem;line-height:1.35;orphans:2;widows:2}
+h4{font-family:var(--sans);font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ember2);margin:1.5rem 0 .55rem;orphans:2;widows:2}
+p{margin:0 0 1.05rem;color:var(--soft);orphans:2;widows:2}
+.lede{font-size:1.08rem;color:var(--bone-soft);font-style:italic;margin-bottom:1.1rem;line-height:1.78;orphans:2;widows:2}
+strong{color:var(--ink);font-weight:700}
+em{color:var(--ember2);font-style:italic}
+ul,ol{margin:.4rem 0 1.2rem 1.25rem}
+li{margin-bottom:.45rem;color:var(--soft);line-height:1.75;orphans:2;widows:2}
+li::marker{color:var(--crimson2)}
+code{font-family:var(--mono);font-size:.78rem;color:var(--gold2);background:rgba(0,0,0,.35);border:1px solid var(--gold-line);padding:.12rem .42rem;border-radius:4px;word-break:break-all}
+
+/* ── BLOCKS ── */
+.verse{margin:1.5rem 0;padding:1.15rem 1.2rem;text-align:center;border:1px solid var(--ember-line);border-radius:12px;background:linear-gradient(160deg,#1a1008,#100a06);color:var(--ink);font-style:italic;line-height:1.85;orphans:2;widows:2}
+.verse strong{color:var(--ember2);font-style:normal}
+.creed{margin:1.5rem 0;padding:1.35rem 1.25rem;text-align:center;border:1px solid var(--ember-line);border-radius:14px;font-size:1.08rem;line-height:1.9;color:var(--ink);background:var(--ember-soft);orphans:2;widows:2}
+.creed strong{color:var(--ember2);display:block;margin-top:.4rem}
+.claim{margin:1.2rem 0;padding:1.1rem 1.2rem;border-radius:12px;border:1px solid var(--hair);background:var(--surface);orphans:2;widows:2}
+.claim.cyan{border-color:var(--cyan-line);background:var(--cyan-soft)}
+.claim.magenta{border-color:var(--magenta-line);background:var(--magenta-soft)}
+.claim.ember{border-color:var(--ember-line);background:var(--ember-soft)}
+.claim.crimson{border-color:var(--crimson-line);background:var(--crimson-soft)}
+.claim.gold{border-color:var(--gold-line);background:var(--gold-soft)}
+.claim p:last-child{margin-bottom:0}
+.claim strong{color:var(--crimson2)}
+.claim.ember strong{color:var(--ember2)}
+.claim.cyan strong{color:var(--cyan2)}
+.claim.gold strong{color:var(--gold2)}
+.def{margin:1.1rem 0;padding:1rem 1.15rem;border-left:3px solid var(--crimson);background:var(--crimson-soft);border-radius:0 8px 8px 0;font-size:.96rem;color:var(--soft);orphans:2;widows:2}
+.def strong{color:var(--ink)}
+.def a{color:var(--crimson2)}
+.pull{margin:1.5rem 0;padding:1rem 0 1rem 1.2rem;border-left:3px solid var(--ember);background:linear-gradient(90deg,var(--ember-soft),transparent 75%);font-style:italic;font-size:1.05rem;color:var(--soft);orphans:2;widows:2}
+.math{margin:1.3rem 0;padding:1.15rem 1.3rem;border-radius:10px;background:var(--surface2);border:1px solid var(--hair);font-family:var(--sans);font-size:.88rem;line-height:1.8;color:var(--soft);white-space:pre-line;overflow-x:auto}
+.table-wrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--hair);border-radius:10px;background:var(--surface)}
+table.ref{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.65;min-width:520px}
+table.ref th{background:rgba(0,0,0,.3);color:var(--crimson2);font-family:var(--sans);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--hair);font-weight:700;white-space:nowrap}
+table.ref td{padding:.85rem 1rem;border-bottom:1px solid var(--hair);vertical-align:top;color:var(--soft);text-wrap:pretty}
+table.ref tr:last-child td{border-bottom:none}
+table.ref td strong{color:var(--crimson2)}
+
+/* ── FIGURES ── */
+figure.plate{margin:1.7rem 0;text-align:center;max-width:100%}
+figure.plate img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--crimson-line);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+figure.plate figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.75rem;line-height:1.6;padding:0 .8rem;orphans:2;widows:2}
+figure.plate figcaption b{color:var(--crimson2);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.74rem;display:inline-block;margin-right:.4rem}
+
+figure.media{margin:1.6rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--crimson-line);background:#000;box-shadow:0 10px 32px rgba(0,0,0,.45)}
+figure.media img,figure.media video{width:100%;display:block;background:#000;max-height:min(56vh,480px);object-fit:contain}
+figure.media figcaption{font-family:var(--sans);font-size:.8rem;color:var(--soft);padding:.8rem 1rem;background:var(--surface);border-top:1px solid var(--hair);line-height:1.6;orphans:2;widows:2}
+figure.media figcaption b{color:var(--crimson2);font-weight:700;letter-spacing:.04em}
+
+figure.brand-seal{margin:2.4rem auto 1.8rem;text-align:center;max-width:min(220px,55vw);display:block}
+figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(212,175,55,.12);background:var(--surface)}
+figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-top:.9rem;font-weight:700}
+figure.brand-seal.silver img{border-color:var(--silver-line);box-shadow:0 12px 40px rgba(200,195,214,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(200,195,214,.14)}
+figure.brand-seal.silver figcaption{color:var(--silver2)}
+
+/* ── HERO ── */
 header.hero{text-align:center;padding:2rem 0 1.4rem;border-bottom:1px solid var(--hair);margin-bottom:1.5rem}
-header.hero img{max-width:100%;border-radius:12px;border:1px solid var(--crimson-line);margin-bottom:.75rem;display:block;width:100%}
+header.hero .banner{max-width:100%;border-radius:12px;border:1px solid var(--crimson-line);margin-bottom:.75rem;display:block;width:100%}
 .kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson2);margin-bottom:.35rem;font-weight:600}
-h1{font-size:clamp(1.55rem,4vw,2.1rem);color:var(--crimson2);margin:.15rem 0 .4rem;font-weight:700;letter-spacing:.02em}
-.byline{color:var(--bone-soft);font-style:italic;font-size:1.04rem;margin:0 0 .65rem}
-.maxim{display:inline-block;margin:.28rem .18rem;padding:.45rem .8rem;border:1px solid var(--ember-line);border-radius:999px;font-family:var(--sans);font-size:.68rem;letter-spacing:.06em;color:var(--ember);text-transform:uppercase}
+header.hero h1{font-size:clamp(1.55rem,4vw,2.1rem);color:var(--crimson2);margin:.15rem 0 .4rem;font-weight:700;letter-spacing:.02em;text-wrap:balance}
+header.hero .byline{color:var(--bone-soft);font-style:italic;font-size:1.04rem;margin:0 0 .65rem;text-wrap:balance}
+header.hero .workshop{font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;color:var(--ember2);margin:.5rem 0 .3rem}
+.maxim{display:inline-block;margin:.28rem .18rem;padding:.45rem .8rem;border:1px solid var(--ember-line);border-radius:999px;font-family:var(--sans);font-size:.68rem;letter-spacing:.06em;color:var(--ember2);text-transform:uppercase}
+header.hero .three-principles{font-family:var(--sans);font-size:.7rem;color:var(--muted);margin:.55rem 0 0;letter-spacing:.04em;text-wrap:balance}
 
-details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--crimson-line);border-radius:10px;background:var(--crimson-soft);padding:.35rem 1rem;text-align:left}
+/* ── PART LABELS / BREAKS ── */
+.part-label{font-family:var(--sans);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember2);font-weight:700;margin:2.8rem 0 .7rem;padding-bottom:.45rem;border-bottom:1px solid var(--ember-line);scroll-margin-top:7rem}
+.part-break{margin:3rem 0 2.2rem;padding:2rem 1.4rem;text-align:center;border-radius:14px;border:1px solid var(--hair);background:linear-gradient(160deg,#140e0c,#0c0705);scroll-margin-top:7rem}
+.part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--crimson2);margin-bottom:.6rem;font-weight:700}
+.part-break h2{font-size:clamp(1.4rem,3.6vw,1.9rem);color:var(--ink);border:none;margin:0 0 .4rem;padding:0;font-family:var(--serif);font-weight:700;line-height:1.2;orphans:2;widows:2}
+.part-break p{margin:0;font-style:italic;color:var(--soft);font-size:.96rem;orphans:2;widows:2}
+.dense-flag{font-style:italic;color:var(--muted);font-size:.88rem;margin:0 0 1rem;padding:.6rem .9rem;border-left:2px solid var(--hair);background:var(--surface);line-height:1.6}
+.workshop{font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;color:var(--ember2);margin:.5rem 0 .3rem}
+
+/* ── YOUTUBE / COMMUNITY / APPENDIX ── */
+.yt-wrap{margin:1.6rem 0;border:1px solid var(--crimson-line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.yt-lab{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson2);padding:.7rem 1rem .35rem;font-weight:700}
+.yt-frame{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
+.yt-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.yt-cap{font-family:var(--sans);font-size:.8rem;color:var(--soft);padding:.75rem 1rem .9rem;line-height:1.6;border-top:1px solid var(--hair);orphans:2;widows:2}
+.yt-cap b{color:var(--crimson2);font-weight:700}
+.community{margin:1.3rem 0;padding:.9rem 1.05rem;border:1px solid var(--hair);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.88rem;color:var(--soft);line-height:1.68;orphans:2;widows:2}
+.community a{color:var(--crimson2)}
+.appendix{margin:1.8rem 0;padding:1.3rem 1.35rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+.appendix h3{color:var(--crimson2);margin:0 0 .7rem;font-size:1.05rem}
+.appendix .note{font-size:.88rem;color:var(--muted);font-style:italic;margin-bottom:.9rem}
+
+/* ── THESIS / HOW / FRAME / CONNECT ── */
+.thesis{margin:1.4rem 0 1.6rem;padding:1.3rem 1.4rem;border:1px solid var(--crimson-line);border-radius:14px;background:linear-gradient(160deg,var(--crimson-soft),rgba(154,122,184,.05));text-align:left;orphans:2;widows:2}
+.thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson2);font-weight:700;display:block;margin-bottom:.7rem}
+.thesis p{color:var(--ink);margin:0 0 .85rem;font-size:1.02rem;line-height:1.78}
+.thesis p:last-child{margin-bottom:0}
+.thesis a{color:var(--crimson2)}
+.frame{margin:1.2rem 0 1.5rem;padding:1rem 1.15rem;border-left:3px solid var(--ember);background:var(--ember-soft);border-radius:0 10px 10px 0;font-size:.95rem;color:var(--soft);orphans:2;widows:2}
+.connect{margin:1.3rem 0;padding:1rem 1.15rem;border:1px dashed var(--cyan-line);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.85rem;color:var(--soft);line-height:1.72;orphans:2;widows:2}
+.connect strong{color:var(--cyan2);display:block;margin-bottom:.35rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.connect a{color:var(--cyan2)}
+
+/* ── PUBLIC LINK ── */
+.public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--cyan-line);border-radius:14px;background:linear-gradient(135deg,rgba(106,158,175,.10),rgba(12,7,5,.6));font-family:var(--sans)}
+.public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan2);font-weight:700;margin-bottom:.6rem}
+.public-link .pl-t{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:700;margin-bottom:.5rem;line-height:1.35;orphans:2;widows:2}
+.public-link .pl-d{font-size:.94rem;color:var(--soft);line-height:1.7;margin-bottom:.9rem;orphans:2;widows:2}
+.public-link .pl-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.public-link a.pl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.05rem;border-radius:999px;background:var(--cyan-soft);border:1px solid var(--cyan-line);color:var(--cyan2);font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:none;transition:background .18s,color .18s,border-color .18s}
+.public-link a.pl-btn:hover{background:rgba(106,158,175,.22);color:#b8d8e8;border-color:var(--cyan2)}
+
+/* ── TELEGRAM ── */
+.telegram-post{margin:2.4rem 0;padding:1.7rem 1.8rem;border:1px solid var(--crimson-line);border-radius:16px;background:linear-gradient(160deg,rgba(201,112,100,.05),rgba(12,7,5,.7));font-family:var(--sans);font-size:1.02rem;line-height:1.85;color:var(--soft)}
+.telegram-post .tp-head{font-family:var(--sans);font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson2);font-weight:700;margin-bottom:1.05rem;padding-bottom:.75rem;border-bottom:1px dashed var(--crimson-line);orphans:2;widows:2}
+.telegram-post .tp-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);letter-spacing:.05em;line-height:1.35;margin:0 0 1.05rem;word-break:keep-all;overflow-wrap:normal;orphans:2;widows:2}
+@media(max-width:560px){.telegram-post .tp-title{font-size:1.16rem}}
+.telegram-post p{margin:0 0 .95rem;color:var(--soft);font-family:var(--sans);font-size:1.02rem;line-height:1.85;orphans:2;widows:2}
+.telegram-post strong{color:var(--crimson2);font-weight:700}
+.telegram-post .tp-bullet{display:block;margin:.9rem 0;padding:.85rem 1.2rem;background:rgba(0,0,0,.25);border-left:3px solid var(--crimson);border-radius:0 10px 10px 0;font-family:var(--sans);font-size:.96rem;color:var(--soft);line-height:1.75;orphans:2;widows:2}
+.telegram-post .tp-hashtags{margin-top:1.3rem;padding-top:.95rem;border-top:1px dashed var(--crimson-line);font-size:.8rem;letter-spacing:.06em;color:var(--muted);font-family:var(--mono);orphans:2;widows:2}
+
+/* ── APPLICATION & WORLD BUILDING ── */
+section.apply-world{margin:3.2rem auto 2.4rem;max-width:40rem;padding:2rem 1.4rem 1.8rem;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center}
+section.apply-world .aw-label{font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ember2);font-weight:700;display:block;margin-bottom:1.2rem;orphans:2;widows:2}
+section.apply-world p{font-family:var(--sans);font-size:.94rem;line-height:1.78;color:var(--soft);margin:0 0 .9rem;orphans:2;widows:2}
+section.apply-world p:last-of-type{margin-bottom:1.35rem}
+section.apply-world .aw-q{font-family:var(--serif);font-size:1.14rem;font-style:italic;color:var(--ink);margin:0;orphans:2;widows:2}
+
+/* ── CODA ── */
+.coda{margin:4rem 0 0;padding:3rem 1.4rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(201,112,100,.05),transparent 60%)}
+.coda p{font-size:1.14rem;font-style:italic;line-height:1.8;color:var(--ink);max-width:34rem;margin:0 auto 1.1rem;orphans:2;widows:2}
+.creedline{margin-top:1.15rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.55;text-align:center;orphans:2;widows:2}
+
+/* ── MENU / TOC ── */
+details.eros-menu{max-width:100%;margin:1rem 0;border:1px solid var(--crimson-line);border-radius:10px;background:var(--crimson-soft);padding:.35rem 1rem;text-align:left}
 details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--crimson2);padding:.55rem 0;user-select:none;font-weight:700}
 details.eros-menu>summary::-webkit-details-marker{display:none}
 details.eros-menu>summary::before{content:"▸ ";}
 details.eros-menu[open]>summary::before{content:"▾ ";}
-details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.65;color:var(--soft)}
+details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.92rem;line-height:1.7;color:var(--soft)}
 details.eros-menu a{color:var(--crimson2)}
 
-details.toc-card{
-  margin:1.3rem auto 1.7rem;
-  border:1px solid var(--hair);border-radius:12px;
-  background:var(--surface);
-  padding:.4rem 1.05rem 1.05rem;
-  font-family:var(--sans);
-  max-width:100%;
-  text-align:left;
-}
-details.toc-card>summary{
-  cursor:pointer;list-style:none;
-  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--crimson2);padding:.6rem 0;
-  user-select:none;font-weight:700;
-}
+details.toc-card{margin:1.3rem auto 1.7rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);padding:.4rem 1.05rem 1.05rem;font-family:var(--sans);max-width:100%;text-align:left}
+details.toc-card>summary{cursor:pointer;list-style:none;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crimson2);padding:.6rem 0;user-select:none;font-weight:700}
 details.toc-card>summary::-webkit-details-marker{display:none}
 details.toc-card>summary::before{content:"▸ ";color:var(--crimson2)}
 details.toc-card[open]>summary::before{content:"▾ "}
-.toc-grid{
-  display:grid;gap:.4rem;grid-template-columns:1fr 1fr;
-  padding-top:.85rem;border-top:1px solid var(--hair);
-}
+.toc-grid{display:grid;gap:.4rem;grid-template-columns:1fr 1fr;padding-top:.85rem;border-top:1px solid var(--hair)}
 @media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
 .toc-grid a{display:flex;gap:.6rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.85rem;padding:.35rem .5rem;border-radius:6px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
 .toc-grid a:hover{background:var(--crimson-soft);color:var(--crimson2);border-bottom:none}
 .toc-grid a .tn{color:var(--crimson2);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.4rem}
 
-.thesis{margin:1.4rem 0 1.6rem;padding:1.25rem 1.3rem;border:1px solid var(--crimson-line);border-radius:14px;background:linear-gradient(160deg,var(--crimson-soft),rgba(154,122,184,.05));text-align:left}
-.thesis .label{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson2);font-weight:700;display:block;margin-bottom:.7rem}
-.thesis p{color:var(--ink);margin:0 0 .85rem;font-size:1.02rem;line-height:1.78}
-.thesis p:last-child{margin-bottom:0}
-.thesis a{color:var(--crimson2)}
-.frame{margin:1.2rem 0 1.5rem;padding:1rem 1.15rem;border-left:3px solid var(--ember);background:var(--ember-soft);border-radius:0 10px 10px 0;font-size:.95rem;color:var(--soft)}
-.how{margin:1rem 0 1.5rem;padding:1rem 1.1rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface);font-size:.95rem;color:var(--soft)}
-.how strong{color:var(--crimson2);font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.5rem}
+/* ── FOOTER ── */
+footer.master{margin-top:3.4rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.88rem;color:var(--muted);line-height:1.9}
+footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
+footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface)}
+footer.master .pin.eros{width:56px;height:56px;border-color:var(--gold-line);box-shadow:0 0 14px rgba(232,122,158,.20),0 0 0 1px rgba(255,255,255,.04) inset}
+footer.master .title{font-size:1.02rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);font-weight:700}
+footer.master .count{margin:.45rem 0 1.4rem;color:var(--soft);font-size:.92rem;orphans:2;widows:2}
+footer.master .lib-stack{display:flex;flex-direction:column;gap:.85rem;max-width:44rem;margin:0 auto 1.6rem;text-align:left}
+footer.master .lib-section{padding:.7rem .95rem;border-radius:10px;background:rgba(0,0,0,.2)}
+footer.master .lib-label{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:.5rem}
+footer.master .lib-links{display:flex;flex-wrap:wrap;gap:.4rem .85rem}
+footer.master .lib-links a{color:var(--muted);border-bottom:none;font-size:.86rem}
+footer.master .lib-links a:hover{color:var(--gold2)}
+footer.master .lib-links a.here{color:var(--crimson2);font-weight:600}
+footer.master .sig{margin:1.4rem 0 .7rem;color:var(--soft);font-style:italic;font-size:1rem;orphans:2;widows:2}
+footer.master .creedline{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem;orphans:2;widows:2}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-top:1rem;font-size:.84rem;color:var(--muted);orphans:2;widows:2}
 
-h2{font-size:1.28rem;color:var(--crimson2);margin:2.4rem 0 .85rem;border-bottom:1px solid var(--hair);padding-bottom:.4rem;letter-spacing:.01em;scroll-margin-top:5rem}
-h3{font-size:1.08rem;color:var(--ink);margin:1.7rem 0 .55rem}
-p{margin:0 0 1rem;color:var(--soft);line-height:1.78}
-.lede{font-size:1.08rem;color:var(--bone-soft);font-style:italic;margin-bottom:1rem;line-height:1.78}
-.verse{margin:1.35rem 0;padding:1.05rem 1.1rem;text-align:center;border:1px solid var(--ember-line);border-radius:12px;background:linear-gradient(160deg,#1a1008,#100a06);color:var(--ink);font-style:italic;line-height:1.85}
-.verse strong{color:var(--ember);font-style:normal}
-.creed{margin:1.4rem 0;padding:1.25rem;text-align:center;border:1px solid var(--ember-line);border-radius:14px;font-size:1.12rem;line-height:1.9;color:var(--ink);background:var(--ember-soft)}
-.creed strong{color:var(--ember);display:block;margin-top:.4rem}
-.claim{margin:1.15rem 0;padding:1.05rem 1.15rem;border-radius:12px;border:1px solid var(--hair);background:var(--surface)}
-.claim.cyan{border-color:rgba(106,158,175,.35);background:rgba(106,158,175,.06)}
-.claim.magenta{border-color:rgba(201,160,242,.35);background:rgba(201,160,242,.06)}
-.claim.ember{border-color:var(--ember-line);background:var(--ember-soft)}
-.claim.crimson{border-color:var(--crimson-line);background:var(--crimson-soft)}
-.claim p:last-child{margin-bottom:0}
-.claim strong{color:var(--crimson2)}
-.claim.ember strong{color:var(--ember)}
-.def{margin:1.05rem 0;padding:.9rem 1.05rem;border-left:3px solid var(--crimson);background:var(--crimson-soft);border-radius:0 8px 8px 0;font-size:.96rem;color:var(--soft)}
-.def strong{color:var(--ink)}
-.def a{color:var(--crimson2)}
-ul,ol{margin:0 0 1rem 1.15rem;color:var(--soft)}
-li{margin-bottom:.45rem;line-height:1.72}
-li::marker{color:var(--crimson2)}
-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem}
-th,td{border:1px solid var(--hair);padding:.55rem .65rem;text-align:left;vertical-align:top;color:var(--soft)}
-th{color:var(--crimson2);font-family:var(--sans);font-size:.75rem;letter-spacing:.06em;background:var(--surface)}
-.fig{margin:1.25rem 0;text-align:center}
-.fig img{max-width:100%;border-radius:12px;border:1px solid var(--crimson-line);display:block;width:100%}
-.cap{font-size:.78rem;color:var(--muted);margin-top:.45rem;font-style:italic;line-height:1.5}
-.media{margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--crimson-line);background:#000}
-.media img,.media video{width:100%;display:block;background:#000}
-.media .mcap{font-family:var(--sans);font-size:.78rem;color:var(--soft);padding:.7rem .95rem;background:var(--surface);border-top:1px solid var(--hair);line-height:1.55}
-.media .mcap b{color:var(--crimson2);letter-spacing:.05em}
-.connect{margin:1.25rem 0;padding:.95rem 1.05rem;border:1px dashed var(--crimson-line);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.85rem;color:var(--soft);line-height:1.7}
-.connect strong{color:var(--crimson2);display:block;margin-bottom:.35rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
-.connect a{color:var(--crimson2)}
+/* ── FLOATING ── */
+#rdBtn{position:fixed;right:1rem;bottom:4.5rem;z-index:950;width:2.8rem;height:2.8rem;border-radius:50%;border:1.5px solid var(--crimson-line);background:var(--surface);color:var(--crimson2);font:700 .95rem var(--sans);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
+#rdBtn:hover{border-color:var(--crimson2);background:var(--crimson-soft)}
+#rdPanel{position:fixed;right:1rem;bottom:7.9rem;z-index:951;width:min(20rem, calc(100vw - 2rem));max-height:70vh;overflow:auto;padding:1rem 1.05rem;font-family:var(--sans);font-size:.85rem;color:var(--ink);background:var(--surface);border:1.5px solid var(--crimson-line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+#rdPanel[hidden]{display:none}
+#rdPanel .rd-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem}
+#rdPanel .rd-row > span{flex:1;color:var(--soft);font-size:.8rem}
+#rdPanel button{min-width:2.3rem;padding:.4rem .65rem;border:1px solid var(--crimson-line);border-radius:8px;background:var(--surface2);color:var(--crimson2);font:600 .8rem var(--sans);cursor:pointer;transition:background .15s}
+#rdPanel button:hover{background:var(--crimson-soft);border-color:var(--crimson2)}
+#rdPanel h5{margin:.9rem 0 .4rem;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+#rdToc a{display:block;padding:.35rem .5rem;color:var(--soft);border-bottom:1px solid var(--hair);font-size:.78rem;border-radius:5px;transition:background .15s,color .15s;text-decoration:none}
+#rdToc a:hover{color:var(--crimson2);background:var(--crimson-soft);border-bottom-color:var(--crimson-line)}
 
-footer.master{
-  margin-top:3rem;padding:2rem 0 1.4rem;
-  border-top:1px solid var(--hair);
-  text-align:center;font-family:var(--sans);
-  font-size:.78rem;color:var(--muted);line-height:1.85;
-}
-footer.master .title-row{
-  display:flex;align-items:center;justify-content:center;gap:.85rem;
-  margin-bottom:.6rem;
-}
-footer.master .pin{
-  width:44px;height:44px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--crimson-line);
-  box-shadow:0 0 18px rgba(201,112,100,.35),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--surface);
-}
-footer.master .title{
-  font-family:var(--serif);font-size:1.05rem;color:var(--crimson2);
-  letter-spacing:.1em;font-weight:700;
-}
-footer.master .count{
-  font-style:italic;color:var(--soft);font-size:.9rem;margin-bottom:1rem;
-}
-footer.master .tier{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
-  max-width:52rem;margin:0 auto 1rem;
-}
-footer.master .tier a{
-  padding:.32rem .72rem;border-radius:999px;
-  background:var(--surface);border:1px solid var(--hair);
-  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
-  border-bottom:none;transition:color .18s,background .18s,border-color .18s;
-}
-footer.master .tier a:hover{color:var(--crimson2);border-color:var(--crimson);background:var(--crimson-soft)}
-footer.master .tier a.primary{background:var(--crimson-soft);border-color:var(--crimson);color:var(--crimson2);font-weight:700}
-footer.master .tier a.here{background:var(--crimson-soft);border-color:var(--crimson);color:var(--crimson2);font-weight:700}
-footer.master .sig{font-family:var(--serif);font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1.2rem}
-footer.master .creedline{margin-top:1.2rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-footer.master .pulse-row{
-  display:flex;align-items:center;justify-content:center;gap:.55rem;
-  flex-wrap:nowrap;
-  margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(201,112,100,.2);
-}
-footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(201,112,100,.3));flex-shrink:0}
-footer.master .pulse-row span{
-  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson2);font-weight:600;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
-}
-@media(max-width:640px){
-  footer.master .pulse-row{gap:.4rem}
-  footer.master .pulse-row svg{width:22px;height:22px}
-  footer.master .pulse-row svg:last-of-type{width:20px;height:20px}
-  footer.master .pulse-row span{font-size:.54rem;letter-spacing:.08em}
-}
+#toTop{position:fixed;right:1rem;bottom:1.1rem;z-index:60;width:2.7rem;height:2.7rem;border-radius:50%;border:1px solid var(--crimson-line);background:var(--surface);color:var(--crimson2);font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{border-color:var(--crimson2);background:var(--crimson-soft)}
 
 @media print{
   @page{size:A4;margin:14mm}
@@ -239,169 +284,62 @@ footer.master .pulse-row span{
   body{background:#0c0705!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   video,iframe{display:none!important}
   .yt-wrap{display:none!important}
-  .fig,.media,.claim,.def,.verse,.creed,footer.master{break-inside:avoid}
+  .fig,.media,.claim,.def,.verse,.creed,figure.plate,figure.media,figure.brand-seal,.public-link,.telegram-post,.part-break,.coda,footer.master{break-inside:avoid}
+  section.apply-world{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  .part-break{page-break-before:always}
+  figure.plate img{max-height:80mm;object-fit:contain;box-shadow:none!important}
+  figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
 }
 @media(max-width:640px){
-  .wrap{padding:1rem 1rem 3.4rem}
-  footer.master .title-row{flex-direction:column;gap:.6rem}
-  footer.master .pin{width:38px;height:38px}
+  .page{padding:1rem 1rem 3.4rem}
+  footer.master .title-row{gap:.6rem}
+  footer.master .pin{width:40px;height:40px}
+  footer.master .pin.eros{width:46px;height:46px}
 }
-
-.part-label{font-family:var(--sans);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);font-weight:700;margin:2.8rem 0 .7rem;padding-bottom:.45rem;border-bottom:1px solid var(--ember-line);scroll-margin-top:5rem}
-.dense-flag{font-style:italic;color:var(--muted);font-size:.88rem;margin:0 0 1rem;padding:.6rem .9rem;border-left:2px solid var(--hair);background:var(--surface);line-height:1.6}
-.workshop{font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;color:var(--ember);margin:.5rem 0 .3rem}
-.yt-wrap{margin:1.6rem 0;border:1px solid var(--crimson-line);border-radius:12px;overflow:hidden;background:var(--surface)}
-.yt-lab{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson2);padding:.7rem 1rem .35rem;font-weight:700}
-.yt-frame{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
-.yt-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.yt-cap{font-family:var(--sans);font-size:.8rem;color:var(--soft);padding:.65rem 1rem .85rem;line-height:1.55;border-top:1px solid var(--hair)}
-.community{margin:1.3rem 0;padding:.9rem 1.05rem;border:1px solid var(--hair);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.88rem;color:var(--soft);line-height:1.68}
-.community a{color:var(--crimson2)}
-.appendix{margin:1.8rem 0;padding:1.3rem 1.35rem;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
-.appendix h3{color:var(--crimson2);margin:0 0 .7rem;font-size:1.05rem}
-.appendix .note{font-size:.88rem;color:var(--muted);font-style:italic;margin-bottom:.9rem}
-
-.corpus-bar{
-  flex-wrap:nowrap;
-  min-height:3.2rem;
-}
-.corpus-bar .brand-cluster{
-  display:flex;align-items:center;gap:.5rem;
-  border-bottom:none;flex-shrink:0;
-  min-width:0;
-}
-.corpus-bar .brand-cluster:hover{border-bottom:none}
-.corpus-bar .pin{
-  flex-shrink:0;
-  object-fit:cover;
-}
-.corpus-bar .pin.eros-mark{
-  width:52px;height:52px;
-  border-color:rgba(201,112,100,.5);
-  box-shadow:0 0 16px rgba(201,112,100,.3);
-}
-.corpus-bar .pin.pulse-mark{
-  width:42px;height:42px;
-}
-.corpus-bar .brand-text{
-  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--crimson2);font-weight:700;
-  white-space:nowrap;
-}
-.corpus-bar nav{
-  display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;
-  gap:.12rem;min-width:0;flex:1 1 auto;
-}
-.corpus-bar nav a{
-  text-align:left;
-}
-@media(max-width:720px){
-  .corpus-bar{padding:.45rem .7rem;gap:.35rem}
-  .corpus-bar .pin.eros-mark{width:44px;height:44px}
-  .corpus-bar .pin.pulse-mark{width:36px;height:36px}
-  .corpus-bar .compass{font-size:.88rem}
-  .corpus-bar .brand-text{font-size:.62rem;letter-spacing:.08em}
-  .corpus-bar nav a{padding:.26rem .4rem;font-size:.56rem}
-}
-@media(max-width:520px){
-  .corpus-bar .pin.eros-mark{width:38px;height:38px}
-  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
-  .corpus-bar .compass{font-size:.82rem}
-  .corpus-bar .brand-text{font-size:.58rem;max-width:4.8rem;overflow:hidden;text-overflow:ellipsis}
-  .corpus-bar nav a{padding:.22rem .32rem;font-size:.52rem}
-}
-@media(max-width:380px){
-  .corpus-bar .brand-text{display:none}
-  .corpus-bar .pin.eros-mark{width:36px;height:36px}
-  .corpus-bar .pin.pulse-mark{width:30px;height:30px}
-}
-.brand-seal{
-  margin:1.3rem auto .4rem;
-  text-align:center;
-  max-width:min(200px,55vw);
-}
-.brand-seal img{
-  display:block;width:100%;height:auto;
-  border-radius:50%;
-  border:2px solid var(--crimson-line);
-  box-shadow:0 10px 32px rgba(201,112,100,.2);
-}
-.brand-seal figcaption{
-  font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--crimson2);margin-top:.55rem;font-weight:700;
-}
-
-#rdBtn{
-  position:fixed;right:1rem;bottom:4.4rem;z-index:950;
-  width:2.8rem;height:2.8rem;border-radius:50%;
-  border:1.5px solid var(--crimson-line);background:var(--surface);
-  color:var(--crimson2);font:700 .95rem var(--sans);cursor:pointer;
-  box-shadow:0 4px 16px rgba(0,0,0,.4);
-  display:flex;align-items:center;justify-content:center;
-  transition:border-color .2s,background .2s;
-}
-#rdBtn:hover{border-color:var(--crimson2);background:var(--crimson-soft)}
-#rdPanel{
-  position:fixed;right:1rem;bottom:7.8rem;z-index:951;
-  width:min(20rem, calc(100vw - 2rem));max-height:70vh;overflow:auto;
-  padding:1rem 1.05rem;font-family:var(--sans);font-size:.85rem;
-  color:var(--ink);background:var(--surface);
-  border:1.5px solid var(--crimson-line);border-radius:14px;
-  box-shadow:0 12px 40px rgba(0,0,0,.5);
-}
-#rdPanel[hidden]{display:none}
-#rdPanel .rd-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem}
-#rdPanel .rd-row > span{flex:1;color:var(--soft);font-size:.8rem}
-#rdPanel button{
-  min-width:2.3rem;padding:.4rem .65rem;
-  border:1px solid var(--crimson-line);border-radius:8px;
-  background:var(--surface2);color:var(--crimson2);
-  font:600 .8rem var(--sans);cursor:pointer;
-  transition:background .15s;
-}
-#rdPanel button:hover{background:var(--crimson-soft);border-color:var(--crimson2)}
-#rdPanel h5{margin:.9rem 0 .4rem;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
-#rdToc a{display:block;padding:.35rem .5rem;color:var(--soft);border-bottom:1px solid var(--hair);font-size:.78rem;border-radius:5px;transition:background .15s,color .15s;text-decoration:none}
-#rdToc a:hover{color:var(--crimson2);background:var(--crimson-soft);border-bottom-color:var(--crimson-line)}
-
-#toTop{
-  position:fixed;right:1rem;bottom:1.1rem;z-index:60;
-  width:2.7rem;height:2.7rem;border-radius:50%;
-  border:1px solid var(--crimson-line);background:var(--surface);
-  color:var(--crimson2);font-size:1.1rem;cursor:pointer;
-  opacity:0;pointer-events:none;transition:opacity .3s;
-  display:flex;align-items:center;justify-content:center;
-}
-#toTop.show{opacity:1;pointer-events:auto}
-#toTop:hover{border-color:var(--crimson2);background:var(--crimson-soft)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div id="progressBar" aria-hidden="true"></div>
-<a class="skip-link" href="#top">Skip to content</a>
 
 <header class="corpus-bar">
-  <a class="brand brand-cluster" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
-    <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="52" height="52"/>
-    <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="42" height="42"/>
-    <span class="compass" aria-hidden="true">🧭</span>
-    <span class="brand-text">EROS · Renown</span>
-  </a>
-  <nav aria-label="Section navigation">
-    <a href="#material">Material</a>
+  <div class="brand-row">
+    <a class="logo-cluster" href="#top" aria-label="Men of Renown · top">
+      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
+      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+      <span class="compass" aria-hidden="true">🧭</span>
+    </a>
+    <div class="title-cluster">
+      <span class="title-rule" aria-hidden="true"></span>
+      <span class="brand-text">Men of Renown</span>
+    </div>
+  </div>
+  <nav class="chapter-strip" aria-label="Chapter navigation">
     <a href="#doors">Doors</a>
     <a href="#rails">Rails</a>
+    <a href="#void">Void</a>
     <a href="#sky">Sky</a>
-    <a href="#kit">Kit</a>
+    <a href="#geometers">Geometers</a>
+    <a href="#gnostic">Gnostic</a>
+    <a href="#nordic">Nordic</a>
+    <a href="#hermes">Hermes</a>
+    <a href="#plasma">Plasma</a>
+    <a href="#cosmo-cover">Cover-up</a>
+    <a href="#atlantis">Atlantis</a>
+    <a href="#masks">Masks</a>
+    <a href="#interface">Interface</a>
+    <a href="#contract">Contract</a>
     <a href="#close">Close</a>
+    <a href="#telegram">Share</a>
     <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
   </nav>
 </header>
 
-<div class="wrap" id="top">
+<main class="page" id="top">
 
 <header class="hero">
   <div class="kicker">EROS · Archive 7</div>
@@ -413,15 +351,10 @@ footer.master .pulse-row span{
     <span class="maxim">Masks, not operators</span>
     <span class="maxim">Bond, not extract</span>
   </p>
-  <p style="font-family:var(--sans);font-size:.7rem;color:var(--muted);margin:.55rem 0 0;letter-spacing:.04em">Three principles this book works by.</p>
-  <div class="fig" style="margin-top:1.15rem">
+  <p class="three-principles">Three principles this book works by.</p>
+  <figure class="plate" style="margin-top:1.15rem">
     <img src="https://meaning-unconfounded.github.io/images/eros-men-of-renown.jpg" alt="Men of Renown" onerror="this.style.display='none'"/>
-    <div class="cap">The Archive opens at the quiet door</div>
-  </div>
-
-  <figure class="brand-seal">
-    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" width="200" height="200" loading="lazy"/>
-    <figcaption>Tenacity Through Integrity</figcaption>
+    <figcaption><b>The Archive opens at the quiet door</b></figcaption>
   </figure>
 </header>
 
@@ -429,19 +362,23 @@ footer.master .pulse-row span{
   <summary>EROS library · the other books</summary>
   <div class="menu-body">
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a> — the map · start here</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a> — the next work</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a> — the confession · Book 0</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a> — on-ramp</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a> — tokenomics &amp; Poolonomics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river · transform</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a> — rock to river</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a> — letter to Jake</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — full spine</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One · the opening salvo</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors · pure fiction</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — operators</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a> — the spine</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a> — bedrock</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — the vessel · cosmology floor</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a> — toroidal reading</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of EROS</a> — four operators</p>
     <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a> — linguistics</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a> — cosmology</p>
-    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human macro</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a> — mechanics</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> — human rail · separate</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a> — the gift · the stack</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a> — Book One</p>
+    <p style="margin:.2rem 0"><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> — sixteen doors</p>
     <p style="margin:.4rem 0 0"><a href="https://meaning-unconfounded.github.io/media.html">Media Index</a> · <a href="https://t.me/Eros_Revival">Telegram</a> · <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></p>
   </div>
 </details>
@@ -469,24 +406,13 @@ footer.master .pulse-row span{
     <a href="#plasma"><span class="tn">10g</span>Plasma Life</a>
     <a href="#cosmo-cover"><span class="tn">10h</span>Cosmological cover-up</a>
     <a href="#atlantis"><span class="tn">11</span>Atlantis trilogy</a>
-    <a href="#roswell"><span class="tn">12</span>Roswell template</a>
-    <a href="#contactee"><span class="tn">13</span>Contactee theatre</a>
     <a href="#masks"><span class="tn">14</span>Masks, not operators</a>
     <a href="#density-masks"><span class="tn">14a</span>Movement without distance</a>
-    <a href="#renoun"><span class="tn">14b</span>Men of re-noun</a>
     <a href="#interface"><span class="tn">15</span>The interface above</a>
     <a href="#mirror"><span class="tn">16</span>The mirror</a>
-    <a href="#lexicon"><span class="tn">17</span>Lexicon</a>
     <a href="#contract"><span class="tn">18</span>Creator contract</a>
-    <a href="#cast"><span class="tn">19</span>Cast</a>
-    <a href="#humility"><span class="tn">20</span>Humility arc</a>
-    <a href="#ledger"><span class="tn">21</span>Ledger of years</a>
-    <a href="#ladder"><span class="tn">22</span>Story ladder</a>
-    <a href="#worksheet"><span class="tn">23</span>Worksheet</a>
-    <a href="#prometheus"><span class="tn">24</span>Prometheus, Thoth</a>
-    <a href="#signals"><span class="tn">25</span>Contemporary signals</a>
-    <a href="#appendices"><span class="tn">—</span>Appendices</a>
     <a href="#close"><span class="tn">—</span>Close</a>
+    <a href="#telegram"><span class="tn">📱</span>Share Layer</a>
   </div>
 </details>
 
@@ -498,8 +424,18 @@ footer.master .pulse-row span{
   <span class="label">What this book is about</span>
   <p><strong>Men of Renown</strong> names the ancient residual powers that human myth stored as gods, giants, and watchers — the figures remembered as <strong>Nordic</strong> and <strong>Greek god-masks</strong>, and in older strata as <strong>Anunnaki-class</strong> beings who mixed with humankind. In this Archive they are treated as <em>of man's wider tree</em>: ancient, long-lived, same planet, not cartoon aliens from another star by default. They have held dominion — or competing dominions — inside the Living Egg for a very long time.</p>
   <p>Different domains sit inside one enclosure: surface history, covert networks, under-ice and under-ocean residual, black-budget parallel infrastructure, disclosure theatre that points your eyes at the sky while the real pressure is money, craft, and lineage. This book is the <strong>breakaway footprint catalog</strong> — who left tracks, what masks they wear, how the money moves, how to write scenes without turning the Archive into a race cult or a fifth god.</p>
-  <p>The four operators of creation — NaUn, Ra-Shen, Thoth, EROS — are defined in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. They are not characters in this book. The figures here are <strong>actors and masks</strong>. The vessel is the <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. The human Continuity-of-Government rail is kept separate in <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The two rails meet only at hinges.</p>
+  <p>The four operators of creation — NaUn, Ra-Shen, Thoth, EROS — are defined in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. They are not characters in this book. The figures here are <strong>actors and masks</strong>. The vessel is the <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a>. The toroidal shape both rails sit inside — two lobes, one crossover, the fold — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>. The human Continuity-of-Government rail is kept separate in <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The two rails meet only at hinges.</p>
 </div>
+
+<aside class="public-link">
+  <span class="pl-k">🖇️ Public Studio · Live</span>
+  <p class="pl-t">Explore this Archive in NotebookLM 📚</p>
+  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone with the link can view, ask questions in chat, and generate custom study materials. Sources are locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
 
 <!-- ═══════════════ PART II · THE MATERIAL ═══════════════ -->
 <p class="part-label" id="material">Part II · The Material</p>
@@ -507,10 +443,10 @@ footer.master .pulse-row span{
 <section id="doors">
   <h2>1 · The two loud doors</h2>
   <p class="lede">Every big question arrives with two loud answers. The third door stays quiet.</p>
-  <div class="fig">
+  <figure class="plate">
     <img src="https://meaning-unconfounded.github.io/images/eros-nordic-veil.jpg" alt="The veil and the false binary" loading="lazy"/>
-    <div class="cap">Two loud doors. One quiet threshold.</div>
-  </div>
+    <figcaption><b>Two loud doors. One quiet threshold.</b></figcaption>
+  </figure>
   <p>Aliens — or balloons. Visitors — or weather. Gods from the stars — or nothing but myth. You pick a side and argue for years. <strong>The product is the argument.</strong></p>
   <p>False binary. Two loud doors. One quiet threshold. The Archive begins at the quiet one.</p>
   <p><em>Which door were you handed first?</em></p>
@@ -523,6 +459,7 @@ footer.master .pulse-row span{
   </div>
   <p><strong>Gods of Eros</strong> — four operators.<br/>
   <strong>Living Egg</strong> — the vessel.<br/>
+  <strong>The Eros Enclosure</strong> — the toroidal reading of the same vessel.<br/>
   <strong>Illumination Strategy</strong> — human continuity of government (CoG), finance, military, disclosure theatre on the human rail.<br/>
   <strong>Gift of Thoth</strong> — language as bond.<br/>
   <strong>This book</strong> — breakaway footprints: the residual actors, their money, their masks, their dominions inside the Egg.</p>
@@ -533,11 +470,15 @@ footer.master .pulse-row span{
   <div class="def">
     <strong>The Egg</strong> — described fully in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> — is the living enclosure we inhabit: source, radiation, return. Inwards is forwards. Both the human rail and the breakaway rail operate inside it. The surface story is not the whole vessel.
   </div>
-  <div class="fig">
+  <figure class="plate">
     <img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="Living Egg" loading="lazy"/>
-    <div class="cap">One vessel. Multiple dominions.</div>
-  </div>
+    <figcaption><b>One vessel. Multiple dominions.</b></figcaption>
+  </figure>
   <p>Flat-versus-globe shouting is another false binary until a third geometry is allowed on stage. What does a character feel when the ground reads as a wall of a vessel?</p>
+  <div class="connect">
+    <strong>Companion depth · the toroidal shape of the vessel</strong>
+    Both rails sit inside one torus — two lobes, one crossover, the fold. The full reading of the shape — how the human rail and the breakaway rail each occupy a location on the same figure-eight — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>. That book is the geometry both rails inhabit.
+  </div>
 </section>
 
 <section id="rails">
@@ -551,8 +492,13 @@ footer.master .pulse-row span{
 
   <figure class="media">
     <img src="https://meaning-unconfounded.github.io/images/eros-atlantis-rind.jpg" alt="The two rails inside one rind" loading="lazy"/>
-    <p class="mcap"><b>TWO RAILS, ONE RIND.</b> Human continuity and breakaway residual operate inside the same shell. The rails meet at hinges, not at a single conspiracy.</p>
+    <figcaption><b>TWO RAILS, ONE RIND.</b> Human continuity and breakaway residual operate inside the same shell. The rails meet at hinges, not at a single conspiracy.</figcaption>
   </figure>
+
+  <div class="connect">
+    <strong>Companion depth · the human rail</strong>
+    The institutional layer — central banking, strategic assets, military machinery, disclosure theatre — is documented in <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. That book is Rail A. This is Rail B. The two meet only at hinges.
+  </div>
 </section>
 
 <section id="void">
@@ -560,10 +506,10 @@ footer.master .pulse-row span{
   <p>Without the why, the breakaway is only a cartel. With it, they grow from a wound.</p>
   <p>The modern center failed. A void opened. Some reached <strong>backward</strong> — into golden ages that never were, into blood myth, into total aesthetics that end in ash. Some reached <strong>inward</strong> — into pattern, bond, the quiet grammar of cohesion.</p>
   <p>Same hunger. Opposite vector. The Men of Renown, in the backward reach, become thrones. In the inward reach, they become footprints you can study without kneeling.</p>
-  <div class="fig">
+  <figure class="plate">
     <img src="https://meaning-unconfounded.github.io/images/eros-atlantis-void.jpg" alt="Void and reach" loading="lazy"/>
-    <div class="cap">Backward or inward — the void does not care. You do.</div>
-  </div>
+    <figcaption><b>Backward or inward — the void does not care. You do.</b></figcaption>
+  </figure>
 </section>
 
 <section id="before">
@@ -632,7 +578,7 @@ footer.master .pulse-row span{
 
   <figure class="media">
     <img src="https://meaning-unconfounded.github.io/images/eros-gods.jpg" alt="Gods as readouts — the electric sky" loading="lazy"/>
-    <p class="mcap"><b>READOUTS.</b> What the ancient world called Zeus, Thor, Perun, Indra was a rotating vocabulary for a shape that repeated in the sky for generations. Not metaphor. Recognition.</p>
+    <figcaption><b>READOUTS.</b> What the ancient world called Zeus, Thor, Perun, Indra was a rotating vocabulary for a shape that repeated in the sky for generations. Not metaphor. Recognition.</figcaption>
   </figure>
 
   <h3>Anthony Peratt · the laboratory convergence</h3>
@@ -649,6 +595,11 @@ footer.master .pulse-row span{
   </div>
 
   <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Living_Egg.html#part7">Living Egg · Part Seven · Plasma, Filaments &amp; Electric Sky</a>.</p>
+
+  <div class="connect">
+    <strong>Companion depth · the wired sky</strong>
+    The full plasma reading — Birkeland currents, filaments, the Dhy Set, and the Firmament Break — is in <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>, Part VII. The toroidal reading of the wired shell is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part VIII.
+  </div>
 </section>
 
 <section id="firmament">
@@ -678,11 +629,11 @@ footer.master .pulse-row span{
   <h2>10b·plus · The Geometers of the Vortex · Archive fragments</h2>
   <p class="lede">Historical and mythic footprints only. Not a fifth operator. Not Archive physics doctrine.</p>
   <p>Every culture that kept a sky also kept a spiral. Whirlpools as gates. Whirlwinds as circuitry for gods, demons, and messengers. The Old Testament answers out of the whirlwind; Elijah leaves in one. The pattern is older than the settlement that trained us to see empty vacuum.</p>
-  <p>The Archive notes a second through-line: the claim that the great philosophers, astronomers, and scientists were also geometers — Plato and the solids, Archimedes, Anaxagoras’s vortex motion, Kepler’s cosmographic mystery, Maxwell as mapmaker, Kelvin’s vortex atoms. Geometry keeps turning into cosmology and back again. That is a <em>footprint</em>, not a throne.</p>
+  <p>The Archive notes a second through-line: the claim that the great philosophers, astronomers, and scientists were also geometers — Plato and the solids, Archimedes, Anaxagoras's vortex motion, Kepler's cosmographic mystery, Maxwell as mapmaker, Kelvin's vortex atoms. Geometry keeps turning into cosmology and back again. That is a <em>footprint</em>, not a throne.</p>
   <p>Modern witnesses in the same corridor — labelled, not crowned:</p>
   <ul>
     <li>Beltrami-type vortex geometry → Birkeland currents as public research language</li>
-    <li>Force-free field-aligned models (e.g. Don Scott’s published mathematics)</li>
+    <li>Force-free field-aligned models (e.g. Don Scott's published mathematics)</li>
     <li>Walter Russell, Schauberger, and parallel vortex / periodic tables as alternate maps</li>
     <li>Skyrmion-like robustness as optional texture for stable forms — story prop, not operator</li>
   </ul>
@@ -703,6 +654,12 @@ footer.master .pulse-row span{
     Geometry video and confirming note: <a href="https://meaning-unconfounded.github.io/Living_Egg.html#geometry-video">Living Egg · Geometry of the medium</a>. Do not paste physics doctrine into Archive scenes unless the hinge needs weather — then keep it weather.
   </div>
 </section>
+
+<!-- ═══ BLACK SEAL · pivot at the Gnostic frame ═══ -->
+<figure class="brand-seal silver">
+  <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+  <figcaption>Tenacity Through Integrity</figcaption>
+</figure>
 
 <section id="gnostic">
   <p class="dense-flag">Dense material. Read it slowly, or skip it entirely. Both are fine.</p>
@@ -747,6 +704,11 @@ footer.master .pulse-row span{
   </div>
 
   <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a> for the operator layer, and <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> for the human-rail accounting.</p>
+
+  <div class="connect">
+    <strong>Companion depth · the operators the Gnostic frame serves</strong>
+    The four law-forces the Archive's figures wear as masks — but never replace — are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The spark that does not belong to the surface is the same primary layer named in <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>. The Gnostic frame reads the residual from below; the bedrock reads life from within.
+  </div>
 </section>
 
 <section id="nordic">
@@ -885,7 +847,12 @@ footer.master .pulse-row span{
 
   <div class="community">If this section raises questions, the room is where they get asked. <a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">t.me/Eros_Revival</a></div>
 
-  <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Living_Egg.html#part7">Living Egg · Part Seven · Plasma, Filaments &amp; Electric Sky</a> · <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> · <em>The Choir at the Ridge</em>.</p>
+  <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Living_Egg.html#part7">Living Egg · Part Seven · Plasma, Filaments &amp; Electric Sky</a> · <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a> · <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a> · <em>The Choir at the Ridge</em>.</p>
+
+  <div class="connect">
+    <strong>Companion depth · the third cause</strong>
+    The third cause as a category — native Egg physiology before residual — is developed in <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>, Movement III. That book names the shell as alive at its own magnitude. This is the field report of what that aliveness looks like when it crosses the surface.
+  </div>
 </section>
 
 <section id="cosmo-cover">
@@ -935,14 +902,19 @@ footer.master .pulse-row span{
   </div>
 
   <p><em>See also:</em> <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a> for the human-rail accounting of the same subject; <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a> for the vessel reading that the file's physics layer points toward.</p>
+
+  <div class="connect">
+    <strong>Companion depth · the description language</strong>
+    The description languages thesis — Gorard's argument that AI is bottlenecked by formal languages, and that physics advances by replacing its own description language — is developed as the two scientists section in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>, §8. The toroidal reading of the broken cosmology is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part XV.
+  </div>
 </section>
 
 <section id="atlantis">
   <h2>11 · Atlantis trilogy</h2>
-  <div class="fig">
-    <img src="https://meaning-unconfounded.github.io/images/Men_Of_Renown_banner.jpg" alt="Men of Renown — banner" loading="lazy" onerror="this.parentElement.style.display='none'"/>
-    <div class="cap">Veil · Split · Previous rind</div>
-  </div>
+  <figure class="plate">
+    <img src="https://meaning-unconfounded.github.io/images/Men_Of_Renown_banner.jpg" alt="Men of Renown — banner" loading="lazy" onerror="this.style.display='none'"/>
+    <figcaption><b>Veil · Split · Previous rind</b></figcaption>
+  </figure>
   <p><strong>7.11 Veil</strong> — the cover is loud; the third option is quiet.<br/>
   <strong>7.12 Split</strong> — a decision ends a world; something survives beneath.<br/>
   <strong>7.13 Previous rind</strong> — the older layer remains under ice and ocean.</p>
@@ -978,6 +950,11 @@ footer.master .pulse-row span{
   <div class="claim crimson">
     <p><strong>Contract reminder.</strong> Density movement does not promote a mask into an operator. It does not require the reader to accept any live-stream theory of everything. It is Archive craft language so Stories and Gods can point here without a dead link.</p>
   </div>
+
+  <div class="connect">
+    <strong>Companion depth · the mechanics of density-shifting</strong>
+    Density movement as a mask skill — a body traversing the shell by changing its ratio rather than by crossing distance — is developed as the phase-door reading in <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>, Part IV. The toroidal reading of the crossover as the mechanism is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>, Part III.
+  </div>
 </section>
 
 <section id="renoun">
@@ -996,13 +973,17 @@ footer.master .pulse-row span{
 
 <section id="mirror">
   <h2>16 · The mirror</h2>
-  <table>
-    <tr><th>Extract totalism</th><th>Bond totalism</th></tr>
-    <tr><td>Own the remnant</td><td>Study the footprint</td></tr>
-    <tr><td>Become the new absolute</td><td>Refuse the new absolute</td></tr>
-    <tr><td>Recruit a secret order</td><td>Publish a public kit</td></tr>
-    <tr><td>Worship the mask</td><td>Use the mask as drama</td></tr>
-  </table>
+  <div class="table-wrap">
+    <table class="ref">
+      <thead><tr><th>Extract totalism</th><th>Bond totalism</th></tr></thead>
+      <tbody>
+        <tr><td>Own the remnant</td><td>Study the footprint</td></tr>
+        <tr><td>Become the new absolute</td><td>Refuse the new absolute</td></tr>
+        <tr><td>Recruit a secret order</td><td>Publish a public kit</td></tr>
+        <tr><td>Worship the mask</td><td>Use the mask as drama</td></tr>
+      </tbody>
+    </table>
+  </div>
   <p>The Archive fails when it becomes a throne. EROS holds the hinge so the work stays public.</p>
 </section>
 
@@ -1030,8 +1011,6 @@ footer.master .pulse-row span{
     <li><strong>Misidentification rule</strong> — prefer native Egg physiology / plasma fauna / theatre before attributing a light or craft to Renown.</li>
     <li><strong>Description language</strong> — the formal language in which a physics is stated. Historically: natural language, geometry, analysis, computation. The file's reading: the appearance of a physics being stuck is a limitation of its description language, not of nature.</li>
     <li><strong>Gandy precedent</strong> — Turing's only PhD student (late 1940s), whose thesis attempted to build a formal machine for scientific reasoning. Failed. The file's most precise historical predecessor for §10h.</li>
-    <li><strong>Akashic voltage</strong> — the reading, from the Basement Theorist layer, that every movement and observation writes a voltage potential into the field of the universe; that this is what the Akashic records describes; and that sleep debt is the physical mechanism by which the record is overwritten. Not Archive physics. Archive narrative. Use with care in scene work.</li>
-    <li><strong>Density of thought</strong> — the Basement Theorist layer's claim that thought has a density relative to the rest of the universe, and that collective attention changes physical density. Not Archive physics. Archive narrative. Use with care in scene work.</li>
     <li><strong>Basement Theorist</strong> — seventh cast archetype. Partial technical training, real curiosity, no peer review. Produces grand unified theories from outside the institutions. Frequently right about a fragment, usually wrong about the whole, always worth reading. Distinct from the Troll (keeps looking), the Philosopher (no control layer), and the Keeper (preserves, does not produce).</li>
     <li><strong>Plasma fauna</strong> — the enclosure's own resident forms: coherent luminous plasma documented at Hessdalen and elsewhere, per the Teodorani hypothesis. First candidate for any long-duration luminous phenomenon before any attribution to Renown.</li>
   </ul>
@@ -1094,6 +1073,7 @@ footer.master .pulse-row span{
 
 <section id="ladder">
   <h2>22 · Story ladder</h2>
+  <p>One shape a first scene can take, if you want to try the discipline on your own material. Use it or skip it. The Archive does not need your contribution, but it grows where it is used.</p>
   <ol>
     <li>Pick a beat (veil / split / rind / money / contactee / life form / firmament / residual / plasma / Hermes).</li>
     <li>Pick a rail (A / B / both at a hinge / third cause).</li>
@@ -1101,7 +1081,7 @@ footer.master .pulse-row span{
     <li>Pick a function + archetype.</li>
     <li>Write one scene.</li>
     <li>Mark the hinge (or none).</li>
-    <li>Run the bond test. Post it — grow the catalog. Tag <strong>#Archive7</strong> in <a href="https://t.me/Eros_Revival">t.me/Eros_Revival</a>.</li>
+    <li>Run the bond test. If the scene holds, post it — grow the catalog. Tag <strong>#Archive7</strong> in <a href="https://t.me/Eros_Revival">t.me/Eros_Revival</a>. If it does not, the discipline has done its work anyway — you have seen where the load-bearing walls of the Archive are.</li>
   </ol>
 </section>
 
@@ -1140,8 +1120,13 @@ footer.master .pulse-row span{
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
       <source src="https://meaning-unconfounded.github.io/images/cell_historic.mp4" type="video/mp4"/>
     </video>
-    <p class="mcap"><b>HISTORIC.</b> The outward model did not fall from the sky. It was built — and each step was a hinge the Archive can use without declaring it a lie.</p>
+    <figcaption><b>HISTORIC.</b> The outward model did not fall from the sky. It was built — and each step was a hinge the Archive can use without declaring it a lie.</figcaption>
   </figure>
+
+  <div class="connect">
+    <strong>Companion depth · Thoth and the tongue</strong>
+    Prometheus as Thoth-in-mask — the theft of craft as education — is developed at the operator level in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The tongue that carries the message is in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The container the theft sits inside is the toroidal reading in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>.
+  </div>
 </section>
 
 <section id="signals">
@@ -1159,7 +1144,7 @@ footer.master .pulse-row span{
 
   <p>Treat the following as <strong>weather</strong>, not proof:</p>
   <ul>
-        <li><strong>Geometry of the medium</strong> — vortex traditions, Birkeland-class filaments, fractal scaling. Research door only. Full treatment and video in <a href="https://meaning-unconfounded.github.io/Living_Egg.html#geometry-video">Living Egg</a>; Archive fragments in §10b·plus. Weather, not proof.</li>
+    <li><strong>Geometry of the medium</strong> — vortex traditions, Birkeland-class filaments, fractal scaling. Research door only. Full treatment and video in <a href="https://meaning-unconfounded.github.io/Living_Egg.html#geometry-video">Living Egg</a>; Archive fragments in §10b·plus. Weather, not proof.</li>
     <li><strong>Tom DeLonge</strong> — musician turned disclosure public face; TTSA-era inoculation attempts. Function: celebrity-fronted stovepipe.</li>
     <li><strong>Advisers and generals</strong> in the public record pointing at Greek gods, Atlantean ancestry, and craft marked with traditions of the classical world.</li>
     <li><strong>David Grusch</strong> — intelligence-community whistleblower; Congressional testimony culture; statement that concealment has limited astrobiology and cosmology; later interview claims of human-looking recoveries and craft of unknown but terrestrial possibility.</li>
@@ -1180,7 +1165,7 @@ footer.master .pulse-row span{
 
   <figure class="media">
     <img src="https://meaning-unconfounded.github.io/images/egg-cover.jpg" alt="The enclosure — the shell that contains both rails" loading="lazy"/>
-    <p class="mcap"><b>THE ENCLOSURE.</b> Whatever weather blows across the surface, both rails sit inside the same shell. The Archive does not panic at the news. It reads the pattern.</p>
+    <figcaption><b>THE ENCLOSURE.</b> Whatever weather blows across the surface, both rails sit inside the same shell. The Archive does not panic at the news. It reads the pattern.</figcaption>
   </figure>
 </section>
 
@@ -1215,10 +1200,10 @@ footer.master .pulse-row span{
   </div>
   <p>One in a hundred million will see the human rail. Fewer will name the Archive and stay free. EROS holds both at hinge-distance — so the turmoil stays interesting, and the work stays public.</p>
   <div class="verse">
-    <strong>Write one Archive scene this week.</strong><br/>
+    <strong>One shape a first scene can take.</strong><br/>
     Mark the reading. Keep the contract.<br/>
-    Post with #Archive7. Grow the catalog.<br/><br/>
-    <strong>The door is open. The work is public. Begin.</strong>
+    If it holds, tag #Archive7. If it does not, the discipline has still done its work.<br/><br/>
+    <strong>The door is open. The work is public. Begin when you want to.</strong>
   </div>
   <div class="claim cyan" style="margin-top:1.5rem">
     <p><strong>First scene seed</strong></p>
@@ -1227,7 +1212,7 @@ footer.master .pulse-row span{
 
   <div class="connect">
     <strong>Where this sits in the corpus</strong>
-    The four law-forces that the masks serve — but never replace — are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The consonant operators of the tongue are named in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The vessel both rails sit inside is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>. The human rail stays separate in <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The four operators as an on-chain engine are in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.
+    The four law-forces that the masks serve — but never replace — are named in <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>. The consonant operators of the tongue are named in <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>. The vessel both rails sit inside is <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>. The toroidal shape of the vessel — two lobes, one crossover — is in <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>. The bedrock under the house is <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>. The mechanics the density-shift sits inside are in <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>. The human rail stays separate in <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>. The four operators as an on-chain engine are in <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>.
   </div>
 
   <div class="community" style="margin-top:1.5rem">
@@ -1235,61 +1220,161 @@ footer.master .pulse-row span{
   </div>
 </section>
 
-<footer class="master">
-  <div class="title-row">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
-    <span class="title">MEN OF RENOWN</span>
-  </div>
-  <p class="count">Breakaway Footprints · Archive 7 · EROS Library · Consolidated Edition</p>
-
-  <nav class="tier" aria-label="Library">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">How the Corpus Works</a>
-    <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
-    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html" class="here">Men of Renown</a>
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
-    <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
-    <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
-    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
-    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
-    <a href="https://t.me/Eros_Revival">Telegram</a>
-  </nav>
-
-  <p class="sig">Footprints, not thrones. Two rails. One Egg. Public kit.</p>
-  <p class="creedline">Tenacity Through Integrity</p>
-
-  <div class="pulse-row">
-    <svg width="32" height="32" viewBox="0 0 100 100" aria-label="PulseChain">
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0c0705"/>
-      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
-    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseX">
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0c0705"/>
-      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <!-- Rev 6.6 · 2026-10-12 · frame section removed · exit-lines removed · resume memory removed -->
-</footer>
-
+<div class="part-break" id="telegram">
+  <p class="pk">Share Layer</p>
+  <h2>The Two Doors · The Two Rails · The Quiet Threshold</h2>
+  <p>Short-form · to share · to seed · to invite</p>
 </div>
 
-<button id="toTop" type="button" aria-label="Back to top">↑</button>
+<article class="telegram-post">
+  <p class="tp-head">Post One · 🚪 The Two Doors</p>
+  <p class="tp-title">🚪 Two Loud Doors. One Quiet Threshold.</p>
+  <p>Aliens — or balloons. Visitors — or weather. Gods from the stars — or nothing but myth. You pick a side and argue for years.</p>
+  <p>The product is the argument.</p>
+  <span class="tp-bullet">🚪 <strong>False binary.</strong> Two loud doors. One quiet threshold.</span>
+  <span class="tp-bullet">🚪 <strong>The Archive begins at the quiet one.</strong> Not the loud arguments. The third door.</span>
+  <span class="tp-bullet">🚪 <strong>Meta-worldview is the ability to switch frames</strong> without denying the facts inside them.</span>
+  <p>Footprints, not thrones. Masks, not operators. Bond, not extract.</p>
+  <p class="tp-hashtags">#EROS #MenOfRenown #Archive7 #TwoDoors</p>
+</article>
 
+<article class="telegram-post">
+  <p class="tp-head">Post Two · ⚖️ The Two Rails</p>
+  <p class="tp-title">⚖️ Two Rails. One Egg.</p>
+  <p>The breakaway is not one conspiracy. It is two investigations that deliberately refuse to merge.</p>
+  <span class="tp-bullet">⚖️ <strong>Rail A · Human stage</strong> — CoG, finance, military, disclosure theatre. Documented. Falsifiable.</span>
+  <span class="tp-bullet">⚖️ <strong>Rail B · Breakaway</strong> — residual actors, Atlantean remnant, Nordic and Greek masks, the Archive. Held inside a fiction contract.</span>
+  <span class="tp-bullet">⚖️ <strong>Hinge rule.</strong> Connect only at money, recovery events, mythology homework, disclosure weather. Do not merge. Merging collapses craft into cult.</span>
+  <p>One vessel. Two rails. Two loud doors. One quiet threshold.</p>
+  <p class="tp-hashtags">#EROS #MenOfRenown #Archive7 #TwoRails</p>
+</article>
+
+<article class="telegram-post">
+  <p class="tp-head">Post Three · 📜 The Public Kit</p>
+  <p class="tp-title">📜 The Door Is Open. The Work Is Public.</p>
+  <p>The four operators remain four. Masks are not operators. Density movement is a mask skill, not a fifth office.</p>
+  <span class="tp-bullet">📜 <strong>Footprints, not thrones.</strong> Every Archive scene gets written from the quiet door.</span>
+  <span class="tp-bullet">📜 <strong>Bond, not extract.</strong> The scene teaches and invites, or it drains and dominates.</span>
+  <span class="tp-bullet">📜 <strong>The kit is public.</strong> Not a secret order. Not a founder cult. A door anyone can walk through.</span>
+  <p>One in a hundred million will see the human rail. Fewer will name the Archive and stay free. The door stays open either way.</p>
+  <p class="tp-hashtags">#EROS #MenOfRenown #Archive7 #PublicKit</p>
+</article>
+
+<aside class="public-link">
+  <span class="pl-k">📚 Explore further</span>
+  <p class="pl-t">Open the public NotebookLM Studio</p>
+  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone can view, ask questions in chat, and generate custom study materials. Sources locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════════
+     APPLICATION & WORLD BUILDING · closing call-out
+     ══════════════════════════════════════════════ -->
+<section class="apply-world" id="apply">
+  <span class="aw-label">Application &amp; World Building</span>
+  <p>The concepts in this book are not limited to the page. What can you build from them?</p>
+  <p>Can you apply them to a character, a weapon, an economy, a casino, a structure, an atom, a molecule, a law, a scientific theory, or an entire universe?</p>
+  <p>Can you extend the science, fiction, lore, and law of our shared world through code, narrative, and creative assets?</p>
+  <p class="aw-q">Take what you have learned. What can you create?</p>
+</section>
+
+<section class="coda" id="coda">
+  <p>Footprints, not thrones.</p>
+  <p><em>Masks, not operators. Bond, not extract. Two rails. One Egg.</em></p>
+  <p>Education seals first. Media moves next. The Archive does not need your contribution — but it grows where it is used.</p>
+  <div class="creed">
+    Two loud doors. One quiet threshold.<br/>
+    Two rails inside one Egg.<br/>
+    Four operators remain four.<br/>
+    Masks are actors, never law.<br/>
+    Bond, not extract.<br/>
+    <strong>The door is open. The work is public.</strong>
+  </div>
+  <p class="creedline">Breakaway Footprints · Archive 7</p>
+  <figure class="brand-seal">
+    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+    <figcaption>Tenacity Through Integrity</figcaption>
+  </figure>
+</section>
+
+<footer class="master">
+  <div class="title-row">
+    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
+    <span class="title">MEN OF RENOWN</span>
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+  </div>
+  <p class="count">Breakaway Footprints · Archive 7 · EROS Library · Consolidated Edition</p>
+  <div class="lib-stack">
+    <div class="lib-section">
+      <span class="lib-label">Entry</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a>
+        <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Science</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>
+        <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">System</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
+        <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+        <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
+        <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">World</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
+        <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
+        <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html" class="here">Men of Renown</a>
+        <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Story</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
+        <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Tools</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+        <a href="https://meaning-unconfounded.github.io/media.html">Media Index</a>
+        <a href="https://notebooklm.link.google/67J7szcyZuaT">NotebookLM 📚</a>
+        <a href="https://t.me/Eros_Revival">Telegram 🖇️</a>
+      </div>
+    </div>
+  </div>
+  <p class="sig">Footprints, not thrones. Two rails. One Egg. Public kit.</p>
+  <p class="creedline">Tenacity Through Integrity</p>
+  <div class="pulse-row">
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseChain"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0c0705"/><path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Built on PulseChain</span>
+    <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0c0705"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <!-- Rev 7 · 2026-10-13 · header v2 · black seal (silver ring) at Gnostic frame (§10d) · pink seal (gold ring) at coda · notebooklm+telegram banners top and coda · application & world building block · lib-stack footer · no resume · toroidal cross-links to Enclosure · telegram share block (Two Doors · Two Rails · Public Kit) · softened story-ladder and Close imperatives · two rails kept separate (hinge discipline) -->
+</footer>
+
+</main>
+
+<button id="toTop" type="button" aria-label="Back to top">↑</button>
 <button id="rdBtn" type="button" aria-label="Reading settings and chapters" aria-expanded="false" aria-controls="rdPanel">Aa</button>
 
 <div id="rdPanel" role="region" aria-label="Reading settings" hidden>
@@ -1304,37 +1389,30 @@ footer.master .pulse-row span{
 <script>
 (function(){
 "use strict";
-
 function each(list, fn){ Array.prototype.forEach.call(list, fn); }
 
-/* 1 · Progress bar + to-top */
 var bar = document.getElementById('progressBar');
 var toTop = document.getElementById('toTop');
-function onScrollProgress(){
+function onScroll(){
   var h = document.documentElement;
   var max = h.scrollHeight - h.clientHeight;
   var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
   if(bar) bar.style.width = pct + '%';
   if(toTop) toTop.classList.toggle('show', h.scrollTop > 700);
 }
-window.addEventListener('scroll', onScrollProgress, {passive:true});
-onScrollProgress();
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
 if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-/* 2 · Smooth anchor scrolling */
 each(document.querySelectorAll('a[href^="#"]'), function(a){
   a.addEventListener('click', function(e){
     var href = a.getAttribute('href');
     if(href.length < 2) return;
     var t = document.querySelector(href);
-    if(t){
-      e.preventDefault();
-      t.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
   });
 });
 
-/* 3 · Open <details> on hash navigation */
 function openFromHash(){
   if(!location.hash) return;
   var el = document.querySelector(location.hash);
@@ -1345,10 +1423,53 @@ function openFromHash(){
 openFromHash();
 window.addEventListener('hashchange', openFromHash);
 
-/* 4 · Reader controls */
 (function(){
-  var KEY = 'eros_renown_reader_v1';
-  var defaults = {size:100, lead:1.78, w:45};
+  var strip = document.querySelector('.corpus-bar nav.chapter-strip');
+  if(!strip) return;
+  var links = Array.prototype.slice.call(strip.querySelectorAll('a[href^="#"]'));
+  var pairs = links.map(function(a){
+    var id = a.getAttribute('href');
+    if(id.indexOf('#') !== 0) return null;
+    var sec = document.querySelector(id);
+    return sec ? {link:a, sec:sec} : null;
+  }).filter(function(p){return p;});
+  var currentIndex = -1;
+  function update(){
+    var probe = window.scrollY + 200;
+    var idx = -1;
+    for(var i=0;i<pairs.length;i++){ if(pairs[i].sec.offsetTop<=probe) idx=i; }
+    if(idx===currentIndex) return;
+    currentIndex = idx;
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(idx<0){ scrollStrip(0); return; }
+    var active = pairs[idx].link;
+    active.classList.add('active');
+    var targetLeft = active.offsetLeft - (strip.clientWidth/2) + (active.clientWidth/2);
+    scrollStrip(targetLeft);
+  }
+  function scrollStrip(left){
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var maxLeft = strip.scrollWidth - strip.clientWidth;
+    var clamped = Math.max(0, Math.min(maxLeft, left));
+    if(reduced){ strip.scrollLeft = clamped; }
+    else { strip.scrollTo({left:clamped, behavior:'smooth'}); }
+  }
+  var rafPending = false;
+  function onScrollTrack(){
+    if(rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(function(){ rafPending = false; update(); });
+  }
+  window.addEventListener('scroll', onScrollTrack, {passive:true});
+  window.addEventListener('resize', onScrollTrack);
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', update); }
+  else { update(); }
+  setTimeout(update, 300);
+})();
+
+(function(){
+  var KEY = 'eros_renown_reader_v2';
+  var defaults = {size:100, lead:1.8, w:45};
   var state = defaults;
   try {
     var sv = JSON.parse(localStorage.getItem(KEY) || '{}');
@@ -1407,10 +1528,6 @@ window.addEventListener('hashchange', openFromHash);
   apply();
 })();
 
-})();
-</script>
-
-<script>
 (function(){
   var was=[];
   window.addEventListener('beforeprint',function(){
@@ -1423,6 +1540,7 @@ window.addEventListener('hashchange', openFromHash);
     was.forEach(function(p){ p[0].open = p[1]; });
     was = [];
   });
+})();
 })();
 </script>
 
