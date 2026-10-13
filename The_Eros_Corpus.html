@@ -79,6 +79,12 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--gold);color:var(--surface);text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
 
+/* ═══ SHIMMER (shared) — sheen slides once on view, and again on hover ═══ */
+@keyframes eros-sheen{
+  0%   { transform: translateX(-140%); }
+  100% { transform: translateX(140%); }
+}
+
 /* ── HEADER v2 ── */
 .corpus-bar{position:sticky;top:0;z-index:900;background:color-mix(in srgb, var(--bg) 94%, transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
 .corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
@@ -117,6 +123,31 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
   .theme-toggle{width:30px;height:30px}
 }
 
+/* ═══ HEADER EROS PIN — shimmer wrapper ═══ */
+.corpus-bar .pin-wrap{position:relative;display:inline-block;line-height:0;border-radius:50%;flex-shrink:0}
+.corpus-bar .pin-wrap .pin.eros-mark{display:block;margin:0}
+.corpus-bar .pin-wrap .pin-sheen{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:3;
+  background:linear-gradient(115deg,
+    transparent 36%,
+    rgba(255,255,255,.42) 47%,
+    rgba(255,255,255,.78) 50%,
+    rgba(255,255,255,.42) 53%,
+    transparent 64%);
+  transform:translateX(-140%);
+}
+.corpus-bar .logo-cluster.is-visible .pin-sheen{
+  animation: eros-sheen 2.6s cubic-bezier(.22,.61,.36,1) .9s 1 both;
+}
+.corpus-bar .logo-cluster:hover .pin-sheen{
+  animation: eros-sheen 1.4s ease-out .05s 1;
+}
+.corpus-bar .pin-wrap .pin-sheen{ will-change:transform; }
+
 header.cover{text-align:center;padding:2.2rem 1rem 1.8rem}
 header.cover .map-badge{display:inline-block;font-family:var(--sans);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);border:1px solid var(--gold-line);border-radius:999px;padding:.32rem .9rem;margin-bottom:.9rem;font-weight:700;background:var(--gold-soft)}
 header.cover .kick{font-family:var(--sans);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:700}
@@ -128,8 +159,30 @@ header.cover .onesentence{max-width:36rem;margin:0 auto;font-size:1.02rem;color:
 header.cover{position:relative}
 header.cover::after{content:"";display:block;width:min(340px, 70%);height:7px;margin:1.6rem auto 0;border-top:1px solid var(--gold-line);border-bottom:1px solid var(--gold-line)}
 
+/* ═══ COVER SEAL — shimmer wrapper ═══ */
 figure.brand-seal{margin:2rem auto 1.6rem;text-align:center;max-width:min(220px, 55vw);display:block}
+figure.brand-seal .seal-wrap{position:relative;display:block;width:100%;line-height:0;border-radius:50%}
 figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px var(--gold-glow), 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 48px var(--gold-soft);background:var(--surface)}
+figure.brand-seal .seal-sheen{
+  position:absolute;
+  inset:3px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:3;
+  background:linear-gradient(115deg,
+    transparent 38%,
+    rgba(255,255,255,.16) 47%,
+    rgba(255,255,255,.30) 50%,
+    rgba(255,255,255,.16) 53%,
+    transparent 62%);
+  transform:translateX(-140%);
+}
+figure.brand-seal.is-visible .seal-sheen{
+  animation: eros-sheen 3s cubic-bezier(.22,.61,.36,1) 1.6s 1 both;
+}
+figure.brand-seal:hover .seal-sheen{
+  animation: eros-sheen 1.6s ease-out .05s 1;
+}
 figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:.9rem;font-weight:700}
 figure.brand-seal.silver img{border-color:var(--silver-line);box-shadow:0 12px 40px rgba(122,112,137,.22), 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 48px rgba(122,112,137,.14)}
 figure.brand-seal.silver figcaption{color:var(--platinum)}
@@ -154,6 +207,129 @@ figure.brand-seal.silver figcaption{color:var(--platinum)}
 .connect{margin:1.6rem 0;padding:1.2rem 1.4rem;border:1px dashed var(--indigo-line);border-radius:10px;background:var(--surface);font-family:var(--sans);font-size:.9rem;color:var(--soft);line-height:1.75}
 .connect strong{display:block;color:var(--indigo);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
 .connect a{color:var(--indigo);border-bottom:1px solid var(--indigo-line)}
+
+/* ═══ CHART PLATES — gradient frame + gloss + shimmer on view ═══ */
+.chart-duo{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.6rem;
+  margin:0 0 2.4rem;
+}
+@media(min-width:640px){
+  .chart-duo{grid-template-columns:1fr 1fr;gap:1.8rem;}
+}
+.chart-plate{
+  position:relative;
+  margin:0;
+  padding:3px;
+  border-radius:18px;
+  transition:transform .35s ease, box-shadow .35s ease;
+  isolation:isolate;
+}
+.chart-plate.violet{
+  background:linear-gradient(135deg,
+    #d4b4f5 0%,
+    #7a5cb8 30%,
+    #c9a0f2 58%,
+    #4e3a72 100%);
+  box-shadow:
+    0 12px 30px -14px rgba(110,82,146,.55),
+    0 0 0 1px rgba(201,160,242,.28),
+    0 24px 60px -30px rgba(201,160,242,.62);
+}
+.chart-plate.green{
+  background:linear-gradient(135deg,
+    #7cf5a8 0%,
+    #14b85c 30%,
+    #a8ffc4 58%,
+    #0a7a3d 100%);
+  box-shadow:
+    0 12px 30px -14px rgba(20,160,88,.55),
+    0 0 0 1px rgba(120,245,168,.28),
+    0 24px 60px -30px rgba(120,245,168,.62);
+}
+.chart-plate:hover{transform:translateY(-4px);}
+.chart-plate.violet:hover{
+  box-shadow:
+    0 20px 44px -16px rgba(110,82,146,.65),
+    0 0 0 1px rgba(201,160,242,.5),
+    0 36px 84px -34px rgba(201,160,242,.75);
+}
+.chart-plate.green:hover{
+  box-shadow:
+    0 20px 44px -16px rgba(20,160,88,.65),
+    0 0 0 1px rgba(120,245,168,.5),
+    0 36px 84px -34px rgba(120,245,168,.75);
+}
+.chart-plate .cp-inner{
+  position:relative;
+  background:var(--surface);
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.55) inset,
+    0 -1px 0 rgba(0,0,0,.05) inset;
+  z-index:1;
+}
+.chart-plate .cp-inner img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  background:var(--surface2);
+}
+.chart-plate .cp-inner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:15px;
+  pointer-events:none;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.30) 0%,
+    rgba(255,255,255,.06) 20%,
+    rgba(255,255,255,0) 42%,
+    rgba(255,255,255,0) 58%,
+    rgba(255,255,255,.05) 100%);
+  mix-blend-mode:screen;
+  z-index:2;
+}
+.chart-plate .cp-sheen{
+  position:absolute;
+  inset:0;
+  border-radius:15px;
+  pointer-events:none;
+  z-index:3;
+  background:linear-gradient(115deg,
+    transparent 38%,
+    rgba(255,255,255,.22) 47%,
+    rgba(255,255,255,.46) 50%,
+    rgba(255,255,255,.22) 53%,
+    transparent 62%);
+  transform:translateX(-140%);
+}
+.chart-plate.is-visible .cp-sheen{
+  animation: eros-sheen 2.8s cubic-bezier(.22,.61,.36,1) .35s 1 both;
+}
+.chart-plate.green.is-visible .cp-sheen{
+  animation-delay: 1s;
+}
+.chart-plate:hover .cp-sheen{
+  animation: eros-sheen 1.6s ease-out .05s 1;
+}
+.chart-plate figcaption{
+  font-family:var(--sans);
+  font-size:.6rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  text-align:center;
+  margin-top:.9rem;
+  color:var(--muted);
+  font-weight:700;
+}
+.chart-plate.violet figcaption{color:var(--violet);}
+.chart-plate.green figcaption{color:var(--teal);}
+[data-theme="dark"] .chart-plate.violet figcaption{color:#b89ae0;}
+[data-theme="dark"] .chart-plate.green figcaption{color:#5adc8c;}
 
 /* Telegram post · wall element */
 .telegram-post{margin:2rem 0;padding:1.5rem 1.6rem;border:1px solid var(--gold-line);border-radius:var(--radius);background:linear-gradient(160deg, var(--gold-soft), var(--surface));font-family:var(--sans);font-size:.98rem;line-height:1.8;color:var(--soft);box-shadow:var(--shadow-sm)}
@@ -218,7 +394,6 @@ p{margin:0 0 .95rem;color:var(--soft)}
 .grid > div b{display:block;font-family:var(--sans);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.4rem}
 .grid > div p{font-size:.92rem;line-height:1.65;margin:0;color:var(--soft)}
 
-/* Layer chip — small honesty label on tiles */
 .layer-chip{display:inline-block;font-family:var(--sans);font-size:.56rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.18rem .55rem;border-radius:999px;margin-bottom:.55rem;border:1px solid}
 .layer-chip.l1{color:var(--teal);border-color:var(--teal-line);background:var(--teal-soft)}
 .layer-chip.l2{color:var(--steel);border-color:var(--steel-line);background:var(--steel-soft)}
@@ -269,10 +444,34 @@ table.ref td a{color:var(--gold);font-family:var(--mono);font-size:.78rem}
 .path-chooser .pc-card .pc-t{font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.3rem}
 .path-chooser .pc-card .pc-d{font-size:.84rem;color:var(--soft);line-height:1.4}
 
+/* ═══ FOOTER — shimmer wrapper for the EROS pin ═══ */
 footer.master{margin-top:3.6rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
 footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
 footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px var(--gold-glow), 0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface)}
 footer.master .pin.eros{width:56px;height:56px;border-color:var(--gold-line);box-shadow:0 0 14px rgba(232,122,158,.20), 0 0 0 1px rgba(255,255,255,.04) inset}
+footer.master .fpin-wrap{position:relative;display:inline-block;line-height:0;border-radius:50%;flex-shrink:0}
+footer.master .fpin-wrap .pin.eros{display:block;margin:0}
+footer.master .fpin-sheen{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:3;
+  background:linear-gradient(115deg,
+    transparent 36%,
+    rgba(255,255,255,.34) 47%,
+    rgba(255,255,255,.62) 50%,
+    rgba(255,255,255,.34) 53%,
+    transparent 64%);
+  transform:translateX(-140%);
+}
+footer.master .title-row.is-visible .fpin-sheen{
+  animation: eros-sheen 2.8s cubic-bezier(.22,.61,.36,1) 1.4s 1 both;
+}
+footer.master .fpin-wrap:hover .fpin-sheen{
+  animation: eros-sheen 1.5s ease-out .05s 1;
+}
+
 footer.master .title{font-size:1.02rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
 footer.master .count{margin:.45rem 0 1.4rem;color:var(--soft);font-size:.94rem}
 footer.master .lib-stack{display:flex;flex-direction:column;gap:.85rem;max-width:44rem;margin:0 auto 1.6rem;text-align:left}
@@ -284,11 +483,6 @@ footer.master .lib-links a:hover{color:var(--gold)}
 footer.master .lib-links a.here{color:var(--gold2);font-weight:600}
 footer.master .sig{margin:1.4rem 0 .7rem;color:var(--soft);font-style:italic;font-size:1rem}
 footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem}
-
-/* ── CODA ── */
-.coda{margin:3rem 0 0;padding:2.6rem 1.4rem 1.4rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,var(--gold-soft),transparent 60%)}
-.coda p{font-size:1.05rem;font-style:italic;line-height:1.8;color:var(--ink);max-width:36rem;margin:0 auto 1rem}
-.coda figure.brand-seal{margin-top:1.4rem}
 
 #rdBtn{position:fixed;right:1rem;bottom:4.4rem;z-index:950;width:2.8rem;height:2.8rem;border-radius:50%;border:1.5px solid var(--gold-line);background:var(--surface);color:var(--gold);font:700 .95rem var(--sans);cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;transition:border-color .2s, background .2s}
 #rdBtn:hover{border-color:var(--gold);background:var(--gold-soft)}
@@ -324,9 +518,16 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   details.fold>summary::after,details.fold>summary::before{display:none!important}
   .media-embed,audio,iframe,video{display:none!important}
   *{box-shadow:none!important;text-shadow:none!important}
-  .claim,.table-wrap,details.fold,.cta,.cover-call,.hopeful-call,.media-embed,.path-chooser,.svg-map,.telegram-post,.public-link,.connect,section.apply-world,figure.brand-seal,.part-break,.verse,.math,.pull{break-inside:avoid}
+  .claim,.table-wrap,details.fold,.cta,.cover-call,.hopeful-call,.media-embed,.path-chooser,.svg-map,.telegram-post,.public-link,.connect,section.apply-world,figure.brand-seal,.part-break,.verse,.math,.pull,.chart-plate{break-inside:avoid}
   h2{break-after:avoid}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
+  .chart-plate{padding:2px !important}
+  .chart-plate .cp-inner{box-shadow:none!important}
+  .chart-plate .cp-inner::after{display:none!important}
+  .chart-plate .cp-sheen,
+  figure.brand-seal .seal-sheen,
+  .corpus-bar .pin-sheen,
+  footer.master .fpin-sheen{display:none!important;animation:none!important}
 }
 @media(max-width:640px){
   body{font-size:1rem}
@@ -340,6 +541,12 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
   .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .chart-plate{transition:none}
+  .chart-plate:hover{transform:none}
+  .chart-plate .cp-sheen,
+  figure.brand-seal .seal-sheen,
+  .corpus-bar .pin-sheen,
+  footer.master .fpin-sheen{animation:none!important;display:none!important}
 }
 </style>
 </head>
@@ -350,7 +557,10 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
 <header class="corpus-bar">
   <div class="brand-row">
     <a class="logo-cluster" href="#top" aria-label="How the Corpus Works · top">
-      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
+      <span class="pin-wrap">
+        <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
+        <span class="pin-sheen" aria-hidden="true"></span>
+      </span>
       <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
       <span class="compass" aria-hidden="true">🧭</span>
     </a>
@@ -390,7 +600,10 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   <div class="rule"></div>
 
   <figure class="brand-seal">
-    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" width="260" height="260" loading="eager"/>
+    <span class="seal-wrap">
+      <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" width="260" height="260" loading="eager"/>
+      <span class="seal-sheen" aria-hidden="true"></span>
+    </span>
     <figcaption>Tenacity Through Integrity</figcaption>
   </figure>
 
@@ -425,14 +638,6 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
       <div class="pc-d">Story first. Fiction, cosmology, mythos.</div>
     </a>
   </div>
-</div>
-
-<div class="media-embed reveal">
-  <span class="media-label">Listen to the open call</span>
-  <audio controls preload="metadata">
-    <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 </div>
 
 <aside class="public-link">
@@ -534,6 +739,23 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
 </section>
 
 <section id="timing-b" class="reveal">
+  <div class="chart-duo">
+    <figure class="chart-plate violet">
+      <div class="cp-inner">
+        <img src="https://meaning-unconfounded.github.io/images/chart1.jpg" alt="Chart I" loading="lazy"/>
+        <span class="cp-sheen" aria-hidden="true"></span>
+      </div>
+      <figcaption>Chart I</figcaption>
+    </figure>
+    <figure class="chart-plate green">
+      <div class="cp-inner">
+        <img src="https://meaning-unconfounded.github.io/images/chart2.jpg" alt="Chart II" loading="lazy"/>
+        <span class="cp-sheen" aria-hidden="true"></span>
+      </div>
+      <figcaption>Chart II</figcaption>
+    </figure>
+  </div>
+
   <h2>What we are front-running</h2>
   <p class="lede">Six threads already in motion. Each is labelled by what kind of claim it is. The labels matter — they are the honesty contract, and everything below respects them.</p>
 
@@ -601,13 +823,12 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   <p>Read down the wall like a scroll. Each card is a book. The <em>Open book</em> button hands you to the door. The badge next to each title says what kind of claim the book is making. Nothing on this page re-explains a book in weaker language — the book itself is the strongest description of what it is.</p>
 
   <div class="svg-map">
-    <svg viewBox="0 0 760 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EROS corpus layer map — every book and tool">
+    <svg viewBox="30 0 730 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EROS corpus layer map — every book and tool">
       <defs>
         <style>
           .m-layer { font-family: Georgia, serif; text-anchor: middle; font-weight: 700; letter-spacing: 1.6px; }
           .m-label { font-family: Georgia, serif; text-anchor: middle; font-size: 13px; font-weight: 700; }
           .m-sub   { font-family: Georgia, serif; text-anchor: middle; font-size: 10.5px; font-style: italic; }
-          .m-side  { font-family: -apple-system, "Segoe UI", sans-serif; text-anchor: start; font-size: 9px; letter-spacing: 1.4px; font-weight: 700; fill: #8a6a1d; }
         </style>
       </defs>
       <rect width="760" height="900" fill="#fbf8f0"/>
@@ -680,13 +901,6 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
       <rect x="390" y="788" width="150" height="42" rx="21" fill="#f5f0e4" stroke="#8a6a1d" stroke-width="1.2"/>
       <text x="465" y="806" class="m-label" fill="#8a6a1d" font-size="11">REFERENCE</text>
       <text x="465" y="821" class="m-sub" fill="#4a463d" font-size="10">Media Index</text>
-      <text x="14" y="182" class="m-side">STORY</text>
-      <text x="14" y="262" class="m-side">GIFT</text>
-      <text x="14" y="386" class="m-side">RAILS</text>
-      <text x="14" y="452" class="m-side">SPINE</text>
-      <text x="14" y="556" class="m-side">MYTHOS</text>
-      <text x="14" y="642" class="m-side">FLOOR</text>
-      <text x="14" y="742" class="m-side">DOOR</text>
     </svg>
     <p class="cap">Every book, every layer. Call above · Story roof · Gift · Rails · Spine · Mythos &amp; Cosmology · Foundation &amp; Mechanics · Instrument · Door · Tools.</p>
   </div>
@@ -1127,14 +1341,20 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   <p>Seventeen books. Three paths. Two rails. One vessel. One gift. One standard. One door.</p>
 
   <figure class="brand-seal">
-    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+    <span class="seal-wrap">
+      <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+      <span class="seal-sheen" aria-hidden="true"></span>
+    </span>
     <figcaption>Tenacity Through Integrity</figcaption>
   </figure>
 </section>
 
 <footer class="master">
   <div class="title-row">
-    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
+    <span class="fpin-wrap">
+      <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
+      <span class="fpin-sheen" aria-hidden="true"></span>
+    </span>
     <span class="title">HOW THE CORPUS WORKS</span>
     <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
   </div>
@@ -1196,7 +1416,7 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   </div>
   <p class="sig">The map is not the world. This page is the map.</p>
   <p class="creedline">Seventeen books · One standard</p>
-  <!-- Rev 17 · 2026-10-13 · fix pass · reveal observer threshold 0.08 → 0 (wall was invisible on mobile) · truth-status badges on all 19 wall posts · tp-head is now flex with chip · .coda CSS added · honesty-ledger wrapped in .table-wrap · #first and #urls folds auto-open on chapter-strip navigation · dead .rails/.rail CSS removed · honesty-ledger lede trimmed · frozen chassis intact · reader key eros_corpus_reader_v1 · no resume, no position memory -->
+  <!-- Rev 19 · 2026-10-14 · shimmer now triggers on IntersectionObserver (fires when element enters view, not on page load) · shimmer applied to header EROS pin, cover brand-seal, footer EROS pin, chart I, chart II · hover re-triggers · frozen chassis intact · reveal threshold 0 · reader panel eros_corpus_reader_v1 · no resume, no position memory -->
 </footer>
 
 </main>
@@ -1233,18 +1453,13 @@ window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
 if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-/* 2 · Smooth anchor scrolling — opens any <details> at the target */
+/* 2 · Smooth anchor scrolling */
 each(document.querySelectorAll('a[href^="#"]'), function(a){
   a.addEventListener('click', function(e){
     var href = a.getAttribute('href');
     if(href.length < 2) return;
     var t = document.querySelector(href);
-    if(t){
-      e.preventDefault();
-      var det = t.closest('details');
-      if(det) det.open = true;
-      t.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
   });
 });
 
@@ -1396,7 +1611,7 @@ window.addEventListener('hashchange', openFromHash);
   });
 })();
 
-/* 8 · Reveal-on-scroll — threshold 0 so tall sections (the wall) reveal correctly */
+/* 8 · Reveal-on-scroll — threshold 0 */
 (function(){
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && reveals.length) {
@@ -1409,6 +1624,29 @@ window.addEventListener('hashchange', openFromHash);
   } else {
     reveals.forEach(function(el){ el.classList.add('visible'); });
   }
+})();
+
+/* 9 · Shimmer trigger — fires when each element enters view, not on load */
+(function(){
+  var targets = document.querySelectorAll('.chart-plate, .logo-cluster, figure.brand-seal, footer.master .title-row');
+  if (!targets.length) return;
+
+  function applyFallback(){
+    targets.forEach(function(t){ t.classList.add('is-visible'); });
+  }
+
+  if (!('IntersectionObserver' in window)) { applyFallback(); return; }
+
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+  targets.forEach(function(t){ obs.observe(t); });
 })();
 
 })();
