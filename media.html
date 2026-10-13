@@ -9,79 +9,58 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230b0e14' stroke='%23d8dde3' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23d8dde3'/%3E%3C/svg%3E"/>
 <style>
 :root{
-  --bg:#0b0e14;
-  --bg-raised:#11151c;
-  --card:#161b22;
-  --card-hover:#1a2029;
-  --ink:#e6edf3;
-  --soft:#b8c1cc;
-  --muted:#8b949e;
-  --dim:#6a7280;
-  --line:#30363d;
-  --line-soft:#21262d;
-  --accent:#58a6ff;
-  --accent-soft:rgba(88,166,255,.12);
-  --accent-line:rgba(88,166,255,.35);
-  --magenta:#e040fb;
-  --magenta-soft:rgba(224,64,251,.1);
-  --platinum:#d8dde3;
-  --gold:#d4af37;
-  --green:#00ff88;
-  --cyan:#00d4ff;
+  --bg:#0b0e14; --bg-raised:#11151c; --card:#161b22; --card-hover:#1a2029;
+  --ink:#e6edf3; --soft:#b8c1cc; --muted:#8b949e; --dim:#6a7280;
+  --line:#30363d; --line-soft:#21262d;
+  --accent:#58a6ff; --accent-soft:rgba(88,166,255,.12); --accent-line:rgba(88,166,255,.35);
+  --magenta:#e040fb; --magenta-soft:rgba(224,64,251,.1);
+  --platinum:#d8dde3; --gold:#d4af37; --gold-line:rgba(212,175,55,.45); --gold-glow:rgba(212,175,55,.22);
+  --green:#00ff88; --cyan:#00d4ff;
   --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --bar-h:116px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:5rem}
-body{
-  font-family:var(--sans);
-  background:var(--bg);
-  color:var(--ink);
-  line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-  padding:0 0 4rem;
-}
+html{scroll-behavior:smooth;scroll-padding-top:8rem;background:var(--bg)}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 0 4rem}
 
-/* ── STANDARD HEADER with pin ── */
-.corpus-bar{
-  position:sticky;top:0;z-index:900;
-  display:flex;align-items:center;justify-content:space-between;gap:.9rem;
-  padding:.55rem 1.1rem;
-  background:rgba(11,14,20,.94);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-  font-family:var(--sans);
-}
-.corpus-bar .brand{
-  display:flex;align-items:center;gap:.7rem;
-  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--platinum);font-weight:700;text-decoration:none;
-}
-.corpus-bar .brand:hover{color:#fff}
-.corpus-bar .pin{
-  width:36px;height:36px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--accent-line);
-  box-shadow:0 0 14px var(--accent-soft),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--bg-raised);
-}
-.corpus-bar nav{display:flex;gap:.15rem;flex-wrap:wrap;justify-content:flex-end}
-.corpus-bar nav a{
-  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);padding:.35rem .6rem;border-radius:999px;
-  text-decoration:none;transition:color .15s,background .15s;
-}
-.corpus-bar nav a:hover{color:var(--accent);background:var(--accent-soft)}
+/* Wrap rules */
+h1,h2,h3{text-wrap:balance;orphans:2;widows:2}
+p,li{text-wrap:pretty;orphans:2;widows:2}
+
+/* ── HEADER v2 ── */
+.corpus-bar{position:sticky;top:0;z-index:900;background:rgba(11,14,20,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
+.corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line-soft);min-height:50px;max-width:1200px;margin:0 auto}
+.corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none}
+.corpus-bar .pin{border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold-line);box-shadow:0 0 12px var(--gold-glow),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--bg-raised);display:block}
+.corpus-bar .pin.eros-mark{width:44px;height:44px;box-shadow:0 0 14px rgba(232,122,158,.24),0 0 0 1px rgba(255,255,255,.04) inset}
+.corpus-bar .pin.pulse-mark{width:38px;height:38px}
+.corpus-bar .compass{font-size:1.1rem;line-height:1;color:var(--gold);flex-shrink:0;opacity:.9;margin-left:.05rem}
+.corpus-bar .title-cluster{display:flex;align-items:center;gap:.7rem;min-width:0;flex-shrink:1}
+.corpus-bar .title-rule{flex:0 0 auto;height:1px;width:clamp(24px,5vw,60px);background:linear-gradient(90deg,transparent,var(--gold-line))}
+.corpus-bar .brand-text{font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.corpus-bar nav.chapter-strip{display:flex;align-items:center;gap:.1rem .2rem;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:none;padding:.55rem .2rem .65rem;margin:0 auto;max-width:1200px;mask-image:linear-gradient(90deg,transparent 0,#000 3%,#000 97%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 3%,#000 97%,transparent 100%)}
+.corpus-bar nav.chapter-strip::-webkit-scrollbar{display:none}
+.corpus-bar nav.chapter-strip a{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.34rem .68rem;border-radius:999px;text-decoration:none;transition:color .25s ease,background .25s ease,box-shadow .25s ease;white-space:nowrap;flex-shrink:0}
+.corpus-bar nav.chapter-strip a:hover{color:var(--accent);background:var(--accent-soft)}
+.corpus-bar nav.chapter-strip a.active{color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent-line);font-weight:700;letter-spacing:.1em}
 @media(max-width:720px){
-  .corpus-bar{padding:.5rem .8rem;gap:.4rem}
-  .corpus-bar .brand{font-size:.68rem;gap:.5rem}
-  .corpus-bar .pin{width:30px;height:30px}
-  .corpus-bar nav a{padding:.28rem .42rem;font-size:.58rem}
+  .corpus-bar{padding:.6rem .85rem 0}
+  .corpus-bar .pin.eros-mark{width:38px;height:38px}
+  .corpus-bar .pin.pulse-mark{width:32px;height:32px}
+  .corpus-bar .compass{font-size:1rem}
+  .corpus-bar .brand-text{font-size:.85rem;letter-spacing:.18em}
+  .corpus-bar .title-rule{width:20px}
+  .corpus-bar nav.chapter-strip{padding:.5rem .2rem .6rem}
+  .corpus-bar nav.chapter-strip a{font-size:.58rem;padding:.3rem .58rem}
 }
-@media(max-width:520px){
-  .corpus-bar nav a:nth-child(n+5){display:none}
-  .corpus-bar .pin{width:28px;height:28px}
+@media(max-width:420px){
+  .corpus-bar .pin.eros-mark{width:34px;height:34px}
+  .corpus-bar .pin.pulse-mark{width:28px;height:28px}
+  .corpus-bar .compass{font-size:.9rem}
+  .corpus-bar .brand-text{font-size:.75rem;letter-spacing:.14em}
+  .corpus-bar .title-rule{width:14px}
 }
 
 /* ── PAGE ── */
@@ -90,217 +69,102 @@ h1{font-size:1.9rem;font-weight:600;margin-bottom:.35rem;color:var(--ink);letter
 .subhead{font-size:.9rem;color:var(--muted);margin-bottom:1.5rem;word-break:break-all}
 .subhead a{color:var(--accent);text-decoration:none}
 .subhead a:hover{text-decoration:underline}
-.lede{
-  font-size:.95rem;color:var(--soft);margin-bottom:2rem;max-width:64rem;
-  padding:1rem 1.15rem;border-left:3px solid var(--accent);
-  background:linear-gradient(90deg,var(--accent-soft),transparent 70%);
-  border-radius:0 10px 10px 0;
-  line-height:1.7;
-}
+.lede{font-size:.95rem;color:var(--soft);margin-bottom:2rem;max-width:64rem;padding:1rem 1.15rem;border-left:3px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),transparent 70%);border-radius:0 10px 10px 0;line-height:1.7}
 .lede b{color:var(--ink);font-weight:600}
 
 /* ── FILTER STRIP ── */
-.filter{
-  position:sticky;top:56px;z-index:850;
-  background:rgba(11,14,20,.94);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  padding:.65rem .35rem;margin:0 -.35rem 1.5rem;
-  border-bottom:1px solid var(--line-soft);
-  display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;
-}
-.filter .search{
-  flex:1;min-width:180px;
-  background:var(--card);border:1px solid var(--line);
-  border-radius:8px;padding:.5rem .8rem;color:var(--ink);
-  font-family:var(--sans);font-size:.82rem;outline:none;
-  transition:border-color .2s;
-}
+.filter{position:sticky;top:var(--bar-h);z-index:850;background:rgba(11,14,20,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:.65rem .35rem;margin:0 -.35rem 1.5rem;border-bottom:1px solid var(--line-soft);display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;transition:top .2s ease}
+.filter .search{flex:1;min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.5rem .8rem;color:var(--ink);font-family:var(--sans);font-size:.82rem;outline:none;transition:border-color .2s}
 .filter .search:focus{border-color:var(--accent)}
 .filter .search::placeholder{color:var(--dim)}
-.filter button{
-  background:var(--card);border:1px solid var(--line);
-  color:var(--soft);font-family:var(--sans);font-size:.72rem;
-  padding:.42rem .8rem;border-radius:999px;cursor:pointer;
-  letter-spacing:.05em;transition:all .18s;
-}
+.filter button{background:var(--card);border:1px solid var(--line);color:var(--soft);font-family:var(--sans);font-size:.72rem;padding:.42rem .8rem;border-radius:999px;cursor:pointer;letter-spacing:.05em;transition:all .18s}
 .filter button:hover{color:var(--accent);border-color:var(--accent-line)}
 .filter button.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-line);font-weight:700}
-.filter .stat{
-  margin-left:auto;font-size:.72rem;color:var(--muted);letter-spacing:.06em;
-  padding:.3rem .6rem;
-}
-@media(max-width:720px){
-  .filter{top:52px}
-  .filter .stat{margin-left:0}
-}
+.filter .stat{margin-left:auto;font-size:.72rem;color:var(--muted);letter-spacing:.06em;padding:.3rem .6rem}
+@media(max-width:720px){.filter .stat{margin-left:0}}
 
 /* ── CLUSTER ── */
-.cluster{
-  margin:1.6rem 0;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--bg-raised);
-  overflow:hidden;
-}
+.cluster{margin:1.6rem 0;border:1px solid var(--line);border-radius:14px;background:var(--bg-raised);overflow:hidden;scroll-margin-top:8rem}
 .cluster[open]{box-shadow:0 4px 20px rgba(0,0,0,.25)}
-.cluster > summary{
-  cursor:pointer;list-style:none;
-  padding:1.05rem 1.3rem;
-  display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;
-  font-size:.9rem;font-weight:700;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--ink);
-  background:linear-gradient(90deg,rgba(88,166,255,.06),transparent 60%);
-  transition:background .2s;
-}
+.cluster > summary{cursor:pointer;list-style:none;padding:1.05rem 1.3rem;display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;font-size:.9rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:linear-gradient(90deg,rgba(88,166,255,.06),transparent 60%);transition:background .2s}
 .cluster > summary::-webkit-details-marker{display:none}
-.cluster > summary::before{
-  content:"▸";color:var(--accent);font-size:.75rem;
-  transition:transform .25s;display:inline-block;
-}
+.cluster > summary::before{content:"▸";color:var(--accent);font-size:.75rem;transition:transform .25s;display:inline-block}
 .cluster[open] > summary::before{transform:rotate(90deg)}
 .cluster > summary:hover{background:linear-gradient(90deg,rgba(88,166,255,.12),transparent 60%)}
-.cluster > summary .c-count{
-  margin-left:auto;font-size:.7rem;color:var(--muted);
-  letter-spacing:.1em;font-weight:400;
-}
-.cluster > summary .c-tag{
-  font-size:.6rem;font-weight:700;letter-spacing:.12em;
-  padding:.18rem .5rem;border-radius:999px;
-  background:var(--accent-soft);color:var(--accent);
-  border:1px solid var(--accent-line);
-}
-.cluster > summary .c-desc{
-  flex-basis:100%;font-size:.8rem;font-weight:400;
-  text-transform:none;letter-spacing:0;color:var(--muted);
-  margin-top:.25rem;line-height:1.55;
-}
+.cluster > summary .c-count{margin-left:auto;font-size:.7rem;color:var(--muted);letter-spacing:.1em;font-weight:400}
+.cluster > summary .c-tag{font-size:.6rem;font-weight:700;letter-spacing:.12em;padding:.18rem .5rem;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line)}
+.cluster > summary .c-desc{flex-basis:100%;font-size:.8rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);margin-top:.25rem;line-height:1.55;text-wrap:pretty}
 .cluster-body{padding:.9rem 1.1rem 1.2rem}
 
 /* ── GRID ── */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:18px;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
 
 /* ── CARD ── */
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:12px;
-  overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:border-color .18s,transform .18s,box-shadow .18s;
-  scroll-margin-top:6rem;
-}
-.card:hover{
-  border-color:var(--accent-line);
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 24px var(--accent-soft);
-}
-.card:target{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px var(--accent-soft),0 0 32px var(--accent-soft);
-}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .18s,transform .18s,box-shadow .18s;scroll-margin-top:8rem}
+.card:hover{border-color:var(--accent-line);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 24px var(--accent-soft)}
+.card:target{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),0 0 32px var(--accent-soft)}
 .card.flash{animation:card-flash 2.2s ease-out}
 @keyframes card-flash{
   0%{box-shadow:0 0 0 0 var(--accent-line),0 0 24px var(--accent-soft)}
   40%{box-shadow:0 0 0 6px var(--accent-soft),0 0 32px var(--accent-soft)}
   100%{box-shadow:0 0 0 0 transparent,0 0 0 transparent}
 }
-.media-wrap{
-  width:100%;aspect-ratio:1/1;
-  background:#0d1117;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
-.media-wrap img,.media-wrap video{
-  width:100%;height:100%;object-fit:contain;display:block;
-}
+.media-wrap{width:100%;aspect-ratio:1/1;background:#0d1117;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.media-wrap img,.media-wrap video{width:100%;height:100%;object-fit:contain;display:block;border:0;border-radius:0}
 .media-wrap video{background:#000}
-.card-body{
-  padding:12px 14px 14px;
-  display:flex;flex-direction:column;gap:6px;flex:1;
-}
-.filename{
-  font-size:.82rem;font-weight:700;color:var(--ink);
-  word-break:break-all;line-height:1.3;
-}
-.addr{
-  font-size:.66rem;color:var(--accent);word-break:break-all;
-  line-height:1.3;text-decoration:none;
-  font-family:var(--mono);
-}
+.card-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.filename{font-size:.82rem;font-weight:700;color:var(--ink);word-break:break-all;line-height:1.3}
+.addr{font-size:.66rem;color:var(--accent);word-break:break-all;line-height:1.3;text-decoration:none;font-family:var(--mono)}
 .addr:hover{text-decoration:underline}
 .badge-row{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:1px}
-.badge{
-  display:inline-block;font-size:.58rem;text-transform:uppercase;
-  letter-spacing:.08em;background:var(--line-soft);color:var(--muted);
-  border-radius:4px;padding:2px 7px;font-weight:700;
-}
+.badge{display:inline-block;font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;background:var(--line-soft);color:var(--muted);border-radius:4px;padding:2px 7px;font-weight:700}
 .badge.img{background:rgba(88,166,255,.1);color:var(--accent)}
 .badge.vid{background:rgba(224,64,251,.1);color:var(--magenta)}
 .badge.dvd{background:rgba(212,175,55,.1);color:var(--gold)}
 .badge.pin{background:rgba(0,255,136,.1);color:var(--green)}
-.usage{
-  font-size:.76rem;color:var(--soft);line-height:1.5;
-  margin-top:6px;padding-top:8px;border-top:1px solid var(--line-soft);
-}
+.usage{font-size:.76rem;color:var(--soft);line-height:1.5;margin-top:6px;padding-top:8px;border-top:1px solid var(--line-soft);text-wrap:pretty}
 .usage b{color:var(--accent);font-weight:700;display:block;margin-bottom:2px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
-.in-books{
-  font-size:.68rem;color:var(--muted);line-height:1.5;
-  margin-top:6px;padding-top:8px;border-top:1px dashed var(--line-soft);
-}
+.in-books{font-size:.68rem;color:var(--muted);line-height:1.5;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line-soft);text-wrap:pretty}
 .in-books b{color:var(--platinum);font-weight:700;display:block;margin-bottom:2px;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
 .in-books a{color:var(--accent);text-decoration:none}
 .in-books a:hover{text-decoration:underline}
+.in-books span{color:var(--muted)}
 
-/* ── MASTER FOOTER ── */
-footer.master{
-  margin-top:3rem;padding:2rem 1rem 1.4rem;
-  border-top:1px solid var(--line);
-  text-align:center;font-family:var(--sans);
-  font-size:.78rem;color:var(--muted);line-height:1.85;
+/* Pink seal exception — round only, on-brand */
+.card img[src*="Eros_pink"],.card img[src*="eros-logo-colour"]{border-radius:50%;object-fit:cover}
+
+/* ── BRAND SEAL ── */
+figure.brand-seal{margin:3rem auto 1.6rem;text-align:center;max-width:min(200px,50vw);display:block}
+figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px var(--gold-glow),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(212,175,55,.12);background:var(--bg-raised)}
+figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:.9rem;font-weight:700}
+
+/* ── MASTER FOOTER (.lib-stack) ── */
+footer.master{margin-top:2rem;padding:2.4rem 1rem 1.6rem;border-top:1px solid var(--line);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
+footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
+footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px var(--gold-glow),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--bg-raised)}
+footer.master .pin.eros{width:56px;height:56px;border-color:var(--gold-line);box-shadow:0 0 14px rgba(232,122,158,.20),0 0 0 1px rgba(255,255,255,.04) inset}
+footer.master .title{font-size:1.02rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+footer.master .count{margin:.45rem 0 1.4rem;color:var(--soft);font-size:.94rem}
+footer.master .lib-stack{display:flex;flex-direction:column;gap:.85rem;max-width:44rem;margin:0 auto 1.6rem;text-align:left}
+footer.master .lib-section{padding:.7rem .95rem;border-radius:10px;background:rgba(0,0,0,.2)}
+footer.master .lib-label{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.5rem}
+footer.master .lib-links{display:flex;flex-wrap:wrap;gap:.4rem .85rem}
+footer.master .lib-links a{color:var(--muted);text-decoration:none;font-size:.88rem}
+footer.master .lib-links a:hover{color:var(--accent)}
+footer.master .lib-links a.here{color:var(--accent);font-weight:700}
+footer.master .sig{margin:1.4rem 0 .7rem;color:var(--soft);font-style:italic;font-size:1rem;font-family:var(--serif)}
+footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem}
+footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-top:1rem;font-size:.86rem;color:var(--muted)}
+footer.master .pulse-row svg{flex-shrink:0}
+@media(max-width:640px){
+  footer.master .pulse-row{gap:.4rem}
+  footer.master .pulse-row svg{width:22px;height:22px}
+  footer.master .pulse-row svg:last-of-type{width:20px;height:20px}
+  footer.master .pulse-row span{font-size:.54rem;letter-spacing:.08em}
+  footer.master .title-row{gap:.6rem}
+  footer.master .pin{width:40px;height:40px}
+  footer.master .pin.eros{width:46px;height:46px}
 }
-footer.master .title-row{
-  display:flex;align-items:center;justify-content:center;gap:.85rem;
-  margin-bottom:.6rem;
-}
-footer.master .pin{
-  width:44px;height:44px;border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--accent-line);
-  box-shadow:0 0 18px var(--accent-soft),0 0 0 1px rgba(255,255,255,.05) inset;
-  flex-shrink:0;background:var(--bg-raised);
-}
-footer.master .title{
-  font-size:1.05rem;color:var(--platinum);letter-spacing:.1em;font-weight:700;
-}
-footer.master .count{
-  font-size:.9rem;color:var(--soft);margin-bottom:1rem;
-}
-footer.master .tier{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;
-  max-width:46rem;margin:0 auto 1rem;
-}
-footer.master .tier a{
-  padding:.32rem .72rem;border-radius:999px;
-  background:var(--card);border:1px solid var(--line);
-  color:var(--soft);font-size:.7rem;letter-spacing:.05em;
-  text-decoration:none;transition:all .18s;
-}
-footer.master .tier a:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
-footer.master .tier a.primary{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:700}
-footer.master .sig{font-style:italic;color:var(--soft);font-size:.92rem;margin-top:1rem}
-footer.master .line{font-style:italic;color:var(--dim);font-size:.85rem;margin-top:.6rem}
-footer.master .built-on{
-  margin-top:1.4rem;display:flex;align-items:center;justify-content:center;gap:.7rem;
-  padding:.85rem 1.2rem;
-  background:var(--card);border:1px solid var(--line);
-  border-radius:999px;max-width:24rem;margin-left:auto;margin-right:auto;
-  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;
-}
-footer.master .built-on .pin{width:32px;height:32px}
 
 @media print{
   @page{size:A4;margin:12mm}
@@ -312,44 +176,42 @@ footer.master .built-on .pin{width:32px;height:32px}
   .addr{color:#555!important}
   .badge{background:#eee!important;color:#333!important}
 }
-
-/* Brand seals · size guard */
-.card img, .media-card img, .item img, img.thumb {
-  max-width: 220px;
-  max-height: 220px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 12px;
-  border: 1px solid rgba(138,106,29,.28);
-  display: block;
-  margin: 0 auto;
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
-img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
-  max-width: 200px;
-  max-height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 </style>
 </head>
-<body>
+<body id="top">
 
-<!-- ── STANDARD HEADER with pin ── -->
+<!-- ── HEADER v2 ── -->
 <header class="corpus-bar">
-  <a class="brand" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain"/>
-    <span>✦ EROS · Media Index</span>
-  </a>
-  <nav aria-label="Section navigation">
-    <a href="#clusters">Clusters</a>
+  <div class="brand-row">
+    <a class="logo-cluster" href="#top" aria-label="Media Index · top">
+      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
+      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+      <span class="compass" aria-hidden="true">🧭</span>
+    </a>
+    <div class="title-cluster">
+      <span class="title-rule" aria-hidden="true"></span>
+      <span class="brand-text">Media Index</span>
+    </div>
+  </div>
+  <nav class="chapter-strip" aria-label="Cluster navigation">
+    <a href="#filter">Filter</a>
     <a href="#brand">Brand</a>
     <a href="#cosmology">Cosmology</a>
     <a href="#operators">Operators</a>
-    <a href="#stories">Stories</a>
+    <a href="#doors">Doors</a>
+    <a href="#network">Network</a>
     <a href="#rail-a">Rail A</a>
     <a href="#rail-b">Rail B</a>
+    <a href="#bridge">Bridge</a>
+    <a href="#stories">Stories</a>
+    <a href="#transform">Transform</a>
+    <a href="#precepts">Precepts</a>
+    <a href="#hopeful-extra">Hopeful extra</a>
+    <a href="#dividers">Dividers</a>
     <a href="#videos">Videos</a>
     <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
   </nav>
@@ -367,7 +229,7 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
 </p>
 
 <!-- ── FILTER ── -->
-<div class="filter" id="clusters">
+<div class="filter" id="filter">
   <input class="search" type="search" id="search" placeholder="Filter by name, purpose, or book…" aria-label="Search media"/>
   <button data-filter="all" class="active">All</button>
   <button data-filter="image">Images</button>
@@ -379,43 +241,86 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
 <!-- ── CLUSTERS ── -->
 <div id="container"></div>
 
-<!-- ── MASTER FOOTER ── -->
-<footer class="master">
-  <div class="title-row">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain"/>
-    <span class="title">MEDIA INDEX · Visual Record</span>
-  </div>
-  <p class="count">The visual record · EROS Library</p>
+<!-- ── BRAND SEAL ── -->
+<figure class="brand-seal">
+  <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+  <figcaption>Tenacity Through Integrity</figcaption>
+</figure>
 
-  <nav class="tier" aria-label="Library">
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" class="primary">Map</a>
-    <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Narrative</a>
-    <a href="https://meaning-unconfounded.github.io/The_Bridge.html">Bridge</a>
-    <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
-    <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">Front Door</a>
-    <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">Plan</a>
-    <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination</a>
-    <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Renown</a>
-    <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods</a>
-    <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Thoth</a>
-    <a href="https://meaning-unconfounded.github.io/Living_Egg.html">Egg</a>
-    <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">Enclosure</a>
-    <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">Hopeful Future</a>
-    <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">Resonance</a>
-    <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Stories</a>
-    <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
-    <a href="https://meaning-unconfounded.github.io/media.html">Media</a>
-    <a href="https://t.me/Eros_Revival">Telegram</a>
-  </nav>
+<!-- ── MASTER FOOTER (.lib-stack) ── -->
+<footer class="master" id="footer">
+  <div class="title-row">
+    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
+    <span class="title">MEDIA INDEX</span>
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+  </div>
+  <p class="count">The Visual Record · EROS Library</p>
+
+  <div class="lib-stack">
+    <div class="lib-section">
+      <span class="lib-label">Entry</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">How the Corpus Works</a>
+        <a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Science</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/The_Conscious_Eros.html">The Conscious Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Living_Egg.html">The Living Egg</a>
+        <a href="https://meaning-unconfounded.github.io/The_Eros_Enclosure.html">The Eros Enclosure</a>
+        <a href="https://meaning-unconfounded.github.io/The_Iteration_Codex.html">The Iteration Codex</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">System</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/TheErosPlan.html">The Eros Plan</a>
+        <a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+        <a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
+        <a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">World</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a>
+        <a href="https://meaning-unconfounded.github.io/Gift_Of_Thoth.html">Gift of Thoth</a>
+        <a href="https://meaning-unconfounded.github.io/Illumination_Strategy.html">Illumination Strategy</a>
+        <a href="https://meaning-unconfounded.github.io/Men_Of_Renown.html">Men of Renown</a>
+        <a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Story</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Narrative.html">Eros Narrative</a>
+        <a href="https://meaning-unconfounded.github.io/The_First_Resonance.html">The First Resonance</a>
+        <a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a>
+      </div>
+    </div>
+    <div class="lib-section">
+      <span class="lib-label">Tools</span>
+      <div class="lib-links">
+        <a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a>
+        <a href="https://meaning-unconfounded.github.io/media.html" class="here">Media Index</a>
+        <a href="https://notebooklm.link.google/67J7szcyZuaT">NotebookLM 📚</a>
+        <a href="https://t.me/Eros_Revival">Telegram 🖇️</a>
+      </div>
+    </div>
+  </div>
 
   <p class="sig">The map is not the world. The index is not the library.</p>
-  <p class="line">Rev 3 · 2026-10-13 · Save as media.html · Cosmology + Operators expanded · Enclosure linked</p>
+  <p class="creedline">The visual record · One standard</p>
 
-  <div class="built-on">
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain"/>
-    <span>Built on PulseChain · Faster · Cheaper · Stronger</span>
+  <div class="pulse-row">
+    <svg width="30" height="30" viewBox="0 0 100 100" aria-label="PulseChain"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#A020F0"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0b0e14"/><path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Built on PulseChain</span>
+    <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0b0e14"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
+  <!-- Rev 4 · 2026-10-13 · header v2 · lib-stack footer · circular seal (gold ring) before footer · dead #books links replaced with canonical URLs · image size cap removed · first cluster opens by default · #clusters → #filter · auto-tracking added · tool register preserved -->
 </footer>
 
 </main>
@@ -425,6 +330,87 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
   "use strict";
 
   const BASE = 'https://meaning-unconfounded.github.io/images/';
+
+  // ── Book name → canonical URL. Unknown names render as plain text. ──
+  const BOOK_URL = {
+    'all books': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'corpus header': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'library standard': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'corpus cover': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'all books optional plate': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'all books · share': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'all books · header pin alternative': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'every book': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'corpus map': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'map': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
+    'bridge': 'https://meaning-unconfounded.github.io/The_Bridge.html',
+    'bridge · tokenomics': 'https://meaning-unconfounded.github.io/The_Bridge.html',
+    'bridge · world': 'https://meaning-unconfounded.github.io/The_Bridge.html',
+    'platinum': 'https://meaning-unconfounded.github.io/The_Platinum_Standard.html',
+    'platinum standard': 'https://meaning-unconfounded.github.io/The_Platinum_Standard.html',
+    'platinum · chart section': 'https://meaning-unconfounded.github.io/The_Platinum_Standard.html',
+    'platinum · money authority': 'https://meaning-unconfounded.github.io/The_Platinum_Standard.html',
+    'platinum · mechanism': 'https://meaning-unconfounded.github.io/The_Platinum_Standard.html',
+    'platinum · build': 'https://meaning-unconfounded.github.io/The_Platinum_Standard.html',
+    'platinum · wider stack': 'https://meaning-unconfounded.github.io/The_Platinum_Standard.html',
+    'front door': 'https://meaning-unconfounded.github.io/The_Front_Door.html',
+    'plan': 'https://meaning-unconfounded.github.io/TheErosPlan.html',
+    'the eros plan': 'https://meaning-unconfounded.github.io/TheErosPlan.html',
+    'illumination': 'https://meaning-unconfounded.github.io/Illumination_Strategy.html',
+    'illumination strategy': 'https://meaning-unconfounded.github.io/Illumination_Strategy.html',
+    'renown': 'https://meaning-unconfounded.github.io/Men_Of_Renown.html',
+    'men of renown': 'https://meaning-unconfounded.github.io/Men_Of_Renown.html',
+    'gods': 'https://meaning-unconfounded.github.io/Gods_Of_Eros.html',
+    'gods of eros': 'https://meaning-unconfounded.github.io/Gods_Of_Eros.html',
+    'thoth': 'https://meaning-unconfounded.github.io/Gift_Of_Thoth.html',
+    'gift of thoth': 'https://meaning-unconfounded.github.io/Gift_Of_Thoth.html',
+    'egg': 'https://meaning-unconfounded.github.io/Living_Egg.html',
+    'living egg': 'https://meaning-unconfounded.github.io/Living_Egg.html',
+    'enclosure': 'https://meaning-unconfounded.github.io/The_Eros_Enclosure.html',
+    'the eros enclosure': 'https://meaning-unconfounded.github.io/The_Eros_Enclosure.html',
+    'hopeful future': 'https://meaning-unconfounded.github.io/The_Hopeful_Future.html',
+    'hopeful future · extra': 'https://meaning-unconfounded.github.io/The_Hopeful_Future.html',
+    'resonance': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance variants': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · appendix': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch2': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch3': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch5': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch6': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch10': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch11': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch11 video poster': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch12': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch13': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch14': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch15': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch16': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch17': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch18': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch18 video poster': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch19': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch20': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · ch21': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · epilogue': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · frank purpose': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'first resonance · story arc': 'https://meaning-unconfounded.github.io/The_First_Resonance.html',
+    'stories': 'https://meaning-unconfounded.github.io/Eros_Stories.html',
+    'eros stories': 'https://meaning-unconfounded.github.io/Eros_Stories.html',
+    'dossier': 'https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html',
+    'newcomer dossier': 'https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html',
+    'narrative': 'https://meaning-unconfounded.github.io/Eros_Narrative.html',
+    'eros narrative': 'https://meaning-unconfounded.github.io/Eros_Narrative.html',
+    'spaceeros': 'https://meaning-unconfounded.github.io/SpaceEros.html',
+    'media': 'https://meaning-unconfounded.github.io/media.html',
+    'telegram': 'https://t.me/Eros_Revival',
+    'transmission': 'https://meaning-unconfounded.github.io/The_First_Resonance.html'
+  };
+
+  function bookUrl(name){
+    const k = String(name).toLowerCase().trim();
+    return BOOK_URL[k] || null;
+  }
 
   // ── CLUSTERS ──
   const clusters = [
@@ -437,11 +423,12 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
         { n:'Eros_pink2.jpg', t:'image', u:'EROS seal · pink field · HEADER MARK. Top-left logo with Pulse pin beside it. Standard chrome across books.', b:['All books','Corpus header','Library standard'] },
         { n:'Eros_pink1.jpg', t:'image', u:'EROS seal · maroon field · PAGE BRAND. Large affirmation under cover / creed. Tenacity Through Integrity.', b:['Corpus cover','All books optional plate'] },
         { n:'eros-logo-colour3.png', t:'image', u:'Round colour logo (legacy neon). Still linked from Platinum Standard and some Resonance variants. Share avatar / alt brand mark.', b:['Platinum Standard','First Resonance variants','media'] },
-        { n:'eros-black-logo.jpg', t:'image', u:'Formal metallic black seal. “Tenacity Through Integrity”. Institutional pages and closing seals.', b:['Bridge','Platinum','Gods','Living Egg','Hopeful Future'] },
+        { n:'eros-black-logo.jpg', t:'image', u:'Formal metallic black seal. "Tenacity Through Integrity". Institutional pages and closing seals.', b:['Bridge','Platinum','Gods','Living Egg','Hopeful Future'] },
         { n:'eros-logo_banner.jpg', t:'image', u:'Wide banner treatment. Mid-book landing bands and social share images.', b:['Platinum','Hopeful Future','All books · share'] },
         { n:'pulsechain-pulsex-logo.jpg', t:'image', u:'PENDING UPLOAD · Combined PulseChain + PulseX mark. Small pin or section header for PulseChain identity across books.', b:['All books · header pin alternative','Platinum','Bridge'] },
         { n:'pulseSystem.jpeg', t:'image', tag:'pin', u:'Official PulseChain mark. Membership pin — header and footer, twice per book.', b:['Every book'] },
-        { n:'pulse_colours.jpeg', t:'image', u:'Colour reference for the PulseChain palette. Thin palette strip between sections.', b:['Platinum','Hopeful Future','Bridge'] }]
+        { n:'pulse_colours.jpeg', t:'image', u:'Colour reference for the PulseChain palette. Thin palette strip between sections.', b:['Platinum','Hopeful Future','Bridge'] }
+      ]
     },
     {
       id: 'cosmology',
@@ -485,7 +472,7 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
         { n:'eros-thoth-second-layer.jpg', t:'image', u:'Second layer teaching. Consonant operators.', b:['Gift of Thoth'] },
         { n:'eros-gift-thoth.jpg', t:'image', u:'Gift of Thoth visual. Teaching / form-building.', b:['Gift of Thoth','First Resonance'] },
         { n:'eros-33-teacher.jpg', t:'image', u:'33 / teacher numerology. The number that does the work.', b:['Platinum','First Resonance · Story arc'] },
-        { n:'Atropos.jpg', t:'image', u:'Atropos / fate operator. Grandfather&#39;s notebooks visual.', b:['Men of Renown','First Resonance · Ch2','Hopeful Future'] },
+        { n:'Atropos.jpg', t:'image', u:'Atropos / fate operator. Grandfather\'s notebooks visual.', b:['Men of Renown','First Resonance · Ch2','Hopeful Future'] },
         { n:'eros-gods-light-bond.jpg', t:'image', u:'Gods light bond. The bond between operators.', b:['Gods of Eros','First Resonance · Ch19'] },
         { n:'eros-gods-two-directions.jpg', t:'image', u:'Two directions of the gods. Signal moving outward and inward.', b:['Gods of Eros','First Resonance · Ch10'] },
         { n:'naun.jpeg', t:'image', u:'Naunthoth portrait · primordial foundation of knowing. Dark readiness, circular symbol, veiled figure. Primary operator plate for The Eros Enclosure and Gods of Eros.', b:['The Eros Enclosure','Gods of Eros','Gift of Thoth'] },
@@ -506,7 +493,7 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
         { n:'eros-willingness.jpg', t:'image', u:'Willingness precept. Abandonment is the sin.', b:['Narrative','Front Door'] },
         { n:'eros-abandon.jpg', t:'image', u:'Abandon / non-attachment teaching.', b:['Narrative'] },
         { n:'eros-ticket.jpg', t:'image', u:'Ticket / entry motif. You may already own it.', b:['Narrative','Front Door'] },
-        { n:'eros-begging.jpg', t:'image', u:'Begging vs building contrast. Don&#39;t beg the chart.', b:['Front Door','Narrative'] }
+        { n:'eros-begging.jpg', t:'image', u:'Begging vs building contrast. Don\'t beg the chart.', b:['Front Door','Narrative'] }
       ]
     },
     {
@@ -601,7 +588,7 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
         { n:'eros-x.jpg', t:'image', u:'EROS X / transformation mark. The flow rail.', b:['Platinum','Bridge','Narrative'] },
         { n:'eros-three-goals.jpg', t:'image', u:'Three goals diagram. Price · rebrand · ErosX.', b:['Narrative','Front Door'] },
         { n:'eros-yin-yang-lp.jpg', t:'image', u:'Balance / LP philosophy. Two assets, one position.', b:['Bridge','Narrative','First Resonance · Ch6'] },
-        { n:'eros-dont-pay-sideline.jpg', t:'image', u:'Don&#39;t pay the sideline. Non-extraction precept.', b:['Newcomer Dossier','First Resonance · Frank Purpose'] },
+        { n:'eros-dont-pay-sideline.jpg', t:'image', u:'Don\'t pay the sideline. Non-extraction precept.', b:['Newcomer Dossier','First Resonance · Frank Purpose'] },
         { n:'eros-risk-on-wall.jpg', t:'image', u:'Risk register / wall of risk.', b:['Bridge'] },
         { n:'titanx-jake.jpg', t:'image', u:'TitanX / Jake context. Poolonomics and ecosystem lineage visual.', b:['Bridge','Front Door','Platinum'] },
         { n:'programming_books.jpg', t:'image', u:'Shen / K / Logic stack. Code + transform teaching. Bridge, Dossier, Narrative, Platinum.', b:['Bridge','Newcomer Dossier','Narrative','Platinum','Plan'] }
@@ -645,7 +632,8 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
         { n:'hr3.webp', t:'divider', u:'Divider / HR series 3. Chapter break.', b:['First Resonance'] },
         { n:'hr4.webp', t:'divider', u:'Divider / HR series 4. Chapter break.', b:['First Resonance · Ch18'] },
         { n:'hr5.webp', t:'divider', u:'Divider / HR series 5. Chapter break.', b:['First Resonance'] },
-        { n:'hr6.webp', t:'divider', u:'Divider / HR series 6. Chapter break.', b:['First Resonance'] }]
+        { n:'hr6.webp', t:'divider', u:'Divider / HR series 6. Chapter break.', b:['First Resonance'] }
+      ]
     },
     {
       id: 'videos',
@@ -704,7 +692,10 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
       ? `<video src="${url}" controls preload="metadata" muted></video>`
       : `<img src="${url}" alt="${escapeHtml(f.n)}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=&quot;font-size:3rem;opacity:.3&quot;>▢</span>'"/>`;
     const booksHtml = Array.isArray(f.b) && f.b.length
-      ? f.b.map(b => `<a href="#books">${escapeHtml(b)}</a>`).join(' · ')
+      ? f.b.map(b => {
+          const u = bookUrl(b);
+          return u ? `<a href="${u}">${escapeHtml(b)}</a>` : `<span>${escapeHtml(b)}</span>`;
+        }).join(' · ')
       : '—';
     return `
       <article class="card" id="${id}" data-type="${f.t}" data-search="${escapeHtml((f.n+' '+f.u+' '+f.b.join(' ')).toLowerCase())}">
@@ -723,11 +714,12 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
     `;
   }
 
-  function clusterHtml(c){
+  function clusterHtml(c, i){
     const cards = c.files.map(cardHtml).join('');
     const count = c.files.length;
+    const openAttr = i === 0 ? ' open' : '';
     return `
-      <details class="cluster" id="${c.id}" open>
+      <details class="cluster" id="${c.id}"${openAttr}>
         <summary>
           <span>${escapeHtml(c.name)}</span>
           <span class="c-tag">${escapeHtml(c.tag)}</span>
@@ -789,6 +781,80 @@ img[src*="Eros_pink"], img[src*="eros-logo-colour"] {
       }
     }, 200);
   }
+
+  /* ── Header height → filter sticky top ── */
+  (function(){
+    var header = document.querySelector('.corpus-bar');
+    var filter = document.getElementById('filter');
+    if(!header || !filter) return;
+    function reposition(){
+      var h = header.offsetHeight;
+      filter.style.top = Math.max(0, h - 4) + 'px';
+    }
+    reposition();
+    window.addEventListener('resize', reposition);
+    window.addEventListener('orientationchange', reposition);
+    setTimeout(reposition, 200);
+  })();
+
+  /* ── Chapter strip auto-tracking ── */
+  (function(){
+    var strip = document.querySelector('.corpus-bar nav.chapter-strip');
+    if(!strip) return;
+    var links = Array.prototype.slice.call(strip.querySelectorAll('a[href^="#"]'));
+    var pairs = links.map(function(a){
+      var id = a.getAttribute('href');
+      if(id.indexOf('#') !== 0) return null;
+      var sec = document.querySelector(id);
+      return sec ? {link:a, sec:sec} : null;
+    }).filter(function(p){return p;});
+    var currentIndex = -1;
+    function update(){
+      var probe = window.scrollY + 200;
+      var idx = -1;
+      for(var i=0;i<pairs.length;i++){ if(pairs[i].sec.offsetTop <= probe) idx=i; }
+      if(idx===currentIndex) return;
+      currentIndex = idx;
+      links.forEach(function(a){ a.classList.remove('active'); });
+      if(idx<0){ scrollStrip(0); return; }
+      var active = pairs[idx].link;
+      active.classList.add('active');
+      var targetLeft = active.offsetLeft - (strip.clientWidth/2) + (active.clientWidth/2);
+      scrollStrip(targetLeft);
+    }
+    function scrollStrip(left){
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var maxLeft = strip.scrollWidth - strip.clientWidth;
+      var clamped = Math.max(0, Math.min(maxLeft, left));
+      if(reduced){ strip.scrollLeft = clamped; }
+      else { strip.scrollTo({left:clamped, behavior:'smooth'}); }
+    }
+    var rafPending = false;
+    function onScrollTrack(){
+      if(rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(function(){ rafPending = false; update(); });
+    }
+    window.addEventListener('scroll', onScrollTrack, {passive:true});
+    window.addEventListener('resize', onScrollTrack);
+    if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', update); }
+    else { update(); }
+    setTimeout(update, 300);
+  })();
+
+  /* ── Smooth anchor scrolling for cluster links ── */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(href.length < 2) return;
+    var t = document.querySelector(href);
+    if(t){
+      e.preventDefault();
+      t.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+
 })();
 </script>
 </body>
