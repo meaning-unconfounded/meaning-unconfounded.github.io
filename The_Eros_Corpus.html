@@ -89,8 +89,8 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 .corpus-bar{position:sticky;top:0;z-index:900;background:color-mix(in srgb, var(--bg) 94%, transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
 .corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
 .corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none;border-bottom:none}
-.corpus-bar .pin{border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold-line);box-shadow:0 0 12px var(--gold-glow), 0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface);display:block}
-.corpus-bar .pin.eros-mark{width:44px;height:44px;box-shadow:0 0 14px rgba(232,122,158,.24), 0 0 0 1px rgba(255,255,255,.04) inset}
+.corpus-bar .pin{border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold-line);box-shadow:0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface);display:block}
+.corpus-bar .pin.eros-mark{width:44px;height:44px}
 .corpus-bar .pin.pulse-mark{width:38px;height:38px}
 .corpus-bar .compass{font-size:1.1rem;line-height:1;color:var(--gold2);flex-shrink:0;opacity:.9;margin-left:.05rem}
 .corpus-bar .title-cluster{display:flex;align-items:center;gap:.7rem;min-width:0;flex-shrink:1}
@@ -123,9 +123,23 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
   .theme-toggle{width:30px;height:30px}
 }
 
-/* ═══ HEADER EROS PIN — shimmer wrapper ═══ */
-.corpus-bar .pin-wrap{position:relative;display:inline-block;line-height:0;border-radius:50%;flex-shrink:0}
-.corpus-bar .pin-wrap .pin.eros-mark{display:block;margin:0}
+/* ═══ HEADER PINS — shimmer wrappers ═══
+   .pin-wrap now clips its own sheen (overflow:hidden) so the shimmer
+   cannot spill into the neighbouring PulseChain pin. The outer glow
+   (box-shadow) is applied to the WRAPPER — a parent's own box-shadow
+   is not clipped by its own overflow:hidden — so the pink/gold halo
+   still reads. */
+.corpus-bar .pin-wrap{
+  position:relative;
+  display:inline-block;
+  line-height:0;
+  border-radius:50%;
+  flex-shrink:0;
+  overflow:hidden;
+}
+.corpus-bar .pin-wrap.eros-wrap{box-shadow:0 0 14px rgba(232,122,158,.24)}
+.corpus-bar .pin-wrap.pulse-wrap{box-shadow:0 0 12px var(--gold-glow)}
+.corpus-bar .pin-wrap .pin{display:block;margin:0}
 .corpus-bar .pin-wrap .pin-sheen{
   position:absolute;
   inset:0;
@@ -139,14 +153,23 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
     rgba(255,255,255,.42) 53%,
     transparent 64%);
   transform:translateX(-140%);
+  will-change:transform;
 }
-.corpus-bar .logo-cluster.is-visible .pin-sheen{
-  animation: eros-sheen 2.6s cubic-bezier(.22,.61,.36,1) .9s 1 both;
+/* Sequence: PulseChain pin first (0.4s → ~2.0s), then 1s gap,
+   then EROS pin (3.0s). Reads as "something happens up top,
+   then the main logo kicks in." */
+.corpus-bar .logo-cluster.is-visible .pulse-sheen{
+  animation: eros-sheen 1.6s cubic-bezier(.22,.61,.36,1) .4s 1 both;
 }
-.corpus-bar .logo-cluster:hover .pin-sheen{
-  animation: eros-sheen 1.4s ease-out .05s 1;
+.corpus-bar .logo-cluster.is-visible .eros-wrap .pin-sheen{
+  animation: eros-sheen 2s cubic-bezier(.22,.61,.36,1) 3s 1 both;
 }
-.corpus-bar .pin-wrap .pin-sheen{ will-change:transform; }
+.corpus-bar .logo-cluster:hover .pulse-sheen{
+  animation: eros-sheen 1.2s ease-out .05s 1;
+}
+.corpus-bar .logo-cluster:hover .eros-wrap .pin-sheen{
+  animation: eros-sheen 1.4s ease-out .15s 1;
+}
 
 header.cover{text-align:center;padding:2.2rem 1rem 1.8rem}
 header.cover .map-badge{display:inline-block;font-family:var(--sans);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);border:1px solid var(--gold-line);border-radius:999px;padding:.32rem .9rem;margin-bottom:.9rem;font-weight:700;background:var(--gold-soft)}
@@ -161,7 +184,7 @@ header.cover::after{content:"";display:block;width:min(340px, 70%);height:7px;ma
 
 /* ═══ COVER SEAL — shimmer wrapper ═══ */
 figure.brand-seal{margin:2rem auto 1.6rem;text-align:center;max-width:min(220px, 55vw);display:block}
-figure.brand-seal .seal-wrap{position:relative;display:block;width:100%;line-height:0;border-radius:50%}
+figure.brand-seal .seal-wrap{position:relative;display:block;width:100%;line-height:0;border-radius:50%;overflow:hidden}
 figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px var(--gold-glow), 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 48px var(--gold-soft);background:var(--surface)}
 figure.brand-seal .seal-sheen{
   position:absolute;
@@ -248,6 +271,23 @@ figure.brand-seal.silver figcaption{color:var(--platinum)}
     0 0 0 1px rgba(120,245,168,.28),
     0 24px 60px -30px rgba(120,245,168,.62);
 }
+/* Shared chrome frame — silver → champagne → gold → bronze.
+   All three Russian Doll charts use the same direction so the
+   set reads as one continuous metal. */
+.chart-plate.chrome{
+  background:linear-gradient(135deg,
+    #e0dce8 0%,
+    #b8b2c4 12%,
+    #d4ccb4 28%,
+    #c6a15b 48%,
+    #8a6a1d 66%,
+    #c9a86a 82%,
+    #7a5c14 100%);
+  box-shadow:
+    0 14px 34px -16px rgba(138,106,29,.55),
+    0 0 0 1px rgba(198,161,91,.34),
+    0 26px 66px -32px rgba(200,180,120,.62);
+}
 .chart-plate:hover{transform:translateY(-4px);}
 .chart-plate.violet:hover{
   box-shadow:
@@ -260,6 +300,12 @@ figure.brand-seal.silver figcaption{color:var(--platinum)}
     0 20px 44px -16px rgba(20,160,88,.65),
     0 0 0 1px rgba(120,245,168,.5),
     0 36px 84px -34px rgba(120,245,168,.75);
+}
+.chart-plate.chrome:hover{
+  box-shadow:
+    0 22px 48px -18px rgba(138,106,29,.70),
+    0 0 0 1px rgba(198,161,91,.6),
+    0 40px 92px -38px rgba(220,196,130,.80);
 }
 .chart-plate .cp-inner{
   position:relative;
@@ -328,8 +374,10 @@ figure.brand-seal.silver figcaption{color:var(--platinum)}
 }
 .chart-plate.violet figcaption{color:var(--violet);}
 .chart-plate.green figcaption{color:var(--teal);}
+.chart-plate.chrome figcaption{color:var(--gold2);}
 [data-theme="dark"] .chart-plate.violet figcaption{color:#b89ae0;}
 [data-theme="dark"] .chart-plate.green figcaption{color:#5adc8c;}
+[data-theme="dark"] .chart-plate.chrome figcaption{color:var(--gold3);}
 
 /* Telegram post · wall element */
 .telegram-post{margin:2rem 0;padding:1.5rem 1.6rem;border:1px solid var(--gold-line);border-radius:var(--radius);background:linear-gradient(160deg, var(--gold-soft), var(--surface));font-family:var(--sans);font-size:.98rem;line-height:1.8;color:var(--soft);box-shadow:var(--shadow-sm)}
@@ -354,6 +402,52 @@ figure.brand-seal.silver figcaption{color:var(--platinum)}
 .telegram-post .tp-open{display:inline-flex;align-items:center;gap:.35rem;padding:.5rem .95rem;border-radius:999px;background:var(--gold-soft);border:1px solid var(--gold-line);color:var(--gold);font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:1px solid var(--gold-line);transition:background .18s, color .18s, border-color .18s}
 .telegram-post .tp-open:hover{background:rgba(138,106,29,.18);color:var(--gold2);border-color:var(--gold2)}
 .telegram-post .tp-open::after{content:"→";font-family:var(--sans);font-size:.85rem}
+.telegram-post .tp-hashtags{font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;color:var(--gold2);font-weight:700;margin-top:.9rem}
+
+/* ═══ FEATURED DOLL POST ═══ */
+.telegram-post.doll{
+  background:linear-gradient(160deg,
+    var(--surface2) 0%,
+    color-mix(in srgb, var(--surface2) 88%, var(--gold)) 100%);
+  border-color:var(--gold-line);
+  box-shadow:var(--shadow), 0 0 44px -12px var(--gold-glow);
+}
+.telegram-post.doll .chart-plate{margin:1.5rem 0 1.7rem}
+.telegram-post.doll .chart-plate.is-visible .cp-sheen{
+  animation: eros-sheen 2.4s cubic-bezier(.22,.61,.36,1) .4s 1 both;
+}
+.telegram-post.doll .chart-plate:nth-of-type(2).is-visible .cp-sheen{animation-delay:.95s}
+.telegram-post.doll .chart-plate:nth-of-type(3).is-visible .cp-sheen{animation-delay:1.5s}
+.telegram-post.doll .doll-sub{
+  font-family:var(--serif);
+  font-size:1.08rem;
+  color:var(--ink);
+  margin:1.4rem 0 .7rem;
+  font-weight:700;
+  letter-spacing:.01em;
+  line-height:1.4;
+}
+.telegram-post.doll .doll-break{
+  height:1px;
+  margin:1.7rem 0;
+  background:linear-gradient(90deg,transparent,var(--gold-line) 20%,var(--gold-line) 80%,transparent);
+}
+.telegram-post.doll .doll-disclaimer{
+  font-family:var(--sans);
+  font-style:italic;
+  font-size:.86rem;
+  line-height:1.7;
+  color:var(--muted);
+  margin-top:1.1rem;
+}
+.telegram-post.doll .doll-tag{
+  font-family:var(--sans);
+  font-size:.7rem;
+  letter-spacing:.1em;
+  color:var(--gold2);
+  font-weight:700;
+  text-transform:uppercase;
+}
 
 section.apply-world{margin:3.2rem auto 2.4rem;max-width:40rem;padding:2rem 1.4rem 1.8rem;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center}
 section.apply-world .aw-label{font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold2);font-weight:700;display:block;margin-bottom:1.2rem}
@@ -448,8 +542,16 @@ table.ref td a{color:var(--gold);font-family:var(--mono);font-size:.78rem}
 footer.master{margin-top:3.6rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
 footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
 footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px var(--gold-glow), 0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface)}
-footer.master .pin.eros{width:56px;height:56px;border-color:var(--gold-line);box-shadow:0 0 14px rgba(232,122,158,.20), 0 0 0 1px rgba(255,255,255,.04) inset}
-footer.master .fpin-wrap{position:relative;display:inline-block;line-height:0;border-radius:50%;flex-shrink:0}
+footer.master .pin.eros{width:56px;height:56px;border-color:var(--gold-line);box-shadow:0 0 0 1px rgba(255,255,255,.04) inset}
+footer.master .fpin-wrap{
+  position:relative;
+  display:inline-block;
+  line-height:0;
+  border-radius:50%;
+  flex-shrink:0;
+  overflow:hidden;
+  box-shadow:0 0 14px rgba(232,122,158,.20);
+}
 footer.master .fpin-wrap .pin.eros{display:block;margin:0}
 footer.master .fpin-sheen{
   position:absolute;
@@ -520,6 +622,7 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   *{box-shadow:none!important;text-shadow:none!important}
   .claim,.table-wrap,details.fold,.cta,.cover-call,.hopeful-call,.media-embed,.path-chooser,.svg-map,.telegram-post,.public-link,.connect,section.apply-world,figure.brand-seal,.part-break,.verse,.math,.pull,.chart-plate{break-inside:avoid}
   h2{break-after:avoid}
+  h3{break-after:avoid}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   .chart-plate{padding:2px !important}
   .chart-plate .cp-inner{box-shadow:none!important}
@@ -528,6 +631,17 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   figure.brand-seal .seal-sheen,
   .corpus-bar .pin-sheen,
   footer.master .fpin-sheen{display:none!important;animation:none!important}
+  /* Russian Doll section — allow the post to break across pages so it
+     doesn't try to fit three charts on one sheet, but never split a chart. */
+  #doll{break-before:page}
+  .telegram-post.doll{break-inside:auto !important}
+  .telegram-post.doll .chart-plate{break-inside:avoid}
+  /* Force the chrome frame to print (browsers otherwise drop backgrounds). */
+  .chart-plate.chrome{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    background:linear-gradient(135deg,#c8c2c8,#c6a15b,#8a6a1d)!important;
+  }
 }
 @media(max-width:640px){
   body{font-size:1rem}
@@ -557,11 +671,14 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
 <header class="corpus-bar">
   <div class="brand-row">
     <a class="logo-cluster" href="#top" aria-label="How the Corpus Works · top">
-      <span class="pin-wrap">
+      <span class="pin-wrap eros-wrap">
         <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
         <span class="pin-sheen" aria-hidden="true"></span>
       </span>
-      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+      <span class="pin-wrap pulse-wrap">
+        <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+        <span class="pin-sheen pulse-sheen" aria-hidden="true"></span>
+      </span>
       <span class="compass" aria-hidden="true">🧭</span>
     </a>
     <div class="title-cluster">
@@ -575,6 +692,7 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
     <a href="#what">What EROS is</a>
     <a href="#flywheel">Flywheel</a>
     <a href="#timing-b">Front-running</a>
+    <a href="#doll">Russian doll</a>
     <a href="#stack">Stack</a>
     <a href="#wall">The wall</a>
     <a href="#position">Position</a>
@@ -799,6 +917,116 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   <div class="claim">
     <p><strong>What the labels mean.</strong> <em>Documented · L1</em> means the fact is on the record and can be checked. <em>Debated · L2</em> means the structural inference is reasonable but contested. <em>Disputed · L3</em> means the claim is a hypothesis the reader is asked to test, not to accept. Every tile on this page carries its own label. Nothing here asks you to skip the label.</p>
   </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     RUSSIAN DOLL · featured post · three charts + commentary
+     Placed between "What we are front-running" and "The wall".
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="doll" class="reveal">
+  <article class="telegram-post doll">
+    <p class="tp-head"><span>🪆 EROS · The Russian Doll Theory</span><span class="tp-status model">Model</span></p>
+    <p class="tp-title">A Wave 3 Inside a Wave 3</p>
+
+    <p>Open a big doll → smaller doll inside.</p>
+    <p>Open that one → smaller still.</p>
+    <p>Open that one → smaller again.</p>
+
+    <p>Waves nest the exact same way. A big Wave 3 contains its own Wave 3… which contains another Wave 3.</p>
+
+    <p><strong>👉 A Wave 3 inside a Wave 3 = “3 of 3.”</strong></p>
+
+    <figure class="chart-plate chrome">
+      <div class="cp-inner">
+        <img src="https://meaning-unconfounded.github.io/images/chart3.jpg" alt="Chart III · The nested wave structure" loading="lazy"/>
+        <span class="cp-sheen" aria-hidden="true"></span>
+      </div>
+      <figcaption>Chart III · The nest</figcaption>
+    </figure>
+
+    <p><strong>🚀 Why this matters</strong></p>
+    <p>Wave 3 is the momentum wave — the snowball that turns into an avalanche.</p>
+
+    <span class="tp-bullet">🟧 <strong>Floor: ~$28K</strong> — tested repeatedly, held every single time.</span>
+    <span class="tp-bullet">📍 <strong>Now: ~$560K</strong> — climbing off the floor again.</span>
+
+    <p>The setup is forming. The structure is lining up.</p>
+
+    <figure class="chart-plate chrome">
+      <div class="cp-inner">
+        <img src="https://meaning-unconfounded.github.io/images/chart4.jpg" alt="Chart IV · The double bottom" loading="lazy"/>
+        <span class="cp-sheen" aria-hidden="true"></span>
+      </div>
+      <figcaption>Chart IV · The double bottom</figcaption>
+    </figure>
+
+    <p><strong>🪆 → 🪆 → 🪆</strong></p>
+    <p>All three dolls opening in the same direction. That's the moment.</p>
+
+    <p><strong>📐 When 3 arrives — where to watch</strong></p>
+    <p>Once Wave 1 and Wave 2 print, Fibonacci extensions map the zones:</p>
+
+    <span class="tp-bullet">• <strong>1.618×</strong> → classic Wave 3</span>
+    <span class="tp-bullet">• <strong>2.618×</strong> → strong extension</span>
+    <span class="tp-bullet">• <strong>4.236×</strong> → full-euphoria extension</span>
+
+    <figure class="chart-plate chrome">
+      <div class="cp-inner">
+        <img src="https://meaning-unconfounded.github.io/images/chart5.jpg" alt="Chart V · Fibonacci extensions" loading="lazy"/>
+        <span class="cp-sheen" aria-hidden="true"></span>
+      </div>
+      <figcaption>Chart V · Fibonacci extensions</figcaption>
+    </figure>
+
+    <p><strong>💎 EROS REVIVAL 🏹</strong></p>
+    <p>We don't predict the dolls opening. We watch for it.</p>
+    <p>1 → 2 → 🚀 3</p>
+    <p>Let the chart tell the story.</p>
+
+    <div class="doll-break"></div>
+
+    <h3 class="doll-sub">📈 The coming EROS Wave 3</h3>
+
+    <p>Over two years in one range. $3M top. $28K bottom. Twice. 🤝</p>
+
+    <p>That's not failure. That's a double bottom forming. 🍵 Under a massive cup with the handle nearly closed.</p>
+
+    <p>And inside it a nested Elliott Wave 🌊 1-2, 1-2 structure. Wave 3 of 3 forming. 🧬</p>
+
+    <p>When 3 of 3 fires, it is the fastest wave in any sequence.</p>
+
+    <p><strong>Boom 💥 upward.</strong></p>
+
+    <p>EROS 💕 is designed with leveraged lensing.</p>
+
+    <p>🔎 A leveraged lens is called a magnifier. Every bond adds focus. Every pair sharpens the beam. The structure concentrates attention.</p>
+
+    <p><strong>Inward is forwards. Eros is the bond that holds.</strong></p>
+
+    <div class="doll-break"></div>
+
+    <h3 class="doll-sub">📯 Why a nested 1-2, 1-2 is the setup traders wait for</h3>
+
+    <p>In Elliott Wave theory, a micro 1-2 forming inside a larger 1-2 is one of the most explosive structures in technical analysis.</p>
+
+    <span class="tp-bullet">⚡ <strong>Wave 3 of 3 multiplier</strong> — multiple degrees of trend align and fire at once.</span>
+    <span class="tp-bullet">🌀 <strong>Exponential factor</strong> — lower-degree momentum compounds into higher-degree waves. A tightly wound spring.</span>
+
+    <p>When a chart builds a multi-year base, then prints a nested 1-2, the energy is primed for parabolic expansion. 🔥</p>
+
+    <p>The EROS chart transitions directly into a nested 1-2, 1-2 embedded structure. Not a standard breakout — the compounding ignition point for the macro Wave 3 markup phase.</p>
+
+    <p><strong>Extreme momentum. Shallow pullbacks. Vertical expansion.</strong></p>
+
+    <div class="doll-break"></div>
+
+    <p class="doll-disclaimer">This is a technical-analysis interpretation, not a price prediction. Fibonacci zones map where to watch. The chart tells the story.</p>
+
+    <div class="tp-btn-row">
+      <a class="tp-open" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">t.me/Eros_Revival</a>
+      <span class="doll-tag">#TheErosPlan</span>
+    </div>
+  </article>
 </section>
 
 <section id="stack" class="reveal">
@@ -1416,7 +1644,7 @@ footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:up
   </div>
   <p class="sig">The map is not the world. This page is the map.</p>
   <p class="creedline">Seventeen books · One standard</p>
-  <!-- Rev 19 · 2026-10-14 · shimmer now triggers on IntersectionObserver (fires when element enters view, not on page load) · shimmer applied to header EROS pin, cover brand-seal, footer EROS pin, chart I, chart II · hover re-triggers · frozen chassis intact · reveal threshold 0 · reader panel eros_corpus_reader_v1 · no resume, no position memory -->
+  <!-- Rev 20 · 2026-10-14 · header shimmer fixed (overflow:hidden on .pin-wrap + glow moved to wrapper so box-shadow is not clipped) · sequence: PulseChain pin 0.4s → 2.0s, EROS pin 3.0s → 5.0s (1s gap, "something up top, then the main one kicks in") · new #doll section between #timing-b and #wall with charts III/IV/V in shared chrome frames + Russian Doll Theory post · chapter strip updated with "Russian doll" anchor · print rules for #doll (break-before:page, no whole-post break, chrome frame forced to print) · frozen chassis intact · reveal threshold 0 · reader panel eros_corpus_reader_v1 · no resume, no position memory -->
 </footer>
 
 </main>
