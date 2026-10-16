@@ -70,8 +70,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 /* ── TEXT-WRAP RULES ── */
 h1,h2,h3,h4{text-wrap:balance;orphans:2;widows:2}
 p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
-.pull,.claim p,.lede,.receipt .quote,.ledger li,.grid>div p,.fold-body p,.fold-body li,.aside,.connect,.svg-block .cap,.media .cap,.creed p{text-wrap:pretty;orphans:2;widows:2}
-.cover h1,.cover .sub,.creed,.creedline,.tp-title,.tp-head,.pl-t,.aw-q,.aw-label,footer.master .sig,footer.master .count,footer.master .creedline,footer.master .title,figure.brand-seal figcaption{text-wrap:balance;orphans:2;widows:2}
+.pull,.claim p,.lede,.receipt .quote,.ledger li,.grid>div p,.fold-body p,.fold-body li,.aside,.connect,.svg-block .cap,.media .cap,.creed p,.door-body p{text-wrap:pretty;orphans:2;widows:2}
+.cover h1,.cover .sub,.creed,.creedline,.tp-title,.tp-head,.pl-t,.aw-q,.aw-label,footer.master .sig,footer.master .count,footer.master .creedline,footer.master .title,figure.brand-seal figcaption,details.doorway>summary{text-wrap:balance;orphans:2;widows:2}
 
 html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
 html::before{inset:8px;border:1px solid rgba(212,175,55,.18)}
@@ -279,6 +279,38 @@ details.toc-card[open]>summary::before{content:"▾ "}
 .toc-grid a{display:flex;gap:.6rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.85rem;padding:.35rem .5rem;border-radius:6px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
 .toc-grid a:hover{background:var(--gold-soft);color:var(--gold);border-bottom:none}
 .toc-grid a .tn{color:var(--gold);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.2rem}
+
+/* ── DOORWAY 🎁 ── */
+details.doorway{
+  margin:1rem auto 1.4rem;
+  max-width:28rem;
+  border:1px solid var(--gold-line);
+  border-radius:12px;
+  background:linear-gradient(160deg,var(--gold-soft),rgba(11,10,8,.55));
+  padding:.4rem 1.15rem 1.15rem;
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 22px rgba(212,175,55,.10);
+}
+details.doorway>summary{
+  cursor:pointer;list-style:none;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold2);padding:.6rem 0;user-select:none;font-weight:700;
+}
+details.doorway>summary::-webkit-details-marker{display:none}
+details.doorway>summary::before{content:"▸ ";color:var(--gold2)}
+details.doorway[open]>summary::before{content:"▾ "}
+details.doorway .door-body{
+  padding:.9rem 0 .35rem;
+  border-top:1px solid var(--gold-line);
+  font-family:var(--serif);
+  font-size:1.02rem;
+  line-height:1.85;
+  color:var(--soft);
+}
+details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
+details.doorway .door-body p:last-child{margin-bottom:0}
+details.doorway .door-body strong{color:var(--gold2);font-weight:700}
 
 /* FOLD */
 details.fold{
@@ -689,8 +721,10 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   details.fold[open]{background:transparent}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
+  details.doorway[open] .door-body{display:block}
+  details.doorway>summary::before{display:none}
   video{display:none}
-  .media,.claim,.receipt,.ledger,.creed,.svg-block,footer.master,.public-link,.telegram-post,.connect,figure.brand-seal,section.apply-world{break-inside:avoid}
+  .media,.claim,.receipt,.ledger,.creed,.svg-block,footer.master,.public-link,.telegram-post,.connect,figure.brand-seal,section.apply-world,details.doorway{break-inside:avoid}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
 }
 @media(max-width:600px){
@@ -835,6 +869,16 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
       <a href="#invitation"><span class="tn">19</span>The invitation</a>
       <a href="#telegram"><span class="tn">📱</span>Share Layer</a>
       <a href="#apply"><span class="tn">◇</span>Application &amp; World Building</a>
+    </div>
+  </details>
+
+  <!-- ═══ DOORWAY 🎁 ═══ -->
+  <details class="doorway" id="doorway">
+    <summary>Doorway 🎁</summary>
+    <div class="door-body">
+      <p>Nobody hands you a shield when you walk into crypto. They hand you a chart. They hand you a promise. They hand you a story about how early you are and how much you stand to make. Nobody sits down with you and tells you what to watch out for.</p>
+      <p>This book does. It is written for the person who has not started yet, or who started and got burned. It teaches you what to refuse. What to check before you touch anything. What to risk, and what never to risk. What a project sounds like when it is dying, and what it sounds like when it is honest.</p>
+      <p>It does not ask you to believe anything. It asks you to check. Read it before you do anything in crypto.</p>
     </div>
   </details>
 
@@ -1500,7 +1544,11 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
     </svg>
   </div>
 
-  <!-- Rev 6 · 2026-10-13 · header v2 (brand-row + chapter-strip auto-tracking) · black seal (silver ring) at the honesty pivot (between §09 Cost and §10 What we do not know) · pink seal (gold ring) at coda · notebooklm+telegram banners top and coda · application & world building block (gold accent) · lib-stack footer with all six tiers · no resumePrompt, no position memory (removed) · toroidal cross-link to Enclosure at §14 story door · telegram share block (begging · gift · invitation) · text-wrap rules applied globally · pulse-top signature bar preserved · all existing content, folds, receipts, media, creed preserved -->
+  <!-- Rev 7 · 2026-10-16 · Doorway 🎁 added inside the cover section, between the toc-card and the seal block, matching the Conscious Eros, Iteration Codex, Living Egg, Gods of Eros, Gift of Thoth, Hopeful Future, Men of Renown, Platinum Standard, Eros Narrative, and Front Door pattern ·
+       gold accent (gold-soft gradient, gold-line border, gold2 summary colour), scaled to the cover's narrow max-width ·
+       Doorway written for the person who has never touched crypto: names the shield the space does not hand you, teaches prepare-and-protect, closes on Read it before you do anything in crypto ·
+       plain language throughout, no jargon, no assumed knowledge ·
+       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1609,7 +1657,7 @@ window.addEventListener('hashchange', openFromHash);
 
 /* 5 · Reader controls */
 (function(){
-  var KEY = 'eros_dossier_reader_v1';
+  var KEY = 'eros_dossier_reader_v2';
   var defaults = {size:100, lead:1.85, w:38};
   var state = defaults;
   try {
