@@ -197,6 +197,39 @@ details.toc-card[open]>summary::before{content:"▾ "}
 .toc-grid a:hover{background:var(--steel-soft);color:var(--steel2);border-bottom:none}
 .toc-grid a .tn{color:var(--steel2);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.4rem}
 
+/* ── DOORWAY 🎁 ── */
+details.doorway{
+  max-width:var(--measure);
+  margin:1rem auto 1.6rem;
+  border:1px solid var(--steel-line);
+  border-radius:14px;
+  background:linear-gradient(160deg,var(--steel-soft),rgba(7,10,14,.55));
+  padding:.4rem 1.15rem 1.15rem;
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 22px rgba(125,163,200,.12);
+}
+@media(min-width:720px){details.doorway{max-width:var(--measure-wide)}}
+details.doorway>summary{
+  cursor:pointer;list-style:none;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--steel2);padding:.6rem 0;user-select:none;font-weight:700;
+}
+details.doorway>summary::-webkit-details-marker{display:none}
+details.doorway>summary::before{content:"▸ ";color:var(--steel2)}
+details.doorway[open]>summary::before{content:"▾ "}
+details.doorway .door-body{
+  padding:.9rem 0 .35rem;
+  border-top:1px solid var(--steel-line);
+  font-family:var(--serif);
+  font-size:1.04rem;
+  line-height:1.82;
+  color:var(--soft);
+}
+details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
+details.doorway .door-body p:last-child{margin-bottom:0}
+details.doorway .door-body strong{color:var(--steel2);font-weight:700}
+
 .layer-key-bar{position:sticky;top:118px;z-index:880;max-width:calc(var(--measure) + 2.4rem);margin:.4rem auto .8rem;padding:0 .4rem;font-family:var(--sans)}
 @media(min-width:720px){.layer-key-bar{max-width:calc(var(--measure) + 4rem)}}
 .layer-key-bar .lk-inner{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;align-items:center;padding:.5rem .85rem;background:rgba(7,10,14,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--hair);border-radius:10px;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -315,12 +348,14 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   body{background:#070a0e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:inherit;border-bottom:none}
-  .part-break,.claim,.verse,.footprint,.thesis,.source-note,.visual-block,.ledger,.grid,.table-wrap,details.appendix,.chapter-nav,.coda,.reprice-box,figure.brand-seal,.illum-fig,section.apply-world,footer.master{break-inside:avoid}
+  .part-break,.claim,.verse,.footprint,.thesis,.source-note,.visual-block,.ledger,.grid,.table-wrap,details.appendix,.chapter-nav,.coda,.reprice-box,figure.brand-seal,.illum-fig,section.apply-world,footer.master,details.doorway{break-inside:avoid}
   h2,h3,h4{break-after:avoid}
   video,iframe{display:none}
   details.appendix[open] .abody{display:block}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
+  details.doorway[open] .door-body{display:block}
+  details.doorway>summary::before{display:none}
 }
 @media(max-width:640px){body{font-size:1rem}.page{padding:1rem 1rem 4rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
@@ -392,6 +427,17 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     <strong>Sources:</strong> documented public instruments, named field notes, and independent analyst work. Each claim is layer-tagged. The reader is not asked to believe. The reader is asked to <em>test</em>.
   </div>
 </header>
+
+<!-- ═══ DOORWAY 🎁 ═══ -->
+<details class="doorway" id="doorway">
+  <summary>Doorway 🎁</summary>
+  <div class="door-body">
+    <p>You will read the news differently after this. Not because the news changes. Because you do. Once you have seen the pattern once, you cannot unsee it. Every crisis that suddenly justifies an expansion of power. Every emergency that leaves permanent machinery behind. Every official statement that arrives with the wrong vocabulary for the moment. You will start noticing that the world behaves less like a series of accidents and more like a production with a schedule.</p>
+    <p>That is the shift. Not information. Perception. The book does not hand you a new set of beliefs to carry around. It hands you a way of watching. You start reading the paperwork instead of the press conference. You start tracking what became permanent after the noise died down. You start noticing that the measuring stick moves and the debt is never paid, and that this has happened before, in your grandparents' lifetime, and everyone alive agreed to forget.</p>
+    <p>The first time it clicks, you will feel a strange calm. Not outrage. Recognition. The world stops feeling random. It starts feeling managed. And once you can see the management, it stops being able to manage you the same way.</p>
+    <p>Start with one event. The Gold Reserve Act of 1934. Look it up tonight. See what they did to the price of gold in a single night, and who paid for it. Then decide what you think of the rest.</p>
+  </div>
+</details>
 
 <aside class="public-link">
   <span class="pl-k">🖇️ Public Studio · Live</span>
@@ -1871,15 +1917,11 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     <span>Built on PulseChain</span>
     <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#070a0e"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
-  <!-- Rev 12 · 2026-10-14 · em dashes replaced with spaced hyphens throughout ·
-       section symbols removed (replaced with "Section" wording where needed) ·
-       New section Book I: 1962 · The Tagalongs (Bluegill Triple Prime, Malmgren) ·
-       New section Book II: The OAP Program · One Specific Instrument (Lockheed, Reid, Bigelow) ·
-       New subsection Book II · The Studio: Case Study · The CIA and the Tabloid Layer (Pope, National Enquirer, Weekly World News) ·
-       New subsection Book II · Executive Signal: How the Signal Enters the Record · DOPSR and AARO ·
-       Chapter strip updated · TOC updated · Glossary extended (DOPSR, AARO, Tagalongs) ·
-       Falsification criteria extended · Executive Signal "What to Watch" extended ·
-       two rails still kept separate (hinge discipline) · Layer 1/2/3 tagging intact -->
+  <!-- Rev 13 · 2026-10-16 · Doorway 🎁 added after the cover header, before the public-link banner, matching the Conscious Eros, Iteration Codex, Living Egg, Gods of Eros, Gift of Thoth, Hopeful Future, Men of Renown, Platinum Standard, Eros Narrative, Front Door, Newcomer Dossier, and Eros Stories pattern ·
+       steel accent (steel-soft gradient, steel-line border, steel2 summary colour) ·
+       Doorway is written about the shift in the reader, not the contents of the book: perception changes, the world stops feeling random, calm arrives before outrage ·
+       closes on a single verifiable event (Gold Reserve Act 1934) so the first move is checkable tonight ·
+       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1977,7 +2019,7 @@ window.addEventListener('hashchange', openFromHash);
 })();
 
 (function(){
-  var KEY = 'eros_illumination_reader_v5';
+  var KEY = 'eros_illumination_reader_v6';
   var defaults = {size:100, lead:1.8, w:46};
   var state = defaults;
   try {
