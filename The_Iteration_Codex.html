@@ -243,6 +243,37 @@ details.toc-card[open]>summary::before{content:"▾ "}
 .toc-grid a:hover{background:var(--copper-soft);color:var(--copper2);border-bottom:none}
 .toc-grid a .tn{color:var(--copper2);font-weight:700;font-size:.72rem;letter-spacing:.05em;flex-shrink:0;min-width:2.4rem;font-family:var(--mono)}
 
+/* ── DOORWAY 🎁 ── */
+details.doorway{
+  margin:1rem 0 1.6rem;
+  border:1px solid var(--copper-line);
+  border-radius:14px;
+  background:linear-gradient(160deg,rgba(201,145,90,.08),rgba(27,32,40,.55));
+  padding:.4rem 1.15rem 1.15rem;
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 22px rgba(201,145,90,.10);
+}
+details.doorway>summary{
+  cursor:pointer;list-style:none;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper2);padding:.6rem 0;user-select:none;font-weight:700;
+}
+details.doorway>summary::-webkit-details-marker{display:none}
+details.doorway>summary::before{content:"▸ ";color:var(--copper2)}
+details.doorway[open]>summary::before{content:"▾ "}
+details.doorway .door-body{
+  padding:.9rem 0 .35rem;
+  border-top:1px solid var(--copper-line);
+  font-family:var(--serif);
+  font-size:1.04rem;
+  line-height:1.85;
+  color:var(--soft);
+}
+details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
+details.doorway .door-body p:last-child{margin-bottom:0}
+details.doorway .door-body strong{color:var(--copper2);font-weight:700}
+
 /* ── FORM CARDS ── */
 .form-card{margin:2rem 0;border:1px solid var(--copper-line);border-radius:14px;overflow:hidden;background:var(--surface);position:relative}
 .form-card::before{content:"";position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-top:2px solid var(--copper);border-left:2px solid var(--copper);pointer-events:none;z-index:1}
@@ -326,11 +357,13 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   a{color:#111;border-bottom:none}
   .part-break{page-break-before:always;border-left:4px solid #333!important}
   .part-break::after,.form-card::before,.form-card::after{display:none}
-  .claim,.pull,.verse,.axiom,.math,.table-wrap,figure.plate,figure.video-frame,figure.brand-seal,.coda,.toc-card,details.eros-menu,details.howto,.thesis-card,.tg-quote,.public-link,.telegram-post,.connect,.form-card,footer.master{break-inside:avoid}
+  .claim,.pull,.verse,.axiom,.math,.table-wrap,figure.plate,figure.video-frame,figure.brand-seal,.coda,.toc-card,details.eros-menu,details.howto,.thesis-card,.tg-quote,.public-link,.telegram-post,.connect,.form-card,footer.master,details.doorway{break-inside:avoid}
   section.apply-world{break-inside:avoid}
   h2,h3,h4{break-after:avoid}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
+  details.doorway[open] .door-body{display:block}
+  details.doorway>summary::before{display:none}
   video{display:none}
   figure.plate img{max-height:80mm;object-fit:contain;box-shadow:none!important}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
@@ -481,6 +514,15 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
       <a href="#apply"><span class="tn">◇</span>Apply</a>
       <a href="#telegram"><span class="tn">📱</span>Share Layer</a>
       <a href="#coda"><span class="tn">❦</span>Coda</a>
+    </div>
+  </details>
+
+  <details class="doorway" id="doorway">
+    <summary>Doorway 🎁</summary>
+    <div class="door-body">
+      <p>You were taught the world is solid and you are one of the solid things. Weight is a fact. Time is a river. The floor is the one thing you can trust.</p>
+      <p>This book says the floor is moving. Everything is contained within one enclosure, and everything inside it is expanding at once, including you. Weight is not a pull. It is a meeting, your own inertia against the ground rising to meet you. Time is not a river. It is a count of changes. Mass is not fixed. It is what unresolved conflict leaves behind. Two simple measures, how fast you cycle and how open your structure is, change what your body feels without changing what it weighs.</p>
+      <p>If this holds, it redefines most of what you were taught. Gravity, expansion, the archive of strange sightings, all become mechanics instead of magic. The principles are simple enough to feel before you understand them.</p>
     </div>
   </details>
 
@@ -1699,7 +1741,10 @@ State axis: [ -1.0 ......... 0 ......... +1.0 ]
     <span>Built on PulseChain</span>
     <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#1B2028"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
-  <!-- Rev 3 · 2026-10-13 · header v2 · black seal at the Five Forms pivot · pink seal at coda · notebooklm+telegram banners · application & world building block · lib-stack footer · no resume · toroidal cross-links to Enclosure · softened practice ledger (mirror not grade) · telegram share block on floor, forms, craft -->
+  <!-- Rev 4 · 2026-10-16 · Doorway 🎁 added after toc-card, matching the Men of Renown, Hopeful Future, Gods of Eros, Gift of Thoth, Living Egg, and Conscious Eros pattern ·
+       copper accent (copper-soft gradient, copper-line border, copper2 summary colour) ·
+       Doorway opens on the reader's assumption about the world, not the book's contents ·
+       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1796,7 +1841,7 @@ window.addEventListener('hashchange', openFromHash);
 })();
 
 (function(){
-  var KEY = 'eros_codex_reader_v7';
+  var KEY = 'eros_codex_reader_v8';
   var defaults = {size:100, lead:1.85, w:46};
   var state = defaults;
   try { var sv = JSON.parse(localStorage.getItem(KEY) || '{}'); for(var k in sv) state[k] = sv[k]; } catch(e){}
