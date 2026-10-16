@@ -134,6 +134,37 @@ details.toc-card[open]>summary::before{content:"▾ "}
 .toc-grid a:hover{background:var(--amber-soft);color:var(--amber);border-bottom:none}
 .toc-grid a .tn{color:var(--amber);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.2rem}
 
+/* ── DOORWAY 🎁 ── */
+details.doorway{
+  margin:1rem 0 1.6rem;
+  border:1px solid var(--amber-line);
+  border-radius:14px;
+  background:linear-gradient(160deg,var(--amber-soft),rgba(11,8,6,.55));
+  padding:.4rem 1.15rem 1.15rem;
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 22px rgba(232,165,90,.10);
+}
+details.doorway>summary{
+  cursor:pointer;list-style:none;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber2);padding:.6rem 0;user-select:none;font-weight:700;
+}
+details.doorway>summary::-webkit-details-marker{display:none}
+details.doorway>summary::before{content:"▸ ";color:var(--amber2)}
+details.doorway[open]>summary::before{content:"▾ "}
+details.doorway .door-body{
+  padding:.9rem 0 .35rem;
+  border-top:1px solid var(--amber-line);
+  font-family:var(--serif);
+  font-size:1.04rem;
+  line-height:1.85;
+  color:var(--soft);
+}
+details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
+details.doorway .door-body p:last-child{margin-bottom:0}
+details.doorway .door-body strong{color:var(--amber2);font-weight:700}
+
 /* ── PUBLIC LINK ── */
 .public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--amber-line);border-radius:14px;background:linear-gradient(135deg,var(--amber-soft),rgba(11,8,6,.6));font-family:var(--sans)}
 .public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--amber2);font-weight:700;margin-bottom:.6rem}
@@ -366,13 +397,15 @@ footer.master .pulse-row svg{flex-shrink:0}
   body{background:#0b0806!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:inherit;border-bottom:none}
-  .media,.plate,.claim,.walk,.part,.creed,footer.master,.public-link,.telegram-post,.connect,figure.brand-seal,section.apply-world{break-inside:avoid}
+  .media,.plate,.claim,.walk,.part,.creed,footer.master,.public-link,.telegram-post,.connect,figure.brand-seal,section.apply-world,details.doorway{break-inside:avoid}
   h2{break-after:avoid}
   video,iframe{display:none}
   .yt-wrap{display:none!important}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
+  details.doorway[open] .door-body{display:block}
+  details.doorway>summary::before{display:none}
 }
 @media(max-width:640px){
   body{font-size:1rem}
@@ -485,6 +518,18 @@ footer.master .pulse-row svg{flex-shrink:0}
     <a href="#close"><span class="tn">XII</span>Close</a>
     <a href="#apply"><span class="tn">◇</span>Application &amp; World Building</a>
     <a href="#coda"><span class="tn">❦</span>Coda</a>
+  </div>
+</details>
+
+<!-- ═══ DOORWAY 🎁 ═══ -->
+<details class="doorway" id="doorway">
+  <summary>Doorway 🎁</summary>
+  <div class="door-body">
+    <p>Every game you have ever played has been fake on the inside. The skin is a picture. The sword is a number. The city is wallpaper. None of it is worth a thing.</p>
+    <p>Now flip that. The car you drive has real money locked inside it. The sword gets more valuable the more you fight with it, or wears down and drops in price. A pair of kid's shoes with coins sewn in that a parent passes down to their kid. That is not a game gimmick. That is the whole money system, built into the stuff you own.</p>
+    <p>That is one idea. The other is bigger. The world is being rebuilt right now. Robots, AI, space, money going digital. Everyone can feel it. Nobody can quite say it. This book is a bet placed before the rebuild finishes.</p>
+    <p>And it starts with your wallet. Two years ago, this project handed out free coins to people who held a different coin. Most never noticed. You might be one of them.</p>
+    <p>Open the wallet. See for yourself.</p>
   </div>
 </details>
 
@@ -1151,7 +1196,11 @@ footer.master .pulse-row svg{flex-shrink:0}
     </svg>
   </div>
 
-  <!-- Rev 3 · 2026-10-13 · header v2 · black seal (silver ring) at Frankness (honesty turn) · pink seal (gold ring) at coda · notebooklm+telegram banners top and coda · application & world building block (amber accent) · lib-stack footer with all six tiers · no resume, no position memory · toroidal cross-links to Enclosure at story section · telegram share block (ticket · front run · floor) · text-wrap rules applied globally -->
+  <!-- Rev 4 · 2026-10-16 · Doorway 🎁 added after toc-card, matching the Conscious Eros, Iteration Codex, Living Egg, Gods of Eros, Gift of Thoth, Hopeful Future, Men of Renown, and Platinum Standard pattern ·
+       amber accent (amber-soft gradient, amber-line border, amber2 summary colour) ·
+       Doorway opens on the fake economy inside every game, flips to the economy-inside-the-object idea, adds the front-run framing, closes on the sleeping wallet ·
+       plain language throughout, no jargon, no assumed knowledge ·
+       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1260,7 +1309,7 @@ window.addEventListener('hashchange', openFromHash);
 
 /* 5 · Reader controls */
 (function(){
-  var KEY = 'eros_narrative_reader_v1';
+  var KEY = 'eros_narrative_reader_v2';
   var defaults = {size:100, lead:1.85, w:42};
   var state = defaults;
   try {
