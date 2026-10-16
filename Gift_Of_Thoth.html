@@ -43,7 +43,6 @@ body{
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--teal);color:#07090a;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
 
-/* ── HEADER v2 ── */
 .corpus-bar{position:sticky;top:0;z-index:900;background:rgba(7,9,10,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
 .corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
 .corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none;border-bottom:none}
@@ -77,7 +76,6 @@ body{
   .corpus-bar .title-rule{width:14px}
 }
 
-/* ── TYPOGRAPHY ── */
 h2{font-size:1.35rem;color:var(--teal);margin:2.5rem 0 .9rem;border-bottom:1px solid var(--hair);padding-bottom:.45rem;scroll-margin-top:7rem;line-height:1.3;text-wrap:balance;orphans:2;widows:2}
 h3{font-size:1.08rem;color:var(--ink);margin:1.6rem 0 .55rem;line-height:1.35;text-wrap:balance;orphans:2;widows:2}
 h4{font-family:var(--sans);font-size:.85rem;font-weight:700;letter-spacing:.04em;color:var(--teal);margin:1.3rem 0 .5rem;text-wrap:balance;orphans:2;widows:2}
@@ -90,7 +88,6 @@ li{margin-bottom:.5rem;color:var(--soft);line-height:1.75;text-wrap:pretty;orpha
 li::marker{color:var(--teal)}
 code{font-family:var(--mono);font-size:.78rem;color:var(--teal2);background:rgba(0,0,0,.35);border:1px solid var(--teal-line);padding:.12rem .42rem;border-radius:4px;word-break:break-all}
 
-/* ── BLOCKS ── */
 a{color:#5fb8c8;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
 a:visited{color:#4a8a99}
 a:hover{color:#8fd0dd;border-bottom-color:#8fd0dd}
@@ -234,7 +231,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .three-doors p:last-child{margin-bottom:0}
 .three-doors strong{color:var(--gold)}
 
-/* ── TOC + MENU ── */
 details.toc-card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:.4rem 1.15rem 1.15rem;margin:1.5rem 0 2rem;font-family:var(--sans);font-size:.88rem;text-align:left}
 details.toc-card>summary{cursor:pointer;list-style:none;color:var(--teal);display:block;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:.6rem 0;user-select:none}
 details.toc-card>summary::-webkit-details-marker{display:none}
@@ -254,6 +250,37 @@ details.eros-menu[open]>summary::before{content:"▾ ";}
 details.eros-menu .menu-body{padding:.25rem 0 .85rem;font-size:.92rem;line-height:1.7;color:var(--soft)}
 details.eros-menu a{color:var(--teal)}
 
+/* ═══ DOORWAY 🎁 — the standard collapsed summary ═══ */
+details.doorway{
+  margin:1rem 0 1.6rem;
+  border:1px solid var(--teal-line);
+  border-radius:12px;
+  background:linear-gradient(160deg,rgba(95,184,200,.08),rgba(7,9,10,.55));
+  padding:.35rem 1.15rem 1.1rem;
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 20px rgba(95,184,200,.08);
+}
+details.doorway>summary{
+  cursor:pointer;list-style:none;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--teal);padding:.55rem 0;user-select:none;font-weight:700;
+}
+details.doorway>summary::-webkit-details-marker{display:none}
+details.doorway>summary::before{content:"▸ ";color:var(--teal)}
+details.doorway[open]>summary::before{content:"▾ "}
+details.doorway .door-body{
+  padding:.85rem 0 .35rem;
+  border-top:1px solid var(--teal-line);
+  font-family:var(--serif);
+  font-size:1.04rem;
+  line-height:1.78;
+  color:var(--soft);
+}
+details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
+details.doorway .door-body p:last-child{margin-bottom:0}
+details.doorway .door-body strong{color:var(--teal2);font-weight:700}
+
 /* ── COVER / HERO ── */
 header.hero{text-align:center;padding:2rem 0 1.5rem;border-bottom:1px solid var(--hair);margin-bottom:2rem}
 header.hero .banner{max-width:100%;border-radius:12px;border:1px solid var(--teal-line);margin-bottom:1.2rem;display:block;width:100%}
@@ -262,7 +289,6 @@ header.hero h1{font-size:clamp(1.6rem,4vw,2.15rem);color:var(--teal);margin:.2re
 header.hero .byline{color:var(--soft);font-style:italic;font-size:1.05rem;margin:0 0 .8rem;text-wrap:balance}
 header.hero .maxim{display:inline-block;margin-top:.6rem;padding:.55rem 1rem;border:1px solid var(--teal-line);border-radius:999px;font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;color:var(--teal);text-transform:uppercase;text-wrap:balance}
 
-/* ── FIGURES ── */
 figure.plate{margin:2rem auto;text-align:center;max-width:100%}
 figure.plate img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--teal-line);box-shadow:0 12px 40px rgba(0,0,0,.45);max-height:min(56vh,480px);object-fit:cover}
 figure.plate figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.75rem;line-height:1.6;padding:0 .8rem;text-wrap:pretty}
@@ -283,7 +309,6 @@ figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spac
 figure.brand-seal.silver img{border-color:var(--silver-line);box-shadow:0 12px 40px rgba(200,195,214,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(200,195,214,.14)}
 figure.brand-seal.silver figcaption{color:var(--silver2)}
 
-/* ── PUBLIC LINK ── */
 .public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--teal-line);border-radius:14px;background:linear-gradient(135deg,rgba(95,184,200,.10),rgba(7,9,10,.6));font-family:var(--sans)}
 .public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:.6rem}
 .public-link .pl-t{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:700;margin-bottom:.5rem;line-height:1.35;text-wrap:balance}
@@ -292,7 +317,6 @@ figure.brand-seal.silver figcaption{color:var(--silver2)}
 .public-link a.pl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.05rem;border-radius:999px;background:var(--teal-soft);border:1px solid var(--teal-line);color:var(--teal);font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:none;transition:background .18s,color .18s,border-color .18s}
 .public-link a.pl-btn:hover{background:rgba(95,184,200,.22);color:#a8e0ec;border-color:var(--teal2)}
 
-/* ── TELEGRAM POSTS ── */
 .telegram-post{margin:2.4rem 0;padding:1.7rem 1.8rem;border:1px solid var(--teal-line);border-radius:16px;background:linear-gradient(160deg,rgba(95,184,200,.05),rgba(7,9,10,.7));font-family:var(--sans);font-size:1.02rem;line-height:1.85;color:var(--soft)}
 .telegram-post .tp-head{font-family:var(--sans);font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:1.05rem;padding-bottom:.75rem;border-bottom:1px dashed var(--teal-line);text-wrap:balance}
 .telegram-post .tp-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);letter-spacing:.05em;line-height:1.35;margin:0 0 1.05rem;word-break:keep-all;overflow-wrap:normal;text-wrap:balance;orphans:2;widows:2}
@@ -302,14 +326,12 @@ figure.brand-seal.silver figcaption{color:var(--silver2)}
 .telegram-post .tp-bullet{display:block;margin:.9rem 0;padding:.85rem 1.2rem;background:rgba(0,0,0,.25);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;font-family:var(--sans);font-size:.96rem;color:var(--soft);line-height:1.75;text-wrap:pretty;orphans:2;widows:2}
 .telegram-post .tp-hashtags{margin-top:1.3rem;padding-top:.95rem;border-top:1px dashed var(--teal-line);font-size:.8rem;letter-spacing:.06em;color:var(--muted);font-family:var(--mono);text-wrap:balance}
 
-/* ── APPLICATION & WORLD BUILDING ── */
 section.apply-world{margin:3.2rem auto 2.4rem;max-width:40rem;padding:2rem 1.4rem 1.8rem;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center}
 section.apply-world .aw-label{font-family:var(--sans);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);font-weight:700;display:block;margin-bottom:1.2rem;text-wrap:balance}
 section.apply-world p{font-family:var(--sans);font-size:.94rem;line-height:1.78;color:var(--soft);margin:0 0 .9rem;text-wrap:pretty;orphans:2;widows:2}
 section.apply-world p:last-of-type{margin-bottom:1.35rem}
 section.apply-world .aw-q{font-family:var(--serif);font-size:1.14rem;font-style:italic;color:var(--ink);margin:0;text-wrap:balance;orphans:2;widows:2}
 
-/* ── FOOTER ── */
 footer.master{margin-top:3.4rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
 footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
 footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface)}
@@ -327,7 +349,6 @@ footer.master .sig{margin:1.4rem 0 .7rem;color:var(--soft);font-style:italic;fon
 footer.master .creedline{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem;text-wrap:balance}
 footer.master .pulse-row{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-top:1rem;font-size:.86rem;color:var(--muted);text-wrap:balance}
 
-/* ── FLOATING CONTROLS ── */
 #rdBtn{position:fixed;right:1rem;bottom:4.6rem;z-index:950;width:2.8rem;height:2.8rem;border-radius:50%;border:1.5px solid var(--teal-line);background:var(--surface);color:var(--teal);font:700 .95rem var(--sans);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
 #rdBtn:hover{border-color:var(--teal);background:var(--teal-soft)}
 #rdPanel{position:fixed;right:1rem;bottom:8rem;z-index:951;width:min(20rem, calc(100vw - 2rem));max-height:70vh;overflow:auto;padding:1rem 1.05rem;font-family:var(--sans);font-size:.85rem;color:var(--ink);background:var(--surface);border:1.5px solid var(--teal-line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
@@ -349,7 +370,7 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   body{background:#fff!important;color:#111!important;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:#111;border-bottom:none}
-  .fig,.media,.claim,.op-card,.experiment,.scientist,.discovery,.wow,.second-layer,.three-doors,figure.plate,figure.video-frame,figure.brand-seal,.public-link,.telegram-post,.coda,.creed,footer.master{break-inside:avoid}
+  .fig,.media,.claim,.op-card,.experiment,.scientist,.discovery,.wow,.second-layer,.three-doors,figure.plate,figure.video-frame,figure.brand-seal,.public-link,.telegram-post,.coda,.creed,footer.master,details.doorway{break-inside:avoid}
   section.apply-world{break-inside:avoid}
   h2,h3,h4{break-after:avoid}
   video{display:none}
@@ -357,6 +378,8 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
+  details.doorway[open] .door-body{display:block}
+  details.doorway>summary::before{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -476,6 +499,15 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     <a href="#telegram"><span class="tn">📱</span>Share Layer</a>
     <a href="#apply"><span class="tn">◇</span>Application &amp; World Building</a>
     <a href="#coda"><span class="tn">❦</span>Coda</a>
+  </div>
+</details>
+
+<details class="doorway" id="doorway">
+  <summary>Doorway 🎁</summary>
+  <div class="door-body">
+    <p>You have argued past someone your whole life. So has everyone you know. Not because either of you was wrong. Because the words were different shapes in each mouth, and neither of you knew the shapes had names.</p>
+    <p>The Gift of Thoth is the book that names them. Beneath the surface language you were taught sits a second layer you have been running since you learned to speak. Consonants are operators. Words are compressed programs. Position is syntax. SPREAD lands. SPRAY continues. The difference is one consonant, and you can feel it in your jaw before anyone explains it to you.</p>
+    <p>What it gives you is unusual: you can read inside any word, name what you are actually doing instead of arguing about what you mean, and build a shared tongue with anyone who hears the same architecture. A leading mathematician at the Wolfram Physics Project arrived at the same insight from the AI side, and the book shows you both doors. Read it, and the fog of conversation turns into structure.</p>
   </div>
 </details>
 
@@ -1071,7 +1103,6 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   <p class="op-bond"><b>Bond test:</b> Breath is the first medium of the bond.</p>
 </article>
 
-<!-- ═══ BLACK SEAL · pivot at the operator cards ═══ -->
 <figure class="brand-seal silver">
   <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
   <figcaption>Tenacity Through Integrity</figcaption>
@@ -1833,9 +1864,6 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   </div>
 </aside>
 
-<!-- ══════════════════════════════════════════════
-     APPLICATION & WORLD BUILDING · closing call-out
-     ══════════════════════════════════════════════ -->
 <section class="apply-world" id="apply">
   <span class="aw-label">Application &amp; World Building</span>
   <p>The concepts in this book are not limited to the page. What can you build from them?</p>
@@ -1930,7 +1958,9 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     <span>Built on PulseChain</span>
     <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07090a"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
-  <!-- Rev 3 · 2026-10-13 · header v2 · thoth portrait at §5 · black seal at operator cards pivot · pink seal at coda · notebooklm+telegram banners · application & world building block · lib-stack footer · no resume · toroidal cross-links to Enclosure · telegram share block (three posts on tongue-as-operators) · softened how-to-read and practice language -->
+  <!-- Rev 4 · 2026-10-16 · Doorway 🎁 added after toc-card, matching the Men of Renown, Hopeful Future and Gods of Eros pattern ·
+       teal accent (teal-soft gradient, teal-line border, teal summary colour) ·
+       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1983,7 +2013,6 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   openFromHash();
   window.addEventListener('hashchange', openFromHash);
 
-  /* Chapter strip auto-tracking */
   (function(){
     var strip=document.querySelector('.corpus-bar nav.chapter-strip');
     if(!strip)return;
@@ -2028,7 +2057,6 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     setTimeout(update,300);
   })();
 
-  /* Reader controls */
   (function(){
     var KEY='eros_thoth_reader_v1';
     var defaults={size:100,lead:1.72,w:45};
@@ -2086,7 +2114,6 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     apply();
   })();
 
-  /* Print handler */
   (function(){
     var was=[];
     window.addEventListener('beforeprint',function(){
