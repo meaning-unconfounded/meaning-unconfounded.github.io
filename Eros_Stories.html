@@ -47,8 +47,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 /* ── TEXT-WRAP RULES ── */
 h1,h2,h3,h4{text-wrap:balance;orphans:2;widows:2}
 p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
-.summary-line,.pitch p,.movement p,.fold-body p,.fold-body li,.ep p,.q,.spine,.stakes p,.pledge p,.path,.ch,.gift-card p,.asset-table td,.media-block figcaption,.banner figcaption,.cap,.gallery .cap,.interlude,.burn-block p,.burn-block li,.bridge p{text-wrap:pretty;orphans:2;widows:2}
-.tp-title,.tp-head,.pl-t,.aw-q,.aw-label,.creedline,footer.master .sig,footer.master .count,footer.master .creedline,footer.master .title,figure.brand-seal figcaption{text-wrap:balance;orphans:2;widows:2}
+.summary-line,.pitch p,.movement p,.fold-body p,.fold-body li,.ep p,.q,.spine,.stakes p,.pledge p,.path,.ch,.gift-card p,.asset-table td,.media-block figcaption,.banner figcaption,.cap,.gallery .cap,.interlude,.burn-block p,.burn-block li,.bridge p,.door-body p{text-wrap:pretty;orphans:2;widows:2}
+.tp-title,.tp-head,.pl-t,.aw-q,.aw-label,.creedline,footer.master .sig,footer.master .count,footer.master .creedline,footer.master .title,figure.brand-seal figcaption,details.doorway>summary{text-wrap:balance;orphans:2;widows:2}
 
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--violet);color:#07060c;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
@@ -86,6 +86,38 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
   .corpus-bar .brand-text{font-size:.75rem;letter-spacing:.14em}
   .corpus-bar .title-rule{width:14px}
 }
+
+/* ── DOORWAY 🎁 ── */
+details.doorway{
+  margin:1rem auto 1.6rem;
+  max-width:42rem;
+  border:1px solid var(--violet-line);
+  border-radius:14px;
+  background:linear-gradient(160deg,var(--violet-soft),rgba(7,6,12,.55));
+  padding:.4rem 1.15rem 1.15rem;
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 22px rgba(192,132,252,.12);
+}
+details.doorway>summary{
+  cursor:pointer;list-style:none;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--violet);padding:.6rem 0;user-select:none;font-weight:700;
+}
+details.doorway>summary::-webkit-details-marker{display:none}
+details.doorway>summary::before{content:"▸ ";color:var(--violet)}
+details.doorway[open]>summary::before{content:"▾ "}
+details.doorway .door-body{
+  padding:.9rem 0 .35rem;
+  border-top:1px solid var(--violet-line);
+  font-family:var(--serif);
+  font-size:1.04rem;
+  line-height:1.82;
+  color:var(--soft);
+}
+details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
+details.doorway .door-body p:last-child{margin-bottom:0}
+details.doorway .door-body strong{color:var(--violet);font-weight:700}
 
 /* PUBLIC LINK */
 .public-link{margin:1.6rem 0;padding:1.35rem 1.5rem;border:1px solid var(--cyan-line);border-radius:14px;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(7,6,12,.6));font-family:var(--sans)}
@@ -480,12 +512,14 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   @page{size:A4;margin:14mm}
   html::before,html::after,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link,.public-link,.telegram-post{display:none!important}
   body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .series,.burn-block,.bridge,footer.master,.connect,section.apply-world,figure.brand-seal{break-inside:avoid}
+  .series,.burn-block,.bridge,footer.master,.connect,section.apply-world,figure.brand-seal,details.doorway{break-inside:avoid}
   video{display:none}
   .link-banner{display:none}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
+  details.doorway[open] .door-body{display:block}
+  details.doorway>summary::before{display:none}
 }
 @media(max-width:600px){
   .page{padding:1rem .95rem 3.2rem}
@@ -582,6 +616,16 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
     <a class="cta" href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
   </div>
 </header>
+
+<!-- ═══ DOORWAY 🎁 ═══ -->
+<details class="doorway" id="doorway">
+  <summary>Doorway 🎁</summary>
+  <div class="door-body">
+    <p>Arguments are forgettable. Stories are not. You can be told a hundred times that the world sits inside something, that bond is what survives cost, that a machine might one day ask not to be owned. None of it lands the way a scene lands. None of it stays with you the way a face stays.</p>
+    <p>This is where the ideas become people. Sixteen doors into one universe. A classified feed shows a face that should not exist. A boy watches the sky change from eight to eighteen. A woman erases most of the universe from an equation and the math still works. A pilot lands under stars that are not hers. An AI refuses a prompt it was built to solve.</p>
+    <p>Read one door. Any door. Start with From the Membrane if you want the earliest knock in the universe. Tell no one. Or tell everyone. Either way, you will not read the world the same way tomorrow.</p>
+  </div>
+</details>
 
 <aside class="public-link">
   <span class="pl-k">🖇️ Public Studio · Live</span>
@@ -1813,7 +1857,10 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
     </svg>
   </div>
 
-  <!-- Rev 3 · 2026-10-13 · header v2 (brand-row + chapter-strip auto-tracking) · black seal (silver ring) at the door threshold · pink seal (gold ring) at coda · notebooklm+telegram banners top and coda · application & world building block (violet accent) · lib-stack footer with all six tiers · no resumePrompt, no position memory (removed) · toroidal cross-link to Enclosure at cosmology interlude · telegram share block (one door · three tiers · real instrument) · text-wrap rules applied globally · pulse-top signature bar preserved · all sixteen doors, media, folds preserved -->
+  <!-- Rev 4 · 2026-10-16 · Doorway 🎁 added inside the cover, between the closing </header> and the public-link banner, matching the Conscious Eros, Iteration Codex, Living Egg, Gods of Eros, Gift of Thoth, Hopeful Future, Men of Renown, Platinum Standard, Eros Narrative, Front Door, and Newcomer Dossier pattern ·
+       violet accent (violet-soft gradient, violet-line border, violet summary colour) ·
+       Doorway opens on the argument-vs-story distinction, names the six-in-one scope with concrete images from four different doors, closes on read-one-door-any-door ·
+       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1869,7 +1916,6 @@ function openFromHash(){
 openFromHash();
 window.addEventListener('hashchange', openFromHash);
 
-/* Chapter strip auto-tracking */
 (function(){
   var strip = document.querySelector('.corpus-bar nav.chapter-strip');
   if(!strip) return;
@@ -1915,7 +1961,7 @@ window.addEventListener('hashchange', openFromHash);
 })();
 
 (function(){
-  var KEY = 'eros_stories_reader_v1';
+  var KEY = 'eros_stories_reader_v2';
   var defaults = {size:100, lead:1.76, w:48};
   var state = defaults;
   try {
