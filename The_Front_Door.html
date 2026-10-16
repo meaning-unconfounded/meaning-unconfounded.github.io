@@ -98,6 +98,38 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 
 #progressBar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--magenta));z-index:9999;transition:width .08s linear}
 
+/* ── DOORWAY 🎁 ── */
+details.doorway{
+  max-width:640px;
+  margin:0 auto 3rem;
+  border:1px solid var(--gold-line);
+  border-radius:14px;
+  background:linear-gradient(160deg,var(--gold-soft),rgba(11,10,8,.55));
+  padding:.4rem 1.9rem 1.6rem;
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 22px rgba(212,175,55,.10);
+}
+details.doorway>summary{
+  cursor:pointer;list-style:none;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold2);padding:.6rem 0;user-select:none;font-weight:700;
+}
+details.doorway>summary::-webkit-details-marker{display:none}
+details.doorway>summary::before{content:"▸ ";color:var(--gold2)}
+details.doorway[open]>summary::before{content:"▾ "}
+details.doorway .door-body{
+  padding:.9rem 0 .35rem;
+  border-top:1px solid var(--gold-line);
+  font-family:var(--serif);
+  font-size:1.04rem;
+  line-height:1.85;
+  color:var(--text);
+}
+details.doorway .door-body p{margin:0 0 1rem;color:var(--text)}
+details.doorway .door-body p:last-child{margin-bottom:0}
+details.doorway .door-body strong{color:var(--gold2);font-weight:700}
+
 /* ── PUBLIC LINK ── */
 .public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--gold-line);border-radius:14px;background:linear-gradient(135deg,var(--gold-soft),rgba(11,10,8,.6));font-family:var(--sans)}
 .public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:.6rem}
@@ -461,13 +493,15 @@ details.eros-menu a{color:var(--gold)}
   html::before,html::after,.corpus-bar,#progressBar,#rdBtn,#rdPanel,#toTop,.skip-link,.public-link,.telegram-post{display:none!important}
   body{background:#0b0a08!important;color:#ece7db!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:0!important}
   .device{box-shadow:none;border:1px solid #28241b}
-  .part,.claim,.pull,.step,.math,.grid,.mockup,.receipts,.qa,.myth,.map,.chart,.media,.burn-feature,.yt-wrap,footer.master,.connect,section.apply-world,figure.brand-seal{break-inside:avoid}
+  .part,.claim,.pull,.step,.math,.grid,.mockup,.receipts,.qa,.myth,.map,.chart,.media,.burn-feature,.yt-wrap,footer.master,.connect,section.apply-world,figure.brand-seal,details.doorway{break-inside:avoid}
   a{color:inherit;text-decoration:none}
   video,iframe{display:none}
   .yt-wrap{display:none!important}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-card ol{columns:2!important}
   details.toc-card>summary::before{display:none}
+  details.doorway[open] .door-body{display:block}
+  details.doorway>summary::before{display:none}
 }
 @media(max-width:680px){
   body{font-size:17px}
@@ -586,6 +620,15 @@ details.eros-menu a{color:var(--gold)}
       <li><a href="#ask"><span class="n">XVI</span>The ask</a></li>
       <li><a href="#lastword"><span class="n">XVII</span>The last word</a></li>
     </ol>
+  </details>
+
+  <!-- ═══ DOORWAY 🎁 ═══ -->
+  <details class="doorway" id="doorway">
+    <summary>Doorway 🎁</summary>
+    <div class="door-body">
+      <p>You have watched them leave. Not the coins. The people who made them. One by one the founders took their fees, their inflation, their exit, and they walked. The communities they built went quiet. The tickers are still there. Nobody is home.</p>
+      <p>This letter was written to the one who did not walk away, and to everyone who stayed to see what he does next. Its claim is sharp. A coin built around a founder expires when the founder leaves. A network compounds. The people who stayed when there was nothing to extract are the signal, not the noise. Survival itself is the story.</p>
+    </div>
   </details>
 </section>
 
@@ -1372,7 +1415,10 @@ details.eros-menu a{color:var(--gold)}
     </svg>
   </div>
 
-  <!-- Rev 4 · 2026-10-13 · header v2 (brand-row + chapter-strip auto-tracking) · black seal (silver ring) at the integrity test (Part Seven) · pink seal (gold ring) at coda · notebooklm+telegram banners top and coda · application & world building block (gold accent) · lib-stack footer with all six tiers · no resume, no position memory · toroidal cross-link to Enclosure at belief layer · telegram share block (ticket · test · door) · text-wrap rules applied globally · all existing content, device mockup, receipts, charts, Q&A preserved -->
+  <!-- Rev 5 · 2026-10-16 · Doorway 🎁 added after toc-card, inside the cover section, matching the Conscious Eros, Iteration Codex, Living Egg, Gods of Eros, Gift of Thoth, Hopeful Future, Men of Renown, Platinum Standard, and Eros Narrative pattern ·
+       gold accent (gold-soft gradient, gold-line border, gold2 summary colour) ·
+       Doorway opens on the graveyard of departed founders, names the founder-coin / network claim, closes on survival itself is the story ·
+       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1477,7 +1523,7 @@ window.addEventListener('hashchange', openFromHash);
 })();
 
 (function(){
-  var KEY = 'eros_frontdoor_reader_v1';
+  var KEY = 'eros_frontdoor_reader_v2';
   var defaults = {size:100, lead:1.85, w:42};
   var state = defaults;
   try {
