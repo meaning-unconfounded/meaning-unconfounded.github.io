@@ -527,6 +527,50 @@ footer.master .pulse-row svg{flex-shrink:0}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
+.media-studio .ms-video{
+  position:relative;
+  width:100%;
+  max-width:720px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,.5);
+  background:#0a0a0c;
+  margin:0 0 .9rem;
+  aspect-ratio:16/9;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 32px rgba(0,0,0,.4),
+    0 0 24px rgba(212,175,55,.08);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.media-studio .ms-video:hover{
+  border-color:rgba(212,175,55,.75);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 14px 40px rgba(0,0,0,.48),
+    0 0 32px rgba(212,175,55,.14);
+  transform:translateY(-2px);
+}
+.media-studio .ms-video video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+  filter:contrast(1.1) saturate(1.14) brightness(1.03);
+  transition:filter .3s ease;
+}
+.media-studio .ms-video:hover video{
+  filter:contrast(1.14) saturate(1.2) brightness(1.06);
+}
+@media (prefers-reduced-motion: reduce){
+  .media-studio .ms-video,
+  .media-studio .ms-video video{transition:none}
+  .media-studio .ms-video:hover{transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -653,7 +697,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ms-t">EROS 💕 explained in plain language</p>
   <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works. Watch or listen before you size a position.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-tokenomics-poster.jpg">
+    <video controls playsinline preload="metadata">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
@@ -784,7 +828,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="note"><b>Source.</b> Official Burnonomics: 2% burn, 1% staking, 1% temporary locking, 1% WPLS/EROS liquidity. Slippage 6%.</p>
 
   <figure class="media-block" id="burn-baby-burn">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
+    <video controls playsinline preload="metadata">
       <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
     </video>
     <figcaption><b>EROS · Burn Baby Burn</b> — every transfer feeds the black hole. Watch the instrument work before you read the theory.</figcaption>
