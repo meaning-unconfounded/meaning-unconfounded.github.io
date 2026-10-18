@@ -806,6 +806,50 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
+.media-studio .ms-video{
+  position:relative;
+  width:100%;
+  max-width:720px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,.5);
+  background:#0a0a0c;
+  margin:0 0 .9rem;
+  aspect-ratio:16/9;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 32px rgba(0,0,0,.4),
+    0 0 24px rgba(212,175,55,.08);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.media-studio .ms-video:hover{
+  border-color:rgba(212,175,55,.75);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 14px 40px rgba(0,0,0,.48),
+    0 0 32px rgba(212,175,55,.14);
+  transform:translateY(-2px);
+}
+.media-studio .ms-video video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+  filter:contrast(1.1) saturate(1.14) brightness(1.03);
+  transition:filter .3s ease;
+}
+.media-studio .ms-video:hover video{
+  filter:contrast(1.14) saturate(1.2) brightness(1.06);
+}
+@media (prefers-reduced-motion: reduce){
+  .media-studio .ms-video,
+  .media-studio .ms-video video{transition:none}
+  .media-studio .ms-video:hover{transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -956,7 +1000,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="ms-t">EROS 💕 explained in plain language</p>
   <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works. Watch or listen before you size a position.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-tokenomics-poster.jpg">
+    <video controls playsinline preload="metadata">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
@@ -1358,7 +1402,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p>The cosmology is not decoration. It is the reason the fiction has a floor. Long before the token, before the books, before the sixteen doors — there was a question: what is the shape of the place we live in? The EROS answer is an enclosure, iterated, inward-oriented, alive.</p>
 
   <div class="media">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg">
+    <video controls playsinline preload="metadata">
       <source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>COSMIC OCTAVES.</b> The Egg at its largest scale. Every layer iterates the one above and below. Same pattern, many sizes.</p>
@@ -1420,7 +1464,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="lede">The crypto is not a side note. It is the floor the fiction stands on. Watch it burn.</p>
 
   <div class="media">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
+    <video controls playsinline preload="metadata">
       <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>BURN BABY BURN.</b> The instrument sings. Every swap pays a 5% flow fee — 2% burned, 1% staked, 1% temporarily locked, 1% into the core WPLS/EROS LP. Activity feeds the burn. Structure rewards those who stay.</p>
@@ -1467,7 +1511,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="creedline">History is one continuous strategic process. The map is not the world. Inward is forwards. Eros is the bond that holds.</p>
 
   <div class="media">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
+    <video controls playsinline preload="metadata">
       <source src="https://meaning-unconfounded.github.io/images/eros_summary.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>THE SUMMARY.</b> If you have read this far, the ninety-second version is here. Same heart. Same floor. Same bond.</p>
