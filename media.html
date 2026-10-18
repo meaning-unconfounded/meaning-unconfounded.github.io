@@ -244,6 +244,57 @@ footer.master .pulse-row svg{flex-shrink:0}
   border-radius:8px;
 }
 
+
+
+
+
+
+}
+
+
+/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
+.media-studio .ms-video{
+  position:relative;
+  width:100%;
+  max-width:720px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,.5);
+  background:#0a0a0c;
+  margin:0 0 .9rem;
+  aspect-ratio:16/9;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 32px rgba(0,0,0,.4),
+    0 0 24px rgba(212,175,55,.08);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.media-studio .ms-video:hover{
+  border-color:rgba(212,175,55,.75);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 14px 40px rgba(0,0,0,.48),
+    0 0 32px rgba(212,175,55,.14);
+  transform:translateY(-2px);
+}
+.media-studio .ms-video video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+  filter:contrast(1.1) saturate(1.14) brightness(1.03);
+  transition:filter .3s ease;
+}
+.media-studio .ms-video:hover video{
+  filter:contrast(1.14) saturate(1.2) brightness(1.06);
+}
+@media (prefers-reduced-motion: reduce){
+  .media-studio .ms-video,
+  .media-studio .ms-video video{transition:none}
+  .media-studio .ms-video:hover{transform:none}
+}
+
 </style>
 </head>
 <body id="top">
@@ -267,6 +318,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <a href="#rock-studio">Rock</a>
     <a href="#chaos-studio">Chaos</a>
     <a href="#polonomics-studio">Polonomics</a>
+    <a href="#gates-studio">Gates</a>
     <a href="#filter">Filter</a>
     <a href="#brand">Brand</a>
     <a href="#cosmology">Cosmology</a>
@@ -381,6 +433,24 @@ footer.master .pulse-row svg{flex-shrink:0}
     </audio>
   </div>
 </aside>
+
+
+<aside class="media-studio" id="gates-studio">
+  <span class="ms-k">🎙️ Media Studio · Three Gates</span>
+  <p class="ms-t">Earned transformation</p>
+  <p class="ms-d">Why the flow rail waits on real milestones — market depth, pool count, and verified code — not a calendar date.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/EROS_Gates.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/EROS_Gates.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
 
 
 
@@ -808,6 +878,8 @@ footer.master .pulse-row svg{flex-shrink:0}
         { n:'EROS_Chaos.m4a', t:'video', u:'Chaos Engine audio companion. Same transform overview for listening without the screen.', b:['Platinum Standard'] },
         { n:'Eros_Polonomics.mp4', t:'video', u:'Polonomics & Gravity Web. 133+ bonded LP nodes, equivalence arbitrage, TitanX gravity. Primary: Bridge.', b:['Bridge'] },
         { n:'Eros_Polonomics.m4a', t:'video', u:'Polonomics audio companion. Same liquidity-web overview for listening without the screen.', b:['Bridge'] },
+        { n:'EROS_Gates.mp4', t:'video', u:'Three Earned Transformation Gates. Market-cap, 333 pools, verified transform code. Milestone discipline before flow rail.', b:['Platinum Standard','The Eros Plan'] },
+        { n:'EROS_Gates.m4a', t:'video', u:'Three Gates audio companion. Same milestone overview for listening without the screen.', b:['Platinum Standard','The Eros Plan'] },
         { n:'Eros_Token_Video.mp4', t:'video', u:'Tokenomics explainer video. Fees, renounce, fixed supply, pool mechanics. Featured at top of Media Index and in Bridge, Platinum, Front Door, Dossier, Narrative.', b:['Bridge','Platinum Standard','Front Door','Newcomer Dossier','Eros Narrative'] },
         { n:'Eros_Token_Audio.m4a', t:'video', u:'Tokenomics audio companion. Same overview as the video for listening without the screen.', b:['Bridge','Platinum Standard','Front Door','Newcomer Dossier','Eros Narrative'] },
         { n:'Eros_Trillion.mp4', t:'video', u:'Trillion outcome motion. Feature at price / scale moments in First Resonance and Plan.', b:['First Resonance','Plan','Platinum'] },
@@ -858,7 +930,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     const badgeClass = f.t === 'video' ? 'vid' : f.t === 'divider' ? 'dvd' : 'img';
     const tagBadge = f.tag === 'pin' ? '<span class="badge pin">pin</span>' : '';
     const mediaHtml = f.t === 'video'
-      ? `<video src="${url}" controls preload="metadata" muted></video>`
+      ? `<video playsinline src="${url}" controls preload="metadata" muted></video>`
       : `<img src="${url}" alt="${escapeHtml(f.n)}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=&quot;font-size:3rem;opacity:.3&quot;>▢</span>'"/>`;
     const booksHtml = Array.isArray(f.b) && f.b.length
       ? f.b.map(b => {
@@ -1025,6 +1097,11 @@ footer.master .pulse-row svg{flex-shrink:0}
   });
 
 })();
+
+    v.addEventListener('pause', function(){ wrap.classList.remove('is-playing'); });
+    v.addEventListener('ended', function(){ wrap.classList.remove('is-playing'); });
+  });
+
 </script>
 </body>
 </html>
