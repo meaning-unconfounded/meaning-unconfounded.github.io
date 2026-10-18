@@ -592,6 +592,50 @@ details.eros-menu a{color:var(--gold)}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
+.media-studio .ms-video{
+  position:relative;
+  width:100%;
+  max-width:720px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,.5);
+  background:#0a0a0c;
+  margin:0 0 .9rem;
+  aspect-ratio:16/9;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 32px rgba(0,0,0,.4),
+    0 0 24px rgba(212,175,55,.08);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.media-studio .ms-video:hover{
+  border-color:rgba(212,175,55,.75);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 14px 40px rgba(0,0,0,.48),
+    0 0 32px rgba(212,175,55,.14);
+  transform:translateY(-2px);
+}
+.media-studio .ms-video video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+  filter:contrast(1.1) saturate(1.14) brightness(1.03);
+  transition:filter .3s ease;
+}
+.media-studio .ms-video:hover video{
+  filter:contrast(1.14) saturate(1.2) brightness(1.06);
+}
+@media (prefers-reduced-motion: reduce){
+  .media-studio .ms-video,
+  .media-studio .ms-video video{transition:none}
+  .media-studio .ms-video:hover{transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -656,7 +700,7 @@ details.eros-menu a{color:var(--gold)}
 
   <div style="max-width:820px;margin:2.5rem auto 3rem;border:1px solid rgba(212,175,55,.4);border-radius:16px;overflow:hidden;background:#0a0908;box-shadow:0 0 32px rgba(212,175,55,.12)">
     <div class="feature-label">Special feature · The letter on film</div>
-    <video controls playsinline preload="metadata" style="display:block;width:100%;max-height:460px;background:#000" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
+    <video controls playsinline preload="metadata" style="display:block;width:100%;max-height:460px;background:#000">
       <source src="https://meaning-unconfounded.github.io/images/Jake_Letter.mp4" type="video/mp4"/>
     </video>
     <p style="padding:.85rem 1.2rem 1.1rem;font-size:.95rem;color:var(--muted);margin:0;line-height:1.6">28 months of receipts. The case for making one free airdrop the liquidity gateway of an ecosystem.</p>
@@ -705,7 +749,7 @@ details.eros-menu a{color:var(--gold)}
   <p class="ms-t">EROS 💕 explained in plain language</p>
   <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works. Watch or listen before you size a position.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-tokenomics-poster.jpg">
+    <video controls playsinline preload="metadata">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
@@ -1072,7 +1116,7 @@ details.eros-menu a{color:var(--gold)}
 
     <div class="media" style="border:2px solid rgba(212,120,138,.45);background:linear-gradient(180deg,#120a0c,#0a0908);box-shadow:0 0 28px rgba(212,120,138,.15)">
       <div style="font-family:var(--sans);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#e8a0a8;padding:1rem 1.2rem .35rem;font-weight:700">Featured · Burn Baby Burn ❤️‍🔥</div>
-      <video controls playsinline preload="metadata" style="display:block;width:100%;max-height:440px;background:#000" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg">
+      <video controls playsinline preload="metadata" style="display:block;width:100%;max-height:440px;background:#000">
         <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
       </video>
       <p class="cap">Every transfer feeds the fire. Burn address is among the largest holders. Watch before you argue about charts.</p>
