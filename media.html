@@ -15,7 +15,7 @@
   --accent:#58a6ff; --accent-soft:rgba(88,166,255,.12); --accent-line:rgba(88,166,255,.35);
   --magenta:#e040fb; --magenta-soft:rgba(224,64,251,.1);
   --platinum:#d8dde3; --gold:#d4af37; --gold-line:rgba(212,175,55,.45); --gold-glow:rgba(212,175,55,.22);
-  --green:#00ff88; --cyan:#00d4ff;
+  --green:#00ff88; --cyan:#00d4ff; --cyan-line:rgba(0,212,255,.4);
   --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -55,13 +55,6 @@ p,li{text-wrap:pretty;orphans:2;widows:2}
   .corpus-bar nav.chapter-strip{padding:.5rem .2rem .6rem}
   .corpus-bar nav.chapter-strip a{font-size:.58rem;padding:.3rem .58rem}
 }
-@media(max-width:420px){
-  .corpus-bar .pin.eros-mark{width:34px;height:34px}
-  .corpus-bar .pin.pulse-mark{width:28px;height:28px}
-  .corpus-bar .compass{font-size:.9rem}
-  .corpus-bar .brand-text{font-size:.75rem;letter-spacing:.14em}
-  .corpus-bar .title-rule{width:14px}
-}
 
 /* ── PAGE ── */
 .page{max-width:1200px;margin:0 auto;padding:1.5rem 1.4rem 2rem}
@@ -96,19 +89,13 @@ h1{font-size:1.9rem;font-weight:600;margin-bottom:.35rem;color:var(--ink);letter
 .cluster > summary .c-desc{flex-basis:100%;font-size:.8rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);margin-top:.25rem;line-height:1.55;text-wrap:pretty}
 .cluster-body{padding:.9rem 1.1rem 1.2rem}
 
-/* ── GRID ── */
+/* ── GRID & CARD ── */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-
-/* ── CARD ── */
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .18s,transform .18s,box-shadow .18s;scroll-margin-top:8rem}
 .card:hover{border-color:var(--accent-line);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 24px var(--accent-soft)}
 .card:target{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),0 0 32px var(--accent-soft)}
 .card.flash{animation:card-flash 2.2s ease-out}
-@keyframes card-flash{
-  0%{box-shadow:0 0 0 0 var(--accent-line),0 0 24px var(--accent-soft)}
-  40%{box-shadow:0 0 0 6px var(--accent-soft),0 0 32px var(--accent-soft)}
-  100%{box-shadow:0 0 0 0 transparent,0 0 0 transparent}
-}
+@keyframes card-flash{0%{box-shadow:0 0 0 0 var(--accent-line),0 0 24px var(--accent-soft)}40%{box-shadow:0 0 0 6px var(--accent-soft),0 0 32px var(--accent-soft)}100%{box-shadow:0 0 0 0 transparent,0 0 0 transparent}}
 .media-wrap{width:100%;aspect-ratio:1/1;background:#0d1117;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .media-wrap img,.media-wrap video{width:100%;height:100%;object-fit:contain;display:block;border:0;border-radius:0}
 .media-wrap video{background:#000}
@@ -121,22 +108,100 @@ h1{font-size:1.9rem;font-weight:600;margin-bottom:.35rem;color:var(--ink);letter
 .badge.img{background:rgba(88,166,255,.1);color:var(--accent)}
 .badge.vid{background:rgba(224,64,251,.1);color:var(--magenta)}
 .badge.dvd{background:rgba(212,175,55,.1);color:var(--gold)}
-.badge.pin{background:rgba(0,255,136,.1);color:var(--green)}
-.usage{font-size:.76rem;color:var(--soft);line-height:1.5;margin-top:6px;padding-top:8px;border-top:1px solid var(--line-soft);text-wrap:pretty}
+.usage{font-size:.76rem;color:var(--soft);line-height:1.5;margin-top:6px;padding-top:8px;border-top:1px solid var(--line-soft)}
 .usage b{color:var(--accent);font-weight:700;display:block;margin-bottom:2px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
-.in-books{font-size:.68rem;color:var(--muted);line-height:1.5;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line-soft);text-wrap:pretty}
+.in-books{font-size:.68rem;color:var(--muted);line-height:1.5;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line-soft)}
 .in-books b{color:var(--platinum);font-weight:700;display:block;margin-bottom:2px;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
 .in-books a{color:var(--accent);text-decoration:none}
 .in-books a:hover{text-decoration:underline}
-.in-books span{color:var(--muted)}
-
-/* Pink seal exception — round only, on-brand */
 .card img[src*="Eros_pink"],.card img[src*="eros-logo-colour"]{border-radius:50%;object-fit:cover}
 
 /* ── BRAND SEAL ── */
 figure.brand-seal{margin:3rem auto 1.6rem;text-align:center;max-width:min(200px,50vw);display:block}
 figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px var(--gold-glow),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(212,175,55,.12);background:var(--bg-raised)}
 figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:.9rem;font-weight:700}
+
+/* ── MEDIA STUDIO (Gold Cards) ── */
+.media-studio{
+  margin:1.4rem auto 1.6rem;max-width:100%;padding:1.35rem 1.4rem 1.5rem;
+  border:1px solid rgba(212,175,55,.38);border-radius:14px;
+  background:linear-gradient(160deg,rgba(212,175,55,.1),rgba(4,1,8,.5));
+  font-family:var(--sans, system-ui, sans-serif);
+  box-shadow:0 0 22px rgba(212,175,55,.12);
+}
+.media-studio .ms-k{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#E8C547;font-weight:700;margin-bottom:.5rem}
+.media-studio .ms-t{font-family:var(--serif, Georgia, serif);font-size:1.15rem;color:var(--ink,#f0eaf8);font-weight:700;margin:0 0 .4rem;line-height:1.3}
+.media-studio .ms-d{font-size:.92rem;color:var(--soft,#c9bdd8);line-height:1.65;margin:0 0 1rem}
+.media-studio .ms-video{
+  position:relative;width:100%;max-width:720px;border-radius:12px;overflow:hidden;
+  border:1px solid rgba(212,175,55,.4);background:#0a0a0c;margin:0 0 .85rem;aspect-ratio:16/9;
+  box-shadow:0 10px 32px rgba(0,0,0,.4);
+}
+.media-studio .ms-video video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.media-studio .ms-audio{width:100%}
+.media-studio .ms-audio audio{width:100%;height:2.4rem;border-radius:8px}
+
+/* ── NATIVE CAROUSEL (Top Experience) ── */
+.native-carousel-wrap {
+  margin: 1.4rem auto 1.8rem; max-width: 100%; padding: 1.4rem 1.5rem 1.5rem;
+  border: 1px solid rgba(0,212,255,.35); border-radius: 16px;
+  background: linear-gradient(160deg,rgba(0,212,255,.08),rgba(0,0,0,.3));
+  font-family: var(--sans); text-align: left;
+  box-shadow: 0 0 28px rgba(0,212,255,.12);
+}
+.native-carousel-wrap .nc-k { display: block; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #22D3EE; font-weight: 700; margin-bottom: .55rem; }
+.native-carousel-wrap .nc-t { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--ink); font-weight: 700; margin: 0 0 .45rem; line-height: 1.35; }
+.native-carousel-wrap .nc-d { font-size: .95rem; color: var(--soft); line-height: 1.65; margin: 0 0 1.2rem; max-width: 42rem; }
+.native-carousel {
+  position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(0,212,255,.4); box-shadow: 0 12px 40px rgba(0,0,0,.5); background: #050508;
+}
+.native-carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out; }
+.native-carousel img.active { opacity: 1; }
+.native-carousel-overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 60%, rgba(5,5,8,.8) 100%); }
+.native-carousel-controls { display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
+.native-carousel-controls a { display: inline-flex; align-items: center; gap: .45rem; padding: .65rem 1.15rem; border-radius: 999px; background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.45); color: #22D3EE; font-size: .78rem; letter-spacing: .06em; font-weight: 700; text-transform: uppercase; text-decoration: none; border-bottom: none; transition: background .18s, color .18s; }
+.native-carousel-controls a:hover { background: rgba(0,212,255,.22); color: #b8e8f8; }
+.native-carousel-controls a.primary { background: #22D3EE; color: #050508; border-color: #22D3EE; }
+.native-carousel-controls a.primary:hover { background: #b8e8f8; color: #050508; }
+
+/* ── EMBEDDED HTML SHOWCASE (Bottom) ── */
+.embedded-showcase {
+  margin: 4rem auto 2rem;
+  padding: 2rem;
+  border: 2px solid var(--cyan);
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(0,212,255,.1), rgba(0,0,0,.6));
+  box-shadow: 0 0 40px rgba(0,212,255,.2), inset 0 0 20px rgba(0,212,255,.05);
+  text-align: center;
+}
+.embedded-showcase .es-k { font-family: var(--sans); font-size: .7rem; letter-spacing: .24em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: .8rem; display: block; }
+.embedded-showcase .es-t { font-family: var(--serif); font-size: 1.8rem; color: var(--ink); font-weight: 700; margin: 0 0 .5rem; line-height: 1.3; }
+.embedded-showcase .es-d { font-family: var(--sans); font-size: 1rem; color: var(--soft); line-height: 1.6; margin: 0 auto 1.5rem; max-width: 48rem; }
+.embedded-iframe-wrapper {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0,212,255,.3);
+  box-shadow: 0 16px 50px rgba(0,0,0,.6);
+  background: #050508;
+  position: relative;
+}
+.embedded-iframe-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+@media(max-width: 640px) {
+  .embedded-showcase { padding: 1.2rem; margin: 2rem auto 1rem; }
+  .embedded-showcase .es-t { font-size: 1.4rem; }
+}
 
 /* ── MASTER FOOTER (.lib-stack) ── */
 footer.master{margin-top:2rem;padding:2.4rem 1rem 1.6rem;border-top:1px solid var(--line);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
@@ -172,215 +237,16 @@ footer.master .pulse-row svg{flex-shrink:0}
   body{background:#fff!important;color:#111!important}
   .cluster,.card{border-color:#ccc!important;background:#fff!important;break-inside:avoid}
   .card .media-wrap{background:#f4f4f4!important}
-  a{color:#111!important}
-  .addr{color:#555!important}
-  .badge{background:#eee!important;color:#333!important}
+  a{color:#111!important}.addr{color:#555!important}.badge{background:#eee!important;color:#333!important}
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
-
-/* ── FEATURED MEDIA STUDIO ── */
-.media-studio{
-  margin:0 0 1.8rem;
-  padding:1.35rem 1.4rem 1.5rem;
-  border:1px solid var(--gold-line);
-  border-radius:14px;
-  background:linear-gradient(160deg,rgba(212,175,55,.09),var(--bg-raised));
-  font-family:var(--sans);
-  text-align:left;
-  box-shadow:0 0 18px rgba(212,175,55,.08);
-}
-.media-studio .ms-k{
-  display:block;
-  font-size:.66rem;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--gold);
-  font-weight:700;
-  margin-bottom:.55rem;
-}
-.media-studio .ms-t{
-  font-family:var(--serif);
-  font-size:1.15rem;
-  color:var(--ink);
-  font-weight:700;
-  margin:0 0 .45rem;
-  line-height:1.35;
-}
-.media-studio .ms-d{
-  font-size:.92rem;
-  color:var(--soft);
-  line-height:1.65;
-  margin:0 0 1rem;
-}
-.media-studio .ms-video{
-  position:relative;
-  width:100%;
-  max-width:720px;
-  border-radius:10px;
-  overflow:hidden;
-  border:1px solid var(--gold-line);
-  background:#000;
-  margin:0 0 .9rem;
-  aspect-ratio:16/9;
-}
-.media-studio .ms-video video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#000;
-}
-.media-studio .ms-audio{
-  width:100%;
-  max-width:720px;
-  margin:0 0 .35rem;
-}
-.media-studio .ms-audio audio{
-  width:100%;
-  height:2.4rem;
-  border-radius:8px;
-}
-
-/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
-.media-studio .ms-video{
-  position:relative;
-  width:100%;
-  max-width:720px;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid rgba(212,175,55,.5);
-  background:#0a0a0c;
-  margin:0 0 .9rem;
-  aspect-ratio:16/9;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 10px 32px rgba(0,0,0,.4),
-    0 0 24px rgba(212,175,55,.08);
-  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
-}
-.media-studio .ms-video:hover{
-  border-color:rgba(212,175,55,.75);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.06) inset,
-    0 14px 40px rgba(0,0,0,.48),
-    0 0 32px rgba(212,175,55,.14);
-  transform:translateY(-2px);
-}
-.media-studio .ms-video video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#000;
-  filter:contrast(1.1) saturate(1.14) brightness(1.03);
-  transition:filter .3s ease;
-}
-.media-studio .ms-video:hover video{
-  filter:contrast(1.14) saturate(1.2) brightness(1.06);
-}
-@media (prefers-reduced-motion: reduce){
-  .media-studio .ms-video,
-  .media-studio .ms-video video{transition:none}
-  .media-studio .ms-video:hover{transform:none}
-}
-
-
-/* ── INVERSION COSMOLOGY · large stage (template) ── */
-.inversion-stage{
-  margin:1.5rem auto 2.4rem;
-  max-width:100%;
-  padding:1.5rem 1.5rem 1.65rem;
-  border:1px solid rgba(0,212,255,.4);
-  border-radius:16px;
-  background:linear-gradient(160deg,rgba(0,212,255,.1),rgba(4,1,8,.65));
-  font-family:var(--sans, system-ui, sans-serif);
-  text-align:left;
-  box-shadow:0 0 32px rgba(0,212,255,.14), 0 16px 48px rgba(0,0,0,.35);
-}
-.inversion-stage .inv-k{
-  display:block;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
-  color:#22D3EE;font-weight:700;margin-bottom:.55rem;
-}
-.inversion-stage .inv-t{
-  font-family:var(--serif, Georgia, serif);font-size:clamp(1.35rem,3.5vw,1.7rem);
-  color:var(--ink,#f0eaf8);font-weight:700;margin:0 0 .5rem;line-height:1.25;
-}
-.inversion-stage .inv-d{
-  font-size:.98rem;color:var(--soft,#c9bdd8);line-height:1.7;margin:0 0 1.15rem;max-width:40rem;
-}
-.inversion-stage .inv-frame{
-  position:relative;width:100%;
-  border-radius:14px;overflow:hidden;
-  border:1px solid rgba(0,212,255,.45);
-  background:#050508;
-  aspect-ratio:16/9;
-  min-height:min(56vh, 420px);
-  max-height:min(70vh, 640px);
-  box-shadow:0 16px 50px rgba(0,0,0,.5);
-}
-.inversion-stage .inv-frame iframe{
-  position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000;
-}
-.inversion-stage .inv-poster{
-  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.85rem;
-  cursor:pointer;border:0;padding:1.25rem;
-  background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.55)),
-    url("https://meaning-unconfounded.github.io/images/inverse1.webp") center/cover no-repeat;
-  color:#fff;font-family:var(--sans, system-ui, sans-serif);z-index:2;
-}
-.inversion-stage .inv-poster:hover{filter:brightness(1.08)}
-.inversion-stage .inv-poster .inv-play{
-  width:72px;height:72px;border-radius:50%;border:2px solid rgba(255,255,255,.92);
-  background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;font-size:1.55rem;
-  box-shadow:0 8px 28px rgba(0,0,0,.4);
-}
-.inversion-stage .inv-poster .inv-cta{
-  font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
-  text-shadow:0 1px 10px rgba(0,0,0,.85);
-}
-.inversion-stage.is-live .inv-poster{display:none}
-.inversion-stage .inv-links{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1rem}
-.inversion-stage .inv-links a{
-  display:inline-flex;padding:.55rem 1.05rem;border-radius:999px;
-  border:1px solid rgba(0,212,255,.45);background:rgba(0,212,255,.12);
-  color:#22D3EE;font-size:.76rem;letter-spacing:.07em;font-weight:700;
-  text-transform:uppercase;text-decoration:none;border-bottom:none;
-}
-.inversion-stage .inv-links a:hover{background:rgba(0,212,255,.22);color:#a5f3fc}
-.inversion-stage .inv-links a:hover{
-  background:rgba(0,212,255,.2);
-  color:#b8e8f8;
-}
-
-
-/* Media studios · Index-grade gold cards */
-.media-studio{
-  margin:1.4rem auto 1.6rem;max-width:100%;padding:1.35rem 1.4rem 1.5rem;
-  border:1px solid rgba(212,175,55,.38);border-radius:14px;
-  background:linear-gradient(160deg,rgba(212,175,55,.1),rgba(4,1,8,.5));
-  font-family:var(--sans, system-ui, sans-serif);
-  box-shadow:0 0 22px rgba(212,175,55,.12);
-}
-.media-studio .ms-k{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#E8C547;font-weight:700;margin-bottom:.5rem}
-.media-studio .ms-t{font-family:var(--serif, Georgia, serif);font-size:1.15rem;color:var(--ink,#f0eaf8);font-weight:700;margin:0 0 .4rem;line-height:1.3}
-.media-studio .ms-d{font-size:.92rem;color:var(--soft,#c9bdd8);line-height:1.65;margin:0 0 1rem}
-.media-studio .ms-video{
-  position:relative;width:100%;max-width:720px;border-radius:12px;overflow:hidden;
-  border:1px solid rgba(212,175,55,.4);background:#0a0a0c;margin:0 0 .85rem;aspect-ratio:16/9;
-  box-shadow:0 10px 32px rgba(0,0,0,.4);
-}
-.media-studio .ms-video video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
-.media-studio .ms-audio{width:100%}
-.media-studio .ms-audio audio{width:100%;height:2.4rem;border-radius:8px}
-
 </style>
 </head>
 <body id="top">
 
-<!-- ── HEADER v2 ── -->
 <header class="corpus-bar">
   <div class="brand-row">
     <a class="logo-cluster" href="#top" aria-label="Media Index · top">
@@ -405,21 +271,9 @@ footer.master .pulse-row svg{flex-shrink:0}
     <a href="#conscious-studio">Conscious</a>
     <a href="#livingegg-studio">Living Egg</a>
     <a href="#immune-studio">Immune</a>
+    <a href="#operators-studio">Operators</a>
     <a href="#filter">Filter</a>
-    <a href="#brand">Brand</a>
-    <a href="#cosmology">Cosmology</a>
-    <a href="#operators">Operators</a>
-    <a href="#doors">Doors</a>
-    <a href="#network">Network</a>
-    <a href="#rail-a">Rail A</a>
-    <a href="#rail-b">Rail B</a>
-    <a href="#bridge">Bridge</a>
-    <a href="#stories">Stories</a>
-    <a href="#transform">Transform</a>
-    <a href="#precepts">Precepts</a>
-    <a href="#hopeful-extra">Hopeful extra</a>
-    <a href="#dividers">Dividers</a>
-    <a href="#videos">Videos</a>
+    <a href="#showcase">Showcase</a>
     <a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Map</a>
   </nav>
 </header>
@@ -431,30 +285,31 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <p class="lede">
   <b>Every image and video used across the EROS corpus.</b> Grouped by topic. Every card carries a stable anchor — a book can deep-link to <code>media.html#eros-green-candle</code> and land on the exact entry. Purpose, tags, and the books each file appears in are recorded, so the index itself becomes a living map of the visual system.
-  <br/><br/>
-  <b>Pending upload (filenames reserved):</b> <code>eros-multiverse.jpg</code> · <code>eros-build-one.jpg</code> · <code>hopeful-standard.png</code> · <code>pulsechain-pulsex-logo.jpg</code> · <code>eros-pls-ratio.jpg</code>. Cards appear below; images will resolve once files land in <code>/images/</code>.
 </p>
 
+<!-- ═══ TOP: NATIVE CAROUSEL ═══ -->
 <section class="media-featured" id="experience" aria-label="Cosmology experience">
-  <h2 class="cluster-title" style="margin:2rem 0 1rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#22D3EE;">Experience · Inward is Forwards</h2>
-<aside class="inversion-stage" id="inversion-cosmology">
-  <span class="inv-k">♾️ Cosmology · Experience</span>
-  <p class="inv-t">The Inversion Cosmology</p>
-  <p class="inv-d">We live on the inner shell of a Cosmic Egg. Rotating vision of Inward is Forwards — load when you are ready.</p>
-  <div class="inv-frame" id="invFrame">
-    <button type="button" class="inv-poster" id="invPoster" aria-label="Load The Inversion Cosmology">
-      <span class="inv-play" aria-hidden="true">▶</span>
-      <span class="inv-cta">Enter the inversion</span>
-    </button>
+<div class="native-carousel-wrap">
+  <span class="nc-k">♾️ Cosmology · Experience</span>
+  <p class="nc-t">The Inversion Cosmology</p>
+  <p class="nc-d">We live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
+  <div class="native-carousel" id="nativeCarousel">
+    <img src="https://meaning-unconfounded.github.io/images/inverse1.webp" class="active" alt="Inversion Frame 1">
+    <img src="https://meaning-unconfounded.github.io/images/inverse2.webp" alt="Inversion Frame 2">
+    <img src="https://meaning-unconfounded.github.io/images/inverse3.webp" alt="Inversion Frame 3">
+    <img src="https://meaning-unconfounded.github.io/images/inverse4.webp" alt="Inversion Frame 4">
+    <div class="native-carousel-overlay"></div>
   </div>
-  <div class="inv-links">
-    <a href="https://meaning-unconfounded.github.io/images/index.html" target="_blank" rel="noopener">Open full page ↗</a>
+  <div class="native-carousel-controls">
+    <a href="https://meaning-unconfounded.github.io/images/index.html" target="_blank" rel="noopener" class="primary">🚀 Launch Full-Screen Cinematic Experience</a>
   </div>
-</aside>
+</div>
 </section>
 
+<!-- ═══ MEDIA STUDIOS (1-10) ═══ -->
 <section class="media-featured" id="studios" aria-label="Media Studios">
   <h2 class="cluster-title" style="margin:2rem 0 1rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2,#E8C547);">Media Studios · Video &amp; Audio</h2>
+
 <aside class="media-studio" id="tokenomics-studio">
   <span class="ms-k">🎙️ Media Studio · Tokenomics</span>
   <p class="ms-t">EROS 💕 explained in plain language</p>
@@ -599,14 +454,28 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 </aside>
 
-
+<aside class="media-studio" id="operators-studio">
+  <span class="ms-k">🎙️ Media Studio · Operators</span>
+  <p class="ms-t">The Four Anatomical Operators</p>
+  <p class="ms-d">Breakdown of four mythic/functional source-code laws governing code permissions, physical expansion, consonant syntax, and cohesion.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
 
 </section>
 
+<!-- ═══ FULL CATALOG ═══ -->
 <section aria-label="Full catalog">
   <h2 class="cluster-title" style="margin:2.4rem 0 1rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2,#E8C547);">Full catalog · Images &amp; files</h2>
 
-<!-- ── FILTER ── -->
 <div class="filter" id="filter">
   <input class="search" type="search" id="search" placeholder="Filter by name, purpose, or book…" aria-label="Search media"/>
   <button data-filter="all" class="active">All</button>
@@ -616,16 +485,23 @@ footer.master .pulse-row svg{flex-shrink:0}
   <span class="stat" id="stat">Loading…</span>
 </div>
 
-<!-- ── CLUSTERS ── -->
 <div id="container"></div>
 
-<!-- ── BRAND SEAL ── -->
+<!-- ═══ BOTTOM: EMBEDDED HTML SHOWCASE ═══ -->
+<section class="embedded-showcase" id="showcase">
+  <span class="es-k">♾️ Live Interactive Experience</span>
+  <h2 class="es-t">The Inversion Cosmology</h2>
+  <p class="es-d">You are looking at the inner shell of the Cosmic Egg. Use your mouse or finger to rotate the view. This is the spatial model that underpins the entire corpus.</p>
+  <div class="embedded-iframe-wrapper">
+    <iframe src="https://meaning-unconfounded.github.io/images/index.html" title="The Inversion Cosmology - Interactive 3D" loading="lazy" allow="fullscreen; autoplay" allowfullscreen></iframe>
+  </div>
+</section>
+
 <figure class="brand-seal">
   <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
   <figcaption>Tenacity Through Integrity</figcaption>
 </figure>
 
-<!-- ── MASTER FOOTER (.lib-stack) ── -->
 <footer class="master" id="footer">
   <div class="title-row">
     <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
@@ -708,7 +584,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 
   const BASE = 'https://meaning-unconfounded.github.io/images/';
 
-  // ── Book name → canonical URL. Unknown names render as plain text. ──
+  // Book name → canonical URL.
   const BOOK_URL = {
     'all books': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
     'corpus header': 'https://meaning-unconfounded.github.io/The_Eros_Corpus.html',
@@ -789,7 +665,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     return BOOK_URL[k] || null;
   }
 
-  // ── CLUSTERS ──
+  // CLUSTERS (Removed 404 images)
   const clusters = [
   {
     id: 'brand',
@@ -918,7 +794,6 @@ footer.master .pulse-row svg{flex-shrink:0}
         { n:'hopeful-atropa-dysnomia-base.png', t:'image', u:'Corpus visual · placement recorded from books.', b:['Hopeful Future'] },
         { n:'hopeful-crossing.png', t:'image', u:'Corpus visual · placement recorded from books.', b:['Hopeful Future','Platinum Standard'] },
         { n:'hopeful-pdai-settlement.png', t:'image', u:'Corpus visual · placement recorded from books.', b:['Hopeful Future'] },
-        { n:'hopeful-standard.png', t:'image', u:'Corpus visual · placement recorded from books.', b:['First Resonance','First Resonance1','Hopeful Future','book'] },
         { n:'hopeful-unity-stack.png', t:'image', u:'Corpus visual · placement recorded from books.', b:['First Resonance','First Resonance1','Hopeful Future','Platinum Standard'] },
         { n:'Hopeful_Future_Poster.png', t:'image', u:'Corpus visual · placement recorded from books.', b:['Corpus'] }
     ]
@@ -1014,6 +889,8 @@ footer.master .pulse-row svg{flex-shrink:0}
         { n:'Eros_Immune.mp4', t:'video', u:'Immune · living defence of the enclosure · organism metaphor.', b:['Living Egg','Conscious','Plan'] },
         { n:'Eros_LivingEgg.m4a', t:'video', u:'Living Egg cosmogony · Inward is Forwards.', b:['Living Egg','Enclosure','Plan'] },
         { n:'Eros_LivingEgg.mp4', t:'video', u:'Living Egg cosmogony · Inward is Forwards.', b:['Living Egg','Enclosure','Plan'] },
+        { n:'Eros_Operators.m4a', t:'video', u:'Four Anatomical Operators · NaUn, Ra-Shen, Thoth, EROS.', b:['Gods Of Eros','Gift Of Thoth','TheErosPlan'] },
+        { n:'Eros_Operators.mp4', t:'video', u:'Four Anatomical Operators · NaUn, Ra-Shen, Thoth, EROS.', b:['Gods Of Eros','Gift Of Thoth','TheErosPlan'] },
         { n:'Eros_Polonomics.m4a', t:'video', u:'Polonomics · liquidity and pairs.', b:['Corpus'] },
         { n:'Eros_Polonomics.mp4', t:'video', u:'Polonomics · liquidity and pairs.', b:['Corpus'] },
         { n:'eros_summary.mp4', t:'video', u:'Corpus video / audio asset.', b:['EROS Newcomer Dossier','Narrative'] },
@@ -1033,7 +910,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   }
 ];
 
-  // ── RENDER ──
   const container = document.getElementById('container');
   const search = document.getElementById('search');
   const stat = document.getElementById('stat');
@@ -1041,16 +917,11 @@ footer.master .pulse-row svg{flex-shrink:0}
   let filterType = 'all';
 
   function anchorId(name){
-    return name.toLowerCase()
-      .replace(/\.[a-z0-9]+$/, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
+    return name.toLowerCase().replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   }
 
   function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g, c => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[c]));
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
   function cardHtml(f){
@@ -1073,10 +944,7 @@ footer.master .pulse-row svg{flex-shrink:0}
         <div class="card-body">
           <div class="filename">${escapeHtml(f.n)}</div>
           <a class="addr" href="${url}" target="_blank" rel="noopener">${url.replace(BASE,'…/images/')}</a>
-          <div class="badge-row">
-            <span class="badge ${badgeClass}">${f.t}</span>
-            ${tagBadge}
-          </div>
+          <div class="badge-row"><span class="badge ${badgeClass}">${f.t}</span>${tagBadge}</div>
           <div class="usage"><b>Purpose</b>${escapeHtml(f.u)}</div>
           <div class="in-books"><b>Appears in</b>${booksHtml}</div>
         </div>
@@ -1096,9 +964,7 @@ footer.master .pulse-row svg{flex-shrink:0}
           <span class="c-count">${count} file${count===1?'':'s'}</span>
           <span class="c-desc">${escapeHtml(c.desc)}</span>
         </summary>
-        <div class="cluster-body">
-          <div class="grid">${cards}</div>
-        </div>
+        <div class="cluster-body"><div class="grid">${cards}</div></div>
       </details>
     `;
   }
@@ -1138,7 +1004,6 @@ footer.master .pulse-row svg{flex-shrink:0}
 
   render();
 
-  // Flash target card if URL has hash
   if (location.hash) {
     setTimeout(() => {
       const el = document.querySelector(location.hash);
@@ -1152,22 +1017,17 @@ footer.master .pulse-row svg{flex-shrink:0}
     }, 200);
   }
 
-  /* ── Header height → filter sticky top ── */
   (function(){
     var header = document.querySelector('.corpus-bar');
     var filter = document.getElementById('filter');
     if(!header || !filter) return;
-    function reposition(){
-      var h = header.offsetHeight;
-      filter.style.top = Math.max(0, h - 4) + 'px';
-    }
+    function reposition(){ filter.style.top = Math.max(0, header.offsetHeight - 4) + 'px'; }
     reposition();
     window.addEventListener('resize', reposition);
     window.addEventListener('orientationchange', reposition);
     setTimeout(reposition, 200);
   })();
 
-  /* ── Chapter strip auto-tracking ── */
   (function(){
     var strip = document.querySelector('.corpus-bar nav.chapter-strip');
     if(!strip) return;
@@ -1196,8 +1056,7 @@ footer.master .pulse-row svg{flex-shrink:0}
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var maxLeft = strip.scrollWidth - strip.clientWidth;
       var clamped = Math.max(0, Math.min(maxLeft, left));
-      if(reduced){ strip.scrollLeft = clamped; }
-      else { strip.scrollTo({left:clamped, behavior:'smooth'}); }
+      if(reduced){ strip.scrollLeft = clamped; } else { strip.scrollTo({left:clamped, behavior:'smooth'}); }
     }
     var rafPending = false;
     function onScrollTrack(){
@@ -1207,67 +1066,38 @@ footer.master .pulse-row svg{flex-shrink:0}
     }
     window.addEventListener('scroll', onScrollTrack, {passive:true});
     window.addEventListener('resize', onScrollTrack);
-    if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', update); }
-    else { update(); }
+    if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', update); } else { update(); }
     setTimeout(update, 300);
   })();
 
-  /* ── Smooth anchor scrolling for cluster links ── */
   document.addEventListener('click', function(e){
     var a = e.target.closest('a[href^="#"]');
     if(!a) return;
     var href = a.getAttribute('href');
     if(href.length < 2) return;
     var t = document.querySelector(href);
-    if(t){
-      e.preventDefault();
-      t.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
   });
 
 })();
-
-
 </script>
+
 <script>
-
-  /* Inversion Cosmology · poster click loads iframe once */
-  (function(){
-  var stage = document.getElementById('inversion-cosmology');
-  var poster = document.getElementById('invPoster');
-  var frame = document.getElementById('invFrame');
-  if(!stage || !poster || !frame) return;
-  var loaded = false;
-  function load(){
-    if(loaded) return;
-    loaded = true;
-    var f = document.createElement('iframe');
-    f.src = 'https://meaning-unconfounded.github.io/images/index.html';
-    f.title = 'The Inversion Cosmology';
-    f.loading = 'eager';
-    f.allow = 'fullscreen; autoplay';
-    f.setAttribute('allowfullscreen','');
-    frame.appendChild(f);
-    stage.classList.add('is-live');
-  }
-  poster.addEventListener('click', load);
-  poster.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); load(); }
-  });
-  // Lazy autoplay when ~40% visible
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting && en.intersectionRatio >= 0.35){
-          load();
-          io.disconnect();
-        }
-      });
-    }, { threshold: [0, 0.35, 0.5] });
-    io.observe(stage);
-  }
+// NATIVE CAROUSEL LOGIC
+(function(){
+  var carousel = document.getElementById('nativeCarousel');
+  if(!carousel) return;
+  var imgs = carousel.querySelectorAll('img');
+  if(imgs.length < 2) return;
+  var current = 0;
+  
+  setInterval(function(){
+    imgs[current].classList.remove('active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('active');
+  }, 4000);
 })();
-
 </script>
+
 </body>
 </html>
