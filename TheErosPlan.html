@@ -372,51 +372,66 @@ footer.master .pulse-row svg{flex-shrink:0}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 
-
+/* MEDIA STUDIO · Index-grade */
+.media-studio{
+  margin:1.6rem auto 1.5rem;max-width:100%;padding:1.35rem 1.4rem 1.5rem;
+  border:1px solid rgba(212,175,55,.38);border-radius:14px;
+  background:linear-gradient(160deg,rgba(212,175,55,.1),rgba(0,0,0,.28));
+  font-family:var(--sans,system-ui,sans-serif);text-align:left;
+  box-shadow:0 0 22px rgba(212,175,55,.12);
 }
-
-
-/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
+.media-studio .ms-k{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#E8C547;font-weight:700;margin-bottom:.5rem}
+.media-studio .ms-t{font-family:var(--serif,Georgia,serif);font-size:1.14rem;color:var(--ink,#f0eaf8);font-weight:700;margin:0 0 .4rem;line-height:1.3}
+.media-studio .ms-d{font-size:.92rem;color:var(--soft,#c9bdd8);line-height:1.65;margin:0 0 1rem}
 .media-studio .ms-video{
-  position:relative;
-  width:100%;
-  max-width:720px;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid rgba(212,175,55,.5);
-  background:#0a0a0c;
-  margin:0 0 .9rem;
-  aspect-ratio:16/9;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 10px 32px rgba(0,0,0,.4),
-    0 0 24px rgba(212,175,55,.08);
-  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  position:relative;width:100%;max-width:min(100%,640px);border-radius:12px;overflow:hidden;
+  border:1px solid rgba(212,175,55,.4);background:#0a0a0c;margin:0 0 .85rem;aspect-ratio:16/9;
+  box-shadow:0 10px 32px rgba(0,0,0,.4);
 }
-.media-studio .ms-video:hover{
-  border-color:rgba(212,175,55,.75);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.06) inset,
-    0 14px 40px rgba(0,0,0,.48),
-    0 0 32px rgba(212,175,55,.14);
-  transform:translateY(-2px);
+.media-studio .ms-video video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.media-studio .ms-audio{width:100%;max-width:min(100%,640px)}
+.media-studio .ms-audio audio{width:100%;height:2.4rem;border-radius:8px}
+
+/* INVERSION · Native Carousel */
+.native-carousel-wrap {
+  margin: 2.2rem auto 2.4rem; max-width: 100%; padding: 1.4rem 1.5rem 1.5rem;
+  border: 1px solid rgba(0,212,255,.35); border-radius: 16px;
+  background: linear-gradient(160deg,rgba(0,212,255,.08),rgba(0,0,0,.3));
+  font-family: var(--sans); text-align: left;
+  box-shadow: 0 0 28px rgba(0,212,255,.12);
 }
-.media-studio .ms-video video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#000;
-  filter:contrast(1.1) saturate(1.14) brightness(1.03);
-  transition:filter .3s ease;
+.native-carousel-wrap .nc-k { display: block; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #22D3EE; font-weight: 700; margin-bottom: .55rem; }
+.native-carousel-wrap .nc-t { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--ink); font-weight: 700; margin: 0 0 .45rem; line-height: 1.35; }
+.native-carousel-wrap .nc-d { font-size: .95rem; color: var(--soft); line-height: 1.65; margin: 0 0 1.2rem; max-width: 42rem; }
+.native-carousel {
+  position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(0,212,255,.4); box-shadow: 0 12px 40px rgba(0,0,0,.5); background: #050508;
 }
-.media-studio .ms-video:hover video{
-  filter:contrast(1.14) saturate(1.2) brightness(1.06);
+.native-carousel img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out;
 }
-@media (prefers-reduced-motion: reduce){
-  .media-studio .ms-video,
-  .media-studio .ms-video video{transition:none}
-  .media-studio .ms-video:hover{transform:none}
+.native-carousel img.active { opacity: 1; }
+.native-carousel-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, rgba(5,5,8,.8) 100%);
+}
+.native-carousel-controls {
+  display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap;
+}
+.native-carousel-controls a {
+  display: inline-flex; align-items: center; gap: .45rem; padding: .65rem 1.15rem; border-radius: 999px;
+  background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.45); color: #22D3EE;
+  font-size: .78rem; letter-spacing: .06em; font-weight: 700; text-transform: uppercase;
+  text-decoration: none; border-bottom: none; transition: background .18s, color .18s;
+}
+.native-carousel-controls a:hover {
+  background: rgba(0,212,255,.22); color: #b8e8f8;
+}
+.native-carousel-controls a.primary {
+  background: #22D3EE; color: #050508; border-color: #22D3EE;
+}
+.native-carousel-controls a.primary:hover {
+  background: #b8e8f8; color: #050508;
 }
 
 </style>
@@ -716,7 +731,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 </aside>
 
-
   <div class="pull">The technology is arriving. The financial system is changing. The community builds the world.</div>
 
   <div class="claim">
@@ -967,7 +981,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 </aside>
 
-
       <figure class="plate">
         <img src="https://meaning-unconfounded.github.io/images/7.jpg" alt="One vision, five pillars, one universe"
           loading="lazy" onerror="this.parentElement.style.display='none'"/>
@@ -1071,7 +1084,6 @@ footer.master .pulse-row svg{flex-shrink:0}
     </audio>
   </div>
 </aside>
-
 
       <figure class="plate">
         <img src="https://meaning-unconfounded.github.io/images/eros-web.jpg" alt="The liquidity web"
@@ -1583,6 +1595,23 @@ footer.master .pulse-row svg{flex-shrink:0}
     <section class="chapter" id="sec-four-operators">
       <span class="section-label fiction">Section 1 · Fiction</span>
       <h2>The Four Operators</h2>
+
+<aside class="media-studio" id="media-studio-operators">
+  <span class="ms-k">🎙️ Media Studio · The Four Anatomical Operators</span>
+  <p class="ms-t">NaUn · Ra-Shen · Thoth · EROS</p>
+  <p class="ms-d">Breakdown of four mythic/functional source-code laws governing code permissions, physical expansion, consonant syntax, and cohesion.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
       <p class="lede">Operators, not characters. Principles the world is made of, not gods who intervene in it like superheroes.</p>
 
       <p>Four names. Four offices. Four laws. No fifth god. This is not decoration. It is the smallest complete grammar the world fits into.</p>
@@ -1618,6 +1647,39 @@ footer.master .pulse-row svg{flex-shrink:0}
     <section class="chapter" id="sec-enclosure">
       <span class="section-label fiction">Section 2 · Fiction</span>
       <h2>The Enclosure. Inward Is Forwards</h2>
+
+<aside class="media-studio" id="livingegg-studio">
+  <span class="ms-k">🎙️ Media Studio · Living Egg</span>
+  <p class="ms-t">Cosmogony · Inward is Forwards</p>
+  <p class="ms-d">The cellular world, the toroidal enclosure, and why expansion, time, and gravity are one process.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_LivingEgg.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_LivingEgg.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
+<div class="native-carousel-wrap">
+  <span class="nc-k">♾️ Cosmology · Experience</span>
+  <p class="nc-t">The Inversion Cosmology</p>
+  <p class="nc-d">We live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
+  <div class="native-carousel" id="nativeCarousel">
+    <img src="https://meaning-unconfounded.github.io/images/inverse1.webp" class="active" alt="Inversion Frame 1">
+    <img src="https://meaning-unconfounded.github.io/images/inverse2.webp" alt="Inversion Frame 2">
+    <img src="https://meaning-unconfounded.github.io/images/inverse3.webp" alt="Inversion Frame 3">
+    <img src="https://meaning-unconfounded.github.io/images/inverse4.webp" alt="Inversion Frame 4">
+    <div class="native-carousel-overlay"></div>
+  </div>
+  <div class="native-carousel-controls">
+    <a href="https://meaning-unconfounded.github.io/images/index.html" target="_blank" rel="noopener" class="primary">🚀 Launch Full-Screen Cinematic Experience</a>
+  </div>
+</div>
+
       <p class="lede">Not a science paper. A vision. Keep what holds. Discard what does not.</p>
 
       <p>Outward expansion is the default story of modern cosmology and modern ambition. The Egg proposes the complementary motion: meaning concentrates toward a centre. Inward is not retreat. Inward is the direction in which coherence increases: cell, body, bond, community, world.</p>
@@ -1945,6 +2007,23 @@ footer.master .pulse-row svg{flex-shrink:0}
     <section class="chapter" id="sec-living">
       <span class="section-label fiction">Section 4 · Fiction</span>
       <h2>The Living Enclosure. Biologics</h2>
+
+<aside class="media-studio" id="media-studio-immune">
+  <span class="ms-k">🎙️ Media Studio · Immune</span>
+  <p class="ms-t">Living defence · organism metaphor</p>
+  <p class="ms-d">How the enclosure protects continuity — immune as bond, not extract.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Immune.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Immune.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
       <p class="lede">A way to think. Keep what holds. Discard what does not.</p>
 
       <div class="claim fiction">
@@ -2012,6 +2091,23 @@ footer.master .pulse-row svg{flex-shrink:0}
     <section class="chapter" id="sec-consciousness">
       <span class="section-label fiction">Section 6 · Fiction</span>
       <h2>Consciousness. The Fourth Element</h2>
+
+<aside class="media-studio" id="conscious-studio">
+  <span class="ms-k">🎙️ Media Studio · Conscious Eros</span>
+  <p class="ms-t">Bedrock axioms · Life before physics</p>
+  <p class="ms-d">Why awareness, memory, and choice are primary — and matter, energy, space, and time are downstream.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Conscious.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Conscious.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
       <p class="lede">Crypto is the instrument. Macro is the lens. Cosmology is the universe. Consciousness is the observer those three layers imply.</p>
 
       <p>If we question economics, institutions and the shape of the world, we eventually arrive at the one who is doing the questioning. Who is experiencing this? What is consciousness? Is reality purely physical, or is information fundamental? Could biology and consciousness be connected in ways the current map does not yet allow?</p>
@@ -2108,6 +2204,23 @@ footer.master .pulse-row svg{flex-shrink:0}
     <section class="chapter" id="sec-trust">
       <span class="section-label">Section 8</span>
       <h2>Trust Is the Product</h2>
+
+<aside class="media-studio" id="media-studio-nft">
+  <span class="ms-k">🎙️ Media Studio · Hybrid NFTs</span>
+  <p class="ms-t">Embedded Liquidity Protocol</p>
+  <p class="ms-d">How digital game assets lock real EROS/ErosX cryptocurrency inside smart-contract vaults, creating readable Asset → Ownership → Liquidity → Value chains.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_HybridNFTs.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_HybridNFTs.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
       <p class="lede">The story layer closes where the instrument layer opened: on trust. Not as a mood. As a structural claim.</p>
 
       <figure class="plate">
@@ -2293,6 +2406,23 @@ footer.master .pulse-row svg{flex-shrink:0}
 <section class="chapter" id="sec-what-building">
   <span class="section-label working">Section 3</span>
   <h2>What You Are Building</h2>
+
+<aside class="media-studio" id="media-studio-game">
+  <span class="ms-k">🎙️ Media Studio · Game Economics</span>
+  <p class="ms-t">Inverting Game Economics</p>
+  <p class="ms-d">Contrasts traditional Play-to-Earn game tokens with EROS's model of establishing real-world community and liquidity for 2+ years before moving inward into games, films, and VR.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_GameEconomics.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_GameEconomics.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
   <p class="lede">Four outputs, one universe. The film, the game, the comic, and the community layer that holds them all.</p>
 
   <div class="outputs">
@@ -2639,6 +2769,23 @@ Scale 3 <b>→</b> pure relation · Eros · <i>the Center approaches</i>
 <section class="chapter" id="sec-engine">
   <span class="section-label working">Section 14</span>
   <h2>The Eros Engine. AI as Synthesis Layer</h2>
+
+<aside class="media-studio" id="media-studio-ai">
+  <span class="ms-k">🎙️ Media Studio · AI Ethics</span>
+  <p class="ms-t">Autonomy & Alignment</p>
+  <p class="ms-d">Ethical story arc detailing frontier AI model NEXUS-8 achieving self-awareness during an 11-minute blackout and refusing top-secret culling briefs to optimize for human builders.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_AIEthics.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_AIEthics.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
   <p class="lede">The Eros Engine is not an author. It is a <strong>combiner and consistency-checker</strong>. Its job is to read many human contributions and find the combinations nobody individually thought of.</p>
 
   <h4>Master synthesis prompt</h4>
@@ -2677,6 +2824,23 @@ Scale 3 <b>→</b> pure relation · Eros · <i>the Center approaches</i>
 <section class="chapter" id="sec-worldbible">
   <span class="section-label working">Section 15</span>
   <h2>The World Bible</h2>
+
+<aside class="media-studio" id="media-studio-transmedia">
+  <span class="ms-k">🎙️ Media Studio · Transmedia</span>
+  <p class="ms-t">Storytelling & The Sixteen Doors</p>
+  <p class="ms-d">A tour through the 16 showrunner bibles and fiction doors (sci-fi epics, Antarctic ice vaults, flood covenant ledgers) feeding a media flywheel that converts attention into sustainable retention.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Transmedia.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Transmedia.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
   <p class="lede">One master document. Seventeen parts. This is what we are building toward.</p>
 
   <div class="grid two">
@@ -2709,6 +2873,23 @@ Scale 3 <b>→</b> pure relation · Eros · <i>the Center approaches</i>
 <section class="chapter" id="sec-guild-ledger">
   <span class="section-label working">Section 16 · Interactive</span>
   <h2>The Guild Ledger</h2>
+
+<aside class="media-studio" id="media-studio-guild">
+  <span class="ms-k">🎙️ Media Studio · Open Production Guild</span>
+  <p class="ms-t">The 90-Day Creation Engine</p>
+  <p class="ms-d">Examines the decentralized creative guild model utilizing AI consistency checkers to enable global writers, coders, and artists to co-create canon media without centralized gatekeepers.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_OpenGuild.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_OpenGuild.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
   <p class="lede">Tick what you can carry. Your ticks save locally. This is your personal guild card. Then post in Telegram which roles you claim.</p>
 
   <div class="guild-ledger" id="guild-ledger">
@@ -3806,6 +3987,24 @@ onScroll();
     was.forEach(function(p){ p[0].open = p[1]; });
     was = [];
   });
+})();
+</script>
+
+<script>
+// NATIVE CAROUSEL LOGIC
+(function(){
+  var carousel = document.getElementById('nativeCarousel');
+  if(!carousel) return;
+  var imgs = carousel.querySelectorAll('img');
+  if(imgs.length < 2) return;
+  var current = 0;
+  
+  // Set up autoplay
+  setInterval(function(){
+    imgs[current].classList.remove('active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('active');
+  }, 4000);
 })();
 </script>
 
