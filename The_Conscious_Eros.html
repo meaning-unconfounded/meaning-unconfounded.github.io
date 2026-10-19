@@ -374,6 +374,109 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* ── MEDIA STUDIO · frame + filter ── */
+.media-studio{
+  margin:1.6rem auto 1.8rem;
+  max-width:100%;
+  padding:1.35rem 1.4rem 1.5rem;
+  border:1px solid var(--violet-line, var(--copper-line, rgba(168,132,212,.32)));
+  border-radius:14px;
+  background:linear-gradient(160deg,var(--violet-soft, var(--copper-soft, rgba(168,132,212,.1))),rgba(0,0,0,.25));
+  font-family:var(--sans);
+  text-align:left;
+  box-shadow:0 0 18px rgba(168,132,212,.08);
+}
+.media-studio .ms-k{
+  display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--violet2, var(--copper2, #C9A0F2));font-weight:700;margin-bottom:.55rem;
+}
+.media-studio .ms-t{
+  font-family:var(--serif);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin:0 0 .45rem;line-height:1.35;
+}
+.media-studio .ms-d{font-size:.92rem;color:var(--soft);line-height:1.65;margin:0 0 1rem}
+.media-studio .ms-video{
+  position:relative;width:100%;max-width:720px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--violet-line, var(--copper-line, rgba(168,132,212,.4)));
+  background:#0a0a0c;margin:0 0 .9rem;aspect-ratio:16/9;
+  box-shadow:0 0 0 1px rgba(255,255,255,.04) inset,0 10px 32px rgba(0,0,0,.4);
+  transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.media-studio .ms-video:hover{
+  border-color:rgba(201,160,242,.75);
+  box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 14px 40px rgba(0,0,0,.48);
+  transform:translateY(-2px);
+}
+.media-studio .ms-video video{
+  display:block;width:100%;height:100%;object-fit:contain;background:#000;
+  filter:contrast(1.1) saturate(1.14) brightness(1.03);transition:filter .3s ease;
+}
+.media-studio .ms-video:hover video{filter:contrast(1.14) saturate(1.2) brightness(1.06)}
+.media-studio .ms-audio{width:100%;margin:0 0 .35rem}
+.media-studio .ms-audio audio{width:100%;height:2.4rem;border-radius:8px}
+@media (prefers-reduced-motion: reduce){
+  .media-studio .ms-video,.media-studio .ms-video video{transition:none}
+  .media-studio .ms-video:hover{transform:none}
+}
+.media-companion{
+  margin:-0.4rem auto 1.8rem;max-width:100%;padding:1rem 1.25rem;
+  border:1px solid var(--violet-line, var(--copper-line, rgba(168,132,212,.32)));
+  border-radius:12px;background:linear-gradient(135deg,var(--violet-soft, rgba(168,132,212,.1)),rgba(0,0,0,.2));
+  font-family:var(--sans);
+}
+.media-companion .mc-k{display:block;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--violet2, var(--copper2));font-weight:700;margin-bottom:.45rem}
+.media-companion .mc-d{font-size:.88rem;color:var(--soft);line-height:1.55;margin:0 0 .65rem}
+.media-companion .mc-row{display:flex;flex-wrap:wrap;gap:.45rem}
+.media-companion a.mc-btn{
+  display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .9rem;border-radius:999px;
+  background:var(--violet-soft, rgba(168,132,212,.12));border:1px solid var(--violet-line, rgba(168,132,212,.35));
+  color:var(--violet2, var(--copper2));font-size:.72rem;letter-spacing:.06em;font-weight:700;
+  text-transform:uppercase;text-decoration:none;border-bottom:none;
+}
+
+/* ── NATIVE CAROUSEL · Inversion Cosmology ── */
+.native-carousel-wrap {
+  margin: 2.2rem auto 2.4rem; max-width: 100%; padding: 1.4rem 1.5rem 1.5rem;
+  border: 1px solid rgba(0,212,255,.35); border-radius: 16px;
+  background: linear-gradient(160deg,rgba(0,212,255,.08),rgba(0,0,0,.3));
+  font-family: var(--sans); text-align: left;
+  box-shadow: 0 0 28px rgba(0,212,255,.12);
+}
+.native-carousel-wrap .nc-k { display: block; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #22D3EE; font-weight: 700; margin-bottom: .55rem; }
+.native-carousel-wrap .nc-t { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--ink); font-weight: 700; margin: 0 0 .45rem; line-height: 1.35; }
+.native-carousel-wrap .nc-d { font-size: .95rem; color: var(--soft); line-height: 1.65; margin: 0 0 1.2rem; max-width: 42rem; }
+.native-carousel {
+  position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(0,212,255,.4); box-shadow: 0 12px 40px rgba(0,0,0,.5); background: #050508;
+}
+.native-carousel img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out;
+}
+.native-carousel img.active { opacity: 1; }
+.native-carousel-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, rgba(5,5,8,.8) 100%);
+}
+.native-carousel-controls {
+  display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap;
+}
+.native-carousel-controls a {
+  display: inline-flex; align-items: center; gap: .45rem; padding: .65rem 1.15rem; border-radius: 999px;
+  background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.45); color: #22D3EE;
+  font-size: .78rem; letter-spacing: .06em; font-weight: 700; text-transform: uppercase;
+  text-decoration: none; border-bottom: none; transition: background .18s, color .18s;
+}
+.native-carousel-controls a:hover {
+  background: rgba(0,212,255,.22); color: #b8e8f8;
+}
+.native-carousel-controls a.primary {
+  background: #22D3EE; color: #050508; border-color: #22D3EE;
+}
+.native-carousel-controls a.primary:hover {
+  background: #b8e8f8; color: #050508;
+}
+
 </style>
 </head>
 <body>
@@ -490,6 +593,38 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
       <p>You do not have to believe it. Run the two truths on your own life. Find the postulate you have been holding against its twin. The weight lifts. Not because you worked on it. Because the code that held it was rewritten.</p>
     </div>
   </details>
+
+  <div class="native-carousel-wrap">
+    <span class="nc-k">♾️ Cosmology · Experience</span>
+    <p class="nc-t">The Inversion Cosmology</p>
+    <p class="nc-d">We live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
+    <div class="native-carousel" id="nativeCarousel">
+      <img src="https://meaning-unconfounded.github.io/images/inverse1.webp" class="active" alt="Inversion Frame 1">
+      <img src="https://meaning-unconfounded.github.io/images/inverse2.webp" alt="Inversion Frame 2">
+      <img src="https://meaning-unconfounded.github.io/images/inverse3.webp" alt="Inversion Frame 3">
+      <img src="https://meaning-unconfounded.github.io/images/inverse4.webp" alt="Inversion Frame 4">
+      <div class="native-carousel-overlay"></div>
+    </div>
+    <div class="native-carousel-controls">
+      <a href="https://meaning-unconfounded.github.io/images/index.html" target="_blank" rel="noopener" class="primary">🚀 Launch Full-Screen Cinematic Experience</a>
+    </div>
+  </div>
+
+  <aside class="media-studio" id="conscious-studio">
+    <span class="ms-k">🎙️ Media Studio · Conscious Eros</span>
+    <p class="ms-t">Bedrock axioms · Life before physics</p>
+    <p class="ms-d">Why awareness, memory, and choice are primary — and matter, energy, space, and time are downstream.</p>
+    <div class="ms-video">
+      <video controls playsinline preload="metadata">
+        <source src="https://meaning-unconfounded.github.io/images/Eros_Conscious.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ms-audio">
+      <audio controls preload="metadata">
+        <source src="https://meaning-unconfounded.github.io/images/Eros_Conscious.m4a" type="audio/mp4"/>
+      </audio>
+    </div>
+  </aside>
 
   <aside class="public-link">
     <span class="pl-k">🖇️ Public Studio · Live</span>
@@ -1258,10 +1393,6 @@ Not a separate force. A differential between two motions.</div>
     <span>Built on PulseChain</span>
     <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#0B0710"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
-  <!-- Rev 5 · 2026-10-17 · new subsection "The postulate layer and the effect layer" inserted at the end of §4.4, between the corpus paragraph and the connect box ·
-       recap updated with one new line: "Rate, weight, and the forms in the Iteration Codex are effects. The postulate is the source." ·
-       connect box extended to reference §1.6 of the Iteration Codex ·
-       no em dashes in the new copy · everything else preserved -->
 </footer>
 
 </main>
@@ -1419,6 +1550,24 @@ window.addEventListener('hashchange', openFromHash);
     was = [];
   });
 })();
+})();
+</script>
+
+<script>
+// NATIVE CAROUSEL LOGIC
+(function(){
+  var carousel = document.getElementById('nativeCarousel');
+  if(!carousel) return;
+  var imgs = carousel.querySelectorAll('img');
+  if(imgs.length < 2) return;
+  var current = 0;
+  
+  // Set up autoplay
+  setInterval(function(){
+    imgs[current].classList.remove('active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('active');
+  }, 4000);
 })();
 </script>
 
