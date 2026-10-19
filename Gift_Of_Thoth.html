@@ -364,31 +364,7 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 #toTop.show{opacity:1;pointer-events:auto}
 #toTop:hover{border-color:var(--teal);background:var(--teal-soft)}
 
-/* ── NATIVE CAROUSEL (Added) ── */
-.native-carousel-wrap {
-  margin: 2.4rem auto; max-width: 100%; padding: 1.4rem 1.5rem 1.5rem;
-  border: 1px solid var(--teal-line); border-radius: 16px;
-  background: linear-gradient(160deg,rgba(95,184,200,.08),rgba(7,9,10,.55));
-  font-family: var(--sans); text-align: left;
-  box-shadow: 0 0 28px rgba(95,184,200,.12);
-}
-.native-carousel-wrap .nc-k { display: block; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: .55rem; }
-.native-carousel-wrap .nc-t { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--ink); font-weight: 700; margin: 0 0 .45rem; line-height: 1.35; }
-.native-carousel-wrap .nc-d { font-size: .95rem; color: var(--soft); line-height: 1.65; margin: 0 0 1.2rem; max-width: 42rem; }
-.native-carousel {
-  position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden;
-  border: 1px solid var(--teal-line); box-shadow: 0 12px 40px rgba(0,0,0,.5); background: #050508;
-}
-.native-carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out; }
-.native-carousel img.active { opacity: 1; }
-.native-carousel-overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 60%, rgba(5,5,8,.8) 100%); }
-.native-carousel-controls { display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
-.native-carousel-controls a { display: inline-flex; align-items: center; gap: .45rem; padding: .65rem 1.15rem; border-radius: 999px; background: rgba(95,184,200,.12); border: 1px solid var(--teal-line); color: var(--teal); font-size: .78rem; letter-spacing: .06em; font-weight: 700; text-transform: uppercase; text-decoration: none; border-bottom: none; transition: background .18s, color .18s; }
-.native-carousel-controls a:hover { background: rgba(95,184,200,.22); color: #a8e0ec; }
-.native-carousel-controls a.primary { background: var(--teal); color: #07090a; border-color: var(--teal); }
-.native-carousel-controls a.primary:hover { background: #a8e0ec; color: #07090a; }
-
-/* ── MEDIA STUDIO (Added) ── */
+/* ═══ MEDIA STUDIO ═══ */
 .media-studio {
   margin: 2rem auto; max-width: 100%; padding: 1.35rem 1.4rem 1.5rem;
   border: 1px solid var(--gold-line); border-radius: 14px;
@@ -407,13 +383,72 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 .media-studio .ms-audio { width: 100%; }
 .media-studio .ms-audio audio { width: 100%; height: 2.4rem; border-radius: 8px; }
 
+/* ═══ CINEMATIC FINALE ═══ */
+.cinematic-finale {
+  margin: 4rem auto 2rem;
+  padding: 2rem;
+  border: 2px solid var(--gold-line);
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(212,175,55,0.08), rgba(7,9,10,0.8));
+  box-shadow: 0 0 40px rgba(212,175,55,0.15), inset 0 0 20px rgba(212,175,55,0.05);
+  text-align: center;
+  max-width: 100%;
+}
+.cf-kicker {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+.cf-video-wrap {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--gold-line);
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  aspect-ratio: 16/9;
+}
+.cf-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.cf-iframe-wrap {
+  width: 100%;
+  max-width: 960px;
+  margin: 1.5rem auto 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--teal-line);
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  aspect-ratio: 16/9;
+  position: relative;
+}
+.cf-iframe-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
 @media print{
   @page{size:A4;margin:14mm}
   #progressBar,.corpus-bar,.eros-menu,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
   body{background:#fff!important;color:#111!important;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:#111;border-bottom:none}
-  .fig,.media,.claim,.op-card,.experiment,.scientist,.discovery,.wow,.second-layer,.three-doors,figure.plate,figure.video-frame,figure.brand-seal,.public-link,.telegram-post,.coda,.creed,footer.master,details.doorway,.native-carousel-wrap,.media-studio{break-inside:avoid}
+  .fig,.media,.claim,.op-card,.experiment,.scientist,.discovery,.wow,.second-layer,.three-doors,figure.plate,figure.video-frame,figure.brand-seal,.public-link,.telegram-post,.coda,.creed,footer.master,details.doorway,.cinematic-finale,.media-studio{break-inside:avoid}
   section.apply-world{break-inside:avoid}
   h2,h3,h4{break-after:avoid}
   video, iframe{display:none}
@@ -564,6 +599,23 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   </div>
 </aside>
 
+<!-- ═══ TOP MEDIA STUDIO (Topic 10: Operators) ═══ -->
+<aside class="media-studio" id="operators-studio">
+  <span class="ms-k">🎙️ Media Studio · Operators</span>
+  <p class="ms-t">The Four Anatomical Operators</p>
+  <p class="ms-d">Breakdown of four mythic/functional source-code laws governing code permissions, physical expansion, consonant syntax, and cohesion.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
 <section id="question">
 <h2>1 · The question</h2>
 <p class="lede">You have said these words your whole life. Have you ever looked inside one?</p>
@@ -633,23 +685,6 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 
 <p style="text-align:center;font-style:italic;color:var(--teal);font-size:1.05rem;margin:1.2rem 0">What word in your life arrives… and what word only sprays?</p>
 </section>
-
-<!-- ═══ NATIVE CAROUSEL (Inserted) ═══ -->
-<div class="native-carousel-wrap">
-  <span class="nc-k">♾️ Cosmology · Experience</span>
-  <p class="nc-t">The Inversion Cosmology</p>
-  <p class="nc-d">We live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
-  <div class="native-carousel" id="nativeCarousel">
-    <img src="https://meaning-unconfounded.github.io/images/inverse1.webp" class="active" alt="Inversion Frame 1">
-    <img src="https://meaning-unconfounded.github.io/images/inverse2.webp" alt="Inversion Frame 2">
-    <img src="https://meaning-unconfounded.github.io/images/inverse3.webp" alt="Inversion Frame 3">
-    <img src="https://meaning-unconfounded.github.io/images/inverse4.webp" alt="Inversion Frame 4">
-    <div class="native-carousel-overlay"></div>
-  </div>
-  <div class="native-carousel-controls">
-    <a href="https://meaning-unconfounded.github.io/images/index.html" target="_blank" rel="noopener" class="primary">🚀 Launch Full-Screen Cinematic Experience</a>
-  </div>
-</div>
 
 <section id="where">
 <h2>3 · Where this sits in The Eros Plan</h2>
@@ -735,23 +770,6 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 <p><strong>On the Witness tier.</strong> Where a card says "same geometry across traditions," read it as: the body-gesture of this consonant recurs in multiple writing cultures as a similar force (cut, bind, flow, edge). It is a pointer for comparative work, not a finished anthropology claim. If a card's Witness line is thin, treat Core + Concise + Form as enough to work.</p>
 <p class="lede">Five tiers · not a spreadsheet. Core → Concise → Common → Form → Witness.</p>
 <p style="font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.4rem">Each card carries a small mouth diagram: <span style="color:var(--teal)">teal</span> = unvoiced (air only) · <span style="color:var(--violet)">violet</span> = voiced (cords vibrate). The dot marks where the body makes the sound.</p>
-
-<!-- ═══ MEDIA STUDIO (Topic 10) ═══ -->
-<aside class="media-studio" id="operators-studio">
-  <span class="ms-k">🎙️ Media Studio · Operators</span>
-  <p class="ms-t">The Four Anatomical Operators</p>
-  <p class="ms-d">Breakdown of four mythic/functional source-code laws governing code permissions, physical expansion, consonant syntax, and cohesion.</p>
-  <div class="ms-video">
-    <video controls playsinline preload="metadata">
-      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.mp4" type="video/mp4"/>
-    </video>
-  </div>
-  <div class="ms-audio">
-    <audio controls preload="metadata">
-      <source src="https://meaning-unconfounded.github.io/images/Eros_Operators.m4a" type="audio/mp4"/>
-    </audio>
-  </div>
-</aside>
 
 <p id="three-dim"><strong style="color:var(--teal)">5.1 · Three dimensions of every consonant</strong></p>
 <p>A core label (B = Boundary) is not enough. Every consonant carries meaning from <em>three layers at once</em>. When all three agree, the operator feels pure:</p>
@@ -1233,6 +1251,23 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 <p><strong>FEAR</strong>: F (unvoiced friction, edge air) + R (radiate/iterate). Skeleton: <em>sharp edge that keeps spinning</em>. Bond test: is this warning or paralysis?</p>
 <p><strong>BUILD</strong>: B (boundary/container) + D (stop/close). Skeleton: <em>make a room and set a floor</em>. Bond test: does the structure invite entry or only exclude?</p>
 </section>
+
+<!-- ═══ MIDDLE MEDIA STUDIO (Topic 7: Conscious Eros) ═══ -->
+<aside class="media-studio" id="conscious-studio">
+  <span class="ms-k">🎙️ Media Studio · Conscious Eros</span>
+  <p class="ms-t">Bedrock axioms · Life before physics</p>
+  <p class="ms-d">Why awareness, memory, and choice are primary — and matter, energy, space, and time are downstream.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Conscious.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Conscious.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
 
 <section id="nature">
 <h2>6 · Nature, water, sun · three doors</h2>
@@ -1966,6 +2001,34 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   </figure>
 </section>
 
+<!-- ═══ CINEMATIC FINALE ═══ -->
+<section class="cinematic-finale">
+  <span class="cf-kicker">♾️ Experience the Cosmology</span>
+  
+  <!-- Auto-playing Video (Topic 8: Living Egg) -->
+  <div class="cf-video-wrap">
+    <video id="finaleVideo" class="finale-video" muted playsinline loop controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_LivingEgg.mp4" type="video/mp4"/>
+    </video>
+  </div>
+
+  <!-- NotebookLM Card -->
+  <aside class="public-link" style="margin: 1.5rem auto; max-width: 100%;">
+    <span class="pl-k">🖇️ Public Studio · Live</span>
+    <p class="pl-t">Explore the full corpus in NotebookLM 📚</p>
+    <p class="pl-d">Audio overview, video explainer, mind map, flashcards, knowledge quiz. Sources are locked and read-only.</p>
+    <div class="pl-row">
+      <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+      <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+    </div>
+  </aside>
+
+  <!-- Embedded Web App Iframe -->
+  <div class="cf-iframe-wrap">
+    <iframe src="https://meaning-unconfounded.github.io/images/index.html" title="The Inversion Cosmology" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+  </div>
+</section>
+
 <footer class="master">
   <div class="title-row">
     <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
@@ -2035,6 +2098,7 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     <span>Built on PulseChain</span>
     <svg width="28" height="28" viewBox="0 0 100 100" aria-label="PulseX"><polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#00D4FF"/><polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#07090a"/><path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
+  <!-- Rev 6 · 2026-10-20 · Added Top Media Studio (Operators). Middle Media Studio (Conscious). Cinematic Finale with autoplay video, card, and iframe. -->
 </footer>
 
 </main>
@@ -2206,19 +2270,28 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 </script>
 
 <script>
-// NATIVE CAROUSEL LOGIC
+// CINEMATIC FINALE AUTOPLAY
 (function(){
-  var carousel = document.getElementById('nativeCarousel');
-  if(!carousel) return;
-  var imgs = carousel.querySelectorAll('img');
-  if(imgs.length < 2) return;
-  var current = 0;
+  var video = document.getElementById('finaleVideo');
+  if(!video) return;
   
-  setInterval(function(){
-    imgs[current].classList.remove('active');
-    current = (current + 1) % imgs.length;
-    imgs[current].classList.add('active');
-  }, 4000);
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.5){
+          // Autoplay when 50% visible
+          video.play().catch(function(e){
+            console.log("Autoplay blocked by browser.");
+          });
+        } else {
+          // Pause when scrolled away
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    observer.observe(video);
+  }
 })();
 </script>
 
