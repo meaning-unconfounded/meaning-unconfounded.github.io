@@ -361,6 +361,69 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   details.toc-card>summary::before{display:none}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ── MEDIA STUDIO · Index-grade card ── */
+.media-studio{
+  margin:1.6rem auto 1.8rem;max-width:100%;padding:1.35rem 1.4rem 1.5rem;
+  border:1px solid var(--gold-line, rgba(212,175,55,.32));border-radius:14px;
+  background:linear-gradient(160deg,rgba(212,175,55,.08),rgba(0,0,0,.28));
+  font-family:var(--sans);text-align:left;
+  box-shadow:0 0 20px rgba(212,175,55,.1);
+}
+.media-studio .ms-k{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2,#E8C547);font-weight:700;margin-bottom:.55rem}
+.media-studio .ms-t{font-family:var(--serif);font-size:1.12rem;color:var(--ink);font-weight:700;margin:0 0 .45rem;line-height:1.35}
+.media-studio .ms-d{font-size:.92rem;color:var(--soft);line-height:1.65;margin:0 0 1rem}
+.media-studio .ms-video{
+  position:relative;width:100%;max-width:720px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--gold-line, rgba(212,175,55,.4));background:#0a0a0c;margin:0 0 .9rem;aspect-ratio:16/9;
+  box-shadow:0 0 0 1px rgba(255,255,255,.04) inset,0 10px 32px rgba(0,0,0,.4);
+}
+.media-studio .ms-video video{display:block;width:100%;height:100%;object-fit:contain;background:#000;filter:contrast(1.1) saturate(1.12) brightness(1.03)}
+.media-studio .ms-audio{width:100%;margin:0 0 .35rem}
+.media-studio .ms-audio audio{width:100%;height:2.4rem;border-radius:8px}
+
+/* ── NATIVE CAROUSEL · Inversion Cosmology ── */
+.native-carousel-wrap {
+  margin: 2.2rem auto 2.4rem; max-width: 100%; padding: 1.4rem 1.5rem 1.5rem;
+  border: 1px solid rgba(0,212,255,.35); border-radius: 16px;
+  background: linear-gradient(160deg,rgba(0,212,255,.08),rgba(0,0,0,.3));
+  font-family: var(--sans); text-align: left;
+  box-shadow: 0 0 28px rgba(0,212,255,.12);
+}
+.native-carousel-wrap .nc-k { display: block; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #22D3EE; font-weight: 700; margin-bottom: .55rem; }
+.native-carousel-wrap .nc-t { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--ink); font-weight: 700; margin: 0 0 .45rem; line-height: 1.35; }
+.native-carousel-wrap .nc-d { font-size: .95rem; color: var(--soft); line-height: 1.65; margin: 0 0 1.2rem; max-width: 42rem; }
+.native-carousel {
+  position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(0,212,255,.4); box-shadow: 0 12px 40px rgba(0,0,0,.5); background: #050508;
+}
+.native-carousel img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out;
+}
+.native-carousel img.active { opacity: 1; }
+.native-carousel-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, rgba(5,5,8,.8) 100%);
+}
+.native-carousel-controls {
+  display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap;
+}
+.native-carousel-controls a {
+  display: inline-flex; align-items: center; gap: .45rem; padding: .65rem 1.15rem; border-radius: 999px;
+  background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.45); color: #22D3EE;
+  font-size: .78rem; letter-spacing: .06em; font-weight: 700; text-transform: uppercase;
+  text-decoration: none; border-bottom: none; transition: background .18s, color .18s;
+}
+.native-carousel-controls a:hover {
+  background: rgba(0,212,255,.22); color: #b8e8f8;
+}
+.native-carousel-controls a.primary {
+  background: #22D3EE; color: #050508; border-color: #22D3EE;
+}
+.native-carousel-controls a.primary:hover {
+  background: #b8e8f8; color: #050508;
+}
+
 </style>
 </head>
 <body>
@@ -523,6 +586,38 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
     <p>What changes if the world has an inside? Time becomes a count instead of a fabric. Gravity becomes the weight of everything that came before, resisting being pushed further in. The centre of the shape becomes a real direction — one you can always move closer to and never arrive at. The book is not asking you to believe the new reading. It is asking whether you noticed the old one was a choice.</p>
   </div>
 </details>
+
+<div class="native-carousel-wrap">
+  <span class="nc-k">♾️ Cosmology · Experience</span>
+  <p class="nc-t">The Inversion Cosmology</p>
+  <p class="nc-d">We live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
+  <div class="native-carousel" id="nativeCarousel">
+    <img src="https://meaning-unconfounded.github.io/images/inverse1.webp" class="active" alt="Inversion Frame 1">
+    <img src="https://meaning-unconfounded.github.io/images/inverse2.webp" alt="Inversion Frame 2">
+    <img src="https://meaning-unconfounded.github.io/images/inverse3.webp" alt="Inversion Frame 3">
+    <img src="https://meaning-unconfounded.github.io/images/inverse4.webp" alt="Inversion Frame 4">
+    <div class="native-carousel-overlay"></div>
+  </div>
+  <div class="native-carousel-controls">
+    <a href="https://meaning-unconfounded.github.io/images/index.html" target="_blank" rel="noopener" class="primary">🚀 Launch Full-Screen Cinematic Experience</a>
+  </div>
+</div>
+
+<aside class="media-studio" id="livingegg-studio">
+  <span class="ms-k">🎙️ Media Studio · Living Egg</span>
+  <p class="ms-t">Cosmogony · Inward is Forwards</p>
+  <p class="ms-d">The cellular world, the toroidal enclosure, and why expansion, time, and gravity are one process.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_LivingEgg.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_LivingEgg.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
 
 <aside class="public-link">
   <span class="pl-k">🖇️ Public Studio · Live</span>
@@ -1554,5 +1649,24 @@ window.addEventListener('hashchange',openFromHash);
 })();
 })();
 </script>
+
+<script>
+// NATIVE CAROUSEL LOGIC
+(function(){
+  var carousel = document.getElementById('nativeCarousel');
+  if(!carousel) return;
+  var imgs = carousel.querySelectorAll('img');
+  if(imgs.length < 2) return;
+  var current = 0;
+  
+  // Set up autoplay
+  setInterval(function(){
+    imgs[current].classList.remove('active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('active');
+  }, 4000);
+})();
+</script>
+
 </body>
 </html>
