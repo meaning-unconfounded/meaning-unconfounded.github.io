@@ -313,13 +313,72 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 .media-studio .ms-audio { width: 100%; }
 .media-studio .ms-audio audio { width: 100%; height: 2.4rem; border-radius: 8px; }
 
+/* ═══ CINEMATIC FINALE ═══ */
+.cinematic-finale {
+  margin: 4rem auto 2rem;
+  padding: 2rem;
+  border: 2px solid var(--gold-line, rgba(212,175,55,.32));
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(212,175,55,0.08), rgba(12,7,5,0.8));
+  box-shadow: 0 0 40px rgba(212,175,55,0.15), inset 0 0 20px rgba(212,175,55,0.05);
+  text-align: center;
+  max-width: 100%;
+}
+.cf-kicker {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold2, #e8c547);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+.cf-video-wrap {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--gold-line, rgba(212,175,55,.32));
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  aspect-ratio: 16/9;
+}
+.cf-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.cf-iframe-wrap {
+  width: 100%;
+  max-width: 960px;
+  margin: 1.5rem auto 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--cyan-line, rgba(106,158,175,.35));
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  aspect-ratio: 16/9;
+  position: relative;
+}
+.cf-iframe-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
 @media print{
   @page{size:A4;margin:14mm}
   html::before,html::after,#progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
   body{background:#0c0705!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   video,iframe{display:none!important}
   .yt-wrap{display:none!important}
-  .fig,.media,.claim,.def,.verse,.creed,figure.plate,figure.media,figure.brand-seal,.public-link,.telegram-post,.part-break,.coda,footer.master{break-inside:avoid}
+  .fig,.media,.claim,.def,.verse,.creed,figure.plate,figure.media,figure.brand-seal,.public-link,.telegram-post,.part-break,.coda,footer.master,.cinematic-finale,.media-studio{break-inside:avoid}
   section.apply-world{break-inside:avoid}
   h2,h3,h4{break-after:avoid}
   .part-break{page-break-before:always}
@@ -1634,6 +1693,31 @@ From inside, it is nearly stationary.</div>
   </figure>
 </section>
 
+<!-- ═══ CINEMATIC FINALE ═══ -->
+<section class="cinematic-finale">
+  <span class="cf-kicker">♾️ Experience the Cosmology</span>
+
+  <div class="cf-video-wrap">
+    <video id="finaleVideo" class="finale-video" muted playsinline loop controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Conscious.mp4" type="video/mp4"/>
+    </video>
+  </div>
+
+  <aside class="public-link" style="margin: 1.5rem auto; max-width: 100%;">
+    <span class="pl-k">🖇️ Public Studio · Live</span>
+    <p class="pl-t">Explore the full corpus in NotebookLM 📚</p>
+    <p class="pl-d">Audio overview, video explainer, mind map, flashcards, knowledge quiz. Sources are locked and read-only.</p>
+    <div class="pl-row">
+      <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+      <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+    </div>
+  </aside>
+
+  <div class="cf-iframe-wrap">
+    <iframe src="https://meaning-unconfounded.github.io/images/index.html" title="The Inversion Cosmology" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+  </div>
+</section>
+
 <footer class="master">
   <div class="title-row">
     <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
@@ -1875,6 +1959,29 @@ window.addEventListener('hashchange', openFromHash);
     was = [];
   });
 })();
+})();
+</script>
+
+<script>
+// CINEMATIC FINALE AUTOPLAY
+(function(){
+  var video = document.getElementById('finaleVideo');
+  if(!video) return;
+
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.5){
+          video.play().catch(function(e){
+            console.log("Autoplay blocked by browser.");
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(video);
+  }
 })();
 </script>
 
