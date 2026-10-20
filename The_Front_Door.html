@@ -62,7 +62,6 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--gold);color:#0b0a08;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
 
-/* ── HEADER v2 ── */
 .corpus-bar{position:sticky;top:0;z-index:900;background:rgba(11,10,8,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
 .corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
 .corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none;border-bottom:none}
@@ -98,7 +97,6 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 
 #progressBar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--magenta));z-index:9999;transition:width .08s linear}
 
-/* ── DOORWAY 🎁 ── */
 details.doorway{
   max-width:640px;
   margin:0 auto 3rem;
@@ -129,7 +127,7 @@ details.doorway .door-body{
 details.doorway .door-body p{margin:0 0 1rem;color:var(--text)}
 details.doorway .door-body p:last-child{margin-bottom:0}
 
-/* ── MEDIA STUDIO · tokenomics video + audio ── */
+/* ── MEDIA STUDIO ── */
 .media-studio{
   margin:1.4rem auto 1.8rem;
   max-width:100%;
@@ -167,12 +165,26 @@ details.doorway .door-body p:last-child{margin-bottom:0}
 .media-studio .ms-video{
   position:relative;
   width:100%;
-  border-radius:10px;
+  max-width:720px;
+  border-radius:12px;
   overflow:hidden;
-  border:1px solid var(--gold-line, rgba(212,175,55,.28));
-  background:#000;
+  border:1px solid rgba(212,175,55,.5);
+  background:#0a0a0c;
   margin:0 0 .9rem;
   aspect-ratio:16/9;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 32px rgba(0,0,0,.4),
+    0 0 24px rgba(212,175,55,.08);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.media-studio .ms-video:hover{
+  border-color:rgba(212,175,55,.75);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 14px 40px rgba(0,0,0,.48),
+    0 0 32px rgba(212,175,55,.14);
+  transform:translateY(-2px);
 }
 .media-studio .ms-video video{
   display:block;
@@ -180,6 +192,11 @@ details.doorway .door-body p:last-child{margin-bottom:0}
   height:100%;
   object-fit:contain;
   background:#000;
+  filter:contrast(1.1) saturate(1.14) brightness(1.03);
+  transition:filter .3s ease;
+}
+.media-studio .ms-video:hover video{
+  filter:contrast(1.14) saturate(1.2) brightness(1.06);
 }
 .media-studio .ms-audio{
   width:100%;
@@ -197,9 +214,83 @@ details.doorway .door-body p:last-child{margin-bottom:0}
   line-height:1.5;
 }
 
+/* ── CINEMATIC PAIR ── */
+.media-studio.cinematic-pair{
+  border-width:2px;
+  border-color:var(--gold-line);
+  background:linear-gradient(160deg, rgba(212,175,55,.14), var(--bg-raised));
+  box-shadow: 0 0 32px rgba(212,175,55,.14), 0 0 0 1px var(--gold-line) inset;
+}
+.media-studio.cinematic-pair .ms-k::after{
+  content: " · Cinematic";
+  color:var(--gold2);
+  opacity:.7;
+  letter-spacing:.24em;
+}
+
+/* ── SUMMARY SERIES · 3 portrait shorts placeholders ── */
+.summary-series{
+  margin:2.4rem 0 2rem;
+  padding:1.6rem 1.6rem 1.6rem;
+  border:2px solid var(--gold-line);
+  border-radius:14px;
+  background:linear-gradient(160deg, var(--gold-soft), var(--bg-raised));
+  box-shadow:0 0 24px rgba(212,175,55,.10), 0 0 0 1px rgba(212,175,55,.08) inset;
+}
+.summary-series .ss-k{
+  display:block;
+  font-family:var(--sans);
+  font-size:.66rem;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:700;
+  margin-bottom:.55rem;
+}
+.summary-series .ss-t{
+  font-family:var(--serif);
+  font-size:1.2rem;
+  color:var(--heading);
+  font-weight:700;
+  margin:0 0 .45rem;
+  line-height:1.35;
+}
+.summary-series .ss-d{
+  font-size:.92rem;
+  color:var(--soft);
+  line-height:1.65;
+  margin:0 0 1.2rem;
+}
+.summary-series .ss-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:.85rem;
+}
+.summary-series .ss-slot{
+  aspect-ratio:9/16;
+  border:1px dashed var(--gold-line);
+  border-radius:12px;
+  background:rgba(0,0,0,.25);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.summary-series .ss-slot video{
+  width:100%;
+  height:100%;
+  border-radius:12px;
+  object-fit:cover;
+  background:#000;
+  display:block;
+}
+@media(max-width: 640px){
+  .summary-series .ss-grid{grid-template-columns:1fr;}
+  .summary-series .ss-slot{aspect-ratio:4/5;}
+}
+
 details.doorway .door-body strong{color:var(--gold2);font-weight:700}
 
-/* ── PUBLIC LINK ── */
 .public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--gold-line);border-radius:14px;background:linear-gradient(135deg,var(--gold-soft),rgba(11,10,8,.6));font-family:var(--sans)}
 .public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:.6rem}
 .public-link .pl-t{font-family:var(--serif);font-size:1.2rem;color:var(--heading);font-weight:700;margin-bottom:.5rem;line-height:1.35}
@@ -208,7 +299,6 @@ details.doorway .door-body strong{color:var(--gold2);font-weight:700}
 .public-link a.pl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.05rem;border-radius:999px;background:var(--gold-soft);border:1px solid var(--gold-line);color:var(--gold2);font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:none;transition:background .18s,color .18s,border-color .18s}
 .public-link a.pl-btn:hover{background:rgba(212,175,55,.22);color:var(--gold3);border-color:var(--gold3)}
 
-/* ── TELEGRAM POST ── */
 .telegram-post{margin:2.6rem 0;padding:1.8rem 1.9rem;border:1px solid var(--gold-line);border-radius:16px;background:linear-gradient(160deg,var(--gold-soft),rgba(11,10,8,.7));font-family:var(--sans);font-size:1.04rem;line-height:1.85;color:var(--text)}
 .telegram-post .tp-head{font-family:var(--sans);font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);font-weight:700;margin-bottom:1.15rem;padding-bottom:.8rem;border-bottom:1px dashed var(--gold-line)}
 .telegram-post .tp-title{font-family:var(--serif);font-size:1.32rem;font-weight:700;color:var(--heading);letter-spacing:.06em;line-height:1.35;margin:0 0 1.15rem;word-break:keep-all;overflow-wrap:normal}
@@ -218,7 +308,6 @@ details.doorway .door-body strong{color:var(--gold2);font-weight:700}
 .telegram-post .tp-bullet{display:block;margin:.95rem 0;padding:.9rem 1.25rem;background:rgba(0,0,0,.35);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;font-family:var(--sans);font-size:.98rem;color:var(--text);line-height:1.75}
 .telegram-post .tp-hashtags{margin-top:1.4rem;padding-top:1rem;border-top:1px dashed var(--gold-line);font-size:.82rem;letter-spacing:.06em;color:var(--muted);font-family:var(--mono)}
 
-/* ── APPLICATION & WORLD BUILDING ── */
 section.apply-world{
   margin:3.2rem auto 2.4rem;
   max-width:40rem;
@@ -253,19 +342,16 @@ section.apply-world .aw-q{
   margin:0;
 }
 
-/* ── BRAND SEALS ── */
 figure.brand-seal{margin:2.6rem auto 2rem;text-align:center;max-width:min(220px,55vw);display:block}
 figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(212,175,55,.12);background:var(--bg-raised)}
 figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-top:.9rem;font-weight:700}
 figure.brand-seal.silver img{border-color:var(--silver-line);box-shadow:0 12px 40px rgba(200,195,214,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(200,195,214,.14)}
 figure.brand-seal.silver figcaption{color:var(--silver2)}
 
-/* ── CONNECT ── */
 .connect{margin:1.8rem 0;padding:1.3rem 1.5rem;border:1px dashed var(--cyan-line);border-radius:12px;background:var(--bg-raised);font-family:var(--sans);font-size:.94rem;color:var(--text);line-height:1.78}
 .connect strong{display:block;color:var(--cyan);font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.55rem}
 .connect a{color:var(--cyan);border-bottom:1px solid var(--cyan-line)}
 
-/* ── FOOTER v2 (.lib-stack) ── */
 footer.master{margin-top:3rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--border);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
 footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
 footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(212,175,55,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--bg-raised)}
@@ -571,6 +657,7 @@ details.eros-menu a{color:var(--gold)}
   details.toc-card>summary::before{display:none}
   details.doorway[open] .door-body{display:block}
   details.doorway>summary::before{display:none}
+  .summary-series,.media-studio.cinematic-pair{display:none!important}
 }
 @media(max-width:680px){
   body{font-size:17px}
@@ -591,46 +678,6 @@ details.eros-menu a{color:var(--gold)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-}
-
-/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
-.media-studio .ms-video{
-  position:relative;
-  width:100%;
-  max-width:720px;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid rgba(212,175,55,.5);
-  background:#0a0a0c;
-  margin:0 0 .9rem;
-  aspect-ratio:16/9;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 10px 32px rgba(0,0,0,.4),
-    0 0 24px rgba(212,175,55,.08);
-  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
-}
-.media-studio .ms-video:hover{
-  border-color:rgba(212,175,55,.75);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.06) inset,
-    0 14px 40px rgba(0,0,0,.48),
-    0 0 32px rgba(212,175,55,.14);
-  transform:translateY(-2px);
-}
-.media-studio .ms-video video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#000;
-  filter:contrast(1.1) saturate(1.14) brightness(1.03);
-  transition:filter .3s ease;
-}
-.media-studio .ms-video:hover video{
-  filter:contrast(1.14) saturate(1.2) brightness(1.06);
-}
-@media (prefers-reduced-motion: reduce){
   .media-studio .ms-video,
   .media-studio .ms-video video{transition:none}
   .media-studio .ms-video:hover{transform:none}
@@ -735,7 +782,6 @@ details.eros-menu a{color:var(--gold)}
     </ol>
   </details>
 
-  <!-- ═══ DOORWAY 🎁 ═══ -->
   <details class="doorway" id="doorway">
     <summary>Doorway 🎁</summary>
     <div class="door-body">
@@ -757,7 +803,7 @@ details.eros-menu a{color:var(--gold)}
     </div>
   </aside>
 
-  <aside class="media-studio" id="media-studio">
+  <aside class="media-studio" id="media-studio-tokenomics">
     <span class="ms-k">🎙️ Media Studio · Tokenomics</span>
     <p class="ms-t">EROS 💕 explained in plain language</p>
     <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works. Watch or listen before you size a position.</p>
@@ -970,7 +1016,6 @@ details.eros-menu a{color:var(--gold)}
     <p>And there is more capital in the room than most people realise. Billions in long-horizon holdings already sit inside the PulseChain orbit. That capital does not need to "invest in Eros" for the architecture to benefit. Patient capital changes the risk calculation for everyone building on the same chain. It makes multi-year infrastructure stories more plausible. It makes liquidity deeper when it finally moves.</p>
   </section>
 
-  <!-- ═══ SILVER SEAL · pivot at the integrity test — the letter's honesty turn ═══ -->
   <figure class="brand-seal silver">
     <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
     <figcaption>Tenacity Through Integrity</figcaption>
@@ -1184,6 +1229,33 @@ details.eros-menu a{color:var(--gold)}
     </figure>
   </section>
 
+<!-- Second public-link + Engine cinematic pair · mid-late -->
+<aside class="public-link">
+  <span class="pl-k">🖇️ Public Studio · Live</span>
+  <p class="pl-t">Keep reading in NotebookLM 📚</p>
+  <p class="pl-d">Still with us. Ask NotebookLM anything about the engine, the stack, or the wider architecture. Sources are locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
+
+<aside class="media-studio cinematic-pair" id="media-studio-engine">
+  <span class="ms-k">🎙️ Media Studio · Two Stack Engine</span>
+  <p class="ms-t">EROS · Atropa · Dysnomia</p>
+  <p class="ms-d">Two builders, two jobs, one machine. Why the rails stay separate on purpose.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata" muted loop>
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  <div class="ms-audio">
+    <audio controls preload="metadata">
+      <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Audio.m4a" type="audio/mp4"/>
+    </audio>
+  </div>
+</aside>
+
   <section class="part">
     <div class="part-head"><span class="part-num">Part Thirteen</span><span class="part-rule"></span></div>
     <h2 id="chart">The chart</h2>
@@ -1383,86 +1455,108 @@ details.eros-menu a{color:var(--gold)}
     <div class="receipt"><div class="value">Zero founder extraction</div><div class="label">True DeFi posture</div></div>
   </div>
 
-  <!-- ═══ SHARE LAYER ═══ -->
-  <div class="part-break" id="telegram" style="margin:2.6rem 0 1.8rem;padding:2rem 1.2rem;text-align:center;border-radius:14px;border:1px solid var(--gold-line);background:linear-gradient(160deg,var(--gold-soft),var(--bg-raised))">
-    <p style="font-family:var(--sans);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;font-weight:700">Share Layer</p>
-    <h2 style="font-size:clamp(1.4rem,3.6vw,1.85rem);color:var(--heading);border:none;margin:0 0 .35rem;padding:0;font-family:var(--serif);font-weight:700;line-height:1.2">The Ticket · The Test · The Door</h2>
-    <p style="margin:0;font-style:italic;color:var(--muted);font-size:.94rem">Short-form · to share · to seed · to invite</p>
-  </div>
-
-  <article class="telegram-post">
-    <p class="tp-head">Post One · 🎫 The Ticket</p>
-    <p class="tp-title">🎫 The Ten Thousand Who Already Own It</p>
-    <p>In 2024, EROS airdropped free to over ten thousand TitanX wallets. No sale. No presale. No founder allocation.</p>
-    <p>Most of them probably forgot.</p>
-    <span class="tp-bullet">🎫 <strong>The gift is still there.</strong> Still on-chain. Still theirs. While they were away, the community kept building.</span>
-    <span class="tp-bullet">🎫 <strong>28 months of receipts.</strong> 133 live pairs. Two years of media, books, audio, daily work.</span>
-    <span class="tp-bullet">🎫 <strong>The reactivation is a reminder,</strong> not a campaign. You do not need to convince ten thousand strangers. You have ten thousand holders who already own a piece of this.</span>
-    <p>You already own the ticket. You just forgot.</p>
-    <p class="tp-hashtags">#EROS #TheFrontDoor #TitanX #PulseChain</p>
-  </article>
-
-  <article class="telegram-post">
-    <p class="tp-head">Post Two · 🧪 The Test</p>
-    <p class="tp-title">🧪 Survival Is the Signal</p>
-    <p>Code can be copied. Tokenomics can be designed. Contracts can be audited. But belief cannot be manufactured.</p>
-    <p>When there was nothing to extract, who kept working?</p>
-    <span class="tp-bullet">🧪 <strong>No founder fee.</strong> No treasury. No hidden extraction. 28 months through the quiet seasons, on-chain, in public.</span>
-    <span class="tp-bullet">🧪 <strong>The integrity test.</strong> A protocol with no admin key. Just community, work, cohesion and execution.</span>
-    <span class="tp-bullet">🧪 <strong>Time reveals everything,</strong> especially when there is no money on the table.</span>
-    <p>Watch what people do, not what they say. The people who survive the bear with no extraction are the people who will still be here in the bull.</p>
-    <p class="tp-hashtags">#EROS #TheFrontDoor #SurvivalIsTheSignal #TrueDeFi</p>
-  </article>
-
-  <article class="telegram-post">
-    <p class="tp-head">Post Three · 🚪 The Door</p>
-    <p class="tp-title">🚪 The Front Door Is Already Open</p>
-    <p>Every coin built around a founder has an expiry date. Every value set built around a network compounds.</p>
-    <p>EROS is the value set. The token is the instrument. The front door is what the whole ecosystem walks through.</p>
-    <span class="tp-bullet">🚪 <strong>Check the wallet.</strong> Free airdrop may already sit there. Confirm it. Remember you own it.</span>
-    <span class="tp-bullet">🚪 <strong>Bridge and bond.</strong> Official Pulse bridge only. Pair what you already believe in. Promote the doorway you own.</span>
-    <span class="tp-bullet">🚪 <strong>Tell one person.</strong> Allies share edges. Tribes that only compete do not lift the graph.</span>
-    <p>It's all waiting on PulseChain. Let's turn on the flashlight.</p>
-    <p class="tp-hashtags">#EROS #TheFrontDoor #TitanX #PulseChain #ReadTheLetter</p>
-  </article>
-
-  <aside class="public-link">
-    <span class="pl-k">📚 Explore further</span>
-    <p class="pl-t">Open the public NotebookLM Studio</p>
-    <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone can view, ask questions in chat, and generate custom study materials. Sources locked and read-only.</p>
-    <div class="pl-row">
-      <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
-      <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+<!-- ═══ SUMMARY SERIES · 3 shorts placeholders ═══ -->
+<aside class="summary-series" id="summary-series">
+  <span class="ss-k">📺 Summary Series · Three Shorts</span>
+  <p class="ss-t">The Front Door in Three Minutes</p>
+  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the ticket ten thousand wallets already hold, why survival is the signal, and the ask itself. Watch here, or on Telegram.</p>
+  <div class="ss-grid">
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 01 · The Ticket">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_frontdoor_01.mp4" type="video/mp4"/>
+      </video>
     </div>
-  </aside>
-
-  <!-- ═══ AWB ═══ -->
-  <section class="apply-world" id="apply">
-    <span class="aw-label">Application &amp; World Building</span>
-    <p>The concepts in this book are not limited to the page. What can you build from them?</p>
-    <p>Can you apply them to a character, a weapon, an economy, a casino, a structure, an atom, a molecule, a law, a scientific theory, or an entire universe?</p>
-    <p>Can you extend the science, fiction, lore, and law of our shared world through code, narrative, and creative assets?</p>
-    <p class="aw-q">Take what you have learned. What can you create?</p>
-  </section>
-
-  <div class="coda">
-    <p>The graveyard is full of coins built around founders.<br/>The front door is built around a network.</p>
-    <p><em>28 months of receipts. One free airdrop. Ten thousand holders who already own the ticket. A cosmology, a macro thesis, and one ecosystem on PulseChain.</em></p>
-    <p>It's all waiting on PulseChain. Let's turn on the flashlight.</p>
-    <span class="next">EROS · The Unkillable · Tenacity Through Integrity</span>
-
-    <figure class="brand-seal" style="margin-top:2.4rem">
-      <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
-      <figcaption>Tenacity Through Integrity</figcaption>
-    </figure>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 02 · Survival Is the Signal">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_frontdoor_02.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 03 · The Ask">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_frontdoor_03.mp4" type="video/mp4"/>
+      </video>
+    </div>
   </div>
+</aside>
 
-  <footer class="signature">
-    <div class="rule"></div>
-    <p class="closing">With respect, and with 28 months of receipts,</p>
-    <p class="who">The people who stayed</p>
-    <p class="mark">✦ Eros · PulseChain · October 2026 ✦</p>
-  </footer>
+<div class="part-break" id="telegram" style="margin:2.6rem 0 1.8rem;padding:2rem 1.2rem;text-align:center;border-radius:14px;border:1px solid var(--gold-line);background:linear-gradient(160deg,var(--gold-soft),var(--bg-raised))">
+  <p style="font-family:var(--sans);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;font-weight:700">Share Layer</p>
+  <h2 style="font-size:clamp(1.4rem,3.6vw,1.85rem);color:var(--heading);border:none;margin:0 0 .35rem;padding:0;font-family:var(--serif);font-weight:700;line-height:1.2">The Ticket · The Test · The Door</h2>
+  <p style="margin:0;font-style:italic;color:var(--muted);font-size:.94rem">Short-form · to share · to seed · to invite</p>
+</div>
+
+<article class="telegram-post">
+  <p class="tp-head">Post One · 🎫 The Ticket</p>
+  <p class="tp-title">🎫 The Ten Thousand Who Already Own It</p>
+  <p>In 2024, EROS airdropped free to over ten thousand TitanX wallets. No sale. No presale. No founder allocation.</p>
+  <p>Most of them probably forgot.</p>
+  <span class="tp-bullet">🎫 <strong>The gift is still there.</strong> Still on-chain. Still theirs. While they were away, the community kept building.</span>
+  <span class="tp-bullet">🎫 <strong>28 months of receipts.</strong> 133 live pairs. Two years of media, books, audio, daily work.</span>
+  <span class="tp-bullet">🎫 <strong>The reactivation is a reminder,</strong> not a campaign. You do not need to convince ten thousand strangers. You have ten thousand holders who already own a piece of this.</span>
+  <p>You already own the ticket. You just forgot.</p>
+  <p class="tp-hashtags">#EROS #TheFrontDoor #TitanX #PulseChain</p>
+</article>
+
+<article class="telegram-post">
+  <p class="tp-head">Post Two · 🧪 The Test</p>
+  <p class="tp-title">🧪 Survival Is the Signal</p>
+  <p>Code can be copied. Tokenomics can be designed. Contracts can be audited. But belief cannot be manufactured.</p>
+  <p>When there was nothing to extract, who kept working?</p>
+  <span class="tp-bullet">🧪 <strong>No founder fee.</strong> No treasury. No hidden extraction. 28 months through the quiet seasons, on-chain, in public.</span>
+  <span class="tp-bullet">🧪 <strong>The integrity test.</strong> A protocol with no admin key. Just community, work, cohesion and execution.</span>
+  <span class="tp-bullet">🧪 <strong>Time reveals everything,</strong> especially when there is no money on the table.</span>
+  <p>Watch what people do, not what they say. The people who survive the bear with no extraction are the people who will still be here in the bull.</p>
+  <p class="tp-hashtags">#EROS #TheFrontDoor #SurvivalIsTheSignal #TrueDeFi</p>
+</article>
+
+<article class="telegram-post">
+  <p class="tp-head">Post Three · 🚪 The Door</p>
+  <p class="tp-title">🚪 The Front Door Is Already Open</p>
+  <p>Every coin built around a founder has an expiry date. Every value set built around a network compounds.</p>
+  <p>EROS is the value set. The token is the instrument. The front door is what the whole ecosystem walks through.</p>
+  <span class="tp-bullet">🚪 <strong>Check the wallet.</strong> Free airdrop may already sit there. Confirm it. Remember you own it.</span>
+  <span class="tp-bullet">🚪 <strong>Bridge and bond.</strong> Official Pulse bridge only. Pair what you already believe in. Promote the doorway you own.</span>
+  <span class="tp-bullet">🚪 <strong>Tell one person.</strong> Allies share edges. Tribes that only compete do not lift the graph.</span>
+  <p>It's all waiting on PulseChain. Let's turn on the flashlight.</p>
+  <p class="tp-hashtags">#EROS #TheFrontDoor #TitanX #PulseChain #ReadTheLetter</p>
+</article>
+
+<aside class="public-link">
+  <span class="pl-k">📚 Explore further</span>
+  <p class="pl-t">Open the public NotebookLM Studio</p>
+  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone can view, ask questions in chat, and generate custom study materials. Sources locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
+
+<section class="apply-world" id="apply">
+  <span class="aw-label">Application &amp; World Building</span>
+  <p>The concepts in this book are not limited to the page. What can you build from them?</p>
+  <p>Can you apply them to a character, a weapon, an economy, a casino, a structure, an atom, a molecule, a law, a scientific theory, or an entire universe?</p>
+  <p>Can you extend the science, fiction, lore, and law of our shared world through code, narrative, and creative assets?</p>
+  <p class="aw-q">Take what you have learned. What can you create?</p>
+</section>
+
+<div class="coda">
+  <p>The graveyard is full of coins built around founders.<br/>The front door is built around a network.</p>
+  <p><em>28 months of receipts. One free airdrop. Ten thousand holders who already own the ticket. A cosmology, a macro thesis, and one ecosystem on PulseChain.</em></p>
+  <p>It's all waiting on PulseChain. Let's turn on the flashlight.</p>
+  <span class="next">EROS · The Unkillable · Tenacity Through Integrity</span>
+
+  <figure class="brand-seal" style="margin-top:2.4rem">
+    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+    <figcaption>Tenacity Through Integrity</figcaption>
+  </figure>
+</div>
+
+<footer class="signature">
+  <div class="rule"></div>
+  <p class="closing">With respect, and with 28 months of receipts,</p>
+  <p class="who">The people who stayed</p>
+  <p class="mark">✦ Eros · PulseChain · October 2026 ✦</p>
+</footer>
 
 </div>
 
@@ -1546,8 +1640,6 @@ details.eros-menu a{color:var(--gold)}
       <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-
-  <!-- Rev 5 · 2026-10-19 · Media Studio moved to sit immediately after public-link -->
 </footer>
 
 </main>
@@ -1606,7 +1698,6 @@ function openFromHash(){
 openFromHash();
 window.addEventListener('hashchange', openFromHash);
 
-/* Chapter strip auto-tracking */
 (function(){
   var strip = document.querySelector('.corpus-bar nav.chapter-strip');
   if(!strip) return;
@@ -1712,10 +1803,6 @@ window.addEventListener('hashchange', openFromHash);
   apply();
 })();
 
-})();
-</script>
-
-<script>
 (function(){
   var was=[];
   window.addEventListener('beforeprint',function(){
@@ -1728,6 +1815,28 @@ window.addEventListener('hashchange', openFromHash);
     was.forEach(function(p){ p[0].open = p[1]; });
     was = [];
   });
+})();
+
+/* Cinematic pair autoplay */
+(function(){
+  var videos = document.querySelectorAll('.media-studio.cinematic-pair video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  videos.forEach(function(v){
+    v.muted = true;
+    v.loop = true;
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+          v.play().catch(function(){});
+        } else {
+          v.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(v);
+  });
+})();
+
 })();
 </script>
 
