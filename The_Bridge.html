@@ -53,7 +53,6 @@ a:visited{color:#b8bfc8;border-bottom-color:rgba(168,176,186,.28)}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--platinum);outline-offset:2px;border-radius:4px}
 ::selection{background:var(--platinum);color:#0a0b0e}
 
-/* ── TEXT-WRAP RULES ── */
 h1,h2,h3,h4{text-wrap:balance;orphans:2;widows:2}
 p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 .pull,.axiom,.note,.warn,.claim p,.lesson p,.usecase p,.risk,.tg .a,.honest p,.step-text,figcaption,.media-block figcaption,.space-note{text-wrap:pretty;orphans:2;widows:2}
@@ -62,7 +61,6 @@ footer.master .sig,footer.master .count,.pl-t,.tp-title,.tp-head,figure.brand-se
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--platinum);color:#0a0b0e;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
 
-/* ── HEADER v2 ── */
 .corpus-bar{position:sticky;top:0;z-index:900;background:rgba(10,11,14,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-line);font-family:var(--sans);padding:.7rem 1.1rem 0}
 .corpus-bar .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--hair2);min-height:50px}
 .corpus-bar .logo-cluster{display:flex;align-items:center;gap:.55rem;flex-shrink:0;text-decoration:none;border-bottom:none}
@@ -96,7 +94,6 @@ footer.master .sig,footer.master .count,.pl-t,.tp-title,.tp-head,figure.brand-se
   .corpus-bar .title-rule{width:14px}
 }
 
-/* ── COVER ── */
 .cover{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem}
 .cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.42em;text-transform:uppercase;color:var(--platinum);margin-bottom:1.2rem;font-weight:600}
 .cover h1{
@@ -119,7 +116,6 @@ figure.hero figcaption,figure.plate figcaption{font-family:var(--sans);font-size
 figure.plate{margin:1.4rem 0;text-align:center}
 figure.plate img{max-width:100%;border-radius:10px;border:1px solid var(--hair)}
 
-/* ── BRAND SEALS ── */
 figure.brand-seal{margin:2.6rem auto 2rem;text-align:center;max-width:min(220px,55vw);display:block}
 figure.brand-seal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:50%;border:3px solid var(--gold-line);box-shadow:0 12px 40px rgba(201,168,96,.22),0 0 0 1px rgba(255,255,255,.06) inset,0 0 48px rgba(201,168,96,.12);background:var(--surface)}
 figure.brand-seal figcaption{font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-top:.9rem;font-weight:700}
@@ -151,7 +147,6 @@ details.toc-card[open]>summary::before{content:"▾ "}
 @media(max-width:560px){.toc-grid{grid-template-columns:1fr}}
 .toc-grid a{display:flex;gap:.6rem;align-items:baseline;color:var(--soft);text-decoration:none;font-size:.85rem;padding:.35rem .5rem;border-radius:6px;line-height:1.45;transition:background .15s,color .15s;border-bottom:none}
 
-/* Doorway gift — subtle discovery reward */
 details.doorway{
   margin:0.6rem auto 1.8rem;
   border:1px solid var(--gold-line);
@@ -182,7 +177,7 @@ details.doorway .door-body{
 details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
 details.doorway .door-body p:last-child{margin-bottom:0}
 
-/* ── MEDIA STUDIO · tokenomics video + audio ── */
+/* ── MEDIA STUDIO · base ── */
 .media-studio{
   margin:1.4rem auto 1.8rem;
   max-width:100%;
@@ -220,12 +215,26 @@ details.doorway .door-body p:last-child{margin-bottom:0}
 .media-studio .ms-video{
   position:relative;
   width:100%;
-  border-radius:10px;
+  max-width:720px;
+  border-radius:12px;
   overflow:hidden;
-  border:1px solid var(--gold-line, rgba(212,175,55,.28));
-  background:#000;
+  border:1px solid rgba(212,175,55,.5);
+  background:#0a0a0c;
   margin:0 0 .9rem;
   aspect-ratio:16/9;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 32px rgba(0,0,0,.4),
+    0 0 24px rgba(212,175,55,.08);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.media-studio .ms-video:hover{
+  border-color:rgba(212,175,55,.75);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 14px 40px rgba(0,0,0,.48),
+    0 0 32px rgba(212,175,55,.14);
+  transform:translateY(-2px);
 }
 .media-studio .ms-video video{
   display:block;
@@ -233,6 +242,11 @@ details.doorway .door-body p:last-child{margin-bottom:0}
   height:100%;
   object-fit:contain;
   background:#000;
+  filter:contrast(1.1) saturate(1.14) brightness(1.03);
+  transition:filter .3s ease;
+}
+.media-studio .ms-video:hover video{
+  filter:contrast(1.14) saturate(1.2) brightness(1.06);
 }
 .media-studio .ms-audio{
   width:100%;
@@ -250,10 +264,84 @@ details.doorway .door-body p:last-child{margin-bottom:0}
   line-height:1.5;
 }
 
+/* ── CINEMATIC PAIR ── */
+.media-studio.cinematic-pair{
+  border-width:2px;
+  border-color:var(--gold-line);
+  background:linear-gradient(160deg, rgba(201,168,96,.14), var(--surface));
+  box-shadow: 0 0 32px rgba(201,168,96,.14), 0 0 0 1px var(--gold-line) inset;
+}
+.media-studio.cinematic-pair .ms-k::after{
+  content: " · Cinematic";
+  color:var(--gold2);
+  opacity:.7;
+  letter-spacing:.24em;
+}
+
+/* ── SUMMARY SERIES · 3 portrait shorts placeholders ── */
+.summary-series{
+  margin:2.4rem 0 2rem;
+  padding:1.6rem 1.6rem 1.6rem;
+  border:2px solid var(--platinum-line);
+  border-radius:14px;
+  background:linear-gradient(160deg, var(--platinum-soft), var(--surface));
+  box-shadow:0 0 24px rgba(216,221,227,.10), 0 0 0 1px rgba(216,221,227,.08) inset;
+}
+.summary-series .ss-k{
+  display:block;
+  font-family:var(--sans);
+  font-size:.66rem;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--platinum);
+  font-weight:700;
+  margin-bottom:.55rem;
+}
+.summary-series .ss-t{
+  font-family:var(--serif);
+  font-size:1.2rem;
+  color:var(--ink);
+  font-weight:700;
+  margin:0 0 .45rem;
+  line-height:1.35;
+}
+.summary-series .ss-d{
+  font-size:.92rem;
+  color:var(--soft);
+  line-height:1.65;
+  margin:0 0 1.2rem;
+}
+.summary-series .ss-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:.85rem;
+}
+.summary-series .ss-slot{
+  aspect-ratio:9/16;
+  border:1px dashed var(--platinum-line);
+  border-radius:12px;
+  background:rgba(0,0,0,.25);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.summary-series .ss-slot video{
+  width:100%;
+  height:100%;
+  border-radius:12px;
+  object-fit:cover;
+  background:#000;
+  display:block;
+}
+@media(max-width: 640px){
+  .summary-series .ss-grid{grid-template-columns:1fr;}
+  .summary-series .ss-slot{aspect-ratio:4/5;}
+}
+
 .toc-grid a:hover{background:var(--platinum-soft);color:var(--platinum);border-bottom:none}
 .toc-grid a .tn{color:var(--platinum);font-weight:700;font-size:.72rem;letter-spacing:.06em;flex-shrink:0;min-width:2.2rem}
 
-/* ── PUBLIC LINK ── */
 .public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid rgba(53,224,255,.4);border-radius:14px;background:linear-gradient(135deg,rgba(53,224,255,.08),rgba(10,11,14,.6));font-family:var(--sans)}
 .public-link .pl-k{display:block;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--plasma);font-weight:700;margin-bottom:.6rem}
 .public-link .pl-t{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:700;margin-bottom:.5rem;line-height:1.35}
@@ -262,7 +350,6 @@ details.doorway .door-body p:last-child{margin-bottom:0}
 .public-link a.pl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.05rem;border-radius:999px;background:rgba(53,224,255,.12);border:1px solid rgba(53,224,255,.4);color:var(--plasma);font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:none;transition:background .18s,color .18s,border-color .18s}
 .public-link a.pl-btn:hover{background:rgba(53,224,255,.22);color:#b8e8f8;border-color:#b8e8f8}
 
-/* ── TELEGRAM POST ── */
 .telegram-post{margin:2.6rem 0;padding:1.8rem 1.9rem;border:1px solid var(--platinum-line);border-radius:16px;background:linear-gradient(160deg,var(--platinum-soft),rgba(10,11,14,.7));font-family:var(--sans);font-size:1.04rem;line-height:1.85;color:var(--soft)}
 .telegram-post .tp-head{font-family:var(--sans);font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--platinum2);font-weight:700;margin-bottom:1.15rem;padding-bottom:.8rem;border-bottom:1px dashed var(--platinum-line)}
 .telegram-post .tp-title{font-family:var(--serif);font-size:1.32rem;font-weight:700;color:var(--ink);letter-spacing:.06em;line-height:1.35;margin:0 0 1.15rem;word-break:keep-all;overflow-wrap:normal}
@@ -272,7 +359,6 @@ details.doorway .door-body p:last-child{margin-bottom:0}
 .telegram-post .tp-bullet{display:block;margin:.95rem 0;padding:.9rem 1.25rem;background:rgba(0,0,0,.25);border-left:3px solid var(--platinum);border-radius:0 10px 10px 0;font-family:var(--sans);font-size:.98rem;color:var(--soft);line-height:1.75}
 .telegram-post .tp-hashtags{margin-top:1.4rem;padding-top:1rem;border-top:1px dashed var(--platinum-line);font-size:.82rem;letter-spacing:.06em;color:var(--muted);font-family:var(--mono)}
 
-/* ── APPLICATION & WORLD BUILDING ── */
 section.apply-world{
   margin:3.2rem auto 2.4rem;
   max-width:40rem;
@@ -468,7 +554,6 @@ details.eros-menu a{color:var(--platinum)}
 .yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
 
-/* ── FOOTER v2 (.lib-stack) ── */
 footer.master{margin-top:3.6rem;padding:2.4rem 0 1.8rem;border-top:1px solid var(--hair);text-align:center;font-family:var(--sans);font-size:.9rem;color:var(--muted);line-height:1.9}
 footer.master .title-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:nowrap}
 footer.master .pin{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-line);box-shadow:0 0 12px rgba(201,168,96,.22),0 0 0 1px rgba(255,255,255,.04) inset;background:var(--surface)}
@@ -513,6 +598,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   figure.brand-seal img{max-height:60mm;box-shadow:none!important;border-color:#aaa!important}
   details.toc-card .toc-grid{display:grid!important}
   details.toc-card>summary::before{display:none}
+  .summary-series,.media-studio.cinematic-pair{display:none!important}
 }
 @media(max-width:640px){
   .page{padding:1rem 1.05rem 4rem}
@@ -526,49 +612,6 @@ footer.master .pulse-row svg{flex-shrink:0}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-}
-
-/* ── MEDIA STUDIO · frame + filter (no second play icon) ── */
-.media-studio .ms-video{
-  position:relative;
-  width:100%;
-  max-width:720px;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid rgba(212,175,55,.5);
-  background:#0a0a0c;
-  margin:0 0 .9rem;
-  aspect-ratio:16/9;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 10px 32px rgba(0,0,0,.4),
-    0 0 24px rgba(212,175,55,.08);
-  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
-}
-.media-studio .ms-video:hover{
-  border-color:rgba(212,175,55,.75);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.06) inset,
-    0 14px 40px rgba(0,0,0,.48),
-    0 0 32px rgba(212,175,55,.14);
-  transform:translateY(-2px);
-}
-.media-studio .ms-video video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#000;
-  filter:contrast(1.1) saturate(1.14) brightness(1.03);
-  transition:filter .3s ease;
-}
-.media-studio .ms-video:hover video{
-  filter:contrast(1.14) saturate(1.2) brightness(1.06);
-}
-@media (prefers-reduced-motion: reduce){
-  .media-studio .ms-video,
-  .media-studio .ms-video video{transition:none}
-  .media-studio .ms-video:hover{transform:none}
 }
 
 </style>
@@ -966,7 +1009,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     </div>
     <div class="ms-audio">
       <audio controls preload="metadata">
-        <source src="https://meaning-unconfounded.github.io/images/The_EROS_Rock.m4a" type="audio/mp4"/>
+        <source src="https://meaning-unconfounded.github.io/images/The_Eros_Rock.m4a" type="audio/mp4"/>
       </audio>
     </div>
   </aside>
@@ -1002,6 +1045,17 @@ footer.master .pulse-row svg{flex-shrink:0}
 
   <div class="pull">Fiction is the doorway. The instrument is the floor. The use case is what you actually do inside the room.</div>
 </section>
+
+<!-- Second public-link · mid-late -->
+<aside class="public-link">
+  <span class="pl-k">🖇️ Public Studio · Live</span>
+  <p class="pl-t">Keep reading in NotebookLM 📚</p>
+  <p class="pl-d">Still with us. Ask NotebookLM anything about the use case, the risks, or the wider stack. Sources are locked and read-only.</p>
+  <div class="pl-row">
+    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
+    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
+  </div>
+</aside>
 
 <div class="part-break" id="p5">
   <p class="pk">Part V</p>
@@ -1052,7 +1106,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="space-note">If blank on mobile, use Open full screen.</p>
 </section>
 
-<!-- ═══ SILVER SEAL · pivot before the honesty turn (Risk Register) ═══ -->
 <figure class="brand-seal silver">
   <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
   <figcaption>Tenacity Through Integrity</figcaption>
@@ -1240,12 +1293,12 @@ footer.master .pulse-row svg{flex-shrink:0}
     <figcaption>Atropa → Dysnomia · cutting the thread · mycelium goes deeper · companion visual for the ecosystem web</figcaption>
   </figure>
 
-  <aside class="media-studio" id="media-studio-engine">
+  <aside class="media-studio cinematic-pair" id="media-studio-engine">
     <span class="ms-k">🎙️ Media Studio · Two Stack Engine</span>
     <p class="ms-t">EROS · Atropa · Dysnomia</p>
     <p class="ms-d">How the wider stack fits together — two build jobs, one machine, and why the rails stay separate on purpose.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata">
+      <video controls playsinline preload="metadata" muted loop>
         <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1376,7 +1429,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   </p>
 </section>
 
-<!-- ═══ SHARE LAYER ═══ -->
 <div class="part-break" id="telegram">
   <p class="pk">Share Layer</p>
   <h2>The LP · The Risk · The Verify</h2>
@@ -1417,18 +1469,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p>Verification is the culture. The chain is the only author.</p>
   <p class="tp-hashtags">#EROS #TheBridge #VerifyFirst #PulseChain</p>
 </article>
-
-<!-- ═══ CODA BANNER ═══ -->
-
-<aside class="public-link">
-  <span class="pl-k">📚 Explore further</span>
-  <p class="pl-t">Open the public NotebookLM Studio</p>
-  <p class="pl-d">Audio overview · video explainer · mind map · flashcards · knowledge quiz. Anyone can view, ask questions in chat, and generate custom study materials. Sources locked and read-only.</p>
-  <div class="pl-row">
-    <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
-    <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
-  </div>
-</aside>
 
 <div class="part-break" id="p12">
   <p class="pk">Part XII</p>
@@ -1478,7 +1518,30 @@ footer.master .pulse-row svg{flex-shrink:0}
   <div class="warn"><b>Disclaimer.</b> Not financial, legal, or tax advice. Crypto can go to zero. Contracts can fail. You can lose everything. DYOR. See also GitBook Disclaimer.</div>
 </section>
 
-<!-- ═══ APPLICATION & WORLD BUILDING ═══ -->
+<!-- ═══ SUMMARY SERIES · 3 shorts placeholders ═══ -->
+<aside class="summary-series" id="summary-series">
+  <span class="ss-k">📺 Summary Series · Three Shorts</span>
+  <p class="ss-t">The Bridge in Three Minutes</p>
+  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — what an LP actually is, why the risk register is first-class, and how to verify before you act. Watch here, or on Telegram.</p>
+  <div class="ss-grid">
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 01 · Poolonomics">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_01.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 02 · Risk First">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_02.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 03 · Verify">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_03.mp4" type="video/mp4"/>
+      </video>
+    </div>
+  </div>
+</aside>
+
 <section class="apply-world" id="apply">
   <span class="aw-label">Application &amp; World Building</span>
   <p>The concepts in this book are not limited to the page. What can you build from them?</p>
@@ -1487,7 +1550,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="aw-q">Take what you have learned. What can you create?</p>
 </section>
 
-<!-- ═══ CODA ═══ -->
 <section class="coda" id="coda" style="margin:3rem 0 0;padding:2.6rem 1.4rem 1.4rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(216,221,227,.06),transparent 60%)">
   <p style="font-size:1.12rem;font-style:italic;line-height:1.8;color:var(--ink);max-width:36rem;margin:0 auto 1rem">Verify on-chain. Never trust a badge. The chain is the only author.</p>
   <p style="font-size:1.05rem;font-style:italic;line-height:1.8;color:var(--soft);max-width:36rem;margin:0 auto 1.6rem">Mechanics before narrative. Risk before size. Bonding is the work. The world is the reason.</p>
@@ -1498,7 +1560,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   </figure>
 </section>
 
-<!-- ═══ MASTER FOOTER v2 ═══ -->
 <footer class="master">
   <div class="title-row">
     <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
@@ -1579,8 +1640,6 @@ footer.master .pulse-row svg{flex-shrink:0}
       <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-
-  <!-- Rev 4 · 2026-10-19 · Media Studios distributed: Tokenomics moved to after public-link · Rock & River added to p4b · Polonomics added to p3 · Engine moved to pdai-atropa -->
 </footer>
 
 </main>
@@ -1604,7 +1663,6 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 function each(list, fn){ Array.prototype.forEach.call(list, fn); }
 
-/* 1 · Progress bar + to-top */
 var bar = document.getElementById('progressBar');
 var toTop = document.getElementById('toTop');
 function onScrollProgress(){
@@ -1618,7 +1676,6 @@ window.addEventListener('scroll', onScrollProgress, {passive:true});
 onScrollProgress();
 if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-/* 2 · Smooth anchor scrolling */
 each(document.querySelectorAll('a[href^="#"]'), function(a){
   a.addEventListener('click', function(e){
     var href = a.getAttribute('href');
@@ -1631,7 +1688,6 @@ each(document.querySelectorAll('a[href^="#"]'), function(a){
   });
 });
 
-/* 3 · Open <details> on hash navigation */
 function openFromHash(){
   if(!location.hash) return;
   var el = document.querySelector(location.hash);
@@ -1642,7 +1698,6 @@ function openFromHash(){
 openFromHash();
 window.addEventListener('hashchange', openFromHash);
 
-/* 4 · Chapter strip auto-tracking (copied from Enclosure) */
 (function(){
   var strip = document.querySelector('.corpus-bar nav.chapter-strip');
   if(!strip) return;
@@ -1687,7 +1742,6 @@ window.addEventListener('hashchange', openFromHash);
   setTimeout(update, 300);
 })();
 
-/* 5 · Reader controls */
 (function(){
   var KEY = 'eros_bridge_reader_v1';
   var defaults = {size:100, lead:1.8, w:48};
@@ -1749,7 +1803,6 @@ window.addEventListener('hashchange', openFromHash);
   apply();
 })();
 
-/* 6 · Print handler */
 (function(){
   var was=[];
   window.addEventListener('beforeprint',function(){
@@ -1761,6 +1814,26 @@ window.addEventListener('hashchange', openFromHash);
   window.addEventListener('afterprint',function(){
     was.forEach(function(p){ p[0].open = p[1]; });
     was = [];
+  });
+})();
+
+/* Cinematic pair autoplay */
+(function(){
+  var videos = document.querySelectorAll('.media-studio.cinematic-pair video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  videos.forEach(function(v){
+    v.muted = true;
+    v.loop = true;
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+          v.play().catch(function(){});
+        } else {
+          v.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(v);
   });
 })();
 
