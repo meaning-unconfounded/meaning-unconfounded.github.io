@@ -224,20 +224,85 @@ details.doorway .door-body p:last-child{margin-bottom:0}
 .media-studio.cinematic-pair .ms-k::after{content: " · Cinematic";color:var(--gold2);opacity:.7;letter-spacing:.24em}
 
 .summary-series{
-  margin:2.4rem 0 2rem;padding:1.6rem 1.6rem 1.6rem;
-  border:2px solid var(--platinum-line);border-radius:14px;
+  margin:2.6rem 0 2.2rem;
+  padding:1.7rem 1.5rem 1.8rem;
+  border:2px solid var(--platinum-line);
+  border-radius:16px;
   background:linear-gradient(160deg, var(--platinum-soft), var(--surface));
-  box-shadow:0 0 24px rgba(216,221,227,.10), 0 0 0 1px rgba(216,221,227,.08) inset;
+  box-shadow:0 0 32px rgba(216,221,227,.16), 0 0 0 1px rgba(216,221,227,.10) inset;
 }
-.summary-series .ss-k{display:block;font-family:var(--sans);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--platinum);font-weight:700;margin-bottom:.55rem}
-.summary-series .ss-t{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:700;margin:0 0 .45rem;line-height:1.35}
-.summary-series .ss-d{font-size:.92rem;color:var(--soft);line-height:1.65;margin:0 0 1.2rem}
-.summary-series .ss-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:.85rem}
-.summary-series .ss-slot{aspect-ratio:9/16;border:1px dashed var(--platinum-line);border-radius:12px;background:rgba(0,0,0,.25);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.summary-series .ss-slot video{width:100%;height:100%;border-radius:12px;object-fit:cover;background:#000;display:block}
-@media(max-width: 640px){
-  .summary-series .ss-grid{grid-template-columns:1fr}
-  .summary-series .ss-slot{aspect-ratio:9/16}
+.summary-series .ss-k{
+  display:block;
+  font-family:var(--sans);
+  font-size:.66rem;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--platinum);
+  font-weight:700;
+  margin-bottom:.55rem;
+}
+.summary-series .ss-t{
+  font-family:var(--serif);
+  font-size:1.22rem;
+  color:var(--ink);
+  font-weight:700;
+  margin:0 0 .45rem;
+  line-height:1.35;
+}
+.summary-series .ss-d{
+  font-size:.92rem;
+  color:var(--soft);
+  line-height:1.65;
+  margin:0 0 1.25rem;
+}
+.summary-series .ss-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1rem;
+  justify-items:center;
+}
+.summary-series .ss-slot{
+  width:100%;
+  max-width:280px;
+  aspect-ratio:9/16;
+  border:1px solid var(--platinum-line);
+  border-radius:14px;
+  background:rgba(0,0,0,.35);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 28px rgba(0,0,0,.35), 0 0 20px rgba(216,221,227,.12);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.summary-series .ss-slot:hover{
+  transform:translateY(-4px);
+  border-color:var(--platinum2);
+  box-shadow:0 14px 36px rgba(0,0,0,.4), 0 0 28px rgba(216,221,227,.22);
+}
+.summary-series .ss-slot video{
+  width:100%;
+  height:100%;
+  border-radius:14px;
+  object-fit:contain;
+  background:#000;
+  display:block;
+}
+@media(max-width:900px){
+  .summary-series .ss-grid{
+    grid-template-columns:repeat(3, minmax(0, 240px));
+    justify-content:center;
+  }
+}
+@media(max-width:640px){
+  .summary-series .ss-grid{
+    grid-template-columns:1fr;
+    justify-items:center;
+  }
+  .summary-series .ss-slot{
+    max-width:320px;
+    aspect-ratio:9/16;
+  }
 }
 
 .toc-grid a:hover{background:var(--platinum-soft);color:var(--platinum);border-bottom:none}
@@ -640,6 +705,29 @@ footer.master .pulse-row svg{flex-shrink:0}
   4 · ErosX / 33eros are <em>design discussion only</em> — not announced products, not dates.<br/>
   5 · SpaceEros is visual theatre; official chain data is the truth.
 </div>
+
+<aside class="summary-series" id="summary-series">
+  <span class="ss-k">📺 Summary Series · Three Shorts</span>
+  <p class="ss-t">The Bridge in Three Minutes</p>
+  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — what an LP actually is, why the risk register is first-class, and how to verify before you act. Watch here, or on Telegram.</p>
+  <div class="ss-grid">
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 01 · Poolonomics" aria-label="Short 01 — Poolonomics">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_01.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 02 · Risk First" aria-label="Short 02 — Risk First">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_02.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 03 · Verify" aria-label="Short 03 — Verify">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_03.mp4" type="video/mp4"/>
+      </video>
+    </div>
+  </div>
+</aside>
 
 <div class="axiom" id="terms">
   <b>Core terms (defined once)</b>
@@ -1378,29 +1466,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   <div class="warn"><b>Disclaimer.</b> Not financial, legal, or tax advice. Crypto can go to zero. Contracts can fail. You can lose everything. DYOR. See also GitBook Disclaimer.</div>
 </section>
 
-<aside class="summary-series" id="summary-series">
-  <span class="ss-k">📺 Summary Series · Three Shorts</span>
-  <p class="ss-t">The Bridge in Three Minutes</p>
-  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — what an LP actually is, why the risk register is first-class, and how to verify before you act. Watch here, or on Telegram.</p>
-  <div class="ss-grid">
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 01 · Poolonomics" aria-label="Short 01 — Poolonomics">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_01.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 02 · Risk First" aria-label="Short 02 — Risk First">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_02.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 03 · Verify" aria-label="Short 03 — Verify">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_03.mp4" type="video/mp4"/>
-      </video>
-    </div>
-  </div>
-</aside>
-
 <section class="apply-world" id="apply">
   <span class="aw-label">Application &amp; World Building</span>
   <p>The concepts in this book are not limited to the page. What can you build from them?</p>
@@ -1704,6 +1769,19 @@ window.addEventListener('hashchange', openFromHash);
   });
 })();
 
+})();
+</script>
+
+
+<script>
+/* Summary-series: unmute on first play so one click = video + sound */
+(function(){
+  document.querySelectorAll('.summary-series video').forEach(function(v){
+    v.addEventListener('play', function onFirstPlay(){
+      v.muted = false;
+      v.removeEventListener('play', onFirstPlay);
+    });
+  });
 })();
 </script>
 
