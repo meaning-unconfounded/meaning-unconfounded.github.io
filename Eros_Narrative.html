@@ -1849,6 +1849,10 @@ window.addEventListener('hashchange', openFromHash);
   var status = document.getElementById('narrativeStatus');
   if(!frame || !video) return;
 
+  /* Top video volume (0.0 – 1.0). Lower this number for quieter. */
+  var TOP_VOLUME = 0.25;
+  video.volume = TOP_VOLUME;
+
   var opened = false;
   var soundOn = false;
   var PEEK = 'clamp(120px,16vw,220px)';
