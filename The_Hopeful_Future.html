@@ -839,7 +839,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,.corpus-bar,#progressBar,#toTop,#rdBtn,#rdPanel,.skip-link{display:none!important}
+  html::before,html::after,.corpus-bar,#progressBar,#toTop,#rdBtn,#rdPanel,.skip-link,.hopeful-hero{display:none!important}
   body{background:#040108!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .part-break,.claim,.verse,.plate,.movement,.capstone,figure.svg-plate,.scoreboard,.stages,.gift-grid,footer.master,.loop-viz,.public-link,.telegram-post,.connect,details.doorway,details.toc-card{break-inside:avoid}
   section.apply-world{break-inside:avoid}
@@ -929,6 +929,188 @@ footer.master .pulse-row svg{flex-shrink:0}
 .yt-wrap .yt-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;background:#000}
 .yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
+
+/* ═══ HOPEFUL HERO · lens-circle cinematic ═══ */
+.hopeful-hero{
+  position:relative;
+  isolation:isolate;
+  width:100vw;
+  margin:0 calc(50% - 50vw) 1.4rem;
+  min-height:min(760px,82vh);
+  min-height:min(760px,82svh);
+  overflow:hidden;
+  display:grid;
+  align-items:end;
+  background:#040108;
+  color:#f4ecff;
+  text-align:left;
+  font-family:var(--sans);
+  cursor:pointer;
+  --lens:0px;
+  --px:50%;
+  --py:50%;
+}
+.hopeful-hero__poster,
+.hopeful-hero__video,
+.hopeful-hero__shade,
+.hopeful-hero__grain{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.hopeful-hero__poster,
+.hopeful-hero__video{
+  object-fit:cover;
+  object-position:45% 45%;
+}
+.hopeful-hero__poster{
+  z-index:-4;
+  transform:scale(1.015);
+  filter:brightness(.55) saturate(.7);
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
+}
+.hopeful-hero__video{
+  z-index:-3;
+  background:#040108;
+  clip-path:circle(var(--lens) at var(--px) var(--py));
+  transition:clip-path 1s cubic-bezier(.16,1,.3,1);
+  will-change:clip-path;
+}
+.hopeful-hero__shade{
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(4,1,8,.80) 0%, rgba(4,1,8,.35) 55%, rgba(4,1,8,.15) 100%),
+    linear-gradient(0deg,rgba(4,1,8,.94) 0%, rgba(4,1,8,.35) 42%, rgba(4,1,8,.08) 72%, rgba(4,1,8,.42) 100%);
+}
+.hopeful-hero__grain{
+  z-index:-1;
+  pointer-events:none;
+  opacity:.10;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+.hopeful-hero.is-peeking .hopeful-hero__poster{
+  transform:scale(1.03);
+  filter:brightness(.46) saturate(.66);
+}
+.hopeful-hero.is-open .hopeful-hero__poster{
+  opacity:.10;
+}
+.hopeful-hero.is-open .hopeful-hero__video{
+  clip-path:circle(150% at var(--px) var(--py));
+}
+.hopeful-hero__top{
+  position:absolute;
+  top:clamp(24px,4vw,48px);
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:rgba(244,236,255,.85);
+  pointer-events:none;
+  z-index:2;
+  font-family:var(--sans);
+}
+.hopeful-hero__top span:first-child{letter-spacing:.38em}
+.hopeful-hero__top span:last-child{color:rgba(244,236,255,.55);text-align:right;letter-spacing:.15em}
+.hopeful-hero__copy{
+  position:relative;
+  width:min(940px,100%);
+  padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);
+  pointer-events:none;
+  z-index:2;
+}
+.hopeful-hero__kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--gift2, #FFD166);
+  font:600 10px/1.4 var(--sans);
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin:0 0 20px;
+}
+.hopeful-hero__kicker:before{
+  content:"";
+  width:30px;
+  height:1px;
+  background:var(--gift2, #FFD166);
+}
+.hopeful-hero h1{
+  font:700 clamp(52px,9vw,112px)/.94 var(--serif);
+  letter-spacing:.06em;
+  margin:0;
+  max-width:900px;
+  background:linear-gradient(180deg,#fff 0%,#E040FB 42%,#A020F0 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 44px rgba(160,32,240,.35));
+  text-shadow:none;
+}
+.hopeful-hero__lede{
+  max-width:560px;
+  color:rgba(244,236,255,.82);
+  font:400 13.5px/1.85 var(--sans);
+  margin:24px 0 0;
+}
+.hopeful-hero__footer{
+  position:absolute;
+  bottom:0;
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  border-top:1px solid rgba(244,236,255,.18);
+  padding:14px 0 17px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:rgba(244,236,255,.5);
+  font:500 9px/1.4 var(--sans);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  pointer-events:none;
+  z-index:2;
+}
+.hopeful-hero__footer span:last-child{text-align:right;color:var(--platinum, #d8dde3)}
+/* Top video — plays full-frame with no image on top; the image fades in for the last 0.5 s only */
+.hopeful-hero .hopeful-hero__video{clip-path:none!important;transition:none!important;will-change:auto}
+.hopeful-hero .hopeful-hero__poster{z-index:-2;opacity:0!important;filter:none!important;transform:none!important;transition:opacity .45s ease!important}
+.hopeful-hero.is-ending .hopeful-hero__poster{opacity:1!important}
+/* Top video — small volume button */
+.vol-btn{position:absolute;right:clamp(24px,6vw,84px);bottom:58px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;
+  border:1px solid rgba(216,221,227,.5);background:rgba(7,6,9,.55);color:#f0e0c4;display:grid;place-items:center;cursor:pointer;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s ease,border-color .2s ease;touch-action:manipulation}
+.vol-btn:hover{background:rgba(7,6,9,.8)}
+.vol-btn:focus-visible{outline:2px solid #f0e0c4;outline-offset:2px}
+.vol-btn .vb-off{display:none}
+.vol-btn.is-muted .vb-on{display:none}
+.vol-btn.is-muted .vb-off{display:inline}
+
+@media(max-width:700px){
+  .hopeful-hero{
+    min-height:min(760px,78vh);
+    min-height:min(760px,78svh);
+    margin-bottom:1.1rem;
+  }
+  .hopeful-hero__top{align-items:flex-start}
+  .hopeful-hero__top span:last-child{max-width:150px}
+  .hopeful-hero__copy{padding:0 24px 78px}
+  .hopeful-hero h1{font-size:clamp(48px,13.5vw,78px)}
+  .hopeful-hero__lede{max-width:320px;margin-top:18px}
+  .hopeful-hero__footer{font-size:7px;letter-spacing:.1em}
+  .hopeful-hero__poster,.hopeful-hero__video{object-position:48% 45%}
+}
+@media(prefers-reduced-motion:reduce){
+  .hopeful-hero__poster,
+  .hopeful-hero__video{transition:none!important}
+}
 </style>
 </head>
 <body>
@@ -968,44 +1150,27 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <main class="page" id="top">
 
-<header class="cover">
-  <p class="kick">PulseChain · The gift · pDAI · Atropa · EROS</p>
-  <div class="hex-row">
-    <svg width="62" height="62" viewBox="0 0 100 100" aria-label="PulseChain">
-      <defs>
-        <linearGradient id="pcg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#A020F0"/>
-          <stop offset="55%" stop-color="#E040FB"/>
-          <stop offset="100%" stop-color="#7A00D4"/>
-        </linearGradient>
-      </defs>
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pcg)"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#040108" opacity=".9"/>
-      <path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <svg width="58" height="58" viewBox="0 0 100 100" aria-label="PulseX">
-      <defs>
-        <linearGradient id="pxg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#00D4FF"/>
-          <stop offset="50%" stop-color="#A020F0"/>
-          <stop offset="100%" stop-color="#E040FB"/>
-        </linearGradient>
-      </defs>
-      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#pxg)"/>
-      <polygon points="50,14 80,32 80,68 50,86 20,68 20,32" fill="#040108" opacity=".9"/>
-      <path d="M28 36 L50 50 L72 36 M50 50 L50 72 M38 62 L50 74 L62 62" fill="none" stroke="#00FF88" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <svg width="54" height="54" viewBox="0 0 100 100" aria-label="Atropa">
-      <circle cx="50" cy="50" r="42" fill="none" stroke="#c97064" stroke-width="2"/>
-      <path d="M50 14 A36 36 0 1 1 49.9 14" fill="none" stroke="#c97064" stroke-width="1" opacity=".5"/>
-      <path d="M20 60 C32 42 44 78 56 60 C64 50 72 55 82 48" fill="none" stroke="#e8a55a" stroke-width="2.4" stroke-linecap="round"/>
-      <circle cx="50" cy="60" r="3.4" fill="#c97064"/>
-    </svg>
+<header class="hopeful-hero" id="hopefulHero" aria-label="The Hopeful Future — cinematic introduction">
+  <img class="hopeful-hero__poster" src="https://meaning-unconfounded.github.io/images/eros-hopeful-pulse-gift.jpg" alt="The Hopeful Future — PulseChain · the gift · the stack" fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
+  <video class="hopeful-hero__video" id="hopefulFilm" playsinline muted loop autoplay preload="auto" aria-hidden="true">
+    <source src="https://meaning-unconfounded.github.io/images/eros_cant_exploit.mp4" type="video/mp4"/>
+  </video>
+  <div class="hopeful-hero__shade"></div>
+  <div class="hopeful-hero__grain"></div>
+  <div class="hopeful-hero__top">
+    <span>PulseChain · The gift · The stack</span>
+    <span>One chain · Five layers · One standard</span>
   </div>
-
-  <h1>THE HOPEFUL FUTURE</h1>
-  <p class="sub">The gift · The settlement · The base · The world · The floor · The bridge</p>
-  <div class="rule"></div>
+  <div class="hopeful-hero__copy">
+    <p class="hopeful-hero__kicker">The gift · The settlement · The base · The world · The floor · The bridge</p>
+    <h1>The Hopeful Future</h1>
+    <p class="hopeful-hero__lede">Not extraction. Everything DeFi should have been. pDAI states what settlement is for. Atropa counts what the base already is. EROS gives the base a world. PulseChain is the floor. The bridge is the mission. The right people make it a home.</p>
+  </div>
+  <button type="button" class="vol-btn is-muted" id="volBtn" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+  <div class="hopeful-hero__footer">
+    <span>The Hopeful Future · Gift Edition</span>
+    <span id="hopefulStatus" aria-live="polite">Click or scroll to enter</span>
+  </div>
 </header>
 
 <section class="frank">
@@ -1074,7 +1239,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <div class="video-hero">
   <div class="vh-label">Eros 414 · visual explainer</div>
-  <video controls playsinline preload="metadata" aria-label="Eros 414 — animated mathematical manifolds, Dysnomia VM wireframes, pDAI liquidity graphs">
+  <video poster="https://meaning-unconfounded.github.io/images/eros-maria.jpg" controls playsinline preload="metadata" aria-label="Eros 414 — animated mathematical manifolds, Dysnomia VM wireframes, pDAI liquidity graphs">
     <source src="https://meaning-unconfounded.github.io/images/Eros414.mp4" type="video/mp4"/>
   </video>
   <p class="vh-cap">Animated mathematical manifolds · neon Dysnomia VM wireframes · pDAI liquidity lock pulse graphs. The whole thesis, in motion.</p>
@@ -1086,17 +1251,17 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the gift, the five-layer stack, and the unity thesis that holds it together. Watch here, or on Telegram.</p>
   <div class="ss-grid">
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 01 · The Gift" aria-label="Short 01 — The Gift">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-hopeful-pulse-gift.jpg" controls playsinline preload="metadata" muted title="Short 01 · The Gift" aria-label="Short 01 — The Gift">
         <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_01.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 02 · The Five Layers" aria-label="Short 02 — The Five Layers">
+      <video poster="https://meaning-unconfounded.github.io/images/hopeful-unity-stack.png" controls playsinline preload="metadata" muted title="Short 02 · The Five Layers" aria-label="Short 02 — The Five Layers">
         <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_02.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 03 · The Unity" aria-label="Short 03 — The Unity">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" controls playsinline preload="metadata" muted title="Short 03 · The Unity" aria-label="Short 03 — The Unity">
         <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_03.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1452,7 +1617,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">EROS 💕 explained in plain language</p>
     <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
         <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1534,7 +1699,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ms-t">EROS · Atropa · Dysnomia</p>
   <p class="ms-d">Two builders, two jobs, one machine. How the wider stack fits together — and why the rails stay separate on purpose.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
+    <video poster="https://meaning-unconfounded.github.io/images/Atropos.jpg" controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4" type="video/mp4"/>
     </video>
   </div>
@@ -1784,7 +1949,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p>This is not a moral judgment about how markets work. It is the weather.</p>
 
   <figure class="loop-viz">
-    <video controls autoplay loop muted playsinline preload="metadata" aria-label="The compounding loop — price leads attention, preparation is the edge">
+    <video poster="https://meaning-unconfounded.github.io/images/eros-pls-ratio.jpg" controls autoplay loop muted playsinline preload="metadata" aria-label="The compounding loop — price leads attention, preparation is the edge">
       <source src="https://meaning-unconfounded.github.io/images/price_leads.mp4" type="video/mp4">
     </video>
     <figcaption class="loop-overlay">
@@ -2612,6 +2777,186 @@ window.addEventListener('hashchange', openFromHash);
       v.removeEventListener('play', onFirstPlay);
     });
   });
+})();
+</script>
+
+
+<script>
+/* ═══ HOPEFUL HERO · lens-circle cinematic with autoplay + sound ═══ */
+(function(){
+  "use strict";
+  var hero = document.getElementById('hopefulHero');
+  var video = document.getElementById('hopefulFilm');
+  var status = document.getElementById('hopefulStatus');
+  if(!hero || !video) return;
+
+  var opened = false;
+  var soundOn = false;
+  var PEEK = 'clamp(120px,16vw,220px)';
+
+  function setStatus(msg){ if(status) status.textContent = msg; }
+  function pointAt(x, y){
+    var r = hero.getBoundingClientRect();
+    var px = Math.max(0, Math.min(r.width,  x - r.left));
+    var py = Math.max(0, Math.min(r.height, y - r.top));
+    hero.style.setProperty('--px', px + 'px');
+    hero.style.setProperty('--py', py + 'px');
+  }
+  function setLens(open){
+    hero.style.setProperty('--lens', open ? '150%' : PEEK);
+  }
+
+  function trySound(){
+    if(soundOn) return;
+    video.muted = false;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
+       .catch(function(){
+         video.muted = true;
+         setStatus('Click or scroll to enter');
+         try { video.play().catch(function(){}); } catch(e){}
+       });
+    } else {
+      soundOn = true;
+      setStatus('Sound on');
+    }
+  }
+
+  function openHero(x, y){
+    if(x != null && y != null) pointAt(x, y);
+    opened = true;
+    hero.classList.add('is-open');
+    hero.classList.remove('is-peeking');
+    setLens(true);
+    trySound();
+    if(soundOn && video.paused) video.play().catch(function(){});
+  }
+
+  (function boot(){
+    video.muted = false;
+    video.loop = true;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
+       .catch(function(){
+         video.muted = true;
+         try { video.play().catch(function(){}); } catch(e){}
+         setStatus('Click or scroll to enter');
+       });
+    }
+  })();
+
+  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
+  function unlockOnce(e){
+    if(soundOn) return;
+    if(e && e.target && e.target.closest && e.target.closest('.vol-btn')) return; /* button handles itself */
+    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
+    trySound();
+  }
+  gestures.forEach(function(evt){
+    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
+  });
+
+  hero.addEventListener('pointermove', function(e){
+    if(opened) return;
+    pointAt(e.clientX, e.clientY);
+    hero.classList.add('is-peeking');
+    setLens(false);
+  });
+  hero.addEventListener('touchmove', function(e){
+    if(opened) return;
+    if(e.touches && e.touches[0]){
+      pointAt(e.touches[0].clientX, e.touches[0].clientY);
+      hero.classList.add('is-peeking');
+      setLens(false);
+    }
+  }, { passive: true });
+
+  hero.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('a')) return;
+    if(!opened) openHero(e.clientX, e.clientY);
+    else if(video.paused) video.play().catch(function(){});
+  });
+
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          if(video.paused) video.play().catch(function(){});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.05 }).observe(hero);
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && video.paused) video.play().catch(function(){});
+  });
+
+
+  /* Small volume button (bottom right of the top video) */
+  var volBtn = document.getElementById('volBtn');
+  function syncVol(){
+    if(!volBtn) return;
+    var off = video.muted || video.volume === 0;
+    volBtn.classList.toggle('is-muted', off);
+    volBtn.setAttribute('aria-pressed', off ? 'true' : 'false');
+    volBtn.setAttribute('aria-label', off ? 'Turn sound on' : 'Turn sound off');
+  }
+  if(volBtn){
+    volBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      soundOn = true; /* the visitor is now in control; stop auto-unmuting */
+      video.muted = !video.muted;
+      if(!video.muted && video.volume === 0) video.volume = 1;
+      if(!video.muted && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        video.play().catch(function(){});
+      }
+      setStatus(video.muted ? 'Sound off' : 'Sound on');
+      syncVol();
+    });
+    video.addEventListener('volumechange', syncVol);
+    syncVol();
+  }
+
+
+  /* Last 0.5 s of the film: fade the image in over the video; it clears when the loop restarts */
+  var END_IMAGE_SECONDS = 0.5;
+  var endingRunning = false;
+  function checkEnding(){
+    var d = video.duration;
+    if(!d || !isFinite(d) || d <= END_IMAGE_SECONDS) return;
+    hero.classList.toggle('is-ending', (d - video.currentTime) <= END_IMAGE_SECONDS);
+  }
+  function endingTick(){
+    checkEnding();
+    if(!video.paused && !video.ended){ requestAnimationFrame(endingTick); } else { endingRunning = false; }
+  }
+  video.addEventListener('playing', function(){
+    if(endingRunning) return;
+    endingRunning = true;
+    requestAnimationFrame(endingTick);
+  });
+  video.addEventListener('seeked', checkEnding);
+
+  video.addEventListener('error', function(){
+    setStatus('Video unavailable · poster remains');
+  });
+
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches){
+    video.pause();
+    video.muted = true;
+    hero.classList.add('is-open');
+    hero.classList.remove('is-peeking');
+    setLens(true);
+    opened = true;
+    setStatus('Static view');
+  }
 })();
 </script>
 
