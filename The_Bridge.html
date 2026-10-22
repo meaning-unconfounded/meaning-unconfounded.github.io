@@ -505,7 +505,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,#progressBar,.corpus-bar,#toTop,#rdBtn,#rdPanel,.skip-link{display:none!important}
+  html::before,html::after,#progressBar,.corpus-bar,#toTop,#rdBtn,#rdPanel,.skip-link,.bridge-hero{display:none!important}
   body{background:#fff!important;color:#111!important;padding:0}
   .page{max-width:42rem;padding:0}
   a{color:#111;border-bottom:none}
@@ -533,6 +533,188 @@ footer.master .pulse-row svg{flex-shrink:0}
   .media-studio .ms-video,
   .media-studio .ms-video video{transition:none}
   .media-studio .ms-video:hover{transform:none}
+}
+
+/* ═══ BRIDGE HERO · lens-circle cinematic ═══ */
+.bridge-hero{
+  position:relative;
+  isolation:isolate;
+  width:100vw;
+  margin:0 calc(50% - 50vw) 1.4rem;
+  min-height:min(760px,82vh);
+  min-height:min(760px,82svh);
+  overflow:hidden;
+  display:grid;
+  align-items:end;
+  background:#05060a;
+  color:#eaeef2;
+  text-align:left;
+  font-family:var(--sans);
+  cursor:pointer;
+  --lens:0px;
+  --px:50%;
+  --py:50%;
+}
+.bridge-hero__poster,
+.bridge-hero__video,
+.bridge-hero__shade,
+.bridge-hero__grain{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.bridge-hero__poster,
+.bridge-hero__video{
+  object-fit:cover;
+  object-position:45% 45%;
+}
+.bridge-hero__poster{
+  z-index:-4;
+  transform:scale(1.015);
+  filter:brightness(.55) saturate(.7);
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
+}
+.bridge-hero__video{
+  z-index:-3;
+  background:#05060a;
+  clip-path:circle(var(--lens) at var(--px) var(--py));
+  transition:clip-path 1s cubic-bezier(.16,1,.3,1);
+  will-change:clip-path;
+}
+.bridge-hero__shade{
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(5,6,10,.78) 0%, rgba(5,6,10,.32) 55%, rgba(5,6,10,.14) 100%),
+    linear-gradient(0deg,rgba(5,6,10,.94) 0%, rgba(5,6,10,.32) 42%, rgba(5,6,10,.08) 72%, rgba(5,6,10,.42) 100%);
+}
+.bridge-hero__grain{
+  z-index:-1;
+  pointer-events:none;
+  opacity:.10;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+.bridge-hero.is-peeking .bridge-hero__poster{
+  transform:scale(1.03);
+  filter:brightness(.46) saturate(.66);
+}
+.bridge-hero.is-open .bridge-hero__poster{
+  opacity:.10;
+}
+.bridge-hero.is-open .bridge-hero__video{
+  clip-path:circle(150% at var(--px) var(--py));
+}
+.bridge-hero__top{
+  position:absolute;
+  top:clamp(24px,4vw,48px);
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:rgba(232,238,245,.85);
+  pointer-events:none;
+  z-index:2;
+  font-family:var(--sans);
+}
+.bridge-hero__top span:first-child{letter-spacing:.38em}
+.bridge-hero__top span:last-child{color:rgba(232,238,245,.55);text-align:right;letter-spacing:.15em}
+.bridge-hero__copy{
+  position:relative;
+  width:min(940px,100%);
+  padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);
+  pointer-events:none;
+  z-index:2;
+}
+.bridge-hero__kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--gold2, #d8b878);
+  font:600 10px/1.4 var(--sans);
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin:0 0 20px;
+}
+.bridge-hero__kicker:before{
+  content:"";
+  width:30px;
+  height:1px;
+  background:var(--gold2, #d8b878);
+}
+.bridge-hero h1{
+  font:700 clamp(52px,9vw,112px)/.94 var(--serif);
+  letter-spacing:.06em;
+  margin:0;
+  max-width:800px;
+  background:linear-gradient(180deg,#f5f7f9 0%,#d8dde3 40%,#a8b0ba 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 42px rgba(216,221,227,.18));
+  text-shadow:none;
+}
+.bridge-hero__lede{
+  max-width:520px;
+  color:rgba(232,238,242,.78);
+  font:400 13.5px/1.85 var(--sans);
+  margin:24px 0 0;
+}
+.bridge-hero__footer{
+  position:absolute;
+  bottom:0;
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  border-top:1px solid rgba(216,221,227,.18);
+  padding:14px 0 17px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:rgba(232,238,242,.5);
+  font:500 9px/1.4 var(--sans);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  pointer-events:none;
+  z-index:2;
+}
+/* Top video — plays full-frame with no image on top; the image fades in for the last 0.5 s only */
+.bridge-hero .bridge-hero__video{clip-path:none!important;transition:none!important;will-change:auto}
+.bridge-hero .bridge-hero__poster{z-index:-2;opacity:0!important;filter:none!important;transform:none!important;transition:opacity .45s ease!important}
+.bridge-hero.is-ending .bridge-hero__poster{opacity:1!important}
+/* Top video — small volume button */
+.vol-btn{position:absolute;right:clamp(24px,6vw,84px);bottom:58px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;
+  border:1px solid rgba(216,221,227,.5);background:rgba(7,6,9,.55);color:#f0e0c4;display:grid;place-items:center;cursor:pointer;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s ease,border-color .2s ease;touch-action:manipulation}
+.vol-btn:hover{background:rgba(7,6,9,.8)}
+.vol-btn:focus-visible{outline:2px solid #f0e0c4;outline-offset:2px}
+.vol-btn .vb-off{display:none}
+.vol-btn.is-muted .vb-on{display:none}
+.vol-btn.is-muted .vb-off{display:inline}
+.bridge-hero__footer span:last-child{text-align:right;color:var(--platinum, #d8dde3)}
+
+@media(max-width:700px){
+  .bridge-hero{
+    min-height:min(760px,78vh);
+    min-height:min(760px,78svh);
+    margin-bottom:1.1rem;
+  }
+  .bridge-hero__top{align-items:flex-start}
+  .bridge-hero__top span:last-child{max-width:150px}
+  .bridge-hero__copy{padding:0 24px 78px}
+  .bridge-hero h1{font-size:clamp(48px,13.5vw,78px)}
+  .bridge-hero__lede{max-width:300px;margin-top:18px}
+  .bridge-hero__footer{font-size:7px;letter-spacing:.1em}
+  .bridge-hero__poster,.bridge-hero__video{object-position:48% 45%}
+}
+@media(prefers-reduced-motion:reduce){
+  .bridge-hero__poster,
+  .bridge-hero__video{transition:none!important}
 }
 </style>
 </head>
@@ -578,14 +760,26 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <main class="page" id="main">
 
-<header class="cover">
-  <div class="kick">Field Manual · EROS · PulseChain</div>
-  <h1>THE BRIDGE</h1>
-  <p class="sub">Tokenomics · Poolonomics · Liquidity · ErosX · Playbook</p>
-  <div class="rule"></div>
-  <p class="opening">A <em>finance-grade field manual</em>, not a whitepaper of promises. What an LP is. How pool liquidity differs from wallet supply. Why bonding is not the same as farming a third-party inflation token. How the Eros → ErosX transform works as a use case. How to verify. How to act. Risks included.</p>
-  <div class="seal">
-    <strong>PulseChain native.</strong> EROS is a PRC-20. The pairs are PulseX pairs. TitanX holders received the airdrop path. Lore companions explain <em>why people stay</em>. This book explains <em>how the instrument works — and where it gets used</em>.
+<header class="bridge-hero" id="bridgeHero" aria-label="The Bridge — cinematic introduction">
+  <img class="bridge-hero__poster" src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Bridge — finance-grade field manual" fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
+  <video class="bridge-hero__video" id="bridgeFilm" playsinline muted loop autoplay preload="auto" aria-hidden="true">
+    <source src="https://meaning-unconfounded.github.io/images/migrate_pulsechain.mp4" type="video/mp4"/>
+  </video>
+  <div class="bridge-hero__shade"></div>
+  <div class="bridge-hero__grain"></div>
+  <div class="bridge-hero__top">
+    <span>Field Manual · EROS · PulseChain</span>
+    <span>PulseChain native · PRC-20 · PulseX pairs</span>
+  </div>
+  <div class="bridge-hero__copy">
+    <p class="bridge-hero__kicker">Finance-grade · Not a whitepaper of promises</p>
+    <h1>The Bridge</h1>
+    <p class="bridge-hero__lede">What an LP is. How pool liquidity differs from wallet supply. Why bonding is not farming. The Eros → ErosX use case. How to verify. How to act. Risks first-class.</p>
+  </div>
+  <button type="button" class="vol-btn is-muted" id="volBtn" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+  <div class="bridge-hero__footer">
+    <span>The Bridge · liquidity as infrastructure</span>
+    <span id="bridgeStatus" aria-live="polite">Click or scroll to enter</span>
   </div>
 </header>
 
@@ -672,7 +866,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ms-t">EROS 💕 explained in plain language</p>
   <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works. Watch or listen before you size a position.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
+    <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
@@ -684,11 +878,6 @@ footer.master .pulse-row svg{flex-shrink:0}
     </audio>
   </div>
 </aside>
-
-<figure class="hero">
-  <img src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Bridge" width="1200" height="800" loading="eager" onerror="this.closest('figure').style.display='none'"/>
-  <figcaption>THE BRIDGE · liquidity as infrastructure</figcaption>
-</figure>
 
 <div class="thesis" id="thesis">
   <span class="label">What this book is about</span>
@@ -712,17 +901,17 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — what an LP actually is, why the risk register is first-class, and how to verify before you act. Watch here, or on Telegram.</p>
   <div class="ss-grid">
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 01 · Poolonomics" aria-label="Short 01 — Poolonomics">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" controls playsinline preload="metadata" muted title="Short 01 · Poolonomics" aria-label="Short 01 — Poolonomics">
         <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_01.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 02 · Risk First" aria-label="Short 02 — Risk First">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" controls playsinline preload="metadata" muted title="Short 02 · Risk First" aria-label="Short 02 — Risk First">
         <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_02.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 03 · Verify" aria-label="Short 03 — Verify">
+      <video poster="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" controls playsinline preload="metadata" muted title="Short 03 · Verify" aria-label="Short 03 — Verify">
         <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_03.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -815,8 +1004,8 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="note"><b>Source.</b> Official Burnonomics: 2% burn, 1% staking, 1% temporary locking, 1% WPLS/EROS liquidity. Slippage 6%.</p>
 
   <figure class="media-block" id="burn-baby-burn">
-    <video controls playsinline preload="metadata" aria-label="Burn Baby Burn — every transfer feeds the fire">
-      <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" controls playsinline preload="metadata" aria-label="Burn Baby Burn — every transfer feeds the fire">
+      <source src="https://meaning-unconfounded.github.io/images/EROS_burn_baby_burn.mp4" type="video/mp4"/>
     </video>
     <figcaption><b>EROS · Burn Baby Burn</b> — every transfer feeds the black hole. Watch the instrument work before you read the theory.</figcaption>
   </figure>
@@ -878,7 +1067,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">The Gravity Web</p>
     <p class="ms-d">Why hundreds of bonded pairs beat one giant pool — and how the web pulls liquidity across PulseChain.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" aria-label="Polonomics — the gravity web">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" controls playsinline preload="metadata" aria-label="Polonomics — the gravity web">
         <source src="https://meaning-unconfounded.github.io/images/Eros_Polonomics.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -952,7 +1141,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">EROS · The Rock</p>
     <p class="ms-d">Why one asset cannot be both vault and spend rail — and how the dual-rail design separates store from flow.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" aria-label="EROS — The Rock · video overview">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-strength.jpg" controls playsinline preload="metadata" aria-label="EROS — The Rock · video overview">
         <source src="https://meaning-unconfounded.github.io/images/The_Eros_Rock.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1115,7 +1304,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 
   <figure class="media-block media-sm">
-    <video controls playsinline preload="metadata" aria-label="Rainman — white paper and PulseDEX pools">
+    <video poster="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" controls playsinline preload="metadata" aria-label="Rainman — white paper and PulseDEX pools">
       <source src="https://meaning-unconfounded.github.io/images/rainMan.mp4" type="video/mp4"/>
     </video>
     <figcaption><b>Rainman · white paper &amp; PulseDEX pools</b> — Community explainer: GitHub white paper and how to open liquidity pools. Small player by design (source resolution). Verify everything on-chain.</figcaption>
@@ -1212,7 +1401,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <div class="axiom"><b>Allies, not islands</b> Theme-brand your pool. Bond edges. Let bots balance what culture connects. Mutual web &gt; competing clubs with empty bridges.</div>
 
   <figure class="media-block media-sm">
-    <video controls playsinline preload="metadata" aria-label="Chiz Explains — why bond TitanX family coins with EROS">
+    <video poster="https://meaning-unconfounded.github.io/images/eros-demand.jpg" controls playsinline preload="metadata" aria-label="Chiz Explains — why bond TitanX family coins with EROS">
       <source src="https://meaning-unconfounded.github.io/images/ChizExplains.mp4" type="video/mp4"/>
     </video>
     <figcaption><b>Chiz Explains · why bond TitanX family coins with EROS</b> — Three reasons to hold EROS, white-paper walkthrough, bridging DragonX / Hydra / Scale, and liquidity bonding Atropa · pDAI · Bear. Educational placement, not decoration.</figcaption>
@@ -1246,7 +1435,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">EROS · Atropa · Dysnomia</p>
     <p class="ms-d">How the wider stack fits together — two build jobs, one machine, and why the rails stay separate on purpose.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
+      <video poster="https://meaning-unconfounded.github.io/images/Atropos.jpg" controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
         <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1782,6 +1971,198 @@ window.addEventListener('hashchange', openFromHash);
       v.removeEventListener('play', onFirstPlay);
     });
   });
+})();
+</script>
+
+
+<script>
+/* ═══ BRIDGE HERO · lens-circle cinematic with autoplay + sound ═══ */
+(function(){
+  "use strict";
+  var hero = document.getElementById('bridgeHero');
+  var video = document.getElementById('bridgeFilm');
+  var status = document.getElementById('bridgeStatus');
+  if(!hero || !video) return;
+
+  /* Top video volume (0.0 – 1.0). Lower this number for quieter. */
+  var TOP_VOLUME = 0.75;
+  video.volume = TOP_VOLUME;
+
+  var opened = false;
+  var soundOn = false;
+  var PEEK = 'clamp(120px,16vw,220px)';
+
+  function setStatus(msg){ if(status) status.textContent = msg; }
+  function pointAt(x, y){
+    var r = hero.getBoundingClientRect();
+    var px = Math.max(0, Math.min(r.width,  x - r.left));
+    var py = Math.max(0, Math.min(r.height, y - r.top));
+    hero.style.setProperty('--px', px + 'px');
+    hero.style.setProperty('--py', py + 'px');
+  }
+  function setLens(open){
+    hero.style.setProperty('--lens', open ? '150%' : PEEK);
+  }
+
+  function trySound(){
+    if(soundOn) return;
+    video.muted = false;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
+       .catch(function(){
+         video.muted = true;
+         setStatus('Click or scroll to enter');
+         try { video.play().catch(function(){}); } catch(e){}
+       });
+    } else {
+      soundOn = true;
+      setStatus('Sound on');
+    }
+  }
+
+  function openHero(x, y){
+    if(x != null && y != null) pointAt(x, y);
+    opened = true;
+    hero.classList.add('is-open');
+    hero.classList.remove('is-peeking');
+    setLens(true);
+    trySound();
+    if(soundOn && video.paused) video.play().catch(function(){});
+  }
+
+  /* Attempt autoplay immediately, sound first */
+  (function boot(){
+    video.muted = false;
+    video.loop = true;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
+       .catch(function(){
+         video.muted = true;
+         try { video.play().catch(function(){}); } catch(e){}
+         setStatus('Click or scroll to enter');
+       });
+    }
+  })();
+
+  /* First real gesture anywhere unlocks sound */
+  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
+  function unlockOnce(e){
+    if(soundOn) return;
+    if(e && e.target && e.target.closest && e.target.closest('.vol-btn')) return; /* button handles itself */
+    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
+    trySound();
+  }
+  gestures.forEach(function(evt){
+    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
+  });
+
+  /* Pointer tracking — peek */
+  hero.addEventListener('pointermove', function(e){
+    if(opened) return;
+    pointAt(e.clientX, e.clientY);
+    hero.classList.add('is-peeking');
+    setLens(false);
+  });
+  hero.addEventListener('touchmove', function(e){
+    if(opened) return;
+    if(e.touches && e.touches[0]){
+      pointAt(e.touches[0].clientX, e.touches[0].clientY);
+      hero.classList.add('is-peeking');
+      setLens(false);
+    }
+  }, { passive: true });
+
+  /* Click / tap opens full-bleed video + sound */
+  hero.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('a')) return;
+    if(!opened) openHero(e.clientX, e.clientY);
+    else if(video.paused) video.play().catch(function(){});
+  });
+
+  /* Do NOT pause on pointer leave. Pause ONLY off-screen. */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          if(video.paused) video.play().catch(function(){});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.05 }).observe(hero);
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && video.paused) video.play().catch(function(){});
+  });
+
+
+  /* Small volume button (bottom right of the top video) */
+  var volBtn = document.getElementById('volBtn');
+  var volUserSet = false;
+  function syncVol(){
+    if(!volBtn) return;
+    var off = video.muted || video.volume === 0;
+    volBtn.classList.toggle('is-muted', off);
+    volBtn.setAttribute('aria-pressed', off ? 'true' : 'false');
+    volBtn.setAttribute('aria-label', off ? 'Turn sound on' : 'Turn sound off');
+  }
+  if(volBtn){
+    volBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      soundOn = true; /* the visitor is now in control; stop auto-unmuting */
+      volUserSet = true;
+      video.muted = !video.muted;
+      if(!video.muted && video.volume === 0) video.volume = TOP_VOLUME;
+      if(!video.muted && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        video.play().catch(function(){});
+      }
+      setStatus(video.muted ? 'Sound off' : 'Sound on');
+      syncVol();
+    });
+    video.addEventListener('volumechange', syncVol);
+    syncVol();
+  }
+
+
+  /* Last 0.5 s of the film: fade the image in over the video; it clears when the loop restarts */
+  var END_IMAGE_SECONDS = 0.5;
+  var endingRunning = false;
+  function checkEnding(){
+    var d = video.duration;
+    if(!d || !isFinite(d) || d <= END_IMAGE_SECONDS) return;
+    hero.classList.toggle('is-ending', (d - video.currentTime) <= END_IMAGE_SECONDS);
+  }
+  function endingTick(){
+    checkEnding();
+    if(!video.paused && !video.ended){ requestAnimationFrame(endingTick); } else { endingRunning = false; }
+  }
+  video.addEventListener('playing', function(){
+    if(endingRunning) return;
+    endingRunning = true;
+    requestAnimationFrame(endingTick);
+  });
+  video.addEventListener('seeked', checkEnding);
+
+  video.addEventListener('error', function(){
+    setStatus('Video unavailable · poster remains');
+  });
+
+  /* Reduced motion */
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches){
+    video.pause();
+    video.muted = true;
+    hero.classList.add('is-open');
+    hero.classList.remove('is-peeking');
+    setLens(true);
+    opened = true;
+    setStatus('Static view');
+  }
 })();
 </script>
 
