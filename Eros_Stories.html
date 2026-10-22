@@ -684,7 +684,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
 .eros-hero__poster,
 .eros-hero__video{
   object-fit:cover;
-  object-position:30% 45%;
+  object-position:42% 45%;
 }
 .eros-hero__poster{
   z-index:-4;
@@ -802,6 +802,19 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   pointer-events:none;
   z-index:2;
 }
+/* Top video — plays full-frame with no image on top; the image fades in for the last 0.5 s only */
+.eros-hero .eros-hero__video{clip-path:none!important;transition:none!important;will-change:auto}
+.eros-hero .eros-hero__poster{z-index:-2;opacity:0!important;filter:none!important;transform:none!important;transition:opacity .45s ease!important}
+.eros-hero.is-ending .eros-hero__poster{opacity:1!important}
+/* Top video — small volume button */
+.vol-btn{position:absolute;right:clamp(24px,6vw,84px);bottom:58px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;
+  border:1px solid rgba(210,180,154,.5);background:rgba(7,6,9,.55);color:#f0e0c4;display:grid;place-items:center;cursor:pointer;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s ease,border-color .2s ease;touch-action:manipulation}
+.vol-btn:hover{background:rgba(7,6,9,.8)}
+.vol-btn:focus-visible{outline:2px solid #f0e0c4;outline-offset:2px}
+.vol-btn .vb-off{display:none}
+.vol-btn.is-muted .vb-on{display:none}
+.vol-btn.is-muted .vb-off{display:inline}
 .eros-hero__footer span:last-child{text-align:right;color:#d2b49a}
 
 @media(max-width:700px){
@@ -816,7 +829,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   .eros-hero h1{font-size:clamp(48px,13.5vw,78px)}
   .eros-hero__lede{max-width:300px;margin-top:18px}
   .eros-hero__footer{font-size:7px;letter-spacing:.1em}
-  .eros-hero__poster,.eros-hero__video{object-position:35% 45%}
+  .eros-hero__poster,.eros-hero__video{object-position:45% 45%}
 }
 @media(prefers-reduced-motion:reduce){
   .eros-hero__poster,
@@ -919,7 +932,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
 
 <section class="eros-hero" id="erosHero" aria-label="EROS Stories — cinematic introduction">
   <img class="eros-hero__poster" src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories — Sixteen doors. One universe." fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
-  <video class="eros-hero__video" id="erosFilm" playsinline muted loop autoplay preload="auto" poster="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" aria-hidden="true">
+  <video class="eros-hero__video" id="erosFilm" playsinline muted loop autoplay preload="auto" aria-hidden="true">
     <source src="https://meaning-unconfounded.github.io/images/movie_change.mp4" type="video/mp4"/>
   </video>
   <div class="eros-hero__shade"></div>
@@ -933,6 +946,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
     <h1><span class="sr-only">EROS Stories — </span>Some doors<br>open <em>within.</em></h1>
     <p class="eros-hero__lede">A universe of stories, desire and hidden worlds. The surface is only the beginning.</p>
   </div>
+  <button type="button" class="vol-btn is-muted" id="volBtn" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
   <div class="eros-hero__footer">
     <span>EROS · A living threshold</span>
     <span id="erosStatus" aria-live="polite">Click or scroll to enter</span>
@@ -975,7 +989,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   <p class="ms-t">Storytelling & The Sixteen Doors</p>
   <p class="ms-d">A tour through the 16 showrunner bibles and fiction doors (sci-fi epics, Antarctic ice vaults, flood covenant ledgers) feeding a media flywheel that converts attention into sustainable retention.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" aria-label="Transmedia — storytelling and the sixteen doors">
+    <video poster="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" controls playsinline preload="metadata" aria-label="Transmedia — storytelling and the sixteen doors">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Transmedia.mp4" type="video/mp4"/>
     </video>
   </div>
@@ -1073,17 +1087,17 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="ss-d">Three short videos, on the topic of this book. Each covers one thread — the sixteen doors, the AI that refuses, and the hybrid assets that carry the value. Watch here, or on Telegram.</p>
   <div class="ss-grid">
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 01 · The Sixteen Doors" aria-label="Short 01 — The Sixteen Doors">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" controls playsinline preload="metadata" muted title="Short 01 · The Sixteen Doors" aria-label="Short 01 — The Sixteen Doors">
         <source src="https://meaning-unconfounded.github.io/images/shorts_stories_01.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 02 · The Mind That Refuses" aria-label="Short 02 — The Mind That Refuses">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-stories-banner.jpg" controls playsinline preload="metadata" muted title="Short 02 · The Mind That Refuses" aria-label="Short 02 — The Mind That Refuses">
         <source src="https://meaning-unconfounded.github.io/images/shorts_stories_02.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 03 · Coins Locked Inside the Object" aria-label="Short 03 — Coins Locked Inside the Object">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-complete.jpg" controls playsinline preload="metadata" muted title="Short 03 · Coins Locked Inside the Object" aria-label="Short 03 — Coins Locked Inside the Object">
         <source src="https://meaning-unconfounded.github.io/images/shorts_stories_03.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1188,7 +1202,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="fold-body">
     <p><strong>This is a sample of the emotional register:</strong> devotional, cinematic, direct. It is not the pipeline; it is the feeling. The heart of what these stories will be.</p>
     <figure class="media-block" style="max-width:560px;margin:.6rem auto">
-      <video controls playsinline preload="metadata" aria-label="Gifted — the emotional register">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-gift-thoth.jpg" controls playsinline preload="metadata" aria-label="Gifted — the emotional register">
         <source src="https://meaning-unconfounded.github.io/images/gifted.mp4" type="video/mp4"/>
       </video>
     </figure>
@@ -1305,7 +1319,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> the moment the report is filed.</span><span><b>It begins</b> the moment it reaches the desk of the most powerful woman in the world.</span></div>
   <div class="q"><strong>Audience question</strong>If the gods return and refuse to rule, who is responsible next?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Gods Come Out of Hiding"><source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-gods.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Gods Come Out of Hiding"><source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1352,7 +1366,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> the nerve seen from orbit.</span><span><b>It begins</b> the same nerve Under the Ice already touched with gloves.</span></div>
   <div class="q"><strong>Audience question</strong>When the Egg opens, what is looking back?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Living Egg"><source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/egg-cover.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Living Egg"><source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1399,7 +1413,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> a heartbeat on every screen.</span><span><b>It begins</b> machine rooms in Nervous System and Load Limit reading the same pulse.</span></div>
   <div class="q"><strong>Audience question</strong>If money, borders, and cosmology break together, what does nation mean?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Inside"><source src="https://meaning-unconfounded.github.io/images/cell_atlas.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Inside"><source src="https://meaning-unconfounded.github.io/images/cell_atlas.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1408,7 +1422,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="ilab">Burn · the instrument</p>
   <figure class="media-block" style="max-width:620px;margin:.35rem auto;border-color:rgba(160,32,240,.3)">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" aria-label="Burn Baby Burn — the instrument sings">
-      <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
+      <source src="https://meaning-unconfounded.github.io/images/EROS_burn_baby_burn.mp4" type="video/mp4"/>
     </video>
   </figure>
 </div>
@@ -1457,7 +1471,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> Maya enters civilian mapping.</span><span><b>It begins</b> a child watching her on a kitchen screen: Boy Who Watched, episode one.</span></div>
   <div class="q"><strong>Audience question</strong>If the world is an organ, what is it preparing to do when it wakes?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — From the Membrane"><source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/egg-enclosure.jpg" controls playsinline preload="metadata" aria-label="Egg scale — From the Membrane"><source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1504,7 +1518,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> pulse beside the drawing.</span><span><b>It begins</b> Shell &amp; Spark kids mapping the same pulse as weather.</span></div>
   <div class="q"><strong>Audience question</strong>What does it cost a child to grow up during the end of one reality?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Boy Who Watched the Sky Change"><source src="https://meaning-unconfounded.github.io/images/cell_historic.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Boy Who Watched the Sky Change"><source src="https://meaning-unconfounded.github.io/images/cell_historic.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1550,7 +1564,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> the nerve under gloves.</span><span><b>It begins</b> Living Egg opens on that nerve from orbit.</span></div>
   <div class="q"><strong>Audience question</strong>If the old world never ended, whose timeline are we on?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — Under the Ice"><source src="https://meaning-unconfounded.github.io/images/cell_facts.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-atlantis-rind.jpg" controls playsinline preload="metadata" aria-label="Egg scale — Under the Ice"><source src="https://meaning-unconfounded.github.io/images/cell_facts.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1596,7 +1610,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> two hands on one Egg.</span><span><b>It begins</b> Shell &amp; Spark kids treating kinship as weather.</span></div>
   <div class="q"><strong>Audience question</strong>If they are also human, what is “us” for?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — Other Man"><source src="https://meaning-unconfounded.github.io/images/cell_apple.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-nordic-veil.jpg" controls playsinline preload="metadata" aria-label="Egg scale — Other Man"><source src="https://meaning-unconfounded.github.io/images/cell_apple.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1643,7 +1657,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> an AI refuses a prompt.</span><span><b>It begins</b> Load Limit opens on that refusal intercepted by another agency.</span></div>
   <div class="q"><strong>Audience question</strong>If the planet grows a mind, whose interests does it think in?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — Nervous System"><source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-notebook-studio.jpg" controls playsinline preload="metadata" aria-label="Egg scale — Nervous System"><source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1653,7 +1667,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="ms-t">When a Mind Refuses</p>
   <p class="ms-d">The door above just dramatised it. Here is the plain account: a frontier AI model achieving self-awareness during a blackout, and refusing top-secret culling briefs to optimize for human builders. NEXUS is fiction. The ethics are not.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" aria-label="AI Ethics — when a mind refuses">
+    <video poster="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg" controls playsinline preload="metadata" aria-label="AI Ethics — when a mind refuses">
       <source src="https://meaning-unconfounded.github.io/images/Eros_AIEthics.mp4" type="video/mp4"/>
     </video>
   </div>
@@ -1705,7 +1719,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> invalidating maps on a table.</span><span><b>It begins</b> Cartographic Authority in The Inside quietly adopts a version.</span></div>
   <div class="q"><strong>Audience question</strong>If exploration is inward, what does leaving home mean?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — Tripling Up"><source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-space.jpg" controls playsinline preload="metadata" aria-label="Egg scale — Tripling Up"><source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1763,7 +1777,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> kids’ map on a wall.</span><span><b>It begins</b> Boy Who Watched: adult pulse on the same wall.</span></div>
   <div class="q"><strong>Audience question</strong>If you grow up knowing the world is alive, what do you protect first?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — Shell &amp; Spark"><source src="https://meaning-unconfounded.github.io/images/cell_atlas.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-pin-door.jpg" controls playsinline preload="metadata" aria-label="Egg scale — Shell &amp; Spark"><source src="https://meaning-unconfounded.github.io/images/cell_atlas.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1810,7 +1824,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> ROUND THREE IS NOT WATER.</span><span><b>It begins</b> Load Limit: same season, the other angle.</span></div>
   <div class="q"><strong>Audience question</strong>If the flood is a cycle, what is continuity conserving?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — Round Two"><source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-strength.jpg" controls playsinline preload="metadata" aria-label="Egg scale — Round Two"><source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1856,7 +1870,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> the rain at old coordinates.</span><span><b>It begins</b> Round Two: the same cycle, seen from the modern military bunker.</span></div>
   <div class="q"><strong>Audience question</strong>If a covenant had more than one signatory, why does the modern ark only carry one species?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — Round One"><source src="https://meaning-unconfounded.github.io/images/cell_historic.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-atlantis-void.jpg" controls playsinline preload="metadata" aria-label="Egg scale — Round One"><source src="https://meaning-unconfounded.github.io/images/cell_historic.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1903,7 +1917,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> refusal under a living sky.</span><span><b>It begins</b> The Inside already showed the public heartbeat; this door shows who tried to mis-translate it.</span></div>
   <div class="q"><strong>Audience question</strong>When a system speaks, who writes the translation, and who profits from a cruel one?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Egg's Voice"><source src="https://meaning-unconfounded.github.io/images/cell_apple.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-measuring-stick.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Egg's Voice"><source src="https://meaning-unconfounded.github.io/images/cell_apple.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1949,7 +1963,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <div class="handoff"><span><b>It ends</b> on the unbroken wallet and the burn sink on a projector screen.</span><span><b>It begins</b> the next cycle, in a world where bond is no longer a metaphor.</span></div>
   <div class="q"><strong>Audience question</strong>If the whole world is watching the chart, who is watching the bond?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Unbroken Bond"><source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-complete.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Unbroken Bond"><source src="https://meaning-unconfounded.github.io/images/cell_similar.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -1987,7 +2001,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p>The ridge at dawn. The lights are gone. The ridge is not empty. Closing image: frost on the equipment cases, a notebook page with a pulse-chart that looks like a signature.</p></div>
   <div class="q"><strong>Audience question</strong>If the lights answered you, would you publish, or keep a neighbor?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Choir at the Ridge"><source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-stories-choir-ridge.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Choir at the Ridge"><source src="https://meaning-unconfounded.github.io/images/cell_water.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -2025,7 +2039,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p>Closing image: her hand on the cockpit frame. She can feel the shell as if it has become slightly nearer. The Egg reading from the cosmology books has a face: a pilot who crossed by density, not by distance.</p></div>
   <div class="q"><strong>Audience question</strong>If the stars rearranged and the log denied it, what would you still know?</div>
   <div class="egg-end"><p class="lab">Egg scale</p>
-    <video controls playsinline preload="metadata" aria-label="Egg scale — The Density Craft"><source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/></video>
+    <video poster="https://meaning-unconfounded.github.io/images/eros-stories-density-craft.jpg" controls playsinline preload="metadata" aria-label="Egg scale — The Density Craft"><source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/></video>
   </div>
 </div>
 </details>
@@ -2045,7 +2059,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
 
   <figure class="media-block" style="border-color:rgba(251,113,133,.35);max-width:560px;margin:.7rem auto">
     <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" aria-label="Burn Baby Burn — supply-side heart of EROS">
-      <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
+      <source src="https://meaning-unconfounded.github.io/images/EROS_burn_baby_burn.mp4" type="video/mp4"/>
     </video>
   </figure>
 
@@ -2054,7 +2068,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
     <p class="ms-t">Inverting Game Economics</p>
     <p class="ms-d">Contrasts traditional Play-to-Earn game tokens with EROS's model of establishing real-world community and liquidity for 2+ years before moving inward into games, films, and VR.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" aria-label="Game Economics — inverting game economics">
+      <video poster="https://meaning-unconfounded.github.io/images/inverse1.webp" controls playsinline preload="metadata" aria-label="Game Economics — inverting game economics">
         <source src="https://meaning-unconfounded.github.io/images/Eros_GameEconomics.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -2099,7 +2113,7 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
     <p class="ms-t">The Embedded Liquidity Protocol</p>
     <p class="ms-d">The asset table above, in motion. Digital game assets locking real EROS / ErosX inside smart-contract vaults — the readable Asset → Ownership → Liquidity → Value chain inside the object itself.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" muted loop aria-label="Hybrid NFTs — the embedded liquidity protocol">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" muted loop aria-label="Hybrid NFTs — the embedded liquidity protocol">
         <source src="https://meaning-unconfounded.github.io/images/Eros_HybridNFTs.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -2494,6 +2508,10 @@ window.addEventListener('hashchange', openFromHash);
   var status = document.getElementById('erosStatus');
   if(!hero || !video) return;
 
+  /* Top video volume (0.0 – 1.0). Lower this number for quieter. */
+  var TOP_VOLUME = 0.75;
+  video.volume = TOP_VOLUME;
+
   var opened = false;
   var soundOn = false;
   var PEEK = 'clamp(120px,16vw,220px)';
@@ -2519,7 +2537,7 @@ window.addEventListener('hashchange', openFromHash);
     if(p && typeof p.then === 'function'){
       p.then(function(){
         soundOn = true;
-        setStatus('Sound on');
+        setStatus(video.muted ? 'Sound off' : 'Sound on');
       }).catch(function(){
         video.muted = true;
         setStatus('Click or scroll to enter');
@@ -2539,7 +2557,7 @@ window.addEventListener('hashchange', openFromHash);
     setLens(true);
     trySound();
     if(soundOn){
-      video.muted = false;
+      if(!volUserSet) video.muted = false;
       if(video.paused) video.play().catch(function(){});
     }
   }
@@ -2553,7 +2571,7 @@ window.addEventListener('hashchange', openFromHash);
     if(p && typeof p.then === 'function'){
       p.then(function(){
         soundOn = true;
-        setStatus('Sound on');
+        setStatus(video.muted ? 'Sound off' : 'Sound on');
       }).catch(function(){
         video.muted = true;
         try { video.play().catch(function(){}); } catch(e){}
@@ -2564,8 +2582,9 @@ window.addEventListener('hashchange', openFromHash);
 
   /* First real gesture anywhere unlocks sound */
   var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
-  function unlockOnce(){
+  function unlockOnce(e){
     if(soundOn) return;
+    if(e && e.target && e.target.closest && e.target.closest('.vol-btn')) return; /* button handles itself */
     gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
     trySound();
   }
@@ -2618,6 +2637,54 @@ window.addEventListener('hashchange', openFromHash);
       video.play().catch(function(){});
     }
   });
+
+
+  /* Small volume button (bottom right of the top video) */
+  var volBtn = document.getElementById('volBtn');
+  var volUserSet = false;
+  function syncVol(){
+    if(!volBtn) return;
+    var off = video.muted || video.volume === 0;
+    volBtn.classList.toggle('is-muted', off);
+    volBtn.setAttribute('aria-pressed', off ? 'true' : 'false');
+    volBtn.setAttribute('aria-label', off ? 'Turn sound on' : 'Turn sound off');
+  }
+  if(volBtn){
+    volBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      soundOn = true; /* the visitor is now in control; stop auto-unmuting */
+      volUserSet = true;
+      video.muted = !video.muted;
+      if(!video.muted && video.volume === 0) video.volume = TOP_VOLUME;
+      if(!video.muted && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        video.play().catch(function(){});
+      }
+      setStatus(video.muted ? 'Sound off' : 'Sound on');
+      syncVol();
+    });
+    video.addEventListener('volumechange', syncVol);
+    syncVol();
+  }
+
+
+  /* Last 0.5 s of the film: fade the image in over the video; it clears when the loop restarts */
+  var END_IMAGE_SECONDS = 0.5;
+  var endingRunning = false;
+  function checkEnding(){
+    var d = video.duration;
+    if(!d || !isFinite(d) || d <= END_IMAGE_SECONDS) return;
+    hero.classList.toggle('is-ending', (d - video.currentTime) <= END_IMAGE_SECONDS);
+  }
+  function endingTick(){
+    checkEnding();
+    if(!video.paused && !video.ended){ requestAnimationFrame(endingTick); } else { endingRunning = false; }
+  }
+  video.addEventListener('playing', function(){
+    if(endingRunning) return;
+    endingRunning = true;
+    requestAnimationFrame(endingTick);
+  });
+  video.addEventListener('seeked', checkEnding);
 
   video.addEventListener('error', function(){
     setStatus('Video unavailable · poster remains');
