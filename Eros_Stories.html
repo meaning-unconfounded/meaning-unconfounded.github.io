@@ -66,6 +66,8 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 .summary-line,.pitch p,.movement p,.fold-body p,.fold-body li,.ep p,.q,.spine,.stakes p,.pledge p,.path,.ch,.gift-card p,.asset-table td,.media-block figcaption,.banner figcaption,.cap,.gallery .cap,.interlude,.burn-block p,.burn-block li,.bridge p,.door-body p{text-wrap:pretty;orphans:2;widows:2}
 .tp-title,.tp-head,.pl-t,.aw-q,.aw-label,.creedline,footer.master .sig,footer.master .count,footer.master .creedline,footer.master .title,figure.brand-seal figcaption,details.doorway>summary{text-wrap:balance;orphans:2;widows:2}
 
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:var(--violet);color:#07060c;text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none}
 
@@ -327,8 +329,6 @@ details.toc-card[open]>summary::before{content:"▾ "}
 
 .cover{text-align:center;padding:.6rem 0 .5rem}
 .kick{font-family:var(--sans);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--violet);margin-bottom:.45rem}
-h1{font-size:clamp(1.9rem,5.2vw,2.7rem);font-weight:400;letter-spacing:.06em;margin-bottom:.25rem;
-  background:linear-gradient(90deg,var(--pulse2),var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .sub{color:var(--soft);margin-bottom:.5rem;font-size:.98rem}
 .epigraph{font-style:italic;color:var(--muted);max-width:36rem;margin:.55rem auto .85rem;line-height:1.55}
 .cta-row{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin:.7rem 0 .9rem}
@@ -631,7 +631,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
 
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link,.public-link,.telegram-post{display:none!important}
+  html::before,html::after,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link,.public-link,.telegram-post,.eros-hero{display:none!important}
   body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .series,.burn-block,.bridge,footer.master,.connect,section.apply-world,figure.brand-seal,details.doorway{break-inside:avoid}
   video{display:none}
@@ -652,37 +652,180 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 
-/* EROS full-page visual refinement: cinematic threshold + readable navigation */
-.eros-hero{position:relative;isolation:isolate;width:100vw;margin:0 calc(50% - 50vw) 2rem;min-height:min(760px,82vh);min-height:min(760px,82svh);overflow:hidden;display:grid;align-items:end;background:#10090d;color:#f3ece4;text-align:left;font-family:var(--sans)}
-.eros-hero__poster,.eros-hero__video,.eros-hero__shade,.eros-hero__grain{position:absolute;inset:0;width:100%;height:100%}
-.eros-hero__poster,.eros-hero__video{object-fit:cover}
-.eros-hero__poster{z-index:-4;filter:brightness(.64) saturate(.72);transform:scale(1.015);transition:transform 1.3s ease,filter 1s ease,opacity .7s ease}
-.eros-hero__video{z-index:-3;clip-path:circle(var(--lens,0px) at var(--px,50%) var(--py,50%));transition:clip-path .8s cubic-bezier(.16,1,.3,1);background:#090708}
-.eros-hero__shade{z-index:-2;background:linear-gradient(90deg,rgba(8,5,7,.7),rgba(8,5,7,.15) 85%),linear-gradient(0deg,rgba(8,5,7,.94),rgba(8,5,7,.18) 60%,rgba(8,5,7,.4))}
-.eros-hero__grain{z-index:-1;opacity:.09;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
-.eros-hero__top{position:absolute;top:clamp(24px,4vw,48px);left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);display:flex;justify-content:space-between;gap:16px;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,246,238,.85)}
+/* ═══ EROS HERO · lens-circle cinematic ═══ */
+.eros-hero{
+  position:relative;
+  isolation:isolate;
+  width:100vw;
+  margin:0 calc(50% - 50vw) 1.6rem;
+  min-height:min(760px,82vh);
+  min-height:min(760px,82svh);
+  overflow:hidden;
+  display:grid;
+  align-items:end;
+  background:#0a0408;
+  color:#f3ece4;
+  text-align:left;
+  font-family:var(--sans);
+  cursor:pointer;
+  --lens:0px;
+  --px:50%;
+  --py:50%;
+}
+.eros-hero__poster,
+.eros-hero__video,
+.eros-hero__shade,
+.eros-hero__grain{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.eros-hero__poster,
+.eros-hero__video{
+  object-fit:cover;
+  object-position:30% 45%;
+}
+.eros-hero__poster{
+  z-index:-4;
+  transform:scale(1.015);
+  filter:brightness(.55) saturate(.7);
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
+}
+.eros-hero__video{
+  z-index:-3;
+  background:#090708;
+  clip-path:circle(var(--lens) at var(--px) var(--py));
+  transition:clip-path 1s cubic-bezier(.16,1,.3,1);
+  will-change:clip-path;
+}
+.eros-hero__shade{
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(6,3,6,.72) 0%, rgba(6,3,6,.28) 55%, rgba(6,3,6,.15) 100%),
+    linear-gradient(0deg,rgba(6,3,6,.94) 0%, rgba(6,3,6,.38) 40%, rgba(6,3,6,.10) 72%, rgba(6,3,6,.42) 100%);
+}
+.eros-hero__grain{
+  z-index:-1;
+  pointer-events:none;
+  opacity:.11;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+.eros-hero.is-peeking .eros-hero__poster{
+  transform:scale(1.03);
+  filter:brightness(.46) saturate(.66);
+}
+.eros-hero.is-open .eros-hero__poster{
+  opacity:.10;
+}
+.eros-hero.is-open .eros-hero__video{
+  clip-path:circle(150% at var(--px) var(--py));
+}
+.eros-hero__top{
+  position:absolute;
+  top:clamp(24px,4vw,48px);
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:rgba(255,246,238,.85);
+  pointer-events:none;
+  z-index:2;
+}
 .eros-hero__top span:first-child{letter-spacing:.4em}
 .eros-hero__top span:last-child{color:rgba(255,246,238,.62);text-align:right}
-.eros-hero__copy{position:relative;width:min(940px,100%);padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);pointer-events:none}
-.eros-hero__kicker{display:flex;align-items:center;gap:12px;color:#c7a27b;font:600 10px/1.4 var(--sans);letter-spacing:.25em;text-transform:uppercase;margin:0 0 20px}
-.eros-hero__kicker:before{content:"";width:30px;height:1px;background:#c7a27b}
-.eros-hero h1{font:400 clamp(52px,9vw,112px)/.94 Georgia,"Palatino Linotype",serif;letter-spacing:-.055em;color:#f3ece4;background:none;-webkit-text-fill-color:initial;text-shadow:0 4px 40px #0004;margin:0;max-width:800px}
-.eros-hero h1 em{font-weight:400;color:#d2b49a}
-.eros-hero__bottom{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-top:32px;pointer-events:auto}
-.eros-hero__bottom>p{max-width:350px;color:rgba(243,236,228,.72);font:400 13px/1.85 var(--sans);margin:0}
-.eros-hero__actions{display:flex;gap:10px;flex-wrap:wrap}
-.eros-hero__enter,.eros-hero__sound{min-height:48px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:20px;background:rgba(10,7,8,.5);border:1px solid rgba(243,236,228,.75);color:#f3ece4;font:600 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);transition:background .2s,color .2s,border-color .2s}
-.eros-hero__enter:hover,.eros-hero__sound:hover{background:#f3ece4;color:#090708;border-color:#f3ece4}
-.eros-hero__enter span{font-size:16px}
-.eros-hero__sound{display:none;border-color:#ffffff55}
-.eros-hero.is-open .eros-hero__sound{display:inline-flex}
-.eros-hero__cue{position:absolute;right:clamp(24px,6vw,84px);top:49%;transform:translateY(-50%);display:flex;align-items:center;gap:12px;color:#fff;letter-spacing:.17em;text-transform:uppercase;font:600 9px var(--sans);pointer-events:none;transition:opacity .3s}
-.eros-hero__ring{width:42px;height:42px;display:grid;place-items:center;border:1px solid #ffffff8a;border-radius:50%;font-size:16px}
-.eros-hero.is-open .eros-hero__cue{opacity:0}
-.eros-hero__footer{position:absolute;bottom:0;left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);border-top:1px solid #ffffff2c;padding:14px 0 17px;display:flex;justify-content:space-between;gap:12px;color:#ffffff70;font:500 9px/1.4 var(--sans);letter-spacing:.15em;text-transform:uppercase}
+.eros-hero__copy{
+  position:relative;
+  width:min(940px,100%);
+  padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);
+  pointer-events:none;
+  z-index:2;
+}
+.eros-hero__kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#c7a27b;
+  font:600 10px/1.4 var(--sans);
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin:0 0 20px;
+}
+.eros-hero__kicker:before{
+  content:"";
+  width:30px;
+  height:1px;
+  background:#c7a27b;
+}
+.eros-hero h1{
+  font:400 clamp(52px,9vw,112px)/.94 Georgia,"Palatino Linotype",serif;
+  letter-spacing:-.055em;
+  color:#f3ece4;
+  background:none;
+  -webkit-text-fill-color:initial;
+  -webkit-background-clip:initial;
+  background-clip:initial;
+  text-shadow:0 4px 40px #0004;
+  margin:0;
+  max-width:800px;
+}
+.eros-hero h1 em{
+  font-weight:400;
+  color:#d2b49a;
+}
+.eros-hero__lede{
+  max-width:350px;
+  color:rgba(243,236,228,.72);
+  font:400 13px/1.85 var(--sans);
+  margin:24px 0 0;
+}
+.eros-hero__footer{
+  position:absolute;
+  bottom:0;
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  border-top:1px solid #ffffff2c;
+  padding:14px 0 17px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:#ffffff70;
+  font:500 9px/1.4 var(--sans);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  pointer-events:none;
+  z-index:2;
+}
 .eros-hero__footer span:last-child{text-align:right;color:#d2b49a}
+
+@media(max-width:700px){
+  .eros-hero{
+    min-height:min(760px,78vh);
+    min-height:min(760px,78svh);
+    margin-bottom:1.2rem;
+  }
+  .eros-hero__top{align-items:flex-start}
+  .eros-hero__top span:last-child{max-width:130px}
+  .eros-hero__copy{padding:0 24px 78px}
+  .eros-hero h1{font-size:clamp(48px,13.5vw,78px)}
+  .eros-hero__lede{max-width:300px;margin-top:18px}
+  .eros-hero__footer{font-size:7px;letter-spacing:.1em}
+  .eros-hero__poster,.eros-hero__video{object-position:35% 45%}
+}
+@media(prefers-reduced-motion:reduce){
+  .eros-hero__poster,
+  .eros-hero__video{transition:none!important}
+}
+
+/* ═══ CTA ROW · four doors ═══ */
 .eros-intro{padding:.2rem 0 1.2rem}
-.eros-intro .epigraph{font-size:clamp(1.15rem,3.4vw,1.65rem);max-width:42rem;line-height:1.55;color:#d0c3d9;margin:1.3rem auto 1.4rem}
+.eros-intro .epigraph{font-size:clamp(1.15rem,3.4vw,1.65rem);max-width:42rem;line-height:1.55;color:#d0c3d9;margin:1.4rem auto 1.6rem}
 .cta-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin:1.2rem auto 1rem;max-width:52rem}
 .cta{display:flex;align-items:center;justify-content:flex-start;gap:.8rem;min-height:72px;padding:.85rem 1rem;border:1px solid #51435e;border-radius:12px;background:linear-gradient(145deg,rgba(27,22,36,.96),rgba(10,9,15,.96));color:#f0eaf8!important;font:500 .8rem/1.25 var(--sans);letter-spacing:.03em;text-transform:none;white-space:normal;transition:transform .2s ease,border-color .2s ease,background .2s ease;box-shadow:0 5px 18px #0002}
 .cta:visited{color:#f0eaf8!important}
@@ -692,9 +835,15 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
 .cta small{display:block;color:#bcb0c9;font-size:.68rem;margin-top:.32rem;line-height:1.35;letter-spacing:0;text-transform:none}
 .eros-orientation{max-width:45rem;margin:.8rem auto 1.5rem;padding:.9rem 1rem;border-left:2px solid #c7a27b;background:linear-gradient(90deg,#c7a27b12,transparent);font:400 .88rem/1.7 var(--sans);color:#c9bdd8}
 .eros-orientation span{display:block;color:#d8b991;font-size:.65rem;font-weight:700;letter-spacing:.2em;margin-bottom:.2rem}
-@media(max-width:700px){.eros-hero{min-height:min(760px,78vh);min-height:min(760px,78svh);margin-bottom:1.3rem}.eros-hero__top{align-items:flex-start}.eros-hero__top span:last-child{max-width:130px}.eros-hero__copy{padding:0 24px 68px}.eros-hero h1{font-size:clamp(48px,13.5vw,78px)}.eros-hero__bottom{align-items:flex-start;flex-direction:column;gap:18px;margin-top:24px}.eros-hero__bottom>p{max-width:300px}.eros-hero__cue{top:40%;right:24px}.eros-hero__cue span:last-child{display:none}.eros-hero__footer{font-size:7px;letter-spacing:.1em}.eros-hero__actions{width:100%}.eros-hero__enter,.eros-hero__sound{min-height:46px}.cta-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.cta{min-height:72px;padding:.75rem}.cta .cta-icon{flex-basis:30px;height:30px}}
-@media(max-width:360px){.eros-hero__top{font-size:8px}.cta-row{grid-template-columns:1fr}.cta{min-height:62px}}
-@media(prefers-reduced-motion:reduce){.eros-hero__poster,.eros-hero__video,.eros-hero__cue,.cta{transition:none!important}}
+@media(max-width:700px){
+  .cta-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+  .cta{min-height:72px;padding:.75rem}
+  .cta .cta-icon{flex-basis:30px;height:30px}
+}
+@media(max-width:360px){
+  .cta-row{grid-template-columns:1fr}
+  .cta{min-height:62px}
+}
 
 </style>
 </head>
@@ -704,8 +853,8 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
 <header class="corpus-bar">
   <div class="brand-row">
     <a class="logo-cluster" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" aria-label="EROS Stories · top">
-      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
-      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44" onerror="this.style.display='none'"/>
+      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38" onerror="this.style.display='none'"/>
       <span class="compass" aria-hidden="true">🧭</span>
     </a>
     <div class="title-cluster">
@@ -768,27 +917,28 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   <span class="tagline">Built on PulseChain · Faster · Cheaper · Stronger</span>
 </div>
 
-<section class="eros-hero" id="erosHero" aria-label="EROS Stories cinematic introduction">
-  <img class="eros-hero__poster" src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories — Sixteen doors. One universe." fetchpriority="high" decoding="async">
-  <video class="eros-hero__video" id="erosFilm" playsinline muted loop preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" aria-hidden="true">
-    <source src="https://meaning-unconfounded.github.io/images/movie_change.mp4" type="video/mp4">
+<section class="eros-hero" id="erosHero" aria-label="EROS Stories — cinematic introduction">
+  <img class="eros-hero__poster" src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories — Sixteen doors. One universe." fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
+  <video class="eros-hero__video" id="erosFilm" playsinline muted loop autoplay preload="auto" poster="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" aria-hidden="true">
+    <source src="https://meaning-unconfounded.github.io/images/movie_change.mp4" type="video/mp4"/>
   </video>
-  <div class="eros-hero__shade"></div><div class="eros-hero__grain"></div>
-  <div class="eros-hero__top"><span>EROS Stories</span><span>Sixteen doors · One universe</span></div>
-  <div class="eros-hero__cue" id="erosCue"><span class="eros-hero__ring">↗</span><span>Touch or move to discover</span></div>
+  <div class="eros-hero__shade"></div>
+  <div class="eros-hero__grain"></div>
+  <div class="eros-hero__top">
+    <span>EROS Stories</span>
+    <span>Sixteen doors · One universe</span>
+  </div>
   <div class="eros-hero__copy">
     <p class="eros-hero__kicker">Pure fiction · Real instrument</p>
-    <h1>Some doors<br>open <em>within.</em></h1>
-    <div class="eros-hero__bottom">
-      <p>A universe of stories, desire and hidden worlds. The surface is only the beginning.</p>
-      <div class="eros-hero__actions">
-        <button type="button" class="eros-hero__enter" id="erosEnter">Enter the stories <span>↗</span></button>
-        <button type="button" class="eros-hero__sound" id="erosSound" aria-pressed="false">Enable sound +</button>
-      </div>
-    </div>
+    <h1><span class="sr-only">EROS Stories — </span>Some doors<br>open <em>within.</em></h1>
+    <p class="eros-hero__lede">A universe of stories, desire and hidden worlds. The surface is only the beginning.</p>
   </div>
-  <div class="eros-hero__footer"><span>EROS · A living threshold</span><span id="erosStatus" aria-live="polite">Touch or move to reveal</span></div>
+  <div class="eros-hero__footer">
+    <span>EROS · A living threshold</span>
+    <span id="erosStatus" aria-live="polite">Click or scroll to enter</span>
+  </div>
 </section>
+
 <header class="cover eros-intro">
   <p class="epigraph">Get a bag. Bond it. Commit. Create.<br/>Fiction is where belief is tested.</p>
   <nav class="cta-row" aria-label="Explore EROS">
@@ -2045,9 +2195,9 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
 
 <footer class="master">
   <div class="title-row">
-    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
+    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy" onerror="this.style.display='none'"/>
     <span class="title">EROS STORIES</span>
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy" onerror="this.style.display='none'"/>
   </div>
   <p class="count">Sixteen doors · One universe · Pure fiction · Real instrument</p>
 
@@ -2147,14 +2297,9 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
 (function(){
 "use strict";
 
-var bar = document.getElementById('progressBar');
 var toTop = document.getElementById('toTop');
 function onScroll(){
-  var h = document.documentElement;
-  var max = h.scrollHeight - h.clientHeight;
-  var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
-  if(bar) bar.style.width = pct + '%';
-  if(toTop) toTop.classList.toggle('show', h.scrollTop > 700);
+  if(toTop) toTop.classList.toggle('show', window.scrollY > 700);
 }
 window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
@@ -2328,7 +2473,6 @@ window.addEventListener('hashchange', openFromHash);
 })();
 </script>
 
-
 <script>
 /* Summary-series: unmute on first play so one click = video + sound */
 (function(){
@@ -2341,27 +2485,155 @@ window.addEventListener('hashchange', openFromHash);
 })();
 </script>
 
-
 <script>
+/* ═══ HERO · lens-circle cinematic with autoplay + sound ═══ */
 (function(){
- const hero=document.getElementById('erosHero'), video=document.getElementById('erosFilm');
- const enter=document.getElementById('erosEnter'), sound=document.getElementById('erosSound'), status=document.getElementById('erosStatus');
- if(!hero||!video)return;
- const fine=window.matchMedia('(hover:hover) and (pointer:fine)');
- let opened=false, pointerIn=false, soundOn=false, token=0;
- function point(e){const r=hero.getBoundingClientRect();hero.style.setProperty('--px',(e.clientX-r.left)+'px');hero.style.setProperty('--py',(e.clientY-r.top)+'px')}
- function lens(on){hero.style.setProperty('--lens',on?'150%':'clamp(115px,15vw,230px)')}
- async function start(audio){token++;soundOn=!!audio;video.muted=!soundOn;hero.classList.add('is-open','is-curious');opened=true;lens(true);sound.setAttribute('aria-pressed',String(soundOn));sound.textContent=soundOn?'Sound on −':'Enable sound +';status.textContent=soundOn?'Revealed · sound on':'Revealed · sound off';try{await video.play()}catch(e){video.muted=true;soundOn=false;sound.textContent='Enable sound +';sound.setAttribute('aria-pressed','false');status.textContent='Video ready · tap to enable sound'}}
- function close(){token++;opened=false;soundOn=false;video.pause();try{video.currentTime=0}catch(e){}video.muted=true;hero.classList.remove('is-open');hero.classList.toggle('is-curious',pointerIn);lens(false);sound.textContent='Enable sound +';sound.setAttribute('aria-pressed','false');status.textContent='Touch or move to reveal'}
- hero.addEventListener('pointerenter',e=>{if(!fine.matches)return;pointerIn=true;point(e);if(!opened){hero.classList.add('is-curious');lens(false);video.muted=true;video.play().catch(()=>{});status.textContent='Move to reveal · click to open'}});
- hero.addEventListener('pointermove',e=>{point(e);if(fine.matches&&!opened){pointerIn=true;hero.classList.add('is-curious');lens(false);if(video.paused){video.muted=true;video.play().catch(()=>{})}}});
- hero.addEventListener('pointerleave',()=>{pointerIn=false;if(fine.matches&&!opened){video.pause();try{video.currentTime=0}catch(e){}hero.classList.remove('is-curious');lens(false);status.textContent='Touch or move to reveal'}});
- hero.addEventListener('click',e=>{if(e.target.closest('button'))return;if(!opened){point(e);start(true)}else if(!fine.matches)close()});
- enter.addEventListener('click',()=>opened?close():start(true));
- sound.addEventListener('click',()=>{if(!opened){start(true);return}soundOn=!soundOn;video.muted=!soundOn;sound.textContent=soundOn?'Sound on −':'Enable sound +';sound.setAttribute('aria-pressed',String(soundOn));status.textContent=soundOn?'Sound on':'Sound off'});
- video.addEventListener('error',()=>status.textContent='Video unavailable · poster remains visible');
- document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else if(opened)video.play().catch(()=>{})});
- lens(false);
+  "use strict";
+  var hero = document.getElementById('erosHero');
+  var video = document.getElementById('erosFilm');
+  var status = document.getElementById('erosStatus');
+  if(!hero || !video) return;
+
+  var opened = false;
+  var soundOn = false;
+  var PEEK = 'clamp(120px,16vw,220px)';
+
+  function setStatus(msg){ if(status) status.textContent = msg; }
+  function pointAt(x, y){
+    var r = hero.getBoundingClientRect();
+    var px = Math.max(0, Math.min(r.width,  x - r.left));
+    var py = Math.max(0, Math.min(r.height, y - r.top));
+    hero.style.setProperty('--px', px + 'px');
+    hero.style.setProperty('--py', py + 'px');
+  }
+  function setLens(open){
+    hero.style.setProperty('--lens', open ? '150%' : PEEK);
+  }
+
+  /* Try to play with sound; fall back to muted if blocked */
+  function trySound(){
+    if(soundOn) return;
+    video.muted = false;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){
+        soundOn = true;
+        setStatus('Sound on');
+      }).catch(function(){
+        video.muted = true;
+        setStatus('Click or scroll to enter');
+        try { video.play().catch(function(){}); } catch(e){}
+      });
+    } else {
+      soundOn = true;
+      setStatus('Sound on');
+    }
+  }
+
+  function openHero(x, y){
+    if(x != null && y != null) pointAt(x, y);
+    opened = true;
+    hero.classList.add('is-open');
+    hero.classList.remove('is-peeking');
+    setLens(true);
+    trySound();
+    if(soundOn){
+      video.muted = false;
+      if(video.paused) video.play().catch(function(){});
+    }
+  }
+
+  /* Attempt autoplay immediately, sound first */
+  (function boot(){
+    video.muted = false;
+    video.loop = true;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){
+        soundOn = true;
+        setStatus('Sound on');
+      }).catch(function(){
+        video.muted = true;
+        try { video.play().catch(function(){}); } catch(e){}
+        setStatus('Click or scroll to enter');
+      });
+    }
+  })();
+
+  /* First real gesture anywhere unlocks sound */
+  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
+  function unlockOnce(){
+    if(soundOn) return;
+    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
+    trySound();
+  }
+  gestures.forEach(function(evt){
+    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
+  });
+
+  /* Pointer tracking — peek */
+  hero.addEventListener('pointermove', function(e){
+    if(opened) return;
+    pointAt(e.clientX, e.clientY);
+    hero.classList.add('is-peeking');
+    setLens(false);
+  });
+  hero.addEventListener('touchmove', function(e){
+    if(opened) return;
+    if(e.touches && e.touches[0]){
+      pointAt(e.touches[0].clientX, e.touches[0].clientY);
+      hero.classList.add('is-peeking');
+      setLens(false);
+    }
+  }, { passive: true });
+
+  /* Click / tap opens (full-screen video + sound) */
+  hero.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('a')) return;
+    if(!opened){
+      openHero(e.clientX, e.clientY);
+    } else {
+      if(video.paused) video.play().catch(function(){});
+    }
+  });
+
+  /* Do NOT pause on pointer leave. Pause ONLY off-screen. */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          if(video.paused) video.play().catch(function(){});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.05 }).observe(hero);
+  }
+
+  /* Resume on tab return */
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && video.paused){
+      video.play().catch(function(){});
+    }
+  });
+
+  video.addEventListener('error', function(){
+    setStatus('Video unavailable · poster remains');
+  });
+
+  /* Reduced motion */
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches){
+    video.pause();
+    video.muted = true;
+    hero.classList.add('is-open');
+    hero.classList.remove('is-peeking');
+    setLens(true);
+    opened = true;
+    setStatus('Static view');
+  }
 })();
 </script>
 
