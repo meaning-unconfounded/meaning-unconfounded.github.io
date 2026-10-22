@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="eros-cinema-engine" content="v1.0-shared">
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="description" content="The Bridge — Field manual for EROS on PulseChain. Tokenomics, Poolonomics, liquidity, ErosX transform, risks, playbook. TitanX path. True DeFi. Renounced."/>
@@ -683,19 +685,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   pointer-events:none;
   z-index:2;
 }
-/* Top video — plays full-frame with no image on top; the image fades in for the last 0.5 s only */
-.bridge-hero .bridge-hero__video{clip-path:none!important;transition:none!important;will-change:auto}
-.bridge-hero .bridge-hero__poster{z-index:-2;opacity:0!important;filter:none!important;transform:none!important;transition:opacity .45s ease!important}
-.bridge-hero.is-ending .bridge-hero__poster{opacity:1!important}
-/* Top video — small volume button */
-.vol-btn{position:absolute;right:clamp(24px,6vw,84px);bottom:58px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;
-  border:1px solid rgba(216,221,227,.5);background:rgba(7,6,9,.55);color:#f0e0c4;display:grid;place-items:center;cursor:pointer;
-  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s ease,border-color .2s ease;touch-action:manipulation}
-.vol-btn:hover{background:rgba(7,6,9,.8)}
-.vol-btn:focus-visible{outline:2px solid #f0e0c4;outline-offset:2px}
-.vol-btn .vb-off{display:none}
-.vol-btn.is-muted .vb-on{display:none}
-.vol-btn.is-muted .vb-off{display:inline}
 .bridge-hero__footer span:last-child{text-align:right;color:var(--platinum, #d8dde3)}
 
 @media(max-width:700px){
@@ -716,6 +705,100 @@ footer.master .pulse-row svg{flex-shrink:0}
   .bridge-hero__poster,
   .bridge-hero__video{transition:none!important}
 }
+
+/* CINEMATIC QUEUES · The Bridge standard */
+.bridge-hero__video,
+.cinema-band__video{
+  opacity:0;
+  transition:opacity 1.5s ease;
+  will-change:opacity;
+}
+.bridge-hero__video.is-active,
+.cinema-band__video.is-active{opacity:1}
+.bridge-hero__video{z-index:0}
+.bridge-hero__shade,.bridge-hero__grain{z-index:1}
+.bridge-hero__top,.bridge-hero__copy,.bridge-hero__footer{z-index:2}
+.bridge-hero__poster{z-index:0}
+.bridge-hero__video{z-index:0}
+.bridge-hero__poster{transition:opacity .8s ease}
+.bridge-hero.is-open .bridge-hero__poster{opacity:.10}
+.cinema-band{
+  --cinema-accent:#00d4ff;
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  align-items:flex-end;
+  min-height:clamp(390px,54vw,620px);
+  margin:3.1rem 0;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--cinema-accent) 42%,transparent);
+  border-radius:18px;
+  background:#080b10;
+  box-shadow:0 18px 55px rgba(0,0,0,.28),0 0 32px color-mix(in srgb,var(--cinema-accent) 8%,transparent);
+}
+.cinema-band--middle{--cinema-accent:#00d4ff}
+.cinema-band--end{--cinema-accent:#d4af37}
+.cinema-band__video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;background:#05070a;z-index:-2;
+}
+.cinema-band__poster{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:.28;filter:brightness(.45) saturate(.65);z-index:-3;
+}
+.cinema-band__shade{
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,rgba(4,7,11,.90) 0%,rgba(4,7,11,.56) 56%,rgba(4,7,11,.20) 100%),
+             linear-gradient(0deg,rgba(4,7,11,.80),transparent 70%);
+  pointer-events:none;
+}
+.cinema-band__content{
+  position:relative;z-index:2;width:min(760px,100%);
+  padding:clamp(25px,5vw,62px);
+}
+.cinema-band__kicker{
+  color:var(--cinema-accent);font:700 .68rem/1.5 var(--sans);
+  letter-spacing:.22em;text-transform:uppercase;margin:0 0 1rem;
+}
+.cinema-band__title{
+  font:700 clamp(2rem,5.5vw,4.3rem)/1.02 var(--serif);
+  color:#f4f5f7;letter-spacing:.025em;margin:0 0 1.1rem;
+  text-shadow:0 4px 28px rgba(0,0,0,.45);
+}
+.cinema-band__copy{
+  max-width:610px;color:rgba(239,243,247,.84);
+  font:400 clamp(.95rem,1.5vw,1.08rem)/1.8 var(--sans);margin:0;
+}
+.cinema-band__footer{
+  display:flex;justify-content:space-between;gap:1rem;align-items:center;
+  margin-top:1.8rem;padding-top:.8rem;border-top:1px solid color-mix(in srgb,var(--cinema-accent) 35%,transparent);
+  color:rgba(239,243,247,.6);font:600 .62rem/1.5 var(--sans);
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.cinema-band__status{color:var(--cinema-accent);text-align:right}
+.cinema-print-card{display:none}
+@media(max-width:640px){
+  .cinema-band{min-height:460px;margin:2.3rem 0;border-radius:13px}
+  .cinema-band__content{padding:26px 23px}
+  .cinema-band__shade{background:linear-gradient(0deg,rgba(4,7,11,.94) 0%,rgba(4,7,11,.65) 62%,rgba(4,7,11,.25) 100%)}
+  .cinema-band__footer{font-size:.55rem;letter-spacing:.08em}
+}
+@media(prefers-reduced-motion:reduce){
+  .bridge-hero__video,.cinema-band__video{transition:none!important}
+}
+@media print{
+  .cinema-band{display:none!important}
+  .cinema-print-card{
+    display:block!important;margin:1.1rem 0;padding:1.15rem 1.25rem;
+    background:#f5f0e5!important;color:#242424!important;border:1px solid #c9bda7;
+    break-inside:avoid;font-family:Georgia,serif;
+  }
+  .cinema-print-card *{color:#242424!important}
+  .cinema-print-card .print-kicker{font:700 8pt/1.4 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+  .cinema-print-card h2{font:700 19pt/1.2 Georgia,serif;margin:.35rem 0 .55rem}
+  .cinema-print-card p{font:10pt/1.55 Georgia,serif;margin:0}
+}
+
 </style>
 </head>
 <body>
@@ -760,11 +843,10 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <main class="page" id="main">
 
-<header class="bridge-hero" id="bridgeHero" aria-label="The Bridge — cinematic introduction">
+<header class="bridge-hero" id="bridgeHero" data-videos="migrate_pulsechain.mp4|migrate_titanX.mp4|eros_bridging.mp4" aria-label="The Bridge — cinematic introduction">
   <img class="bridge-hero__poster" src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="The Bridge — finance-grade field manual" fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
-  <video class="bridge-hero__video" id="bridgeFilm" playsinline muted loop autoplay preload="auto" aria-hidden="true">
-    <source src="https://meaning-unconfounded.github.io/images/migrate_pulsechain.mp4" type="video/mp4"/>
-  </video>
+  <video class="bridge-hero__video is-active" id="bridgeFilmA" playsinline muted preload="auto" poster="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" aria-hidden="true"></video>
+  <video class="bridge-hero__video" id="bridgeFilmB" playsinline muted preload="auto" aria-hidden="true"></video>
   <div class="bridge-hero__shade"></div>
   <div class="bridge-hero__grain"></div>
   <div class="bridge-hero__top">
@@ -776,7 +858,6 @@ footer.master .pulse-row svg{flex-shrink:0}
     <h1>The Bridge</h1>
     <p class="bridge-hero__lede">What an LP is. How pool liquidity differs from wallet supply. Why bonding is not farming. The Eros → ErosX use case. How to verify. How to act. Risks first-class.</p>
   </div>
-  <button type="button" class="vol-btn is-muted" id="volBtn" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
   <div class="bridge-hero__footer">
     <span>The Bridge · liquidity as infrastructure</span>
     <span id="bridgeStatus" aria-live="polite">Click or scroll to enter</span>
@@ -866,7 +947,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ms-t">EROS 💕 explained in plain language</p>
   <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works. Watch or listen before you size a position.</p>
   <div class="ms-video">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
+    <video controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
@@ -901,17 +982,17 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — what an LP actually is, why the risk register is first-class, and how to verify before you act. Watch here, or on Telegram.</p>
   <div class="ss-grid">
     <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" controls playsinline preload="metadata" muted title="Short 01 · Poolonomics" aria-label="Short 01 — Poolonomics">
+      <video controls playsinline preload="metadata" muted title="Short 01 · Poolonomics" aria-label="Short 01 — Poolonomics">
         <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_01.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" controls playsinline preload="metadata" muted title="Short 02 · Risk First" aria-label="Short 02 — Risk First">
+      <video controls playsinline preload="metadata" muted title="Short 02 · Risk First" aria-label="Short 02 — Risk First">
         <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_02.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" controls playsinline preload="metadata" muted title="Short 03 · Verify" aria-label="Short 03 — Verify">
+      <video controls playsinline preload="metadata" muted title="Short 03 · Verify" aria-label="Short 03 — Verify">
         <source src="https://meaning-unconfounded.github.io/images/shorts_bridge_03.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1004,8 +1085,8 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="note"><b>Source.</b> Official Burnonomics: 2% burn, 1% staking, 1% temporary locking, 1% WPLS/EROS liquidity. Slippage 6%.</p>
 
   <figure class="media-block" id="burn-baby-burn">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" controls playsinline preload="metadata" aria-label="Burn Baby Burn — every transfer feeds the fire">
-      <source src="https://meaning-unconfounded.github.io/images/EROS_burn_baby_burn.mp4" type="video/mp4"/>
+    <video controls playsinline preload="metadata" aria-label="Burn Baby Burn — every transfer feeds the fire">
+      <source src="https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4" type="video/mp4"/>
     </video>
     <figcaption><b>EROS · Burn Baby Burn</b> — every transfer feeds the black hole. Watch the instrument work before you read the theory.</figcaption>
   </figure>
@@ -1067,7 +1148,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">The Gravity Web</p>
     <p class="ms-d">Why hundreds of bonded pairs beat one giant pool — and how the web pulls liquidity across PulseChain.</p>
     <div class="ms-video">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" controls playsinline preload="metadata" aria-label="Polonomics — the gravity web">
+      <video controls playsinline preload="metadata" aria-label="Polonomics — the gravity web">
         <source src="https://meaning-unconfounded.github.io/images/Eros_Polonomics.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1090,6 +1171,24 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p><strong>IL is the cost of continuous market-making, not a glitch.</strong> Spot holding is a different tool. Choose on purpose.</p>
   <div class="axiom"><b>Poolonomics</b> Depth without demand is a museum. Demand without depth is a spike that dies. Bond both — and understand IL first.</div>
 </section>
+
+<section class="cinema-band cinema-band--middle" id="cinemaMidpoint" data-videos="eros_bond.mp4|binding_eros.mp4|eros_hard.mp4" aria-label="Cinematic interlude: the work">
+  <img class="cinema-band__poster" src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="" loading="lazy"/>
+  <video class="cinema-band__video is-active" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-band__video" playsinline muted preload="auto" aria-hidden="true"></video>
+  <div class="cinema-band__shade"></div>
+  <div class="cinema-band__content">
+    <p class="cinema-band__kicker">The work · burn · bond · bind</p>
+    <h2 class="cinema-band__title">What holds it together.</h2>
+    <p class="cinema-band__copy">Not a single pool. Not a single pair. A web of bonded edges, each one a doorway someone owns, each one a promise that stayed.</p>
+    <div class="cinema-band__footer"><span>THE BRIDGE · ACT BREAK</span><span class="cinema-band__status" aria-live="polite">Preparing sequence</span></div>
+  </div>
+</section>
+<div class="cinema-print-card">
+  <div class="print-kicker">The Act Break · The Work</div>
+  <h2>What holds it together.</h2>
+  <p><strong>Burn · bond · bind.</strong> Not a single pool. A web of bonded edges. Every pair is a doorway someone owns. Every promise made public is a pair that stayed.</p>
+</div>
 
 <div class="part-break" id="p4">
   <p class="pk">Part IV</p>
@@ -1141,7 +1240,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">EROS · The Rock</p>
     <p class="ms-d">Why one asset cannot be both vault and spend rail — and how the dual-rail design separates store from flow.</p>
     <div class="ms-video">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-strength.jpg" controls playsinline preload="metadata" aria-label="EROS — The Rock · video overview">
+      <video controls playsinline preload="metadata" aria-label="EROS — The Rock · video overview">
         <source src="https://meaning-unconfounded.github.io/images/The_Eros_Rock.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1304,7 +1403,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 
   <figure class="media-block media-sm">
-    <video poster="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" controls playsinline preload="metadata" aria-label="Rainman — white paper and PulseDEX pools">
+    <video controls playsinline preload="metadata" aria-label="Rainman — white paper and PulseDEX pools">
       <source src="https://meaning-unconfounded.github.io/images/rainMan.mp4" type="video/mp4"/>
     </video>
     <figcaption><b>Rainman · white paper &amp; PulseDEX pools</b> — Community explainer: GitHub white paper and how to open liquidity pools. Small player by design (source resolution). Verify everything on-chain.</figcaption>
@@ -1401,7 +1500,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <div class="axiom"><b>Allies, not islands</b> Theme-brand your pool. Bond edges. Let bots balance what culture connects. Mutual web &gt; competing clubs with empty bridges.</div>
 
   <figure class="media-block media-sm">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-demand.jpg" controls playsinline preload="metadata" aria-label="Chiz Explains — why bond TitanX family coins with EROS">
+    <video controls playsinline preload="metadata" aria-label="Chiz Explains — why bond TitanX family coins with EROS">
       <source src="https://meaning-unconfounded.github.io/images/ChizExplains.mp4" type="video/mp4"/>
     </video>
     <figcaption><b>Chiz Explains · why bond TitanX family coins with EROS</b> — Three reasons to hold EROS, white-paper walkthrough, bridging DragonX / Hydra / Scale, and liquidity bonding Atropa · pDAI · Bear. Educational placement, not decoration.</figcaption>
@@ -1435,7 +1534,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">EROS · Atropa · Dysnomia</p>
     <p class="ms-d">How the wider stack fits together — two build jobs, one machine, and why the rails stay separate on purpose.</p>
     <div class="ms-video">
-      <video poster="https://meaning-unconfounded.github.io/images/Atropos.jpg" controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
+      <video controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
         <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1662,6 +1761,25 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p>Can you extend the science, fiction, lore, and law of our shared world through code, narrative, and creative assets?</p>
   <p class="aw-q">Take what you have learned. What can you create?</p>
 </section>
+
+
+<section class="cinema-band cinema-band--end" id="cinemaBookEnd" data-videos="eros_power.mp4|proud_eros.mp4|jake_rich_dancing.mp4" aria-label="Cinematic book-end: the web">
+  <img class="cinema-band__poster" src="https://meaning-unconfounded.github.io/images/The_Bridge_banner.jpg" alt="" loading="lazy"/>
+  <video class="cinema-band__video is-active" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-band__video" playsinline muted preload="auto" aria-hidden="true"></video>
+  <div class="cinema-band__shade"></div>
+  <div class="cinema-band__content">
+    <p class="cinema-band__kicker">The web · force · pride · joy</p>
+    <h2 class="cinema-band__title">The web is built.</h2>
+    <p class="cinema-band__copy">Bridge the coins. Bond the pairs. Bring the right people. Not a merger. A thickening. The bridge is how the right people arrive.</p>
+    <div class="cinema-band__footer"><span>THE BRIDGE · THE CLOSE</span><span class="cinema-band__status" aria-live="polite">Preparing sequence</span></div>
+  </div>
+</section>
+<div class="cinema-print-card">
+  <div class="print-kicker">The Close · The Web</div>
+  <h2>The web is built.</h2>
+  <p><strong>Force · pride · joy.</strong> Bridge the coins. Bond the pairs. Bring the right people. Not a merger. A thickening. That is the mission.</p>
+</div>
 
 <section class="coda" id="coda" style="margin:3rem 0 0;padding:2.6rem 1.4rem 1.4rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(216,221,227,.06),transparent 60%)">
   <p style="font-size:1.12rem;font-style:italic;line-height:var(--leading,1.8);color:var(--ink);max-width:36rem;margin:0 auto 1rem">Verify on-chain. Never trust a badge. The chain is the only author.</p>
@@ -1976,193 +2094,493 @@ window.addEventListener('hashchange', openFromHash);
 
 
 <script>
-/* ═══ BRIDGE HERO · lens-circle cinematic with autoplay + sound ═══ */
-(function(){
+/* EROS CINEMA SYSTEM · canonical shared engine v1.0
+   Shared behaviour across books; book-specific styling and queue configuration stay in HTML.
+   Standards: muted first load; sound activated by deliberate gesture; one audible placement;
+   preload next clip once; short clips finish naturally; long clips transition 1.5s before end;
+   1.45s visual crossfade; 400ms audio crossfade; queue loops; recover from failed media.
+*/
+(function () {
   "use strict";
-  var hero = document.getElementById('bridgeHero');
-  var video = document.getElementById('bridgeFilm');
-  var status = document.getElementById('bridgeStatus');
-  if(!hero || !video) return;
-
-  /* Top video volume (0.0 – 1.0). Lower this number for quieter. */
-  var TOP_VOLUME = 0.75;
-  video.volume = TOP_VOLUME;
-
-  var opened = false;
-  var soundOn = false;
-  var PEEK = 'clamp(120px,16vw,220px)';
-
-  function setStatus(msg){ if(status) status.textContent = msg; }
-  function pointAt(x, y){
-    var r = hero.getBoundingClientRect();
-    var px = Math.max(0, Math.min(r.width,  x - r.left));
-    var py = Math.max(0, Math.min(r.height, y - r.top));
-    hero.style.setProperty('--px', px + 'px');
-    hero.style.setProperty('--py', py + 'px');
+  var BASE = "https://meaning-unconfounded.github.io/images/";
+  var VOL = 0.22;
+  var VISUAL_FADE_MS = 1450;
+  var AUDIO_FADE_MS = 400;
+  var READY_TIMEOUT_MS = 9000;
+  var pref = window.__erosSoundPref;
+  if (!pref || typeof pref !== "object") {
+    pref = window.__erosSoundPref = { muted: true };
   }
-  function setLens(open){
-    hero.style.setProperty('--lens', open ? '150%' : PEEK);
-  }
+  if (typeof pref.muted !== "boolean") pref.muted = true;
 
-  function trySound(){
-    if(soundOn) return;
-    video.muted = false;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         setStatus('Click or scroll to enter');
-         try { video.play().catch(function(){}); } catch(e){}
-       });
-    } else {
-      soundOn = true;
-      setStatus('Sound on');
+  function resolveSource(name) {
+    if (/^https?:\/\//i.test(name)) return name;
+    return BASE + name.split("/").map(function (part) {
+      return encodeURIComponent(part);
+    }).join("/");
+  }
+  function closestControl(target) {
+    return target && target.closest ? target.closest("button,a,input,select,textarea") : null;
+  }
+  function parseFiles(root) {
+    var value = root.getAttribute("data-queue") || root.getAttribute("data-videos") || "";
+    var separator = value.indexOf("|") >= 0 ? "|" : ",";
+    return value.split(separator).map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function getLayers(root) {
+    var all = Array.prototype.slice.call(root.querySelectorAll(
+      ".cinema-va, .cinema-vb, .cinema-layer, .cinema-band__video, .bridge-hero__video"
+    ));
+    /* A cinematic placement must have exactly two video layers. */
+    return all.filter(function (v, i) { return all.indexOf(v) === i; }).slice(0, 2);
+  }
+  function getSoundControl(root) {
+    return root.querySelector(".cinema-vol, .cinema-sound, .cinema-band__sound, [data-sound-toggle]");
+  }
+  function getStatus(root) {
+    return root.querySelector(".cinema-status, .cinema-band__status");
+  }
+  var roots = Array.prototype.slice.call(document.querySelectorAll("[data-queue], [data-videos]"));
+  var states = [];
+  var owner = null;
+  var ratios = new Map();
+
+  function setStatus(st, message) {
+    if (st.status) st.status.textContent = message;
+  }
+  function updateControl(st) {
+    var button = st.sound;
+    if (!button) return;
+    var muted = pref.muted;
+    button.classList.toggle("is-muted", muted);
+    button.setAttribute("aria-pressed", muted ? "false" : "true");
+    button.setAttribute("aria-label", muted ? "Turn sound on" : "Turn sound off");
+    var label = button.querySelector(".sound-label");
+    if (label) label.textContent = muted ? "Enable sound" : "Sound on";
+    else if (button.textContent.trim() === "Enable sound" || button.textContent.trim() === "Sound on") {
+      button.textContent = muted ? "Enable sound" : "Sound on · tap to mute";
     }
   }
-
-  function openHero(x, y){
-    if(x != null && y != null) pointAt(x, y);
-    opened = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    trySound();
-    if(soundOn && video.paused) video.play().catch(function(){});
-  }
-
-  /* Attempt autoplay immediately, sound first */
-  (function boot(){
-    video.muted = false;
-    video.loop = true;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         try { video.play().catch(function(){}); } catch(e){}
-         setStatus('Click or scroll to enter');
-       });
-    }
-  })();
-
-  /* First real gesture anywhere unlocks sound */
-  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
-  function unlockOnce(e){
-    if(soundOn) return;
-    if(e && e.target && e.target.closest && e.target.closest('.vol-btn')) return; /* button handles itself */
-    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
-    trySound();
-  }
-  gestures.forEach(function(evt){
-    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
-  });
-
-  /* Pointer tracking — peek */
-  hero.addEventListener('pointermove', function(e){
-    if(opened) return;
-    pointAt(e.clientX, e.clientY);
-    hero.classList.add('is-peeking');
-    setLens(false);
-  });
-  hero.addEventListener('touchmove', function(e){
-    if(opened) return;
-    if(e.touches && e.touches[0]){
-      pointAt(e.touches[0].clientX, e.touches[0].clientY);
-      hero.classList.add('is-peeking');
-      setLens(false);
-    }
-  }, { passive: true });
-
-  /* Click / tap opens full-bleed video + sound */
-  hero.addEventListener('click', function(e){
-    if(e.target.closest && e.target.closest('a')) return;
-    if(!opened) openHero(e.clientX, e.clientY);
-    else if(video.paused) video.play().catch(function(){});
-  });
-
-  /* Do NOT pause on pointer leave. Pause ONLY off-screen. */
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          if(video.paused) video.play().catch(function(){});
+  function syncAudio() {
+    states.forEach(function (st) {
+      st.layers.forEach(function (v, i) {
+        v.volume = VOL;
+        var shouldBeAudible = !pref.muted && owner === st && st.active &&
+          (i === st.current || (st.switching && (i === st.current || i === 1 - st.current)));
+        if (!st.switching || owner !== st || pref.muted) {
+          v.muted = !(shouldBeAudible && i === st.current);
         } else {
-          video.pause();
+          /* During the one queue's fade, both layers may be audible at ramped volumes. */
+          v.muted = false;
         }
       });
-    }, { threshold: 0.05 }).observe(hero);
-  }
-
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && video.paused) video.play().catch(function(){});
-  });
-
-
-  /* Small volume button (bottom right of the top video) */
-  var volBtn = document.getElementById('volBtn');
-  var volUserSet = false;
-  function syncVol(){
-    if(!volBtn) return;
-    var off = video.muted || video.volume === 0;
-    volBtn.classList.toggle('is-muted', off);
-    volBtn.setAttribute('aria-pressed', off ? 'true' : 'false');
-    volBtn.setAttribute('aria-label', off ? 'Turn sound on' : 'Turn sound off');
-  }
-  if(volBtn){
-    volBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      soundOn = true; /* the visitor is now in control; stop auto-unmuting */
-      volUserSet = true;
-      video.muted = !video.muted;
-      if(!video.muted && video.volume === 0) video.volume = TOP_VOLUME;
-      if(!video.muted && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        video.play().catch(function(){});
-      }
-      setStatus(video.muted ? 'Sound off' : 'Sound on');
-      syncVol();
+      updateControl(st);
     });
-    video.addEventListener('volumechange', syncVol);
-    syncVol();
   }
-
-
-  /* Last 0.5 s of the film: fade the image in over the video; it clears when the loop restarts */
-  var END_IMAGE_SECONDS = 0.5;
-  var endingRunning = false;
-  function checkEnding(){
-    var d = video.duration;
-    if(!d || !isFinite(d) || d <= END_IMAGE_SECONDS) return;
-    hero.classList.toggle('is-ending', (d - video.currentTime) <= END_IMAGE_SECONDS);
-  }
-  function endingTick(){
-    checkEnding();
-    if(!video.paused && !video.ended){ requestAnimationFrame(endingTick); } else { endingRunning = false; }
-  }
-  video.addEventListener('playing', function(){
-    if(endingRunning) return;
-    endingRunning = true;
-    requestAnimationFrame(endingTick);
-  });
-  video.addEventListener('seeked', checkEnding);
-
-  video.addEventListener('error', function(){
-    setStatus('Video unavailable · poster remains');
-  });
-
-  /* Reduced motion */
-  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches){
+  function setSourceOnce(st, index, video) {
+    if (index < 0 || index >= st.files.length) return false;
+    var source = resolveSource(st.files[index]);
+    if (video.dataset.erosSource === source && video.getAttribute("src")) return true;
     video.pause();
     video.muted = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    opened = true;
-    setStatus('Static view');
+    video.volume = VOL;
+    video.removeAttribute("src");
+    while (video.firstChild) video.removeChild(video.firstChild);
+    video.src = source;
+    video.dataset.erosSource = source;
+    video.dataset.erosClipIndex = String(index);
+    video.preload = "auto";
+    video.loop = false;
+    video.removeAttribute("loop");
+    video.playsInline = true;
+    video.load();
+    return true;
   }
+  function nextIndex(st, fromIndex) {
+    for (var step = 1; step <= st.files.length; step++) {
+      var candidate = (fromIndex + step) % st.files.length;
+      if (!st.failed[candidate]) return candidate;
+    }
+    return -1;
+  }
+  function prepareNext(st) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) return;
+    var incoming = st.layers[1 - st.current];
+    if (incoming.dataset.erosClipIndex === String(ni) &&
+        incoming.getAttribute("src") && incoming.readyState >= 2) {
+      st.preparedIndex = ni;
+      return;
+    }
+    setSourceOnce(st, ni, incoming);
+    st.preparedIndex = ni;
+  }
+  function setLayerOpacity(video, value) {
+    video.style.opacity = String(value);
+    video.style.visibility = value > 0 ? "visible" : "visible";
+  }
+  function playMuted(video) {
+    video.muted = true;
+    try {
+      var p = video.play();
+      if (p && typeof p.catch === "function") p.catch(function () {});
+    } catch (e) {}
+  }
+  function startCurrent(st, fromGesture) {
+    if (!st || !st.active || owner !== st) return;
+    var current = st.layers[st.current];
+    current.muted = pref.muted;
+    current.volume = VOL;
+    try {
+      var p = current.play();
+      if (p && typeof p.catch === "function") {
+        p.catch(function () {
+          setStatus(st, "Tap the film or sound control to resume");
+        });
+      }
+    } catch (e) {
+      setStatus(st, "Tap the film or sound control to resume");
+    }
+    prepareNext(st);
+    syncAudio();
+  }
+  function clearTransition(st) {
+    if (st.transitionTimer) {
+      clearTimeout(st.transitionTimer);
+      st.transitionTimer = null;
+    }
+    if (st.readyTimer) {
+      clearTimeout(st.readyTimer);
+      st.readyTimer = null;
+    }
+    if (st.incoming && st.handlers) {
+      st.incoming.removeEventListener("canplay", st.handlers.ready);
+      st.incoming.removeEventListener("error", st.handlers.error);
+    }
+    if (st.fadeFrame) {
+      cancelAnimationFrame(st.fadeFrame);
+      st.fadeFrame = null;
+    }
+    st.handlers = null;
+  }
+  function finishTransition(st, outgoing, incoming, ni) {
+    if (!st.switching) return;
+    clearTransition(st);
+    outgoing.pause();
+    try { outgoing.currentTime = 0; } catch (e) {}
+    outgoing.muted = true;
+    outgoing.volume = VOL;
+    setLayerOpacity(outgoing, 0);
+    setLayerOpacity(incoming, 1);
+    outgoing.classList.remove("is-active");
+    incoming.classList.add("is-active");
+    incoming.volume = VOL;
+    incoming.muted = pref.muted || owner !== st;
+    st.current = 1 - st.current;
+    st.index = ni;
+    st.preparedIndex = null;
+    st.switching = false;
+    st.incoming = null;
+    st.failed[ni] = false;
+    syncAudio();
+    setStatus(st, "Film " + (st.index + 1) + " of " + st.files.length +
+      (pref.muted ? " · Sound off" : " · Sound on"));
+    prepareNext(st);
+  }
+  function failIncoming(st, ni, incoming, outgoing, message) {
+    if (!st.switching) return;
+    clearTransition(st);
+    incoming.pause();
+    incoming.muted = true;
+    incoming.volume = VOL;
+    incoming.removeAttribute("src");
+    delete incoming.dataset.erosSource;
+    delete incoming.dataset.erosClipIndex;
+    setLayerOpacity(incoming, 0);
+    st.failed[ni] = true;
+    st.switching = false;
+    st.incoming = null;
+    st.preparedIndex = null;
+    outgoing.muted = pref.muted || owner !== st;
+    outgoing.volume = VOL;
+    setLayerOpacity(outgoing, 1);
+    setStatus(st, message || "A film could not load · continuing the loop");
+    if (st.active && owner === st) {
+      if (outgoing.ended || outgoing.paused) {
+        try { outgoing.currentTime = 0; } catch (e) {}
+        playMuted(outgoing);
+        outgoing.muted = pref.muted || owner !== st;
+      }
+      var next = nextIndex(st, st.index);
+      if (next >= 0) {
+        /* Retry progression with the next non-failed clip, never spin on this failed one. */
+        window.setTimeout(function () { if (st.active && !st.switching) switchClip(st, true); }, 0);
+      } else {
+        setStatus(st, "No playable films remain in this queue");
+      }
+    }
+    syncAudio();
+  }
+  function switchClip(st, force) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) {
+      setStatus(st, "No playable films remain in this queue");
+      return;
+    }
+    var outgoing = st.layers[st.current];
+    var incoming = st.layers[1 - st.current];
+    st.switching = true;
+    st.incoming = incoming;
+    setStatus(st, "Preparing next film");
+    if (incoming.dataset.erosClipIndex !== String(ni) ||
+        !incoming.getAttribute("src")) {
+      setSourceOnce(st, ni, incoming);
+    }
+    incoming.muted = true;
+    incoming.volume = 0;
+    incoming.loop = false;
+    var settled = false;
+    function cleanupReady() {
+      if (st.readyTimer) { clearTimeout(st.readyTimer); st.readyTimer = null; }
+      incoming.removeEventListener("canplay", onReady);
+      incoming.removeEventListener("error", onError);
+    }
+    function onError() {
+      if (settled) return;
+      settled = true;
+      cleanupReady();
+      failIncoming(st, ni, incoming, outgoing, "A film could not load · skipping to the next");
+    }
+    function onReady() {
+      if (settled || !st.switching || incoming.readyState < 2) return;
+      settled = true;
+      cleanupReady();
+      try { incoming.currentTime = 0; } catch (e) {}
+      incoming.muted = true;
+      incoming.volume = 0;
+      var playPromise;
+      try { playPromise = incoming.play(); }
+      catch (e) {
+        failIncoming(st, ni, incoming, outgoing, "Playback was blocked · tap the film to resume");
+        return;
+      }
+      function beginFade() {
+        if (!st.switching || !st.active || owner !== st) {
+          incoming.pause();
+          incoming.muted = true;
+          st.switching = false;
+          setLayerOpacity(incoming, 0);
+          return;
+        }
+        st.failed[ni] = false;
+        /* Both frames are in play before the incoming layer is revealed. */
+        setLayerOpacity(incoming, 1);
+        incoming.classList.add("is-active");
+        outgoing.classList.remove("is-active");
+        var t0 = performance.now();
+        var outgoingStart = outgoing.volume;
+        var incomingStart = 0;
+        function audioStep(now) {
+          if (!st.switching || st.incoming !== incoming) return;
+          var progress = Math.min(1, (now - t0) / AUDIO_FADE_MS);
+          if (!pref.muted && owner === st) {
+            outgoing.muted = false;
+            incoming.muted = false;
+            outgoing.volume = Math.max(0, outgoingStart * (1 - progress));
+            incoming.volume = VOL * progress;
+          } else {
+            outgoing.muted = true;
+            incoming.muted = true;
+            outgoing.volume = VOL * (1 - progress);
+            incoming.volume = VOL * progress;
+          }
+          if (progress < 1) st.fadeFrame = requestAnimationFrame(audioStep);
+          else {
+            outgoing.volume = 0;
+            incoming.volume = VOL;
+            st.fadeFrame = null;
+          }
+        }
+        st.fadeFrame = requestAnimationFrame(audioStep);
+        st.transitionTimer = window.setTimeout(function () {
+          finishTransition(st, outgoing, incoming, ni);
+        }, VISUAL_FADE_MS);
+      }
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(beginFade).catch(function () {
+          failIncoming(st, ni, incoming, outgoing, "Playback was blocked · tap the film to resume");
+        });
+      } else {
+        beginFade();
+      }
+    }
+    st.handlers = { ready: onReady, error: onError };
+    incoming.addEventListener("canplay", onReady);
+    incoming.addEventListener("error", onError);
+    st.readyTimer = window.setTimeout(function () {
+      if (incoming.readyState >= 2) onReady();
+      else onError();
+    }, READY_TIMEOUT_MS);
+    if (incoming.readyState >= 2) onReady();
+  }
+  function deactivate(st) {
+    if (!st) return;
+    st.active = false;
+    if (st.switching) {
+      clearTransition(st);
+      st.switching = false;
+      st.incoming = null;
+    }
+    st.layers.forEach(function (v, i) {
+      v.muted = true;
+      v.pause();
+      setLayerOpacity(v, i === st.current ? 1 : 0);
+      v.classList.toggle("is-active", i === st.current);
+    });
+    if (owner === st) owner = null;
+    syncAudio();
+  }
+  function activate(st) {
+    if (!st) return;
+    if (owner && owner !== st) deactivate(owner);
+    owner = st;
+    st.active = true;
+    st.layers.forEach(function (v, i) {
+      v.volume = VOL;
+      if (i !== st.current) {
+        v.muted = true;
+        if (!st.switching) v.pause();
+      }
+    });
+    syncAudio();
+    startCurrent(st, false);
+  }
+  function toggleSound(st) {
+    pref.muted = !pref.muted;
+    syncAudio();
+    if (!pref.muted) {
+      if (!st.active || owner !== st) activate(st);
+      startCurrent(st, true);
+      setStatus(st, "Sound enabled · active section only");
+    } else {
+      states.forEach(function (state) {
+        state.layers.forEach(function (v) { v.muted = true; v.volume = VOL; });
+      });
+      setStatus(st, "Sound muted");
+    }
+    syncAudio();
+  }
+  function makeState(root) {
+    var files = parseFiles(root);
+    var layers = getLayers(root);
+    if (!files.length || layers.length !== 2) return null;
+    var st = {
+      root: root, files: files, layers: layers, sound: getSoundControl(root), status: getStatus(root),
+      index: 0, current: 0, active: false, switching: false, failed: Object.create(null),
+      preparedIndex: null, incoming: null, handlers: null, readyTimer: null,
+      transitionTimer: null, fadeFrame: null, observerRatio: 0
+    };
+    layers.forEach(function (v, i) {
+      v.muted = true;
+      v.volume = VOL;
+      v.loop = false;
+      v.removeAttribute("loop");
+      v.playsInline = true;
+      v.preload = "auto";
+      setLayerOpacity(v, i === 0 ? 1 : 0);
+      v.addEventListener("timeupdate", function () {
+        if (!st.active || owner !== st || st.switching || st.layers[st.current] !== v) return;
+        if (Number.isFinite(v.duration) && v.duration > 15 && v.duration - v.currentTime <= 1.5) {
+          switchClip(st, false);
+        }
+      });
+      v.addEventListener("ended", function () {
+        if (st.active && owner === st && st.layers[st.current] === v && !st.switching) {
+          switchClip(st, true);
+        }
+      });
+    });
+    setSourceOnce(st, 0, layers[0]);
+    st.sound && st.sound.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSound(st);
+    });
+    root.addEventListener("pointerdown", function (event) {
+      if (closestControl(event.target)) return;
+      if (!pref.muted) {
+        if (!st.active || owner !== st) activate(st);
+        else if (st.layers[st.current].paused) startCurrent(st, true);
+        return;
+      }
+      pref.muted = false;
+      root.classList.add("is-open");
+      if (!st.active || owner !== st) activate(st);
+      else startCurrent(st, true);
+      syncAudio();
+      setStatus(st, "Sound enabled · active section only");
+    });
+    root.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        if (root.getAttribute("role") === "button" || root.classList.contains("cinema-hero")) {
+          event.preventDefault();
+          root.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+        }
+      }
+    });
+    if (st.sound) updateControl(st);
+    return st;
+  }
+
+  roots.forEach(function (root) {
+    var st = makeState(root);
+    if (st) states.push(st);
+  });
+  if (!states.length) return;
+
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var st = states.filter(function (x) { return x.root === entry.target; })[0];
+        if (!st) return;
+        st.observerRatio = entry.isIntersecting ? entry.intersectionRatio : 0;
+        ratios.set(st, st.observerRatio);
+      });
+      var candidate = null, best = 0;
+      states.forEach(function (st) {
+        var ratio = ratios.get(st) || 0;
+        if (ratio >= 0.22 && ratio > best) { best = ratio; candidate = st; }
+      });
+      if (candidate) {
+        if (owner !== candidate) activate(candidate);
+      } else if (owner && (ratios.get(owner) || 0) < 0.22) {
+        deactivate(owner);
+      }
+    }, { threshold: [0, 0.06, 0.22, 0.5, 0.75] });
+    states.forEach(function (st) { observer.observe(st.root); });
+  } else {
+    activate(states[0]);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      states.forEach(function (st) {
+        st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+      });
+    } else if (owner && owner.active) {
+      syncAudio();
+      startCurrent(owner, false);
+    }
+  });
+  window.addEventListener("pagehide", function () {
+    states.forEach(function (st) {
+      clearTransition(st);
+      st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+    });
+  });
+  syncAudio();
 })();
 </script>
 
