@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="eros-cinema-engine" content="v1.0-shared">
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="description" content="The Hopeful Future · The gift · The stack · pDAI · Atropa · Dysnomia · EROS · PulseChain · The bridge. What is stated. What is counted. What is built. What is given."/>
 <meta name="theme-color" content="#040108"/>
 <title>The Hopeful Future 💕 Gift Edition</title>
 
-<!-- Open Graph / Twitter share cards -->
 <link rel="canonical" href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html"/>
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="EROS Library"/>
@@ -837,9 +838,20 @@ footer.master .pulse-row svg{flex-shrink:0}
 #toTop.show{opacity:1;pointer-events:auto}
 #toTop:hover{border-color:var(--magenta);background:var(--pulse-soft)}
 
+
+/* Cinema quality pop — on-screen contrast/saturate */
+.cinema-video{
+  filter: contrast(1.12) saturate(1.18) brightness(0.96);
+  transition: opacity .35s ease, filter .35s ease;
+}
+.cinema-hero.is-open .cinema-video,
+.cinema-band.is-playing .cinema-video{
+  filter: contrast(1.15) saturate(1.20) brightness(1.02);
+}
+
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,.corpus-bar,#progressBar,#toTop,#rdBtn,#rdPanel,.skip-link,.hopeful-hero{display:none!important}
+  html::before,html::after,.corpus-bar,#progressBar,#toTop,#rdBtn,#rdPanel,.skip-link{display:none!important}
   body{background:#040108!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .part-break,.claim,.verse,.plate,.movement,.capstone,figure.svg-plate,.scoreboard,.stages,.gift-grid,footer.master,.loop-viz,.public-link,.telegram-post,.connect,details.doorway,details.toc-card{break-inside:avoid}
   section.apply-world{break-inside:avoid}
@@ -856,6 +868,36 @@ footer.master .pulse-row svg{flex-shrink:0}
   details.doorway[open] .door-body{display:block}
   details.doorway>summary::before{display:none}
   .summary-series,.media-studio.cinematic-pair{display:none!important}
+/* Cinema print — cream chapter cards */
+  .cinema-hero,.cinema-band{
+    background:#f5efe0!important;color:#1a1a1a!important;
+    min-height:0!important;width:auto!important;
+    margin:1.5em 0!important;padding:2em 1.5em!important;
+    border:1px solid #c9a55a!important;border-radius:0!important;
+    page-break-inside:avoid;
+  }
+  .cinema-video,.cinema-shade,.cinema-grain,.cinema-ring,.cinema-vol,
+  .cinema-footer span:last-child{display:none!important}
+  .cinema-top,.cinema-footer{
+    position:static!important;border:none!important;
+    color:#8a6a1d!important;padding:0 0 .8em!important;
+    display:block!important;font-size:9pt!important;
+  }
+  .cinema-top span:last-child{color:#4a463d!important;text-align:left!important}
+  .cinema-copy{position:static!important;padding:0!important;width:100%!important}
+  .cinema-kicker{
+    color:#8a6a1d!important;border-top:1px solid #c9a55a!important;
+    padding-top:.8em!important;display:block!important;
+  }
+  .cinema-kicker:before{display:none!important}
+  .cinema-title{
+    background:none!important;-webkit-background-clip:unset!important;
+    background-clip:unset!important;color:#1a1a1a!important;
+    -webkit-text-fill-color:#1a1a1a!important;filter:none!important;
+    font-size:24pt!important;letter-spacing:.02em!important;
+    text-shadow:none!important;
+  }
+  .cinema-sub{color:#4a463d!important;font-size:11pt!important;max-width:100%!important}
 }
 @media(max-width:640px){
   body{font-size:1rem}
@@ -930,186 +972,166 @@ footer.master .pulse-row svg{flex-shrink:0}
 .yt-wrap .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .yt-wrap .yt-cap{font-size:.9rem;color:#b8bcc2;font-style:italic;margin-top:.7rem;text-align:center;line-height:1.55}
 
-/* ═══ HOPEFUL HERO · lens-circle cinematic ═══ */
-.hopeful-hero{
-  position:relative;
-  isolation:isolate;
-  width:100vw;
-  margin:0 calc(50% - 50vw) 1.4rem;
-  min-height:min(760px,82vh);
-  min-height:min(760px,82svh);
-  overflow:hidden;
-  display:grid;
-  align-items:end;
-  background:#040108;
-  color:#f4ecff;
-  text-align:left;
-  font-family:var(--sans);
-  cursor:pointer;
-  --lens:0px;
-  --px:50%;
-  --py:50%;
+/* ═══ CINEMA SYSTEM · queue-based ═══ */
+.cinema-hero,
+.cinema-band{
+  position:relative;isolation:isolate;overflow:hidden;
+  background:#040108;color:#f4ecff;font-family:var(--sans);text-align:left;
+  --accent-color:#E040FB;--accent-glow:rgba(224,64,251,.45);
 }
-.hopeful-hero__poster,
-.hopeful-hero__video,
-.hopeful-hero__shade,
-.hopeful-hero__grain{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+.cinema-hero{
+  width:100vw;margin:0 calc(50% - 50vw) 1.4rem;
+  min-height:min(760px,82vh);min-height:min(760px,82svh);
+  display:grid;align-items:end;cursor:pointer;touch-action:manipulation;
 }
-.hopeful-hero__poster,
-.hopeful-hero__video{
-  object-fit:cover;
-  object-position:45% 45%;
+.cinema-hero.accent-hopeful{--accent-color:#E040FB;--accent-glow:rgba(224,64,251,.45)}
+.cinema-band{
+  width:100vw;margin:2.5rem calc(50% - 50vw);
+  min-height:min(560px,68vh);min-height:min(560px,68svh);
+  display:grid;align-items:end;
 }
-.hopeful-hero__poster{
-  z-index:-4;
-  transform:scale(1.015);
-  filter:brightness(.55) saturate(.7);
-  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
+.cinema-band.accent-crimson{--accent-color:#c97064;--accent-glow:rgba(201,112,100,.45)}
+.cinema-band.accent-gold{--accent-color:#D4AF37;--accent-glow:rgba(212,175,55,.45)}
+
+.cinema-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 45%;
+  background:#040108;z-index:-3;opacity:0;
+  transition:opacity .35s ease;
 }
-.hopeful-hero__video{
-  z-index:-3;
-  background:#040108;
-  clip-path:circle(var(--lens) at var(--px) var(--py));
-  transition:clip-path 1s cubic-bezier(.16,1,.3,1);
-  will-change:clip-path;
-}
-.hopeful-hero__shade{
-  z-index:-2;
-  pointer-events:none;
+.cinema-va{opacity:1}
+
+.cinema-shade{
+  position:absolute;inset:0;z-index:-2;pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(4,1,8,.80) 0%, rgba(4,1,8,.35) 55%, rgba(4,1,8,.15) 100%),
-    linear-gradient(0deg,rgba(4,1,8,.94) 0%, rgba(4,1,8,.35) 42%, rgba(4,1,8,.08) 72%, rgba(4,1,8,.42) 100%);
+    linear-gradient(90deg,rgba(4,1,8,.82) 0%,rgba(4,1,8,.35) 55%,rgba(4,1,8,.12) 100%),
+    linear-gradient(0deg,rgba(4,1,8,.94) 0%,rgba(4,1,8,.30) 42%,rgba(4,1,8,.05) 72%,rgba(4,1,8,.40) 100%);
+  transition:background .8s ease;
 }
-.hopeful-hero__grain{
-  z-index:-1;
-  pointer-events:none;
-  opacity:.10;
+/* Poster state — darker, so the still frame is a scene but the text pops */
+.cinema-hero:not(.is-open) .cinema-shade,
+.cinema-band:not(.is-playing) .cinema-shade{
+  background:
+    linear-gradient(90deg,rgba(4,1,8,.94) 0%,rgba(4,1,8,.65) 55%,rgba(4,1,8,.38) 100%),
+    linear-gradient(0deg,rgba(4,1,8,.97) 0%,rgba(4,1,8,.62) 42%,rgba(4,1,8,.28) 72%,rgba(4,1,8,.65) 100%);
+}
+.cinema-grain{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.14;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
   mix-blend-mode:soft-light;
 }
-.hopeful-hero.is-peeking .hopeful-hero__poster{
-  transform:scale(1.03);
-  filter:brightness(.46) saturate(.66);
-}
-.hopeful-hero.is-open .hopeful-hero__poster{
-  opacity:.10;
-}
-.hopeful-hero.is-open .hopeful-hero__video{
-  clip-path:circle(150% at var(--px) var(--py));
-}
-.hopeful-hero__top{
-  position:absolute;
-  top:clamp(24px,4vw,48px);
-  left:clamp(24px,6vw,84px);
-  right:clamp(24px,6vw,84px);
-  display:flex;
-  justify-content:space-between;
-  gap:16px;
-  font-size:10px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:rgba(244,236,255,.85);
-  pointer-events:none;
-  z-index:2;
-  font-family:var(--sans);
-}
-.hopeful-hero__top span:first-child{letter-spacing:.38em}
-.hopeful-hero__top span:last-child{color:rgba(244,236,255,.55);text-align:right;letter-spacing:.15em}
-.hopeful-hero__copy{
-  position:relative;
-  width:min(940px,100%);
+.cinema-copy{
+  position:relative;width:min(940px,100%);
   padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);
-  pointer-events:none;
-  z-index:2;
+  pointer-events:none;z-index:2;
 }
-.hopeful-hero__kicker{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:var(--gift2, #FFD166);
+.cinema-band .cinema-copy{
+  width:min(900px,100%);
+  padding:0 clamp(24px,6vw,84px) clamp(70px,8vw,100px);
+}
+.cinema-kicker{
+  display:flex;align-items:center;gap:12px;
+  color:var(--accent-color);
   font:600 10px/1.4 var(--sans);
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  margin:0 0 20px;
+  letter-spacing:.25em;text-transform:uppercase;margin:0 0 20px;
 }
-.hopeful-hero__kicker:before{
-  content:"";
-  width:30px;
-  height:1px;
-  background:var(--gift2, #FFD166);
-}
-.hopeful-hero h1{
+.cinema-kicker:before{content:"";width:30px;height:1px;background:var(--accent-color)}
+.cinema-hero .cinema-title{
   font:700 clamp(52px,9vw,112px)/.94 var(--serif);
-  letter-spacing:.06em;
-  margin:0;
-  max-width:900px;
-  background:linear-gradient(180deg,#fff 0%,#E040FB 42%,#A020F0 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 44px rgba(160,32,240,.35));
-  text-shadow:none;
+  letter-spacing:.06em;margin:0;max-width:900px;
+  background:linear-gradient(180deg,#fff 0%,var(--accent-color) 42%,#A020F0 100%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 44px var(--accent-glow));
 }
-.hopeful-hero__lede{
-  max-width:560px;
-  color:rgba(244,236,255,.82);
-  font:400 13.5px/1.85 var(--sans);
-  margin:24px 0 0;
+.cinema-band .cinema-title{
+  font:700 clamp(36px,6vw,72px)/1.02 var(--serif);
+  letter-spacing:.02em;margin:0;max-width:800px;
+  color:#f4ecff;text-shadow:0 4px 40px rgba(0,0,0,.4);
 }
-.hopeful-hero__footer{
-  position:absolute;
-  bottom:0;
-  left:clamp(24px,6vw,84px);
-  right:clamp(24px,6vw,84px);
+.cinema-sub{
+  max-width:560px;color:rgba(244,236,255,.82);
+  font:400 13.5px/1.85 var(--sans);margin:24px 0 0;
+}
+.cinema-band .cinema-sub{max-width:580px}
+
+.cinema-top{
+  position:absolute;top:clamp(24px,4vw,48px);
+  left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);
+  display:flex;justify-content:space-between;gap:16px;
+  font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(244,236,255,.85);pointer-events:none;z-index:2;
+}
+.cinema-top span:last-child{
+  color:rgba(244,236,255,.55);text-align:right;letter-spacing:.15em;
+}
+.cinema-footer{
+  position:absolute;bottom:0;left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);
   border-top:1px solid rgba(244,236,255,.18);
-  padding:14px 0 17px;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  color:rgba(244,236,255,.5);
-  font:500 9px/1.4 var(--sans);
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  pointer-events:none;
-  z-index:2;
+  padding:14px 0 17px;display:flex;justify-content:space-between;gap:12px;
+  color:rgba(244,236,255,.5);font:500 9px/1.4 var(--sans);
+  letter-spacing:.15em;text-transform:uppercase;pointer-events:none;z-index:2;
 }
-.hopeful-hero__footer span:last-child{text-align:right;color:var(--platinum, #d8dde3)}
-/* Top video — plays full-frame with no image on top; the image fades in for the last 0.5 s only */
-.hopeful-hero .hopeful-hero__video{clip-path:none!important;transition:none!important;will-change:auto}
-.hopeful-hero .hopeful-hero__poster{z-index:-2;opacity:0!important;filter:none!important;transform:none!important;transition:opacity .45s ease!important}
-.hopeful-hero.is-ending .hopeful-hero__poster{opacity:1!important}
-/* Top video — small volume button */
-.vol-btn{position:absolute;right:clamp(24px,6vw,84px);bottom:58px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;
-  border:1px solid rgba(216,221,227,.5);background:rgba(7,6,9,.55);color:#f0e0c4;display:grid;place-items:center;cursor:pointer;
-  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s ease,border-color .2s ease;touch-action:manipulation}
-.vol-btn:hover{background:rgba(7,6,9,.8)}
-.vol-btn:focus-visible{outline:2px solid #f0e0c4;outline-offset:2px}
-.vol-btn .vb-off{display:none}
-.vol-btn.is-muted .vb-on{display:none}
-.vol-btn.is-muted .vb-off{display:inline}
+.cinema-footer span:last-child{text-align:right;color:var(--platinum,#d8dde3)}
+
+.cinema-vol{
+  position:absolute;right:clamp(24px,6vw,84px);bottom:56px;z-index:4;
+  width:38px;height:38px;padding:0;border-radius:50%;
+  border:1px solid rgba(244,236,255,.35);
+  background:rgba(4,1,8,.55);color:#f4ecff;
+  display:grid;place-items:center;cursor:pointer;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  transition:background .2s,border-color .2s;touch-action:manipulation;
+}
+.cinema-vol:hover{background:rgba(4,1,8,.85);border-color:var(--accent-color)}
+.cinema-vol:focus-visible{outline:2px solid var(--accent-color);outline-offset:2px}
+.cinema-vol .vb-off{display:none}
+.cinema-vol.is-muted .vb-on{display:none}
+.cinema-vol.is-muted .vb-off{display:inline}
+
+.cinema-ring{
+  position:absolute;top:50%;left:50%;
+  width:140px;height:140px;margin:-70px 0 0 -70px;
+  border-radius:50%;border:2px solid var(--accent-color);
+  box-shadow:0 0 40px var(--accent-glow),inset 0 0 24px rgba(224,64,251,.18);
+  pointer-events:none;z-index:3;opacity:.95;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;
+  color:var(--accent-color);
+  background:rgba(4,1,8,.35);
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+  transition:opacity .5s ease,transform .4s cubic-bezier(.16,1,.3,1);
+  animation:cinema-ring-pulse 2.5s ease-in-out infinite;
+}
+.cinema-ring svg{display:block;margin-left:3px}
+.cinema-ring span{
+  font-family:var(--sans);font-size:9px;letter-spacing:.24em;
+  text-transform:uppercase;font-weight:700;
+}
+.cinema-hero.is-open .cinema-ring{opacity:0;transform:scale(1.6);pointer-events:none;animation:none}
+.cinema-hero.is-peeking .cinema-ring{
+  animation:none;
+  transform:translate(var(--ring-tx,0px),var(--ring-ty,0px));
+}
+@keyframes cinema-ring-pulse{
+  0%,100%{transform:scale(1);opacity:.85;box-shadow:0 0 40px var(--accent-glow),inset 0 0 24px rgba(224,64,251,.18)}
+  50%{transform:scale(1.06);opacity:1;box-shadow:0 0 60px var(--accent-glow),inset 0 0 32px rgba(224,64,251,.28)}
+}
 
 @media(max-width:700px){
-  .hopeful-hero{
-    min-height:min(760px,78vh);
-    min-height:min(760px,78svh);
-    margin-bottom:1.1rem;
-  }
-  .hopeful-hero__top{align-items:flex-start}
-  .hopeful-hero__top span:last-child{max-width:150px}
-  .hopeful-hero__copy{padding:0 24px 78px}
-  .hopeful-hero h1{font-size:clamp(48px,13.5vw,78px)}
-  .hopeful-hero__lede{max-width:320px;margin-top:18px}
-  .hopeful-hero__footer{font-size:7px;letter-spacing:.1em}
-  .hopeful-hero__poster,.hopeful-hero__video{object-position:48% 45%}
+  .cinema-hero{min-height:min(760px,78vh);min-height:min(760px,78svh)}
+  .cinema-band{min-height:min(500px,62vh);min-height:min(500px,62svh)}
+  .cinema-hero .cinema-title{font-size:clamp(48px,13.5vw,78px)}
+  .cinema-band .cinema-title{font-size:clamp(32px,10vw,52px)}
+  .cinema-sub{max-width:340px;font-size:12.5px}
+  .cinema-top span:last-child{max-width:150px}
+  .cinema-footer{font-size:7px;letter-spacing:.1em}
+  .cinema-ring{width:100px;height:100px;margin:-50px 0 0 -50px}
+  .cinema-ring span{font-size:8px;letter-spacing:.2em}
 }
+
 @media(prefers-reduced-motion:reduce){
-  .hopeful-hero__poster,
-  .hopeful-hero__video{transition:none!important}
+  .cinema-video{transition:none!important}
+  .cinema-ring{animation:none!important;display:none}
 }
 </style>
 </head>
@@ -1150,28 +1172,38 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <main class="page" id="top">
 
-<header class="hopeful-hero" id="hopefulHero" aria-label="The Hopeful Future — cinematic introduction">
-  <img class="hopeful-hero__poster" src="https://meaning-unconfounded.github.io/images/eros-hopeful-pulse-gift.jpg" alt="The Hopeful Future — PulseChain · the gift · the stack" fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
-  <video class="hopeful-hero__video" id="hopefulFilm" playsinline muted loop autoplay preload="auto" aria-hidden="true">
-    <source src="https://meaning-unconfounded.github.io/images/eros_cant_exploit.mp4" type="video/mp4"/>
+<section class="cinema-hero accent-hopeful" id="cinemaHero" role="button" tabindex="0" aria-expanded="false" aria-label="The Hopeful Future — cinematic introduction"
+         data-queue="eros_cant_exploit.mp4,migrate_titanX.mp4,we_are_with_you_eros.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true">
   </video>
-  <div class="hopeful-hero__shade"></div>
-  <div class="hopeful-hero__grain"></div>
-  <div class="hopeful-hero__top">
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-ring" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <span>Enter</span>
+  </div>
+  <div class="cinema-top">
     <span>PulseChain · The gift · The stack</span>
     <span>One chain · Five layers · One standard</span>
   </div>
-  <div class="hopeful-hero__copy">
-    <p class="hopeful-hero__kicker">The gift · The settlement · The base · The world · The floor · The bridge</p>
-    <h1>The Hopeful Future</h1>
-    <p class="hopeful-hero__lede">Not extraction. Everything DeFi should have been. pDAI states what settlement is for. Atropa counts what the base already is. EROS gives the base a world. PulseChain is the floor. The bridge is the mission. The right people make it a home.</p>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">The gift · The settlement · The base · The world · The floor · The bridge</p>
+    <h1 class="cinema-title">The Hopeful Future</h1>
+    <p class="cinema-sub">Not extraction. Everything DeFi should have been. pDAI states what settlement is for. Atropa counts what the base already is. EROS gives the base a world. PulseChain is the floor. The bridge is the mission. The right people make it a home.</p>
   </div>
-  <button type="button" class="vol-btn is-muted" id="volBtn" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
-  <div class="hopeful-hero__footer">
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="true">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/>
+    </svg>
+  </button>
+  <div class="cinema-footer">
     <span>The Hopeful Future · Gift Edition</span>
-    <span id="hopefulStatus" aria-live="polite">Click or scroll to enter</span>
+    <span class="cinema-status" aria-live="polite">Tap to enter</span>
   </div>
-</header>
+</section>
 
 <section class="frank">
   <p><span class="medal">🎁</span><strong class="gift-c">The gift</strong> is what we bring that crypto has not had.</p>
@@ -1182,7 +1214,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p>The bridge is the mission. Bonding is the work. Bringing the right people is the point. This is what they build together, and it is a gift.</p>
 </section>
 
-<!-- ═══ TOC — moved up, open by default ═══ -->
 <details class="toc-card" id="toc-anchor" open>
   <summary>Contents · 14 sections</summary>
   <div class="toc-grid">
@@ -1231,43 +1262,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   </figure>
 </div>
 
-<div class="cover" style="min-height:auto;padding-top:0">
-  <div class="seal">
-    <strong>What this book is.</strong> The gift, then the stack. Not extraction, everything DeFi should have been. pDAI states what settlement is for. Atropa and Dysnomia state what the base actually counts. EROS gives the base a world. PulseChain is the floor. The bridge is what makes the floor a web. And the right people are what make the web a home. No merging. No partnerships. One chain. One standard. One window. One gift, given, not sold.
-  </div>
-</div>
-
-<div class="video-hero">
-  <div class="vh-label">Eros 414 · visual explainer</div>
-  <video poster="https://meaning-unconfounded.github.io/images/eros-maria.jpg" controls playsinline preload="metadata" aria-label="Eros 414 — animated mathematical manifolds, Dysnomia VM wireframes, pDAI liquidity graphs">
-    <source src="https://meaning-unconfounded.github.io/images/Eros414.mp4" type="video/mp4"/>
-  </video>
-  <p class="vh-cap">Animated mathematical manifolds · neon Dysnomia VM wireframes · pDAI liquidity lock pulse graphs. The whole thesis, in motion.</p>
-</div>
-
-<aside class="summary-series" id="summary-series">
-  <span class="ss-k">📺 Summary Series · Three Shorts</span>
-  <p class="ss-t">The Hopeful Future in Three Minutes</p>
-  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the gift, the five-layer stack, and the unity thesis that holds it together. Watch here, or on Telegram.</p>
-  <div class="ss-grid">
-    <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-hopeful-pulse-gift.jpg" controls playsinline preload="metadata" muted title="Short 01 · The Gift" aria-label="Short 01 — The Gift">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_01.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/hopeful-unity-stack.png" controls playsinline preload="metadata" muted title="Short 02 · The Five Layers" aria-label="Short 02 — The Five Layers">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_02.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" controls playsinline preload="metadata" muted title="Short 03 · The Unity" aria-label="Short 03 — The Unity">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_03.mp4" type="video/mp4"/>
-      </video>
-    </div>
-  </div>
-</aside>
-
 <details class="eros-menu" id="eros-library">
   <summary>EROS library · the other books</summary>
   <div class="menu-body">
@@ -1311,6 +1305,41 @@ footer.master .pulse-row svg{flex-shrink:0}
     <a class="pl-btn" href="https://x.com/ErosPulseChain" target="_blank" rel="noopener">𝕏 @ErosPulseChain</a>
   </div>
 </aside>
+
+<aside class="media-studio" id="media-studio-eros414">
+  <span class="ms-k">🎞️ Visual Explainer · Eros 414</span>
+  <p class="ms-t">The whole thesis, in motion</p>
+  <p class="ms-d">Animated mathematical manifolds · neon Dysnomia VM wireframes · pDAI liquidity lock pulse graphs. Vital education — watch after the doorway, before the stack.</p>
+  <div class="ms-video">
+    <video controls playsinline preload="metadata" muted aria-label="Eros 414 — animated mathematical manifolds, Dysnomia VM wireframes, pDAI liquidity graphs">
+      <source src="https://meaning-unconfounded.github.io/images/Eros414.mp4" type="video/mp4"/>
+    </video>
+  </div>
+</aside>
+
+<aside class="summary-series" id="summary-series">
+  <span class="ss-k">📺 Summary Series · Three Shorts</span>
+  <p class="ss-t">The Hopeful Future in Three Minutes</p>
+  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the gift, the five-layer stack, and the unity thesis that holds it together. Watch here, or on Telegram.</p>
+  <div class="ss-grid">
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 01 · The Gift" aria-label="Short 01 — The Gift">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_01.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 02 · The Five Layers" aria-label="Short 02 — The Five Layers">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_02.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 03 · The Unity" aria-label="Short 03 — The Unity">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_hopeful_03.mp4" type="video/mp4"/>
+      </video>
+    </div>
+  </div>
+</aside>
+
 
 <div class="part-break gift" id="gift">
   <p class="pk">🎁 Before the stack · The gift</p>
@@ -1611,13 +1640,12 @@ footer.master .pulse-row svg{flex-shrink:0}
     <tr><th>Liquidity web</th><td>WPLS, TITANX, DRAGONX, ATROPA, PLSX, BEAR, and more, always verify the live set</td></tr>
   </table>
 
-  <!-- ═══ Tokenomics media — moved here from preamble ═══ -->
   <aside class="media-studio" id="media-studio-tokenomics">
     <span class="ms-k">🎙️ Media Studio · Tokenomics</span>
     <p class="ms-t">EROS 💕 explained in plain language</p>
     <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works.</p>
     <div class="ms-video">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
+      <video controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
         <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1699,7 +1727,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ms-t">EROS · Atropa · Dysnomia</p>
   <p class="ms-d">Two builders, two jobs, one machine. How the wider stack fits together — and why the rails stay separate on purpose.</p>
   <div class="ms-video">
-    <video poster="https://meaning-unconfounded.github.io/images/Atropos.jpg" controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
+    <video controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4" type="video/mp4"/>
     </video>
   </div>
@@ -1935,6 +1963,35 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 </section>
 
+<!-- ═══ CINEMA · BODY (midpoint) ═══ -->
+<section class="cinema-band accent-crimson" id="cinemaMidpoint" aria-label="The work — burn, pride, transform"
+         data-queue="EROS_burn_baby_burn.mp4,proud_eros.mp4,transform_eros.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-top">
+    <span>The work · Burn · Pride · Transform</span>
+    <span>Midpoint · Between crossing and loop</span>
+  </div>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">The work · burn · pride · transform</p>
+    <h2 class="cinema-title">What we actually do.</h2>
+    <p class="cinema-sub">Not the chart. Not the announcement. The burn that makes the base honest, the pride that keeps the room full, and the transform that earns the next rail.</p>
+  </div>
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="true">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/>
+    </svg>
+  </button>
+  <div class="cinema-footer">
+    <span>The Hopeful Future · Act break</span>
+    <span class="cinema-status" aria-live="polite">Tap for sound</span>
+  </div>
+</section>
+
 <div class="part-break gold" id="loop">
   <p class="pk">◉ Sixth · The Compounding Loop</p>
   <h2>Being found</h2>
@@ -1949,7 +2006,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p>This is not a moral judgment about how markets work. It is the weather.</p>
 
   <figure class="loop-viz">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-pls-ratio.jpg" controls autoplay loop muted playsinline preload="metadata" aria-label="The compounding loop — price leads attention, preparation is the edge">
+    <video controls autoplay loop muted playsinline preload="metadata" aria-label="The compounding loop — price leads attention, preparation is the edge">
       <source src="https://meaning-unconfounded.github.io/images/price_leads.mp4" type="video/mp4">
     </video>
     <figcaption class="loop-overlay">
@@ -2388,6 +2445,35 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 </section>
 
+<!-- ═══ CINEMA · LOWER (book-end) ═══ -->
+<section class="cinema-band accent-gold" id="cinemaBookEnd" aria-label="The close — five billion, entry, trillion"
+         data-queue="five_billion_eros.mp4,best_way_buy_eros.mp4,Eros_Trillion.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-top">
+    <span>The close · What remains</span>
+    <span>Before the Coda</span>
+  </div>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">The close · what remains</p>
+    <h2 class="cinema-title">Given, not sold.</h2>
+    <p class="cinema-sub">Scale, the entry, the grand arc. One chain. One window. Refusing the same lie. The bond is what holds.</p>
+  </div>
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="true">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/>
+    </svg>
+  </button>
+  <div class="cinema-footer">
+    <span>The Hopeful Future · Book-end</span>
+    <span class="cinema-status" aria-live="polite">Tap for sound</span>
+  </div>
+</section>
+
 <div class="part-break gift" id="telegram">
   <p class="pk">Share Layer</p>
   <h2>The Gift · The Stack · The Right People</h2>
@@ -2598,7 +2684,6 @@ window.addEventListener('scroll', onScrollProgress, {passive:true});
 onScrollProgress();
 if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-/* Delegated smooth-scroll — opens any <details> we land on */
 document.addEventListener('click', function(e){
   var a = e.target.closest && e.target.closest('a[href^="#"]');
   if(!a) return;
@@ -2744,7 +2829,6 @@ window.addEventListener('hashchange', openFromHash);
   });
 })();
 
-/* Cinematic pair autoplay */
 (function(){
   var videos = document.querySelectorAll('.media-studio.cinematic-pair video');
   if (!videos.length || !('IntersectionObserver' in window)) return;
@@ -2767,7 +2851,6 @@ window.addEventListener('hashchange', openFromHash);
 })();
 </script>
 
-
 <script>
 /* Summary-series: unmute on first play so one click = video + sound */
 (function(){
@@ -2780,183 +2863,494 @@ window.addEventListener('hashchange', openFromHash);
 })();
 </script>
 
-
 <script>
-/* ═══ HOPEFUL HERO · lens-circle cinematic with autoplay + sound ═══ */
-(function(){
+/* EROS CINEMA SYSTEM · canonical shared engine v1.0
+   Shared behaviour across books; book-specific styling and queue configuration stay in HTML.
+   Standards: muted first load; sound activated by deliberate gesture; one audible placement;
+   preload next clip once; short clips finish naturally; long clips transition 1.5s before end;
+   1.45s visual crossfade; 400ms audio crossfade; queue loops; recover from failed media.
+*/
+(function () {
   "use strict";
-  var hero = document.getElementById('hopefulHero');
-  var video = document.getElementById('hopefulFilm');
-  var status = document.getElementById('hopefulStatus');
-  if(!hero || !video) return;
-
-  var opened = false;
-  var soundOn = false;
-  var PEEK = 'clamp(120px,16vw,220px)';
-
-  function setStatus(msg){ if(status) status.textContent = msg; }
-  function pointAt(x, y){
-    var r = hero.getBoundingClientRect();
-    var px = Math.max(0, Math.min(r.width,  x - r.left));
-    var py = Math.max(0, Math.min(r.height, y - r.top));
-    hero.style.setProperty('--px', px + 'px');
-    hero.style.setProperty('--py', py + 'px');
+  var BASE = "https://meaning-unconfounded.github.io/images/";
+  var VOL = 0.22;
+  var VISUAL_FADE_MS = 1450;
+  var AUDIO_FADE_MS = 400;
+  var READY_TIMEOUT_MS = 9000;
+  var pref = window.__erosSoundPref;
+  if (!pref || typeof pref !== "object") {
+    pref = window.__erosSoundPref = { muted: true };
   }
-  function setLens(open){
-    hero.style.setProperty('--lens', open ? '150%' : PEEK);
-  }
+  if (typeof pref.muted !== "boolean") pref.muted = true;
 
-  function trySound(){
-    if(soundOn) return;
-    video.muted = false;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         setStatus('Click or scroll to enter');
-         try { video.play().catch(function(){}); } catch(e){}
-       });
-    } else {
-      soundOn = true;
-      setStatus('Sound on');
+  function resolveSource(name) {
+    if (/^https?:\/\//i.test(name)) return name;
+    return BASE + name.split("/").map(function (part) {
+      return encodeURIComponent(part);
+    }).join("/");
+  }
+  function closestControl(target) {
+    return target && target.closest ? target.closest("button,a,input,select,textarea") : null;
+  }
+  function parseFiles(root) {
+    var value = root.getAttribute("data-queue") || root.getAttribute("data-videos") || "";
+    var separator = value.indexOf("|") >= 0 ? "|" : ",";
+    return value.split(separator).map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function getLayers(root) {
+    var all = Array.prototype.slice.call(root.querySelectorAll(
+      ".cinema-va, .cinema-vb, .cinema-layer, .cinema-band__video, .bridge-hero__video"
+    ));
+    /* A cinematic placement must have exactly two video layers. */
+    return all.filter(function (v, i) { return all.indexOf(v) === i; }).slice(0, 2);
+  }
+  function getSoundControl(root) {
+    return root.querySelector(".cinema-vol, .cinema-sound, .cinema-band__sound, [data-sound-toggle]");
+  }
+  function getStatus(root) {
+    return root.querySelector(".cinema-status, .cinema-band__status");
+  }
+  var roots = Array.prototype.slice.call(document.querySelectorAll("[data-queue], [data-videos]"));
+  var states = [];
+  var owner = null;
+  var ratios = new Map();
+
+  function setStatus(st, message) {
+    if (st.status) st.status.textContent = message;
+  }
+  function updateControl(st) {
+    var button = st.sound;
+    if (!button) return;
+    var muted = pref.muted;
+    button.classList.toggle("is-muted", muted);
+    button.setAttribute("aria-pressed", muted ? "false" : "true");
+    button.setAttribute("aria-label", muted ? "Turn sound on" : "Turn sound off");
+    var label = button.querySelector(".sound-label");
+    if (label) label.textContent = muted ? "Enable sound" : "Sound on";
+    else if (button.textContent.trim() === "Enable sound" || button.textContent.trim() === "Sound on") {
+      button.textContent = muted ? "Enable sound" : "Sound on · tap to mute";
     }
   }
-
-  function openHero(x, y){
-    if(x != null && y != null) pointAt(x, y);
-    opened = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    trySound();
-    if(soundOn && video.paused) video.play().catch(function(){});
-  }
-
-  (function boot(){
-    video.muted = false;
-    video.loop = true;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         try { video.play().catch(function(){}); } catch(e){}
-         setStatus('Click or scroll to enter');
-       });
-    }
-  })();
-
-  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
-  function unlockOnce(e){
-    if(soundOn) return;
-    if(e && e.target && e.target.closest && e.target.closest('.vol-btn')) return; /* button handles itself */
-    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
-    trySound();
-  }
-  gestures.forEach(function(evt){
-    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
-  });
-
-  hero.addEventListener('pointermove', function(e){
-    if(opened) return;
-    pointAt(e.clientX, e.clientY);
-    hero.classList.add('is-peeking');
-    setLens(false);
-  });
-  hero.addEventListener('touchmove', function(e){
-    if(opened) return;
-    if(e.touches && e.touches[0]){
-      pointAt(e.touches[0].clientX, e.touches[0].clientY);
-      hero.classList.add('is-peeking');
-      setLens(false);
-    }
-  }, { passive: true });
-
-  hero.addEventListener('click', function(e){
-    if(e.target.closest && e.target.closest('a')) return;
-    if(!opened) openHero(e.clientX, e.clientY);
-    else if(video.paused) video.play().catch(function(){});
-  });
-
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          if(video.paused) video.play().catch(function(){});
+  function syncAudio() {
+    states.forEach(function (st) {
+      st.layers.forEach(function (v, i) {
+        v.volume = VOL;
+        var shouldBeAudible = !pref.muted && owner === st && st.active &&
+          (i === st.current || (st.switching && (i === st.current || i === 1 - st.current)));
+        if (!st.switching || owner !== st || pref.muted) {
+          v.muted = !(shouldBeAudible && i === st.current);
         } else {
-          video.pause();
+          /* During the one queue's fade, both layers may be audible at ramped volumes. */
+          v.muted = false;
         }
       });
-    }, { threshold: 0.05 }).observe(hero);
-  }
-
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && video.paused) video.play().catch(function(){});
-  });
-
-
-  /* Small volume button (bottom right of the top video) */
-  var volBtn = document.getElementById('volBtn');
-  function syncVol(){
-    if(!volBtn) return;
-    var off = video.muted || video.volume === 0;
-    volBtn.classList.toggle('is-muted', off);
-    volBtn.setAttribute('aria-pressed', off ? 'true' : 'false');
-    volBtn.setAttribute('aria-label', off ? 'Turn sound on' : 'Turn sound off');
-  }
-  if(volBtn){
-    volBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      soundOn = true; /* the visitor is now in control; stop auto-unmuting */
-      video.muted = !video.muted;
-      if(!video.muted && video.volume === 0) video.volume = 1;
-      if(!video.muted && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        video.play().catch(function(){});
-      }
-      setStatus(video.muted ? 'Sound off' : 'Sound on');
-      syncVol();
+      updateControl(st);
     });
-    video.addEventListener('volumechange', syncVol);
-    syncVol();
   }
-
-
-  /* Last 0.5 s of the film: fade the image in over the video; it clears when the loop restarts */
-  var END_IMAGE_SECONDS = 0.5;
-  var endingRunning = false;
-  function checkEnding(){
-    var d = video.duration;
-    if(!d || !isFinite(d) || d <= END_IMAGE_SECONDS) return;
-    hero.classList.toggle('is-ending', (d - video.currentTime) <= END_IMAGE_SECONDS);
-  }
-  function endingTick(){
-    checkEnding();
-    if(!video.paused && !video.ended){ requestAnimationFrame(endingTick); } else { endingRunning = false; }
-  }
-  video.addEventListener('playing', function(){
-    if(endingRunning) return;
-    endingRunning = true;
-    requestAnimationFrame(endingTick);
-  });
-  video.addEventListener('seeked', checkEnding);
-
-  video.addEventListener('error', function(){
-    setStatus('Video unavailable · poster remains');
-  });
-
-  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches){
+  function setSourceOnce(st, index, video) {
+    if (index < 0 || index >= st.files.length) return false;
+    var source = resolveSource(st.files[index]);
+    if (video.dataset.erosSource === source && video.getAttribute("src")) return true;
     video.pause();
     video.muted = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    opened = true;
-    setStatus('Static view');
+    video.volume = VOL;
+    video.removeAttribute("src");
+    while (video.firstChild) video.removeChild(video.firstChild);
+    video.src = source;
+    video.dataset.erosSource = source;
+    video.dataset.erosClipIndex = String(index);
+    video.preload = "auto";
+    video.loop = false;
+    video.removeAttribute("loop");
+    video.playsInline = true;
+    video.load();
+    return true;
   }
+  function nextIndex(st, fromIndex) {
+    for (var step = 1; step <= st.files.length; step++) {
+      var candidate = (fromIndex + step) % st.files.length;
+      if (!st.failed[candidate]) return candidate;
+    }
+    return -1;
+  }
+  function prepareNext(st) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) return;
+    var incoming = st.layers[1 - st.current];
+    if (incoming.dataset.erosClipIndex === String(ni) &&
+        incoming.getAttribute("src") && incoming.readyState >= 2) {
+      st.preparedIndex = ni;
+      return;
+    }
+    setSourceOnce(st, ni, incoming);
+    st.preparedIndex = ni;
+  }
+  function setLayerOpacity(video, value) {
+    video.style.opacity = String(value);
+    video.style.visibility = value > 0 ? "visible" : "visible";
+  }
+  function playMuted(video) {
+    video.muted = true;
+    try {
+      var p = video.play();
+      if (p && typeof p.catch === "function") p.catch(function () {});
+    } catch (e) {}
+  }
+  function startCurrent(st, fromGesture) {
+    if (!st || !st.active || owner !== st) return;
+    var current = st.layers[st.current];
+    current.muted = pref.muted;
+    current.volume = VOL;
+    try {
+      var p = current.play();
+      if (p && typeof p.catch === "function") {
+        p.catch(function () {
+          setStatus(st, "Tap the film or sound control to resume");
+        });
+      }
+    } catch (e) {
+      setStatus(st, "Tap the film or sound control to resume");
+    }
+    prepareNext(st);
+    syncAudio();
+  }
+  function clearTransition(st) {
+    if (st.transitionTimer) {
+      clearTimeout(st.transitionTimer);
+      st.transitionTimer = null;
+    }
+    if (st.readyTimer) {
+      clearTimeout(st.readyTimer);
+      st.readyTimer = null;
+    }
+    if (st.incoming && st.handlers) {
+      st.incoming.removeEventListener("canplay", st.handlers.ready);
+      st.incoming.removeEventListener("error", st.handlers.error);
+    }
+    if (st.fadeFrame) {
+      cancelAnimationFrame(st.fadeFrame);
+      st.fadeFrame = null;
+    }
+    st.handlers = null;
+  }
+  function finishTransition(st, outgoing, incoming, ni) {
+    if (!st.switching) return;
+    clearTransition(st);
+    outgoing.pause();
+    try { outgoing.currentTime = 0; } catch (e) {}
+    outgoing.muted = true;
+    outgoing.volume = VOL;
+    setLayerOpacity(outgoing, 0);
+    setLayerOpacity(incoming, 1);
+    outgoing.classList.remove("is-active");
+    incoming.classList.add("is-active");
+    incoming.volume = VOL;
+    incoming.muted = pref.muted || owner !== st;
+    st.current = 1 - st.current;
+    st.index = ni;
+    st.preparedIndex = null;
+    st.switching = false;
+    st.incoming = null;
+    st.failed[ni] = false;
+    syncAudio();
+    setStatus(st, "Film " + (st.index + 1) + " of " + st.files.length +
+      (pref.muted ? " · Sound off" : " · Sound on"));
+    prepareNext(st);
+  }
+  function failIncoming(st, ni, incoming, outgoing, message) {
+    if (!st.switching) return;
+    clearTransition(st);
+    incoming.pause();
+    incoming.muted = true;
+    incoming.volume = VOL;
+    incoming.removeAttribute("src");
+    delete incoming.dataset.erosSource;
+    delete incoming.dataset.erosClipIndex;
+    setLayerOpacity(incoming, 0);
+    st.failed[ni] = true;
+    st.switching = false;
+    st.incoming = null;
+    st.preparedIndex = null;
+    outgoing.muted = pref.muted || owner !== st;
+    outgoing.volume = VOL;
+    setLayerOpacity(outgoing, 1);
+    setStatus(st, message || "A film could not load · continuing the loop");
+    if (st.active && owner === st) {
+      if (outgoing.ended || outgoing.paused) {
+        try { outgoing.currentTime = 0; } catch (e) {}
+        playMuted(outgoing);
+        outgoing.muted = pref.muted || owner !== st;
+      }
+      var next = nextIndex(st, st.index);
+      if (next >= 0) {
+        /* Retry progression with the next non-failed clip, never spin on this failed one. */
+        window.setTimeout(function () { if (st.active && !st.switching) switchClip(st, true); }, 0);
+      } else {
+        setStatus(st, "No playable films remain in this queue");
+      }
+    }
+    syncAudio();
+  }
+  function switchClip(st, force) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) {
+      setStatus(st, "No playable films remain in this queue");
+      return;
+    }
+    var outgoing = st.layers[st.current];
+    var incoming = st.layers[1 - st.current];
+    st.switching = true;
+    st.incoming = incoming;
+    setStatus(st, "Preparing next film");
+    if (incoming.dataset.erosClipIndex !== String(ni) ||
+        !incoming.getAttribute("src")) {
+      setSourceOnce(st, ni, incoming);
+    }
+    incoming.muted = true;
+    incoming.volume = 0;
+    incoming.loop = false;
+    var settled = false;
+    function cleanupReady() {
+      if (st.readyTimer) { clearTimeout(st.readyTimer); st.readyTimer = null; }
+      incoming.removeEventListener("canplay", onReady);
+      incoming.removeEventListener("error", onError);
+    }
+    function onError() {
+      if (settled) return;
+      settled = true;
+      cleanupReady();
+      failIncoming(st, ni, incoming, outgoing, "A film could not load · skipping to the next");
+    }
+    function onReady() {
+      if (settled || !st.switching || incoming.readyState < 2) return;
+      settled = true;
+      cleanupReady();
+      try { incoming.currentTime = 0; } catch (e) {}
+      incoming.muted = true;
+      incoming.volume = 0;
+      var playPromise;
+      try { playPromise = incoming.play(); }
+      catch (e) {
+        failIncoming(st, ni, incoming, outgoing, "Playback was blocked · tap the film to resume");
+        return;
+      }
+      function beginFade() {
+        if (!st.switching || !st.active || owner !== st) {
+          incoming.pause();
+          incoming.muted = true;
+          st.switching = false;
+          setLayerOpacity(incoming, 0);
+          return;
+        }
+        st.failed[ni] = false;
+        /* Both frames are in play before the incoming layer is revealed. */
+        setLayerOpacity(incoming, 1);
+        incoming.classList.add("is-active");
+        outgoing.classList.remove("is-active");
+        var t0 = performance.now();
+        var outgoingStart = outgoing.volume;
+        var incomingStart = 0;
+        function audioStep(now) {
+          if (!st.switching || st.incoming !== incoming) return;
+          var progress = Math.min(1, (now - t0) / AUDIO_FADE_MS);
+          if (!pref.muted && owner === st) {
+            outgoing.muted = false;
+            incoming.muted = false;
+            outgoing.volume = Math.max(0, outgoingStart * (1 - progress));
+            incoming.volume = VOL * progress;
+          } else {
+            outgoing.muted = true;
+            incoming.muted = true;
+            outgoing.volume = VOL * (1 - progress);
+            incoming.volume = VOL * progress;
+          }
+          if (progress < 1) st.fadeFrame = requestAnimationFrame(audioStep);
+          else {
+            outgoing.volume = 0;
+            incoming.volume = VOL;
+            st.fadeFrame = null;
+          }
+        }
+        st.fadeFrame = requestAnimationFrame(audioStep);
+        st.transitionTimer = window.setTimeout(function () {
+          finishTransition(st, outgoing, incoming, ni);
+        }, VISUAL_FADE_MS);
+      }
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(beginFade).catch(function () {
+          failIncoming(st, ni, incoming, outgoing, "Playback was blocked · tap the film to resume");
+        });
+      } else {
+        beginFade();
+      }
+    }
+    st.handlers = { ready: onReady, error: onError };
+    incoming.addEventListener("canplay", onReady);
+    incoming.addEventListener("error", onError);
+    st.readyTimer = window.setTimeout(function () {
+      if (incoming.readyState >= 2) onReady();
+      else onError();
+    }, READY_TIMEOUT_MS);
+    if (incoming.readyState >= 2) onReady();
+  }
+  function deactivate(st) {
+    if (!st) return;
+    st.active = false;
+    if (st.switching) {
+      clearTransition(st);
+      st.switching = false;
+      st.incoming = null;
+    }
+    st.layers.forEach(function (v, i) {
+      v.muted = true;
+      v.pause();
+      setLayerOpacity(v, i === st.current ? 1 : 0);
+      v.classList.toggle("is-active", i === st.current);
+    });
+    if (owner === st) owner = null;
+    syncAudio();
+  }
+  function activate(st) {
+    if (!st) return;
+    if (owner && owner !== st) deactivate(owner);
+    owner = st;
+    st.active = true;
+    st.layers.forEach(function (v, i) {
+      v.volume = VOL;
+      if (i !== st.current) {
+        v.muted = true;
+        if (!st.switching) v.pause();
+      }
+    });
+    syncAudio();
+    startCurrent(st, false);
+  }
+  function toggleSound(st) {
+    pref.muted = !pref.muted;
+    syncAudio();
+    if (!pref.muted) {
+      if (!st.active || owner !== st) activate(st);
+      startCurrent(st, true);
+      setStatus(st, "Sound enabled · active section only");
+    } else {
+      states.forEach(function (state) {
+        state.layers.forEach(function (v) { v.muted = true; v.volume = VOL; });
+      });
+      setStatus(st, "Sound muted");
+    }
+    syncAudio();
+  }
+  function makeState(root) {
+    var files = parseFiles(root);
+    var layers = getLayers(root);
+    if (!files.length || layers.length !== 2) return null;
+    var st = {
+      root: root, files: files, layers: layers, sound: getSoundControl(root), status: getStatus(root),
+      index: 0, current: 0, active: false, switching: false, failed: Object.create(null),
+      preparedIndex: null, incoming: null, handlers: null, readyTimer: null,
+      transitionTimer: null, fadeFrame: null, observerRatio: 0
+    };
+    layers.forEach(function (v, i) {
+      v.muted = true;
+      v.volume = VOL;
+      v.loop = false;
+      v.removeAttribute("loop");
+      v.playsInline = true;
+      v.preload = "auto";
+      setLayerOpacity(v, i === 0 ? 1 : 0);
+      v.addEventListener("timeupdate", function () {
+        if (!st.active || owner !== st || st.switching || st.layers[st.current] !== v) return;
+        if (Number.isFinite(v.duration) && v.duration > 15 && v.duration - v.currentTime <= 1.5) {
+          switchClip(st, false);
+        }
+      });
+      v.addEventListener("ended", function () {
+        if (st.active && owner === st && st.layers[st.current] === v && !st.switching) {
+          switchClip(st, true);
+        }
+      });
+    });
+    setSourceOnce(st, 0, layers[0]);
+    st.sound && st.sound.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSound(st);
+    });
+    root.addEventListener("pointerdown", function (event) {
+      if (closestControl(event.target)) return;
+      if (!pref.muted) {
+        if (!st.active || owner !== st) activate(st);
+        else if (st.layers[st.current].paused) startCurrent(st, true);
+        return;
+      }
+      pref.muted = false;
+      root.classList.add("is-open");
+      if (!st.active || owner !== st) activate(st);
+      else startCurrent(st, true);
+      syncAudio();
+      setStatus(st, "Sound enabled · active section only");
+    });
+    root.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        if (root.getAttribute("role") === "button" || root.classList.contains("cinema-hero")) {
+          event.preventDefault();
+          root.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+        }
+      }
+    });
+    if (st.sound) updateControl(st);
+    return st;
+  }
+
+  roots.forEach(function (root) {
+    var st = makeState(root);
+    if (st) states.push(st);
+  });
+  if (!states.length) return;
+
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var st = states.filter(function (x) { return x.root === entry.target; })[0];
+        if (!st) return;
+        st.observerRatio = entry.isIntersecting ? entry.intersectionRatio : 0;
+        ratios.set(st, st.observerRatio);
+      });
+      var candidate = null, best = 0;
+      states.forEach(function (st) {
+        var ratio = ratios.get(st) || 0;
+        if (ratio >= 0.22 && ratio > best) { best = ratio; candidate = st; }
+      });
+      if (candidate) {
+        if (owner !== candidate) activate(candidate);
+      } else if (owner && (ratios.get(owner) || 0) < 0.22) {
+        deactivate(owner);
+      }
+    }, { threshold: [0, 0.06, 0.22, 0.5, 0.75] });
+    states.forEach(function (st) { observer.observe(st.root); });
+  } else {
+    activate(states[0]);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      states.forEach(function (st) {
+        st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+      });
+    } else if (owner && owner.active) {
+      syncAudio();
+      startCurrent(owner, false);
+    }
+  });
+  window.addEventListener("pagehide", function () {
+    states.forEach(function (st) {
+      clearTransition(st);
+      st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+    });
+  });
+  syncAudio();
 })();
 </script>
 
