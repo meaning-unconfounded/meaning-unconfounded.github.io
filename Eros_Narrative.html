@@ -107,7 +107,162 @@ p,li{overflow-wrap:break-word;text-wrap:pretty;orphans:2;widows:2}
 .cover h1{font-size:clamp(2rem,6vw,2.75rem);font-weight:700;letter-spacing:.02em;margin:.2rem 0;color:var(--amber)}
 .cover .sub{color:var(--soft);font-size:1.05rem;margin-top:.5rem;max-width:32rem;margin-left:auto;margin-right:auto}
 .banner{width:100%;border-radius:12px;border:1px solid var(--amber-line);margin:1rem 0;display:block}
-video.hero{width:100%;border-radius:12px;border:1px solid var(--amber-line);margin:1rem 0 1.25rem;background:#000;display:block}
+
+/* Cinematic narrative cover — lens-circle over video underlay */
+.narrative-film{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  width:100%;
+  min-height:clamp(430px,68vw,760px);
+  margin:1.5rem 0 1.25rem;
+  border:1px solid rgba(232,165,90,.36);
+  border-radius:14px;
+  background:#070609;
+  box-shadow:0 22px 70px rgba(0,0,0,.42);
+  text-align:left;
+  cursor:pointer;
+  touch-action:manipulation;
+  --lens:0px;
+  --px:50%;
+  --py:50%;
+}
+.narrative-film .film-poster,
+.narrative-film .film-video,
+.narrative-film .film-shade,
+.narrative-film .film-grain{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.narrative-film .film-poster,
+.narrative-film .film-video{
+  object-fit:cover;
+  object-position:center 45%;
+}
+.narrative-film .film-poster{
+  z-index:-4;
+  transform:scale(1.015);
+  filter:brightness(.55) saturate(.72);
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
+}
+.narrative-film .film-video{
+  z-index:-3;
+  background:#090708;
+  clip-path:circle(var(--lens) at var(--px) var(--py));
+  transition:clip-path 1s cubic-bezier(.16,1,.3,1);
+  will-change:clip-path;
+}
+.narrative-film .film-shade{
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(5,4,8,.78) 0%, rgba(5,4,8,.34) 55%, rgba(5,4,8,.14) 100%),
+    linear-gradient(0deg,rgba(5,4,8,.94) 0%, rgba(5,4,8,.30) 42%, rgba(5,4,8,.08) 72%, rgba(5,4,8,.42) 100%);
+}
+.narrative-film .film-grain{
+  z-index:-1;
+  pointer-events:none;
+  opacity:.11;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+.narrative-film.is-peeking .film-poster{
+  transform:scale(1.03);
+  filter:brightness(.46) saturate(.66);
+}
+.narrative-film.is-open .film-poster{
+  opacity:.10;
+}
+.narrative-film.is-open .film-video{
+  clip-path:circle(150% at var(--px) var(--py));
+}
+.narrative-film .film-top,
+.narrative-film .film-copy,
+.narrative-film .film-bottom{
+  position:absolute;
+  left:clamp(20px,5vw,58px);
+  right:clamp(20px,5vw,58px);
+  z-index:2;
+}
+.narrative-film .film-top{
+  top:clamp(22px,4vw,42px);
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:center;
+  font-family:var(--sans);
+  font-size:.68rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#e9d8bd;
+  pointer-events:none;
+}
+.narrative-film .film-top span:last-child{
+  text-align:right;
+  color:#c2b1a0;
+  letter-spacing:.12em;
+}
+.narrative-film .film-copy{
+  top:50%;
+  transform:translateY(-45%);
+  max-width:760px;
+  pointer-events:none;
+}
+.narrative-film .film-kicker{
+  font-family:var(--sans);
+  font-size:.68rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--amber2);
+  margin:0 0 1rem;
+}
+.narrative-film .film-title{
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:500;
+  font-size:clamp(3rem,9vw,7.4rem);
+  line-height:.92;
+  letter-spacing:-.055em;
+  color:#f5eadb;
+  margin:0 0 1.1rem;
+  text-wrap:balance;
+  text-shadow:0 4px 40px #0004;
+}
+.narrative-film .film-sub{
+  max-width:32rem;
+  color:#d8cbbb;
+  font-size:clamp(.95rem,2vw,1.15rem);
+  line-height:1.65;
+  margin:0;
+}
+.narrative-film .film-bottom{
+  bottom:24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  border-top:1px solid rgba(245,234,219,.24);
+  padding-top:14px;
+  color:#c3b4a6;
+  font-family:var(--sans);
+  font-size:.62rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+@media(max-width:600px){
+  .narrative-film{min-height:570px;min-height:min(76svh,700px);border-radius:10px}
+  .narrative-film .film-poster,.narrative-film .film-video{object-position:58% center}
+  .narrative-film .film-copy{top:49%;transform:translateY(-40%)}
+  .narrative-film .film-title{font-size:clamp(3.1rem,15vw,5rem)}
+  .narrative-film .film-sub{max-width:18rem}
+  .narrative-film .film-bottom{font-size:.53rem;letter-spacing:.09em}
+}
+@media(prefers-reduced-motion:reduce){
+  .narrative-film *{transition:none!important}
+}
+
 
 details.eros-menu{max-width:42rem;margin:1rem auto;border:1px solid var(--amber-line);border-radius:10px;background:var(--amber-soft);padding:.35rem 1rem;text-align:left}
 details.eros-menu>summary{cursor:pointer;list-style:none;font-family:var(--sans);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);padding:.55rem 0;user-select:none;font-weight:600}
@@ -205,7 +360,7 @@ details.doorway .door-body strong{color:var(--amber2);font-weight:700}
 .media-studio .ms-d{
   font-size:.92rem;
   color:var(--soft, #d4c4b0);
-  line-height:1.65;
+  line-height:var(--leading, 1.65);
   margin:0 0 1rem;
 }
 .media-studio .ms-video{
@@ -302,7 +457,7 @@ details.doorway .door-body strong{color:var(--amber2);font-weight:700}
 .summary-series .ss-d{
   font-size:.92rem;
   color:var(--soft);
-  line-height:1.65;
+  line-height:var(--leading, 1.65);
   margin:0 0 1.25rem;
 }
 .summary-series .ss-grid{
@@ -426,9 +581,9 @@ figure.brand-seal.silver figcaption{color:var(--silver2)}
 .companions{margin:1.25rem 0 2rem;padding:1.2rem 1.3rem;border:1px solid var(--amber-line);background:var(--amber-soft);border-radius:12px}
 .companions h3{font-family:var(--sans);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 .65rem}
 .companions ul{list-style:none}
-.companions li{margin:.45rem 0;font-size:.96rem;line-height:1.6}
+.companions li{margin:.45rem 0;font-size:.96rem;line-height:var(--leading, 1.6)}
 .companions li b{color:var(--ink)}
-.readguide{margin:.9rem 0 0;padding-top:.85rem;border-top:1px solid var(--amber-line);font-size:.95rem;line-height:1.75}
+.readguide{margin:.9rem 0 0;padding-top:.85rem;border-top:1px solid var(--amber-line);font-size:.95rem;line-height:var(--leading, 1.75)}
 .readguide strong{color:var(--amber);display:block;margin-bottom:.35rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
 
 .part{margin:2.75rem 0 1.25rem;padding-top:1.5rem;border-top:1px solid var(--border)}
@@ -476,7 +631,7 @@ code{font-family:var(--mono);font-size:.86em;color:#f0d498;word-break:break-all;
 @media(min-width:540px){.grid.two{grid-template-columns:1fr 1fr}}
 .grid > div{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:.95rem 1.05rem}
 .grid > div b{display:block;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:.4rem}
-.grid > div p{font-size:.92rem;line-height:1.65;margin:0;color:var(--soft)}
+.grid > div p{font-size:.92rem;line-height:var(--leading, 1.65);margin:0;color:var(--soft)}
 
 .svg-block{margin:1.4rem 0;padding:.7rem;border:1px solid var(--border);border-radius:12px;background:var(--card)}
 .svg-block svg{width:100%;height:auto;display:block;border-radius:8px}
@@ -487,7 +642,7 @@ code{font-family:var(--mono);font-size:.86em;color:#f0d498;word-break:break-all;
 .creed strong{color:var(--gold);display:block;margin-top:.5rem}
 .creedline{margin-top:.9rem;font-family:var(--sans);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.55}
 
-.connect{margin:1.2rem 0;padding:.9rem 1.15rem;border:1px dashed var(--amber-line);border-radius:10px;background:var(--raised);font-family:var(--sans);font-size:.86rem;color:var(--soft);line-height:1.7}
+.connect{margin:1.2rem 0;padding:.9rem 1.15rem;border:1px dashed var(--amber-line);border-radius:10px;background:var(--raised);font-family:var(--sans);font-size:.86rem;color:var(--soft);line-height:var(--leading, 1.7)}
 .connect strong{color:var(--amber);font-weight:700;display:block;margin-bottom:.3rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
 .connect a{color:var(--amber)}
 
@@ -619,8 +774,8 @@ footer.master .pulse-row svg{flex-shrink:0}
 <header class="corpus-bar">
   <div class="brand-row">
     <a class="logo-cluster" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" aria-label="EROS Narrative · top">
-      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44"/>
-      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38"/>
+      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" width="44" height="44" onerror="this.style.display='none'"/>
+      <img class="pin pulse-mark" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" width="38" height="38" onerror="this.style.display='none'"/>
       <span class="compass" aria-hidden="true">🧭</span>
     </a>
     <div class="title-cluster">
@@ -653,12 +808,22 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <header class="cover">
   <div class="seal">Narrative · On-ramp · Not the full dossier</div>
-  <h1>EROS</h1>
+  <section class="narrative-film" id="narrativeFilm" aria-label="EROS Narrative — cinematic introduction">
+    <img class="film-poster" src="https://meaning-unconfounded.github.io/images/eros-plan-summary-banner.jpg" alt="EROS Narrative — a cinematic doorway into the story" fetchpriority="high" decoding="async" onerror="this.src='https://meaning-unconfounded.github.io/images/eros-door.jpg'"/>
+    <video class="film-video" id="narrativeFilmVideo" playsinline muted loop autoplay preload="auto" poster="https://meaning-unconfounded.github.io/images/eros-plan-summary-banner.jpg" aria-hidden="true">
+      <source src="https://meaning-unconfounded.github.io/images/sommi_facts.mp4" type="video/mp4"/>
+    </video>
+    <div class="film-shade" aria-hidden="true"></div>
+    <div class="film-grain" aria-hidden="true"></div>
+    <div class="film-top"><span>EROS · The Narrative</span><span>Crypto first · Story second</span></div>
+    <div class="film-copy">
+      <p class="film-kicker">A living threshold</p>
+      <h1 class="film-title">The story<br/>beneath the signal.</h1>
+      <p class="film-sub">A readable path into EROS — where belief is tested, stories become worlds, and extraction is never the point.</p>
+    </div>
+    <div class="film-bottom"><span>EROS · A readable on-ramp</span><span id="narrativeStatus" aria-live="polite">Click or scroll to enter</span></div>
+  </section>
   <p class="sub">The readable path into the plan.<br/>Crypto first. Story second. Extraction never.</p>
-  <img class="banner" src="https://meaning-unconfounded.github.io/images/eros-plan-summary-banner.jpg" alt="EROS Narrative banner" onerror="this.style.display='none'"/>
-  <video class="hero" controls playsinline preload="metadata" aria-label="EROS summary — ninety-second narrative overview">
-    <source src="https://meaning-unconfounded.github.io/images/eros_summary.mp4" type="video/mp4"/>
-  </video>
 </header>
 
 <figure class="link-banner media-slot" role="img" aria-label="The weakest link — EROS welcomes only the strong">
@@ -1369,9 +1534,9 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <footer class="master">
   <div class="title-row">
-    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
+    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy" onerror="this.style.display='none'"/>
     <span class="title">EROS NARRATIVE</span>
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy" onerror="this.style.display='none'"/>
   </div>
   <p class="count">The On-Ramp · Stage One education · EROS Library</p>
 
@@ -1562,7 +1727,7 @@ window.addEventListener('hashchange', openFromHash);
 
 /* 5 · Reader controls */
 (function(){
-  var KEY = 'eros_narrative_reader_v3';
+  var KEY = 'eros_narrative_reader_v4';
   var defaults = {size:100, lead:1.85, w:42};
   var state = Object.assign({}, defaults);
   try {
@@ -1671,6 +1836,145 @@ window.addEventListener('hashchange', openFromHash);
       v.removeEventListener('play', onFirstPlay);
     });
   });
+})();
+</script>
+
+
+<script>
+/* EROS Narrative film — lens-circle with autoplay + sound + loop */
+(function(){
+  "use strict";
+  var frame = document.getElementById('narrativeFilm');
+  var video = document.getElementById('narrativeFilmVideo');
+  var status = document.getElementById('narrativeStatus');
+  if(!frame || !video) return;
+
+  var opened = false;
+  var soundOn = false;
+  var PEEK = 'clamp(120px,16vw,220px)';
+
+  function setStatus(msg){ if(status) status.textContent = msg; }
+  function pointAt(x, y){
+    var r = frame.getBoundingClientRect();
+    var px = Math.max(0, Math.min(r.width,  x - r.left));
+    var py = Math.max(0, Math.min(r.height, y - r.top));
+    frame.style.setProperty('--px', px + 'px');
+    frame.style.setProperty('--py', py + 'px');
+  }
+  function setLens(open){
+    frame.style.setProperty('--lens', open ? '150%' : PEEK);
+  }
+
+  function trySound(){
+    if(soundOn) return;
+    video.muted = false;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){ soundOn = true; setStatus('Sound on'); })
+       .catch(function(){
+         video.muted = true;
+         setStatus('Click or scroll to enter');
+         try { video.play().catch(function(){}); } catch(e){}
+       });
+    } else {
+      soundOn = true;
+      setStatus('Sound on');
+    }
+  }
+
+  function openFrame(x, y){
+    if(x != null && y != null) pointAt(x, y);
+    opened = true;
+    frame.classList.add('is-open');
+    frame.classList.remove('is-peeking');
+    setLens(true);
+    trySound();
+    if(soundOn && video.paused) video.play().catch(function(){});
+  }
+
+  /* Attempt autoplay, sound first */
+  (function boot(){
+    video.muted = false;
+    video.loop = true;
+    var p;
+    try { p = video.play(); } catch(e){ p = null; }
+    if(p && typeof p.then === 'function'){
+      p.then(function(){ soundOn = true; setStatus('Sound on'); })
+       .catch(function(){
+         video.muted = true;
+         try { video.play().catch(function(){}); } catch(e){}
+         setStatus('Click or scroll to enter');
+       });
+    }
+  })();
+
+  /* First gesture unlocks sound */
+  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
+  function unlockOnce(){
+    if(soundOn) return;
+    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
+    trySound();
+  }
+  gestures.forEach(function(evt){
+    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
+  });
+
+  /* Pointer tracking — peek */
+  frame.addEventListener('pointermove', function(e){
+    if(opened) return;
+    pointAt(e.clientX, e.clientY);
+    frame.classList.add('is-peeking');
+    setLens(false);
+  });
+  frame.addEventListener('touchmove', function(e){
+    if(opened) return;
+    if(e.touches && e.touches[0]){
+      pointAt(e.touches[0].clientX, e.touches[0].clientY);
+      frame.classList.add('is-peeking');
+      setLens(false);
+    }
+  }, { passive: true });
+
+  frame.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('a')) return;
+    if(!opened) openFrame(e.clientX, e.clientY);
+    else if(video.paused) video.play().catch(function(){});
+  });
+
+  /* Do NOT pause on pointer leave. Pause ONLY off-screen. */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          if(video.paused) video.play().catch(function(){});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.05 }).observe(frame);
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && opened && video.paused){
+      video.play().catch(function(){});
+    }
+  });
+
+  video.addEventListener('error', function(){
+    setStatus('Video unavailable · poster remains');
+  });
+
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches){
+    video.pause();
+    video.muted = true;
+    frame.classList.add('is-open');
+    frame.classList.remove('is-peeking');
+    setLens(true);
+    opened = true;
+    setStatus('Static view');
+  }
 })();
 </script>
 
