@@ -174,13 +174,12 @@ details.doorway .door-body strong{color:var(--violet);font-weight:700}
 }
 
 .summary-series{
-  margin:2.4rem auto 2rem;
-  max-width:100%;
-  padding:1.6rem 1.6rem 1.6rem;
+  margin:2.6rem 0 2.2rem;
+  padding:1.7rem 1.5rem 1.8rem;
   border:2px solid var(--gold-line);
-  border-radius:14px;
+  border-radius:16px;
   background:linear-gradient(160deg, var(--gold-soft), var(--surface));
-  box-shadow:0 0 24px rgba(232,197,71,.10), 0 0 0 1px rgba(232,197,71,.08) inset;
+  box-shadow:0 0 32px rgba(232,197,71,.16), 0 0 0 1px rgba(232,197,71,.10) inset;
 }
 .summary-series .ss-k{
   display:block;
@@ -194,7 +193,7 @@ details.doorway .door-body strong{color:var(--violet);font-weight:700}
 }
 .summary-series .ss-t{
   font-family:var(--serif);
-  font-size:1.2rem;
+  font-size:1.22rem;
   color:var(--ink);
   font-weight:700;
   margin:0 0 .45rem;
@@ -204,34 +203,56 @@ details.doorway .door-body strong{color:var(--violet);font-weight:700}
   font-size:.92rem;
   color:var(--soft);
   line-height:1.65;
-  margin:0 0 1.2rem;
+  margin:0 0 1.25rem;
 }
 .summary-series .ss-grid{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
-  gap:.85rem;
+  gap:1rem;
+  justify-items:center;
 }
 .summary-series .ss-slot{
+  width:100%;
+  max-width:280px;
   aspect-ratio:9/16;
-  border:1px dashed var(--gold-line);
-  border-radius:12px;
-  background:rgba(0,0,0,.2);
+  border:1px solid var(--gold-line);
+  border-radius:14px;
+  background:rgba(0,0,0,.35);
   overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
+  box-shadow:0 8px 28px rgba(0,0,0,.35), 0 0 20px rgba(232,197,71,.12);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.summary-series .ss-slot:hover{
+  transform:translateY(-4px);
+  border-color:var(--gold2);
+  box-shadow:0 14px 36px rgba(0,0,0,.4), 0 0 28px rgba(232,197,71,.22);
 }
 .summary-series .ss-slot video{
   width:100%;
   height:100%;
-  border-radius:12px;
-  object-fit:cover;
+  border-radius:14px;
+  object-fit:contain;
   background:#000;
   display:block;
 }
-@media(max-width: 640px){
-  .summary-series .ss-grid{grid-template-columns:1fr;}
-  .summary-series .ss-slot{aspect-ratio:4/5;}
+@media(max-width:900px){
+  .summary-series .ss-grid{
+    grid-template-columns:repeat(3, minmax(0, 240px));
+    justify-content:center;
+  }
+}
+@media(max-width:640px){
+  .summary-series .ss-grid{
+    grid-template-columns:1fr;
+    justify-items:center;
+  }
+  .summary-series .ss-slot{
+    max-width:320px;
+    aspect-ratio:9/16;
+  }
 }
 
 .telegram-post{margin:2.6rem 0;padding:1.8rem 1.9rem;border:1px solid var(--gold-line);border-radius:16px;background:linear-gradient(160deg,var(--gold-soft),rgba(7,6,12,.7));font-family:var(--sans);font-size:1.04rem;line-height:var(--leading,1.85);color:var(--soft)}
@@ -630,6 +651,51 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* EROS full-page visual refinement: cinematic threshold + readable navigation */
+.eros-hero{position:relative;isolation:isolate;width:100vw;margin:0 calc(50% - 50vw) 2rem;min-height:min(760px,82vh);min-height:min(760px,82svh);overflow:hidden;display:grid;align-items:end;background:#10090d;color:#f3ece4;text-align:left;font-family:var(--sans)}
+.eros-hero__poster,.eros-hero__video,.eros-hero__shade,.eros-hero__grain{position:absolute;inset:0;width:100%;height:100%}
+.eros-hero__poster,.eros-hero__video{object-fit:cover}
+.eros-hero__poster{z-index:-4;filter:brightness(.64) saturate(.72);transform:scale(1.015);transition:transform 1.3s ease,filter 1s ease,opacity .7s ease}
+.eros-hero__video{z-index:-3;clip-path:circle(var(--lens,0px) at var(--px,50%) var(--py,50%));transition:clip-path .8s cubic-bezier(.16,1,.3,1);background:#090708}
+.eros-hero__shade{z-index:-2;background:linear-gradient(90deg,rgba(8,5,7,.7),rgba(8,5,7,.15) 85%),linear-gradient(0deg,rgba(8,5,7,.94),rgba(8,5,7,.18) 60%,rgba(8,5,7,.4))}
+.eros-hero__grain{z-index:-1;opacity:.09;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
+.eros-hero__top{position:absolute;top:clamp(24px,4vw,48px);left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);display:flex;justify-content:space-between;gap:16px;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,246,238,.85)}
+.eros-hero__top span:first-child{letter-spacing:.4em}
+.eros-hero__top span:last-child{color:rgba(255,246,238,.62);text-align:right}
+.eros-hero__copy{position:relative;width:min(940px,100%);padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);pointer-events:none}
+.eros-hero__kicker{display:flex;align-items:center;gap:12px;color:#c7a27b;font:600 10px/1.4 var(--sans);letter-spacing:.25em;text-transform:uppercase;margin:0 0 20px}
+.eros-hero__kicker:before{content:"";width:30px;height:1px;background:#c7a27b}
+.eros-hero h1{font:400 clamp(52px,9vw,112px)/.94 Georgia,"Palatino Linotype",serif;letter-spacing:-.055em;color:#f3ece4;background:none;-webkit-text-fill-color:initial;text-shadow:0 4px 40px #0004;margin:0;max-width:800px}
+.eros-hero h1 em{font-weight:400;color:#d2b49a}
+.eros-hero__bottom{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-top:32px;pointer-events:auto}
+.eros-hero__bottom>p{max-width:350px;color:rgba(243,236,228,.72);font:400 13px/1.85 var(--sans);margin:0}
+.eros-hero__actions{display:flex;gap:10px;flex-wrap:wrap}
+.eros-hero__enter,.eros-hero__sound{min-height:48px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:20px;background:rgba(10,7,8,.5);border:1px solid rgba(243,236,228,.75);color:#f3ece4;font:600 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);transition:background .2s,color .2s,border-color .2s}
+.eros-hero__enter:hover,.eros-hero__sound:hover{background:#f3ece4;color:#090708;border-color:#f3ece4}
+.eros-hero__enter span{font-size:16px}
+.eros-hero__sound{display:none;border-color:#ffffff55}
+.eros-hero.is-open .eros-hero__sound{display:inline-flex}
+.eros-hero__cue{position:absolute;right:clamp(24px,6vw,84px);top:49%;transform:translateY(-50%);display:flex;align-items:center;gap:12px;color:#fff;letter-spacing:.17em;text-transform:uppercase;font:600 9px var(--sans);pointer-events:none;transition:opacity .3s}
+.eros-hero__ring{width:42px;height:42px;display:grid;place-items:center;border:1px solid #ffffff8a;border-radius:50%;font-size:16px}
+.eros-hero.is-open .eros-hero__cue{opacity:0}
+.eros-hero__footer{position:absolute;bottom:0;left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);border-top:1px solid #ffffff2c;padding:14px 0 17px;display:flex;justify-content:space-between;gap:12px;color:#ffffff70;font:500 9px/1.4 var(--sans);letter-spacing:.15em;text-transform:uppercase}
+.eros-hero__footer span:last-child{text-align:right;color:#d2b49a}
+.eros-intro{padding:.2rem 0 1.2rem}
+.eros-intro .epigraph{font-size:clamp(1.15rem,3.4vw,1.65rem);max-width:42rem;line-height:1.55;color:#d0c3d9;margin:1.3rem auto 1.4rem}
+.cta-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin:1.2rem auto 1rem;max-width:52rem}
+.cta{display:flex;align-items:center;justify-content:flex-start;gap:.8rem;min-height:72px;padding:.85rem 1rem;border:1px solid #51435e;border-radius:12px;background:linear-gradient(145deg,rgba(27,22,36,.96),rgba(10,9,15,.96));color:#f0eaf8!important;font:500 .8rem/1.25 var(--sans);letter-spacing:.03em;text-transform:none;white-space:normal;transition:transform .2s ease,border-color .2s ease,background .2s ease;box-shadow:0 5px 18px #0002}
+.cta:visited{color:#f0eaf8!important}
+.cta:hover{filter:none;transform:translateY(-2px);border-color:#c7a27b;background:linear-gradient(145deg,rgba(55,37,54,.98),rgba(16,12,20,.98))}
+.cta .cta-icon{display:grid;place-items:center;flex:0 0 34px;height:34px;border:1px solid #8d6c9e;border-radius:50%;color:#d9b7ec;font-size:16px}
+.cta b{display:block;color:#f7f0fa;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.cta small{display:block;color:#bcb0c9;font-size:.68rem;margin-top:.32rem;line-height:1.35;letter-spacing:0;text-transform:none}
+.eros-orientation{max-width:45rem;margin:.8rem auto 1.5rem;padding:.9rem 1rem;border-left:2px solid #c7a27b;background:linear-gradient(90deg,#c7a27b12,transparent);font:400 .88rem/1.7 var(--sans);color:#c9bdd8}
+.eros-orientation span{display:block;color:#d8b991;font-size:.65rem;font-weight:700;letter-spacing:.2em;margin-bottom:.2rem}
+@media(max-width:700px){.eros-hero{min-height:min(760px,78vh);min-height:min(760px,78svh);margin-bottom:1.3rem}.eros-hero__top{align-items:flex-start}.eros-hero__top span:last-child{max-width:130px}.eros-hero__copy{padding:0 24px 68px}.eros-hero h1{font-size:clamp(48px,13.5vw,78px)}.eros-hero__bottom{align-items:flex-start;flex-direction:column;gap:18px;margin-top:24px}.eros-hero__bottom>p{max-width:300px}.eros-hero__cue{top:40%;right:24px}.eros-hero__cue span:last-child{display:none}.eros-hero__footer{font-size:7px;letter-spacing:.1em}.eros-hero__actions{width:100%}.eros-hero__enter,.eros-hero__sound{min-height:46px}.cta-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.cta{min-height:72px;padding:.75rem}.cta .cta-icon{flex-basis:30px;height:30px}}
+@media(max-width:360px){.eros-hero__top{font-size:8px}.cta-row{grid-template-columns:1fr}.cta{min-height:62px}}
+@media(prefers-reduced-motion:reduce){.eros-hero__poster,.eros-hero__video,.eros-hero__cue,.cta{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -702,21 +768,36 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
   <span class="tagline">Built on PulseChain · Faster · Cheaper · Stronger</span>
 </div>
 
-<header class="cover">
-  <p class="kick">EROS world view · pure fiction · real instrument</p>
-  <h1>EROS STORIES</h1>
-  <p class="sub">Sixteen doors · One universe · Step in blind</p>
-  <figure class="banner">
-    <img src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories · Sixteen Doors · Pure fiction. Real instrument." loading="eager" onerror="this.closest('figure').style.display='none'"/>
-  </figure>
-  <p class="epigraph">Get a bag. Bond it. Commit. Create.<br/>
-  Fiction is where belief is tested.</p>
-  <div class="cta-row">
-    <a class="cta" href="https://t.me/Eros_Revival">Telegram</a>
-    <a class="cta" href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Dossier</a>
-    <a class="cta" href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
-    <a class="cta" href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">Platinum</a>
+<section class="eros-hero" id="erosHero" aria-label="EROS Stories cinematic introduction">
+  <img class="eros-hero__poster" src="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" alt="EROS Stories — Sixteen doors. One universe." fetchpriority="high" decoding="async">
+  <video class="eros-hero__video" id="erosFilm" playsinline muted loop preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-stories-promo.png" aria-hidden="true">
+    <source src="https://meaning-unconfounded.github.io/images/movie_change.mp4" type="video/mp4">
+  </video>
+  <div class="eros-hero__shade"></div><div class="eros-hero__grain"></div>
+  <div class="eros-hero__top"><span>EROS Stories</span><span>Sixteen doors · One universe</span></div>
+  <div class="eros-hero__cue" id="erosCue"><span class="eros-hero__ring">↗</span><span>Touch or move to discover</span></div>
+  <div class="eros-hero__copy">
+    <p class="eros-hero__kicker">Pure fiction · Real instrument</p>
+    <h1>Some doors<br>open <em>within.</em></h1>
+    <div class="eros-hero__bottom">
+      <p>A universe of stories, desire and hidden worlds. The surface is only the beginning.</p>
+      <div class="eros-hero__actions">
+        <button type="button" class="eros-hero__enter" id="erosEnter">Enter the stories <span>↗</span></button>
+        <button type="button" class="eros-hero__sound" id="erosSound" aria-pressed="false">Enable sound +</button>
+      </div>
+    </div>
   </div>
+  <div class="eros-hero__footer"><span>EROS · A living threshold</span><span id="erosStatus" aria-live="polite">Touch or move to reveal</span></div>
+</section>
+<header class="cover eros-intro">
+  <p class="epigraph">Get a bag. Bond it. Commit. Create.<br/>Fiction is where belief is tested.</p>
+  <nav class="cta-row" aria-label="Explore EROS">
+    <a class="cta" href="https://t.me/Eros_Revival"><span class="cta-icon">↗</span><span><b>Telegram</b><small>Join the conversation</small></span></a>
+    <a class="cta" href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html"><span class="cta-icon">⌘</span><span><b>Dossier</b><small>Start with the brief</small></span></a>
+    <a class="cta" href="https://meaning-unconfounded.github.io/The_Bridge.html"><span class="cta-icon">↔</span><span><b>The Bridge</b><small>Connect the ideas</small></span></a>
+    <a class="cta" href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html"><span class="cta-icon">✧</span><span><b>Platinum</b><small>Explore the standard</small></span></a>
+  </nav>
+  <p class="eros-orientation"><span>NEW HERE?</span> Start with the Dossier. Follow the doors that intrigue you. Nothing needs to be understood all at once.</p>
 </header>
 
 <details class="doorway" id="doorway">
@@ -835,6 +916,29 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(160,32,240,.3));fl
 
 <p class="tier-hint">Three Spine doors · six genre Doors · seven Witness files.<br/>
 Start with Door 4 if you want the earliest knock in the universe.</p>
+
+<aside class="summary-series" id="summary-series">
+  <span class="ss-k">📺 Summary Series · Three Shorts</span>
+  <p class="ss-t">Eros Stories in Three Minutes</p>
+  <p class="ss-d">Three short videos, on the topic of this book. Each covers one thread — the sixteen doors, the AI that refuses, and the hybrid assets that carry the value. Watch here, or on Telegram.</p>
+  <div class="ss-grid">
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 01 · The Sixteen Doors" aria-label="Short 01 — The Sixteen Doors">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_stories_01.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 02 · The Mind That Refuses" aria-label="Short 02 — The Mind That Refuses">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_stories_02.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video controls playsinline preload="metadata" muted title="Short 03 · Coins Locked Inside the Object" aria-label="Short 03 — Coins Locked Inside the Object">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_stories_03.mp4" type="video/mp4"/>
+      </video>
+    </div>
+  </div>
+</aside>
 
 <details class="fold" open>
   <summary>Sixteen doors · one-line index · scan before you open</summary>
@@ -1927,29 +2031,6 @@ Start with Door 4 if you want the earliest knock in the universe.</p>
   <p class="aw-q">Take what you have learned. What can you create?</p>
 </section>
 
-<aside class="summary-series" id="summary-series">
-  <span class="ss-k">📺 Summary Series · Three Shorts</span>
-  <p class="ss-t">Eros Stories in Three Minutes</p>
-  <p class="ss-d">Three short videos, on the topic of this book. Each covers one thread — the sixteen doors, the AI that refuses, and the hybrid assets that carry the value. Watch here, or on Telegram.</p>
-  <div class="ss-grid">
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 01 · The Sixteen Doors" aria-label="Short 01 — The Sixteen Doors">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_stories_01.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 02 · The Mind That Refuses" aria-label="Short 02 — The Mind That Refuses">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_stories_02.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 03 · Coins Locked Inside the Object" aria-label="Short 03 — Coins Locked Inside the Object">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_stories_03.mp4" type="video/mp4"/>
-      </video>
-    </div>
-  </div>
-</aside>
-
 <section class="coda" id="coda" style="margin:3rem 0 0;padding:2.6rem 1.4rem 1.4rem;border-top:1px solid var(--hair);text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(232,197,71,.06),transparent 60%)">
   <p style="font-size:1.12rem;font-style:italic;line-height:var(--leading,1.8);color:var(--ink);max-width:36rem;margin:0 auto 1rem">The stories are doors. The community is the house. You are already inside.</p>
   <p style="font-size:1.05rem;font-style:italic;line-height:var(--leading,1.8);color:var(--soft);max-width:36rem;margin:0 auto 1.6rem">Read one tonight. Tell no one. Or tell everyone. Either way, you will not read the world the same way tomorrow.</p>
@@ -2244,6 +2325,43 @@ window.addEventListener('hashchange', openFromHash);
     }, { threshold: 0.5 });
     obs.observe(v);
   });
+})();
+</script>
+
+
+<script>
+/* Summary-series: unmute on first play so one click = video + sound */
+(function(){
+  document.querySelectorAll('.summary-series video').forEach(function(v){
+    v.addEventListener('play', function onFirstPlay(){
+      v.muted = false;
+      v.removeEventListener('play', onFirstPlay);
+    });
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+ const hero=document.getElementById('erosHero'), video=document.getElementById('erosFilm');
+ const enter=document.getElementById('erosEnter'), sound=document.getElementById('erosSound'), status=document.getElementById('erosStatus');
+ if(!hero||!video)return;
+ const fine=window.matchMedia('(hover:hover) and (pointer:fine)');
+ let opened=false, pointerIn=false, soundOn=false, token=0;
+ function point(e){const r=hero.getBoundingClientRect();hero.style.setProperty('--px',(e.clientX-r.left)+'px');hero.style.setProperty('--py',(e.clientY-r.top)+'px')}
+ function lens(on){hero.style.setProperty('--lens',on?'150%':'clamp(115px,15vw,230px)')}
+ async function start(audio){token++;soundOn=!!audio;video.muted=!soundOn;hero.classList.add('is-open','is-curious');opened=true;lens(true);sound.setAttribute('aria-pressed',String(soundOn));sound.textContent=soundOn?'Sound on −':'Enable sound +';status.textContent=soundOn?'Revealed · sound on':'Revealed · sound off';try{await video.play()}catch(e){video.muted=true;soundOn=false;sound.textContent='Enable sound +';sound.setAttribute('aria-pressed','false');status.textContent='Video ready · tap to enable sound'}}
+ function close(){token++;opened=false;soundOn=false;video.pause();try{video.currentTime=0}catch(e){}video.muted=true;hero.classList.remove('is-open');hero.classList.toggle('is-curious',pointerIn);lens(false);sound.textContent='Enable sound +';sound.setAttribute('aria-pressed','false');status.textContent='Touch or move to reveal'}
+ hero.addEventListener('pointerenter',e=>{if(!fine.matches)return;pointerIn=true;point(e);if(!opened){hero.classList.add('is-curious');lens(false);video.muted=true;video.play().catch(()=>{});status.textContent='Move to reveal · click to open'}});
+ hero.addEventListener('pointermove',e=>{point(e);if(fine.matches&&!opened){pointerIn=true;hero.classList.add('is-curious');lens(false);if(video.paused){video.muted=true;video.play().catch(()=>{})}}});
+ hero.addEventListener('pointerleave',()=>{pointerIn=false;if(fine.matches&&!opened){video.pause();try{video.currentTime=0}catch(e){}hero.classList.remove('is-curious');lens(false);status.textContent='Touch or move to reveal'}});
+ hero.addEventListener('click',e=>{if(e.target.closest('button'))return;if(!opened){point(e);start(true)}else if(!fine.matches)close()});
+ enter.addEventListener('click',()=>opened?close():start(true));
+ sound.addEventListener('click',()=>{if(!opened){start(true);return}soundOn=!soundOn;video.muted=!soundOn;sound.textContent=soundOn?'Sound on −':'Enable sound +';sound.setAttribute('aria-pressed',String(soundOn));status.textContent=soundOn?'Sound on':'Sound off'});
+ video.addEventListener('error',()=>status.textContent='Video unavailable · poster remains visible');
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else if(opened)video.play().catch(()=>{})});
+ lens(false);
 })();
 </script>
 
