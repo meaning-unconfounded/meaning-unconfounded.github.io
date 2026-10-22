@@ -300,12 +300,12 @@ details.doorway .door-body strong{color:var(--platinum2);font-weight:700}
 }
 
 .summary-series{
-  margin:2.4rem 0 2rem;
-  padding:1.6rem 1.6rem 1.6rem;
+  margin:2.6rem 0 2.2rem;
+  padding:1.7rem 1.5rem 1.8rem;
   border:2px solid var(--platinum-line);
-  border-radius:14px;
+  border-radius:16px;
   background:linear-gradient(160deg, var(--platinum-soft), var(--paper-raised));
-  box-shadow:0 0 24px rgba(216,221,227,.10), 0 0 0 1px rgba(216,221,227,.08) inset;
+  box-shadow:0 0 32px rgba(216,221,227,.16), 0 0 0 1px rgba(216,221,227,.10) inset;
 }
 .summary-series .ss-k{
   display:block;
@@ -313,13 +313,13 @@ details.doorway .door-body strong{color:var(--platinum2);font-weight:700}
   font-size:.66rem;
   letter-spacing:.24em;
   text-transform:uppercase;
-  color:var(--platinum);
+  color:var(--platinum2);
   font-weight:700;
   margin-bottom:.55rem;
 }
 .summary-series .ss-t{
   font-family:var(--serif);
-  font-size:1.2rem;
+  font-size:1.22rem;
   color:var(--ink);
   font-weight:700;
   margin:0 0 .45rem;
@@ -329,34 +329,56 @@ details.doorway .door-body strong{color:var(--platinum2);font-weight:700}
   font-size:.92rem;
   color:var(--soft);
   line-height:1.65;
-  margin:0 0 1.2rem;
+  margin:0 0 1.25rem;
 }
 .summary-series .ss-grid{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
-  gap:.85rem;
+  gap:1rem;
+  justify-items:center;
 }
 .summary-series .ss-slot{
+  width:100%;
+  max-width:280px;
   aspect-ratio:9/16;
-  border:1px dashed var(--platinum-line);
-  border-radius:12px;
-  background:rgba(0,0,0,.25);
+  border:1px solid var(--platinum-line);
+  border-radius:14px;
+  background:rgba(0,0,0,.35);
   overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
+  box-shadow:0 8px 28px rgba(0,0,0,.35), 0 0 20px rgba(216,221,227,.12);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.summary-series .ss-slot:hover{
+  transform:translateY(-4px);
+  border-color:var(--platinum2);
+  box-shadow:0 14px 36px rgba(0,0,0,.4), 0 0 28px rgba(216,221,227,.22);
 }
 .summary-series .ss-slot video{
   width:100%;
   height:100%;
-  border-radius:12px;
-  object-fit:cover;
+  border-radius:14px;
+  object-fit:contain;
   background:#000;
   display:block;
 }
-@media(max-width: 640px){
-  .summary-series .ss-grid{grid-template-columns:1fr;}
-  .summary-series .ss-slot{aspect-ratio:9/16;}
+@media(max-width:900px){
+  .summary-series .ss-grid{
+    grid-template-columns:repeat(3, minmax(0, 240px));
+    justify-content:center;
+  }
+}
+@media(max-width:640px){
+  .summary-series .ss-grid{
+    grid-template-columns:1fr;
+    justify-items:center;
+  }
+  .summary-series .ss-slot{
+    max-width:320px;
+    aspect-ratio:9/16;
+  }
 }
 
 .public-link{margin:1.8rem 0;padding:1.4rem 1.6rem;border:1px solid var(--cyan);border-radius:14px;background:linear-gradient(135deg,rgba(0,212,255,.10),rgba(10,4,24,.6));font-family:var(--sans)}
@@ -706,7 +728,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 @media print{
   @page{size:A4;margin:14mm}
-  #progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
+  #progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link,.platinum-hero,.film33{display:none!important}
   body{background:#0a0418!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:inherit;border-bottom:none}
@@ -738,6 +760,225 @@ footer.master .pulse-row svg{flex-shrink:0}
   .media-studio .ms-video,
   .media-studio .ms-video video{transition:none}
   .media-studio .ms-video:hover{transform:none}
+}
+
+/* ═══ PLATINUM HERO · lens-circle cinematic, cross-fade dual video ═══ */
+.platinum-hero{
+  position:relative;
+  isolation:isolate;
+  width:100vw;
+  margin:0 calc(50% - 50vw) 1.4rem;
+  min-height:min(760px,82vh);
+  min-height:min(760px,82svh);
+  overflow:hidden;
+  display:grid;
+  align-items:end;
+  background:#0a0418;
+  color:#f4ecff;
+  text-align:left;
+  font-family:var(--sans);
+  cursor:pointer;
+  --lens:0px;
+  --px:50%;
+  --py:50%;
+}
+.platinum-hero__poster,
+.platinum-hero__video,
+.platinum-hero__shade,
+.platinum-hero__grain{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.platinum-hero__poster,
+.platinum-hero__video{
+  object-fit:cover;
+  object-position:45% 45%;
+}
+.platinum-hero__poster{
+  z-index:-5;
+  transform:scale(1.015);
+  filter:brightness(.55) saturate(.7);
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
+}
+.platinum-hero__video{
+  z-index:-4;
+  background:#0a0418;
+  clip-path:circle(var(--lens) at var(--px) var(--py));
+  transition:clip-path 1s cubic-bezier(.16,1,.3,1), opacity .5s ease;
+  opacity:0;
+  will-change:clip-path, opacity;
+}
+.platinum-hero__video.is-active{
+  opacity:1;
+}
+.platinum-hero__shade{
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(10,4,24,.80) 0%, rgba(10,4,24,.35) 55%, rgba(10,4,24,.15) 100%),
+    linear-gradient(0deg,rgba(10,4,24,.94) 0%, rgba(10,4,24,.35) 42%, rgba(10,4,24,.08) 72%, rgba(10,4,24,.42) 100%);
+}
+.platinum-hero__grain{
+  z-index:-1;
+  pointer-events:none;
+  opacity:.10;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+.platinum-hero.is-peeking .platinum-hero__poster{
+  transform:scale(1.03);
+  filter:brightness(.46) saturate(.66);
+}
+.platinum-hero.is-open .platinum-hero__poster{
+  opacity:.10;
+}
+.platinum-hero.is-open .platinum-hero__video{
+  clip-path:circle(150% at var(--px) var(--py));
+}
+/* ── Films (top hero + 33EROS band): full-frame video, no image on top, seamless cross-fade ── */
+.platinum-hero .platinum-hero__video{clip-path:none!important;transition:opacity .5s ease!important;will-change:opacity}
+.platinum-hero .platinum-hero__video.is-active{opacity:1;z-index:-3}
+.platinum-hero .platinum-hero__video.is-leaving{opacity:1;z-index:-4}
+
+/* small sound button */
+.vol-btn{position:absolute;right:clamp(24px,6vw,84px);bottom:58px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;
+  border:1px solid rgba(216,221,227,.5);background:rgba(7,6,9,.55);color:#f0e0c4;display:grid;place-items:center;cursor:pointer;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:background .2s ease,border-color .2s ease;touch-action:manipulation}
+.vol-btn:hover{background:rgba(7,6,9,.8)}
+.vol-btn:focus-visible{outline:2px solid #f0e0c4;outline-offset:2px}
+.vol-btn .vb-off{display:none}
+.vol-btn.is-muted .vb-on{display:none}
+.vol-btn.is-muted .vb-off{display:inline}
+
+/* 33EROS band */
+.film33{position:relative;isolation:isolate;width:100vw;margin:0 calc(50% - 50vw) 1.8rem;
+  min-height:min(600px,74vh);min-height:min(600px,74svh);overflow:hidden;display:grid;align-items:end;
+  background:#0a0418;color:#f4ecff;text-align:left;font-family:var(--sans)}
+.film33__video,.film33__shade,.film33__grain{position:absolute;inset:0;width:100%;height:100%}
+.film33__video{object-fit:cover;object-position:50% 45%;z-index:-4;background:#0a0418;opacity:0;transition:opacity .5s ease;will-change:opacity}
+.film33__video.is-active{opacity:1;z-index:-3}
+.film33__video.is-leaving{opacity:1;z-index:-4}
+.film33__shade{z-index:-2;pointer-events:none;
+  background:
+    linear-gradient(0deg,rgba(10,4,24,.94) 0%,rgba(10,4,24,.62) 42%,rgba(10,4,24,.38) 100%),
+    linear-gradient(90deg,rgba(10,4,24,.72) 0%,rgba(10,4,24,.28) 70%,rgba(10,4,24,.18) 100%)}
+.film33__grain{z-index:-1;pointer-events:none;opacity:.10;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}
+.film33__copy{position:relative;width:min(940px,100%);padding:0 clamp(24px,7vw,100px) clamp(64px,8vw,90px);pointer-events:none;z-index:2}
+.film33__kicker{display:flex;align-items:center;gap:12px;color:var(--gold2,#E8C547);font:600 10px/1.4 var(--sans);letter-spacing:.25em;text-transform:uppercase;margin:0 0 18px}
+.film33__kicker:before{content:"";width:30px;height:1px;background:var(--gold2,#E8C547)}
+.film33__title{font:700 clamp(48px,9vw,104px)/.94 var(--serif);letter-spacing:.05em;margin:0;max-width:900px;
+  background:linear-gradient(180deg,#fff 0%,#E040FB 45%,#A020F0 100%);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 44px rgba(160,32,240,.35))}
+.film33__lede{max-width:520px;color:rgba(244,236,255,.86);font:400 13.5px/1.85 var(--sans);margin:20px 0 0}
+.film33__ctl{position:absolute;right:clamp(24px,6vw,84px);bottom:20px;z-index:4;display:flex;align-items:center;gap:12px}
+.film33__ctl .vol-btn{position:static}
+.film33__status{font:500 9px/1.4 var(--sans);letter-spacing:.15em;text-transform:uppercase;color:rgba(244,236,255,.6)}
+@media(max-width:700px){
+  .film33{min-height:min(560px,70vh);min-height:min(560px,70svh)}
+  .film33__copy{padding:0 24px 76px}
+  .film33__lede{max-width:320px}
+  .film33__video{object-position:48% 45%}
+}
+@media(prefers-reduced-motion:reduce){.film33__video{transition:none!important}}
+.platinum-hero__top{
+  position:absolute;
+  top:clamp(24px,4vw,48px);
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:rgba(244,236,255,.85);
+  pointer-events:none;
+  z-index:2;
+  font-family:var(--sans);
+}
+.platinum-hero__top span:first-child{letter-spacing:.38em}
+.platinum-hero__top span:last-child{color:rgba(244,236,255,.55);text-align:right;letter-spacing:.15em}
+.platinum-hero__copy{
+  position:relative;
+  width:min(940px,100%);
+  padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);
+  pointer-events:none;
+  z-index:2;
+}
+.platinum-hero__kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--gold2, #E8C547);
+  font:600 10px/1.4 var(--sans);
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin:0 0 20px;
+}
+.platinum-hero__kicker:before{
+  content:"";
+  width:30px;
+  height:1px;
+  background:var(--gold2, #E8C547);
+}
+.platinum-hero h1{
+  font:700 clamp(52px,9vw,112px)/.94 var(--serif);
+  letter-spacing:.05em;
+  margin:0;
+  max-width:900px;
+  background:linear-gradient(180deg,#fff 0%,#E040FB 45%,#A020F0 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 44px rgba(160,32,240,.35));
+  text-shadow:none;
+}
+.platinum-hero__lede{
+  max-width:560px;
+  color:rgba(244,236,255,.82);
+  font:400 13.5px/1.85 var(--sans);
+  margin:24px 0 0;
+}
+.platinum-hero__footer{
+  position:absolute;
+  bottom:0;
+  left:clamp(24px,6vw,84px);
+  right:clamp(24px,6vw,84px);
+  border-top:1px solid rgba(244,236,255,.18);
+  padding:14px 0 17px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:rgba(244,236,255,.5);
+  font:500 9px/1.4 var(--sans);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  pointer-events:none;
+  z-index:2;
+}
+.platinum-hero__footer span:last-child{text-align:right;color:var(--platinum, #d8dde3)}
+
+@media(max-width:700px){
+  .platinum-hero{
+    min-height:min(760px,78vh);
+    min-height:min(760px,78svh);
+    margin-bottom:1.1rem;
+  }
+  .platinum-hero__top{align-items:flex-start}
+  .platinum-hero__top span:last-child{max-width:150px}
+  .platinum-hero__copy{padding:0 24px 78px}
+  .platinum-hero h1{font-size:clamp(46px,12.5vw,74px)}
+  .platinum-hero__lede{max-width:320px;margin-top:18px}
+  .platinum-hero__footer{font-size:7px;letter-spacing:.1em}
+  .platinum-hero__poster,.platinum-hero__video{object-position:48% 45%}
+}
+@media(prefers-reduced-motion:reduce){
+  .platinum-hero__poster,
+  .platinum-hero__video{transition:none!important}
 }
 </style>
 </head>
@@ -784,14 +1025,30 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <main class="page">
 
-<section class="cover">
-  <img class="logo" src="https://meaning-unconfounded.github.io/images/eros-logo-colour3.png" width="104" height="104" alt="EROS" onerror="this.style.display='none'"/>
-  <p class="kicker">EROS · PulseChain Native · Instrument</p>
-  <h1>The Platinum Standard</h1>
-  <p class="subtitle">From rock to river · The transformation thesis</p>
-  <div class="rule"></div>
-  <p class="byline">Twenty-eight months of thinking · One clear architecture</p>
-</section>
+<header class="platinum-hero" id="platinumHero" aria-label="The Platinum Standard — cinematic introduction">
+  <video class="platinum-hero__video is-active" id="platinumFilmA" playsinline muted preload="auto" aria-hidden="true">
+    <source src="https://meaning-unconfounded.github.io/images/nemerology_eros.mp4" type="video/mp4"/>
+  </video>
+  <video class="platinum-hero__video" id="platinumFilmB" playsinline muted preload="auto" aria-hidden="true">
+    <source src="https://meaning-unconfounded.github.io/images/nemerology_eros2.mp4" type="video/mp4"/>
+  </video>
+  <div class="platinum-hero__shade"></div>
+  <div class="platinum-hero__grain"></div>
+  <div class="platinum-hero__top">
+    <span>EROS · PulseChain Native · Instrument</span>
+    <span>From rock to river · The transformation thesis</span>
+  </div>
+  <div class="platinum-hero__copy">
+    <p class="platinum-hero__kicker">Twenty-eight months of thinking · One clear architecture</p>
+    <h1>The Platinum Standard</h1>
+    <p class="platinum-hero__lede">EROS is the rock. ErosX and 33EROS are the river. The transform, the gates, and the path to omnichain.</p>
+  </div>
+  <button type="button" class="vol-btn is-muted" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+  <div class="platinum-hero__footer">
+    <span>The Platinum Standard · from rock to river</span>
+    <span id="platinumStatus" aria-live="polite">Tap for sound</span>
+  </div>
+</header>
 
 <details class="eros-menu" id="eros-library">
   <summary>EROS library · the other books</summary>
@@ -864,6 +1121,29 @@ footer.master .pulse-row svg{flex-shrink:0}
     <a class="pl-btn" href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">📚 Open NotebookLM</a>
     <a class="pl-btn" href="https://t.me/Eros_Revival" target="_blank" rel="noopener">🖇️ Join on Telegram</a>
     <a class="pl-btn" href="https://x.com/ErosPulseChain" target="_blank" rel="noopener">𝕏 @ErosPulseChain</a>
+  </div>
+</aside>
+
+<aside class="summary-series" id="summary-series">
+  <span class="ss-k">📺 Summary Series · Three Shorts</span>
+  <p class="ss-t">The Platinum Standard in Three Minutes</p>
+  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the rock and the river, the three gates, and the two transform paths. Watch here, or on Telegram.</p>
+  <div class="ss-grid">
+    <div class="ss-slot">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-strength.jpg" controls playsinline preload="metadata" muted title="Short 01 · Rock & River" aria-label="Short 01 — Rock and River">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_platinum_01.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video poster="https://meaning-unconfounded.github.io/images/hopeful-crossing.png" controls playsinline preload="metadata" muted title="Short 02 · The Three Gates" aria-label="Short 02 — The Three Gates">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_platinum_02.mp4" type="video/mp4"/>
+      </video>
+    </div>
+    <div class="ss-slot">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" controls playsinline preload="metadata" muted title="Short 03 · Two Paths" aria-label="Short 03 — Two Paths">
+        <source src="https://meaning-unconfounded.github.io/images/shorts_platinum_03.mp4" type="video/mp4"/>
+      </video>
+    </div>
   </div>
 </aside>
 
@@ -949,7 +1229,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   </div>
 
   <figure class="media">
-    <video controls playsinline preload="metadata" aria-label="Eros Trillion — where the arc points">
+    <video poster="https://meaning-unconfounded.github.io/images/eros-green-candle.jpg" controls playsinline preload="metadata" aria-label="Eros Trillion — where the arc points">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Trillion.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>The trillion.</b> Where the arc points, if the design holds and the cycle returns. Watch the vision before the mechanism.</p>
@@ -981,7 +1261,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">EROS · The Rock</p>
     <p class="ms-d">Why one asset cannot be both vault and spend rail — and how the dual-rail design separates store from flow.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" aria-label="EROS — The Rock · video overview">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-strength.jpg" controls playsinline preload="metadata" aria-label="EROS — The Rock · video overview">
         <source src="https://meaning-unconfounded.github.io/images/The_Eros_Rock.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1082,7 +1362,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   </figure>
 
   <figure class="media cyan">
-    <video controls playsinline preload="metadata" aria-label="Chiz Explains — the full walkthrough">
+    <video poster="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" controls playsinline preload="metadata" aria-label="Chiz Explains — the full walkthrough">
       <source src="https://meaning-unconfounded.github.io/images/ChizExplains.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>Chiz Explains · the full walkthrough.</b> The whole transform, the white paper, and how the pieces fit together. The primary explainer video for the book.</p>
@@ -1124,7 +1404,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">Earned transformation</p>
     <p class="ms-d">Why the flow rail waits on real milestones — market depth, pool count, and verified code — not a calendar date.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" aria-label="Earned transformation — the three gates">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" aria-label="Earned transformation — the three gates">
         <source src="https://meaning-unconfounded.github.io/images/EROS_Gates.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1147,6 +1427,26 @@ footer.master .pulse-row svg{flex-shrink:0}
 </section>
 
 <section id="33eros">
+  <div class="film33" id="film33" role="region" aria-label="33EROS — the upgrade, cinematic">
+    <video class="film33__video is-active" id="film33A" playsinline muted preload="none" aria-hidden="true">
+      <source src="https://meaning-unconfounded.github.io/images/eros33_upgrade.mp4" type="video/mp4"/>
+    </video>
+    <video class="film33__video" id="film33B" playsinline muted preload="none" aria-hidden="true">
+      <source src="https://meaning-unconfounded.github.io/images/eros33_upgrade2.mp4" type="video/mp4"/>
+    </video>
+    <div class="film33__shade"></div>
+    <div class="film33__grain"></div>
+    <div class="film33__copy">
+      <p class="film33__kicker">33EROS · the upgrade</p>
+      <p class="film33__title">Thirty-three.</p>
+      <p class="film33__lede">The master number of the design — in the supply, in the transform math, in the leaderboard cycle.</p>
+    </div>
+    <div class="film33__ctl">
+      <span class="film33__status" id="film33Status" aria-live="polite">Tap for sound</span>
+      <button type="button" class="vol-btn is-muted" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+    </div>
+  </div>
+
   <span class="section-label">The gamified rail</span>
   <h2>33EROS · the number that does the work</h2>
 
@@ -1159,7 +1459,7 @@ footer.master .pulse-row svg{flex-shrink:0}
     <p class="ms-t">33EROS · The Transform</p>
     <p class="ms-d">The high-burn transform path and the three-body engine that keeps it from being front-run.</p>
     <div class="ms-video">
-      <video controls playsinline preload="metadata" muted loop aria-label="33EROS — the transform, cinematic">
+      <video poster="https://meaning-unconfounded.github.io/images/eros-33-teacher.jpg" controls playsinline preload="metadata" muted loop aria-label="33EROS — the transform, cinematic">
         <source src="https://meaning-unconfounded.github.io/images/EROS_Chaos.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1293,7 +1593,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   </figure>
 
   <figure class="media cyan">
-    <video controls playsinline preload="metadata" aria-label="Rainman — pools and white paper">
+    <video poster="https://meaning-unconfounded.github.io/images/pulse_colours.jpeg" controls playsinline preload="metadata" aria-label="Rainman — pools and white paper">
       <source src="https://meaning-unconfounded.github.io/images/rainMan.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>Rainman · pools and white paper.</b> Opening liquidity pools on PulseDEX and the GitHub white paper. The practical mechanics beside the invitation.</p>
@@ -1402,29 +1702,6 @@ footer.master .pulse-row svg{flex-shrink:0}
     </p>
   </div>
 </section>
-
-<aside class="summary-series" id="summary-series">
-  <span class="ss-k">📺 Summary Series · Three Shorts</span>
-  <p class="ss-t">The Platinum Standard in Three Minutes</p>
-  <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the rock and the river, the three gates, and the two transform paths. Watch here, or on Telegram.</p>
-  <div class="ss-grid">
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 01 · Rock & River" aria-label="Short 01 — Rock and River">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_platinum_01.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 02 · The Three Gates" aria-label="Short 02 — The Three Gates">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_platinum_02.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 03 · Two Paths" aria-label="Short 03 — Two Paths">
-        <source src="https://meaning-unconfounded.github.io/images/shorts_platinum_03.mp4" type="video/mp4"/>
-      </video>
-    </div>
-  </div>
-</aside>
 
 <section id="close">
   <span class="section-label">The point</span>
@@ -1786,6 +2063,261 @@ window.addEventListener('hashchange', openFromHash);
   });
 })();
 
+})();
+</script>
+
+
+<script>
+/* Summary-series: unmute on first play so one click = video + sound */
+(function(){
+  document.querySelectorAll('.summary-series video').forEach(function(v){
+    v.addEventListener('play', function onFirstPlay(){
+      v.muted = false;
+      v.removeEventListener('play', onFirstPlay);
+    });
+  });
+})();
+</script>
+
+
+<script>
+/* ═══ FILMS · top hero + 33EROS band ═══
+   Two clips play back to back with a seamless cross-fade.
+   Each film plays ONLY while it is on screen. When you scroll away it pauses and goes silent.
+   Volume: top pair = TOP_VOL, lower (33EROS) pair = LOWER_VOL  (0.0 – 1.0). */
+(function(){
+  "use strict";
+  var TOP_VOL = 0.33;
+  var LOWER_VOL = 0.22;
+  var SWAP_AT = 0.5;    /* seconds before a clip ends when the next one fades in */
+  var noop = function(){};
+  var pref = window.__erosSoundPref = window.__erosSoundPref || { muted:false };
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  function activated(){ return !!(navigator.userActivation && navigator.userActivation.hasBeenActive); }
+
+  function initFilm(o){
+    var root = o.root, videos = [o.a, o.b], btn = o.btn, statusEl = o.status, VOL = o.vol;
+    var active = 0, swapping = false, soundOn = false, visible = false, started = false;
+    var raf = 0, fadeTimer = 0, pending = false;
+
+    function setStatus(m){ if(statusEl) statusEl.textContent = m; }
+    function syncBtn(){
+      if(!btn) return;
+      var off = !soundOn;
+      btn.classList.toggle('is-muted', off);
+      btn.setAttribute('aria-pressed', off ? 'true' : 'false');
+      btn.setAttribute('aria-label', off ? 'Turn sound on' : 'Turn sound off');
+    }
+    function applyMute(){
+      videos.forEach(function(v, i){ v.muted = (i !== active) || !soundOn || !visible; });
+      syncBtn();
+    }
+
+    videos.forEach(function(v){ v.volume = VOL; v.loop = false; v.muted = true; });
+    videos[0].classList.add('is-active');
+    syncBtn();
+
+    /* audio cross-fade so the sound is as seamless as the picture */
+    function crossfadeAudio(cur, nxt){
+      var t0 = Date.now(), D = 600;
+      clearInterval(fadeTimer);
+      nxt.volume = 0; nxt.muted = false; cur.muted = false;
+      fadeTimer = setInterval(function(){
+        var k = Math.min(1, (Date.now() - t0) / D);
+        try { nxt.volume = VOL * k; cur.volume = VOL * (1 - k); } catch(e){}
+        if(k >= 1){
+          clearInterval(fadeTimer);
+          cur.muted = true; cur.volume = VOL; nxt.volume = VOL;
+        }
+      }, 40);
+    }
+
+    function swap(){
+      if(swapping || !visible) return;
+      var cur = videos[active], nextIdx = 1 - active, nxt = videos[nextIdx];
+      if(nxt.error || cur.error){          /* a clip is missing: just replay this one */
+        try { cur.currentTime = 0; cur.play().catch(noop); } catch(e){}
+        return;
+      }
+      swapping = true;
+      try { nxt.currentTime = 0; } catch(e){}
+      var p = nxt.play(); if(p && p.catch) p.catch(noop);
+      cur.classList.remove('is-active'); cur.classList.add('is-leaving');
+      nxt.classList.remove('is-leaving'); nxt.classList.add('is-active');
+      active = nextIdx;
+      if(soundOn){ crossfadeAudio(cur, nxt); } else { applyMute(); }
+      setTimeout(function(){
+        cur.classList.remove('is-leaving');
+        try { cur.pause(); cur.currentTime = 0; } catch(e){}
+        swapping = false;
+      }, 700);
+    }
+
+    function tick(){
+      raf = 0;
+      if(!visible) return;
+      var v = videos[active];
+      if(v.duration && !swapping && v.currentTime >= v.duration - SWAP_AT) swap();
+      if(!v.paused) raf = requestAnimationFrame(tick);
+    }
+    function startTick(){ if(!raf && visible) raf = requestAnimationFrame(tick); }
+    videos.forEach(function(v){
+      v.addEventListener('playing', startTick);
+      v.addEventListener('timeupdate', function(){
+        if(visible && v === videos[active] && v.duration && !swapping && v.currentTime >= v.duration - SWAP_AT) swap();
+      });
+    });
+
+    /* first start when the film comes on screen */
+    function start(){
+      started = true;
+      var v = videos[active];
+      var wantSound = !pref.muted && (o.soundAtStart || activated());
+      v.muted = !wantSound;
+      var p; try { p = v.play(); } catch(e){ p = null; }
+      if(p && p.then){
+        p.then(function(){
+          if(!visible){ return; }
+          if(wantSound){ soundOn = true; setStatus('Sound on'); }
+          else { setStatus(pref.muted ? 'Sound off' : o.idleText); }
+          applyMute();
+        }).catch(function(){
+          if(!visible) return;
+          v.muted = true; soundOn = false; applyMute();
+          v.play().catch(noop);
+          setStatus(o.idleText);
+        });
+      } else { applyMute(); }
+    }
+
+    /* come back on screen: resume with sound if it was on */
+    function resume(){
+      var v = videos[active];
+      v.muted = !soundOn;
+      var p; try { p = v.play(); } catch(e){ p = null; }
+      if(p && p.catch){
+        p.catch(function(){
+          if(!visible) return;
+          if(!v.muted){ v.muted = true; soundOn = false; syncBtn(); setStatus(o.idleText); }
+          v.play().catch(noop);
+        });
+      }
+      syncBtn();
+    }
+
+    /* scroll away: stop picture and sound completely */
+    function stopAll(){
+      clearInterval(fadeTimer);
+      videos.forEach(function(v){
+        try { v.pause(); } catch(e){}
+        v.muted = true;
+        v.volume = VOL;
+      });
+      videos.forEach(function(v, i){ if(i !== active) v.classList.remove('is-leaving'); });
+      swapping = false;
+    }
+
+    function tryUnmute(){
+      if(pending) return;
+      if(!visible){                         /* never start playing off-screen: just remember the choice */
+        soundOn = true; syncBtn(); return;
+      }
+      pending = true;
+      var v = videos[active];
+      v.muted = false;
+      var p; try { p = v.play(); } catch(e){ p = null; }
+      function ok(){ pending = false; soundOn = true; applyMute(); setStatus('Sound on'); }
+      function no(){
+        pending = false; v.muted = true; soundOn = false; applyMute(); setStatus(o.idleText);
+        if(visible) v.play().catch(noop);
+      }
+      if(p && p.then){ p.then(ok).catch(no); } else { ok(); }
+    }
+
+    /* a tap / click / key press anywhere turns the sound on for the film that is on screen */
+    function onGesture(e){
+      if(soundOn || pref.muted) return;
+      if(e && e.target && e.target.closest && e.target.closest('.vol-btn')) return;
+      tryUnmute();
+    }
+    function onWeak(e){ if(activated()) onGesture(e); }
+    ['click','touchend','pointerup','keydown'].forEach(function(evt){
+      window.addEventListener(evt, onGesture, { capture:true, passive:true });
+    });
+    ['scroll','wheel','touchstart','pointerdown'].forEach(function(evt){
+      window.addEventListener(evt, onWeak, { capture:true, passive:true });
+    });
+
+    if(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation(); e.preventDefault();
+        if(soundOn){ soundOn = false; pref.muted = true; applyMute(); setStatus('Sound off'); }
+        else { pref.muted = false; tryUnmute(); }
+      });
+    }
+
+    /* load the clips shortly before the band comes into view (loading only — never playing) */
+    if(o.preloadMargin && 'IntersectionObserver' in window){
+      var po = new IntersectionObserver(function(es){
+        if(!es[0].isIntersecting) return;
+        videos.forEach(function(v, i){
+          v.preload = 'auto';
+          if(!(started && i === active)){ try { if(v.readyState === 0) v.load(); } catch(e){} }
+        });
+        po.disconnect();
+      }, { rootMargin: o.preloadMargin });
+      po.observe(root);
+    }
+
+    if(reduce){
+      videos.forEach(function(v){ v.pause(); v.muted = true; });
+      setStatus('Static view');
+      return;
+    }
+
+    function setVisible(on){
+      if(on === visible && started) return;
+      visible = on;
+      if(visible){ if(!started) start(); else resume(); }
+      else { stopAll(); }
+    }
+
+    if(o.eager){ visible = true; start(); }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        es.forEach(function(en){ setVisible(en.isIntersecting); });
+      }, { threshold: o.threshold || 0.05 }).observe(root);
+    } else if(!started){ visible = true; start(); }
+
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ if(visible){ stopAll(); } }
+      else if(visible){ resume(); }
+    });
+  }
+
+  var hero = document.getElementById('platinumHero');
+  if(hero){
+    initFilm({
+      root: hero,
+      a: document.getElementById('platinumFilmA'),
+      b: document.getElementById('platinumFilmB'),
+      btn: hero.querySelector('.vol-btn'),
+      status: document.getElementById('platinumStatus'),
+      vol: TOP_VOL, eager: true, soundAtStart: true, idleText: 'Tap for sound'
+    });
+  }
+  var band = document.getElementById('film33');
+  if(band){
+    initFilm({
+      root: band,
+      a: document.getElementById('film33A'),
+      b: document.getElementById('film33B'),
+      btn: band.querySelector('.vol-btn'),
+      status: document.getElementById('film33Status'),
+      vol: LOWER_VOL, preloadMargin: '900px 0px', threshold: 0.25, idleText: 'Tap for sound'
+    });
+  }
 })();
 </script>
 
