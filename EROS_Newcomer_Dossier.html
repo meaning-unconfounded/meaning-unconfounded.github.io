@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="eros-cinema-engine" content="v1.0-shared">
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="description" content="EROS Newcomer Dossier — The Confession. Frankness is a declaration of freedom. The founder is not the point. We are not extraction — we are everything DeFi should have been."/>
@@ -209,7 +211,6 @@ html::after{inset:12px;border:1px solid rgba(160,32,240,.12)}
   --px:50%;
   --py:50%;
 }
-.dossier-hero__poster,
 .dossier-hero__video,
 .dossier-hero__shade,
 .dossier-hero__grain{
@@ -218,16 +219,9 @@ html::after{inset:12px;border:1px solid rgba(160,32,240,.12)}
   width:100%;
   height:100%;
 }
-.dossier-hero__poster,
 .dossier-hero__video{
   object-fit:cover;
   object-position:45% 45%;
-}
-.dossier-hero__poster{
-  z-index:-4;
-  transform:scale(1.015);
-  filter:brightness(.55) saturate(.7);
-  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
 }
 .dossier-hero__video{
   z-index:-3;
@@ -249,13 +243,6 @@ html::after{inset:12px;border:1px solid rgba(160,32,240,.12)}
   opacity:.10;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
   mix-blend-mode:soft-light;
-}
-.dossier-hero.is-peeking .dossier-hero__poster{
-  transform:scale(1.03);
-  filter:brightness(.46) saturate(.66);
-}
-.dossier-hero.is-open .dossier-hero__poster{
-  opacity:.10;
 }
 .dossier-hero.is-open .dossier-hero__video{
   clip-path:circle(150% at var(--px) var(--py));
@@ -332,10 +319,110 @@ html::after{inset:12px;border:1px solid rgba(160,32,240,.12)}
   pointer-events:none;
   z-index:2;
 }
-/* Top video — plays full-frame with no image on top; the image fades in for the last 0.5 s only */
-.dossier-hero .dossier-hero__video{clip-path:none!important;transition:none!important;will-change:auto}
-.dossier-hero .dossier-hero__poster{z-index:-2;opacity:0!important;filter:none!important;transform:none!important;transition:opacity .45s ease!important}
-.dossier-hero.is-ending .dossier-hero__poster{opacity:1!important}
+/* Top video plays full-frame directly; no generic poster image obscures its subject. */
+.dossier-hero .dossier-hero__video{clip-path:none!important;transition:opacity .8s ease!important;will-change:auto}
+
+/* ═══ DOSSIER CINEMA SYSTEM · two placements, eight clips ═══ */
+.cinema-queue--hero .cinema-layer{
+  z-index:-3!important;
+  opacity:0;
+  transition:opacity .8s ease!important;
+  clip-path:none!important;
+  pointer-events:none;
+}
+.cinema-queue--hero .cinema-layer.is-active{opacity:1}
+.cinema-queue--hero .dossier-hero__shade{z-index:-2}
+.cinema-queue--hero .dossier-hero__grain{z-index:-1}
+.cinema-queue--hero .vol-btn{
+  width:auto;min-width:48px;height:46px;padding:0 13px;display:flex;align-items:center;justify-content:center;gap:8px;
+  font:600 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;
+}
+.cinema-queue--hero .sound-label{display:inline}
+.cinema-queue--hero .vol-btn .vb-on{display:none}
+.cinema-queue--hero .vol-btn.is-muted .vb-off{display:inline}
+.cinema-queue--hero .vol-btn:not(.is-muted) .vb-off{display:none}
+.cinema-queue--hero .vol-btn:not(.is-muted) .vb-on{display:inline}
+.cinema-band{
+  --cinema-accent:#D4AF37;
+  position:relative;
+  isolation:isolate;
+  width:100vw;
+  margin:2.8rem calc(50% - 50vw);
+  min-height:clamp(430px,65vh,680px);
+  overflow:hidden;
+  display:grid;
+  align-items:end;
+  color:#ece7db;
+  background:#08060a;
+  border-top:1px solid color-mix(in srgb,var(--cinema-accent) 40%,transparent);
+  border-bottom:1px solid color-mix(in srgb,var(--cinema-accent) 28%,transparent);
+  font-family:var(--sans);
+}
+.cinema-band__media,.cinema-band__shade,.cinema-band__grain{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+.cinema-band__media{z-index:-3;background:#08060a}
+.cinema-band__media video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+  opacity:0;transition:opacity .8s ease;filter:saturate(.88) contrast(1.04);
+}
+.cinema-band__media video.is-active{opacity:1}
+.cinema-band__shade{
+  z-index:-2;pointer-events:none;
+  background:linear-gradient(90deg,rgba(8,6,10,.82),rgba(8,6,10,.36) 60%,rgba(8,6,10,.20)),
+    linear-gradient(0deg,rgba(8,6,10,.96),rgba(8,6,10,.45) 42%,rgba(8,6,10,.16) 76%,rgba(8,6,10,.44));
+}
+.cinema-band__grain{
+  z-index:-1;pointer-events:none;opacity:.08;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+.cinema-band__top{
+  position:absolute;top:clamp(22px,4vw,42px);left:clamp(22px,6vw,80px);right:clamp(22px,6vw,80px);
+  display:flex;justify-content:space-between;gap:16px;z-index:2;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(236,231,219,.78);
+}
+.cinema-band__top span:last-child{text-align:right;color:var(--cinema-accent)}
+.cinema-band__copy{position:relative;z-index:2;width:min(940px,100%);padding:0 clamp(24px,7vw,100px) 88px;pointer-events:none}
+.cinema-band__kicker{margin:0 0 18px;color:var(--cinema-accent);font:600 10px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.cinema-band__title{margin:0;color:#f0dfbd;font:700 clamp(38px,6.6vw,76px)/.98 var(--serif);letter-spacing:.025em;text-shadow:0 0 45px rgba(212,175,55,.18)}
+.cinema-band__lede{max-width:600px;margin:22px 0 0;color:rgba(236,231,219,.83);font:400 14px/1.8 var(--sans)}
+.cinema-band__footer{
+  position:absolute;left:clamp(22px,6vw,80px);right:clamp(22px,6vw,80px);bottom:0;z-index:2;
+  border-top:1px solid rgba(236,231,219,.18);padding:14px 0 17px;display:flex;justify-content:space-between;gap:14px;
+  color:rgba(236,231,219,.56);font:500 9px/1.5 var(--sans);letter-spacing:.14em;text-transform:uppercase;
+}
+.cinema-band__footer span:last-child{text-align:right}
+.cinema-band__sound{
+  position:absolute;right:clamp(22px,6vw,80px);bottom:58px;z-index:5;min-width:48px;min-height:46px;padding:0 14px;
+  display:flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--cinema-accent) 60%,transparent);background:rgba(7,6,9,.72);
+  color:#f0e0c4;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  font:600 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;touch-action:manipulation;
+}
+.cinema-band__sound:hover{background:rgba(7,6,9,.92)}
+.cinema-band__sound:focus-visible{outline:2px solid var(--cinema-accent);outline-offset:3px}
+.cinema-band__sound .sound-on{display:none}
+.cinema-band__sound[aria-pressed="true"] .sound-off{display:none}
+.cinema-band__sound[aria-pressed="true"] .sound-on{display:inline}
+.cinema-print-card{display:none}
+@media(max-width:700px){
+  .cinema-band{min-height:min(680px,72svh);margin:2.2rem calc(50% - 50vw)}
+  .cinema-band__top{font-size:8px;letter-spacing:.14em;align-items:flex-start}
+  .cinema-band__top span:first-child{max-width:55%}
+  .cinema-band__copy{padding:0 24px 94px}
+  .cinema-band__title{font-size:clamp(38px,10vw,58px)}
+  .cinema-band__lede{font-size:13px;max-width:330px}
+  .cinema-band__footer{font-size:7px;letter-spacing:.08em}
+}
+@media(prefers-reduced-motion:reduce){
+  .cinema-band__media video,.cinema-queue--hero .cinema-layer{transition:none!important}
+}
+@media print{
+  .cinema-band,.cinema-queue--hero{display:none!important}
+  .cinema-print-card{display:block!important;margin:1rem 0;padding:1rem;border:1px solid #999;page-break-inside:avoid;color:#111;background:#fff}
+  .cinema-print-card *{color:#111!important}
+}
+
 /* Top video — small volume button */
 .vol-btn{position:absolute;right:clamp(24px,6vw,84px);bottom:58px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;
   border:1px solid rgba(214,178,98,.5);background:rgba(7,6,9,.55);color:#f0e0c4;display:grid;place-items:center;cursor:pointer;
@@ -359,10 +446,9 @@ html::after{inset:12px;border:1px solid rgba(160,32,240,.12)}
   .dossier-hero h1{font-size:clamp(40px,12vw,68px)}
   .dossier-hero__lede{max-width:300px;margin-top:18px}
   .dossier-hero__footer{font-size:7px;letter-spacing:.1em}
-  .dossier-hero__poster,.dossier-hero__video{object-position:48% 45%}
+  .dossier-hero__video{object-position:48% 45%}
 }
 @media(prefers-reduced-motion:reduce){
-  .dossier-hero__poster,
   .dossier-hero__video{transition:none!important}
 }
 
@@ -1097,6 +1183,11 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 
+
+/* Media reliability: show native video directly rather than a generic poster. */
+video{background:#08060a;}
+video[controls]{max-width:100%;}
+video[controls]:focus-visible{outline:2px solid var(--gold3,#D4AF37);outline-offset:3px;}
 </style>
 </head>
 <body>
@@ -1172,11 +1263,9 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
 
 <header class="cover">
 
-  <div class="dossier-hero" id="dossierHero" aria-label="EROS Newcomer Dossier — cinematic introduction">
-    <img class="dossier-hero__poster" src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="The front door — EROS Newcomer Dossier" fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
-    <video class="dossier-hero__video" id="dossierFilm" playsinline muted loop autoplay preload="auto" aria-hidden="true">
-      <source src="https://meaning-unconfounded.github.io/images/best_way_buy_eros.mp4" type="video/mp4"/>
-    </video>
+  <div class="dossier-hero cinema-queue cinema-queue--hero" id="dossierHero" data-cinema="dossier-top" data-videos="eros_summary.mp4|sommi_facts.mp4|we_are_with_you_eros.mp4" aria-label="EROS Newcomer Dossier — cinematic introduction">
+    <video class="dossier-hero__video cinema-layer is-active" id="dossierFilmA" playsinline muted preload="auto" aria-hidden="true"></video>
+    <video class="dossier-hero__video cinema-layer" id="dossierFilmB" playsinline muted preload="metadata" aria-hidden="true"></video>
     <div class="dossier-hero__shade"></div>
     <div class="dossier-hero__grain"></div>
     <div class="dossier-hero__top">
@@ -1184,15 +1273,20 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
       <span>The founder is not the point</span>
     </div>
     <div class="dossier-hero__copy">
-      <p class="dossier-hero__kicker">Frankness · Not a whitepaper · Read before you buy</p>
+      <p class="dossier-hero__kicker">Book 0 · The confession · Where to begin</p>
       <h1>Newcomer<br/>Dossier</h1>
-      <p class="dossier-hero__lede">The confession at the door. What you are walking into, what it costs, and what it does not promise.</p>
+      <p class="dossier-hero__lede">What actually happened. What was built when the chart was quiet. What was given away when giving away was not the easy thing. The confession this series builds on — read it before anything else.</p>
     </div>
-    <button type="button" class="vol-btn is-muted" id="volBtn" aria-label="Turn sound on" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+    <button type="button" class="vol-btn is-muted cinema-sound" data-sound-toggle aria-label="Turn sound on" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg><span class="sound-label">Sound</span></button>
     <div class="dossier-hero__footer">
-      <span>EROS · Book 0 · The Confession</span>
-      <span id="dossierStatus" aria-live="polite">Click or scroll to enter</span>
+      <span>THE THRESHOLD · 01 / 02</span>
+      <span class="cinema-status" aria-live="polite">Touch or hover to enter · sound optional</span>
     </div>
+  </div>
+  <div class="cinema-print-card">
+    <strong>THE DOSSIER · ENTRY</strong>
+    <h3>Book 0 · The confession</h3>
+    <p>What actually happened. What was built when the chart was quiet. What was given away when giving away was not the easy thing. Read it before anything else.</p>
   </div>
 
   <details class="eros-menu" id="eros-library">
@@ -1267,17 +1361,17 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the confession, the gift, and what a newcomer does first. Watch here, or on Telegram.</p>
   <div class="ss-grid">
     <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" controls playsinline preload="metadata" muted title="Short 01 · The Confession" aria-label="Short 01 — The Confession">
+      <video controls playsinline preload="metadata" muted title="Short 01 · The Confession" aria-label="Short 01 — The Confession">
         <source src="https://meaning-unconfounded.github.io/images/shorts_dossier_01.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" controls playsinline preload="metadata" muted title="Short 02 · The Gift" aria-label="Short 02 — The Gift">
+      <video controls playsinline preload="metadata" muted title="Short 02 · The Gift" aria-label="Short 02 — The Gift">
         <source src="https://meaning-unconfounded.github.io/images/shorts_dossier_02.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video poster="https://meaning-unconfounded.github.io/images/eros-door.jpg" controls playsinline preload="metadata" muted title="Short 03 · First Move" aria-label="Short 03 — First Move">
+      <video controls playsinline preload="metadata" muted title="Short 03 · First Move" aria-label="Short 03 — First Move">
         <source src="https://meaning-unconfounded.github.io/images/shorts_dossier_03.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1300,7 +1394,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="ms-t">EROS 💕 explained in plain language</p>
   <p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works. Watch or listen before you size a position.</p>
   <div class="ms-video">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-gold-erosx-flow.jpg" controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
+    <video controls playsinline preload="metadata" aria-label="EROS tokenomics — video overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4" type="video/mp4"/>
       Your browser does not support the video tag.
     </video>
@@ -1619,7 +1713,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="ms-t">EROS · Atropa · Dysnomia</p>
   <p class="ms-d">How the wider stack fits together — two build jobs, one machine, and why the rails stay separate on purpose.</p>
   <div class="ms-video">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-yin-yang-lp.jpg" controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
+    <video controls playsinline preload="metadata" muted loop aria-label="Two Stack Engine — video overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4" type="video/mp4"/>
     </video>
   </div>
@@ -1698,7 +1792,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p>The cosmology is not decoration. It is the reason the fiction has a floor. Long before the token, before the books, before the sixteen doors — there was a question: what is the shape of the place we live in? The EROS answer is an enclosure, iterated, inward-oriented, alive.</p>
 
   <div class="media">
-    <video poster="https://meaning-unconfounded.github.io/images/egg-cover.jpg" controls playsinline preload="metadata" aria-label="Cosmic octaves — the Egg at its largest scale">
+    <video controls playsinline preload="metadata" aria-label="Cosmic octaves — the Egg at its largest scale">
       <source src="https://meaning-unconfounded.github.io/images/cell_cosmic.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>COSMIC OCTAVES.</b> The Egg at its largest scale. Every layer iterates the one above and below. Same pattern, many sizes.</p>
@@ -1756,7 +1850,7 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="lede">The crypto is not a side note. It is the floor the fiction stands on. Watch it burn.</p>
 
   <div class="media">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" controls playsinline preload="metadata" aria-label="Burn Baby Burn — every transfer feeds the fire">
+    <video controls playsinline preload="metadata" aria-label="Burn Baby Burn — every transfer feeds the fire">
       <source src="https://meaning-unconfounded.github.io/images/EROS_burn_baby_burn.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>BURN BABY BURN.</b> The instrument sings. Every swap pays a 5% flow fee — 2% burned, 1% staked, 1% temporarily locked, 1% into the core WPLS/EROS LP. Activity feeds the burn. Structure rewards those who stay.</p>
@@ -1808,12 +1902,38 @@ footer.master .pulse-row svg{filter:drop-shadow(0 0 10px rgba(212,175,55,.3));fl
   <p class="creedline">History is one continuous strategic process. The map is not the world. Inward is forwards. Eros is the bond that holds.</p>
 
   <div class="media">
-    <video poster="https://meaning-unconfounded.github.io/images/eros-web.jpg" controls playsinline preload="metadata" aria-label="EROS summary — the ninety-second version">
+    <video controls playsinline preload="metadata" aria-label="EROS summary — the ninety-second version">
       <source src="https://meaning-unconfounded.github.io/images/eros_summary.mp4" type="video/mp4"/>
     </video>
     <p class="cap"><b>THE SUMMARY.</b> If you have read this far, the ninety-second version is here. Same heart. Same floor. Same bond.</p>
   </div>
 </section>
+
+<!-- ═══ CINEMATIC HAND-OFF · the invitation into the wider EROS library ═══ -->
+<section class="cinema-band" id="dossierHandOff" data-cinema="dossier-bottom" data-videos="five_billion_eros.mp4|eros_bond.mp4|binding_eros.mp4|proud_eros.mp4|we_are_with_you_eros.mp4" style="--cinema-accent:#D4AF37" aria-label="The hand-off — what comes next">
+  <div class="cinema-band__media">
+    <video class="cinema-layer is-active" id="dossierEndA" playsinline muted preload="metadata" aria-hidden="true"></video>
+    <video class="cinema-layer" id="dossierEndB" playsinline muted preload="metadata" aria-hidden="true"></video>
+  </div>
+  <div class="cinema-band__shade"></div>
+  <div class="cinema-band__grain"></div>
+  <div class="cinema-band__top"><span>THE HAND-OFF · WHAT COMES NEXT</span><span>02 / 02 · THE INVITATION</span></div>
+  <div class="cinema-band__copy">
+    <p class="cinema-band__kicker">The confession · the bond · the next door</p>
+    <h2 class="cinema-band__title">Now the map.</h2>
+    <p class="cinema-band__lede">You have heard the confession. The Narrative is the map that follows. The Bridge is the field manual. The rest is a world waiting for its builders.</p>
+  </div>
+  <button class="cinema-band__sound" type="button" data-sound-toggle aria-label="Turn sound on" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/><path class="sound-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="sound-off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+    <span class="sound-label">Sound</span>
+  </button>
+  <div class="cinema-band__footer"><span>THE DOSSIER · BOOK 0</span><span class="cinema-status" aria-live="polite">Scroll into view · sound optional</span></div>
+</section>
+<div class="cinema-print-card">
+  <strong>THE HAND-OFF · WHAT COMES NEXT</strong>
+  <h3>Now the map.</h3>
+  <p>You have heard the confession. The Narrative is the map that follows. The Bridge is the field manual. The rest is a world waiting for its builders.</p>
+</div>
 
 <!-- ═══ SHARE LAYER ═══ -->
 <div class="part-break" id="telegram" style="margin:2.6rem 0 1.8rem;padding:2rem 1.2rem;text-align:center;border-radius:14px;border:1px solid var(--gold-line);background:linear-gradient(160deg,var(--gold-soft),var(--raised))">
@@ -2193,191 +2313,493 @@ window.addEventListener('hashchange', openFromHash);
 
 
 <script>
-/* ═══ DOSSIER HERO · lens-circle cinematic with autoplay + sound ═══ */
-(function(){
+/* EROS CINEMA SYSTEM · canonical shared engine v1.0
+   Shared behaviour across books; book-specific styling and queue configuration stay in HTML.
+   Standards: muted first load; sound activated by deliberate gesture; one audible placement;
+   preload next clip once; short clips finish naturally; long clips transition 1.5s before end;
+   1.45s visual crossfade; 400ms audio crossfade; queue loops; recover from failed media.
+*/
+(function () {
   "use strict";
-  var hero = document.getElementById('dossierHero');
-  var video = document.getElementById('dossierFilm');
-  var status = document.getElementById('dossierStatus');
-  if(!hero || !video) return;
-
-  /* Top video volume (0.0 – 1.0). Lower this number for quieter. */
-  var TOP_VOLUME = 0.25;
-  video.volume = TOP_VOLUME;
-
-  var opened = false;
-  var soundOn = false;
-  var PEEK = 'clamp(120px,16vw,220px)';
-
-  function setStatus(msg){ if(status) status.textContent = msg; }
-  function pointAt(x, y){
-    var r = hero.getBoundingClientRect();
-    var px = Math.max(0, Math.min(r.width,  x - r.left));
-    var py = Math.max(0, Math.min(r.height, y - r.top));
-    hero.style.setProperty('--px', px + 'px');
-    hero.style.setProperty('--py', py + 'px');
+  var BASE = "https://meaning-unconfounded.github.io/images/";
+  var VOL = 0.22;
+  var VISUAL_FADE_MS = 1450;
+  var AUDIO_FADE_MS = 400;
+  var READY_TIMEOUT_MS = 9000;
+  var pref = window.__erosSoundPref;
+  if (!pref || typeof pref !== "object") {
+    pref = window.__erosSoundPref = { muted: true };
   }
-  function setLens(open){
-    hero.style.setProperty('--lens', open ? '150%' : PEEK);
-  }
+  if (typeof pref.muted !== "boolean") pref.muted = true;
 
-  function trySound(){
-    if(soundOn) return;
-    video.muted = false;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         setStatus('Click or scroll to enter');
-         try { video.play().catch(function(){}); } catch(e){}
-       });
-    } else {
-      soundOn = true;
-      setStatus('Sound on');
+  function resolveSource(name) {
+    if (/^https?:\/\//i.test(name)) return name;
+    return BASE + name.split("/").map(function (part) {
+      return encodeURIComponent(part);
+    }).join("/");
+  }
+  function closestControl(target) {
+    return target && target.closest ? target.closest("button,a,input,select,textarea") : null;
+  }
+  function parseFiles(root) {
+    var value = root.getAttribute("data-queue") || root.getAttribute("data-videos") || "";
+    var separator = value.indexOf("|") >= 0 ? "|" : ",";
+    return value.split(separator).map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function getLayers(root) {
+    var all = Array.prototype.slice.call(root.querySelectorAll(
+      ".cinema-va, .cinema-vb, .cinema-layer, .cinema-band__video, .bridge-hero__video"
+    ));
+    /* A cinematic placement must have exactly two video layers. */
+    return all.filter(function (v, i) { return all.indexOf(v) === i; }).slice(0, 2);
+  }
+  function getSoundControl(root) {
+    return root.querySelector(".cinema-vol, .cinema-sound, .cinema-band__sound, [data-sound-toggle]");
+  }
+  function getStatus(root) {
+    return root.querySelector(".cinema-status, .cinema-band__status");
+  }
+  var roots = Array.prototype.slice.call(document.querySelectorAll("[data-queue], [data-videos]"));
+  var states = [];
+  var owner = null;
+  var ratios = new Map();
+
+  function setStatus(st, message) {
+    if (st.status) st.status.textContent = message;
+  }
+  function updateControl(st) {
+    var button = st.sound;
+    if (!button) return;
+    var muted = pref.muted;
+    button.classList.toggle("is-muted", muted);
+    button.setAttribute("aria-pressed", muted ? "false" : "true");
+    button.setAttribute("aria-label", muted ? "Turn sound on" : "Turn sound off");
+    var label = button.querySelector(".sound-label");
+    if (label) label.textContent = muted ? "Enable sound" : "Sound on";
+    else if (button.textContent.trim() === "Enable sound" || button.textContent.trim() === "Sound on") {
+      button.textContent = muted ? "Enable sound" : "Sound on · tap to mute";
     }
   }
-
-  function openHero(x, y){
-    if(x != null && y != null) pointAt(x, y);
-    opened = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    trySound();
-    if(soundOn && video.paused) video.play().catch(function(){});
-  }
-
-  /* Attempt autoplay immediately, sound first */
-  (function boot(){
-    video.muted = false;
-    video.loop = true;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus(video.muted ? 'Sound off' : 'Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         try { video.play().catch(function(){}); } catch(e){}
-         setStatus('Click or scroll to enter');
-       });
-    }
-  })();
-
-  /* First real gesture anywhere unlocks sound */
-  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
-  function unlockOnce(e){
-    if(soundOn) return;
-    if(e && e.target && e.target.closest && e.target.closest('.vol-btn')) return; /* button handles itself */
-    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
-    trySound();
-  }
-  gestures.forEach(function(evt){
-    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
-  });
-
-  /* Pointer tracking — peek */
-  hero.addEventListener('pointermove', function(e){
-    if(opened) return;
-    pointAt(e.clientX, e.clientY);
-    hero.classList.add('is-peeking');
-    setLens(false);
-  });
-  hero.addEventListener('touchmove', function(e){
-    if(opened) return;
-    if(e.touches && e.touches[0]){
-      pointAt(e.touches[0].clientX, e.touches[0].clientY);
-      hero.classList.add('is-peeking');
-      setLens(false);
-    }
-  }, { passive: true });
-
-  /* Click / tap opens full-bleed video + sound */
-  hero.addEventListener('click', function(e){
-    if(e.target.closest && e.target.closest('a')) return;
-    if(!opened) openHero(e.clientX, e.clientY);
-    else if(video.paused) video.play().catch(function(){});
-  });
-
-  /* Do NOT pause on pointer leave. Pause ONLY off-screen. */
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          if(video.paused) video.play().catch(function(){});
+  function syncAudio() {
+    states.forEach(function (st) {
+      st.layers.forEach(function (v, i) {
+        v.volume = VOL;
+        var shouldBeAudible = !pref.muted && owner === st && st.active &&
+          (i === st.current || (st.switching && (i === st.current || i === 1 - st.current)));
+        if (!st.switching || owner !== st || pref.muted) {
+          v.muted = !(shouldBeAudible && i === st.current);
         } else {
-          video.pause();
+          /* During the one queue's fade, both layers may be audible at ramped volumes. */
+          v.muted = false;
         }
       });
-    }, { threshold: 0.05 }).observe(hero);
-  }
-
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && video.paused) video.play().catch(function(){});
-  });
-
-
-  /* Small volume button (bottom right of the top video) */
-  var volBtn = document.getElementById('volBtn');
-  function syncVol(){
-    if(!volBtn) return;
-    var off = video.muted || video.volume === 0;
-    volBtn.classList.toggle('is-muted', off);
-    volBtn.setAttribute('aria-pressed', off ? 'true' : 'false');
-    volBtn.setAttribute('aria-label', off ? 'Turn sound on' : 'Turn sound off');
-  }
-  if(volBtn){
-    volBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      soundOn = true; /* the visitor is now in control; stop auto-unmuting */
-      video.muted = !video.muted;
-      if(!video.muted && video.volume === 0) video.volume = TOP_VOLUME;
-      if(!video.muted && video.paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        video.play().catch(function(){});
-      }
-      setStatus(video.muted ? 'Sound off' : 'Sound on');
-      syncVol();
+      updateControl(st);
     });
-    video.addEventListener('volumechange', syncVol);
-    syncVol();
   }
-
-
-  /* Last 0.5 s of the film: fade the image in over the video; it clears when the loop restarts */
-  var END_IMAGE_SECONDS = 0.5;
-  var endingRunning = false;
-  function checkEnding(){
-    var d = video.duration;
-    if(!d || !isFinite(d) || d <= END_IMAGE_SECONDS) return;
-    hero.classList.toggle('is-ending', (d - video.currentTime) <= END_IMAGE_SECONDS);
-  }
-  function endingTick(){
-    checkEnding();
-    if(!video.paused && !video.ended){ requestAnimationFrame(endingTick); } else { endingRunning = false; }
-  }
-  video.addEventListener('playing', function(){
-    if(endingRunning) return;
-    endingRunning = true;
-    requestAnimationFrame(endingTick);
-  });
-  video.addEventListener('seeked', checkEnding);
-
-  video.addEventListener('error', function(){
-    setStatus('Video unavailable · poster remains');
-  });
-
-  /* Reduced motion */
-  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches){
+  function setSourceOnce(st, index, video) {
+    if (index < 0 || index >= st.files.length) return false;
+    var source = resolveSource(st.files[index]);
+    if (video.dataset.erosSource === source && video.getAttribute("src")) return true;
     video.pause();
     video.muted = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    opened = true;
-    setStatus('Static view');
+    video.volume = VOL;
+    video.removeAttribute("src");
+    while (video.firstChild) video.removeChild(video.firstChild);
+    video.src = source;
+    video.dataset.erosSource = source;
+    video.dataset.erosClipIndex = String(index);
+    video.preload = "auto";
+    video.loop = false;
+    video.removeAttribute("loop");
+    video.playsInline = true;
+    video.load();
+    return true;
   }
+  function nextIndex(st, fromIndex) {
+    for (var step = 1; step <= st.files.length; step++) {
+      var candidate = (fromIndex + step) % st.files.length;
+      if (!st.failed[candidate]) return candidate;
+    }
+    return -1;
+  }
+  function prepareNext(st) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) return;
+    var incoming = st.layers[1 - st.current];
+    if (incoming.dataset.erosClipIndex === String(ni) &&
+        incoming.getAttribute("src") && incoming.readyState >= 2) {
+      st.preparedIndex = ni;
+      return;
+    }
+    setSourceOnce(st, ni, incoming);
+    st.preparedIndex = ni;
+  }
+  function setLayerOpacity(video, value) {
+    video.style.opacity = String(value);
+    video.style.visibility = value > 0 ? "visible" : "visible";
+  }
+  function playMuted(video) {
+    video.muted = true;
+    try {
+      var p = video.play();
+      if (p && typeof p.catch === "function") p.catch(function () {});
+    } catch (e) {}
+  }
+  function startCurrent(st, fromGesture) {
+    if (!st || !st.active || owner !== st) return;
+    var current = st.layers[st.current];
+    current.muted = pref.muted;
+    current.volume = VOL;
+    try {
+      var p = current.play();
+      if (p && typeof p.catch === "function") {
+        p.catch(function () {
+          setStatus(st, "Tap the film or sound control to resume");
+        });
+      }
+    } catch (e) {
+      setStatus(st, "Tap the film or sound control to resume");
+    }
+    prepareNext(st);
+    syncAudio();
+  }
+  function clearTransition(st) {
+    if (st.transitionTimer) {
+      clearTimeout(st.transitionTimer);
+      st.transitionTimer = null;
+    }
+    if (st.readyTimer) {
+      clearTimeout(st.readyTimer);
+      st.readyTimer = null;
+    }
+    if (st.incoming && st.handlers) {
+      st.incoming.removeEventListener("canplay", st.handlers.ready);
+      st.incoming.removeEventListener("error", st.handlers.error);
+    }
+    if (st.fadeFrame) {
+      cancelAnimationFrame(st.fadeFrame);
+      st.fadeFrame = null;
+    }
+    st.handlers = null;
+  }
+  function finishTransition(st, outgoing, incoming, ni) {
+    if (!st.switching) return;
+    clearTransition(st);
+    outgoing.pause();
+    try { outgoing.currentTime = 0; } catch (e) {}
+    outgoing.muted = true;
+    outgoing.volume = VOL;
+    setLayerOpacity(outgoing, 0);
+    setLayerOpacity(incoming, 1);
+    outgoing.classList.remove("is-active");
+    incoming.classList.add("is-active");
+    incoming.volume = VOL;
+    incoming.muted = pref.muted || owner !== st;
+    st.current = 1 - st.current;
+    st.index = ni;
+    st.preparedIndex = null;
+    st.switching = false;
+    st.incoming = null;
+    st.failed[ni] = false;
+    syncAudio();
+    setStatus(st, "Film " + (st.index + 1) + " of " + st.files.length +
+      (pref.muted ? " · Sound off" : " · Sound on"));
+    prepareNext(st);
+  }
+  function failIncoming(st, ni, incoming, outgoing, message) {
+    if (!st.switching) return;
+    clearTransition(st);
+    incoming.pause();
+    incoming.muted = true;
+    incoming.volume = VOL;
+    incoming.removeAttribute("src");
+    delete incoming.dataset.erosSource;
+    delete incoming.dataset.erosClipIndex;
+    setLayerOpacity(incoming, 0);
+    st.failed[ni] = true;
+    st.switching = false;
+    st.incoming = null;
+    st.preparedIndex = null;
+    outgoing.muted = pref.muted || owner !== st;
+    outgoing.volume = VOL;
+    setLayerOpacity(outgoing, 1);
+    setStatus(st, message || "A film could not load · continuing the loop");
+    if (st.active && owner === st) {
+      if (outgoing.ended || outgoing.paused) {
+        try { outgoing.currentTime = 0; } catch (e) {}
+        playMuted(outgoing);
+        outgoing.muted = pref.muted || owner !== st;
+      }
+      var next = nextIndex(st, st.index);
+      if (next >= 0) {
+        /* Retry progression with the next non-failed clip, never spin on this failed one. */
+        window.setTimeout(function () { if (st.active && !st.switching) switchClip(st, true); }, 0);
+      } else {
+        setStatus(st, "No playable films remain in this queue");
+      }
+    }
+    syncAudio();
+  }
+  function switchClip(st, force) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) {
+      setStatus(st, "No playable films remain in this queue");
+      return;
+    }
+    var outgoing = st.layers[st.current];
+    var incoming = st.layers[1 - st.current];
+    st.switching = true;
+    st.incoming = incoming;
+    setStatus(st, "Preparing next film");
+    if (incoming.dataset.erosClipIndex !== String(ni) ||
+        !incoming.getAttribute("src")) {
+      setSourceOnce(st, ni, incoming);
+    }
+    incoming.muted = true;
+    incoming.volume = 0;
+    incoming.loop = false;
+    var settled = false;
+    function cleanupReady() {
+      if (st.readyTimer) { clearTimeout(st.readyTimer); st.readyTimer = null; }
+      incoming.removeEventListener("canplay", onReady);
+      incoming.removeEventListener("error", onError);
+    }
+    function onError() {
+      if (settled) return;
+      settled = true;
+      cleanupReady();
+      failIncoming(st, ni, incoming, outgoing, "A film could not load · skipping to the next");
+    }
+    function onReady() {
+      if (settled || !st.switching || incoming.readyState < 2) return;
+      settled = true;
+      cleanupReady();
+      try { incoming.currentTime = 0; } catch (e) {}
+      incoming.muted = true;
+      incoming.volume = 0;
+      var playPromise;
+      try { playPromise = incoming.play(); }
+      catch (e) {
+        failIncoming(st, ni, incoming, outgoing, "Playback was blocked · tap the film to resume");
+        return;
+      }
+      function beginFade() {
+        if (!st.switching || !st.active || owner !== st) {
+          incoming.pause();
+          incoming.muted = true;
+          st.switching = false;
+          setLayerOpacity(incoming, 0);
+          return;
+        }
+        st.failed[ni] = false;
+        /* Both frames are in play before the incoming layer is revealed. */
+        setLayerOpacity(incoming, 1);
+        incoming.classList.add("is-active");
+        outgoing.classList.remove("is-active");
+        var t0 = performance.now();
+        var outgoingStart = outgoing.volume;
+        var incomingStart = 0;
+        function audioStep(now) {
+          if (!st.switching || st.incoming !== incoming) return;
+          var progress = Math.min(1, (now - t0) / AUDIO_FADE_MS);
+          if (!pref.muted && owner === st) {
+            outgoing.muted = false;
+            incoming.muted = false;
+            outgoing.volume = Math.max(0, outgoingStart * (1 - progress));
+            incoming.volume = VOL * progress;
+          } else {
+            outgoing.muted = true;
+            incoming.muted = true;
+            outgoing.volume = VOL * (1 - progress);
+            incoming.volume = VOL * progress;
+          }
+          if (progress < 1) st.fadeFrame = requestAnimationFrame(audioStep);
+          else {
+            outgoing.volume = 0;
+            incoming.volume = VOL;
+            st.fadeFrame = null;
+          }
+        }
+        st.fadeFrame = requestAnimationFrame(audioStep);
+        st.transitionTimer = window.setTimeout(function () {
+          finishTransition(st, outgoing, incoming, ni);
+        }, VISUAL_FADE_MS);
+      }
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(beginFade).catch(function () {
+          failIncoming(st, ni, incoming, outgoing, "Playback was blocked · tap the film to resume");
+        });
+      } else {
+        beginFade();
+      }
+    }
+    st.handlers = { ready: onReady, error: onError };
+    incoming.addEventListener("canplay", onReady);
+    incoming.addEventListener("error", onError);
+    st.readyTimer = window.setTimeout(function () {
+      if (incoming.readyState >= 2) onReady();
+      else onError();
+    }, READY_TIMEOUT_MS);
+    if (incoming.readyState >= 2) onReady();
+  }
+  function deactivate(st) {
+    if (!st) return;
+    st.active = false;
+    if (st.switching) {
+      clearTransition(st);
+      st.switching = false;
+      st.incoming = null;
+    }
+    st.layers.forEach(function (v, i) {
+      v.muted = true;
+      v.pause();
+      setLayerOpacity(v, i === st.current ? 1 : 0);
+      v.classList.toggle("is-active", i === st.current);
+    });
+    if (owner === st) owner = null;
+    syncAudio();
+  }
+  function activate(st) {
+    if (!st) return;
+    if (owner && owner !== st) deactivate(owner);
+    owner = st;
+    st.active = true;
+    st.layers.forEach(function (v, i) {
+      v.volume = VOL;
+      if (i !== st.current) {
+        v.muted = true;
+        if (!st.switching) v.pause();
+      }
+    });
+    syncAudio();
+    startCurrent(st, false);
+  }
+  function toggleSound(st) {
+    pref.muted = !pref.muted;
+    syncAudio();
+    if (!pref.muted) {
+      if (!st.active || owner !== st) activate(st);
+      startCurrent(st, true);
+      setStatus(st, "Sound enabled · active section only");
+    } else {
+      states.forEach(function (state) {
+        state.layers.forEach(function (v) { v.muted = true; v.volume = VOL; });
+      });
+      setStatus(st, "Sound muted");
+    }
+    syncAudio();
+  }
+  function makeState(root) {
+    var files = parseFiles(root);
+    var layers = getLayers(root);
+    if (!files.length || layers.length !== 2) return null;
+    var st = {
+      root: root, files: files, layers: layers, sound: getSoundControl(root), status: getStatus(root),
+      index: 0, current: 0, active: false, switching: false, failed: Object.create(null),
+      preparedIndex: null, incoming: null, handlers: null, readyTimer: null,
+      transitionTimer: null, fadeFrame: null, observerRatio: 0
+    };
+    layers.forEach(function (v, i) {
+      v.muted = true;
+      v.volume = VOL;
+      v.loop = false;
+      v.removeAttribute("loop");
+      v.playsInline = true;
+      v.preload = "auto";
+      setLayerOpacity(v, i === 0 ? 1 : 0);
+      v.addEventListener("timeupdate", function () {
+        if (!st.active || owner !== st || st.switching || st.layers[st.current] !== v) return;
+        if (Number.isFinite(v.duration) && v.duration > 15 && v.duration - v.currentTime <= 1.5) {
+          switchClip(st, false);
+        }
+      });
+      v.addEventListener("ended", function () {
+        if (st.active && owner === st && st.layers[st.current] === v && !st.switching) {
+          switchClip(st, true);
+        }
+      });
+    });
+    setSourceOnce(st, 0, layers[0]);
+    st.sound && st.sound.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSound(st);
+    });
+    root.addEventListener("pointerdown", function (event) {
+      if (closestControl(event.target)) return;
+      if (!pref.muted) {
+        if (!st.active || owner !== st) activate(st);
+        else if (st.layers[st.current].paused) startCurrent(st, true);
+        return;
+      }
+      pref.muted = false;
+      root.classList.add("is-open");
+      if (!st.active || owner !== st) activate(st);
+      else startCurrent(st, true);
+      syncAudio();
+      setStatus(st, "Sound enabled · active section only");
+    });
+    root.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        if (root.getAttribute("role") === "button" || root.classList.contains("cinema-hero")) {
+          event.preventDefault();
+          root.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+        }
+      }
+    });
+    if (st.sound) updateControl(st);
+    return st;
+  }
+
+  roots.forEach(function (root) {
+    var st = makeState(root);
+    if (st) states.push(st);
+  });
+  if (!states.length) return;
+
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var st = states.filter(function (x) { return x.root === entry.target; })[0];
+        if (!st) return;
+        st.observerRatio = entry.isIntersecting ? entry.intersectionRatio : 0;
+        ratios.set(st, st.observerRatio);
+      });
+      var candidate = null, best = 0;
+      states.forEach(function (st) {
+        var ratio = ratios.get(st) || 0;
+        if (ratio >= 0.22 && ratio > best) { best = ratio; candidate = st; }
+      });
+      if (candidate) {
+        if (owner !== candidate) activate(candidate);
+      } else if (owner && (ratios.get(owner) || 0) < 0.22) {
+        deactivate(owner);
+      }
+    }, { threshold: [0, 0.06, 0.22, 0.5, 0.75] });
+    states.forEach(function (st) { observer.observe(st.root); });
+  } else {
+    activate(states[0]);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      states.forEach(function (st) {
+        st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+      });
+    } else if (owner && owner.active) {
+      syncAudio();
+      startCurrent(owner, false);
+    }
+  });
+  window.addEventListener("pagehide", function () {
+    states.forEach(function (st) {
+      clearTransition(st);
+      st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+    });
+  });
+  syncAudio();
 })();
 </script>
 
