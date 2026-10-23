@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="eros-cinema-engine" content="v2.0-canonical"/>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="description" content="The Living Egg — Cosmogony, axioms, physics, and full manual of law for the EROS Universe. Inward is forwards."/>
-
 <link rel="canonical" href="https://meaning-unconfounded.github.io/Living_Egg.html"/>
 <meta property="og:type" content="book"/>
 <meta property="og:site_name" content="EROS Library"/>
@@ -52,6 +52,7 @@ body{
     radial-gradient(700px 420px at 100% 85%, rgba(154,122,184,.06), transparent 45%),
     var(--bg);
   min-height:100vh;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 html::before,html::after{content:"";position:fixed;pointer-events:none;z-index:9990}
 html::before{inset:8px;border:1px solid rgba(125,143,184,.2)}
@@ -218,22 +219,29 @@ details.doorway .door-body p{margin:0 0 1rem;color:var(--soft)}
 details.doorway .door-body p:last-child{margin-bottom:0}
 details.doorway .door-body strong{color:var(--indigo2);font-weight:700}
 
-.cover{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem 2.4rem}
-.cover .kick{font-family:var(--sans);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--indigo);margin-bottom:1.2rem;font-weight:600}
-.cover h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.1rem,6vw,3.4rem);letter-spacing:.06em;color:var(--indigo2);text-shadow:0 0 48px rgba(125,143,184,.28);margin-bottom:.3rem;line-height:1.1}
-.cover .sub{font-style:italic;font-size:1.05rem;color:var(--bone-soft);margin-bottom:1rem;letter-spacing:.02em}
-.cover .rule{width:min(260px,60%);height:1px;margin:0 auto 1.4rem;background:linear-gradient(90deg,transparent,var(--indigo),transparent)}
-.cover .banner{max-width:100%;border-radius:12px;border:1px solid var(--indigo-line);margin:0 0 1.4rem;display:block;width:100%}
-.cover .opening{font-size:1.08rem;color:var(--soft);max-width:38rem;line-height:var(--leading,1.8);margin-bottom:1.4rem}
-.cover .opening em{color:var(--indigo2)}
-.cover .seal{padding:1.05rem 1.2rem;border:1px solid var(--indigo-line);border-radius:12px;background:linear-gradient(150deg,#0e1018,#151824);font-size:.93rem;color:var(--soft);max-width:36rem;box-shadow:0 10px 36px rgba(0,0,0,.4);text-align:left;line-height:var(--leading,1.75)}
-.cover .seal strong{color:var(--indigo2)}
-.cover .layer-key{margin-top:1.5rem;font-family:var(--sans);font-size:.7rem;color:var(--muted);line-height:1.7;letter-spacing:.04em;orphans:2;widows:2}
-.cover .layer-key span{display:inline-block;margin:.15rem .55rem}
-
-.modes{margin:1.4rem auto;max-width:40rem;display:grid;gap:.6rem;text-align:left;width:100%}
-.modes div{display:flex;gap:.7rem;align-items:baseline;font-family:var(--sans);font-size:.86rem;color:var(--soft);orphans:2;widows:2}
-.modes div b{color:var(--indigo2);flex-shrink:0;font-weight:700;letter-spacing:.05em;min-width:7.5rem}
+.egg-intro{
+  margin:1.4rem auto 2rem;
+  max-width:44rem;
+  text-align:center;
+  padding:0 1rem;
+}
+.egg-intro .seal{
+  padding:1.05rem 1.2rem;
+  border:1px solid var(--indigo-line);
+  border-radius:12px;
+  background:linear-gradient(150deg,#0e1018,#151824);
+  font-size:.93rem;color:var(--soft);
+  max-width:36rem;margin:0 auto 1.3rem;
+  box-shadow:0 10px 36px rgba(0,0,0,.4);
+  text-align:left;line-height:var(--leading,1.75);
+}
+.egg-intro .seal strong{color:var(--indigo2)}
+.egg-intro .seal em{color:var(--indigo2);font-style:italic}
+.egg-intro .layer-key{
+  font-family:var(--sans);font-size:.7rem;color:var(--muted);
+  line-height:1.7;letter-spacing:.04em;
+}
+.egg-intro .layer-key span{display:inline-block;margin:.15rem .55rem}
 
 .part-break{margin:3.4rem 0 2.4rem;padding:2.2rem 1.4rem;text-align:center;border-radius:16px;border:1px solid var(--hair);background:linear-gradient(160deg,#0e1018,#0a0c14);scroll-margin-top:7rem}
 .part-break .pk{font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--indigo2);margin-bottom:.45rem;font-weight:700}
@@ -389,11 +397,11 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 
 @media print{
   @page{size:A4;margin:14mm}
-  html::before,html::after,#progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link,.egg-hero{display:none!important}
+  html::before,html::after,#progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
   body{background:#fff!important;color:#111!important;font-size:10.5pt}
   .page{max-width:none;padding:0}
   a{color:#111;border-bottom:none}
-  .claim,.verse,.pull,.axiom,.math,.ledger,.grid,.create,.witness,.connect,.telegram-post,.public-link,.part-break,.creed,.coda,figure.plate,figure.media,figure.brand-seal,footer.master,details.doorway,.cinematic-finale,.media-studio,.native-carousel-wrap,.summary-series{break-inside:avoid}
+  .claim,.verse,.pull,.axiom,.math,.ledger,.grid,.create,.witness,.connect,.telegram-post,.public-link,.part-break,.creed,.coda,figure.plate,figure.media,figure.brand-seal,footer.master,details.doorway,.media-studio,.native-carousel-wrap,.summary-series{break-inside:avoid}
   section.apply-world{break-inside:avoid}
   h2,h3,h4{break-after:avoid}
   video, iframe{display:none}
@@ -525,201 +533,383 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   display: block;
 }
 
-/* ═══ LIVING EGG HERO · lens-circle cinematic ═══ */
-.egg-hero{
-  position:relative;
-  isolation:isolate;
-  width:100vw;
-  margin:0 calc(50% - 50vw) 1.4rem;
-  min-height:min(760px,82vh);
-  min-height:min(760px,82svh);
-  overflow:hidden;
-  display:grid;
-  align-items:end;
-  background:#07070e;
-  color:#eaeaf2;
-  text-align:left;
-  font-family:var(--sans);
-  cursor:pointer;
-  --lens:0px;
-  --px:50%;
-  --py:50%;
+/* ═══ EROS CINEMA SYSTEM · CSS v2.0 · Living Egg ═══ */
+.cinema-hero,
+.cinema-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #07070e;
+  color: #eaeaf2;
+  font-family: var(--sans);
+  text-align: left;
+  --accent-color: #7d8fb8;
+  --accent-glow: rgba(125, 143, 184, .42);
+  --lens: 0px;
+  --px: 50%;
+  --py: 50%;
+  --ring-tx: 0px;
+  --ring-ty: 0px;
 }
-.egg-hero__poster,
-.egg-hero__video,
-.egg-hero__shade,
-.egg-hero__grain{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+.cinema-hero {
+  width: 100vw;
+  margin: 0 calc(50% - 50vw) 1.4rem;
+  min-height: min(760px, 82vh);
+  min-height: min(760px, 82svh);
+  display: grid;
+  align-items: end;
+  cursor: pointer;
+  touch-action: manipulation;
 }
-.egg-hero__poster,
-.egg-hero__video{
-  object-fit:cover;
-  object-position:45% 45%;
+.cinema-band {
+  width: 100vw;
+  margin: 2.5rem calc(50% - 50vw);
+  min-height: min(560px, 68vh);
+  min-height: min(560px, 68svh);
+  display: grid;
+  align-items: end;
 }
-.egg-hero__poster{
-  z-index:-4;
-  transform:scale(1.015);
-  filter:brightness(.55) saturate(.7);
-  transition:transform 1.2s cubic-bezier(.2,.7,.2,1), filter .9s ease, opacity .9s ease;
-}
-.egg-hero__video{
-  z-index:-3;
-  background:#07070e;
-  clip-path:circle(var(--lens) at var(--px) var(--py));
-  transition:clip-path 1s cubic-bezier(.16,1,.3,1);
-  will-change:clip-path;
-}
-.egg-hero__shade{
-  z-index:-2;
-  pointer-events:none;
-  background:
-    linear-gradient(90deg,rgba(7,7,14,.80) 0%, rgba(7,7,14,.35) 55%, rgba(7,7,14,.15) 100%),
-    linear-gradient(0deg,rgba(7,7,14,.94) 0%, rgba(7,7,14,.35) 42%, rgba(7,7,14,.08) 72%, rgba(7,7,14,.42) 100%);
-}
-.egg-hero__grain{
-  z-index:-1;
-  pointer-events:none;
-  opacity:.10;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-  mix-blend-mode:soft-light;
-}
-.egg-hero.is-peeking .egg-hero__poster{
-  transform:scale(1.03);
-  filter:brightness(.46) saturate(.66);
-}
-.egg-hero.is-open .egg-hero__poster{
-  opacity:.10;
-}
-.egg-hero.is-open .egg-hero__video{
-  clip-path:circle(150% at var(--px) var(--py));
-}
-.egg-hero__top{
-  position:absolute;
-  top:clamp(24px,4vw,48px);
-  left:clamp(24px,6vw,84px);
-  right:clamp(24px,6vw,84px);
-  display:flex;
-  justify-content:space-between;
-  gap:16px;
-  font-size:10px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:rgba(234,234,242,.85);
-  pointer-events:none;
-  z-index:2;
-  font-family:var(--sans);
-}
-.egg-hero__top span:first-child{letter-spacing:.38em}
-.egg-hero__top span:last-child{color:rgba(234,234,242,.55);text-align:right;letter-spacing:.15em}
-.egg-hero__copy{
-  position:relative;
-  width:min(940px,100%);
-  padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);
-  pointer-events:none;
-  z-index:2;
-}
-.egg-hero__kicker{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:var(--gold2, #e8c547);
-  font:600 10px/1.4 var(--sans);
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  margin:0 0 20px;
-}
-.egg-hero__kicker:before{
-  content:"";
-  width:30px;
-  height:1px;
-  background:var(--gold2, #e8c547);
-}
-.egg-hero h1{
-  font:700 clamp(52px,9vw,112px)/.94 var(--serif);
-  letter-spacing:.06em;
-  margin:0 0 1rem;
-  max-width:900px;
-  color:var(--indigo2, #a0b0d0);
-  text-shadow:0 0 48px rgba(125,143,184,.35);
-}
-.egg-hero__sub{
-  font-style:italic;
-  font-size:clamp(1.05rem,2.4vw,1.35rem);
-  color:var(--bone-soft, #c9c2b0);
-  letter-spacing:.03em;
-  margin:0 0 1.4rem;
-}
-.egg-hero__lede{
-  max-width:560px;
-  color:rgba(234,234,242,.82);
-  font:400 13.5px/1.85 var(--sans);
-  margin:0;
-}
-.egg-hero__lede em{color:var(--indigo3, #c0d0e8);font-style:italic}
-.egg-hero__footer{
-  position:absolute;
-  bottom:0;
-  left:clamp(24px,6vw,84px);
-  right:clamp(24px,6vw,84px);
-  border-top:1px solid rgba(234,234,242,.18);
-  padding:14px 0 17px;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  color:rgba(234,234,242,.5);
-  font:500 9px/1.4 var(--sans);
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  pointer-events:none;
-  z-index:2;
-}
-.egg-hero__footer span:last-child{text-align:right;color:var(--indigo2, #a0b0d0)}
+.cinema-hero.accent-egg { --accent-color: #7d8fb8; --accent-glow: rgba(125,143,184,.42); }
+.cinema-band.accent-egg-indigo { --accent-color: #7d8fb8; --accent-glow: rgba(125,143,184,.42); }
+.cinema-band.accent-egg-gold { --accent-color: #d4af37; --accent-glow: rgba(212,175,55,.42); }
 
-.egg-intro{
-  margin:1.4rem auto 2rem;
-  max-width:44rem;
-  text-align:center;
-  padding:0 1rem;
+.cinema-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  background: #07070e;
+  z-index: -3;
+  opacity: 0;
+  transition: opacity 1.45s ease;
 }
-.egg-intro .seal{
-  padding:1.05rem 1.2rem;
-  border:1px solid var(--indigo-line);
-  border-radius:12px;
-  background:linear-gradient(150deg,#0e1018,#151824);
-  font-size:.93rem;color:var(--soft);
-  max-width:36rem;margin:0 auto 1.3rem;
-  box-shadow:0 10px 36px rgba(0,0,0,.4);
-  text-align:left;line-height:var(--leading,1.75);
-}
-.egg-intro .seal strong{color:var(--indigo2)}
-.egg-intro .seal em{color:var(--indigo2);font-style:italic}
-.egg-intro .layer-key{
-  font-family:var(--sans);font-size:.7rem;color:var(--muted);
-  line-height:1.7;letter-spacing:.04em;
-}
-.egg-intro .layer-key span{display:inline-block;margin:.15rem .55rem}
+.cinema-va { opacity: 1; }
 
-@media(max-width:700px){
-  .egg-hero{
-    min-height:min(760px,78vh);
-    min-height:min(760px,78svh);
-    margin-bottom:1.1rem;
+.cinema-hero .cinema-va,
+.cinema-hero .cinema-vb {
+  clip-path: circle(var(--lens) at var(--px) var(--py));
+  -webkit-clip-path: circle(var(--lens) at var(--px) var(--py));
+  transition: opacity 1.45s ease, clip-path .7s cubic-bezier(.16, 1, .3, 1);
+}
+.cinema-hero.is-open .cinema-va,
+.cinema-hero.is-open .cinema-vb {
+  clip-path: circle(150% at var(--px) var(--py));
+  -webkit-clip-path: circle(150% at var(--px) var(--py));
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-hero .cinema-va,
+  .cinema-hero .cinema-vb {
+    transition: none !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
   }
-  .egg-hero__top{align-items:flex-start}
-  .egg-hero__top span:last-child{max-width:150px}
-  .egg-hero__copy{padding:0 24px 78px}
-  .egg-hero h1{font-size:clamp(44px,12.5vw,72px)}
-  .egg-hero__lede{max-width:320px}
-  .egg-hero__footer{font-size:7px;letter-spacing:.1em}
-  .egg-hero__poster,.egg-hero__video{object-position:48% 45%}
 }
-@media(prefers-reduced-motion:reduce){
-  .egg-hero__poster,
-  .egg-hero__video{transition:none!important}
+
+.cinema-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  transition: background .8s ease;
+  background:
+    linear-gradient(90deg, rgba(7,7,14,.82) 0%, rgba(7,7,14,.35) 55%, rgba(7,7,14,.12) 100%),
+    linear-gradient(0deg, rgba(7,7,14,.94) 0%, rgba(7,7,14,.30) 42%, rgba(7,7,14,.05) 72%, rgba(7,7,14,.40) 100%);
 }
+.cinema-hero:not(.is-open) .cinema-shade,
+.cinema-band:not(.is-playing) .cinema-shade {
+  background:
+    linear-gradient(90deg, rgba(7,7,14,.94) 0%, rgba(7,7,14,.65) 55%, rgba(7,7,14,.38) 100%),
+    linear-gradient(0deg, rgba(7,7,14,.97) 0%, rgba(7,7,14,.62) 42%, rgba(7,7,14,.28) 72%, rgba(7,7,14,.65) 100%);
+}
+.cinema-hero.is-open .cinema-shade,
+.cinema-band.is-playing .cinema-shade {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.06) 50%, transparent 100%),
+    linear-gradient(0deg, rgba(0,0,0,.38) 0%, rgba(0,0,0,.08) 38%, transparent 72%);
+}
+
+.cinema-grain {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .14;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+.cinema-copy {
+  position: relative;
+  width: min(940px, 100%);
+  padding: 0 clamp(24px, 7vw, 100px) clamp(66px, 8vw, 94px);
+  pointer-events: none;
+  z-index: 2;
+}
+.cinema-band .cinema-copy {
+  width: min(900px, 100%);
+  padding: 0 clamp(24px, 6vw, 84px) clamp(70px, 8vw, 100px);
+}
+.cinema-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent-color);
+  font: 600 10px/1.4 var(--sans);
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+.cinema-kicker::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: var(--accent-color);
+}
+.cinema-hero .cinema-title {
+  font: 700 clamp(52px, 9vw, 112px)/.94 var(--serif);
+  letter-spacing: .06em;
+  margin: 0;
+  max-width: min(900px, 92vw);
+  background: linear-gradient(180deg, #fff 0%, var(--accent-color) 42%, #a8b8d8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 44px var(--accent-glow));
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .55);
+}
+.cinema-band .cinema-title {
+  font: 700 clamp(36px, 6vw, 72px)/1.02 var(--serif);
+  letter-spacing: .02em;
+  margin: 0;
+  max-width: min(800px, 92vw);
+  color: #eaeaf2;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, .4);
+}
+.cinema-sub {
+  max-width: min(28rem, 88vw);
+  color: rgba(234, 234, 242, .82);
+  font: 400 clamp(.9rem, 2.4vw, 1.05rem)/1.4 var(--sans);
+  margin: 14px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .5);
+}
+
+.cinema-top {
+  position: absolute;
+  top: clamp(24px, 4vw, 48px);
+  left: clamp(24px, 6vw, 84px);
+  right: clamp(24px, 6vw, 84px);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(234, 234, 242, .7);
+  pointer-events: none;
+  z-index: 2;
+}
+.cinema-top span:last-child {
+  color: rgba(234, 234, 242, .55);
+  text-align: right;
+  letter-spacing: .15em;
+}
+.cinema-footer {
+  position: absolute;
+  bottom: 0;
+  left: clamp(24px, 6vw, 84px);
+  right: clamp(24px, 6vw, 84px);
+  border-top: 1px solid rgba(234, 234, 242, .18);
+  padding: 14px 0 17px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(234, 234, 242, .5);
+  font: 500 8px/1.4 var(--sans);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 2;
+}
+.cinema-footer span:last-child {
+  text-align: right;
+  color: var(--accent-color);
+}
+
+.cinema-vol {
+  position: absolute;
+  right: clamp(24px, 6vw, 84px);
+  bottom: 56px;
+  z-index: 4;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(234, 234, 242, .35);
+  background: rgba(7, 7, 14, .55);
+  color: #eaeaf2;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background .2s, border-color .2s;
+  touch-action: manipulation;
+}
+.cinema-vol:hover { background: rgba(7, 7, 14, .85); border-color: var(--accent-color); }
+.cinema-vol:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+.cinema-vol .vb-off { display: none; }
+.cinema-vol.is-muted .vb-on { display: none; }
+.cinema-vol.is-muted .vb-off { display: inline; }
+
+.cinema-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  margin: -70px 0 0 -70px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 40px var(--accent-glow), inset 0 0 24px rgba(125, 143, 184, .18);
+  pointer-events: none;
+  z-index: 3;
+  opacity: .95;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  color: var(--accent-color);
+  background: rgba(7, 7, 14, .35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  transform: translate(var(--ring-tx, 0px), var(--ring-ty, 0px));
+  transition: opacity .5s ease, transform .18s ease;
+  animation: cinema-ring-pulse 2.5s ease-in-out infinite;
+}
+.cinema-ring svg { display: block; margin-left: 3px; }
+.cinema-ring span {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.cinema-hero.is-open .cinema-ring {
+  opacity: 0;
+  transform: scale(1.6);
+  pointer-events: none;
+  animation: none;
+}
+@keyframes cinema-ring-pulse {
+  0%, 100% { box-shadow: 0 0 40px var(--accent-glow), inset 0 0 24px rgba(125, 143, 184, .18); }
+  50%      { box-shadow: 0 0 60px var(--accent-glow), inset 0 0 32px rgba(125, 143, 184, .28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-ring { animation: none !important; transform: none !important; }
+  .cinema-hero.is-open .cinema-ring { transform: none !important; }
+}
+
+.cinema-print { display: none; }
+
+@media (max-width: 700px) {
+  .cinema-hero { min-height: min(760px, 78svh); }
+  .cinema-band { min-height: min(500px, 62svh); }
+  .cinema-hero .cinema-title { font-size: clamp(48px, 13.5vw, 78px); }
+  .cinema-band .cinema-title { font-size: clamp(32px, 10vw, 52px); }
+  .cinema-top { display: none; }
+  .cinema-footer { font-size: 7px; letter-spacing: .1em; }
+  .cinema-ring { width: 100px; height: 100px; margin: -50px 0 0 -50px; }
+  .cinema-ring span { font-size: 8px; letter-spacing: .2em; }
+}
+
+@media print {
+  .cinema-hero,
+  .cinema-band {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 1.5em 0 !important;
+    padding: 2em 1.5em !important;
+    background: #f5efe0 !important;
+    color: #1a1a1a !important;
+    border: 1px solid #c9a55a !important;
+    border-radius: 0 !important;
+    page-break-inside: avoid;
+  }
+  .cinema-video, .cinema-shade, .cinema-grain, .cinema-ring, .cinema-vol { display: none !important; }
+  .cinema-top, .cinema-footer {
+    position: static !important;
+    display: block !important;
+    border: none !important;
+    color: #8a6a1d !important;
+    padding: 0 0 .8em !important;
+    font-size: 9pt !important;
+  }
+  .cinema-top span:last-child { color: #4a463d !important; text-align: left !important; }
+  .cinema-copy, .cinema-band .cinema-copy {
+    position: static !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  .cinema-kicker {
+    color: #8a6a1d !important;
+    border-top: 1px solid #c9a55a !important;
+    padding-top: .8em !important;
+    display: block !important;
+  }
+  .cinema-kicker::before { display: none !important; }
+  .cinema-hero .cinema-title, .cinema-band .cinema-title {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: #1a1a1a !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    filter: none !important;
+    text-shadow: none !important;
+    font-size: 24pt !important;
+    letter-spacing: .02em !important;
+  }
+  .cinema-sub {
+    color: #4a463d !important;
+    font-size: 11pt !important;
+    max-width: 100% !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    overflow: visible !important;
+  }
+  .cinema-print { display: block !important; margin-top: 1.2em; }
+  .cinema-print b, .cinema-print span, .cinema-print strong { display: block; }
+  .cinema-print b {
+    font: 700 9pt/1.4 -apple-system, system-ui, sans-serif;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #8a6a1d;
+  }
+  .cinema-print span {
+    margin-top: .7rem;
+    color: #4a463d;
+    font: 10pt/1.5 -apple-system, system-ui, sans-serif;
+  }
+  .cinema-print strong {
+    font: 22pt/1.15 Georgia, serif;
+    color: #1a1a1a;
+    margin: .3rem 0;
+  }
+  .cinema-print p {
+    font: 10pt/1.55 Georgia, serif;
+    color: #333;
+    margin: .5rem 0 0;
+  }
+}
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Book","name":"The Living Egg","subtitle":"Cosmogony of EROS · Manual of Law · Full Reference Edition","author":{"@type":"Organization","name":"EROS · Tenacity & Integrity"},"datePublished":"2026","inLanguage":"en","url":"https://meaning-unconfounded.github.io/Living_Egg.html","image":"https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg","description":"The full manual: cosmogony, axioms, physics, and manual of law for the EROS Universe. Inward is forwards."}
@@ -768,28 +958,49 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
 
 <main class="page" id="top">
 
-<header class="egg-hero" id="eggHero" aria-label="The Living Egg — cinematic introduction">
-  <img class="egg-hero__poster" src="https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg" alt="The Living Egg — cosmogony of EROS" fetchpriority="high" decoding="async" onerror="this.style.display='none'"/>
-  <video class="egg-hero__video" id="eggFilm" playsinline muted loop autoplay preload="auto" poster="https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg" aria-hidden="true">
-    <source src="https://meaning-unconfounded.github.io/images/cell_facts.mp4" type="video/mp4"/>
-  </video>
-  <div class="egg-hero__shade"></div>
-  <div class="egg-hero__grain"></div>
-  <div class="egg-hero__top">
+<section class="cinema-hero accent-egg"
+         id="cinemaHero"
+         role="button"
+         tabindex="0"
+         aria-expanded="false"
+         aria-label="The Living Egg — cinematic threshold"
+         data-cinema="hero"
+         data-queue="cell_facts.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-ring" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <span>Enter</span>
+  </div>
+  <div class="cinema-top">
     <span>The EROS Universe · Cosmogony</span>
     <span>Manual of Law · Inward is forwards</span>
   </div>
-  <div class="egg-hero__copy">
-    <p class="egg-hero__kicker">Cosmogony &amp; Manual of Law</p>
-    <h1>The Living Egg</h1>
-    <p class="egg-hero__sub">Inward is forwards.</p>
-    <p class="egg-hero__lede">At 3:47 AM in the Atacama Desert, a scientist erased 85 percent of the universe from her equation. The math still worked. <em>This is the manual that explains why — and what to build with it.</em></p>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">Cosmogony &amp; Manual of Law</p>
+    <h1 class="cinema-title">The Living Egg</h1>
+    <p class="cinema-sub">Inward is forwards. At 3:47 AM in the Atacama Desert, a scientist erased 85 percent of the universe from her equation. The math still worked.</p>
   </div>
-  <div class="egg-hero__footer">
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"></path>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"></path>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"></path>
+    </svg>
+  </button>
+  <div class="cinema-footer">
     <span>The Living Egg · cosmogony of EROS</span>
-    <span id="eggStatus" aria-live="polite">Click or scroll to enter</span>
+    <span class="cinema-status" aria-live="polite">Move to reveal · Tap to enter</span>
   </div>
-</header>
+  <div class="cinema-print">
+    <b>THE LIVING EGG · ENTRY</b>
+    <span>Cosmogony &amp; Manual of Law</span>
+    <strong>The Living Egg.</strong>
+    <p>Inward is forwards. At 3:47 AM in the Atacama Desert, a scientist erased 85 percent of the universe from her equation. The math still worked. This is the manual that explains why — and what to build with it.</p>
+  </div>
+</section>
 
 <div class="egg-intro">
   <div class="seal">
@@ -1385,6 +1596,44 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <p>Intention · conflict · stored mass · TROM bridge</p>
 </div>
 
+<!-- CINEMA · MID (canonical) -->
+<section class="cinema-band accent-egg-indigo"
+         id="cinemaMiddle"
+         aria-label="The Living Egg — the turn inward"
+         data-cinema="middle"
+         data-queue="shorts_egg_01.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-top">
+    <span>ACT BREAK · THE TURN INWARD</span>
+    <span>The Living Egg</span>
+  </div>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">The turn inward · intention · enclosure</p>
+    <h2 class="cinema-title">Intention precedes mass.</h2>
+    <p class="cinema-sub">Before the world becomes structure, a possibility is chosen. The shell is not merely a boundary; it is the condition that lets a world take form.</p>
+  </div>
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"></path>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"></path>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"></path>
+    </svg>
+  </button>
+  <div class="cinema-footer">
+    <span>THE LIVING EGG · ACT BREAK</span>
+    <span class="cinema-status" aria-live="polite">Scroll into view</span>
+  </div>
+  <div class="cinema-print">
+    <b>ACT BREAK · THE TURN INWARD</b>
+    <span>The turn inward</span>
+    <strong>Intention precedes mass.</strong>
+    <p>Before the world becomes structure, a possibility is chosen. The shell is not merely a boundary; it is the condition that lets a world take form.</p>
+  </div>
+</section>
+
 <figure class="brand-seal silver">
   <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
   <figcaption>Tenacity Through Integrity</figcaption>
@@ -1941,7 +2190,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
       <li><b>16 · Is this a political book?</b><br/>No. It is about the shape of the world, not about who should govern it. Where the book touches on power, it does so to note that surface conflicts often sit on top of deeper cosmological disagreement.</li>
       <li><b>17 · What do I do with this, practically?</b><br/>Three things. First, run the axiom system on your own life and notice where it holds. Second, use the creator seeds to build something — a comic, a scene, a post. Third, bond with someone. EROS is not a theory. EROS is a practice.</li>
       <li><b>18 · What if I disagree with the physics?</b><br/>You are free to. The book repeatedly labels the physical claims as model, not as proof. The mind architecture and the axioms are more robust than any specific physical reading. Use what holds. Set aside what does not.</li>
-      <li><b>19 · What if I think this is all nonsense?</b><br>Then you should test the parts you can test. The consonant code, the postulate resolution, the iteration-as-time reading — these are checkable against your own experience. The larger cosmology is not required for any of them.</li>
+      <li><b>19 · What if I think this is all nonsense?</b><br/>Then you should test the parts you can test. The consonant code, the postulate resolution, the iteration-as-time reading — these are checkable against your own experience. The larger cosmology is not required for any of them.</li>
       <li><b>20 · What is the one-line answer?</b><br/>Inward is forwards. The universe is not an empty room you are escaping from. It is a body you are inside. Read it.</li>
     </ul>
   </div>
@@ -2406,6 +2655,44 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   <p class="aw-q">Take what you have learned. What can you create?</p>
 </section>
 
+<!-- CINEMA · BOOK-END (canonical) -->
+<section class="cinema-band accent-egg-gold"
+         id="cinemaBookEnd"
+         aria-label="The Living Egg — the living law · the invitation"
+         data-cinema="book-end"
+         data-queue="shorts_egg_02.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-top">
+    <span>THE LIVING LAW · THE INVITATION</span>
+    <span>Before the coda</span>
+  </div>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">The living law · the invitation</p>
+    <h2 class="cinema-title">The Egg is a world to build inside.</h2>
+    <p class="cinema-sub">Take the axioms as seeds. Test them, argue with them, turn them into characters, systems, scenes and worlds.</p>
+  </div>
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"></path>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"></path>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"></path>
+    </svg>
+  </button>
+  <div class="cinema-footer">
+    <span>THE LIVING EGG · THE INVITATION</span>
+    <span class="cinema-status" aria-live="polite">Scroll into view</span>
+  </div>
+  <div class="cinema-print">
+    <b>THE LIVING LAW · THE INVITATION</b>
+    <span>Inward is forwards</span>
+    <strong>The Egg is a world to build inside.</strong>
+    <p>Take the axioms as seeds. Test them, argue with them, turn them into characters, systems, scenes and worlds. The book ends; the work continues.</p>
+  </div>
+</section>
+
 <section class="coda" id="coda">
   <p>Not a glance — a lawbook for a living world.</p>
   <p><em>The whole universe is here. Inward is forwards.</em></p>
@@ -2559,7 +2846,6 @@ window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
 if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-/* Delegated smooth-scroll — opens any <details> we land on */
 document.addEventListener('click', function(e){
   var a = e.target.closest && e.target.closest('a[href^="#"]');
   if(!a) return;
@@ -2757,135 +3043,580 @@ window.addEventListener('hashchange', openFromHash);
 })();
 </script>
 
-<script>
-/* ═══ LIVING EGG HERO · lens-circle cinematic with autoplay + sound ═══ */
-(function(){
+<script id="eros-cinema-engine-v2">
+/* ═══ EROS CINEMA SYSTEM · ENGINE v2.0 ═══
+   Canonical engine. Role-aware: hero / middle / book-end.
+   Hero: paused on frame 3, pointer-tracked lens, click to reveal / play / unmute.
+   Middle + book-end: autoplay muted on 50% intersection, unmute button.
+   One preload. Canplay-gated reveal. Failed-clip skip. Modulo loop unless data-loop="false".
+   Optional per-placement data-fade="<ms>" for audio crossfade (default 400).
+   pauseHeroInit guard prevents the "user clicked early, video stays frozen" race.
+*/
+(function () {
   "use strict";
-  var hero = document.getElementById('eggHero');
-  var video = document.getElementById('eggFilm');
-  var status = document.getElementById('eggStatus');
-  if(!hero || !video) return;
 
-  var opened = false;
-  var soundOn = false;
-  var PEEK = 'clamp(120px,16vw,220px)';
+  var BASE = "https://meaning-unconfounded.github.io/images/";
+  var VOL = 0.22;
+  var VISUAL_FADE_MS = 1450;
+  var DEFAULT_AUDIO_FADE_MS = 400;
+  var READY_TIMEOUT_MS = 9000;
+  var HERO_HOLD_FRAME_SECONDS = 0.1;
 
-  function setStatus(msg){ if(status) status.textContent = msg; }
-  function pointAt(x, y){
-    var r = hero.getBoundingClientRect();
-    var px = Math.max(0, Math.min(r.width,  x - r.left));
-    var py = Math.max(0, Math.min(r.height, y - r.top));
-    hero.style.setProperty('--px', px + 'px');
-    hero.style.setProperty('--py', py + 'px');
+  var pref = window.__erosSoundPref;
+  if (!pref || typeof pref !== "object") pref = window.__erosSoundPref = { muted: true };
+  if (typeof pref.muted !== "boolean") pref.muted = true;
+
+  var reducedMotion = !!(window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  function resolveSource(name) {
+    if (/^https?:\/\//i.test(name)) return name;
+    return BASE + name.split("/").map(encodeURIComponent).join("/");
   }
-  function setLens(open){
-    hero.style.setProperty('--lens', open ? '150%' : PEEK);
+  function closestControl(t) {
+    return t && t.closest ? t.closest("button,a,input,select,textarea") : null;
+  }
+  function parseFiles(root) {
+    var v = root.getAttribute("data-queue") || root.getAttribute("data-videos") || "";
+    var sep = v.indexOf("|") >= 0 ? "|" : ",";
+    return v.split(sep).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  function getLayers(root) {
+    var sel = ".cinema-va,.cinema-vb,.cinema-layer,.cinema-band__video," +
+              ".bridge-hero__video,.film-video,.dossier-hero__video," +
+              ".platinum-hero__video";
+    var all = Array.prototype.slice.call(root.querySelectorAll(sel));
+    return all.filter(function (v, i) { return all.indexOf(v) === i; }).slice(0, 2);
+  }
+  function getSoundControl(root) {
+    return root.querySelector(".cinema-vol,.cinema-sound,.cinema-band__sound,[data-sound-toggle]");
+  }
+  function getStatus(root) {
+    return root.querySelector(".cinema-status,.cinema-band__status");
+  }
+  function getRole(root) {
+    var r = (root.getAttribute("data-cinema") || "").trim().toLowerCase();
+    if (r === "hero") return "hero";
+    if (r === "middle" || r === "mechanism") return "middle";
+    if (r === "book-end" || r === "arrival") return "book-end";
+    if (root.classList.contains("cinema-hero")) return "hero";
+    if (root.classList.contains("cinema-band")) return "middle";
+    return "middle";
   }
 
-  function trySound(){
-    if(soundOn) return;
-    video.muted = false;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus('Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         setStatus('Click or scroll to enter');
-         try { video.play().catch(function(){}); } catch(e){}
-       });
-    } else {
-      soundOn = true;
-      setStatus('Sound on');
-    }
-  }
+  var roots = Array.prototype.slice.call(document.querySelectorAll("[data-queue],[data-videos]"));
+  var states = [];
+  var owner = null;
+  var ratios = new Map();
 
-  function openHero(x, y){
-    if(x != null && y != null) pointAt(x, y);
-    opened = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    trySound();
-    if(soundOn && video.paused) video.play().catch(function(){});
-  }
-
-  (function boot(){
-    video.muted = false;
-    video.loop = true;
-    var p;
-    try { p = video.play(); } catch(e){ p = null; }
-    if(p && typeof p.then === 'function'){
-      p.then(function(){ soundOn = true; setStatus('Sound on'); })
-       .catch(function(){
-         video.muted = true;
-         try { video.play().catch(function(){}); } catch(e){}
-         setStatus('Click or scroll to enter');
-       });
-    }
-  })();
-
-  var gestures = ['click','touchstart','keydown','pointerdown','scroll','wheel'];
-  function unlockOnce(){
-    if(soundOn) return;
-    gestures.forEach(function(evt){ window.removeEventListener(evt, unlockOnce, true); });
-    trySound();
-  }
-  gestures.forEach(function(evt){
-    window.addEventListener(evt, unlockOnce, { once: true, capture: true, passive: true });
-  });
-
-  hero.addEventListener('pointermove', function(e){
-    if(opened) return;
-    pointAt(e.clientX, e.clientY);
-    hero.classList.add('is-peeking');
-    setLens(false);
-  });
-  hero.addEventListener('touchmove', function(e){
-    if(opened) return;
-    if(e.touches && e.touches[0]){
-      pointAt(e.touches[0].clientX, e.touches[0].clientY);
-      hero.classList.add('is-peeking');
-      setLens(false);
-    }
-  }, { passive: true });
-
-  hero.addEventListener('click', function(e){
-    if(e.target.closest && e.target.closest('a')) return;
-    if(!opened) openHero(e.clientX, e.clientY);
-    else if(video.paused) video.play().catch(function(){});
-  });
-
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          if(video.paused) video.play().catch(function(){});
+  function syncAudio() {
+    states.forEach(function (st) {
+      st.layers.forEach(function (v, i) {
+        v.volume = VOL;
+        var audible = !pref.muted && owner === st && st.active &&
+          (i === st.current || (st.switching && (i === st.current || i === 1 - st.current)));
+        if (!st.switching || owner !== st || pref.muted) {
+          v.muted = !(audible && i === st.current);
         } else {
-          video.pause();
+          v.muted = false;
         }
       });
-    }, { threshold: 0.05 }).observe(hero);
+      updateControl(st);
+    });
+  }
+  function updateControl(st) {
+    var b = st.sound; if (!b) return;
+    var m = pref.muted;
+    b.classList.toggle("is-muted", m);
+    b.setAttribute("aria-pressed", m ? "false" : "true");
+    b.setAttribute("aria-label", m ? "Turn sound on" : "Turn sound off");
+    var lbl = b.querySelector(".sound-label");
+    if (lbl) lbl.textContent = m ? "Sound" : "Mute";
+  }
+  function setStatus(st, msg) {
+    if (st.status) st.status.textContent = msg;
   }
 
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && video.paused) video.play().catch(function(){});
-  });
-
-  video.addEventListener('error', function(){
-    setStatus('Video unavailable · poster remains');
-  });
-
-  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches){
+  function setSourceOnce(st, idx, video) {
+    if (idx < 0 || idx >= st.files.length) return false;
+    var src = resolveSource(st.files[idx]);
+    if (video.dataset.erosSource === src && video.getAttribute("src")) return true;
     video.pause();
     video.muted = true;
-    hero.classList.add('is-open');
-    hero.classList.remove('is-peeking');
-    setLens(true);
-    opened = true;
-    setStatus('Static view');
+    video.volume = VOL;
+    video.removeAttribute("src");
+    while (video.firstChild) video.removeChild(video.firstChild);
+    video.src = src;
+    video.dataset.erosSource = src;
+    video.dataset.erosClipIndex = String(idx);
+    video.preload = "auto";
+    video.loop = false;
+    video.removeAttribute("loop");
+    video.playsInline = true;
+    video.load();
+    return true;
   }
+  function nextIndex(st, from) {
+    for (var s = 1; s <= st.files.length; s++) {
+      var c = (from + s) % st.files.length;
+      if (!st.allowLoop && c <= from) return -1;
+      if (!st.failed[c]) return c;
+    }
+    return -1;
+  }
+  function prepareNext(st) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    if (st.role === "hero" && !st.heroActivated) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) return;
+    var inc = st.layers[1 - st.current];
+    if (inc.dataset.erosClipIndex === String(ni) && inc.getAttribute("src") && inc.readyState >= 2) {
+      st.preparedIndex = ni;
+      return;
+    }
+    setSourceOnce(st, ni, inc);
+    st.preparedIndex = ni;
+  }
+
+  function setLayerOpacity(video, value) { video.style.opacity = String(value); }
+  function playMuted(v) {
+    v.muted = true;
+    try { var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+  }
+  function startCurrent(st) {
+    if (!st || !st.active || owner !== st) return;
+    if (st.role === "hero" && !st.heroActivated) return;
+    var cur = st.layers[st.current];
+    cur.muted = pref.muted;
+    cur.volume = VOL;
+    try {
+      var p = cur.play();
+      if (p && p.catch) p.catch(function () {
+        setStatus(st, "Tap the film or sound control to resume");
+      });
+    } catch (e) {
+      setStatus(st, "Tap the film or sound control to resume");
+    }
+    prepareNext(st);
+    syncAudio();
+  }
+  function clearTransition(st) {
+    if (st.transitionTimer) { clearTimeout(st.transitionTimer); st.transitionTimer = null; }
+    if (st.readyTimer) { clearTimeout(st.readyTimer); st.readyTimer = null; }
+    if (st.incoming && st.handlers) {
+      st.incoming.removeEventListener("canplay", st.handlers.ready);
+      st.incoming.removeEventListener("error", st.handlers.error);
+    }
+    if (st.fadeFrame) { cancelAnimationFrame(st.fadeFrame); st.fadeFrame = null; }
+    st.handlers = null;
+  }
+  function finishTransition(st, out, inc, ni) {
+    if (!st.switching) return;
+    clearTransition(st);
+    out.pause();
+    try { out.currentTime = 0; } catch (e) {}
+    out.muted = true; out.volume = VOL;
+    setLayerOpacity(out, 0); setLayerOpacity(inc, 1);
+    out.classList.remove("is-active"); inc.classList.add("is-active");
+    inc.volume = VOL;
+    inc.muted = pref.muted || owner !== st;
+    st.current = 1 - st.current;
+    st.index = ni;
+    st.preparedIndex = null;
+    st.switching = false;
+    st.incoming = null;
+    st.failed[ni] = false;
+    syncAudio();
+    setStatus(st, "Film " + (st.index + 1) + " of " + st.files.length +
+      (pref.muted ? " · Sound off" : " · Sound on"));
+    prepareNext(st);
+  }
+  function failIncoming(st, ni, inc, out, msg) {
+    if (!st.switching) return;
+    clearTransition(st);
+    inc.pause(); inc.muted = true; inc.volume = VOL;
+    inc.removeAttribute("src");
+    delete inc.dataset.erosSource; delete inc.dataset.erosClipIndex;
+    setLayerOpacity(inc, 0);
+    st.failed[ni] = true;
+    st.switching = false; st.incoming = null; st.preparedIndex = null;
+    out.muted = pref.muted || owner !== st; out.volume = VOL;
+    setLayerOpacity(out, 1);
+    setStatus(st, msg || "A film could not load · continuing the loop");
+    if (st.active && owner === st) {
+      if (out.ended || out.paused) {
+        try { out.currentTime = 0; } catch (e) {}
+        playMuted(out);
+        out.muted = pref.muted || owner !== st;
+      }
+      var nxt = nextIndex(st, st.index);
+      if (nxt >= 0) {
+        window.setTimeout(function () {
+          if (st.active && !st.switching) switchClip(st);
+        }, 0);
+      } else {
+        setStatus(st, "No playable films remain in this queue");
+      }
+    }
+    syncAudio();
+  }
+  function switchClip(st) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    if (st.role === "hero" && !st.heroActivated) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) { setStatus(st, "No playable films remain in this queue"); return; }
+    var out = st.layers[st.current];
+    var inc = st.layers[1 - st.current];
+    st.switching = true; st.incoming = inc;
+    setStatus(st, "Preparing next film");
+    if (inc.dataset.erosClipIndex !== String(ni) || !inc.getAttribute("src")) {
+      setSourceOnce(st, ni, inc);
+    }
+    inc.muted = true; inc.volume = 0; inc.loop = false;
+    var settled = false;
+    function cleanup() {
+      if (st.readyTimer) { clearTimeout(st.readyTimer); st.readyTimer = null; }
+      inc.removeEventListener("canplay", onReady);
+      inc.removeEventListener("error", onError);
+    }
+    function onError() {
+      if (settled) return; settled = true; cleanup();
+      failIncoming(st, ni, inc, out, "A film could not load · skipping to the next");
+    }
+    function onReady() {
+      if (settled || !st.switching || inc.readyState < 2) return;
+      settled = true; cleanup();
+      try { inc.currentTime = 0; } catch (e) {}
+      inc.muted = true; inc.volume = 0;
+      var pp;
+      try { pp = inc.play(); }
+      catch (e) { failIncoming(st, ni, inc, out, "Playback was blocked · tap the film to resume"); return; }
+      function beginFade() {
+        if (!st.switching || !st.active || owner !== st) {
+          inc.pause(); inc.muted = true; st.switching = false;
+          setLayerOpacity(inc, 0); return;
+        }
+        st.failed[ni] = false;
+        setLayerOpacity(out, 0); setLayerOpacity(inc, 1);
+        inc.classList.add("is-active"); out.classList.remove("is-active");
+        var t0 = performance.now();
+        var outStart = out.volume;
+        var fadeMs = st.fadeMs;
+        function audioStep(now) {
+          if (!st.switching || st.incoming !== inc) return;
+          var p = Math.min(1, (now - t0) / fadeMs);
+          if (!pref.muted && owner === st) {
+            out.muted = false; inc.muted = false;
+            out.volume = Math.max(0, outStart * (1 - p));
+            inc.volume = VOL * p;
+          } else {
+            out.muted = true; inc.muted = true;
+            out.volume = VOL * (1 - p); inc.volume = VOL * p;
+          }
+          if (p < 1) st.fadeFrame = requestAnimationFrame(audioStep);
+          else { out.volume = 0; inc.volume = VOL; st.fadeFrame = null; }
+        }
+        st.fadeFrame = requestAnimationFrame(audioStep);
+        st.transitionTimer = window.setTimeout(function () {
+          finishTransition(st, out, inc, ni);
+        }, VISUAL_FADE_MS);
+      }
+      if (pp && pp.then) pp.then(beginFade).catch(function () {
+        failIncoming(st, ni, inc, out, "Playback was blocked · tap the film to resume");
+      });
+      else beginFade();
+    }
+    st.handlers = { ready: onReady, error: onError };
+    inc.addEventListener("canplay", onReady);
+    inc.addEventListener("error", onError);
+    st.readyTimer = window.setTimeout(function () {
+      if (inc.readyState >= 2) onReady(); else onError();
+    }, READY_TIMEOUT_MS);
+    if (inc.readyState >= 2) onReady();
+  }
+
+  function deactivate(st) {
+    if (!st) return;
+    st.active = false;
+    try { st.root && st.root.classList.remove("is-playing"); } catch (e) {}
+    if (st.switching) { clearTransition(st); st.switching = false; st.incoming = null; }
+    st.layers.forEach(function (v, i) {
+      v.muted = true; v.pause();
+      setLayerOpacity(v, i === st.current ? 1 : 0);
+      v.classList.toggle("is-active", i === st.current);
+    });
+    if (owner === st) owner = null;
+    syncAudio();
+  }
+  function activate(st) {
+    if (!st) return;
+    if (owner && owner !== st) deactivate(owner);
+    owner = st; st.active = true;
+    try { st.root && st.root.classList.add("is-playing"); } catch (e) {}
+    st.layers.forEach(function (v, i) {
+      v.volume = VOL;
+      if (i !== st.current) { v.muted = true; if (!st.switching) v.pause(); }
+    });
+    syncAudio();
+    if (st.role === "hero" && !st.heroActivated) return;
+    startCurrent(st);
+  }
+  function toggleSound(st) {
+    pref.muted = !pref.muted;
+    syncAudio();
+    if (!pref.muted) {
+      if (!st.active || owner !== st) activate(st);
+      if (st.role === "hero") activateHero(st);
+      else startCurrent(st);
+      setStatus(st, "Sound enabled · active section only");
+    } else {
+      states.forEach(function (s) {
+        s.layers.forEach(function (v) { v.muted = true; v.volume = VOL; });
+      });
+      setStatus(st, "Sound muted");
+    }
+    syncAudio();
+  }
+
+  function activateHero(st) {
+    if (!st || st.role !== "hero" || st.heroActivated) return;
+    st.heroActivated = true;
+    if (!st.active || owner !== st) {
+      if (owner && owner !== st) deactivate(owner);
+      owner = st;
+      st.active = true;
+    }
+    st.root.classList.add("is-open");
+    st.root.classList.remove("is-peeking");
+    st.root.setAttribute("aria-expanded", "true");
+    st.root.style.setProperty("--lens", "150%");
+    pref.muted = false;
+    var v = st.layers[st.current];
+    v.muted = false; v.volume = VOL;
+    try {
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {
+        v.muted = true; pref.muted = true;
+        setStatus(st, "Tap the film to start");
+      });
+    } catch (e) {
+      v.muted = true; pref.muted = true;
+      setStatus(st, "Tap the film to start");
+    }
+    syncAudio();
+    setStatus(st, "Sound on");
+    prepareNext(st);
+  }
+  function bindHeroInteraction(st) {
+    var root = st.root;
+    if (reducedMotion) {
+      root.addEventListener("click", function (e) {
+        if (closestControl(e.target)) return;
+        activateHero(st);
+      });
+      root.addEventListener("keydown", function (e) {
+        if ((e.key === "Enter" || e.key === " ") && !closestControl(e.target)) {
+          e.preventDefault(); activateHero(st);
+        }
+      });
+      return;
+    }
+    var moveRaf = null;
+    function pointAt(x, y) {
+      if (st.heroActivated) return;
+      var r = root.getBoundingClientRect();
+      var px = Math.max(0, Math.min(r.width,  x - r.left));
+      var py = Math.max(0, Math.min(r.height, y - r.top));
+      root.style.setProperty("--px", px + "px");
+      root.style.setProperty("--py", py + "px");
+      var dx = px - r.width / 2, dy = py - r.height / 2;
+      var cap = Math.min(r.width, r.height) * 0.26;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var scale = dist > cap ? cap / dist : 1;
+      root.style.setProperty("--ring-tx", (dx * scale) + "px");
+      root.style.setProperty("--ring-ty", (dy * scale) + "px");
+    }
+    function throttledPointAt(x, y) {
+      if (moveRaf) return;
+      moveRaf = requestAnimationFrame(function () {
+        moveRaf = null;
+        pointAt(x, y);
+      });
+    }
+    root.addEventListener("pointermove", function (e) {
+      if (st.heroActivated) return;
+      throttledPointAt(e.clientX, e.clientY);
+      root.classList.add("is-peeking");
+      var cur = root.style.getPropertyValue("--lens");
+      if (!cur || cur === "0px") {
+        root.style.setProperty("--lens", "clamp(120px, 16vw, 220px)");
+      }
+    }, { passive: true });
+    root.addEventListener("touchmove", function (e) {
+      if (st.heroActivated || !e.touches || !e.touches[0]) return;
+      throttledPointAt(e.touches[0].clientX, e.touches[0].clientY);
+      root.classList.add("is-peeking");
+      var cur = root.style.getPropertyValue("--lens");
+      if (!cur || cur === "0px") {
+        root.style.setProperty("--lens", "clamp(120px, 16vw, 220px)");
+      }
+    }, { passive: true });
+    root.addEventListener("pointerleave", function () {
+      if (st.heroActivated) return;
+      root.classList.remove("is-peeking");
+      root.style.setProperty("--px", "50%");
+      root.style.setProperty("--py", "50%");
+      root.style.setProperty("--lens", "0px");
+      root.style.setProperty("--ring-tx", "0px");
+      root.style.setProperty("--ring-ty", "0px");
+    });
+    root.addEventListener("click", function (e) {
+      if (closestControl(e.target)) return;
+      if (e.clientX || e.clientY) pointAt(e.clientX, e.clientY);
+      activateHero(st);
+    });
+    root.addEventListener("keydown", function (e) {
+      if ((e.key === "Enter" || e.key === " ") && !closestControl(e.target)) {
+        e.preventDefault(); activateHero(st);
+      }
+    });
+  }
+  function pauseHeroInit(st) {
+    var v = st.layers[st.current];
+    function onReady() {
+      if (st.heroActivated) return;
+      try { v.currentTime = HERO_HOLD_FRAME_SECONDS; } catch (e) {}
+      v.pause();
+      v.removeEventListener("canplay", onReady);
+      v.removeEventListener("loadeddata", onReady);
+    }
+    if (v.readyState >= 2) onReady();
+    else {
+      v.addEventListener("canplay", onReady);
+      v.addEventListener("loadeddata", onReady);
+    }
+  }
+
+  function makeState(root) {
+    var files = parseFiles(root);
+    var layers = getLayers(root);
+    if (!files.length || layers.length !== 2) return null;
+    var loopAttr = (root.getAttribute("data-loop") || "true").toLowerCase();
+    var allowLoop = loopAttr !== "false" && loopAttr !== "0" && loopAttr !== "no";
+    var fadeAttr = parseInt(root.getAttribute("data-fade"), 10);
+    var fadeMs = (!isNaN(fadeAttr) && fadeAttr > 0) ? fadeAttr : DEFAULT_AUDIO_FADE_MS;
+    var st = {
+      root: root, files: files, layers: layers,
+      sound: getSoundControl(root), status: getStatus(root),
+      role: getRole(root), heroActivated: false, allowLoop: allowLoop,
+      fadeMs: fadeMs,
+      index: 0, current: 0, active: false, switching: false,
+      failed: Object.create(null), preparedIndex: null,
+      incoming: null, handlers: null, readyTimer: null,
+      transitionTimer: null, fadeFrame: null, observerRatio: 0
+    };
+    layers.forEach(function (v, i) {
+      v.muted = true; v.volume = VOL;
+      v.loop = false; v.removeAttribute("loop");
+      v.playsInline = true; v.preload = "auto";
+      setLayerOpacity(v, i === 0 ? 1 : 0);
+      v.addEventListener("timeupdate", function () {
+        if (!st.active || owner !== st || st.switching || st.layers[st.current] !== v) return;
+        if (st.role === "hero" && !st.heroActivated) return;
+        if (Number.isFinite(v.duration) && v.duration > 15 && v.duration - v.currentTime <= 1.5) {
+          if (!st.allowLoop && st.index >= st.files.length - 1) return;
+          switchClip(st);
+        }
+      });
+      v.addEventListener("ended", function () {
+        if (st.active && owner === st && st.layers[st.current] === v && !st.switching) {
+          if (st.role === "hero" && !st.heroActivated) return;
+          if (!st.allowLoop && st.index >= st.files.length - 1) {
+            setStatus(st, "Sequence complete"); return;
+          }
+          switchClip(st);
+        }
+      });
+    });
+    setSourceOnce(st, 0, layers[0]);
+    if (st.role === "hero") {
+      bindHeroInteraction(st);
+      pauseHeroInit(st);
+    }
+    if (st.sound) {
+      st.sound.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        toggleSound(st);
+      });
+    }
+    if (st.role !== "hero") {
+      root.addEventListener("pointerdown", function (event) {
+        if (closestControl(event.target)) return;
+        if (!pref.muted) {
+          if (!st.active || owner !== st) activate(st);
+          else if (st.layers[st.current].paused) startCurrent(st);
+          return;
+        }
+        pref.muted = false;
+        root.classList.add("is-open");
+        try { root.classList.add("is-playing"); } catch (e) {}
+        if (!st.active || owner !== st) activate(st);
+        else startCurrent(st);
+        syncAudio();
+        setStatus(st, "Sound enabled · active section only");
+      });
+    }
+    if (st.sound) updateControl(st);
+    return st;
+  }
+
+  roots.forEach(function (root) {
+    var st = makeState(root);
+    if (st) states.push(st);
+  });
+  if (!states.length) return;
+
+  if ("IntersectionObserver" in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var st = states.filter(function (x) { return x.root === entry.target; })[0];
+        if (!st) return;
+        st.observerRatio = entry.isIntersecting ? entry.intersectionRatio : 0;
+        ratios.set(st, st.observerRatio);
+      });
+      var cand = null, best = 0;
+      states.forEach(function (st) {
+        var r = ratios.get(st) || 0;
+        if (r >= 0.22 && r > best) { best = r; cand = st; }
+      });
+      if (cand) {
+        if (owner !== cand) activate(cand);
+      } else if (owner && (ratios.get(owner) || 0) < 0.22) {
+        deactivate(owner);
+      }
+    }, { threshold: [0, 0.06, 0.22, 0.5, 0.75] });
+    states.forEach(function (st) { obs.observe(st.root); });
+  } else {
+    if (states[0] && states[0].role !== "hero") activate(states[0]);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      states.forEach(function (st) {
+        st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+      });
+    } else if (owner && owner.active && !(owner.role === "hero" && !owner.heroActivated)) {
+      syncAudio();
+      startCurrent(owner);
+    }
+  });
+  window.addEventListener("pagehide", function () {
+    states.forEach(function (st) {
+      clearTransition(st);
+      st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+    });
+  });
+  syncAudio();
 })();
 </script>
 
