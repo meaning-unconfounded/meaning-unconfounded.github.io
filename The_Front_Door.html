@@ -1108,6 +1108,81 @@ details.eros-menu a{color:var(--gold)}
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 36px var(--accent-glow));
 }
+/* === UX refinements 2026-10 === */
+.cinema-band {
+  min-height: min(420px, 52vh) !important;
+  min-height: min(420px, 52svh) !important;
+  margin: 1.8rem calc(50% - 50vw) !important;
+}
+.cinema-band .cinema-title {
+  font-size: clamp(28px, 5vw, 52px) !important;
+  letter-spacing: .01em !important;
+  filter: none !important;
+  opacity: .96;
+}
+.cinema-band .cinema-copy {
+  padding-bottom: clamp(48px, 6vw, 72px) !important;
+}
+.cinema-band .cinema-kicker {
+  font-size: 9px !important;
+  margin-bottom: 12px !important;
+}
+.cinema-band .cinema-sub {
+  -webkit-line-clamp: 2;
+  font-size: clamp(.85rem, 2.1vw, .98rem) !important;
+}
+.cinema-band .cinema-grain {
+  opacity: .35 !important;
+}
+.cinema-hero {
+  min-height: min(680px, 76vh);
+  min-height: min(680px, 76svh);
+}
+@media (max-width: 700px) {
+  .cinema-hero { min-height: min(520px, 68svh) !important; }
+  .cinema-band { min-height: min(340px, 46svh) !important; }
+  .cinema-hero .cinema-title { font-size: clamp(40px, 11vw, 68px) !important; }
+  .cinema-band .cinema-title { font-size: clamp(24px, 8vw, 40px) !important; }
+  .cinema-copy, .cinema-band .cinema-copy { padding-left: 1.1rem !important; padding-right: 1.1rem !important; }
+}
+.cinema-vol.is-cue {
+  animation: cinema-vol-cue 1.4s ease-out 1;
+}
+@keyframes cinema-vol-cue {
+  0% { box-shadow: 0 0 0 0 var(--accent-glow); border-color: var(--accent-color); }
+  40% { box-shadow: 0 0 0 10px transparent; border-color: var(--accent-color); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.cinema-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 28%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font: 500 11px/1.4 var(--sans);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(234,234,242,.55);
+  pointer-events: none;
+  transition: opacity .6s ease, transform .6s ease;
+  white-space: nowrap;
+}
+.cinema-hero.is-open .cinema-hint,
+.cinema-hero.is-peeking .cinema-hint {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+}
+figure.video-frame video,
+figure.media video {
+  border-radius: 12px;
+  border: 1px solid var(--hair);
+  box-shadow: 0 12px 36px rgba(0,0,0,.45);
+}
+@media (max-width: 720px) {
+  .corpus-bar { padding-top: .45rem; }
+  .corpus-bar .brand-row { min-height: 42px; padding-bottom: .4rem; }
+}
+/* end UX refinements */
 </style>
 
 </head>
@@ -1182,7 +1257,7 @@ details.eros-menu a{color:var(--gold)}
   </button>
   <div class="cinema-footer">
     <span>The Front Door · The threshold</span>
-    <span class="cinema-status" aria-live="polite">Move to reveal · Tap to enter</span>
+    <span class="cinema-status" aria-live="polite">Move across · Tap to enter</span>
   </div>
   <div class="cinema-print">
     <b>THE FRONT DOOR · ENTRY</b>
@@ -1475,7 +1550,7 @@ details.eros-menu a{color:var(--gold)}
   </button>
   <div class="cinema-footer">
     <span>The Front Door · The crossing</span>
-    <span class="cinema-status" aria-live="polite">Scroll into view</span>
+    <span class="cinema-status" aria-live="polite">Scroll to play</span>
   </div>
   <div class="cinema-print">
     <b>THE CASE · THE TICKET · THE CROSSING</b>
@@ -2061,7 +2136,7 @@ details.eros-menu a{color:var(--gold)}
   </button>
   <div class="cinema-footer">
     <span>The Front Door · The invitation</span>
-    <span class="cinema-status" aria-live="polite">Scroll into view</span>
+    <span class="cinema-status" aria-live="polite">Scroll to play</span>
   </div>
   <div class="cinema-print">
     <b>THE INVITATION · PRIDE · FORCE</b>
@@ -2702,7 +2777,7 @@ window.addEventListener('hashchange', openFromHash);
     if (!st) return;
     if (owner && owner !== st) deactivate(owner);
     owner = st; st.active = true;
-    try { st.root && st.root.classList.add("is-playing"); } catch (e) {}
+    try { st.root && st.root.classList.add("is-playing"); if(st.sound){ st.sound.classList.remove("is-cue"); void st.sound.offsetWidth; st.sound.classList.add("is-cue"); } } catch (e) {}
     st.layers.forEach(function (v, i) {
       v.volume = VOL;
       if (i !== st.current) { v.muted = true; if (!st.switching) v.pause(); }
