@@ -20,7 +20,7 @@
 <meta content="Complete visual inventory of the EROS corpus. Every image and video, grouped by topic." name="twitter:description"/>
 <meta content="https://meaning-unconfounded.github.io/images/eros-logo_banner.jpg" name="twitter:image"/>
 <meta content="The EROS PulseChain Media Centre: cinematic video journeys, featured lessons, 15 media studios, interactive experiences, and a searchable catalog." name="description"/>
-<meta content="#0b0e14" name="theme-color"/>
+<meta content="#01020e" name="theme-color"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230b0e14' stroke='%23d8dde3' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23d8dde3'/%3E%3C/svg%3E" rel="icon"/>
 <style>
 :root{
@@ -1729,7 +1729,7 @@ a:not(.button):not(.btn){text-decoration-color:rgba(0,234,255,.52)}
   const count=panel.querySelector('.mc-count'),status=panel.querySelector('.mc-status'),sound=panel.querySelector('.mc-sound'),next=panel.querySelector('.mc-next');
   let order=urls.slice(),index=0,active=false,attempt=0;
   // Shuffle each 44-clip playlist independently, then rotate forever.
-  function shuffle(){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}}
+  function shuffle(){for(let i=order.length-1;i>1;i--){const j=1+Math.floor(Math.random()*i);[order[i],order[j]]=[order[j],order[i]];}}
   shuffle();
   function playAt(i){if(!order.length)return;index=(i+order.length)%order.length;attempt=0;loadCurrent();}
   function loadCurrent(){if(attempt>=order.length){status.textContent='Media could not be loaded. Try Next video.';return;}const url=order[index];count.textContent=(index+1)+' / '+order.length;status.textContent='Now playing · clip '+(index+1)+' of '+order.length;video.src=url;video.muted=!sound.classList.contains('is-on');video.load();if(active){const p=video.play();if(p&&p.catch)p.catch(()=>{status.textContent='Tap Next video if playback does not start.';});}}
@@ -1788,6 +1788,211 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+
+
+<style id="eros-cinematic-load-status-violet">
+/* Visible loading status: communicates real media states without faking a percentage. */
+.media-cinema .cinema-load-status{
+  position:absolute;z-index:7;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;align-items:center;gap:.85rem;width:max-content;max-width:calc(100% - 2rem);
+  padding:.9rem 1.1rem;border:1px solid rgba(192,132,252,.7);border-radius:16px;
+  color:#f7edff;background:rgba(13,7,30,.88);
+  box-shadow:0 0 0 1px rgba(168,85,247,.14),0 0 24px rgba(139,92,246,.28),0 0 46px rgba(217,70,239,.12);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  font:600 .78rem/1.45 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;
+  text-align:left;pointer-events:none;transition:opacity .3s ease,visibility .3s ease;
+}
+.media-cinema .cinema-load-status[hidden]{display:none}
+.media-cinema .cinema-load-status .cls-spinner{
+  width:27px;height:27px;flex:0 0 27px;border-radius:50%;
+  border:2px solid rgba(216,180,254,.22);border-top-color:#e879f9;
+  border-right-color:#a78bfa;box-shadow:0 0 14px rgba(192,132,252,.28);
+  animation:eros-load-spin 1s linear infinite;
+}
+.media-cinema .cinema-load-status .cls-title{display:block;color:#f5d0fe;text-shadow:0 0 12px rgba(192,132,252,.4)}
+.media-cinema .cinema-load-status .cls-detail{display:block;margin-top:.18rem;color:#c4b5fd;font-size:.68rem;font-weight:500;letter-spacing:.045em;text-transform:none}
+.media-cinema .cinema-load-status.is-error{border-color:rgba(251,191,36,.65);box-shadow:0 0 24px rgba(251,191,36,.13)}
+.media-cinema .cinema-load-status.is-error .cls-spinner{animation:none;border-color:#fbbf24;position:relative}
+.media-cinema .cinema-load-status.is-error .cls-spinner:after{content:"!";position:absolute;inset:0;display:grid;place-items:center;color:#fef3c7;font-size:16px;font-weight:800}
+@keyframes eros-load-spin{to{transform:rotate(360deg)}}
+@media(max-width:480px){
+ .media-cinema .cinema-load-status{gap:.65rem;padding:.75rem .85rem;font-size:.7rem}
+ .media-cinema .cinema-load-status .cls-spinner{width:23px;height:23px;flex-basis:23px}
+}
+@media(prefers-reduced-motion:reduce){.media-cinema .cinema-load-status .cls-spinner{animation:none}}
+</style>
+<script id="eros-cinematic-load-status-controller">
+(function(){
+  'use strict';
+  document.querySelectorAll('[data-media-cinema]').forEach(function(stage){
+    var video=stage.querySelector('video');
+    if(!video || stage.querySelector('.cinema-load-status')) return;
+    var status=document.createElement('div');
+    status.className='cinema-load-status';
+    status.setAttribute('role','status');
+    status.setAttribute('aria-live','polite');
+    status.innerHTML='<span class="cls-spinner" aria-hidden="true"></span><span><span class="cls-title">Loading first video…</span><span class="cls-detail">Connecting to the media library</span></span>';
+    stage.appendChild(status);
+    var title=status.querySelector('.cls-title'), detail=status.querySelector('.cls-detail');
+    var timer=null, hideTimer=null;
+    function show(main,sub,error){
+      if(timer){clearTimeout(timer);timer=null;}
+      if(hideTimer){clearTimeout(hideTimer);hideTimer=null;}
+      status.hidden=false;status.classList.toggle('is-error',!!error);
+      title.textContent=main;detail.textContent=sub||'';
+      detail.hidden=!sub;
+    }
+    function hide(){
+      if(hideTimer) clearTimeout(hideTimer);
+      hideTimer=setTimeout(function(){status.hidden=true;status.classList.remove('is-error');},450);
+    }
+    video.addEventListener('loadstart',function(){
+      show('Loading video…','Fetching the first frame · this can take a moment');
+      timer=setTimeout(function(){
+        if(video.readyState<3 && !video.error) show('Still loading…','The video server is responding slowly. Please wait.');
+      },4500);
+    });
+    video.addEventListener('loadedmetadata',function(){
+      show('Preparing video…','Video found · buffering the first frames');
+    });
+    video.addEventListener('waiting',function(){
+      show('Buffering video…','Preparing playback');
+    });
+    video.addEventListener('stalled',function(){
+      show('Connection is slow…','Still waiting for video data');
+    });
+    video.addEventListener('canplay',function(){hide();});
+    video.addEventListener('playing',function(){hide();});
+    video.addEventListener('error',function(){
+      show('This clip did not load','Trying another clip if available · or tap “Next video”',true);
+    });
+    video.addEventListener('emptied',function(){
+      show('Loading next video…','Switching to another clip');
+    });
+    // Show feedback immediately, including before the browser dispatches loadstart.
+    show('Loading first video…','Connecting to the media library');
+  });
+})();
+</script>
+
+<style id="eros-image-matched-neon-v3">
+/* EROS NEON v3 — colours sampled directly from the two reference images (pixel-picked)
+   magenta #FF10FF · pale pink #FF9CFC · violet #8406FC · blue #0030F6/#0060F0 · cyan #00F0FF · pale cyan #9CF6FC
+   gold #FCE478 · amber #FF9A2E · panels #0D1931 / #162549 / #101B41 */
+@property --a{syntax:"<angle>";initial-value:0deg;inherits:false}
+:root{
+  --n-void:#01020e;--n-panel:#0d1931;--n-panel2:#162549;--n-panel3:#101b41;
+  --n-magenta:#ff10ff;--n-pink:#ff9cfc;--n-violet:#8406fc;--n-blue:#0030f6;--n-blue2:#0060f0;
+  --n-cyan:#00f0ff;--n-cyan-hi:#9cf6fc;--n-gold:#fce478;--n-amber:#ff9a2e;
+  --n-rim:linear-gradient(120deg,#00f0ff 0%,#0060f0 25%,#8406fc 52%,#ff10ff 78%,#ff9cfc 100%);
+  --n-glass:linear-gradient(155deg,rgba(22,37,73,.88),rgba(13,25,49,.92) 55%,rgba(40,12,84,.82));
+  --bg:#01020e;--bg-raised:#0d1931;--card:#0d1931;--card-hover:#162549;
+  --ink:#f2f4ff;--soft:#c9d4ff;--muted:#9fb0ee;
+  --accent:#00f0ff;--accent-soft:rgba(0,240,255,.14);--accent-line:rgba(0,240,255,.8);
+  --magenta:#ff10ff;--gold:#fce478;--gold2:#fce478;--gold-line:rgba(252,228,120,.6);--gold-glow:rgba(255,154,46,.4);
+  --cyan:#00f0ff;--cyan-line:rgba(0,240,255,.8);--green:#3de0a0;
+  --line:rgba(0,240,255,.45);--line-soft:rgba(132,6,252,.4);
+}
+html{background:var(--n-void)}
+body{
+  background-color:var(--n-void);
+  background-image:
+    radial-gradient(1100px 620px at 4% -4%,rgba(132,6,252,.72),transparent 62%),
+    radial-gradient(1000px 620px at 100% 2%,rgba(0,96,240,.68),transparent 62%),
+    radial-gradient(760px 520px at 50% 38%,rgba(255,16,255,.20),transparent 66%),
+    radial-gradient(1000px 640px at 96% 104%,rgba(255,16,255,.46),transparent 62%),
+    radial-gradient(900px 560px at 0% 100%,rgba(0,240,255,.30),transparent 62%);
+  background-attachment:fixed;
+}
+body::before{opacity:.9!important;background:
+  radial-gradient(2px 2px at 11% 16%,#fff,transparent),radial-gradient(1.6px 1.6px at 79% 11%,#9cf6fc,transparent),
+  radial-gradient(2px 2px at 41% 63%,#ff9cfc,transparent),radial-gradient(1.6px 1.6px at 91% 71%,#fff,transparent),
+  radial-gradient(1.6px 1.6px at 23% 87%,#9cf6fc,transparent),radial-gradient(1.4px 1.4px at 63% 33%,#fce478,transparent)!important;
+  background-size:210px 230px,260px 250px,310px 290px,350px 330px,400px 370px,450px 410px!important}
+
+/* ---- header ---- */
+.corpus-bar{background:rgba(1,2,20,.78);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);border-bottom:0;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.corpus-bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--n-rim);box-shadow:0 0 12px #ff10ff,0 0 30px #8406fc,0 0 50px rgba(0,240,255,.5)}
+.corpus-bar .brand-row{border-bottom-color:rgba(255,16,255,.28)}
+.corpus-bar .pin{border:2px solid #00f0ff;box-shadow:0 0 12px #00f0ff,0 0 30px rgba(255,16,255,.55)}
+.corpus-bar .brand-text{background:linear-gradient(90deg,#9cf6fc,#00f0ff 40%,#ff9cfc 90%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 3px rgba(255,255,255,.6)) drop-shadow(0 0 10px rgba(0,240,255,.8)) drop-shadow(0 0 24px rgba(255,16,255,.5));letter-spacing:.2em}
+.corpus-bar .title-rule{background:linear-gradient(90deg,transparent,#ff10ff);box-shadow:0 0 10px #ff10ff}
+.corpus-bar nav.chapter-strip a{color:#dfe6ff;letter-spacing:.12em}
+.corpus-bar nav.chapter-strip a:hover,.corpus-bar nav.chapter-strip a.active{color:#fff;background:rgba(0,240,255,.14);
+  box-shadow:inset 0 0 0 1px #00f0ff,0 0 14px #00f0ff,inset 0 0 14px rgba(0,240,255,.35);text-shadow:0 0 8px #00f0ff}
+
+/* ---- headings: layered neon ---- */
+h1{font-size:clamp(2.4rem,9vw,4.6rem)!important;line-height:1.02;font-weight:850;letter-spacing:.02em;
+  background:linear-gradient(90deg,#c8f8ff 0%,#00f0ff 28%,#6a8cff 55%,#ff9cfc 85%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;
+  filter:drop-shadow(0 0 3px rgba(255,255,255,.75)) drop-shadow(0 0 10px rgba(0,240,255,.9)) drop-shadow(0 0 26px rgba(0,48,246,.9)) drop-shadow(0 0 56px rgba(255,16,255,.6))}
+.intro-line{font:italic 600 clamp(1.15rem,4.2vw,1.8rem)/1.35 "Brush Script MT","Segoe Script","Snell Roundhand",cursive!important;color:#ffc4fb!important;
+  text-shadow:0 0 4px #fff,0 0 12px #ff10ff,0 0 32px #ff10ff,0 0 54px #8406fc}
+h2{color:#e8fdff;text-shadow:0 0 4px #fff,0 0 12px #00f0ff,0 0 30px #0060f0}
+h3{color:#fff;text-shadow:0 0 10px rgba(0,240,255,.7),0 0 26px rgba(0,96,240,.6)}
+.mc-kicker,.featured-kicker,.eyebrow,.nc-k,.path-number,.section-kicker,.cluster-title{color:#fce478!important;
+  text-shadow:0 0 5px rgba(255,255,255,.5),0 0 14px #ff9a2e,0 0 28px rgba(255,154,46,.7)!important;letter-spacing:.2em}
+
+/* ---- glass panels with gradient rim + glow ---- */
+.media-featured,.featured-card,.media-studio-dropdown,.cluster,.path-card,.visitor-paths,.embedded-showcase,.lede,.filter,.card{
+  border:2px solid transparent!important;
+  background:var(--n-glass) padding-box,var(--n-rim) border-box!important;
+  box-shadow:0 0 18px rgba(0,96,240,.45),0 0 44px rgba(132,6,252,.32),inset 0 0 38px rgba(0,96,240,.20),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%)}
+.card{border-width:1.5px!important;box-shadow:0 0 12px rgba(0,96,240,.4),inset 0 0 24px rgba(0,96,240,.16)!important}
+.featured-card:hover,.media-studio-dropdown:hover,.path-card:hover,.path-card:focus-visible,.card:hover{transform:translateY(-3px);
+  box-shadow:0 0 22px rgba(0,240,255,.6),0 0 54px rgba(255,16,255,.45),inset 0 0 42px rgba(0,96,240,.28)!important}
+.media-studio-dropdown[open],.cluster[open]{box-shadow:0 0 26px rgba(255,16,255,.55),0 0 60px rgba(132,6,252,.45),inset 0 0 44px rgba(255,16,255,.14)!important}
+.media-studio-dropdown>summary,.cluster>summary{background:linear-gradient(100deg,rgba(0,240,255,.16),rgba(132,6,252,.12) 55%,rgba(255,16,255,.14))}
+.media-studio-dropdown .ms-k{color:#fff;text-shadow:0 0 8px #00f0ff,0 0 22px rgba(0,96,240,.8)}
+.media-studio-dropdown .ms-t,.ms-d,.featured-copy p,.paths-heading p{color:#cdd8ff}
+.media-studio-dropdown>summary:after,.cluster>summary::before{color:#fce478;text-shadow:0 0 10px #ff9a2e,0 0 22px rgba(255,154,46,.7)}
+.media-studio-dropdown .ms-video,.featured-card video,.native-carousel{border:2px solid #00f0ff;border-radius:14px;
+  box-shadow:0 0 18px rgba(0,240,255,.6),0 0 46px rgba(132,6,252,.45),inset 0 0 18px rgba(0,0,0,.6)}
+.featured-audio,.ms-audio{border:1px solid rgba(255,16,255,.55);background:linear-gradient(110deg,rgba(255,16,255,.12),rgba(0,240,255,.09));box-shadow:0 0 16px rgba(255,16,255,.28)}
+audio{accent-color:#ff10ff}
+
+/* ---- hero cinema player: spinning conic rim ---- */
+.media-cinema{border:3px solid transparent!important;background:linear-gradient(#02031a,#02031a) padding-box,conic-gradient(from var(--a),#00f0ff,#0060f0,#8406fc,#ff10ff,#fce478,#00f0ff) border-box!important;
+  animation:n-spin 7s linear infinite;box-shadow:0 0 24px rgba(0,240,255,.55),0 0 64px rgba(255,16,255,.45),0 0 110px rgba(132,6,252,.4)!important}
+.media-cinema::before{display:none!important}
+.mc-content h2{filter:drop-shadow(0 0 14px rgba(0,240,255,.5))}
+@keyframes n-spin{to{--a:360deg}}
+
+/* ---- buttons ---- */
+.media-cinema button,.mc-sound,.mc-next,.filter button,.path-cta,.visitor-tools a,.native-carousel-controls a{
+  background:linear-gradient(90deg,rgba(0,48,246,.7),rgba(132,6,252,.7),rgba(255,16,255,.6))!important;color:#fff!important;border:1.5px solid #ff9cfc!important;
+  text-shadow:0 0 4px #fff,0 0 12px rgba(255,255,255,.6);box-shadow:0 0 14px rgba(255,16,255,.6),inset 0 0 14px rgba(255,255,255,.2)!important}
+.native-carousel-controls a.primary,.buy-eros-card{border:3px solid transparent!important;
+  background:linear-gradient(#12104f,#12104f) padding-box,conic-gradient(from var(--a),#00f0ff,#0060f0,#8406fc,#ff10ff,#fce478,#00f0ff) border-box!important;animation:n-spin 6s linear infinite;
+  box-shadow:0 0 24px rgba(255,16,255,.75),0 0 60px rgba(132,6,252,.55),inset 0 0 24px rgba(255,255,255,.18)!important;font-weight:800;letter-spacing:.05em}
+.filter button:hover,.filter button.active,.mc-sound:hover,.mc-next:hover{filter:brightness(1.3);border-color:#00f0ff!important;box-shadow:0 0 20px #00f0ff,0 0 40px rgba(255,16,255,.5)!important}
+.filter .search,input,select,textarea{background:rgba(2,3,26,.9)!important;border:1.5px solid rgba(0,240,255,.6)!important;color:#fff!important;box-shadow:inset 0 0 18px rgba(0,96,240,.25),0 0 12px rgba(0,240,255,.25)}
+.filter .search:focus{border-color:#ff10ff!important;box-shadow:0 0 18px #ff10ff,inset 0 0 18px rgba(255,16,255,.2)!important}
+.badge{box-shadow:0 0 10px rgba(0,240,255,.4)}
+a{color:#00f0ff}a:hover{color:#ff9cfc;text-shadow:0 0 12px #ff10ff}
+
+/* ---- loading status recoloured ---- */
+.media-cinema .cinema-load-status{border:1.5px solid #00f0ff;background:rgba(2,3,26,.85);color:#e8fdff;box-shadow:0 0 22px rgba(0,240,255,.6),0 0 54px rgba(255,16,255,.4)}
+.media-cinema .cinema-load-status .cls-title{color:#9cf6fc;text-shadow:0 0 12px #00f0ff}
+.media-cinema .cinema-load-status .cls-detail{color:#ffc4fb}
+.media-cinema .cinema-load-status .cls-spinner{border-color:rgba(0,240,255,.2);border-top-color:#ff10ff;border-right-color:#00f0ff;box-shadow:0 0 16px #ff10ff}
+
+/* ---- footer ---- */
+footer,footer.master{position:relative;background:linear-gradient(180deg,rgba(13,25,49,.9),rgba(1,2,14,.98))!important;border-top:0!important;box-shadow:none!important}
+footer::before,footer.master::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--n-rim);box-shadow:0 0 14px #ff10ff,0 0 40px #8406fc}
+footer.master .lib-links a{border:1px solid rgba(0,240,255,.55);box-shadow:0 0 10px rgba(0,240,255,.3)}
+footer.master .lib-links a:hover,footer.master .lib-links a.here{color:#fff;border-color:#ff10ff;box-shadow:0 0 16px #ff10ff;text-shadow:0 0 8px #ff10ff}
+
+::selection{background:#00f0ff;color:#01020e}
+:focus-visible{outline:2px solid #fce478!important}
+*{scrollbar-color:#8406fc #01020e}
+@media(max-width:720px){
+  .media-featured,.featured-card,.media-studio-dropdown,.cluster,.path-card,.visitor-paths,.card,.filter{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .featured-card:hover,.path-card:hover,.card:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){.media-cinema,.native-carousel-controls a.primary,.buy-eros-card{animation:none!important}}
+</style>
 
 </body>
 </html>
