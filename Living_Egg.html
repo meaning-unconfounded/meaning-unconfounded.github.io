@@ -910,6 +910,81 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   }
 }
 
+/* === UX refinements 2026-10 === */
+.cinema-band {
+  min-height: min(420px, 52vh) !important;
+  min-height: min(420px, 52svh) !important;
+  margin: 1.8rem calc(50% - 50vw) !important;
+}
+.cinema-band .cinema-title {
+  font-size: clamp(28px, 5vw, 52px) !important;
+  letter-spacing: .01em !important;
+  filter: none !important;
+  opacity: .96;
+}
+.cinema-band .cinema-copy {
+  padding-bottom: clamp(48px, 6vw, 72px) !important;
+}
+.cinema-band .cinema-kicker {
+  font-size: 9px !important;
+  margin-bottom: 12px !important;
+}
+.cinema-band .cinema-sub {
+  -webkit-line-clamp: 2;
+  font-size: clamp(.85rem, 2.1vw, .98rem) !important;
+}
+.cinema-band .cinema-grain {
+  opacity: .35 !important;
+}
+.cinema-hero {
+  min-height: min(680px, 76vh);
+  min-height: min(680px, 76svh);
+}
+@media (max-width: 700px) {
+  .cinema-hero { min-height: min(520px, 68svh) !important; }
+  .cinema-band { min-height: min(340px, 46svh) !important; }
+  .cinema-hero .cinema-title { font-size: clamp(40px, 11vw, 68px) !important; }
+  .cinema-band .cinema-title { font-size: clamp(24px, 8vw, 40px) !important; }
+  .cinema-copy, .cinema-band .cinema-copy { padding-left: 1.1rem !important; padding-right: 1.1rem !important; }
+}
+.cinema-vol.is-cue {
+  animation: cinema-vol-cue 1.4s ease-out 1;
+}
+@keyframes cinema-vol-cue {
+  0% { box-shadow: 0 0 0 0 var(--accent-glow); border-color: var(--accent-color); }
+  40% { box-shadow: 0 0 0 10px transparent; border-color: var(--accent-color); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.cinema-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 28%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font: 500 11px/1.4 var(--sans);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(234,234,242,.55);
+  pointer-events: none;
+  transition: opacity .6s ease, transform .6s ease;
+  white-space: nowrap;
+}
+.cinema-hero.is-open .cinema-hint,
+.cinema-hero.is-peeking .cinema-hint {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+}
+figure.video-frame video,
+figure.media video {
+  border-radius: 12px;
+  border: 1px solid var(--hair);
+  box-shadow: 0 12px 36px rgba(0,0,0,.45);
+}
+@media (max-width: 720px) {
+  .corpus-bar { padding-top: .45rem; }
+  .corpus-bar .brand-row { min-height: 42px; padding-bottom: .4rem; }
+}
+/* end UX refinements */
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Book","name":"The Living Egg","subtitle":"Cosmogony of EROS · Manual of Law · Full Reference Edition","author":{"@type":"Organization","name":"EROS · Tenacity & Integrity"},"datePublished":"2026","inLanguage":"en","url":"https://meaning-unconfounded.github.io/Living_Egg.html","image":"https://meaning-unconfounded.github.io/images/Living_Egg_banner.jpg","description":"The full manual: cosmogony, axioms, physics, and manual of law for the EROS Universe. Inward is forwards."}
@@ -965,12 +1040,13 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
          aria-expanded="false"
          aria-label="The Living Egg — cinematic threshold"
          data-cinema="hero"
-         data-queue="cell_facts.mp4">
+         data-queue="cell_facts.mp4|cell_historic.mp4|cell_cosmic.mp4|cell_water.mp4|cell_atlas.mp4|cell_similar.mp4">
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
   <div class="cinema-grain" aria-hidden="true"></div>
   <div class="cinema-ring" aria-hidden="true">
+  <div class="cinema-hint" aria-hidden="true">Move across the frame</div>
     <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     <span>Enter</span>
   </div>
@@ -992,7 +1068,7 @@ footer.master .pulse-row{display:flex;align-items:center;justify-content:center;
   </button>
   <div class="cinema-footer">
     <span>The Living Egg · cosmogony of EROS</span>
-    <span class="cinema-status" aria-live="polite">Move to reveal · Tap to enter</span>
+    <span class="cinema-status" aria-live="polite">Move across · Tap to enter</span>
   </div>
   <div class="cinema-print">
     <b>THE LIVING EGG · ENTRY</b>
@@ -1601,7 +1677,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
          id="cinemaMiddle"
          aria-label="The Living Egg — the turn inward"
          data-cinema="middle"
-         data-queue="shorts_egg_01.mp4">
+         data-queue="Eros_LivingEgg.mp4|Eros_Conscious.mp4|Eros_Operators.mp4|Eros_Immune.mp4">
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
@@ -1624,7 +1700,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   </button>
   <div class="cinema-footer">
     <span>THE LIVING EGG · ACT BREAK</span>
-    <span class="cinema-status" aria-live="polite">Scroll into view</span>
+    <span class="cinema-status" aria-live="polite">Scroll to play</span>
   </div>
   <div class="cinema-print">
     <b>ACT BREAK · THE TURN INWARD</b>
@@ -2660,7 +2736,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
          id="cinemaBookEnd"
          aria-label="The Living Egg — the living law · the invitation"
          data-cinema="book-end"
-         data-queue="shorts_egg_02.mp4">
+         data-queue="cell_atlas.mp4|cell_similar.mp4|cell_facts.mp4|cell_historic.mp4|cell_cosmic.mp4|cell_water.mp4">
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
@@ -2683,7 +2759,7 @@ Affinity / cohesion / bond = EROS at cultural scale</div>
   </button>
   <div class="cinema-footer">
     <span>THE LIVING EGG · THE INVITATION</span>
-    <span class="cinema-status" aria-live="polite">Scroll into view</span>
+    <span class="cinema-status" aria-live="polite">Scroll to play</span>
   </div>
   <div class="cinema-print">
     <b>THE LIVING LAW · THE INVITATION</b>
@@ -3352,7 +3428,7 @@ window.addEventListener('hashchange', openFromHash);
     if (!st) return;
     if (owner && owner !== st) deactivate(owner);
     owner = st; st.active = true;
-    try { st.root && st.root.classList.add("is-playing"); } catch (e) {}
+    try { st.root && st.root.classList.add("is-playing"); if(st.sound){ st.sound.classList.remove("is-cue"); void st.sound.offsetWidth; st.sound.classList.add("is-cue"); } } catch (e) {}
     st.layers.forEach(function (v, i) {
       v.volume = VOL;
       if (i !== st.current) { v.muted = true; if (!st.switching) v.pause(); }
