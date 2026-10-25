@@ -769,6 +769,16 @@ footer.master .pulse-row svg{flex-shrink:0}
   }
 }
 </style>
+<style id="eros-polish">
+/* images that now carry intrinsic width/height keep their natural proportions */
+:where(img[data-sized]){height:auto}
+/* comfortable touch target for the sound control on touch screens */
+@media (pointer:coarse){.cinema-vol{width:44px;height:44px}}
+@media print{.skip-link{display:none!important}}
+.cinema-vol.is-cue{animation:cinema-vol-cue 1.4s ease-out 1}
+@keyframes cinema-vol-cue{0%{box-shadow:0 0 0 0 var(--accent-glow);border-color:var(--accent-color)}40%{box-shadow:0 0 0 10px transparent;border-color:var(--accent-color)}100%{box-shadow:0 0 0 0 transparent}}
+@media (prefers-reduced-motion:reduce){.cinema-vol.is-cue{animation:none}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#cinemaHero">Skip to content</a>
@@ -889,7 +899,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <div class="media-embed reveal">
   <span class="media-label">Listen to the call</span>
-  <audio controls preload="metadata" aria-label="An Open Call — audio version">
+  <audio controls preload="none" data-meta-lazy aria-label="An Open Call — audio version">
     <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
@@ -922,12 +932,12 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p class="ms-t">The 90-Day Creation Engine</p>
   <p class="ms-d">Examines the decentralized creative guild model utilizing AI consistency checkers to enable global writers, coders, and artists to co-create canon media without centralized gatekeepers.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" aria-label="Production Guild — the 90-day creation engine">
+    <video controls playsinline preload="none" data-meta-lazy aria-label="Production Guild — the 90-day creation engine">
       <source src="https://meaning-unconfounded.github.io/images/Eros_OpenGuild.mp4" type="video/mp4"/>
     </video>
   </div>
   <div class="ms-audio">
-    <audio controls preload="metadata" aria-label="Production Guild — audio overview">
+    <audio controls preload="none" data-meta-lazy aria-label="Production Guild — audio overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_OpenGuild.m4a" type="audio/mp4"/>
     </audio>
   </div>
@@ -1062,7 +1072,7 @@ footer.master .pulse-row svg{flex-shrink:0}
          aria-label="An Open Call — the guild answer"
          data-cinema="middle"
          data-queue="EROS_burn_baby_burn.mp4|Eros_OpenGuild.mp4">
-  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
   <div class="cinema-grain" aria-hidden="true"></div>
@@ -1095,7 +1105,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 </section>
 
 <figure class="brand-seal silver">
-  <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+  <img width="1254" height="1254" data-sized src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
   <figcaption>Tenacity Through Integrity</figcaption>
 </figure>
 
@@ -1153,7 +1163,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <div class="media-embed reveal" id="watch">
   <span class="media-label">Watch the call</span>
-  <video controls preload="metadata" playsinline aria-label="An Open Call — video version">
+  <video controls preload="none" data-meta-lazy playsinline aria-label="An Open Call — video version">
     <source src="https://meaning-unconfounded.github.io/images/The_open_call.mp4" type="video/mp4">
     Your browser does not support the video element.
   </video>
@@ -1184,7 +1194,7 @@ footer.master .pulse-row svg{flex-shrink:0}
          aria-label="An Open Call — the close · the call repeated"
          data-cinema="book-end"
          data-queue="jakeTinc.mp4|eros_cant_exploit.mp4|Eros_Trillion.mp4|Chiz1.mp4|The_open_call.mp4">
-  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
   <div class="cinema-grain" aria-hidden="true"></div>
@@ -1220,7 +1230,7 @@ footer.master .pulse-row svg{flex-shrink:0}
   <p>The builders have done their part. Now it is time for the communicators to do theirs.</p>
 
   <figure class="brand-seal">
-    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
+    <img width="1024" height="1024" data-sized src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy"/>
     <figcaption>Tenacity Through Integrity</figcaption>
   </figure>
   <p class="creedline">Get loud at the bottom · Build bridges, not billboards</p>
@@ -1228,9 +1238,9 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 <footer class="master">
   <div class="title-row">
-    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
+    <img width="1024" height="1024" data-sized class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy"/>
     <span class="title">AN OPEN CALL</span>
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
+    <img width="705" height="435" data-sized class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy"/>
   </div>
   <p class="count">Entry · The Call · EROS Library</p>
 
@@ -1631,7 +1641,6 @@ each(document.querySelectorAll('a[href^="#"]'), function(a){
     video.src = src;
     video.dataset.erosSource = src;
     video.dataset.erosClipIndex = String(idx);
-    video.preload = "auto";
     video.loop = false;
     video.removeAttribute("loop");
     video.playsInline = true;
@@ -1656,7 +1665,7 @@ each(document.querySelectorAll('a[href^="#"]'), function(a){
       st.preparedIndex = ni;
       return;
     }
-    setSourceOnce(st, ni, inc);
+    inc.preload = "auto"; setSourceOnce(st, ni, inc);
     st.preparedIndex = ni;
   }
 
@@ -1752,7 +1761,7 @@ each(document.querySelectorAll('a[href^="#"]'), function(a){
     st.switching = true; st.incoming = inc;
     setStatus(st, "Preparing next film");
     if (inc.dataset.erosClipIndex !== String(ni) || !inc.getAttribute("src")) {
-      setSourceOnce(st, ni, inc);
+      inc.preload = "auto"; setSourceOnce(st, ni, inc);
     }
     inc.muted = true; inc.volume = 0; inc.loop = false;
     var settled = false;
@@ -1834,7 +1843,7 @@ each(document.querySelectorAll('a[href^="#"]'), function(a){
     if (!st) return;
     if (owner && owner !== st) deactivate(owner);
     owner = st; st.active = true;
-    try { st.root && st.root.classList.add("is-playing"); } catch (e) {}
+    try { st.root && st.root.classList.add("is-playing"); if(st.sound){ st.sound.classList.remove("is-cue"); void st.sound.offsetWidth; st.sound.classList.add("is-cue"); } } catch (e) {}
     st.layers.forEach(function (v, i) {
       v.volume = VOL;
       if (i !== st.current) { v.muted = true; if (!st.switching) v.pause(); }
@@ -2000,7 +2009,7 @@ each(document.querySelectorAll('a[href^="#"]'), function(a){
     layers.forEach(function (v, i) {
       v.muted = true; v.volume = VOL;
       v.loop = false; v.removeAttribute("loop");
-      v.playsInline = true; v.preload = "auto";
+      v.playsInline = true;
       setLayerOpacity(v, i === 0 ? 1 : 0);
       v.addEventListener("timeupdate", function () {
         if (!st.active || owner !== st || st.switching || st.layers[st.current] !== v) return;
@@ -2102,5 +2111,23 @@ each(document.querySelectorAll('a[href^="#"]'), function(a){
 })();
 </script>
 
+<script id="eros-meta-lazy">
+(function(){
+  'use strict';
+  var els=[].slice.call(document.querySelectorAll('video[data-meta-lazy],audio[data-meta-lazy]'));
+  if(!els.length) return;
+  function arm(m){
+    if(m.dataset.metaArmed) return; m.dataset.metaArmed='1';
+    if(m.readyState===0 && m.paused){ m.preload='metadata'; try{ m.load(); }catch(e){} }
+  }
+  if(!('IntersectionObserver' in window)){ els.forEach(arm); return; }
+  var sd=navigator.connection && navigator.connection.saveData;
+  if(sd) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ io.unobserve(e.target); arm(e.target); } });
+  },{rootMargin:'700px 0px'});
+  els.forEach(function(m){ io.observe(m); });
+})();
+</script>
 </body>
 </html>

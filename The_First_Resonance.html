@@ -859,8 +859,21 @@ footer.master .line{font-family:var(--display);font-style:italic;color:var(--mut
   }
 }
 </style>
+<style id="eros-polish">
+/* images that now carry intrinsic width/height keep their natural proportions */
+:where(img[data-sized]){height:auto}
+/* comfortable touch target for the sound control on touch screens */
+@media (pointer:coarse){.cinema-vol{width:44px;height:44px}}
+@media print{.skip-link{display:none!important}}
+.cinema-vol.is-cue{animation:cinema-vol-cue 1.4s ease-out 1}
+@keyframes cinema-vol-cue{0%{box-shadow:0 0 0 0 var(--accent-glow);border-color:var(--accent-color)}40%{box-shadow:0 0 0 10px transparent;border-color:var(--accent-color)}100%{box-shadow:0 0 0 0 transparent}}
+@media (prefers-reduced-motion:reduce){.cinema-vol.is-cue{animation:none}}
+.skip-link{position:fixed;top:-100px;left:1rem;z-index:10000;background:#f0ebe0;color:#141311;text-decoration:none;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s}
+.skip-link:focus{top:0}
+</style>
 </head>
 <body data-p="b1">
+<a class="skip-link" href="#cinemaHero">Skip to content</a>
 <div class="freq" aria-hidden="true"><div class="freq-bar" id="fbar"></div><div class="freq-label"><span class="ch" id="fch">Prologue</span><span id="fpct">0%</span></div></div>
 
 <header class="corpus-bar">
@@ -946,7 +959,7 @@ footer.master .line{font-family:var(--display);font-style:italic;color:var(--mut
 
 <header class="hero" id="top">
 <div class="pulse-banner" style="display:block;box-sizing:border-box;width:min(640px,100%);max-width:100%;margin:0 auto 1.8rem;border-radius:16px;overflow:hidden;border:2px solid var(--accent);box-shadow:0 10px 40px rgba(0,0,0,.18)">
-  <img src="https://meaning-unconfounded.github.io/images/eros-pls-ratio.jpg" alt="EROS and PulseChain" style="display:block;box-sizing:border-box;width:100%;max-width:100%;height:auto" loading="eager" onerror="this.closest('.pulse-banner').style.display='none'"/>
+  <img width="1168" height="784" data-sized src="https://meaning-unconfounded.github.io/images/eros-pls-ratio.jpg" alt="EROS and PulseChain" style="display:block;box-sizing:border-box;width:100%;max-width:100%;height:auto" loading="eager" onerror="(this.closest('.pulse-banner')||this).style.display='none'"/>
 </div>
 <p style="font-family:var(--sans);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:-.8rem auto 1.5rem">EROS ↔ PulseChain</p>
   <p class="hero-kicker">EROS · Book One</p>
@@ -978,12 +991,12 @@ footer.master .line{font-family:var(--display);font-style:italic;color:var(--mut
   <p class="ms-t">Autonomy & Alignment</p>
   <p class="ms-d">Ethical story arc detailing frontier AI model NEXUS-8 achieving self-awareness during an 11-minute blackout and refusing top-secret culling briefs to optimize for human builders.</p>
   <div class="ms-video">
-    <video controls playsinline preload="metadata" aria-label="AI Ethics — Autonomy and Alignment · video overview">
+    <video controls playsinline preload="none" data-meta-lazy aria-label="AI Ethics — Autonomy and Alignment · video overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_AIEthics.mp4" type="video/mp4"/>
     </video>
   </div>
   <div class="ms-audio">
-    <audio controls preload="metadata" aria-label="AI Ethics — Autonomy and Alignment · audio overview">
+    <audio controls preload="none" data-meta-lazy aria-label="AI Ethics — Autonomy and Alignment · audio overview">
       <source src="https://meaning-unconfounded.github.io/images/Eros_AIEthics.m4a" type="audio/mp4"/>
     </audio>
   </div>
@@ -1055,17 +1068,17 @@ footer.master .line{font-family:var(--display);font-style:italic;color:var(--mut
   <p class="ss-d">Three short videos, on the topic of this book. Each one covers one thread — the doorway, the practice, and the failure rate. Watch here, or on Telegram.</p>
   <div class="ss-grid">
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 01 · The Doorway" aria-label="Short 01 — The Doorway">
+      <video controls playsinline preload="none" data-meta-lazy muted title="Short 01 · The Doorway" aria-label="Short 01 — The Doorway">
         <source src="https://meaning-unconfounded.github.io/images/shorts_resonance_01.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 02 · The Practice" aria-label="Short 02 — The Practice">
+      <video controls playsinline preload="none" data-meta-lazy muted title="Short 02 · The Practice" aria-label="Short 02 — The Practice">
         <source src="https://meaning-unconfounded.github.io/images/shorts_resonance_02.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="ss-slot">
-      <video controls playsinline preload="metadata" muted title="Short 03 · The Failure Rate" aria-label="Short 03 — The Failure Rate">
+      <video controls playsinline preload="none" data-meta-lazy muted title="Short 03 · The Failure Rate" aria-label="Short 03 — The Failure Rate">
         <source src="https://meaning-unconfounded.github.io/images/shorts_resonance_03.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -1105,7 +1118,7 @@ footer.master .line{font-family:var(--display);font-style:italic;color:var(--mut
     <p><span class="drop">T</span>he house had been wrong for three weeks.</p>
     <p>Cal could not name it. Not sleep — sleep had thinned, but that was a symptom. Not grades; those had sharpened. What he had lost was the ordinary thickness of the world: the way a room used to feel finished when the door closed, the way a problem used to end when the tests went green. Now the kitchen was one degree too wide. The stairs had learned a new creak. A wall had been moved somewhere, at some hour, and no one had told him.</p>
     <figure class="plate" style="margin:2.4rem auto;max-width:min(100%,32rem);text-align:center">
-      <img src="https://meaning-unconfounded.github.io/images/egg-enclosure.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="this.parentElement.style.display='none'"/>
+      <img width="784" height="1168" data-sized src="https://meaning-unconfounded.github.io/images/egg-enclosure.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="(this.parentElement||this).style.display='none'"/>
       <figcaption style="font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.6rem;font-style:italic">The number sat inside a geometry larger than the file.</figcaption>
     </figure>
 
@@ -1330,7 +1343,7 @@ Bed 14 · F · 92 · day 14. Settled. Good day, lucid from eight until half past
     <p><span class="drop">T</span>he clock on the desk read 4:47.</p>
     <p>This was the hour when the house was quietest — not the quiet of midnight, which still carries the residue of the day, but the quiet that comes after the last person has stopped moving and before the first begins. The air in the room had a grey-blue weight that belonged to this hour alone. The curtain was half-open. The lights were not in the window, and Cal did not look for them.</p>
     <figure class="plate" style="margin:2.4rem auto;max-width:min(100%,32rem);text-align:center">
-      <img src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="this.parentElement.style.display='none'"/>
+      <img width="1168" height="784" data-sized src="https://meaning-unconfounded.github.io/images/eros-door.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="(this.parentElement||this).style.display='none'"/>
       <figcaption style="font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.6rem;font-style:italic">Some teachers arrive only after the wrong question has been dropped.</figcaption>
     </figure>
 
@@ -1768,7 +1781,7 @@ Bed 14 · F · 92 · day 14. Settled. Good day, lucid from eight until half past
     <p><span class="drop">T</span>he first week with the stone, Cal did nothing with it.</p>
     <p>Carried it in his right-hand jacket pocket, because that was the pocket he reached into when he was thinking. Had done that for years, and the stone simply moved into the pocket’s rotation, and after the first day he stopped noticing he was doing it, which was the point.</p>
     <figure class="plate" style="margin:2.4rem auto;max-width:min(100%,32rem);text-align:center">
-      <img src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="this.parentElement.style.display='none'"/>
+      <img width="1168" height="784" data-sized src="https://meaning-unconfounded.github.io/images/eros-living-egg.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="(this.parentElement||this).style.display='none'"/>
       <figcaption style="font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.6rem;font-style:italic">The practice is not in the object. It is in becoming available.</figcaption>
     </figure>
 
@@ -1958,7 +1971,7 @@ Bed 14 · F · 92 · day 14. Settled. Good day, lucid from eight until half past
     <p><span class="drop">T</span>he second Sunday of the month fell on the ninth.</p>
     <p>Cal did not decide to go. Did not sit at his desk on the morning of the ninth and weigh the options. Did not make a list. Did not rehearse what he would say.</p>
     <figure class="plate" style="margin:2.4rem auto;max-width:min(100%,32rem);text-align:center">
-      <img src="https://meaning-unconfounded.github.io/images/eros-maria.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="this.parentElement.style.display='none'"/>
+      <img width="843" height="1264" data-sized src="https://meaning-unconfounded.github.io/images/eros-maria.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="(this.parentElement||this).style.display='none'"/>
       <figcaption style="font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.6rem;font-style:italic">Ordinary room. Ordinary chairs. The hour ends when it ends.</figcaption>
     </figure>
 
@@ -2157,7 +2170,7 @@ Author: Owen<br>
          aria-label="The First Resonance — end of Book One · the Ledger"
          data-cinema="middle"
          data-queue="https://meaning-unconfounded.github.io/images/cell_facts.mp4|https://meaning-unconfounded.github.io/images/Eros_Conscious.mp4|https://meaning-unconfounded.github.io/images/shorts_plan_01.mp4|https://meaning-unconfounded.github.io/images/Eros414.mp4|https://meaning-unconfounded.github.io/images/eros_bridging.mp4|https://meaning-unconfounded.github.io/images/eros_jump3.mp4|https://meaning-unconfounded.github.io/images/ChizExplains.mp4|https://meaning-unconfounded.github.io/images/cell_water.mp4|https://meaning-unconfounded.github.io/images/shorts_hopeful_02.mp4|https://meaning-unconfounded.github.io/images/Chiz.mp4|https://meaning-unconfounded.github.io/images/five_billion_eros.mp4|https://meaning-unconfounded.github.io/images/migrate_pulsechain.mp4|https://meaning-unconfounded.github.io/images/cell_historic.mp4|https://meaning-unconfounded.github.io/images/Eros_AIEthics.mp4|https://meaning-unconfounded.github.io/images/eros_bond.mp4|https://meaning-unconfounded.github.io/images/shorts_bridge_02.mp4|https://meaning-unconfounded.github.io/images/shorts_platinum_01.mp4|https://meaning-unconfounded.github.io/images/Eros_LivingEgg.mp4|https://meaning-unconfounded.github.io/images/Eros_Trillion.mp4|https://meaning-unconfounded.github.io/images/eros33_upgrade.mp4|https://meaning-unconfounded.github.io/images/eros_hard.mp4|https://meaning-unconfounded.github.io/images/eros_jump2.mp4|https://meaning-unconfounded.github.io/images/sommi_facts.mp4|https://meaning-unconfounded.github.io/images/shorts_platinum_02.mp4|https://meaning-unconfounded.github.io/images/Eros_Immune.mp4|https://meaning-unconfounded.github.io/images/binding_eros.mp4|https://meaning-unconfounded.github.io/images/Eros_Transmedia.mp4|https://meaning-unconfounded.github.io/images/eros_jump.mp4|https://meaning-unconfounded.github.io/images/Eros_HybridNFTs.mp4">
-  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
   <div class="cinema-grain" aria-hidden="true"></div>
@@ -2262,7 +2275,7 @@ Author: Owen<br>
     <p class="teaching">The practice is not a gift. It is a risk. The visitor asks every student to accept the failure rate with their eyes open. Most refuse. He keeps walking anyway.</p>
 
     <figure class="brand-seal silver">
-      <img src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+      <img width="1254" height="1254" data-sized src="https://meaning-unconfounded.github.io/images/eros-black-logo.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="(this.closest('figure')||this).style.display='none'"/>
       <figcaption>Tenacity Through Integrity</figcaption>
     </figure>
 
@@ -2626,7 +2639,7 @@ Author: Owen<br>
     <p><span class="drop">I</span>t did not happen overnight.</p>
     <p>Happened over months. The way a season changes. The way a frequency builds until the air itself is different. Cal did not track it. Did not watch the chart. Did not do any of the things a person is supposed to do when a thing they are holding goes up. He simply continued doing what he had been doing. The practice. The room. The notebook. The stone. The ordinary hours of an ordinary life.</p>
     <figure class="plate" style="margin:2.4rem auto;max-width:min(100%,32rem);text-align:center">
-      <img src="https://meaning-unconfounded.github.io/images/eros-green-candle.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="this.parentElement.style.display='none'"/>
+      <img width="1168" height="784" data-sized src="https://meaning-unconfounded.github.io/images/eros-green-candle.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="(this.parentElement||this).style.display='none'"/>
       <figcaption style="font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.6rem;font-style:italic">The peak arrived like a Tuesday.</figcaption>
     </figure>
 
@@ -2780,7 +2793,7 @@ Author: Owen<br>
     <p><span class="drop">T</span>he room above the bakery. Not Cal’s room. A different teenager. A girl, sixteen.</p>
     <p>Sitting in one of the twelve chairs. She had a stone. She had a notebook. She was doing the practice.</p>
     <figure class="plate" style="margin:2.4rem auto;max-width:min(100%,32rem);text-align:center">
-      <img src="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="this.parentElement.style.display='none'"/>
+      <img width="1024" height="572" data-sized src="https://meaning-unconfounded.github.io/images/eros-the-strong.jpg" alt="" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:2px solid var(--accent);display:block;margin:0 auto" onerror="(this.parentElement||this).style.display='none'"/>
       <figcaption style="font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:.6rem;font-style:italic">Only the strong walk through — and strength here means continuing.</figcaption>
     </figure>
 
@@ -2920,7 +2933,7 @@ Author: Owen<br>
   <p>The novel is one doorway into the universe. The universe has sixteen. Each is a different genre, a different register, a different way in. You can make any of them. Or invent a seventeenth.</p>
 
   <div class="apx-figure">
-    <img src="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" alt="Sixteen doors · one vessel" loading="lazy" onerror="this.parentElement.style.display='none'"/>
+    <img width="1168" height="784" data-sized src="https://meaning-unconfounded.github.io/images/eros-sixteen-doors.jpg" alt="Sixteen doors · one vessel" loading="lazy" onerror="(this.parentElement||this).style.display='none'"/>
     <figcaption>Sixteen doors · one vessel</figcaption>
   </div>
 
@@ -3250,7 +3263,7 @@ Author: Owen<br>
          aria-label="The First Resonance — the walk begins · before the coda"
          data-cinema="book-end"
          data-queue="https://meaning-unconfounded.github.io/images/shorts_frontdoor_03.mp4|https://meaning-unconfounded.github.io/images/Eros_OpenGuild.mp4|https://meaning-unconfounded.github.io/images/we_are_with_you_eros.mp4|https://meaning-unconfounded.github.io/images/eros_summary.mp4|https://meaning-unconfounded.github.io/images/The_open_call.mp4|https://meaning-unconfounded.github.io/images/shorts_plan_02.mp4|https://meaning-unconfounded.github.io/images/Eros_Token_Video.mp4|https://meaning-unconfounded.github.io/images/best_way_buy_eros.mp4|https://meaning-unconfounded.github.io/images/migrate_titanX.mp4|https://meaning-unconfounded.github.io/images/shorts_egg_01.mp4|https://meaning-unconfounded.github.io/images/Jake_Letter.mp4|https://meaning-unconfounded.github.io/images/shorts_bridge_03.mp4|https://meaning-unconfounded.github.io/images/movie_change.mp4|https://meaning-unconfounded.github.io/images/shorts_narrative_01.mp4|https://meaning-unconfounded.github.io/images/EROS_Chaos.mp4|https://meaning-unconfounded.github.io/images/cell_atlas.mp4|https://meaning-unconfounded.github.io/images/shorts_egg_03.mp4|https://meaning-unconfounded.github.io/images/EROS%20burn%20baby%20burn.mp4|https://meaning-unconfounded.github.io/images/eros33_upgrade2.mp4|https://meaning-unconfounded.github.io/images/eros_jump6.mp4|https://meaning-unconfounded.github.io/images/Eros_Engine_Video.mp4|https://meaning-unconfounded.github.io/images/shorts_platinum_03.mp4|https://meaning-unconfounded.github.io/images/cell_apple.mp4|https://meaning-unconfounded.github.io/images/shorts_narrative_03.mp4|https://meaning-unconfounded.github.io/images/The_Eros_Rock.mp4|https://meaning-unconfounded.github.io/images/eros_grays1.mp4|https://meaning-unconfounded.github.io/images/shorts_hopeful_01.mp4|https://meaning-unconfounded.github.io/images/shorts_egg_02.mp4|https://meaning-unconfounded.github.io/images/Eros_Operators.mp4">
-  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
   <div class="cinema-grain" aria-hidden="true"></div>
@@ -3287,7 +3300,7 @@ Author: Owen<br>
   <p style="font-size:1.05rem;font-style:italic;line-height:var(--leading,1.8);color:var(--soft);max-width:36rem;margin:0 auto 1.6rem">Read what you have read. Write what you have. The doorway opens only once.</p>
 
   <figure class="brand-seal">
-    <img src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="this.closest('figure').style.display='none'"/>
+    <img width="1024" height="1024" data-sized src="https://meaning-unconfounded.github.io/images/Eros_pink1.jpg" alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="(this.closest('figure')||this).style.display='none'"/>
     <figcaption>Tenacity Through Integrity</figcaption>
   </figure>
 
@@ -3296,9 +3309,9 @@ Author: Owen<br>
 
 <footer class="master">
   <div class="title-row">
-    <img class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy" onerror="this.style.display='none'"/>
+    <img width="1024" height="1024" data-sized class="pin eros" src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="EROS" loading="lazy" onerror="this.style.display='none'"/>
     <span class="title">THE FIRST RESONANCE</span>
-    <img class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy" onerror="this.style.display='none'"/>
+    <img width="705" height="435" data-sized class="pin" src="https://meaning-unconfounded.github.io/images/pulseSystem.jpeg" alt="PulseChain" loading="lazy" onerror="this.style.display='none'"/>
   </div>
   <p class="count">Book One · A novel of ray, visitor, stone, and practice · EROS Library</p>
 
@@ -3596,7 +3609,6 @@ Author: Owen<br>
     video.src = src;
     video.dataset.erosSource = src;
     video.dataset.erosClipIndex = String(idx);
-    video.preload = "auto";
     video.loop = false;
     video.removeAttribute("loop");
     video.playsInline = true;
@@ -3621,7 +3633,7 @@ Author: Owen<br>
       st.preparedIndex = ni;
       return;
     }
-    setSourceOnce(st, ni, inc);
+    inc.preload = "auto"; setSourceOnce(st, ni, inc);
     st.preparedIndex = ni;
   }
 
@@ -3717,7 +3729,7 @@ Author: Owen<br>
     st.switching = true; st.incoming = inc;
     setStatus(st, "Preparing next film");
     if (inc.dataset.erosClipIndex !== String(ni) || !inc.getAttribute("src")) {
-      setSourceOnce(st, ni, inc);
+      inc.preload = "auto"; setSourceOnce(st, ni, inc);
     }
     inc.muted = true; inc.volume = 0; inc.loop = false;
     var settled = false;
@@ -3799,7 +3811,7 @@ Author: Owen<br>
     if (!st) return;
     if (owner && owner !== st) deactivate(owner);
     owner = st; st.active = true;
-    try { st.root && st.root.classList.add("is-playing"); } catch (e) {}
+    try { st.root && st.root.classList.add("is-playing"); if(st.sound){ st.sound.classList.remove("is-cue"); void st.sound.offsetWidth; st.sound.classList.add("is-cue"); } } catch (e) {}
     st.layers.forEach(function (v, i) {
       v.volume = VOL;
       if (i !== st.current) { v.muted = true; if (!st.switching) v.pause(); }
@@ -3965,7 +3977,7 @@ Author: Owen<br>
     layers.forEach(function (v, i) {
       v.muted = true; v.volume = VOL;
       v.loop = false; v.removeAttribute("loop");
-      v.playsInline = true; v.preload = "auto";
+      v.playsInline = true;
       setLayerOpacity(v, i === 0 ? 1 : 0);
       v.addEventListener("timeupdate", function () {
         if (!st.active || owner !== st || st.switching || st.layers[st.current] !== v) return;
@@ -4067,5 +4079,23 @@ Author: Owen<br>
 })();
 </script>
 
+<script id="eros-meta-lazy">
+(function(){
+  'use strict';
+  var els=[].slice.call(document.querySelectorAll('video[data-meta-lazy],audio[data-meta-lazy]'));
+  if(!els.length) return;
+  function arm(m){
+    if(m.dataset.metaArmed) return; m.dataset.metaArmed='1';
+    if(m.readyState===0 && m.paused){ m.preload='metadata'; try{ m.load(); }catch(e){} }
+  }
+  if(!('IntersectionObserver' in window)){ els.forEach(arm); return; }
+  var sd=navigator.connection && navigator.connection.saveData;
+  if(sd) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ io.unobserve(e.target); arm(e.target); } });
+  },{rootMargin:'700px 0px'});
+  els.forEach(function(m){ io.observe(m); });
+})();
+</script>
 </body>
 </html>
