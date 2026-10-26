@@ -1442,7 +1442,7 @@ figure.media video {
          aria-expanded="false"
          aria-label="The Hopeful Future — cinematic introduction"
          data-cinema="hero"
-         data-queue="eros_cant_exploit.mp4|maria_richard.mp4|migrate_titanX.mp4|we_are_with_you_eros.mp4">
+         data-queue="eros_cant_exploit.mp4|maria_richard.mp4|migrate_titanX.mp4|we_are_with_you_eros.mp4|titanxbridge1.mp4|betterGreys2.mp4|donot_promote.mp4|bondedEros1.mp4|withYouEros7.mp4|fiveBillion2.mp4|betterGreys6.mp4|titanxbridge3.mp4|migrate1.mp4|fiveBillion1.mp4|withYouEros2.mp4|fiveBillion4.mp4|bondedEros2.mp4|betterGreys5.mp4|withYouEros4.mp4|migrate2.mp4|fiveBillion5.mp4|best_way.mp4|greys1.mp4|withYouEros3.mp4|betterGreys3.mp4|titanxbridge2.mp4|betterGreys1.mp4|withYouEros6.mp4|fiveBillion3.mp4|withYouEros1.mp4|fiveBillion6.mp4|eros_chart2.mp4|withYouEros8.mp4|betterGreys4.mp4|withYouEros5.mp4|greys2.mp4">
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
@@ -2242,7 +2242,7 @@ figure.media video {
          id="cinemaMidpoint"
          aria-label="The work — burn, pride, transform"
          data-cinema="middle"
-         data-queue="EROS_burn_baby_burn.mp4|proud_eros.mp4|transform_eros.mp4">
+         data-queue="EROS_burn_baby_burn.mp4|proud_eros.mp4|transform_eros.mp4|withYouEros8.mp4|bondedEros1.mp4|withYouEros3.mp4|eros_chart2.mp4|migrate2.mp4|fiveBillion1.mp4|migrate1.mp4|withYouEros2.mp4|fiveBillion2.mp4|titanxbridge1.mp4|withYouEros1.mp4|betterGreys2.mp4|withYouEros7.mp4|best_way.mp4|withYouEros4.mp4|fiveBillion6.mp4|bondedEros2.mp4|betterGreys4.mp4|donot_promote.mp4|greys1.mp4|titanxbridge3.mp4|greys2.mp4|withYouEros6.mp4|betterGreys5.mp4|titanxbridge2.mp4|betterGreys1.mp4|fiveBillion5.mp4|betterGreys6.mp4|fiveBillion4.mp4|betterGreys3.mp4|fiveBillion3.mp4|withYouEros5.mp4">
   <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
@@ -2733,7 +2733,7 @@ figure.media video {
          id="cinemaBookEnd"
          aria-label="The close — five billion, entry, trillion"
          data-cinema="book-end"
-         data-queue="five_billion_eros.mp4|best_way_buy_eros.mp4|Eros_Trillion.mp4">
+         data-queue="five_billion_eros.mp4|best_way_buy_eros.mp4|Eros_Trillion.mp4|withYouEros5.mp4|donot_promote.mp4|fiveBillion2.mp4|withYouEros7.mp4|greys1.mp4|withYouEros6.mp4|fiveBillion4.mp4|betterGreys1.mp4|bondedEros2.mp4|greys2.mp4|fiveBillion6.mp4|withYouEros1.mp4|betterGreys6.mp4|titanxbridge2.mp4|betterGreys4.mp4|migrate2.mp4|fiveBillion5.mp4|betterGreys2.mp4|withYouEros8.mp4|betterGreys3.mp4|withYouEros4.mp4|best_way.mp4|withYouEros2.mp4|fiveBillion1.mp4|titanxbridge3.mp4|betterGreys5.mp4|bondedEros1.mp4|fiveBillion3.mp4|titanxbridge1.mp4|eros_chart2.mp4|withYouEros3.mp4|migrate1.mp4">
   <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
@@ -3414,7 +3414,7 @@ window.addEventListener('hashchange', openFromHash);
         var fadeDur = st.fadeMs || AUDIO_FADE_MS;
         function audioStep(now) {
           if (!st.switching || st.incoming !== inc) return;
-          var p = Math.min(1, (now - t0) / fadeDur);
+          var p = Math.max(0, Math.min(1, (now - t0) / fadeDur));
           if (!pref.muted && owner === st) {
             out.muted = false; inc.muted = false;
             out.volume = Math.max(0, outStart * (1 - p));
