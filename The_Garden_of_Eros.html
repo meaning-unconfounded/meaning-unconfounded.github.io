@@ -372,6 +372,25 @@ table.ref td strong{color:var(--gold2)}
   h2,h3{break-after:avoid}
   figure,.svgplate svg{max-height:80mm;object-fit:contain}
 }
+
+/* Collapsible TOC */
+details.toc-fold{
+  margin:0 0 2.4rem;padding:0;border:1px solid var(--gold-line);border-radius:16px;
+  background:var(--surface);font-family:var(--sans);overflow:hidden;
+}
+details.toc-fold > summary.toc-summary{
+  cursor:pointer;list-style:none;padding:1.15rem 1.35rem;font-size:1.05rem;
+  color:var(--gold2);font-weight:700;letter-spacing:.02em;
+}
+details.toc-fold > summary.toc-summary::-webkit-details-marker{display:none}
+details.toc-fold > summary.toc-summary::before{content:"▸ ";color:var(--cyan);font-size:.9rem}
+details.toc-fold[open] > summary.toc-summary::before{content:"▾ "}
+details.toc-fold .toc-grid{padding:0 1.35rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.35rem 1rem}
+@media(max-width:580px){details.toc-fold .toc-grid{grid-template-columns:1fr}}
+details.toc-fold .toc-grid a{display:block;padding:.38rem 0;color:var(--soft);border:none;font-size:.86rem;text-decoration:none}
+details.toc-fold .toc-grid a:hover{color:var(--gold2)}
+details.toc-fold .toc-grid em{font-style:normal;color:var(--muted);font-size:.72rem;margin-right:.45rem}
+
 </style>
 </head>
 <body>
@@ -506,8 +525,8 @@ table.ref td strong{color:var(--gold2)}
   </div>
 </div>
 
-<nav class="toc" aria-label="Contents">
-  <h2>Enter the architecture</h2>
+<details class="toc toc-fold" aria-label="Contents">
+  <summary class="toc-summary">Enter the architecture · chapter map</summary>
   <div class="toc-grid">
     <a href="#invitation"><em>00</em> Invitation</a>
     <a href="#bedrock"><em>01</em> Bedrock — Life &amp; logic</a>
@@ -531,7 +550,7 @@ table.ref td strong{color:var(--gold2)}
     <a href="#lexicon"><em>19</em> Working lexicon</a>
     <a href="#open"><em>20</em> Open Garden</a>
   </div>
-</nav>
+</details>
 
 <details class="eros-menu" id="eros-library">
   <summary>EROS library · the other books</summary>
