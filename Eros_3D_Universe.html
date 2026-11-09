@@ -626,77 +626,60 @@ body.document-mode code{color:#8A6D1F;background:rgba(232,194,90,.15)}
   video{display:none}
 }
 
-/* Series image arrangement */
+
+/* Magazine plates — spaced, not a wall */
 .image-gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:1.15rem;
-  margin:1.8rem 0 2.2rem;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:1.6rem 1.4rem;
+  margin:2rem 0 2.6rem;
+  max-width:100%;
 }
 .image-gallery figure,
 figure.plate-card{
   margin:0;
-  display:flex;
-  flex-direction:column;
-  background:var(--surface2, #1A1230);
+  background:transparent;
   border:1px solid var(--violet-line);
   border-radius:12px;
   overflow:hidden;
-  box-shadow:0 8px 24px rgba(0,0,0,.35);
-  transition:border-color .2s, transform .2s;
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
 }
-.image-gallery figure:hover,
-figure.plate-card:hover{border-color:var(--gold-line);transform:translateY(-2px)}
 .image-gallery figure img,
 figure.plate-card img{
   width:100%;
-  height:200px;
+  height:180px;
   object-fit:cover;
   display:block;
   cursor:pointer;
-  border:0;
-  border-radius:0;
-  box-shadow:none;
 }
 .image-gallery figcaption,
 figure.plate-card figcaption{
-  padding:.65rem .75rem .8rem;
-  font-family:var(--sans);
-  font-size:.72rem;
-  letter-spacing:.04em;
+  padding:.7rem .85rem .85rem;
+  font-size:.74rem;
   color:var(--muted);
-  line-height:1.4;
-  font-style:normal;
+  background:rgba(8,5,15,.55);
 }
 .image-gallery figcaption strong,
 figure.plate-card figcaption strong{
   display:block;
   color:var(--gold2);
-  font-size:.8rem;
-  letter-spacing:.06em;
-  margin-bottom:.15rem;
-  font-style:normal;
+  font-size:.82rem;
+  margin-bottom:.2rem;
+}
+/* Prefer 2-up magazine on wide screens for content galleries */
+@media(min-width:720px){
+  .image-gallery:not(.gallery-dense){
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:1.8rem;
+  }
+  .image-gallery:not(.gallery-dense) figure img{height:220px}
 }
 .full-width-image{
-  width:100%;
-  height:auto;
-  max-height:420px;
-  object-fit:cover;
+  max-width:100%;
+  max-height:360px;
+  margin:1.8rem auto 2.2rem;
   border-radius:12px;
-  border:1px solid var(--violet-line);
-  margin:1.6rem 0 2rem;
-  display:block;
-  cursor:pointer;
-  box-shadow:0 10px 28px rgba(0,0,0,.4);
 }
-section + .image-gallery{margin-top:1.2rem}
-.image-gallery.gallery-dense{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.85rem}
-.image-gallery.gallery-dense img{height:150px}
-@media(max-width:560px){
-  .image-gallery{grid-template-columns:1fr 1fr;gap:.75rem}
-  .image-gallery figure img{height:140px}
-}
-
 </style>
 </head>
 <body>
@@ -1381,14 +1364,10 @@ section + .image-gallery{margin-top:1.2rem}
     </div>
   </div>
 
-  <div class="image-gallery">
-    <figure class="plate-card"><img src="/holo/holo003.jpg" alt="Level 2 · VR room" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 2 · VR room</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo007.jpg" alt="Level 3 · Projection-mapped environments" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 3 · Projection-mapped environments</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo017.jpg" alt="Level 4 · Holographic presentation" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 4 · Holographic presentation</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo012.jpg" alt="Level 4 · Holographic projection" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 4 · Holographic projection</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo015.jpg" alt="Level 5 · The EROS Room" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 5 · The EROS Room</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo025.jpg" alt="Level 6 · Immersive dome" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 6 · Immersive dome</strong></figcaption></figure>
-  </div>
+  <div class="image-gallery"><figure class="plate-card"><img src="/holo/holo003.jpg" alt="Level 2 · VR room" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 2 · VR room</strong></figcaption></figure>
+<figure class="plate-card"><img src="/holo/holo007.jpg" alt="Level 3 · Projection-mapped environments" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 3 · Projection-mapped environments</strong></figcaption></figure>
+<figure class="plate-card"><img src="/holo/holo017.jpg" alt="Level 4 · Holographic presentation" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 4 · Holographic presentation</strong></figcaption></figure>
+<figure class="plate-card"><img src="/holo/holo012.jpg" alt="Level 4 · Holographic projection" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 4 · Holographic projection</strong></figcaption></figure></div>
 
   <div class="mech gold">
     <h4>Level 3 · Projection-mapped environments</h4>
@@ -1526,14 +1505,10 @@ section + .image-gallery{margin-top:1.2rem}
   <span class="section-label">Part VI · EROS destinations</span>
   <h2>Repurposing the buildings we already have</h2>
 
-  <div class="image-gallery">
-    <figure class="plate-card"><img src="/holo/holo009.jpg" alt="Immersive theatre" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Immersive theatre</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo010.jpg" alt="Repurposed building" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Repurposed building</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo008.jpg" alt="The Grand Hall" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Grand Hall</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo013.jpg" alt="Interactive art installation" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Interactive art installation</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo014.jpg" alt="Spatial architecture" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Spatial architecture</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo016.jpg" alt="Interactive floor sensors" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Interactive floor sensors</strong></figcaption></figure>
-  </div>
+  <div class="image-gallery"><figure class="plate-card"><img src="/holo/holo009.jpg" alt="Immersive theatre" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Immersive theatre</strong></figcaption></figure>
+<figure class="plate-card"><img src="/holo/holo010.jpg" alt="Repurposed building" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Repurposed building</strong></figcaption></figure>
+<figure class="plate-card"><img src="/holo/holo008.jpg" alt="The Grand Hall" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Grand Hall</strong></figcaption></figure>
+<figure class="plate-card"><img src="/holo/holo013.jpg" alt="Interactive art installation" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Interactive art installation</strong></figcaption></figure></div>
 
   <p class="lede">This idea has a commercial and urban-development dimension. Many cities have buildings that are underutilised, vacant, or no longer suitable for their original purpose. Some could be converted into immersive entertainment destinations.</p>
 
@@ -1953,51 +1928,7 @@ section + .image-gallery{margin-top:1.2rem}
   <p>All thirty-seven images. The complete visual architecture of the universe.</p>
 </div>
 
-<section id="gallery">
-  <span class="section-label">The complete visual canon</span>
-  <h2>Thirty-seven images of the living universe</h2>
-  <p>Click any image to expand.</p>
 
-  <div class="image-gallery" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:1rem;">
-    <figure class="plate-card"><img src="/holo/holo001.jpg" alt="The Cosmic Egg &amp; The Tree of Life" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Cosmic Egg &amp; The Tree of Life</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo002.jpg" alt="Cosmic Vortex · Continuity" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Cosmic Vortex · Continuity</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo003.jpg" alt="Level 2 · Virtual Reality room" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 2 · Virtual Reality room</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo004.jpg" alt="Cosmic Humanoid · Character Bible" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Cosmic Humanoid · Character Bible</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo005.jpg" alt="Storyboards · The First Resonance" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Storyboards · The First Resonance</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo006.jpg" alt="Motion Capture &amp; Body as Controller" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Motion Capture &amp; Body as Controller</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo007.jpg" alt="Level 3 · Projection-mapped environments" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Level 3 · Projection-mapped environments</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo008.jpg" alt="The Grand Hall" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Grand Hall</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo009.jpg" alt="Immersive Theatre" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Immersive Theatre</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo010.jpg" alt="Repurposed Building · EROS Destination" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Repurposed Building · EROS Destination</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo011.jpg" alt="The Living Egg" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Living Egg</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo012.jpg" alt="Holographic Projection" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Holographic Projection</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo013.jpg" alt="Interactive Art Installation" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Interactive Art Installation</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo014.jpg" alt="Spatial Architecture" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Spatial Architecture</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo015.jpg" alt="The EROS Room · Level 5" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The EROS Room · Level 5</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo016.jpg" alt="Interactive Floor Sensors" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Interactive Floor Sensors</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo017.jpg" alt="Holographic Presentation · Level 4" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Holographic Presentation · Level 4</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo018.jpg" alt="Bedroom Cinema" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Bedroom Cinema</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo019.jpg" alt="Cryptocurrency &amp; The Digital City" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Cryptocurrency &amp; The Digital City</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo020.jpg" alt="Virtual Production Stage" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Virtual Production Stage</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo021.jpg" alt="Virtual Production Set" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Virtual Production Set</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo022.jpg" alt="Character Concept" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Character Concept</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo023.jpg" alt="Polonomics &amp; Liquidity Vaults" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Polonomics &amp; Liquidity Vaults</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo024.jpg" alt="The Golden Tree · Asset Growth" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Golden Tree · Asset Growth</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo025.jpg" alt="Immersive Dome Environment" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Immersive Dome Environment</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo026.jpg" alt="The Dark Corridor" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Dark Corridor</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo027.jpg" alt="Toroid Energy Lines" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Toroid Energy Lines</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo028.jpg" alt="Council Room" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Council Room</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo029.jpg" alt="Thoth · The Recorder" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Thoth · The Recorder</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo030.jpg" alt="The Astronaut" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Astronaut</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo031.jpg" alt="Red Toroid" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Red Toroid</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo032.jpg" alt="Ra-Shen · The Manifestor" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Ra-Shen · The Manifestor</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo033.jpg" alt="Energy Sphere" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Energy Sphere</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo034.jpg" alt="NaUn · The Programmer" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>NaUn · The Programmer</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo035.jpg" alt="The Toroid Energy Pattern" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>The Toroid Energy Pattern</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo036.jpg" alt="EROS · The Continuity" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>EROS · The Continuity</strong></figcaption></figure>
-    <figure class="plate-card"><img src="/holo/holo037.jpg" alt="Digital Toroid" loading="lazy" onclick="openLightbox(this.src, this.alt)"/><figcaption><strong>Digital Toroid</strong></figcaption></figure>
-  </div>
-</section>
 
 <!-- CODA -->
 <section class="coda" id="coda">
