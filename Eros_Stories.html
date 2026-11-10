@@ -802,6 +802,66 @@ figure.media video {
 .watch-listen[open]>summary::before{content:"▾ "}
 .watch-listen>aside{margin-left:auto;margin-right:auto}
 </style>
+
+<!-- EROS LIBRARY LAYOUT POLISH v3: shared geometry; book palettes and bespoke components retained. -->
+<style id="eros-library-layout-polish-v3">
+:root {
+  --radius-box: 12px; --radius-nested: 8px; --eros-radius-box: var(--radius-box); --eros-radius-nested: var(--radius-nested);
+  --eros-page-pad: clamp(1rem, 2.4vw, 1.75rem);
+  --eros-chrome-max: 80rem;
+}
+/* Prevent viewport-level horizontal drift while leaving intentional inner scrollers usable. */
+html { overflow-x: clip; }
+body { max-width: 100%; overflow-x: clip; }
+/* Shared corpus chrome: identical geometry, with each book's own colour treatment retained. */
+.corpus-bar {
+  box-sizing: border-box;
+  padding: .65rem clamp(1rem, 2.4vw, 2rem) 0;
+}
+.corpus-bar .brand-row {
+  box-sizing: border-box;
+  width: min(100%, var(--eros-chrome-max));
+  max-width: var(--eros-chrome-max);
+  min-height: 50px;
+  padding-bottom: .6rem;
+  gap: 1rem;
+  margin-inline: auto;
+}
+.chapter-strip {
+  box-sizing: border-box;
+  width: min(100%, var(--eros-chrome-max));
+  max-width: var(--eros-chrome-max);
+  margin-inline: auto;
+  padding-left: .2rem;
+  padding-right: .2rem;
+}
+/* Standard component geometry. Accent hues, fills, shadows and special left rules stay local. */
+.doorway {
+  box-sizing: border-box;
+  max-width: 100%;
+  border-width: 1px;
+  border-radius: var(--eros-radius-box);
+}
+.claim {
+  box-sizing: border-box;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-radius: var(--eros-radius-box);
+}
+/* Stable horizontal inset across long-read and technical books; width categories remain distinct. */
+.page, main.page, div.page {
+  padding-left: var(--eros-page-pad);
+  padding-right: var(--eros-page-pad);
+}
+@media (max-width: 640px) {
+  :root { --eros-page-pad: 1rem; }
+  .corpus-bar { padding-left: 1rem; padding-right: 1rem; }
+  .corpus-bar .brand-row { gap: .75rem; }
+  .chapter-strip { width: 100%; }
+}
+</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
