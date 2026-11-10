@@ -160,7 +160,7 @@ figure.plate.medium{max-width:42rem}
 figure.plate figcaption{font-family:var(--sans);font-size:.84rem;color:var(--muted);margin-top:.9rem;line-height:1.6;padding:0 .8rem;orphans:2;widows:2}
 figure.plate figcaption b{color:var(--indigo2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.74rem;display:inline-block;margin-right:.4rem}
 figure.media{margin:1.6rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--indigo-line);background:#000;box-shadow:0 10px 32px rgba(0,0,0,.45)}
-figure.media img,figure.media video{display:block;width:100%;height:auto;background:#000;max-height:min(56vh,480px);object-fit:contain}
+figure.media img,figure.media video{display:block;width:100%;height:auto;background:#000;max-height:none;object-fit:contain}
 figure.media figcaption{font-family:var(--sans);font-size:.8rem;color:var(--soft);padding:.8rem 1rem;background:var(--surface);border-top:1px solid var(--hair);line-height:1.6;orphans:2;widows:2}
 figure.media figcaption b{color:var(--indigo2);font-weight:700;letter-spacing:.04em}
 
@@ -3076,7 +3076,56 @@ All moments exist at once → the present is a cross-section → the whole is re
   </div>
 </section>
 
-<style id="eta-next-css">:where(.eta-next){max-width:44rem;margin:2.5rem auto 1.5rem;padding:1.1rem 1rem 0;border-top:1px solid rgba(128,128,128,.4);text-align:left;font-size:1rem;line-height:1.6}:where(.eta-next .eta-next-h){margin:0 0 .6rem;font:700 .78rem/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.8}:where(.eta-next ul){list-style:none;margin:0 0 .8rem;padding:0}:where(.eta-next li){margin:0 0 .55rem}:where(.eta-next li a){font-weight:700}:where(.eta-next li span){display:block;opacity:.8;font-size:.92rem}:where(.eta-next .eta-next-more){margin:0;font-size:.95rem}</style>
+<style id="eta-next-css">:where(.eta-next){max-width:44rem;margin:2.5rem auto 1.5rem;padding:1.1rem 1rem 0;border-top:1px solid rgba(128,128,128,.4);text-align:left;font-size:1rem;line-height:1.6}:where(.eta-next .eta-next-h){margin:0 0 .6rem;font:700 .78rem/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.8}:where(.eta-next ul){list-style:none;margin:0 0 .8rem;padding:0}:where(.eta-next li){margin:0 0 .55rem}:where(.eta-next li a){font-weight:700}:where(.eta-next li span){display:block;opacity:.8;font-size:.92rem}:where(.eta-next .eta-next-more){margin:0;font-size:.95rem}
+
+/* === EROS frame-fix v3.2 === */
+img { max-width: 100%; height: auto; }
+figure.plate { overflow: hidden; max-width: 100%; }
+figure.plate > img,
+figure.plate img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+/* Instructional plates: never crop letterforms / diagrams */
+figure.plate img[data-sized] {
+  max-height: none;
+  object-fit: contain;
+}
+.operator {
+  overflow: hidden;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+.operator-media {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0.75rem 0 1rem;
+  border-radius: 10px;
+  object-fit: contain;
+  object-position: center;
+}
+.visual-gallery-card img,
+.plate-card img {
+  object-fit: cover; /* thumbs only */
+}
+/* === end frame-fix v3.2 === */
+/* === EROS device-safety v3.3 === */
+/* iOS/Android landscape text inflation off; long hashes/addresses wrap instead of clipping */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+code, kbd, samp, td, th { overflow-wrap: anywhere; }
+pre { max-width: 100%; overflow-x: auto; }
+table { max-width: 100%; }
+/* reader panel: never taller than a short (landscape) screen */
+#rdPanel { max-height: min(70vh, calc(100vh - 9.5rem)); max-height: min(70vh, calc(100dvh - 9.5rem)); }
+/* === end device-safety v3.3 === */
+
+</style>
 <section class="eta-next" id="where-next" aria-label="Where next">
 <p class="eta-next-h" role="heading" aria-level="2">Where next</p>
 <ul><li><a href="Gods_Of_Eros.html">Gods of EROS</a><span>the mythology: four operators</span></li><li><a href="The_Conscious_Eros.html">The Conscious Eros</a><span>life first, postulates first</span></li></ul>
