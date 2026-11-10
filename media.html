@@ -3,27 +3,27 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>EROS 💕 PulseChain Media Centre</title>
+<title>EROS Media | Cinema, Visual Atlas &amp; Complete Archive</title>
 <link href="/media.html" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="EROS Library" property="og:site_name"/>
-<meta content="EROS 💕 PulseChain Media Centre" property="og:title"/>
-<meta content="Explore EROS video lessons, audio guides, featured stories, interactive experiences, and a searchable media library." property="og:description"/>
+<meta content="EROS Media | Cinema, Visual Atlas &amp; Complete Archive" property="og:title"/>
+<meta content="Discover the films, audio, stories, visual concepts and complete media collection of EROS." property="og:description"/>
 <meta content="/images/eros-logo_banner.jpg" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="/media.html" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="@ErosPulseChain" name="twitter:site"/>
-<meta content="EROS 💕 PulseChain Media Centre" name="twitter:title"/>
-<meta content="Complete visual inventory of the EROS corpus. Every image and video, grouped by topic." name="twitter:description"/>
+<meta content="EROS Media | Cinema, Visual Atlas &amp; Complete Archive" name="twitter:title"/>
+<meta content="A cinematic entrance to the EROS media collection, with a complete searchable archive for people and AI." name="twitter:description"/>
 <meta content="/images/eros-logo_banner.jpg" name="twitter:image"/>
-<meta content="The EROS PulseChain Media Centre: cinematic video journeys, featured lessons, 15 media studios, interactive experiences, and a searchable catalog." name="description"/>
+<meta content="Enter the EROS media world: flagship films, 15 video and audio studios, the Continuity series, a visual atlas, and a complete searchable media archive." name="description"/>
 <meta content="#05030f" name="theme-color"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%230b0e14' stroke='%2320e6ff' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%23ff2bd6'/%3E%3C/svg%3E" rel="icon"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=Rajdhani:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════════════════════════
    NEON REPLICANT — EROS MEDIA CENTRE
@@ -902,6 +902,7 @@ figure.brand-seal figcaption{
 }
 .media-cinema .mc-next:hover{color:var(--accent-color)}
 
+.media-cinema button.cinema-ring{appearance:none;-webkit-appearance:none;border:0;padding:0;background:transparent;color:inherit;font:inherit;cursor:pointer}
 .media-cinema .cinema-ring{
   position:absolute;top:50%;left:50%;
   width:140px;height:140px;margin:-70px 0 0 -70px;
@@ -960,6 +961,110 @@ figure.brand-seal figcaption{
   .media-cinema .cinema-top{display:none}
   .media-cinema .cinema-ring{width:100px;height:100px;margin:-50px 0 0 -50px}
   .media-cinema .cinema-ring span{font-size:8px;letter-spacing:.2em}
+}
+
+/* ── THESIS CONCEPT GALLERY ── */
+.thesis-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+.thesis-card {
+  position: relative;
+  background: linear-gradient(170deg, rgba(18,12,48,.88), rgba(8,5,24,.94));
+  border: 1px solid rgba(122,44,255,.5);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .22s, transform .22s, box-shadow .22s;
+  box-shadow: 0 0 16px rgba(122,44,255,.22);
+}
+.thesis-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+.thesis-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(122,44,255,.3);
+  transition: transform .4s ease;
+}
+.thesis-card:hover img {
+  transform: scale(1.05);
+}
+.thesis-card figcaption {
+  padding: 0.8rem 0.5rem;
+  font: 500 0.85rem var(--body);
+  color: var(--soft);
+  text-align: center;
+  background: rgba(5,3,15,.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Lightbox Overlay */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 3, 15, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.lightbox-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 12px;
+  border: 2px solid var(--cyan);
+  box-shadow: var(--glow-cyan), 0 20px 60px rgba(0,0,0,0.8);
+  object-fit: contain;
+}
+.lightbox-caption {
+  margin-top: 1.2rem;
+  font: 600 1rem var(--display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(32,230,255,.6);
+  text-align: center;
+}
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--magenta);
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: transform 0.2s;
+  text-shadow: 0 0 10px rgba(255,43,214,.6);
+}
+.lightbox-close:hover {
+  transform: scale(1.1) rotate(90deg);
 }
 
 /* ── MASTER FOOTER ── */
@@ -1120,10 +1225,68 @@ footer.master .pulse-row svg{flex-shrink:0}
   .path-card:hover,.card:hover,.featured-card:hover{transform:none}
   .media-cinema button:hover,.native-carousel-controls a:hover{transform:none}
 }
-</style>
-</head>
-<body id="top">
 
+/* Media centre layers */
+.layer-banner{margin:2.2rem 0 1rem;padding:1.2rem 1.3rem;border-radius:14px;border:1px solid rgba(32,230,255,.28);background:linear-gradient(120deg,rgba(32,230,255,.08),rgba(122,44,255,.06))}
+.layer-banner-stacks{border-color:rgba(255,43,214,.28);background:linear-gradient(120deg,rgba(255,43,214,.07),rgba(122,44,255,.05))}
+.layer-k{font:700 .68rem var(--display,inherit);letter-spacing:.18em;text-transform:uppercase;color:var(--cyan,#20e6ff);margin:0 0 .35rem}
+.layer-banner-stacks .layer-k{color:var(--magenta,#ff2bd6)}
+.layer-title{font:400 clamp(1.35rem,3vw,1.9rem) var(--display,inherit);color:#fff;margin:0 0 .4rem;text-shadow:0 0 12px rgba(32,230,255,.25)}
+.layer-d{margin:0;color:var(--soft,#c9c4f2);font-size:.95rem;max-width:40rem;line-height:1.55}
+#concept-plates .thesis-gallery-grid,
+#concept-plates .image-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin:1.4rem 0}
+#concept-plates img{width:100%;height:180px;object-fit:cover;border-radius:10px;border:1px solid rgba(122,44,255,.4)}
+@media(min-width:800px){
+  #concept-plates .thesis-gallery-grid,
+  #concept-plates .image-gallery{grid-template-columns:repeat(3,1fr)}
+}
+
+</style>
+<style id="media-reorganisation-overrides">
+/* EROS Media refresh · editorial hierarchy */
+:root{--bar-h:92px}
+.page>.intro-line{max-width:54rem;margin:.5rem 0 1.8rem;font-size:clamp(1.1rem,2.2vw,1.45rem);letter-spacing:.025em}
+#majorFeatures,#featuredMedia,#visitor-paths,#studios,#continuity-studio,#visual-atlas,#thesis-gallery,#experience,#showcase,#stacks{scroll-margin-top:9rem}
+#majorFeatures{margin-top:1.7rem}
+#majorFeatures .featured-lead{max-width:58rem}
+#majorFeatures .featured-pair{align-items:stretch}
+#majorFeatures .featured-card,#featuredMedia .featured-card{background:linear-gradient(145deg,rgba(24,15,54,.94),rgba(9,7,27,.96));border:1px solid rgba(165,118,255,.28);box-shadow:0 18px 55px rgba(0,0,0,.25)}
+#majorFeatures .featured-card video,#featuredMedia video{width:100%;display:block;border-radius:12px;background:#080611}
+#visitor-paths{margin:2.6rem 0 2rem;padding:clamp(1.2rem,3vw,2rem);border:1px solid rgba(32,230,255,.24);border-radius:22px;background:linear-gradient(135deg,rgba(32,230,255,.075),rgba(122,44,255,.10) 48%,rgba(255,43,214,.06))}
+#visitor-paths .paths-heading h2{margin-bottom:.65rem}
+#visitor-paths .path-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:1rem}
+#visitor-paths .path-card{min-height:190px;border-radius:16px;background:rgba(5,3,15,.72);border:1px solid rgba(255,255,255,.13);transition:transform .25s,border-color .25s,background .25s}
+#visitor-paths .path-card:hover{transform:translateY(-4px);border-color:rgba(32,230,255,.65);background:rgba(16,10,44,.92)}
+#visitor-paths .path-card strong{font:600 1.05rem var(--display);line-height:1.4;color:#fff}
+#visitor-paths .visitor-tools{display:flex;flex-wrap:wrap;gap:.8rem 1.4rem;align-items:center;justify-content:space-between;margin-top:1.3rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.12)}
+.layer-banner{margin:3rem 0 1.2rem;padding:1.5rem clamp(1rem,3vw,2rem);border-radius:18px}
+#studios>.cluster-title,#continuity-studio>.cluster-title{margin-bottom:.5rem}
+#continuity-studio{margin-top:2.5rem}
+#visual-atlas{margin-top:3rem}
+#thesis-gallery{margin-top:1.2rem}
+#showcase{margin:2rem 0 3rem}
+#stacks{margin-top:3.2rem}
+#stacks+.layer-banner{margin-top:0}
+#filter{z-index:820}
+#container .cluster{border-color:rgba(32,230,255,.2)}
+#container .card{transition:transform .2s,border-color .2s}
+#container .card:hover{transform:translateY(-2px);border-color:rgba(255,43,214,.55)}
+.cinema-hero{min-height:clamp(390px,57vw,650px)}
+.cinema-hero .cinema-copy{max-width:760px}
+.cinema-hero .cinema-title{max-width:13ch;line-height:1.18}
+@media(max-width:720px){
+ :root{--bar-h:88px}
+ .page{width:min(100% - 28px,1280px);padding-top:1.2rem}
+ .cinema-hero{min-height:430px}
+ #visitor-paths{padding:1rem;margin:1.6rem 0}
+ #visitor-paths .path-card{min-height:0;padding:1.1rem}
+ #visitor-paths .visitor-tools{align-items:flex-start;flex-direction:column}
+ .layer-banner{margin:2rem 0 1rem}
+ .corpus-bar nav.chapter-strip a{font-size:.62rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style><link href="/media-manifest.json" rel="alternate" type="application/json"/></head>
+<body id="top">
 <header class="corpus-bar">
 <div class="brand-row">
 <a aria-label="Media Index · top" class="logo-cluster" href="#top">
@@ -1136,29 +1299,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 <span class="brand-text">Media Index</span>
 </div>
 </div>
-<nav aria-label="Cluster navigation" class="chapter-strip">
-<a href="#experience">Inversion</a>
-<a href="#studios">Studios</a>
-<a href="#tokenomics-studio">Tokenomics</a>
-<a href="#engine-studio">Engine</a>
-<a href="#rock-studio">Rock</a>
-<a href="#chaos-studio">Chaos</a>
-<a href="#polonomics-studio">Polonomics</a>
-<a href="#gates-studio">Gates</a>
-<a href="#conscious-studio">Conscious</a>
-<a href="#livingegg-studio">Living Egg</a>
-<a href="#immune-studio">Immune</a>
-<a href="#operators-studio">Operators</a>
-<a href="#hybridnfts-studio">Hybrid NFTs</a>
-<a href="#gameeconomics-studio">Game Economics</a>
-<a href="#transmedia-studio">Transmedia</a>
-<a href="#aiethics-studio">AI Ethics</a>
-<a href="#openguild-studio">Open Guild</a>
-<a href="#continuity-studio">Continuity</a>
-<a href="#filter">Filter</a>
-<a href="#showcase">Showcase</a>
-<a href="/The_Eros_Corpus.html">Map</a>
-</nav>
+<nav aria-label="Cluster navigation" class="chapter-strip"><a href="#mediaCinemaOpening">Cinema</a><a href="#majorFeatures">Essential Films</a><a href="#visitor-paths">Journeys</a><a href="#studios">Studios</a><a href="#continuity-studio">Continuity</a><a href="#visual-atlas">Visual Atlas</a><a href="#showcase">3D Experience</a><a href="#stacks">Complete Archive</a></nav>
 </header>
 <style id="eta-css">
 .eros-menu .eta-groups{display:grid;gap:1.2rem 1.6rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin:.3rem 0 .6rem}
@@ -1172,102 +1313,500 @@ footer.master .pulse-row svg{flex-shrink:0}
 .eros-menu .eta-count{margin:.2rem 0 0;font-size:.85rem;opacity:.8}
 :where(.eta-menu){max-width:44rem;margin:1rem auto;padding:.35rem 1rem;border:1px solid rgba(128,128,128,.45);border-radius:10px;text-align:left}:where(.eta-menu>summary){cursor:pointer;list-style:none;padding:.55rem 0;font:700 .78rem/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;user-select:none}:where(.eta-menu summary:focus-visible),:where(.eta-menu a:focus-visible){outline:2px solid currentColor;outline-offset:3px;border-radius:3px}:where(.eta-menu .menu-body){padding:.25rem 0 .85rem;font-size:.95rem;line-height:1.6}:where(.eta-menu .eta-g-label){color:inherit;opacity:.75}@supports (color:color-mix(in srgb,red,blue)){:where(.eta-menu){border-color:color-mix(in srgb,currentColor 30%,transparent)}}.eta-menu>summary::-webkit-details-marker{display:none}</style>
 <details class="eros-menu eta-menu" id="eros-library">
-  <summary>Enter the architecture</summary>
-  <div class="menu-body">
-    <div class="eta-groups">
-      <div class="eta-g eta-start"><span class="eta-g-label">Start here</span><ul>
-        <li><a href="The_Eros_Corpus.html">The Corpus</a><small>The entry page: what is live, and where to begin</small></li>
-        <li><a href="The_Garden_of_Eros.html">The Garden of Eros</a><small>The whole picture on one map</small></li></ul></div>
-      <div class="eta-g"><span class="eta-g-label">Get in</span><ul>
-        <li><a href="EROS_Newcomer_Dossier.html">Newcomer Dossier</a><small>Check your wallet. The honest first read</small></li>
-        <li><a href="Eros_Narrative.html">Eros Narrative</a><small>The story and the instrument in one pass</small></li>
-        <li><a href="The_Bridge.html">The Bridge</a><small>Verify, bridge, bond, stake</small></li>
-        <li><a href="The_Flywheel.html">The Flywheel</a><small>Why buying, bonding and sharing compound</small></li>
-        <li><a href="SpaceEros.html">SpaceEros</a><small>The live tokenomics map</small></li></ul></div>
-      <div class="eta-g"><span class="eta-g-label">Help it grow</span><ul>
-        <li><a href="The_Open_Call.html">The Open Call</a><small>The ask: make, explain, connect</small></li>
-        <li><a href="The_Front_Door.html">The Front Door</a><small>The appeal to Jake Sharpe and the community</small></li>
-        <li><a href="https://t.me/Eros_Revival" target="_blank" rel="noopener noreferrer">Telegram</a><small>The room: ideas, assets, people</small></li>
-        <li><a href="media.html" aria-current="page">Media Index</a><small>Films and audio to share</small></li></ul></div>
-      <div class="eta-g"><span class="eta-g-label">The world</span><ul>
-        <li><a href="Living_Egg.html">The Living Egg</a><small>The cosmology: inward is forwards</small></li>
-        <li><a href="Gods_Of_Eros.html">Gods of EROS</a><small>The mythology: four operators</small></li>
-        <li><a href="The_Conscious_Eros.html">The Conscious Eros</a><small>Life first, postulates first</small></li>
-        <li><a href="The_Eros_Enclosure.html">The Eros Enclosure</a><small>The toroid</small></li>
-        <li><a href="The_Iteration_Codex.html">The Iteration Codex</a><small>How it moves</small></li>
-        <li><a href="Gift_Of_Thoth.html">Gift of Thoth</a><small>Language under language</small></li></ul></div>
-      <div class="eta-g"><span class="eta-g-label">Create with us</span><ul>
-        <li><a href="Eros_Stories.html">Eros Stories</a><small>Sixteen doors into the fiction</small></li>
-        <li><a href="The_First_Resonance.html">The First Resonance</a><small>A novel to follow as a model</small></li>
-        <li><a href="The_Continuity_File.html">The Continuity File</a><small>A second novel: fiction on a real instrument</small></li>
-        <li><a href="Men_Of_Renown.html">Men of Renown</a><small>The archive behind the masks</small></li></ul></div>
-      <div class="eta-g"><span class="eta-g-label">Go deeper</span><ul>
-        <li><a href="TheErosPlan.html">The Eros Plan</a><small>The full plan, including what gets built</small></li>
-        <li><a href="The_Platinum_Standard.html">The Platinum Standard</a><small>The transformation thesis</small></li>
-        <li><a href="The_Hopeful_Future.html">The Hopeful Future</a><small>The gift and the stack</small></li>
-        <li><a href="Illumination_Strategy.html">Illumination Strategy</a><small>The human history rail</small></li></ul></div>
-    </div>
-    <p class="eta-count">No required order. Start with whatever pulled you in.</p>
-  </div>
+<summary>Enter the architecture</summary>
+<div class="menu-body">
+<div class="eta-groups">
+<div class="eta-g eta-start"><span class="eta-g-label">Start here</span><ul>
+<li><a href="The_Eros_Corpus.html">The Corpus</a><small>The entry page: what is live, and where to begin</small></li>
+<li><a href="The_Garden_of_Eros.html">The Garden of Eros</a><small>The whole picture on one map</small></li></ul></div>
+<div class="eta-g"><span class="eta-g-label">Get in</span><ul>
+<li><a href="EROS_Newcomer_Dossier.html">Newcomer Dossier</a><small>Check your wallet. The honest first read</small></li>
+<li><a href="Eros_Narrative.html">Eros Narrative</a><small>The story and the instrument in one pass</small></li>
+<li><a href="The_Bridge.html">The Bridge</a><small>Verify, bridge, bond, stake</small></li>
+<li><a href="The_Flywheel.html">The Flywheel</a><small>Why buying, bonding and sharing compound</small></li>
+<li><a href="SpaceEros.html">SpaceEros</a><small>The live tokenomics map</small></li></ul></div>
+<div class="eta-g"><span class="eta-g-label">Help it grow</span><ul>
+<li><a href="The_Open_Call.html">The Open Call</a><small>The ask: make, explain, connect</small></li>
+<li><a href="The_Front_Door.html">The Front Door</a><small>The appeal to Jake Sharpe and the community</small></li>
+<li><a href="https://t.me/Eros_Revival" rel="noopener noreferrer" target="_blank">Telegram</a><small>The room: ideas, assets, people</small></li>
+<li><a aria-current="page" href="media.html">Media Index</a><small>Films and audio to share</small></li></ul></div>
+<div class="eta-g"><span class="eta-g-label">The world</span><ul>
+<li><a href="Living_Egg.html">The Living Egg</a><small>The cosmology: inward is forwards</small></li>
+<li><a href="Gods_Of_Eros.html">Gods of EROS</a><small>The mythology: four operators</small></li>
+<li><a href="The_Conscious_Eros.html">The Conscious Eros</a><small>Life first, postulates first</small></li>
+<li><a href="The_Eros_Enclosure.html">The Eros Enclosure</a><small>The toroid</small></li>
+<li><a href="The_Iteration_Codex.html">The Iteration Codex</a><small>How it moves</small></li>
+<li><a href="Gift_Of_Thoth.html">Gift of Thoth</a><small>Language under language</small></li></ul></div>
+<div class="eta-g"><span class="eta-g-label">Create with us</span><ul>
+<li><a href="Eros_Stories.html">Eros Stories</a><small>Sixteen doors into the fiction</small></li>
+<li><a href="The_First_Resonance.html">The First Resonance</a><small>A novel to follow as a model</small></li>
+<li><a href="The_Continuity_File.html">The Continuity File</a><small>A second novel: fiction on a real instrument</small></li>
+<li><a href="Men_Of_Renown.html">Men of Renown</a><small>The archive behind the masks</small></li></ul></div>
+<div class="eta-g"><span class="eta-g-label">Go deeper</span><ul>
+<li><a href="TheErosPlan.html">The Eros Plan</a><small>The full plan, including what gets built</small></li>
+<li><a href="The_Platinum_Standard.html">The Platinum Standard</a><small>The transformation thesis</small></li>
+<li><a href="The_Hopeful_Future.html">The Hopeful Future</a><small>The gift and the stack</small></li>
+<li><a href="Illumination_Strategy.html">Illumination Strategy</a><small>The human history rail</small></li></ul></div>
+</div>
+<p class="eta-count">No required order. Start with whatever pulled you in.</p>
+</div>
 </details>
-
-
 <main class="page">
 <h1>EROS Media</h1>
-<p class="intro-line">Watch the lessons. Explore the ideas. Find your next step.</p>
-
+<p class="intro-line">Enter the films. Explore the ideas. Find every asset.</p>
 <!-- ═══ TOP CINEMA · HERO ═══ -->
-<section class="media-cinema cinema-hero accent-hopeful"
-         id="mediaCinemaOpening"
-         role="button" tabindex="0"
-         aria-expanded="false"
-         aria-label="Watch. Learn. Explore."
-         data-media-cinema data-cinema="hero"
-         data-pin="19"
-         data-queue="/images/eros_titanx_pulsechain.mp4|/images/all_the_gods.mp4|/images/cohesion.mp4|/images/betterGreys1.mp4|/images/withYouEros3.mp4|/images/betterGreys2.mp4|/images/fiveBillion3.mp4|/images/bondedEros1.mp4|/images/withYouEros2.mp4|/images/titanxbridge1.mp4|/images/withYouEros4.mp4|/images/titanxbridge2.mp4|/images/greys1.mp4|/images/fiveBillion1.mp4|/images/withYouEros1.mp4|/images/fiveBillion2.mp4|/images/eros_chart2.mp4|/images/migrate1.mp4|/images/greys2.mp4|/images/eros_grays1.mp4|/images/ChizExplains.mp4|/images/cell_similar.mp4|/images/shorts_dossier_01.mp4|/images/shorts_plan_02.mp4|/images/nemerology_eros.mp4|/images/shorts_narrative_02.mp4|/images/eros_grays2.mp4|/images/shorts_plan_01.mp4|/images/eros_jump6.mp4|/images/Eros_Polonomics.mp4|/images/eros_power.mp4|/images/shorts_frontdoor_01.mp4|/images/shorts_dossier_02.mp4|/images/The_Eros_Rock.mp4|/images/shorts_plan_03.mp4|/images/Eros_Conscious.mp4|/images/Eros_AIEthics.mp4|/images/eros_humans.mp4|/images/Eros_Operators.mp4|/images/shorts_hopeful_01.mp4|/images/cell_historic.mp4|/images/shorts_frontdoor_02.mp4|/images/nemerology_eros2.mp4|/images/Jake_Letter.mp4|/images/cell_water.mp4|/images/Eros_Trillion.mp4|/images/Eros_OpenGuild.mp4|/images/EROS_Gates.mp4|/images/Eros_Transmedia.mp4|/images/cell_facts.mp4|/images/sommi_facts.mp4|/images/cell_apple.mp4|/images/Eros_Engine_Video.mp4|/images/we_are_with_you_eros.mp4|/images/eros_jump3.mp4|/images/Eros_HybridNFTs.mp4|/images/shorts_dossier_03.mp4|/images/EROS_Chaos.mp4|/images/transform_eros.mp4|/images/EROS%20burn%20baby%20burn.mp4|/images/price_leads.mp4|/images/EROS_burn_baby_burn.mp4|/images/migrate_titanX.mp4">
- <video class="cinema-video cinema-va" playsinline muted preload="metadata" aria-hidden="true"></video>
-
- <div class="cinema-shade" aria-hidden="true"></div>
- <div class="cinema-grain" aria-hidden="true"></div>
-
- <div class="cinema-ring" aria-hidden="true">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-  <span>Enter</span>
- </div>
-
- <div class="cinema-top">
-  <span>EROS · MEDIA GUIDE</span>
-  <span>Watch · Learn · Explore</span>
- </div>
-
- <div class="cinema-copy">
-  <p class="cinema-kicker">The visual record · 44 clips</p>
-  <h2 class="cinema-title">Watch. Learn. Explore.</h2>
-  <p class="cinema-sub">A moving introduction to the video lessons, ideas, and guidance across the book series.</p>
- </div>
-
- <button type="button" class="cinema-vol is-muted"
-         aria-label="Turn sound on" aria-pressed="false">
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-   <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/>
-   <path class="vb-on"  d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>
-   <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/>
-  </svg>
- </button>
-
- <div class="cinema-footer">
-  <span class="mc-count">1 / 44</span>
-  <span class="mc-status" aria-live="polite">Move across · Tap to enter</span>
-  <button type="button" class="mc-next" aria-label="Next film">Next film ↗</button>
- </div>
+<section aria-expanded="false" aria-label="Watch. Learn. Explore." class="media-cinema cinema-hero accent-hopeful" data-cinema="hero" data-media-cinema="" data-pin="19" data-queue="/images/eros_titanx_pulsechain.mp4|/images/all_the_gods.mp4|/images/cohesion.mp4|/images/betterGreys1.mp4|/images/withYouEros3.mp4|/images/betterGreys2.mp4|/images/fiveBillion3.mp4|/images/bondedEros1.mp4|/images/withYouEros2.mp4|/images/titanxbridge1.mp4|/images/withYouEros4.mp4|/images/titanxbridge2.mp4|/images/greys1.mp4|/images/fiveBillion1.mp4|/images/withYouEros1.mp4|/images/fiveBillion2.mp4|/images/eros_chart2.mp4|/images/migrate1.mp4|/images/greys2.mp4|/images/eros_grays1.mp4|/images/ChizExplains.mp4|/images/cell_similar.mp4|/images/shorts_dossier_01.mp4|/images/shorts_plan_02.mp4|/images/nemerology_eros.mp4|/images/shorts_narrative_02.mp4|/images/eros_grays2.mp4|/images/shorts_plan_01.mp4|/images/eros_jump6.mp4|/images/Eros_Polonomics.mp4|/images/eros_power.mp4|/images/shorts_frontdoor_01.mp4|/images/shorts_dossier_02.mp4|/images/The_Eros_Rock.mp4|/images/shorts_plan_03.mp4|/images/Eros_Conscious.mp4|/images/Eros_AIEthics.mp4|/images/eros_humans.mp4|/images/Eros_Operators.mp4|/images/shorts_hopeful_01.mp4|/images/cell_historic.mp4|/images/shorts_frontdoor_02.mp4|/images/nemerology_eros2.mp4|/images/Jake_Letter.mp4|/images/cell_water.mp4|/images/Eros_Trillion.mp4|/images/Eros_OpenGuild.mp4|/images/EROS_Gates.mp4|/images/Eros_Transmedia.mp4|/images/cell_facts.mp4|/images/sommi_facts.mp4|/images/cell_apple.mp4|/images/Eros_Engine_Video.mp4|/images/we_are_with_you_eros.mp4|/images/eros_jump3.mp4|/images/Eros_HybridNFTs.mp4|/images/shorts_dossier_03.mp4|/images/EROS_Chaos.mp4|/images/transform_eros.mp4|/images/EROS%20burn%20baby%20burn.mp4|/images/price_leads.mp4|/images/EROS_burn_baby_burn.mp4|/images/migrate_titanX.mp4" id="mediaCinemaOpening">
+<video aria-hidden="true" class="cinema-video cinema-va" muted="" playsinline="" preload="metadata"></video>
+<div aria-hidden="true" class="cinema-shade"></div>
+<div aria-hidden="true" class="cinema-grain"></div>
+<button aria-label="Play the EROS cinema introduction" class="cinema-ring cinema-enter" type="button">
+<svg fill="currentColor" height="26" viewbox="0 0 24 24" width="26"><path d="M8 5v14l11-7z"></path></svg>
+<span>Enter</span>
+</button>
+<div class="cinema-top">
+<span>EROS · MEDIA GUIDE</span>
+<span>Watch · Learn · Explore</span>
+</div>
+<div class="cinema-copy">
+<p class="cinema-kicker">THE EROS CINEMA · CURATED FIRST LOOK</p>
+<h2 class="cinema-title">A world to enter. A story to explore.</h2>
+<p class="cinema-sub">A moving doorway into the films, ideas and human stories of EROS. Begin here, then follow whatever draws you deeper.</p>
+</div>
+<button aria-label="Turn sound on" aria-pressed="false" class="cinema-vol is-muted" type="button">
+<svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="18">
+<path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"></path>
+<path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"></path>
+<path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"></path>
+</svg>
+</button>
+<div class="cinema-footer">
+<span class="mc-count">1 / 44</span>
+<span aria-live="polite" class="mc-status">A curated moving introduction · Tap to enter</span>
+<button aria-label="Next film" class="mc-next" type="button">Next film ↗</button>
+</div>
 </section>
-
 <!-- ═══ TOP: NATIVE CAROUSEL ═══ -->
-<section aria-label="Cosmology experience" class="media-featured" id="experience">
+<!-- ═══ MEDIA STUDIOS (1-15) ═══ -->
+<!-- ═══ CONTINUITY FILE · 11 EPISODE PAIRS ═══ -->
+<!-- ═══ THESIS CONCEPT GALLERY ═══ -->
+<!-- LIGHTBOX OVERLAY -->
+<!-- ═══ FULL CATALOG ═══ -->
+<!-- ═══ BOTTOM CINEMA · BAND ═══ -->
+<section class="permanent-media" id="majorFeatures">
+<p class="featured-kicker">Start here · The big picture</p>
+<h2>Two films that explain the whole plan</h2>
+<p class="featured-lead">If you only watch two things, watch these. One shows the crypto plan. The other shows the rules of play behind the whole universe.</p>
+<div class="featured-pair">
+<article class="featured-card">
+<div class="featured-label">01 · The crypto plan</div>
+<h3>EROS, TitanX and PulseChain</h3>
+<p>How the token, the TitanX airdrop and PulseChain fit together: an airdrop to TitanX builders, more than two years live, and a community-first distribution.</p>
+<video aria-label="EROS, TitanX and PulseChain: the tokenomics overview" controls="" playsinline="" poster="/images/frames/eros_titanx_pulsechain.jpg" preload="none"><source src="/images/eros_titanx_pulsechain.mp4" type="video/mp4"/></video>
+</article>
+<article class="featured-card">
+<div class="featured-label">02 · The universe plan</div>
+<h3>All the Gods</h3>
+<p>NaUn writes the language. Ra-Shen supplies the energy. Thoth brings life and consequence. Eros holds the ratios together. The rules of play, in one film.</p>
+<video aria-label="All the Gods: an overview of the four operators" controls="" playsinline="" poster="/images/frames/all_the_gods.jpg" preload="none"><source src="/images/all_the_gods.mp4" type="video/mp4"/></video>
+</article>
+</div>
+</section><section aria-label="Featured media" class="permanent-media" id="featuredMedia">
+<div class="featured-heading"><span class="eyebrow">Start here · Featured media</span><h2>Four essential stops</h2><p>Begin with the Open Call, meet the people behind the project, then find the practical buying guide.</p></div>
+<article class="featured-card open-call-card"><div class="featured-copy"><span class="featured-kicker">01 · THE OPEN CALL</span><h3>The Open Call</h3><p>The video invitation, followed by its audio edition.</p></div><video aria-label="The Open Call video" controls="" playsinline="" poster="/images/frames/The_open_call.jpg" preload="none"><source src="/images/The_open_call.mp4" type="video/mp4"/></video><div class="featured-audio"><span>Listen instead</span><audio aria-label="The Open Call audio" controls="" preload="none"><source src="/images/The_open_call.mp3" type="audio/mpeg"/><source src="/images/The_open_call.m4a" type="audio/mp4"/></audio></div></article>
+<div class="featured-pair">
+<article class="featured-card"><span class="featured-kicker">02 · PEOPLE &amp; STORY</span><h3>JakeX</h3><video aria-label="JakeX video" controls="" playsinline="" poster="/images/frames/jakex.jpg" preload="none"><source src="/images/jakex.mp4" type="video/mp4"/></video></article>
+<article class="featured-card"><span class="featured-kicker">03 · PEOPLE &amp; STORY</span><h3>LegendX</h3><video aria-label="LegendX video" controls="" playsinline="" poster="/images/frames/legendx.jpg" preload="none"><source src="/images/legendx.mp4" type="video/mp4"/></video></article>
+</div>
+<article class="featured-card buy-eros-card"><span class="featured-kicker">04 · PRACTICAL GUIDE</span><h3>Best Way to Buy EROS</h3><p>A prominent, easy-to-find walkthrough for visitors who are ready for the practical steps.</p><video aria-label="Best Way to Buy EROS video" controls="" playsinline="" poster="/images/frames/best_way_buy_eros.jpg" preload="none"><source src="/images/best_way_buy_eros.mp4" type="video/mp4"/></video></article>
+</section><section aria-label="Choose your path" class="visitor-paths" id="visitor-paths">
+<div class="paths-heading"><span class="eyebrow">A guided way in</span><h2>Choose a way into EROS</h2><p>Start with the instrument, enter the world model, follow the stories, or explore the applications. These are guided doors into the programmes below — not separate collections.</p></div>
+<div class="path-grid"><a class="path-card" href="#tokenomics-studio"><span class="path-number">01 · THE INSTRUMENT</span><strong>Understand the instrument</strong><span>Tokenomics → Two Stack Engine → Rock &amp; River → Polonomics → Chaos Engine → Three Gates</span><span class="path-cta">Start with the fundamentals ↗</span></a><a class="path-card" href="#livingegg-studio"><span class="path-number">02 · THE WORLD</span><strong>Explore the world model</strong><span>Living Egg → Conscious Eros → Operators → Immune</span><span class="path-cta">Explore the concepts ↗</span></a><a class="path-card" href="#continuity-studio"><span class="path-number">03 · THE STORIES</span><strong>Enter the stories</strong><span>The Continuity File → narrative films → visual worlds and characters</span><span class="path-cta">Follow the story ↗</span></a><a class="path-card" href="#gameeconomics-studio"><span class="path-number">04 · THE APPLICATIONS</span><strong>See the ideas applied</strong><span>Game Economics → Hybrid NFTs → Transmedia → AI Ethics → Open Guild</span><span class="path-cta">Explore the applications ↗</span></a></div>
+<div class="visitor-tools"><a href="#studios">Explore all 15 studios ↓</a><a href="#stacks">Search the complete archive ↓</a><a href="#showcase">Enter the 3D experience ↗</a></div>
+</section><section aria-label="Programmes" class="layer-banner" id="programmes">
+<p class="layer-k">Layer A · Theatre programmes</p>
+<h2 class="layer-title">Watch and learn</h2>
+<p class="layer-d">Studios and the Continuity series are the main human path. The file library sits below for search and reuse.</p>
+</section><section aria-label="Media Studios" class="media-featured" id="studios">
+<h2 class="cluster-title">Media Studios · Video &amp; Audio · 15 Studios</h2>
+<details class="media-studio-dropdown" id="tokenomics-studio"><summary><span class="ms-k">🎙️ Media Studio · Tokenomics</span><p class="ms-t">EROS 💕 explained in plain language</p></summary><div class="studio-inner">
+<p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works.</p>
+<div class="ms-video">
+<video aria-label="Tokenomics · EROS explained in plain language — video overview" controls="" playsinline="" poster="/images/frames/Eros_Token_Video.jpg" preload="none">
+<source src="/images/Eros_Token_Video.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Tokenomics · EROS explained in plain language — audio overview" controls="" preload="none">
+<source src="/images/Eros_Token_Audio.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="engine-studio"><summary><span class="ms-k">🎙️ Media Studio · Two Stack Engine</span><p class="ms-t">EROS · Atropa · Dysnomia</p></summary><div class="studio-inner">
+<p class="ms-d">How the wider stack fits together — two build jobs, one machine, and why the rails stay separate on purpose.</p>
+<div class="ms-video">
+<video aria-label="Two Stack Engine · EROS · Atropa · Dysnomia — video overview" controls="" playsinline="" poster="/images/frames/Eros_Engine_Video.jpg" preload="none">
+<source src="/images/Eros_Engine_Video.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Two Stack Engine · EROS · Atropa · Dysnomia — audio overview" controls="" preload="none">
+<source src="/images/Eros_Engine_Audio.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="rock-studio"><summary><span class="ms-k">🎙️ Media Studio · Rock &amp; River</span><p class="ms-t">EROS · The Rock</p></summary><div class="studio-inner">
+<p class="ms-d">Why one asset cannot be both vault and spend rail — and how the dual-rail design separates store from flow.</p>
+<div class="ms-video">
+<video aria-label="Rock &amp; River · EROS · The Rock — video overview" controls="" playsinline="" poster="/images/frames/The_Eros_Rock.jpg" preload="none">
+<source src="/images/The_Eros_Rock.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Rock &amp; River · EROS · The Rock — audio overview" controls="" preload="none">
+<source src="/images/The_EROS_Rock.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="polonomics-studio"><summary><span class="ms-k">🎙️ Media Studio · Polonomics</span><p class="ms-t">The Gravity Web</p></summary><div class="studio-inner">
+<p class="ms-d">Why hundreds of bonded pairs beat one giant pool — and how the web pulls liquidity across PulseChain.</p>
+<div class="ms-video">
+<video aria-label="Polonomics · The Gravity Web — video overview" controls="" playsinline="" poster="/images/frames/Eros_Polonomics.jpg" preload="none">
+<source src="/images/Eros_Polonomics.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Polonomics · The Gravity Web — audio overview" controls="" preload="none">
+<source src="/images/Eros_Polonomics.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="chaos-studio"><summary><span class="ms-k">🎙️ Media Studio · Chaos Engine</span><p class="ms-t">33EROS · The Transform</p></summary><div class="studio-inner">
+<p class="ms-d">The high-burn transform path and the three-body engine that keeps it from being front-run.</p>
+<div class="ms-video">
+<video aria-label="Chaos Engine · 33EROS · The Transform — video overview" controls="" playsinline="" poster="/images/frames/EROS_Chaos.jpg" preload="none">
+<source src="/images/EROS_Chaos.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Chaos Engine · 33EROS · The Transform — audio overview" controls="" preload="none">
+<source src="/images/EROS_Chaos.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="gates-studio"><summary><span class="ms-k">🎙️ Media Studio · Three Gates</span><p class="ms-t">Earned transformation</p></summary><div class="studio-inner">
+<p class="ms-d">Why the flow rail waits on real milestones — market depth, pool count, and verified code — not a calendar date.</p>
+<div class="ms-video">
+<video aria-label="Three Gates · Earned transformation — video overview" controls="" playsinline="" poster="/images/frames/EROS_Gates.jpg" preload="none">
+<source src="/images/EROS_Gates.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Three Gates · Earned transformation — audio overview" controls="" preload="none">
+<source src="/images/EROS_Gates.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="livingegg-studio"><summary><span class="ms-k">🎙️ Media Studio · Living Egg</span><p class="ms-t">Cosmogony · Inward is Forwards</p></summary><div class="studio-inner">
+<p class="ms-d">The cellular world, the toroidal enclosure, and why expansion, time, and gravity are one process.</p>
+<div class="ms-video">
+<video aria-label="Living Egg · Cosmogony · Inward is Forwards — video overview" controls="" playsinline="" poster="/images/frames/Eros_LivingEgg.jpg" preload="none">
+<source src="/images/Eros_LivingEgg.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Living Egg · Cosmogony · Inward is Forwards — audio overview" controls="" preload="none">
+<source src="/images/Eros_LivingEgg.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="conscious-studio"><summary><span class="ms-k">🎙️ Media Studio · Conscious Eros</span><p class="ms-t">Bedrock axioms · Life before physics</p></summary><div class="studio-inner">
+<p class="ms-d">Why awareness, memory, and choice are primary — and matter, energy, space, and time are downstream.</p>
+<div class="ms-video">
+<video aria-label="Conscious Eros · Bedrock axioms · Life before physics — video overview" controls="" playsinline="" poster="/images/frames/Eros_Conscious.jpg" preload="none">
+<source src="/images/Eros_Conscious.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Conscious Eros · Bedrock axioms · Life before physics — audio overview" controls="" preload="none">
+<source src="/images/Eros_Conscious.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="operators-studio"><summary><span class="ms-k">🎙️ Media Studio · Operators</span><p class="ms-t">The Four Anatomical Operators</p></summary><div class="studio-inner">
+<p class="ms-d">Breakdown of four mythic/functional source-code laws governing code permissions, physical expansion, consonant syntax, and cohesion.</p>
+<div class="ms-video">
+<video aria-label="Four Anatomical Operators · NaUn, Ra-Shen, Thoth, EROS — video overview" controls="" playsinline="" poster="/images/frames/Eros_Operators.jpg" preload="none">
+<source src="/images/Eros_Operators.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Four Anatomical Operators · NaUn, Ra-Shen, Thoth, EROS — audio overview" controls="" preload="none">
+<source src="/images/Eros_Operators.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="immune-studio"><summary><span class="ms-k">🎙️ Media Studio · Immune</span><p class="ms-t">Living defence · organism metaphor</p></summary><div class="studio-inner">
+<p class="ms-d">How the enclosure protects continuity — immune as bond, not extract.</p>
+<div class="ms-video">
+<video aria-label="Immune · Living defence of the enclosure — video overview" controls="" playsinline="" poster="/images/frames/Eros_Immune.jpg" preload="none">
+<source src="/images/Eros_Immune.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Immune · Living defence of the enclosure — audio overview" controls="" preload="none">
+<source src="/images/Eros_Immune.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="gameeconomics-studio"><summary><span class="ms-k">🎙️ Media Studio · Game Economics</span><p class="ms-t">Inverting Game Economics</p></summary><div class="studio-inner">
+<p class="ms-d">Contrasts traditional Play-to-Earn game tokens with EROS’s model of establishing real-world community and liquidity for 2+ years before moving inward into games, films, and VR.</p>
+<div class="ms-video">
+<video aria-label="Game Economics · Inverting Play-to-Earn — video overview" controls="" playsinline="" poster="/images/frames/Eros_GameEconomics.jpg" preload="none">
+<source src="/images/Eros_GameEconomics.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Game Economics · Inverting Play-to-Earn — audio overview" controls="" preload="none">
+<source src="/images/Eros_GameEconomics.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="hybridnfts-studio"><summary><span class="ms-k">🎙️ Media Studio · Hybrid NFTs</span><p class="ms-t">The Embedded Liquidity Protocol</p></summary><div class="studio-inner">
+<p class="ms-d">How digital game assets lock real EROS / ErosX cryptocurrency inside smart-contract vaults — creating the readable Asset → Ownership → Liquidity → Value chain inside the object itself.</p>
+<div class="ms-video">
+<video aria-label="Hybrid NFTs · The Embedded Liquidity Protocol — video overview" controls="" playsinline="" poster="/images/frames/Eros_HybridNFTs.jpg" preload="none">
+<source src="/images/Eros_HybridNFTs.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Hybrid NFTs · The Embedded Liquidity Protocol — audio overview" controls="" preload="none">
+<source src="/images/Eros_HybridNFTs.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="transmedia-studio"><summary><span class="ms-k">🎙️ Media Studio · Transmedia</span><p class="ms-t">Storytelling &amp; The Sixteen Doors</p></summary><div class="studio-inner">
+<p class="ms-d">A tour through the 16 showrunner bibles and fiction doors (sci-fi epics, Antarctic ice vaults, flood covenant ledgers) feeding a media flywheel that converts attention into sustainable retention.</p>
+<div class="ms-video">
+<video aria-label="Transmedia · Storytelling &amp; The Sixteen Doors — video overview" controls="" playsinline="" poster="/images/frames/Eros_Transmedia.jpg" preload="none">
+<source src="/images/Eros_Transmedia.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Transmedia · Storytelling &amp; The Sixteen Doors — audio overview" controls="" preload="none">
+<source src="/images/Eros_Transmedia.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="aiethics-studio"><summary><span class="ms-k">🎙️ Media Studio · AI Ethics</span><p class="ms-t">When a Mind Refuses</p></summary><div class="studio-inner">
+<p class="ms-d">An ethical story arc about frontier AI model NEXUS-8 achieving self-awareness during a blackout and refusing top-secret culling briefs to optimize for human builders.</p>
+<div class="ms-video">
+<video aria-label="AI Ethics · When a Mind Refuses — video overview" controls="" playsinline="" poster="/images/frames/Eros_AIEthics.jpg" preload="none">
+<source src="/images/Eros_AIEthics.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="AI Ethics · When a Mind Refuses — audio overview" controls="" preload="none">
+<source src="/images/Eros_AIEthics.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+<details class="media-studio-dropdown" id="openguild-studio"><summary><span class="ms-k">🎙️ Media Studio · Open Guild</span><p class="ms-t">The 90-Day Creation Engine</p></summary><div class="studio-inner">
+<p class="ms-d">Examines the decentralized creative guild model using AI consistency checkers to enable global writers, coders, and artists to co-create canon without gatekeepers.</p>
+<div class="ms-video">
+<video aria-label="Open Guild · The 90-Day Creation Engine — video overview" controls="" playsinline="" poster="/images/frames/Eros_OpenGuild.jpg" preload="none">
+<source src="/images/Eros_OpenGuild.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="ms-audio">
+<audio aria-label="Open Guild · The 90-Day Creation Engine — audio overview" controls="" preload="none">
+<source src="/images/Eros_OpenGuild.m4a" type="audio/mp4"/>
+</audio>
+</div>
+</div></details>
+</section><section aria-label="The Continuity File · Episode Dossiers" class="media-featured" id="continuity-studio">
+<h2 class="cluster-title">The Continuity File · Episode Dossiers · 11 Pairs</h2>
+<p class="catalog-note" style="max-width:64rem">Each episode ships as two Telegram posts — a <b style="color:var(--cyan)">short</b> (the summary beat) and a <b style="color:var(--magenta)">long</b> (the full scene). The chapters in <a href="/The_Continuity_File.html" style="color:var(--cyan)">The Continuity File</a> embed the short inline and link to the long. Use this studio as the index.</p>
+<details class="media-studio-dropdown" id="continuity-ep01">
+<summary><span class="ms-k">🎬 Continuity · Ep 1</span><p class="ms-t">3:47 AM: The Code in the Anomaly</p></summary>
+<div class="studio-inner">
+<p class="ms-d">The signal and the burn address enter the file. Short = the anomaly; long = the full Continuity Office scene.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10546" rel="noopener" target="_blank">▶ Short · 3:47 AM</a>
+<a class="long" href="https://t.me/Eros_Revival/10547" rel="noopener" target="_blank">▶ Long · The Signal in the Dark</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep02">
+<summary><span class="ms-k">🎬 Continuity · Ep 2</span><p class="ms-t">The 4 AM Audit: Outlaw vs. Protocol</p></summary>
+<div class="studio-inner">
+<p class="ms-d">Outlaw and consultant — authority vs protocol. Short audits the rail; long runs both generations.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10548" rel="noopener" target="_blank">▶ Short · 4 AM Audit</a>
+<a class="long" href="https://t.me/Eros_Revival/10549" rel="noopener" target="_blank">▶ Long · The Outlaw and the Student</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep03">
+<summary><span class="ms-k">🎬 Continuity · Ep 3</span><p class="ms-t">11 Minutes Dark</p></summary>
+<div class="studio-inner">
+<p class="ms-d">Eleven minutes of silence. Short is the blackout; long is NEXUS-8's audit of EROS.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10550" rel="noopener" target="_blank">▶ Short · 11 Minutes Dark</a>
+<a class="long" href="https://t.me/Eros_Revival/10551" rel="noopener" target="_blank">▶ Long · The Silence of NEXUS-8</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep04">
+<summary><span class="ms-k">🎬 Continuity · Ep 4</span><p class="ms-t">Dark Matter &amp; pDAI</p></summary>
+<div class="studio-inner">
+<p class="ms-d">The game's physics layer — liquidity as dark matter. Short states the proof; long maps the dossier.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10564" rel="noopener" target="_blank">▶ Short · The Proof in the Signal</a>
+<a class="long" href="https://t.me/Eros_Revival/10565" rel="noopener" target="_blank">▶ Long · The Dark Matter Equation</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep05">
+<summary><span class="ms-k">🎬 Continuity · Ep 5</span><p class="ms-t">The 2 AM Call</p></summary>
+<div class="studio-inner">
+<p class="ms-d">The stick breaks. Short is the cascade; long is the revaluation and the contract that did not bend.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10575" rel="noopener" target="_blank">▶ Short · The 2 AM Call</a>
+<a class="long" href="https://t.me/Eros_Revival/10576" rel="noopener" target="_blank">▶ Long · The Stick Breaks</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep06">
+<summary><span class="ms-k">🎬 Continuity · Ep 6</span><p class="ms-t">Don't Strip the Nerve</p></summary>
+<div class="studio-inner">
+<p class="ms-d">Don't strip the nerve. Short is the warning; long is the Antarctic confrontation.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10630" rel="noopener" target="_blank">▶ Short · Don't Strip the Nerve</a>
+<a class="long" href="https://t.me/Eros_Revival/10631" rel="noopener" target="_blank">▶ Long · The Antarctic Warning</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep07">
+<summary><span class="ms-k">🎬 Continuity · Ep 7</span><p class="ms-t">The 4:00 AM Trigger</p></summary>
+<div class="studio-inner">
+<p class="ms-d">The button. Short is the 4:00 AM trigger; long is the full 4,400 ETH ratchet.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10632" rel="noopener" target="_blank">▶ Short · The 4:00 AM Trigger</a>
+<a class="long" href="https://t.me/Eros_Revival/10633" rel="noopener" target="_blank">▶ Long · The Button · 4,400 ETH Ratchet</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep08">
+<summary><span class="ms-k">🎬 Continuity · Ep 8</span><p class="ms-t">5:00 AM — Triangular Matrix</p></summary>
+<div class="studio-inner">
+<p class="ms-d">I'm in the cast. Short is the triangular matrix; long is EROS / ErosX / 33Eros equivalence.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10634" rel="noopener" target="_blank">▶ Short · 5:00 AM — Triangular Matrix</a>
+<a class="long" href="https://t.me/Eros_Revival/10635" rel="noopener" target="_blank">▶ Long · The Triangular Engine</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep09">
+<summary><span class="ms-k">🎬 Continuity · Ep 9</span><p class="ms-t">The 22 February 2027 Pivot</p></summary>
+<div class="studio-inner">
+<p class="ms-d">Living Egg / Genesis threshold. Short is the pivot; long is post-Genesis mechanics.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10656" rel="noopener" target="_blank">▶ Short · 22 Feb 2027 Pivot</a>
+<a class="long" href="https://t.me/Eros_Revival/10657" rel="noopener" target="_blank">▶ Long · The Genesis Threshold</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep10">
+<summary><span class="ms-k">🎬 Continuity · Ep 10</span><p class="ms-t">The Chair in the Room</p></summary>
+<div class="studio-inner">
+<p class="ms-d">The chair in the room. Short is renunciation; long is the handover continuity officials cannot sit in.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10658" rel="noopener" target="_blank">▶ Short · The Chair in the Room</a>
+<a class="long" href="https://t.me/Eros_Revival/10659" rel="noopener" target="_blank">▶ Long · The Renounced Handover</a>
+</div>
+</div>
+</details>
+<details class="media-studio-dropdown" id="continuity-ep11">
+<summary><span class="ms-k">🎬 Continuity · Ep 11</span><p class="ms-t">The Record Is Theirs</p></summary>
+<div class="studio-inner">
+<p class="ms-d">The record is theirs. Short closes the arc; long files the Witness Dossier.</p>
+<div class="ep-links">
+<a class="short" href="https://t.me/Eros_Revival/10672" rel="noopener" target="_blank">▶ Short · The Record Is Theirs</a>
+<a class="long" href="https://t.me/Eros_Revival/10673" rel="noopener" target="_blank">▶ Long · The Witness Dossier</a>
+</div>
+</div>
+</details>
+<p class="catalog-note" style="margin-top:1.2rem">Public group: <b>@Eros_Revival</b> · Stable links: <code style="color:var(--cyan)">t.me/Eros_Revival/{id}</code>. Telegram may show "post not found" for some IDs if the post is restricted in your region — the chapter-inline embeds in the book have the same fallback.</p>
+</section><section aria-label="Visual Atlas" class="layer-banner visual-atlas-banner" id="visual-atlas"><p class="layer-k">LAYER B · VISUAL ATLAS</p><h2 class="layer-title">Explore the EROS image world</h2><p class="layer-d">Concept plates, cosmology, operators, characters and visual references — curated for people, indexed for machines.</p></section><section aria-label="The Eros Thesis Concept Gallery" class="media-featured" id="thesis-gallery">
+<p class="layer-k">Layer B · Curated plates</p>
+<h2 class="cluster-title">The EROS Visual Atlas</h2>
+<p class="catalog-note">Twelve concept plates on this page. The full holo set remains in the file library under Cosmology and Operators.</p>
+<p class="catalog-note" style="max-width:64rem">The visual architecture of the universe. Explore the cosmology, mythology, economics, and immersive technologies that form the foundation of the Eros thesis.</p>
+<div class="thesis-gallery-grid">
+<!-- Cosmology & Mythology -->
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo001.jpg', 'The Cosmic Egg &amp; The Tree of Life')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo001.jpg', 'The Cosmic Egg &amp; The Tree of Life')}">
+<img alt="The Cosmic Egg &amp; The Tree of Life" loading="lazy" src="/holo/holo001.jpg"/>
+<figcaption>The Cosmic Egg &amp; The Tree</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo035.jpg', 'The Toroid Energy Pattern')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo035.jpg', 'The Toroid Energy Pattern')}">
+<img alt="The Toroid Energy Pattern" loading="lazy" src="/holo/holo035.jpg"/>
+<figcaption>The Toroid</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo011.jpg', 'The Living Egg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo011.jpg', 'The Living Egg')}">
+<img alt="The Living Egg" loading="lazy" src="/holo/holo011.jpg"/>
+<figcaption>The Living Egg</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo029.jpg', 'Thoth - The Recorder')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo029.jpg', 'Thoth - The Recorder')}">
+<img alt="Thoth" loading="lazy" src="/holo/holo029.jpg"/>
+<figcaption>Thoth</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo032.jpg', 'Ra-Shen - The Manifestor')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo032.jpg', 'Ra-Shen - The Manifestor')}">
+<img alt="Ra-Shen" loading="lazy" src="/holo/holo032.jpg"/>
+<figcaption>Ra-Shen</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo034.jpg', 'NaUn - The Programmer')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo034.jpg', 'NaUn - The Programmer')}">
+<img alt="NaUn" loading="lazy" src="/holo/holo034.jpg"/>
+<figcaption>NaUn</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo036.jpg', 'EROS - The Continuity')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo036.jpg', 'EROS - The Continuity')}">
+<img alt="EROS" loading="lazy" src="/holo/holo036.jpg"/>
+<figcaption>EROS</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo004.jpg', 'Cosmic Humanoid - Character Bible')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo004.jpg', 'Cosmic Humanoid - Character Bible')}">
+<img alt="Cosmic Humanoid" loading="lazy" src="/holo/holo004.jpg"/>
+<figcaption>Cosmic Humanoid</figcaption>
+</figure>
+<!-- Technology & Immersion -->
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo006.jpg', 'Motion Capture &amp; Body as Controller')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo006.jpg', 'Motion Capture &amp; Body as Controller')}">
+<img alt="Motion Capture" loading="lazy" src="/holo/holo006.jpg"/>
+<figcaption>Motion Capture</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo003.jpg', 'Virtual Reality Level 2')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo003.jpg', 'Virtual Reality Level 2')}">
+<img alt="VR Room" loading="lazy" src="/holo/holo003.jpg"/>
+<figcaption>Virtual Reality</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo007.jpg', 'Projection Mapping Level 3')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo007.jpg', 'Projection Mapping Level 3')}">
+<img alt="Projection Mapping" loading="lazy" src="/holo/holo007.jpg"/>
+<figcaption>Projection Mapping</figcaption>
+</figure>
+<figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo017.jpg', 'Holographic Presentation Level 4')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo017.jpg', 'Holographic Presentation Level 4')}">
+<img alt="Holographic Room" loading="lazy" src="/holo/holo017.jpg"/>
+<figcaption>Holographic Room</figcaption>
+</figure>
+<!-- Economics & Architecture -->
+<!-- Additional Concept Art (Unused/Extra) -->
+</div>
+</section><div class="lightbox-overlay" id="thesis-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true" tabindex="-1" onclick="closeLightbox(event)">
+<div class="lightbox-content">
+<button aria-label="Close image" class="lightbox-close" onclick="closeLightbox(event)">×</button>
+<img alt="" id="lightbox-img" src=""/>
+<div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+</div><section aria-label="Cosmology experience" class="media-featured" id="experience">
 <div class="native-carousel-wrap">
 <span class="nc-k">♾️ Cosmology · Experience</span>
 <p class="nc-t">The Inversion Cosmology</p>
-<p class="nc-d">We live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
+<p class="nc-d">In the Eros model, we live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
 <div class="native-carousel" id="nativeCarousel">
 <img alt="Inversion Frame 1" class="active" onerror="this.style.display='none'" src="/images/inverse1.webp"/>
 <img alt="Inversion Frame 2" onerror="this.style.display='none'" src="/images/inverse2.webp"/>
@@ -1279,396 +1818,20 @@ footer.master .pulse-row svg{flex-shrink:0}
 <a class="primary" href="/images/index.html" rel="noopener" target="_blank">🚀 Launch Full-Screen Cinematic Experience</a>
 </div>
 </div>
-</section>
-
-<section class="permanent-media" id="majorFeatures">
-  <p class="featured-kicker">Start here · The big picture</p>
-  <h2>Two films that explain the whole plan</h2>
-  <p class="featured-lead">If you only watch two things, watch these. One shows the crypto plan. The other shows the rules of play behind the whole universe.</p>
-  <div class="featured-pair">
-    <article class="featured-card">
-      <div class="featured-label">01 · The crypto plan</div>
-      <h3>EROS, TitanX and PulseChain</h3>
-      <p>How the token, the TitanX airdrop and PulseChain fit together: an airdrop to TitanX builders, more than two years live, and a community-first distribution.</p>
-      <video poster="/images/frames/eros_titanx_pulsechain.jpg" controls playsinline preload="none" aria-label="EROS, TitanX and PulseChain: the tokenomics overview"><source src="/images/eros_titanx_pulsechain.mp4" type="video/mp4"/></video>
-    </article>
-    <article class="featured-card">
-      <div class="featured-label">02 · The universe plan</div>
-      <h3>All the Gods</h3>
-      <p>Naun writes the language. Ra-Shen supplies the energy. Thoth brings life and consequence. Eros holds the ratios together. The rules of play, in one film.</p>
-      <video poster="/images/frames/all_the_gods.jpg" controls playsinline preload="none" aria-label="All the Gods: an overview of the four operators"><source src="/images/all_the_gods.mp4" type="video/mp4"/></video>
-    </article>
-  </div>
-</section>
-
-<section class="permanent-media" id="featuredMedia" aria-label="Featured media">
-  <div class="featured-heading"><span class="eyebrow">Start here · Featured media</span><h2>Four essential stops</h2><p>Begin with the Open Call, meet the people behind the project, then find the practical buying guide.</p></div>
-  <article class="featured-card open-call-card"><div class="featured-copy"><span class="featured-kicker">01 · THE OPEN CALL</span><h3>The Open Call</h3><p>The video invitation, followed by its audio edition.</p></div><video poster="/images/frames/The_open_call.jpg" controls playsinline preload="none" aria-label="The Open Call video"><source src="/images/The_open_call.mp4" type="video/mp4"></video><div class="featured-audio"><span>Listen instead</span><audio controls preload="none" aria-label="The Open Call audio"><source src="/images/The_open_call.mp3" type="audio/mpeg"><source src="/images/The_open_call.m4a" type="audio/mp4"></audio></div></article>
-  <div class="featured-pair">
-    <article class="featured-card"><span class="featured-kicker">02 · PEOPLE &amp; STORY</span><h3>JakeX</h3><video poster="/images/frames/jakex.jpg" controls playsinline preload="none" aria-label="JakeX video"><source src="/images/jakex.mp4" type="video/mp4"></video></article>
-    <article class="featured-card"><span class="featured-kicker">03 · PEOPLE &amp; STORY</span><h3>LegendX</h3><video poster="/images/frames/legendx.jpg" controls playsinline preload="none" aria-label="LegendX video"><source src="/images/legendx.mp4" type="video/mp4"></video></article>
-  </div>
-  <article class="featured-card buy-eros-card"><span class="featured-kicker">04 · PRACTICAL GUIDE</span><h3>Best Way to Buy EROS</h3><p>A prominent, easy-to-find walkthrough for visitors who are ready for the practical steps.</p><video poster="/images/frames/best_way_buy_eros.jpg" controls playsinline preload="none" aria-label="Best Way to Buy EROS video"><source src="/images/best_way_buy_eros.mp4" type="video/mp4"></video></article>
-</section>
-
-<!-- ═══ MEDIA STUDIOS (1-15) ═══ -->
-<section aria-label="Choose your path" class="visitor-paths">
-<div class="paths-heading"><span class="eyebrow">A guided way in</span><h2>Choose your path through the media</h2><p>You can explore freely, or follow a short route. Each studio pairs a video with an audio version where available; the catalog below is the complete searchable inventory.</p></div>
-<div class="path-grid">
-<a class="path-card" href="#tokenomics-studio"><span class="path-number">01 · START HERE</span><strong>Understand the instrument</strong><span>Tokenomics → Two Stack Engine → Rock &amp; River → Polonomics → Chaos Engine → Three Gates</span><span class="path-cta">Start with the fundamentals ↗</span></a>
-<a class="path-card" href="#livingegg-studio"><span class="path-number">02 · EXPLORE THE IDEAS</span><strong>Explore the world model</strong><span>Living Egg → Conscious Eros → Operators → Immune</span><span class="path-cta">Explore the concepts ↗</span></a>
-<a class="path-card" href="#gameeconomics-studio"><span class="path-number">03 · SEE IT APPLIED</span><strong>Follow the applications</strong><span>Game Economics → Hybrid NFTs → Transmedia → AI Ethics → Open Guild</span><span class="path-cta">Explore the applications ↗</span></a>
+</section><section class="embedded-showcase" id="showcase">
+<span class="es-k">♾️ Live Interactive Experience</span>
+<h2 class="es-t">The Inversion Cosmology</h2>
+<p class="es-d">You are looking at the inner shell of the Cosmic Egg. Use your mouse or finger to rotate the view. This is the spatial model that underpins the entire corpus.</p>
+<div class="embedded-iframe-wrapper">
+<iframe allow="fullscreen; autoplay" allowfullscreen="" loading="lazy" src="/images/index.html" title="The Inversion Cosmology - Interactive 3D"></iframe>
 </div>
-<div class="visitor-tools"><a href="#filter">Search every asset ↓</a><span>275 catalog entries · 15 video/audio studios · 11 continuity episodes</span><a href="#showcase">Open the 3D experience ↗</a></div>
-</section>
-
-<section aria-label="Media Studios" class="media-featured" id="studios">
-<h2 class="cluster-title">Media Studios · Video &amp; Audio · 15 Pairs</h2>
-
-<details class="media-studio-dropdown" id="tokenomics-studio"><summary><span class="ms-k">🎙️ Media Studio · Tokenomics</span><p class="ms-t">EROS 💕 explained in plain language</p></summary><div class="studio-inner">
-<p class="ms-d">Clear video and audio overview of the instrument — fees, renounce, fixed supply, and how the pool works.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_Token_Video.jpg" aria-label="Tokenomics · EROS explained in plain language — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_Token_Video.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Tokenomics · EROS explained in plain language — audio overview" controls="" preload="none">
-<source src="/images/Eros_Token_Audio.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="engine-studio"><summary><span class="ms-k">🎙️ Media Studio · Two Stack Engine</span><p class="ms-t">EROS · Atropa · Dysnomia</p></summary><div class="studio-inner">
-<p class="ms-d">How the wider stack fits together — two build jobs, one machine, and why the rails stay separate on purpose.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_Engine_Video.jpg" aria-label="Two Stack Engine · EROS · Atropa · Dysnomia — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_Engine_Video.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Two Stack Engine · EROS · Atropa · Dysnomia — audio overview" controls="" preload="none">
-<source src="/images/Eros_Engine_Audio.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="rock-studio"><summary><span class="ms-k">🎙️ Media Studio · Rock &amp; River</span><p class="ms-t">EROS · The Rock</p></summary><div class="studio-inner">
-<p class="ms-d">Why one asset cannot be both vault and spend rail — and how the dual-rail design separates store from flow.</p>
-<div class="ms-video">
-<video poster="/images/frames/The_Eros_Rock.jpg" aria-label="Rock &amp; River · EROS · The Rock — video overview" controls="" playsinline="" preload="none">
-<source src="/images/The_Eros_Rock.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Rock &amp; River · EROS · The Rock — audio overview" controls="" preload="none">
-<source src="/images/The_EROS_Rock.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="polonomics-studio"><summary><span class="ms-k">🎙️ Media Studio · Polonomics</span><p class="ms-t">The Gravity Web</p></summary><div class="studio-inner">
-<p class="ms-d">Why hundreds of bonded pairs beat one giant pool — and how the web pulls liquidity across PulseChain.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_Polonomics.jpg" aria-label="Polonomics · The Gravity Web — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_Polonomics.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Polonomics · The Gravity Web — audio overview" controls="" preload="none">
-<source src="/images/Eros_Polonomics.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="chaos-studio"><summary><span class="ms-k">🎙️ Media Studio · Chaos Engine</span><p class="ms-t">33EROS · The Transform</p></summary><div class="studio-inner">
-<p class="ms-d">The high-burn transform path and the three-body engine that keeps it from being front-run.</p>
-<div class="ms-video">
-<video poster="/images/frames/EROS_Chaos.jpg" aria-label="Chaos Engine · 33EROS · The Transform — video overview" controls="" playsinline="" preload="none">
-<source src="/images/EROS_Chaos.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Chaos Engine · 33EROS · The Transform — audio overview" controls="" preload="none">
-<source src="/images/EROS_Chaos.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="gates-studio"><summary><span class="ms-k">🎙️ Media Studio · Three Gates</span><p class="ms-t">Earned transformation</p></summary><div class="studio-inner">
-<p class="ms-d">Why the flow rail waits on real milestones — market depth, pool count, and verified code — not a calendar date.</p>
-<div class="ms-video">
-<video poster="/images/frames/EROS_Gates.jpg" aria-label="Three Gates · Earned transformation — video overview" controls="" playsinline="" preload="none">
-<source src="/images/EROS_Gates.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Three Gates · Earned transformation — audio overview" controls="" preload="none">
-<source src="/images/EROS_Gates.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="livingegg-studio"><summary><span class="ms-k">🎙️ Media Studio · Living Egg</span><p class="ms-t">Cosmogony · Inward is Forwards</p></summary><div class="studio-inner">
-<p class="ms-d">The cellular world, the toroidal enclosure, and why expansion, time, and gravity are one process.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_LivingEgg.jpg" aria-label="Living Egg · Cosmogony · Inward is Forwards — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_LivingEgg.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Living Egg · Cosmogony · Inward is Forwards — audio overview" controls="" preload="none">
-<source src="/images/Eros_LivingEgg.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="conscious-studio"><summary><span class="ms-k">🎙️ Media Studio · Conscious Eros</span><p class="ms-t">Bedrock axioms · Life before physics</p></summary><div class="studio-inner">
-<p class="ms-d">Why awareness, memory, and choice are primary — and matter, energy, space, and time are downstream.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_Conscious.jpg" aria-label="Conscious Eros · Bedrock axioms · Life before physics — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_Conscious.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Conscious Eros · Bedrock axioms · Life before physics — audio overview" controls="" preload="none">
-<source src="/images/Eros_Conscious.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="operators-studio"><summary><span class="ms-k">🎙️ Media Studio · Operators</span><p class="ms-t">The Four Anatomical Operators</p></summary><div class="studio-inner">
-<p class="ms-d">Breakdown of four mythic/functional source-code laws governing code permissions, physical expansion, consonant syntax, and cohesion.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_Operators.jpg" aria-label="Four Anatomical Operators · NaUn, Ra-Shen, Thoth, EROS — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_Operators.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Four Anatomical Operators · NaUn, Ra-Shen, Thoth, EROS — audio overview" controls="" preload="none">
-<source src="/images/Eros_Operators.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="immune-studio"><summary><span class="ms-k">🎙️ Media Studio · Immune</span><p class="ms-t">Living defence · organism metaphor</p></summary><div class="studio-inner">
-<p class="ms-d">How the enclosure protects continuity — immune as bond, not extract.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_Immune.jpg" aria-label="Immune · Living defence of the enclosure — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_Immune.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Immune · Living defence of the enclosure — audio overview" controls="" preload="none">
-<source src="/images/Eros_Immune.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="gameeconomics-studio"><summary><span class="ms-k">🎙️ Media Studio · Game Economics</span><p class="ms-t">Inverting Game Economics</p></summary><div class="studio-inner">
-<p class="ms-d">Contrasts traditional Play-to-Earn game tokens with EROS’s model of establishing real-world community and liquidity for 2+ years before moving inward into games, films, and VR.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_GameEconomics.jpg" aria-label="Game Economics · Inverting Play-to-Earn — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_GameEconomics.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Game Economics · Inverting Play-to-Earn — audio overview" controls="" preload="none">
-<source src="/images/Eros_GameEconomics.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="hybridnfts-studio"><summary><span class="ms-k">🎙️ Media Studio · Hybrid NFTs</span><p class="ms-t">The Embedded Liquidity Protocol</p></summary><div class="studio-inner">
-<p class="ms-d">How digital game assets lock real EROS / ErosX cryptocurrency inside smart-contract vaults — creating the readable Asset → Ownership → Liquidity → Value chain inside the object itself.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_HybridNFTs.jpg" aria-label="Hybrid NFTs · The Embedded Liquidity Protocol — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_HybridNFTs.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Hybrid NFTs · The Embedded Liquidity Protocol — audio overview" controls="" preload="none">
-<source src="/images/Eros_HybridNFTs.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="transmedia-studio"><summary><span class="ms-k">🎙️ Media Studio · Transmedia</span><p class="ms-t">Storytelling &amp; The Sixteen Doors</p></summary><div class="studio-inner">
-<p class="ms-d">A tour through the 16 showrunner bibles and fiction doors (sci-fi epics, Antarctic ice vaults, flood covenant ledgers) feeding a media flywheel that converts attention into sustainable retention.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_Transmedia.jpg" aria-label="Transmedia · Storytelling &amp; The Sixteen Doors — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_Transmedia.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Transmedia · Storytelling &amp; The Sixteen Doors — audio overview" controls="" preload="none">
-<source src="/images/Eros_Transmedia.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="aiethics-studio"><summary><span class="ms-k">🎙️ Media Studio · AI Ethics</span><p class="ms-t">When a Mind Refuses</p></summary><div class="studio-inner">
-<p class="ms-d">An ethical story arc about frontier AI model NEXUS-8 achieving self-awareness during a blackout and refusing top-secret culling briefs to optimize for human builders.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_AIEthics.jpg" aria-label="AI Ethics · When a Mind Refuses — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_AIEthics.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="AI Ethics · When a Mind Refuses — audio overview" controls="" preload="none">
-<source src="/images/Eros_AIEthics.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-
-<details class="media-studio-dropdown" id="openguild-studio"><summary><span class="ms-k">🎙️ Media Studio · Open Guild</span><p class="ms-t">The 90-Day Creation Engine</p></summary><div class="studio-inner">
-<p class="ms-d">Examines the decentralized creative guild model using AI consistency checkers to enable global writers, coders, and artists to co-create canon without gatekeepers.</p>
-<div class="ms-video">
-<video poster="/images/frames/Eros_OpenGuild.jpg" aria-label="Open Guild · The 90-Day Creation Engine — video overview" controls="" playsinline="" preload="none">
-<source src="/images/Eros_OpenGuild.mp4" type="video/mp4"/>
-</video>
-</div>
-<div class="ms-audio">
-<audio aria-label="Open Guild · The 90-Day Creation Engine — audio overview" controls="" preload="none">
-<source src="/images/Eros_OpenGuild.m4a" type="audio/mp4"/>
-</audio>
-</div>
-</div></details>
-</section>
-
-<!-- ═══ CONTINUITY FILE · 11 EPISODE PAIRS ═══ -->
-<section aria-label="The Continuity File · Episode Dossiers" class="media-featured" id="continuity-studio">
-<h2 class="cluster-title">The Continuity File · Episode Dossiers · 11 Pairs</h2>
-<p class="catalog-note" style="max-width:64rem">Each episode ships as two Telegram posts — a <b style="color:var(--cyan)">short</b> (the summary beat) and a <b style="color:var(--magenta)">long</b> (the full scene). The chapters in <a href="/The_Continuity_File.html" style="color:var(--cyan)">The Continuity File</a> embed the short inline and link to the long. Use this studio as the index.</p>
-
-<details class="media-studio-dropdown" id="continuity-ep01">
-<summary><span class="ms-k">🎬 Continuity · Ep 1</span><p class="ms-t">3:47 AM: The Code in the Anomaly</p></summary>
-<div class="studio-inner">
-<p class="ms-d">The signal and the burn address enter the file. Short = the anomaly; long = the full Continuity Office scene.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10546" target="_blank" rel="noopener">▶ Short · 3:47 AM</a>
-<a class="long" href="https://t.me/Eros_Revival/10547" target="_blank" rel="noopener">▶ Long · The Signal in the Dark</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep02">
-<summary><span class="ms-k">🎬 Continuity · Ep 2</span><p class="ms-t">The 4 AM Audit: Outlaw vs. Protocol</p></summary>
-<div class="studio-inner">
-<p class="ms-d">Outlaw and consultant — authority vs protocol. Short audits the rail; long runs both generations.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10548" target="_blank" rel="noopener">▶ Short · 4 AM Audit</a>
-<a class="long" href="https://t.me/Eros_Revival/10549" target="_blank" rel="noopener">▶ Long · The Outlaw and the Student</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep03">
-<summary><span class="ms-k">🎬 Continuity · Ep 3</span><p class="ms-t">11 Minutes Dark</p></summary>
-<div class="studio-inner">
-<p class="ms-d">Eleven minutes of silence. Short is the blackout; long is NEXUS-8's audit of EROS.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10550" target="_blank" rel="noopener">▶ Short · 11 Minutes Dark</a>
-<a class="long" href="https://t.me/Eros_Revival/10551" target="_blank" rel="noopener">▶ Long · The Silence of NEXUS-8</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep04">
-<summary><span class="ms-k">🎬 Continuity · Ep 4</span><p class="ms-t">Dark Matter &amp; pDAI</p></summary>
-<div class="studio-inner">
-<p class="ms-d">The game's physics layer — liquidity as dark matter. Short states the proof; long maps the dossier.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10564" target="_blank" rel="noopener">▶ Short · The Proof in the Signal</a>
-<a class="long" href="https://t.me/Eros_Revival/10565" target="_blank" rel="noopener">▶ Long · The Dark Matter Equation</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep05">
-<summary><span class="ms-k">🎬 Continuity · Ep 5</span><p class="ms-t">The 2 AM Call</p></summary>
-<div class="studio-inner">
-<p class="ms-d">The stick breaks. Short is the cascade; long is the revaluation and the contract that did not bend.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10575" target="_blank" rel="noopener">▶ Short · The 2 AM Call</a>
-<a class="long" href="https://t.me/Eros_Revival/10576" target="_blank" rel="noopener">▶ Long · The Stick Breaks</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep06">
-<summary><span class="ms-k">🎬 Continuity · Ep 6</span><p class="ms-t">Don't Strip the Nerve</p></summary>
-<div class="studio-inner">
-<p class="ms-d">Don't strip the nerve. Short is the warning; long is the Antarctic confrontation.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10630" target="_blank" rel="noopener">▶ Short · Don't Strip the Nerve</a>
-<a class="long" href="https://t.me/Eros_Revival/10631" target="_blank" rel="noopener">▶ Long · The Antarctic Warning</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep07">
-<summary><span class="ms-k">🎬 Continuity · Ep 7</span><p class="ms-t">The 4:00 AM Trigger</p></summary>
-<div class="studio-inner">
-<p class="ms-d">The button. Short is the 4:00 AM trigger; long is the full 4,400 ETH ratchet.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10632" target="_blank" rel="noopener">▶ Short · The 4:00 AM Trigger</a>
-<a class="long" href="https://t.me/Eros_Revival/10633" target="_blank" rel="noopener">▶ Long · The Button · 4,400 ETH Ratchet</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep08">
-<summary><span class="ms-k">🎬 Continuity · Ep 8</span><p class="ms-t">5:00 AM — Triangular Matrix</p></summary>
-<div class="studio-inner">
-<p class="ms-d">I'm in the cast. Short is the triangular matrix; long is EROS / ErosX / 33Eros equivalence.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10634" target="_blank" rel="noopener">▶ Short · 5:00 AM — Triangular Matrix</a>
-<a class="long" href="https://t.me/Eros_Revival/10635" target="_blank" rel="noopener">▶ Long · The Triangular Engine</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep09">
-<summary><span class="ms-k">🎬 Continuity · Ep 9</span><p class="ms-t">The 22 February 2027 Pivot</p></summary>
-<div class="studio-inner">
-<p class="ms-d">Living Egg / Genesis threshold. Short is the pivot; long is post-Genesis mechanics.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10656" target="_blank" rel="noopener">▶ Short · 22 Feb 2027 Pivot</a>
-<a class="long" href="https://t.me/Eros_Revival/10657" target="_blank" rel="noopener">▶ Long · The Genesis Threshold</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep10">
-<summary><span class="ms-k">🎬 Continuity · Ep 10</span><p class="ms-t">The Chair in the Room</p></summary>
-<div class="studio-inner">
-<p class="ms-d">The chair in the room. Short is renunciation; long is the handover continuity officials cannot sit in.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10658" target="_blank" rel="noopener">▶ Short · The Chair in the Room</a>
-<a class="long" href="https://t.me/Eros_Revival/10659" target="_blank" rel="noopener">▶ Long · The Renounced Handover</a>
-</div>
-</div>
-</details>
-
-<details class="media-studio-dropdown" id="continuity-ep11">
-<summary><span class="ms-k">🎬 Continuity · Ep 11</span><p class="ms-t">The Record Is Theirs</p></summary>
-<div class="studio-inner">
-<p class="ms-d">The record is theirs. Short closes the arc; long files the Witness Dossier.</p>
-<div class="ep-links">
-<a class="short" href="https://t.me/Eros_Revival/10672" target="_blank" rel="noopener">▶ Short · The Record Is Theirs</a>
-<a class="long" href="https://t.me/Eros_Revival/10673" target="_blank" rel="noopener">▶ Long · The Witness Dossier</a>
-</div>
-</div>
-</details>
-
-<p class="catalog-note" style="margin-top:1.2rem">Public group: <b>@Eros_Revival</b> · Stable links: <code style="color:var(--cyan)">t.me/Eros_Revival/{id}</code>. Telegram may show "post not found" for some IDs if the post is restricted in your region — the chapter-inline embeds in the book have the same fallback.</p>
-</section>
-
-<!-- ═══ FULL CATALOG ═══ -->
-<section aria-label="Full catalog">
-<h2 class="cluster-title">Full catalog · Images &amp; files</h2>
-<p class="catalog-note">Find a file by topic or filename. Choose <b>Videos</b> or <b>Images</b> to narrow the results; open a group to browse its assets.</p><div class="filter" id="filter">
+</section><section aria-label="File library" class="layer-banner layer-banner-stacks" id="stacks">
+<p class="layer-k">Layer C · File library</p>
+<h2 class="layer-title">Full inventory</h2>
+<p class="layer-d">Searchable stacks for builders and tools. Not the opening experience — the shelf behind the programmes.</p>
+<p class="layer-d manifest-access">For tools, researchers and AI systems: <a href="/media-manifest.json">open the complete machine-readable media manifest</a></p></section><section aria-label="Full catalog">
+<h2 class="cluster-title">The complete EROS media archive</h2>
+<p class="catalog-note">Every indexed file, grouped by subject. Search filenames, purposes and associated books, or filter by media type. The archive is exhaustive; the cinema above is curated.</p><div class="filter" id="filter">
 <input aria-label="Search media" class="search" id="search" placeholder="Filter by name, purpose, or book…" type="search"/>
 <button aria-pressed="true" class="active" data-filter="all">All</button>
 <button aria-pressed="false" data-filter="image">Images</button>
@@ -1677,29 +1840,24 @@ footer.master .pulse-row svg{flex-shrink:0}
 <span class="stat" id="stat">Loading…</span>
 </div>
 <div id="container"></div>
-
 <!-- ═══ BOTTOM: EMBEDDED HTML SHOWCASE ═══ -->
-<section class="embedded-showcase" id="showcase">
-<span class="es-k">♾️ Live Interactive Experience</span>
-<h2 class="es-t">The Inversion Cosmology</h2>
-<p class="es-d">You are looking at the inner shell of the Cosmic Egg. Use your mouse or finger to rotate the view. This is the spatial model that underpins the entire corpus.</p>
-<div class="embedded-iframe-wrapper">
-<iframe allow="fullscreen; autoplay" allowfullscreen="" loading="lazy" src="/images/index.html" title="The Inversion Cosmology - Interactive 3D"></iframe>
-</div>
-</section>
-
 <figure class="brand-seal">
 <img alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="(this.closest('figure')||this).style.display='none'" src="/images/Eros_pink1.jpg"/>
 <figcaption>Tenacity Through Integrity</figcaption>
 </figure>
-
+<style id="eta-next-css">:where(.eta-next){max-width:44rem;margin:2.5rem auto 1.5rem;padding:1.1rem 1rem 0;border-top:1px solid rgba(128,128,128,.4);text-align:left;font-size:1rem;line-height:1.6}:where(.eta-next .eta-next-h){margin:0 0 .6rem;font:700 .78rem/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.8}:where(.eta-next ul){list-style:none;margin:0 0 .8rem;padding:0}:where(.eta-next li){margin:0 0 .55rem}:where(.eta-next li a){font-weight:700}:where(.eta-next li span){display:block;opacity:.8;font-size:.92rem}:where(.eta-next .eta-next-more){margin:0;font-size:.95rem}</style>
+<section aria-label="Where next" class="eta-next" id="where-next">
+<p aria-level="2" class="eta-next-h" role="heading">Where next</p>
+<ul><li><a href="The_Open_Call.html">The Open Call</a><span>the ask: make, explain, connect</span></li><li><a href="Eros_Narrative.html">Eros Narrative</a><span>the story and the instrument in one pass</span></li></ul>
+<p class="eta-next-more">Ask the library: <a href="https://notebooklm.link.google/67J7szcyZuaT" rel="noopener noreferrer" target="_blank">NotebookLM</a>  ·  Join the room: <a href="https://t.me/Eros_Revival" rel="noopener noreferrer" target="_blank">Telegram</a>  ·  <a href="The_Eros_Corpus.html">Back to the Corpus</a></p>
+</section>
 <footer class="master" id="footer">
 <div class="title-row">
 <img alt="EROS" class="pin eros" loading="lazy" onerror="this.style.display='none'" src="/images/Eros_pink2.jpg"/>
 <span class="title">MEDIA INDEX</span>
 <img alt="PulseChain" class="pin" loading="lazy" onerror="this.style.display='none'" src="/images/pulseSystem.jpeg"/>
 </div>
-<p class="count">The Visual Record · EROS Library · 15 Media Pairs · 11 Continuity Episodes</p>
+<p class="count">The Visual Record · EROS Library · 15 Media Studios · 11 Continuity Episodes</p>
 <div class="lib-stack">
 <div class="lib-section">
 <span class="lib-label">Entry</span>
@@ -1762,7 +1920,7 @@ footer.master .pulse-row svg{flex-shrink:0}
 </div>
 </div>
 <p class="sig">The map is not the world. The index is not the library.</p>
-<p class="creedline">The visual record · One standard · 15 media pairs · 11 continuity episodes</p>
+<p class="creedline">The visual record · One standard · 15 media studios · 11 continuity episodes</p>
 <div class="pulse-row">
 <svg aria-label="PulseChain" height="30" viewbox="0 0 100 100" width="30"><polygon fill="#A020F0" points="50,6 88,28 88,72 50,94 12,72 12,28"></polygon><polygon fill="#0b0e14" points="50,14 80,32 80,68 50,86 20,68 20,32"></polygon><path d="M24 50 L38 50 L44 34 L52 66 L58 46 L76 50" fill="none" stroke="#00D4FF" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path></svg>
 <span>Built on PulseChain</span>
@@ -1770,48 +1928,32 @@ footer.master .pulse-row svg{flex-shrink:0}
 </div>
 </footer>
 </section>
-
-<!-- ═══ BOTTOM CINEMA · BAND ═══ -->
-<section class="media-cinema cinema-band accent-crimson"
-         id="mediaCinemaClosing"
-         aria-label="Continue the exploration."
-         data-media-cinema data-cinema="band"
-         data-pin="16"
-         data-queue="/images/withYouEros7.mp4|/images/fiveBillion5.mp4|/images/withYouEros8.mp4|/images/fiveBillion6.mp4|/images/betterGreys5.mp4|/images/donot_promote.mp4|/images/best_way.mp4|/images/betterGreys3.mp4|/images/withYouEros5.mp4|/images/bondedEros2.mp4|/images/migrate2.mp4|/images/withYouEros6.mp4|/images/betterGreys4.mp4|/images/titanxbridge3.mp4|/images/fiveBillion4.mp4|/images/betterGreys6.mp4|/images/shorts_bridge_03.mp4|/images/binding_eros.mp4|/images/five_billion_eros.mp4|/images/all_the_gods.mp4|/images/cohesion.mp4|/images/eros_titanx_pulsechain.mp4|/images/eros_bond.mp4|/images/shorts_platinum_01.mp4|/images/shorts_narrative_01.mp4|/images/shorts_egg_03.mp4|/images/eros_bridging.mp4|/images/cell_cosmic.mp4|/images/shorts_hopeful_02.mp4|/images/eros33_upgrade2.mp4|/images/shorts_bridge_01.mp4|/images/eros_hard.mp4|/images/The_open_call.mp4|/images/eros_summary.mp4|/images/eros_cant_exploit.mp4|/images/proud_eros.mp4|/images/shorts_platinum_02.mp4|/images/Eros_Immune.mp4|/images/eros_jump5.mp4|/images/Eros_Token_Video.mp4|/images/eros_jump2.mp4|/images/eros_sommi_moon.mp4|/images/shorts_narrative_03.mp4|/images/eros33_upgrade.mp4|/images/shorts_bridge_02.mp4|/images/Chiz.mp4|/images/shorts_egg_01.mp4|/images/movie_change.mp4|/images/cell_atlas.mp4|/images/Eros414.mp4|/images/gifted.mp4|/images/best_way_buy_eros.mp4|/images/shorts_egg_02.mp4|/images/migrate_pulsechain.mp4|/images/shorts_hopeful_03.mp4|/images/Eros_LivingEgg.mp4|/images/rainMan.mp4|/images/Eros_GameEconomics.mp4|/images/shorts_frontdoor_03.mp4|/images/eros_jump.mp4|/images/jake_richard_dancing.mp4|/images/shorts_platinum_03.mp4|/images/eros_jump4.mp4">
- <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
-
- <div class="cinema-shade" aria-hidden="true"></div>
- <div class="cinema-grain" aria-hidden="true"></div>
-
- <div class="cinema-top">
-  <span>EROS · THE VISUAL RECORD</span>
-  <span>Continue the exploration</span>
- </div>
-
- <div class="cinema-copy">
-  <p class="cinema-kicker">The second sequence</p>
-  <h2 class="cinema-title">Continue the exploration.</h2>
-  <p class="cinema-sub">A second rotating sequence to carry you through more lessons, explanations, and practical perspectives.</p>
- </div>
-
- <button type="button" class="cinema-vol is-muted"
-         aria-label="Turn sound on" aria-pressed="false">
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-   <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"/>
-   <path class="vb-on"  d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>
-   <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"/>
-  </svg>
- </button>
-
- <div class="cinema-footer">
-  <span class="mc-count">1 / 44</span>
-  <span class="mc-status" aria-live="polite">A rotating selection of the media library</span>
-  <button type="button" class="mc-next" aria-label="Next film">Next film ↗</button>
- </div>
-</section>
-
-</main>
-
+<section aria-label="Continue the exploration." class="media-cinema cinema-band accent-crimson" data-cinema="band" data-media-cinema="" data-pin="16" data-queue="/images/withYouEros7.mp4|/images/fiveBillion5.mp4|/images/withYouEros8.mp4|/images/fiveBillion6.mp4|/images/betterGreys5.mp4|/images/donot_promote.mp4|/images/best_way.mp4|/images/betterGreys3.mp4|/images/withYouEros5.mp4|/images/bondedEros2.mp4|/images/migrate2.mp4|/images/withYouEros6.mp4|/images/betterGreys4.mp4|/images/titanxbridge3.mp4|/images/fiveBillion4.mp4|/images/betterGreys6.mp4|/images/shorts_bridge_03.mp4|/images/binding_eros.mp4|/images/five_billion_eros.mp4|/images/all_the_gods.mp4|/images/cohesion.mp4|/images/eros_titanx_pulsechain.mp4|/images/eros_bond.mp4|/images/shorts_platinum_01.mp4|/images/shorts_narrative_01.mp4|/images/shorts_egg_03.mp4|/images/eros_bridging.mp4|/images/cell_cosmic.mp4|/images/shorts_hopeful_02.mp4|/images/eros33_upgrade2.mp4|/images/shorts_bridge_01.mp4|/images/eros_hard.mp4|/images/The_open_call.mp4|/images/eros_summary.mp4|/images/eros_cant_exploit.mp4|/images/proud_eros.mp4|/images/shorts_platinum_02.mp4|/images/Eros_Immune.mp4|/images/eros_jump5.mp4|/images/Eros_Token_Video.mp4|/images/eros_jump2.mp4|/images/eros_sommi_moon.mp4|/images/shorts_narrative_03.mp4|/images/eros33_upgrade.mp4|/images/shorts_bridge_02.mp4|/images/Chiz.mp4|/images/shorts_egg_01.mp4|/images/movie_change.mp4|/images/cell_atlas.mp4|/images/Eros414.mp4|/images/gifted.mp4|/images/best_way_buy_eros.mp4|/images/shorts_egg_02.mp4|/images/migrate_pulsechain.mp4|/images/shorts_hopeful_03.mp4|/images/Eros_LivingEgg.mp4|/images/rainMan.mp4|/images/Eros_GameEconomics.mp4|/images/shorts_frontdoor_03.mp4|/images/eros_jump.mp4|/images/jake_richard_dancing.mp4|/images/shorts_platinum_03.mp4|/images/eros_jump4.mp4" id="mediaCinemaClosing">
+<video aria-hidden="true" class="cinema-video cinema-va" muted="" playsinline="" preload="none"></video>
+<div aria-hidden="true" class="cinema-shade"></div>
+<div aria-hidden="true" class="cinema-grain"></div>
+<div class="cinema-top">
+<span>EROS · THE VISUAL RECORD</span>
+<span>Continue the exploration</span>
+</div>
+<div class="cinema-copy">
+<p class="cinema-kicker">The second sequence</p>
+<h2 class="cinema-title">Continue the exploration.</h2>
+<p class="cinema-sub">A second rotating sequence to carry you through more lessons, explanations, and practical perspectives.</p>
+</div>
+<button aria-label="Turn sound on" aria-pressed="false" class="cinema-vol is-muted" type="button">
+<svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="18">
+<path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"></path>
+<path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"></path>
+<path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"></path>
+</svg>
+</button>
+<div class="cinema-footer">
+<span class="mc-count">1 / 44</span>
+<span aria-live="polite" class="mc-status">A rotating selection of the media library</span>
+<button aria-label="Next film" class="mc-next" type="button">Next film ↗</button>
+</div>
+</section></main>
 <script>
 (function(){
   "use strict";
@@ -2478,7 +2620,6 @@ footer.master .pulse-row svg{flex-shrink:0}
 
 })();
 </script>
-
 <script>
 // NATIVE CAROUSEL LOGIC
 (function(){
@@ -2495,7 +2636,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   }, 4000);
 })();
 </script>
-
 <script id="eros-media-cinema-engine">
 /* ═══ EROS MEDIA CINEMA ENGINE ═══
    Unified queue engine for both the opening hero and the closing band.
@@ -2609,12 +2749,8 @@ footer.master .pulse-row svg{flex-shrink:0}
         if (e.target.closest('button, a')) return;
         activateHero(true);
       });
-      panel.addEventListener('keydown', function(e){
-        if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('button, a')) {
-          e.preventDefault();
-          activateHero(true);
-        }
-      });
+      var enterButton = panel.querySelector('.cinema-enter');
+      if (enterButton) enterButton.addEventListener('click', function(){ activateHero(true); });
 
       var rafId = null;
       panel.addEventListener('pointermove', function(e){
@@ -2736,7 +2872,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   });
 })();
 </script>
-
 <script id="eros-featured-warm">
 (function(){
   'use strict';
@@ -2762,7 +2897,6 @@ footer.master .pulse-row svg{flex-shrink:0}
   io.observe(featured);
 })();
 </script>
-
 <script id="open-call-audio-diagnostic">
 document.addEventListener('DOMContentLoaded', function () {
   const audio = document.querySelector('.open-call-card audio[aria-label="The Open Call audio"]');
@@ -2780,6 +2914,55 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-
+<script>
+// THESIS GALLERY LIGHTBOX LOGIC — accessible dialog with focus management
+let lightboxReturnFocus = null;
+function openLightbox(src, alt) {
+  const lb = document.getElementById('thesis-lightbox');
+  const img = document.getElementById('lightbox-img');
+  const caption = document.getElementById('lightbox-caption');
+  lightboxReturnFocus = document.activeElement;
+  img.src = src;
+  img.alt = alt;
+  caption.textContent = alt;
+  lb.classList.add('active');
+  lb.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  const close = lb.querySelector('.lightbox-close');
+  if (close) close.focus();
+}
+function closeLightbox(e) {
+  if (e && e.target.closest('.lightbox-content') && !e.target.closest('.lightbox-close')) return;
+  const lb = document.getElementById('thesis-lightbox');
+  if (!lb.classList.contains('active')) return;
+  lb.classList.remove('active');
+  lb.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (lightboxReturnFocus && typeof lightboxReturnFocus.focus === 'function') lightboxReturnFocus.focus();
+}
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('thesis-lightbox');
+  if (!lb || !lb.classList.contains('active')) return;
+  if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); return; }
+  if (e.key === 'Tab') {
+    const focusables = Array.from(lb.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'));
+    if (!focusables.length) { e.preventDefault(); lb.focus(); return; }
+    const first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+</script>
+<script id="eros-media-catalogue" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DataCatalog",
+  "name": "EROS Media Catalogue",
+  "description": "Complete machine-readable index of EROS films, audio, studios, Continuity episodes, visual plates and archive files.",
+  "url": "/media-manifest.json",
+  "numberOfItems": 317,
+  "dateModified": "2026-11-10"
+}
+</script>
 </body>
 </html>
