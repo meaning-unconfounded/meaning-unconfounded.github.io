@@ -145,7 +145,7 @@ table.ref td strong{color:var(--gold2)}
 .card h3{margin:0 0 .45rem;font-size:1.15rem}
 .card p{margin:0;font-size:.9rem;font-family:var(--sans);color:var(--muted);line-height:1.62}
 
-.operator{border-top:3px solid var(--violet);margin:1.15rem 0;padding:1.15rem 1.2rem;border-radius:0 0 14px 14px;background:var(--surface);border-left:1px solid var(--violet-line);border-right:1px solid var(--violet-line);border-bottom:1px solid var(--violet-line)}
+.operator{border-top:3px solid var(--violet);margin:1.15rem 0;padding:1.15rem 1.2rem;border-radius:12px;background:var(--surface);border-left:1px solid var(--violet-line);border-right:1px solid var(--violet-line);border-bottom:1px solid var(--violet-line);overflow:hidden;box-sizing:border-box}
 .operator.ra{border-top-color:var(--gold)}
 .operator.thoth{border-top-color:var(--cyan)}
 .operator.eros{border-top-color:var(--pink)}
@@ -1500,7 +1500,54 @@ body { max-width: 100%; overflow-x: clip; }
   </div>
 </footer>
 
-<style id="eta-next-css">:where(.eta-next){max-width:44rem;margin:2.5rem auto 1.5rem;padding:1.1rem 1rem 0;border-top:1px solid rgba(128,128,128,.4);text-align:left;font-size:1rem;line-height:1.6}:where(.eta-next .eta-next-h){margin:0 0 .6rem;font:700 .78rem/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.8}:where(.eta-next ul){list-style:none;margin:0 0 .8rem;padding:0}:where(.eta-next li){margin:0 0 .55rem}:where(.eta-next li a){font-weight:700}:where(.eta-next li span){display:block;opacity:.8;font-size:.92rem}:where(.eta-next .eta-next-more){margin:0;font-size:.95rem}</style>
+<style id="eta-next-css">:where(.eta-next){max-width:44rem;margin:2.5rem auto 1.5rem;padding:1.1rem 1rem 0;border-top:1px solid rgba(128,128,128,.4);text-align:left;font-size:1rem;line-height:1.6}:where(.eta-next .eta-next-h){margin:0 0 .6rem;font:700 .78rem/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.8}:where(.eta-next ul){list-style:none;margin:0 0 .8rem;padding:0}:where(.eta-next li){margin:0 0 .55rem}:where(.eta-next li a){font-weight:700}:where(.eta-next li span){display:block;opacity:.8;font-size:.92rem}:where(.eta-next .eta-next-more){margin:0;font-size:.95rem}
+
+/* === EROS frame-fix v3.2 === */
+img { max-width: 100%; height: auto; }
+figure.plate { overflow: hidden; max-width: 100%; }
+figure.plate > img,
+figure.plate img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+/* Instructional plates: never crop letterforms / diagrams */
+figure.plate img[data-sized] {
+  max-height: none;
+  object-fit: contain;
+}
+.operator {
+  overflow: hidden;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+.operator-media {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0.75rem 0 1rem;
+  border-radius: 10px;
+  object-fit: contain;
+  object-position: center;
+}
+.visual-gallery-card img,
+.plate-card img {
+  object-fit: cover; /* thumbs only */
+}
+/* === end frame-fix v3.2 === */
+/* === EROS device-safety v3.3 === */
+/* iOS/Android landscape text inflation off; long hashes/addresses wrap instead of clipping */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+code, kbd, samp, td, th { overflow-wrap: anywhere; }
+pre { max-width: 100%; overflow-x: auto; }
+table { max-width: 100%; }
+/* === end device-safety v3.3 === */
+
+</style>
 <section class="eta-next" id="where-next" aria-label="Where next">
 <p class="eta-next-h" role="heading" aria-level="2">Where next</p>
 <ul><li><a href="Living_Egg.html">The Living Egg</a><span>the cosmology: inward is forwards</span></li><li><a href="Gods_Of_Eros.html">Gods of EROS</a><span>the mythology: four operators</span></li><li><a href="Eros_3D_Universe.html">The Living Universe</a><span>the statement of intent: what EROS builds</span></li></ul>
