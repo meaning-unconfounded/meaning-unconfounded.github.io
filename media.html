@@ -1345,6 +1345,44 @@ body { max-width: 100%; overflow-x: clip; }
 }
 </style>
 
+<style id="eros-media-frame-v3-6">
+/* === EROS media-frame layer v3.6 === */
+/* Scope: framed artwork and video only. Never targets .cinema-*, cinema videos, summary slots, media-studio players, logos, seals or operator portraits. */
+/* 1. Light inset: 5px of padding inside each frame's own border (the frame keeps its book theme colour, radius and shadow). */
+.media img,.media video,
+figure.plate:not(.operator-portrait) img,figure.plate:not(.operator-portrait) video,
+.media-block img,.media-block video,
+.landmark img,.landmark video,
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,
+.illum-fig img,figure.video-frame video,figure.hero img,
+.media-frame video,.thesis-card img,.vault-card img,
+.flywheel-board>img,.flywheel-board>video,.il-grid img {
+  box-sizing:border-box;
+  padding:5px!important;
+  object-fit:contain!important;
+  object-position:center;
+}
+/* 2. Gallery/thumbnail boxes show the whole artwork at natural proportions (real width/height attributes now reserve the space). */
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,figure.plate-card img,
+.il-grid img,.thesis-card img,.vault-card img,.editorial-img {
+  height:auto!important;aspect-ratio:auto!important;
+  object-fit:contain!important;
+}
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,figure.plate-card img,
+.il-grid img,.thesis-card img,.vault-card img,.landmark img,.landmark video {
+  max-height:min(85vh,900px)!important;
+}
+.landmark img,.landmark video {height:auto!important;}
+/* 3. Fixed 16:9 tiles keep their shape and now show the whole picture. */
+.bk-image img,.chart-plate .cp-inner img {
+  box-sizing:border-box;padding:4px;object-fit:contain!important;
+}
+.chart-plate .cp-inner img {height:auto!important;}
+/* 4. Players must never overflow a narrow screen. */
+.media audio,.media iframe,figure.media audio,figure.media iframe,.media-studio:not(.cinematic-pair) audio,.media-studio:not(.cinematic-pair) iframe {max-width:100%;box-sizing:border-box;}
+.media-studio:not(.cinematic-pair) audio,figure.media audio,.media audio {width:100%;}
+/* === end EROS media-frame layer v3.6 === */
+</style>
 </head>
 <body id="top">
 <header class="corpus-bar">
@@ -1472,7 +1510,7 @@ body { max-width: 100%; overflow-x: clip; }
 </div>
 </section><section aria-label="Featured media" class="permanent-media" id="featuredMedia">
 <div class="featured-heading"><span class="eyebrow">Start here · Featured media</span><h2>Four essential stops</h2><p>Begin with the Open Call, meet the people behind the project, then find the practical buying guide.</p></div>
-<article class="featured-card open-call-card"><div class="featured-copy"><span class="featured-kicker">01 · THE OPEN CALL</span><h3>The Open Call</h3><p>The video invitation, followed by its audio edition.</p></div><video aria-label="The Open Call video" controls="" playsinline="" poster="/images/frames/The_open_call.jpg" preload="none"><source src="/images/The_open_call.mp4" type="video/mp4"/></video><div class="featured-audio"><span>Listen instead</span><audio aria-label="The Open Call audio" controls="" preload="none"><source src="/images/The_open_call.mp3" type="audio/mpeg"/><source src="/images/The_open_call.m4a" type="audio/mp4"/></audio></div></article>
+<article class="featured-card open-call-card"><div class="featured-copy"><span class="featured-kicker">01 · THE OPEN CALL</span><h3>The Open Call</h3><p>The video invitation, followed by its audio edition.</p></div><video aria-label="The Open Call video" controls="" playsinline="" poster="/images/frames/The_open_call.jpg" preload="none"><source src="/images/The_open_call.mp4" type="video/mp4"/></video><div class="featured-audio"><span>Listen instead</span><audio aria-label="The Open Call audio" controls="" preload="none"><source src="/images/The_open_call.mp3" type="audio/mpeg"/></audio></div></article>
 <div class="featured-pair">
 <article class="featured-card"><span class="featured-kicker">02 · PEOPLE &amp; STORY</span><h3>JakeX</h3><video aria-label="JakeX video" controls="" playsinline="" poster="/images/frames/jakex.jpg" preload="none"><source src="/images/jakex.mp4" type="video/mp4"/></video></article>
 <article class="featured-card"><span class="featured-kicker">03 · PEOPLE &amp; STORY</span><h3>LegendX</h3><video aria-label="LegendX video" controls="" playsinline="" poster="/images/frames/legendx.jpg" preload="none"><source src="/images/legendx.mp4" type="video/mp4"/></video></article>
@@ -1805,52 +1843,52 @@ body { max-width: 100%; overflow-x: clip; }
 <div class="thesis-gallery-grid">
 <!-- Cosmology & Mythology -->
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo001.jpg', 'The Cosmic Egg &amp; The Tree of Life')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo001.jpg', 'The Cosmic Egg &amp; The Tree of Life')}">
-<img alt="The Cosmic Egg &amp; The Tree of Life" loading="lazy" src="/holo/holo001.jpg"/>
+<img width="1433" height="860" alt="The Cosmic Egg &amp; The Tree of Life" loading="lazy" src="/holo/holo001.jpg"/>
 <figcaption>The Cosmic Egg &amp; The Tree</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo035.jpg', 'The Toroid Energy Pattern')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo035.jpg', 'The Toroid Energy Pattern')}">
-<img alt="The Toroid Energy Pattern" loading="lazy" src="/holo/holo035.jpg"/>
+<img width="1248" height="832" alt="The Toroid Energy Pattern" loading="lazy" src="/holo/holo035.jpg"/>
 <figcaption>The Toroid</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo011.jpg', 'The Living Egg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo011.jpg', 'The Living Egg')}">
-<img alt="The Living Egg" loading="lazy" src="/holo/holo011.jpg"/>
+<img width="1024" height="1024" alt="The Living Egg" loading="lazy" src="/holo/holo011.jpg"/>
 <figcaption>The Living Egg</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo029.jpg', 'Thoth - The Recorder')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo029.jpg', 'Thoth - The Recorder')}">
-<img alt="Thoth" loading="lazy" src="/holo/holo029.jpg"/>
+<img width="832" height="832" alt="Thoth" loading="lazy" src="/holo/holo029.jpg"/>
 <figcaption>Thoth</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo032.jpg', 'Ra-Shen - The Manifestor')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo032.jpg', 'Ra-Shen - The Manifestor')}">
-<img alt="Ra-Shen" loading="lazy" src="/holo/holo032.jpg"/>
+<img width="1528" height="860" alt="Ra-Shen" loading="lazy" src="/holo/holo032.jpg"/>
 <figcaption>Ra-Shen</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo034.jpg', 'NaUn - The Programmer')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo034.jpg', 'NaUn - The Programmer')}">
-<img alt="NaUn" loading="lazy" src="/holo/holo034.jpg"/>
+<img width="1529" height="860" alt="NaUn" loading="lazy" src="/holo/holo034.jpg"/>
 <figcaption>NaUn</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo036.jpg', 'EROS - The Continuity')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo036.jpg', 'EROS - The Continuity')}">
-<img alt="EROS" loading="lazy" src="/holo/holo036.jpg"/>
+<img width="980" height="980" alt="EROS" loading="lazy" src="/holo/holo036.jpg"/>
 <figcaption>EROS</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo004.jpg', 'Cosmic Humanoid - Character Bible')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo004.jpg', 'Cosmic Humanoid - Character Bible')}">
-<img alt="Cosmic Humanoid" loading="lazy" src="/holo/holo004.jpg"/>
+<img width="512" height="512" alt="Cosmic Humanoid" loading="lazy" src="/holo/holo004.jpg"/>
 <figcaption>Cosmic Humanoid</figcaption>
 </figure>
 <!-- Technology & Immersion -->
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo006.jpg', 'Motion Capture &amp; Body as Controller')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo006.jpg', 'Motion Capture &amp; Body as Controller')}">
-<img alt="Motion Capture" loading="lazy" src="/holo/holo006.jpg"/>
+<img width="1024" height="1024" alt="Motion Capture" loading="lazy" src="/holo/holo006.jpg"/>
 <figcaption>Motion Capture</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo003.jpg', 'Virtual Reality Level 2')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo003.jpg', 'Virtual Reality Level 2')}">
-<img alt="VR Room" loading="lazy" src="/holo/holo003.jpg"/>
+<img width="560" height="399" alt="VR Room" loading="lazy" src="/holo/holo003.jpg"/>
 <figcaption>Virtual Reality</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo007.jpg', 'Projection Mapping Level 3')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo007.jpg', 'Projection Mapping Level 3')}">
-<img alt="Projection Mapping" loading="lazy" src="/holo/holo007.jpg"/>
+<img width="1500" height="844" alt="Projection Mapping" loading="lazy" src="/holo/holo007.jpg"/>
 <figcaption>Projection Mapping</figcaption>
 </figure>
 <figure class="thesis-card" role="button" tabindex="0" aria-haspopup="dialog" onclick="this.focus();openLightbox('/holo/holo017.jpg', 'Holographic Presentation Level 4')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox('/holo/holo017.jpg', 'Holographic Presentation Level 4')}">
-<img alt="Holographic Room" loading="lazy" src="/holo/holo017.jpg"/>
+<img width="1283" height="700" alt="Holographic Room" loading="lazy" src="/holo/holo017.jpg"/>
 <figcaption>Holographic Room</figcaption>
 </figure>
 <!-- Economics & Architecture -->
@@ -1868,10 +1906,10 @@ body { max-width: 100%; overflow-x: clip; }
 <p class="nc-t">The Inversion Cosmology</p>
 <p class="nc-d">In the Eros model, we live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
 <div class="native-carousel" id="nativeCarousel">
-<img alt="Inversion Frame 1" class="active" onerror="this.style.display='none'" src="/images/inverse1.webp"/>
-<img alt="Inversion Frame 2" onerror="this.style.display='none'" src="/images/inverse2.webp"/>
-<img alt="Inversion Frame 3" onerror="this.style.display='none'" src="/images/inverse3.webp"/>
-<img alt="Inversion Frame 4" onerror="this.style.display='none'" src="/images/inverse4.webp"/>
+<img width="1280" height="853" alt="Inversion Frame 1" class="active" onerror="this.style.display='none'" src="/images/inverse1.webp" loading="lazy"/>
+<img width="1536" height="1024" alt="Inversion Frame 2" onerror="this.style.display='none'" src="/images/inverse2.webp" loading="lazy"/>
+<img width="1536" height="1024" alt="Inversion Frame 3" onerror="this.style.display='none'" src="/images/inverse3.webp" loading="lazy"/>
+<img width="1536" height="1024" alt="Inversion Frame 4" onerror="this.style.display='none'" src="/images/inverse4.webp" loading="lazy"/>
 <div class="native-carousel-overlay"></div>
 </div>
 <div class="native-carousel-controls">
@@ -1902,7 +1940,7 @@ body { max-width: 100%; overflow-x: clip; }
 <div id="container"></div>
 <!-- ═══ BOTTOM: EMBEDDED HTML SHOWCASE ═══ -->
 <figure class="brand-seal">
-<img alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="(this.closest('figure')||this).style.display='none'" src="/images/Eros_pink1.jpg"/>
+<img width="1024" height="1024" alt="EROS · Tenacity Through Integrity" loading="lazy" onerror="(this.closest('figure')||this).style.display='none'" src="/images/Eros_pink1.jpg"/>
 <figcaption>Tenacity Through Integrity</figcaption>
 </figure>
 <style id="eta-next-css">:where(.eta-next){max-width:44rem;margin:2.5rem auto 1.5rem;padding:1.1rem 1rem 0;border-top:1px solid rgba(128,128,128,.4);text-align:left;font-size:1rem;line-height:1.6}:where(.eta-next .eta-next-h){margin:0 0 .6rem;font:700 .78rem/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.8}:where(.eta-next ul){list-style:none;margin:0 0 .8rem;padding:0}:where(.eta-next li){margin:0 0 .55rem}:where(.eta-next li a){font-weight:700}:where(.eta-next li span){display:block;opacity:.8;font-size:.92rem}:where(.eta-next .eta-next-more){margin:0;font-size:.95rem}
@@ -1952,6 +1990,7 @@ pre { max-width: 100%; overflow-x: auto; }
 table { max-width: 100%; }
 /* === end device-safety v3.3 === */
 
+
 </style>
 <section aria-label="Where next" class="eta-next" id="where-next">
 <p aria-level="2" class="eta-next-h" role="heading">Where next</p>
@@ -1960,9 +1999,9 @@ table { max-width: 100%; }
 </section>
 <footer class="master" id="footer">
 <div class="title-row">
-<img alt="EROS" class="pin eros" loading="lazy" onerror="this.style.display='none'" src="/images/Eros_pink2.jpg"/>
+<img width="1024" height="1024" alt="EROS" class="pin eros" loading="lazy" onerror="this.style.display='none'" src="/images/Eros_pink2.jpg"/>
 <span class="title">MEDIA INDEX</span>
-<img alt="PulseChain" class="pin" loading="lazy" onerror="this.style.display='none'" src="/images/pulseSystem.jpeg"/>
+<img width="705" height="435" alt="PulseChain" class="pin" loading="lazy" onerror="this.style.display='none'" src="/images/pulseSystem.jpeg"/>
 </div>
 <p class="count">The Visual Record · EROS Library · 15 Media Studios · 11 Continuity Episodes</p>
 <div class="lib-stack">

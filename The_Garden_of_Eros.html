@@ -452,6 +452,44 @@ body { max-width: 100%; overflow-x: clip; }
 }
 </style>
 
+<style id="eros-media-frame-v3-6">
+/* === EROS media-frame layer v3.6 === */
+/* Scope: framed artwork and video only. Never targets .cinema-*, cinema videos, summary slots, media-studio players, logos, seals or operator portraits. */
+/* 1. Light inset: 5px of padding inside each frame's own border (the frame keeps its book theme colour, radius and shadow). */
+.media img,.media video,
+figure.plate:not(.operator-portrait) img,figure.plate:not(.operator-portrait) video,
+.media-block img,.media-block video,
+.landmark img,.landmark video,
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,
+.illum-fig img,figure.video-frame video,figure.hero img,
+.media-frame video,.thesis-card img,.vault-card img,
+.flywheel-board>img,.flywheel-board>video,.il-grid img {
+  box-sizing:border-box;
+  padding:5px!important;
+  object-fit:contain!important;
+  object-position:center;
+}
+/* 2. Gallery/thumbnail boxes show the whole artwork at natural proportions (real width/height attributes now reserve the space). */
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,figure.plate-card img,
+.il-grid img,.thesis-card img,.vault-card img,.editorial-img {
+  height:auto!important;aspect-ratio:auto!important;
+  object-fit:contain!important;
+}
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,figure.plate-card img,
+.il-grid img,.thesis-card img,.vault-card img,.landmark img,.landmark video {
+  max-height:min(85vh,900px)!important;
+}
+.landmark img,.landmark video {height:auto!important;}
+/* 3. Fixed 16:9 tiles keep their shape and now show the whole picture. */
+.bk-image img,.chart-plate .cp-inner img {
+  box-sizing:border-box;padding:4px;object-fit:contain!important;
+}
+.chart-plate .cp-inner img {height:auto!important;}
+/* 4. Players must never overflow a narrow screen. */
+.media audio,.media iframe,figure.media audio,figure.media iframe,.media-studio:not(.cinematic-pair) audio,.media-studio:not(.cinematic-pair) iframe {max-width:100%;box-sizing:border-box;}
+.media-studio:not(.cinematic-pair) audio,figure.media audio,.media audio {width:100%;}
+/* === end EROS media-frame layer v3.6 === */
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -719,10 +757,10 @@ body { max-width: 100%; overflow-x: clip; }
   <p class="nc-t">The Inversion Cosmology</p>
   <p class="nc-d">In the Eros model, we live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
   <div class="native-carousel" id="nativeCarousel">
-    <img width="1280" height="853" src="/images/inverse1.webp" class="active" alt="Inversion Frame 1"/>
-    <img width="1536" height="1024" src="/images/inverse2.webp" alt="Inversion Frame 2"/>
-    <img width="1536" height="1024" src="/images/inverse3.webp" alt="Inversion Frame 3"/>
-    <img width="1536" height="1024" src="/images/inverse4.webp" alt="Inversion Frame 4"/>
+    <img width="1280" height="853" src="/images/inverse1.webp" class="active" alt="Inversion Frame 1" loading="lazy"/>
+    <img width="1536" height="1024" src="/images/inverse2.webp" alt="Inversion Frame 2" loading="lazy"/>
+    <img width="1536" height="1024" src="/images/inverse3.webp" alt="Inversion Frame 3" loading="lazy"/>
+    <img width="1536" height="1024" src="/images/inverse4.webp" alt="Inversion Frame 4" loading="lazy"/>
     <div class="native-carousel-overlay"></div>
   </div>
   <div class="native-carousel-controls">
@@ -1014,28 +1052,28 @@ body { max-width: 100%; overflow-x: clip; }
   <article class="operator">
     <div class="tag" style="color:var(--violet)">01 · Violet · The Architect</div>
     <h3>NaUn</h3>
-    <img class="operator-media" src="/images/naun.jpeg" alt="NaUn" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
+    <img width="900" height="900" class="operator-media" src="/images/naun.jpeg" alt="NaUn" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
     
     <p>Architecture, permission, pattern, <strong>choose, code, and plan</strong> — the grammar and programme that allow forms and relations to hold. NaUn is the architect function: what establishes structure before the visible world appears.</p>
   </article>
   <article class="operator ra">
     <div class="tag" style="color:var(--gold)">02 · Gold · Bounded radiation</div>
     <h3>Ra-Shen</h3>
-    <img class="operator-media" src="/images/ra-shen.jpeg" alt="Ra-Shen" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
+    <img width="900" height="900" class="operator-media" src="/images/ra-shen.jpeg" alt="Ra-Shen" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
     
     <p>Radiation, vibration, energy, movement, and expansion under containment. “Ra” carries radiance and force; “Shen” supplies the enclosing ring. Power becomes a usable stage when it is bounded.</p>
   </article>
   <article class="operator thoth">
     <div class="tag" style="color:var(--cyan)">03 · Cyan · Learning and transmission</div>
     <h3>Thoth</h3>
-    <img class="operator-media" src="/images/thoth.jpeg" alt="Thoth" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
+    <img width="832" height="832" class="operator-media" src="/images/thoth.jpeg" alt="Thoth" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
     
     <p>Learning, language, medicine, teaching, and the building of forms that can receive and transmit knowledge. Thoth enters where existence begins to learn and where understanding can be carried forward.</p>
   </article>
   <article class="operator eros">
     <div class="tag" style="color:var(--pink)">04 · Rose · Bond and continuation</div>
     <h3>EROS</h3>
-    <img class="operator-media" src="/images/eros-gods.jpg" alt="EROS" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
+    <img width="1168" height="784" class="operator-media" src="/images/eros-gods.jpg" alt="EROS" loading="lazy" onerror="this.onerror=null;this.src='/images/Eros_pink2.jpg';"/>
     
     <p>Relation, cohesion, resonance, bond, and continuation. Not another object competing for a place on the stage — the thread between things that lets what is built, learned, or created continue beyond its first moment.</p>
   </article>
@@ -1546,6 +1584,7 @@ code, kbd, samp, td, th { overflow-wrap: anywhere; }
 pre { max-width: 100%; overflow-x: auto; }
 table { max-width: 100%; }
 /* === end device-safety v3.3 === */
+
 
 </style>
 <section class="eta-next" id="where-next" aria-label="Where next">
