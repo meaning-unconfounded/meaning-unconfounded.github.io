@@ -1154,6 +1154,44 @@ body { max-width: 100%; overflow-x: clip; }
 }
 </style>
 
+<style id="eros-media-frame-v3-6">
+/* === EROS media-frame layer v3.6 === */
+/* Scope: framed artwork and video only. Never targets .cinema-*, cinema videos, summary slots, media-studio players, logos, seals or operator portraits. */
+/* 1. Light inset: 5px of padding inside each frame's own border (the frame keeps its book theme colour, radius and shadow). */
+.media img,.media video,
+figure.plate:not(.operator-portrait) img,figure.plate:not(.operator-portrait) video,
+.media-block img,.media-block video,
+.landmark img,.landmark video,
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,
+.illum-fig img,figure.video-frame video,figure.hero img,
+.media-frame video,.thesis-card img,.vault-card img,
+.flywheel-board>img,.flywheel-board>video,.il-grid img {
+  box-sizing:border-box;
+  padding:5px!important;
+  object-fit:contain!important;
+  object-position:center;
+}
+/* 2. Gallery/thumbnail boxes show the whole artwork at natural proportions (real width/height attributes now reserve the space). */
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,figure.plate-card img,
+.il-grid img,.thesis-card img,.vault-card img,.editorial-img {
+  height:auto!important;aspect-ratio:auto!important;
+  object-fit:contain!important;
+}
+.visual-gallery-card img,.plate-card img,.image-gallery figure img,figure.plate-card img,
+.il-grid img,.thesis-card img,.vault-card img,.landmark img,.landmark video {
+  max-height:min(85vh,900px)!important;
+}
+.landmark img,.landmark video {height:auto!important;}
+/* 3. Fixed 16:9 tiles keep their shape and now show the whole picture. */
+.bk-image img,.chart-plate .cp-inner img {
+  box-sizing:border-box;padding:4px;object-fit:contain!important;
+}
+.chart-plate .cp-inner img {height:auto!important;}
+/* 4. Players must never overflow a narrow screen. */
+.media audio,.media iframe,figure.media audio,figure.media iframe,.media-studio:not(.cinematic-pair) audio,.media-studio:not(.cinematic-pair) iframe {max-width:100%;box-sizing:border-box;}
+.media-studio:not(.cinematic-pair) audio,figure.media audio,.media audio {width:100%;}
+/* === end EROS media-frame layer v3.6 === */
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -1347,10 +1385,10 @@ body { max-width: 100%; overflow-x: clip; }
     <p class="nc-t">The Inversion Cosmology</p>
     <p class="nc-d">In the Eros model, we live on the inner shell of a Cosmic Egg. Watch the rotation of Inward is Forwards.</p>
     <div class="native-carousel" id="nativeCarousel">
-      <img width="1280" height="853" data-sized src="/images/inverse1.webp" class="active" alt="Inversion Frame 1" onerror="this.style.display='none'"/>
-      <img width="1536" height="1024" data-sized src="/images/inverse2.webp" alt="Inversion Frame 2" onerror="this.style.display='none'"/>
-      <img width="1536" height="1024" data-sized src="/images/inverse3.webp" alt="Inversion Frame 3" onerror="this.style.display='none'"/>
-      <img width="1536" height="1024" data-sized src="/images/inverse4.webp" alt="Inversion Frame 4" onerror="this.style.display='none'"/>
+      <img width="1280" height="853" data-sized src="/images/inverse1.webp" class="active" alt="Inversion Frame 1" onerror="this.style.display='none'" loading="lazy"/>
+      <img width="1536" height="1024" data-sized src="/images/inverse2.webp" alt="Inversion Frame 2" onerror="this.style.display='none'" loading="lazy"/>
+      <img width="1536" height="1024" data-sized src="/images/inverse3.webp" alt="Inversion Frame 3" onerror="this.style.display='none'" loading="lazy"/>
+      <img width="1536" height="1024" data-sized src="/images/inverse4.webp" alt="Inversion Frame 4" onerror="this.style.display='none'" loading="lazy"/>
       <div class="native-carousel-overlay"></div>
     </div>
     <div class="native-carousel-controls">
@@ -2316,6 +2354,7 @@ table { max-width: 100%; }
 /* reader panel: never taller than a short (landscape) screen */
 #rdPanel { max-height: min(70vh, calc(100vh - 9.5rem)); max-height: min(70vh, calc(100dvh - 9.5rem)); }
 /* === end device-safety v3.3 === */
+
 
 </style>
 <section class="eta-next" id="where-next" aria-label="Where next">
