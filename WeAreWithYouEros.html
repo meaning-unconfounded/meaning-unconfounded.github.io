@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b0d">
+<title>EROS · The Time to Build — Community Edition</title>
+<meta name="description" content="The EROS community invitation and practical build guide for TitanX, PulseChain and EROS. Bonding, not extracting.">
+<style>
+:root{
+ --bg:#080b0d;--bg2:#101719;--panel:#111c1f;--panel2:#152326;
+ --ink:#f6f4ee;--soft:#c9d1cc;--muted:#91a19d;
+ --orange:#ff8a36;--orange2:#ffb36f;--teal:#62d8d0;--teal2:#a2f0e8;
+ --line:rgba(162,240,232,.2);--line2:rgba(255,138,54,.3);
+ --serif:Georgia,"Palatino Linotype","Iowan Old Style",serif;
+ --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ --max:1080px;
+ --gradient-primary: linear-gradient(135deg, var(--orange) 0%, var(--teal) 100%);
+ --gradient-subtle: linear-gradient(135deg, rgba(255,138,54,0.15) 0%, rgba(98,216,208,0.15) 100%);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:74px;background:var(--bg);overflow-x:clip}
+body{margin:0;background:radial-gradient(ellipse at 85% 0%,#153338 0,transparent 35%),radial-gradient(ellipse at 0% 40%,#321d13 0,transparent 32%),var(--bg);color:var(--ink);font:18px/1.82 var(--serif);overflow-x:clip;max-width:100vw;}
+a{color:var(--teal2);text-decoration:none;border-bottom:1px solid rgba(98,216,208,.35);transition:color 0.2s, border-color 0.2s;}
+a:hover{color:var(--orange2);border-color:var(--orange)}
+.wrap{width:min(var(--max),calc(100% - 38px));margin:auto;max-width:100%;}
+header{position:sticky;top:0;z-index:30;background:rgba(8,11,13,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 .68rem var(--sans);letter-spacing:.11em;text-transform:uppercase}
+.brand{border:0;color:var(--ink);display:flex;align-items:center;gap:10px}
+.sigil{width:22px;height:22px;border:2px solid var(--orange);border-radius:50%;box-shadow:0 0 16px rgba(255,138,54,0.4), 0 0 8px rgba(98,216,208,0.3);position:relative}
+.sigil:after{content:"";position:absolute;inset:4px;border:1px solid var(--teal);border-radius:50%}
+.navlinks{display:flex;gap:13px;flex-wrap:wrap}
+.navlinks a{border:0;color:var(--muted);font-size:.64rem}
+.navlinks a:hover{color:var(--orange2)}
+
+section{padding:82px 0;border-bottom:1px solid var(--line);width:100%;max-width:100%;}
+.section-head{max-width:850px;margin-bottom:28px;overflow-wrap:break-word;}
+.section-head h2{font-size:clamp(2.1rem,5vw,3.8rem);font-weight:500;letter-spacing:-.035em;margin:12px 0 18px}
+.section-head p{color:var(--soft);font-size:1.08rem}
+
+/* Enhanced Colors */
+.statement{font-size:clamp(1.5rem,3.3vw,2.55rem);line-height:1.3;max-width:960px;margin:30px 0;text-shadow:0 2px 10px rgba(0,0,0,0.5);}
+.statement strong{color:var(--orange2);font-weight:600;text-shadow:0 0 20px rgba(255,138,54,0.3);}
+.prose{max-width:790px;color:var(--soft);overflow-wrap:break-word;}
+.prose p{margin:0 0 1.1em}
+.pull{font-size:clamp(1.35rem,3vw,2.1rem);line-height:1.38;color:var(--ink);border-left:3px solid var(--orange);padding:18px 24px;margin:34px 0;background:linear-gradient(90deg,rgba(255,138,54,0.08),rgba(98,216,208,0.03),transparent);max-width:900px;border-radius:0 12px 12px 0;position:relative;overflow-wrap:break-word;}
+.pull::before{content:"";position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg, var(--orange), transparent);}
+.pull::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:1px;background:linear-gradient(90deg, var(--teal), transparent);}
+.pull em{color:var(--teal2);font-style:normal;font-weight:600;}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:28px 0}
+.card{background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid rgba(98, 216, 208, 0.25);border-top:2px solid rgba(255, 138, 54, 0.6);border-radius:14px;padding:23px;min-height:185px;position:relative;overflow:hidden;transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;}
+.card:hover{transform:translateY(-3px);border-color:rgba(162,240,232,0.6);box-shadow:0 8px 24px rgba(0,0,0,0.4), 0 0 20px rgba(98,216,208,0.1);}
+.card .num{font:800 .66rem var(--sans);letter-spacing:.14em;color:var(--orange)}
+.card h3{font-size:1.35rem;color:var(--teal2);font-weight:500;margin:12px 0 9px;text-shadow:0 0 15px rgba(98,216,208,0.2);}
+.card p{color:var(--soft);margin:0;font-size:.98rem}
+
+/* FIXED MEDIA CONTAINERS - Strict locking */
+.media{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center;margin:32px 0;width:100%;min-width:0;}
+.media video,.media img{
+    width:100%;
+    height:100%;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    background:#030506;
+    border-radius:13px;
+    border:2px solid rgba(98, 216, 208, 0.4);
+    box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 15px rgba(255, 138, 54, 0.1);
+    max-width:100%;
+    display:block;
+    overflow:hidden;
+}
+.media-copy h3{font-size:1.7rem;color:var(--orange2);font-weight:500;margin:8px 0 12px}
+.media-copy p{color:var(--soft);overflow-wrap:break-word;}
+
+.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:26px 0;width:100%;min-width:0;}
+.video-card{background:#0d1517;border:2px solid rgba(255, 138, 54, 0.4);border-radius:13px;overflow:hidden;width:100%;max-width:100%;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
+.video-card video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:#030506;border:none;border-radius:0;box-shadow:none;}
+.video-card div{padding:14px 16px;border-top:1px solid rgba(98,216,208,0.2);}
+.video-card h3{font-size:1.08rem;color:var(--teal2);font-weight:500;margin:0 0 4px}
+.video-card p{font-size:.9rem;color:var(--muted);margin:0}
+
+.quote-band{padding:clamp(28px,5vw,58px);border:2px solid rgba(255,138,54,0.4);border-radius:18px;background:linear-gradient(130deg,rgba(37,24,15,0.9),rgba(14,41,43,0.9) 70%);margin:36px 0;box-shadow:0 0 40px rgba(98,216,208,0.08);}
+.quote-band h2{font-size:clamp(2rem,5vw,3.8rem);font-weight:500;margin:0 0 16px}
+.quote-band p{font-size:1.12rem;color:var(--soft);max-width:800px;margin:0 auto}
+
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.links a{border:1px solid rgba(98,216,208,0.4);border-radius:99px;padding:8px 14px;font:700 .7rem var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--teal2);background:rgba(98,216,208,0.08);transition:all 0.2s;}
+.links a:hover{border-color:var(--orange);color:var(--bg);background:var(--orange);box-shadow:0 0 15px rgba(255,138,54,0.4);}
+.note{font:.84rem/1.65 var(--sans);color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:22px;background:rgba(0,0,0,0.3);border-left:3px solid var(--teal);}
+
+.pathways{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0}
+.path{border-top:2px solid var(--orange);padding:16px 2px}
+.path h3{font-size:1.25rem;font-weight:500;color:var(--orange2);margin:0 0 6px}
+.path p{color:var(--soft);margin:0}
+
+.steps{counter-reset:step;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0}
+.step{counter-increment:step;border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel);border-top:2px solid var(--teal);}
+.step:before{content:"0" counter(step);font:800 .72rem var(--sans);color:var(--orange);letter-spacing:.12em}
+.step h3{font-size:1.1rem;color:var(--teal2);font-weight:500;margin:10px 0 4px}
+.step p{font-size:.9rem;color:var(--soft);margin:0}
+
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:20px 0}
+.flow div{text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 4px;background:var(--panel);font:700 .72rem var(--sans)}
+.flow b{display:block;font:700 1.1rem var(--serif);color:var(--orange2);margin-bottom:2px}
+
+.corpus-cta{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--orange)!important;border-radius:99px;padding:12px 20px;background:linear-gradient(110deg,rgba(255,138,54,0.15),rgba(98,216,208,0.15));color:var(--orange2)!important;font:800 .72rem var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(255,138,54,0.1);}
+.corpus-cta:hover{background:var(--gradient-primary);color:var(--bg)!important;box-shadow:0 0 25px rgba(98,216,208,0.5);border-color:var(--teal)!important;}
+
+footer{padding:42px 0 60px;color:var(--muted);font:.85rem/1.7 var(--sans)}
+footer strong{color:var(--orange2)}
+
+/* Mobile Fixes */
+@media(max-width:760px){
+ .nav{align-items:flex-start;flex-direction:column;padding:12px 0}
+ .navlinks{gap:10px}
+ .grid,.media,.video-grid{grid-template-columns:1fr;} /* FIX: video-grid added here */
+ section{padding:58px 0}
+ .pathways{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(2,1fr)}
+ .media video, .media img {max-height: 300px;}
+}
+
+/* ═══ EROS CINEMA SYSTEM · CSS v2.0 ═══ */
+.cinema-hero,.cinema-band{position:relative;isolation:isolate;overflow:hidden;background:#080b0d;color:var(--ink);font-family:var(--sans);text-align:left;--accent-color:var(--orange);--accent-glow:rgba(255,138,54,.42);--lens:0px;--px:50%;--py:50%;--ring-tx:0px;--ring-ty:0px;width:100vw;max-width:100vw;}
+.cinema-hero{margin:0 calc(50% - 50vw) 1.4rem;min-height:min(760px,82vh);min-height:min(760px,82svh);display:grid;align-items:end;cursor:pointer;touch-action:manipulation;border-bottom:1px solid var(--line)}
+.cinema-band{margin:2.5rem calc(50% - 50vw) 0;min-height:min(560px,68vh);min-height:min(560px,68svh);display:grid;align-items:end;border-bottom:1px solid var(--line)}
+.cinema-hero.accent-garden{--accent-color:var(--orange);--accent-glow:rgba(255,138,54,.42)}
+.cinema-band.accent-garden-end{--accent-color:var(--teal);--accent-glow:rgba(98,216,208,.42)}
+
+.cinema-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;background:#080b0d;z-index:-3;opacity:0;transition:opacity 1.45s ease}
+.cinema-va{opacity:1}
+.cinema-hero .cinema-va,.cinema-hero .cinema-vb{clip-path:circle(var(--lens) at var(--px) var(--py));-webkit-clip-path:circle(var(--lens) at var(--px) var(--py));transition:opacity 1.45s ease,clip-path .7s cubic-bezier(.16,1,.3,1)}
+.cinema-hero.is-open .cinema-va,.cinema-hero.is-open .cinema-vb{clip-path:circle(150% at var(--px) var(--py));-webkit-clip-path:circle(150% at var(--px) var(--py))}
+
+.cinema-shade{position:absolute;inset:0;z-index:-2;pointer-events:none;transition:background .8s ease;background:linear-gradient(90deg,rgba(8,11,13,.82) 0%,rgba(8,11,13,.35) 55%,rgba(8,11,13,.12) 100%),linear-gradient(0deg,rgba(8,11,13,.94) 0%,rgba(8,11,13,.30) 42%,rgba(8,11,13,.05) 72%,rgba(8,11,13,.40) 100%)}
+.cinema-hero:not(.is-open) .cinema-shade,.cinema-band:not(.is-playing) .cinema-shade{background:linear-gradient(90deg,rgba(8,11,13,.94) 0%,rgba(8,11,13,.65) 55%,rgba(8,11,13,.38) 100%),linear-gradient(0deg,rgba(8,11,13,.97) 0%,rgba(8,11,13,.62) 42%,rgba(8,11,13,.28) 72%,rgba(8,11,13,.65) 100%)}
+.cinema-hero.is-open .cinema-shade,.cinema-band.is-playing .cinema-shade{background:linear-gradient(90deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.06) 50%,transparent 100%),linear-gradient(0deg,rgba(0,0,0,.38) 0%,rgba(0,0,0,.08) 38%,transparent 72%)}
+
+.cinema-copy{position:relative;width:min(940px,100%);padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);pointer-events:none;z-index:2;overflow-wrap:break-word;}
+.cinema-band .cinema-copy{width:min(900px,100%);padding:0 clamp(24px,6vw,84px) clamp(70px,8vw,100px)}
+.cinema-kicker{display:flex;align-items:center;gap:12px;color:var(--accent-color);font:600 10px/1.4 var(--sans);letter-spacing:.25em;text-transform:uppercase;margin:0 0 20px}
+.cinema-kicker::before{content:"";width:30px;height:1px;background:var(--accent-color)}
+
+.cinema-hero .cinema-title{font:700 clamp(2.5rem,8vw,6rem)/1.05 var(--serif);letter-spacing:.02em;margin:0;max-width:min(900px,95vw);background:linear-gradient(180deg,#fff 0%,var(--accent-color) 42%,var(--orange2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 44px var(--accent-glow));text-shadow:0 2px 24px rgba(0,0,0,.55);word-wrap:break-word;}
+.cinema-band .cinema-title{font:700 clamp(2rem,5vw,4.5rem)/1.1 var(--serif);letter-spacing:.02em;margin:0;max-width:min(800px,95vw);color:var(--ink);text-shadow:0 4px 40px rgba(0,0,0,.4);word-wrap:break-word;}
+.cinema-sub{max-width:min(28rem,95vw);color:rgba(246,244,238,.82);font:400 clamp(.9rem,2.4vw,1.05rem)/1.4 var(--sans);margin:14px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-shadow:0 1px 12px rgba(0,0,0,.5);word-wrap:break-word;}
+
+.cinema-top{position:absolute;top:clamp(24px,4vw,48px);left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);display:flex;justify-content:space-between;gap:16px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,244,238,.7);pointer-events:none;z-index:2}
+.cinema-top span:last-child{color:rgba(246,244,238,.55);text-align:right;letter-spacing:.15em}
+.cinema-footer{position:absolute;bottom:0;left:clamp(24px,6vw,84px);right:clamp(24px,6vw,84px);border-top:1px solid rgba(246,244,238,.18);padding:14px 0 17px;display:flex;justify-content:space-between;gap:12px;color:rgba(246,244,238,.5);font:500 8px/1.4 var(--sans);letter-spacing:.15em;text-transform:uppercase;pointer-events:none;z-index:2}
+.cinema-footer span:last-child{text-align:right;color:var(--accent-color)}
+
+.cinema-vol{position:absolute;right:clamp(24px,6vw,84px);bottom:56px;z-index:4;width:38px;height:38px;padding:0;border-radius:50%;border:1px solid rgba(246,244,238,.35);background:rgba(8,11,13,.55);color:var(--ink);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:background .2s,border-color .2s;touch-action:manipulation}
+.cinema-vol:hover{background:rgba(8,11,13,.85);border-color:var(--accent-color)}
+.cinema-vol:focus-visible{outline:2px solid var(--accent-color);outline-offset:2px}
+.cinema-vol .vb-off{display:none}
+.cinema-vol.is-muted .vb-on{display:none}
+.cinema-vol.is-muted .vb-off{display:inline}
+
+.cinema-ring{position:absolute;top:50%;left:50%;width:140px;height:140px;margin:-70px 0 0 -70px;border-radius:50%;border:2px solid var(--accent-color);box-shadow:0 0 40px var(--accent-glow),inset 0 0 24px rgba(255,138,54,.18);pointer-events:none;z-index:3;opacity:.95;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;color:var(--accent-color);background:rgba(8,11,13,.35);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);transform:translate(var(--ring-tx,0px),var(--ring-ty,0px));transition:opacity .5s ease,transform .18s ease;animation:cinema-ring-pulse 2.5s ease-in-out infinite}
+.cinema-ring svg{display:block;margin-left:3px}
+.cinema-ring span{font-family:var(--sans);font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+.cinema-hero.is-open .cinema-ring{opacity:0;transform:scale(1.6);pointer-events:none;animation:none}
+@keyframes cinema-ring-pulse{0%,100%{box-shadow:0 0 40px var(--accent-glow),inset 0 0 24px rgba(255,138,54,.18)}50%{box-shadow:0 0 60px var(--accent-glow),inset 0 0 32px rgba(255,138,54,.28)}}
+@media(prefers-reduced-motion:reduce){.cinema-ring{animation:none!important;transform:none!important}.cinema-hero.is-open .cinema-ring{transform:none!important}.cinema-hero .cinema-va,.cinema-hero .cinema-vb{transition:none!important;clip-path:none!important;-webkit-clip-path:none!important}}
+
+.cinema-print{display:none}
+@media(max-width:700px){
+ .cinema-hero{min-height:min(760px,78svh)}
+ .cinema-band{min-height:min(500px,62svh)}
+ .cinema-top{display:none}
+ .cinema-footer{font-size:7px;letter-spacing:.1em}
+ .cinema-ring{width:100px;height:100px;margin:-50px 0 0 -50px}
+ .cinema-ring span{font-size:8px;letter-spacing:.2em}
+}
+@media(pointer:coarse){.cinema-vol{width:44px;height:44px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="#top"><span class="sigil"></span> EROS · THE TIME TO BUILD</a>
+<nav class="navlinks">
+<a href="#trust">Trust</a><a href="#bridge">The bridge</a><a href="#bond">Bonding</a><a href="#world">The world</a><a href="#flywheel">Flywheel</a><a href="#freedom">Build freely</a><a href="#live">What is live</a><a href="#build">What we build</a><a href="#roles">Your role</a><a href="#90days">First 90 days</a><a href="#call">The call</a>
+</nav></div></header>
+
+<main id="top">
+<section class="cinema-hero accent-garden"
+         id="cinemaHero"
+         role="button"
+         tabindex="0"
+         aria-expanded="false"
+         aria-label="The Time to Build — cinematic threshold"
+         data-cinema="hero"
+         data-queue="we_are_with_you_eros.mp4|eros_power.mp4|eros_bridging.mp4|eros_fight.mp4|eros_jump5.mp4|eros_heaven_bridge.mp4|eros_bond.mp4|eros_grays1.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-ring" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <span>Enter</span>
+  </div>
+  <div class="cinema-top">
+    <span>For TitanX · PulseChain · EROS</span>
+    <span>The Community Edition</span>
+  </div>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">The time to build</p>
+    <p class="cinema-title" role="presentation">The time to build is now.</p>
+    <p class="cinema-sub">Twenty-two books have opened the doors and explained the foundations. This one is different. It is the moment we stop looking only at what EROS could become — and recognise what we can create together.</p>
+  </div>
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"></path>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"></path>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"></path>
+    </svg>
+  </button>
+  <div class="cinema-footer">
+    <span>Trust before promises · Bonding, not extracting</span>
+    <span class="cinema-status" aria-live="polite">Move across · Tap to enter</span>
+  </div>
+  <div class="cinema-print">
+    <b>THE TIME TO BUILD</b>
+    <span>Community Edition · TitanX · PulseChain</span>
+    <strong>The time to build is now.</strong>
+    <p>Twenty-two books have opened the doors and explained the foundations. This one is different. It is the moment we stop looking only at what EROS could become — and recognise what we can create together.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+<section id="opening">
+<div class="section-head">
+<div class="kicker">The invitation</div>
+<h2>We have explained the vision.<br><span class="orange">Now let the vision live.</span></h2>
+<p>There is a point in every project when another explanation is not the answer. The foundations have been described. The ideas have been explored. The doors have been opened. The next chapter is not simply another book about building. It is the beginning of the building itself.</p>
+</div>
+<div class="prose">
+<p>This is an invitation to the people who have been here, the people who have only just discovered EROS, and the people across TitanX and PulseChain who recognise the value of building something that can outlast a market cycle.</p>
+<p>Not everyone needs the same vision. Not everyone needs the same role. Some will build liquidity. Some will create stories, films, art, games, tools, guides, music, applications or entirely new projects. Some will connect communities that have never worked together. The strength is not that we all do the same thing. It is that our work can connect.</p>
+</div>
+<p class="statement">The books explain the doors. <strong>The community decides what grows beyond them.</strong></p>
+<div class="links"><a class="corpus-cta" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Start at the EROS Corpus</a></div>
+</section>
+
+<section id="trust">
+<div class="section-head">
+<div class="kicker">01 · The trust proposition</div>
+<h2>Trust is not the marketing.<br><span class="teal">Trust is the product.</span></h2>
+<p>The Newcomer Dossier puts its finger on a distinction that matters in crypto: words are easy to publish; time, behaviour and a visible record are harder to fake.</p>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-strength.jpg">
+  <source src="https://meaning-unconfounded.github.io/images/eros_grays1.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>Twenty-eight months of showing up.</h3>
+<p>The EROS books describe a project with 28 months of activity behind it: no developer fee, no treasury extraction, and a founder who bought alongside the community. The point is not to claim that time removes risk. It is that time creates a record people can examine.</p>
+<p>In a space where projects can appear, take fees and disappear, continuity matters. The community has kept creating, communicating, building liquidity and publishing material through quieter conditions. That history is part of the proposition.</p>
+</div></div>
+<p class="pull">Don't ask people to trust a promise about tomorrow. <em>Show them what has been done, what is verifiable today, and who is still here doing the work.</em></p>
+<div class="grid">
+<article class="card"><div class="num">THE BEGINNING</div><h3>A gift, not a sale</h3><p>EROS was distributed as a free airdrop to TitanX holders. The invitation began with shared participation, not a paid entry ticket.</p></article>
+<article class="card"><div class="num">THE STANDARD</div><h3>No developer fee</h3><p>The Dossier and related books emphasise the absence of a developer-fee extraction line. The principle is that the people building should stand alongside the community.</p></article>
+<article class="card"><div class="num">THE RECORD</div><h3>Survival is a signal</h3><p>Books, media, community history and ongoing work form a record. The strongest case is made by evidence and consistency, not by asking anyone to suspend judgement.</p></article>
+</div>
+<p class="prose">The Dossier's challenge is simple: look at what people do, not only what they say. Read the record. Check the contract. Explore the history. Make your own judgement. That is how trust is invited rather than demanded.</p>
+<div class="links"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a></div>
+</section>
+
+<section id="bridge">
+<div class="section-head">
+<div class="kicker">02 · From Ethereum to PulseChain</div>
+<h2>A bridge is more than a route for tokens.<br><span class="orange">It is a route for communities.</span></h2>
+<p>The Bridge and Front Door describe EROS as an extension of the TitanX ecosystem onto PulseChain — not a replacement for TitanX, and not a demand that every project abandon its roots.</p>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_bridging.jpg">
+<source src="https://meaning-unconfounded.github.io/images/eros_bridging.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>From one chain to a wider field of connection.</h3>
+<p>Ethereum holds the history and activity of the TitanX ecosystem. Bridging creates a path for supported assets to move to PulseChain, where new liquidity relationships and community connections can be formed.</p>
+<p>EROS's role in this vision is connective: helping create a liquidity web where ecosystem assets can meet, pair and become part of a larger network. The bridge is not only about moving a token from one chain to another. It is about making it easier for builders and communities to meet on the other side.</p>
+</div></div>
+<p class="pull">The bridge is not only for coins. <em>It is for people.</em> Every connection can bring a builder, a story, a skill, a community and another reason to create.</p>
+<div class="prose">
+<p>That is why the language of the books matters: extend the graph; do not replace the people who built it. TitanX remains part of the story. PulseChain becomes another place for that story to develop. EROS can help make the connection visible.</p>
+<p>Bridging and liquidity involve smart-contract, network, custody and market risks. The invitation is to understand the route and verify the official contracts and current bridge status before using it.</p>
+</div>
+<div class="links"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge · technical field manual</a><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a><a href="https://meaning-unconfounded.github.io/media.html">Media Centre</a></div>
+</section>
+
+<section id="bond">
+<div class="section-head">
+<div class="kicker">03 · The bonding web</div>
+<h2>Not one giant pool.<br><span class="teal">A web of relationships.</span></h2>
+<p>The liquidity-web idea is one of the strongest recurring themes in the EROS library. The ambition is not to make every asset identical or collapse every project into one identity. It is to create many useful connections.</p>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/eros-web.jpg">
+  <source src="https://meaning-unconfounded.github.io/images/eros_bond.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>Every pair is another doorway.</h3>
+<p>EROS paired with TitanX, DragonX, Blaze, Helios and other ecosystem assets creates a network of relationships. Each pool remains its own market. Together, the connections can make the ecosystem easier to discover and can give each project another path into the wider community.</p>
+<p>The idea is not that every pair automatically succeeds. Liquidity depth, volatility, fees, slippage and impermanent loss matter. The deeper principle is that cooperation can create shared reach where isolated projects have none.</p>
+</div></div>
+<p class="statement">Don't just hold your coins. <strong>Connect the things you believe in.</strong></p>
+<div class="grid">
+<article class="card"><div class="num">ALLIES, NOT ISLANDS</div><h3>Keep identities intact</h3><p>Each project can keep its own name, community, leadership and purpose while building a useful connection to others.</p></article>
+<article class="card"><div class="num">MANY EDGES</div><h3>Small bonds add up</h3><p>A web grows through many independent relationships. One person's contribution may become the next person's starting point.</p></article>
+<article class="card"><div class="num">SHARED DISCOVERY</div><h3>Every community can invite</h3><p>A project can promote its own work and still help people discover the wider network. Cooperation need not mean surrendering independence.</p></article>
+</div>
+<p class="pull">Cohesion over competition. <em>Build bridges, not billboards. Allies, not islands.</em></p>
+<div class="links"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></div>
+</section>
+
+<section id="standard">
+<div class="section-head">
+<div class="kicker">04 · The standard beneath the instrument</div>
+<h2>Fixed foundations.<br><span class="orange">A living network above them.</span></h2>
+<p>The Platinum Standard explores the difference between the underlying EROS instrument and the new rails and experiments that may be built around it.</p>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/vault1.jpg">
+  <source src="https://meaning-unconfounded.github.io/images/eros_cant_exploit.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>The rock and the rivers.</h3>
+<p>The books describe EROS as the fixed-supply foundation — the rock — while proposed extensions such as ErosX and 33EROS explore different forms of movement, participation and gamified activity. Their roles are not interchangeable, and proposed mechanisms should remain clearly labelled until deployed and verified.</p>
+<p>The positive idea is that one foundation can support many forms of experimentation. A community member does not need to reinvent the whole system to create a new use, a new connection or a new experience.</p>
+</div></div>
+<p class="pull">The foundation gives the ecosystem continuity. <em>The builders give it new directions.</em></p>
+<div class="note">Technical details, token permissions, fee splits, supply and deployment status can change or be misunderstood when repeated out of context. The Bridge and Platinum Standard are the technical references; check current on-chain state and official sources before relying on any specific mechanism.</div>
+<div class="links"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a></div>
+</section>
+
+<section id="world">
+<div class="section-head">
+<div class="kicker">05 · The cultural vault</div>
+<h2>The books are not just explanations.<br><span class="teal">They are the beginning of a world.</span></h2>
+<p>The Flywheel Thesis describes two connected foundations: the on-chain instrument and the cultural archive. The token can be examined. The archive can be explored. The community is the bridge between them.</p>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/vault2.jpg">
+  <source src="https://meaning-unconfounded.github.io/images/eros_heaven_bridge.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>Mythology. Stories. Art. Media. Ideas.</h3>
+<p>The EROS library contains more than token explanations. It develops a mythology, characters, a fictional universe, cosmology, language, visual identity and story worlds. Those works can become the raw material for films, animation, music, games, interactive experiences and community-created art.</p>
+<p>Not every future medium is already built. That is precisely why there is room for creators. The books establish a world that people can interpret, extend, illustrate, animate, translate and bring to life in their own way.</p>
+</div></div>
+<p class="pull">The mythology gives the world its identity. The books preserve its ideas. <em>The community expands it.</em> Technology gives it ways to move beyond the page.</p>
+<div class="video-grid">
+<article class="video-card"><video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/transform_eros.jpg"><source src="https://meaning-unconfounded.github.io/images/transform_eros.mp4" type="video/mp4"></video><div><h3>Transformation</h3><p>A cinematic expression of change and possibility.</p></div></article>
+<article class="video-card"><video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_humans.jpg"><source src="https://meaning-unconfounded.github.io/images/eros_humans.mp4" type="video/mp4"></video><div><h3>Human connection</h3><p>The world is made meaningful by the people who enter it.</p></div></article>
+</div>
+<div class="links"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">The EROS Corpus</a><a href="https://meaning-unconfounded.github.io/The_Garden_of_Eros.html">The Garden of Eros</a><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a><a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a><a href="https://meaning-unconfounded.github.io/media.html">Media Centre</a></div>
+</section>
+
+<section id="flywheel">
+<div class="section-head">
+<div class="kicker">06 · The flywheel</div>
+<h2>Price can open the door.<br><span class="orange">Purpose gives people a reason to stay.</span></h2>
+<p>The Flywheel book connects two cycles: the market cycle that can bring attention, and the cultural cycle that can turn discovery into belonging and creation.</p>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/strategy1.jpg">
+  <source src="https://meaning-unconfounded.github.io/images/eros_chart2.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>From attention to creation — and back again.</h3>
+<p>A rising price can attract attention. Attention can lead people to research EROS. Research can reveal the history, tokenomics, books and wider universe. Discovery may become belonging. Belonging can inspire people to create and contribute. Those creations can introduce EROS to others and renew attention.</p>
+<p>That is the flywheel: not a guaranteed price machine, but a strategy for giving attention somewhere meaningful to go. A rising chart alone cannot build a lasting community. The world, the work and the people are what can make the attention matter.</p>
+</div></div>
+<div class="grid">
+<article class="card"><div class="num">THE MARKET CYCLE</div><h3>Price → Attention</h3><p>Market activity can make people look. It creates an opening, not proof of adoption or a promise that price will keep rising.</p></article>
+<article class="card"><div class="num">THE CULTURAL CYCLE</div><h3>Discovery → Belonging</h3><p>People explore the project, understand its ideas, find others and discover reasons to participate beyond the chart.</p></article>
+<article class="card"><div class="num">THE COMMUNITY CYCLE</div><h3>Creation → New attention</h3><p>New work, useful tools, stories and genuine advocacy can bring fresh people into the world and give existing members reasons to return.</p></article>
+</div>
+<p class="pull">Price can start the conversation. <em>People and purpose determine whether there is a conversation worth continuing.</em></p>
+<div class="note">The flywheel is a strategic hypothesis, not a guaranteed market outcome. Price can fall as well as rise; attention can fade; participation is not automatic. The aim is to build a world that remains worth exploring in quiet markets too.</div>
+<div class="links"><a href="https://meaning-unconfounded.github.io/The_Flywheel.html">The Flywheel</a><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a></div>
+</section>
+
+<section id="freedom">
+<div class="section-head">
+<div class="kicker">07 · The freedom to build</div>
+<h2>One foundation.<br><span class="teal">A thousand possible directions.</span></h2>
+<p>This is where the explanation books hand the story to the community. EROS does not need to own every idea, direct every project or approve every experiment. Community members are free to build what they believe is useful.</p>
+</div>
+<div class="prose">
+<p>A member might create a new token, a liquidity design, an independent application, a game, a media channel, an educational resource, a marketplace, a new mythology project or a tool nobody has thought of yet. It can have its own identity, its own team and its own decisions.</p>
+<p>The invitation is not to copy one blueprint. It is to create something that can connect with the wider ecosystem in a positive way. Independent does not have to mean isolated. Collaboration does not have to mean control.</p>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/artifact1.jpg">
+  <source src="https://meaning-unconfounded.github.io/images/eros33_upgrade2.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>Bring your own vision.</h3>
+<p>The community member's EROS / GAIA liquidity concept is one example of independent thinking. It imagines connecting EROS liquidity pools through layers of LP tokens and using a proposed GAIA mechanism to acquire, burn or distribute exposure to a top-level liquidity position.</p>
+<p>It is a proposal, not an approved EROS roadmap or a live system. That distinction does not make the idea unwelcome. It means the idea can be explored on its own merits, with its mechanics, risks and intended contribution made clear.</p>
+</div></div>
+<p class="pull">Build what you imagine. Build independently. <em>But build to bond, not to extract.</em></p>
+<div class="grid">
+<article class="card"><div class="num">WELCOME</div><h3>New ideas</h3><p>There is room for new projects, new voices, new technology and new forms of creativity.</p></article>
+<article class="card"><div class="num">INTEGRITY</div><h3>Honest design</h3><p>Explain what exists, what is proposed, who benefits, who carries risk and how participants can verify the claims.</p></article>
+<article class="card"><div class="num">CONNECTION</div><h3>Shared possibility</h3><p>Let independent projects strengthen the network through useful relationships, voluntary participation and mutual respect.</p></article>
+</div>
+<div class="note">The GAIA example is included as an illustration of community freedom, not as an endorsement. Nested LPs, fee-on-transfer mechanics, LP burns, holder distributions and redemption paths require detailed design, testing and independent review.</div>
+</section>
+
+
+<section id="live">
+  <div class="section-head">
+    <div class="kicker">08 · The ground beneath the vision</div>
+    <h2>Be clear about what exists.<br><span class="teal">Be honest about what comes next.</span></h2>
+    <p>Inspiration gives people a reason to care. Clarity gives them a reason to trust what they are being invited into. Every project, feature and claim should be identified accurately.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="num">LIVE · VERIFY CURRENT STATE</div><h3>What people can examine</h3><p>The EROS token and its on-chain history, existing liquidity relationships, the published Corpus and the community's existing books and media. Direct people to verifiable contracts and current on-chain information rather than relying on a headline or old snapshot.</p></article>
+    <article class="card"><div class="num">PROPOSED</div><h3>What is still being designed</h3><p>ErosX and 33EROS layers, hybrid NFTs, deeper in-world economies, games and immersive spaces. These are possibilities, not live features, unless and until they are deployed and independently checked.</p></article>
+    <article class="card"><div class="num">HYPOTHESIS</div><h3>What the community is testing</h3><p>That attention can become discovery, understanding, participation and creation — and that useful creation can renew attention. This is a community-growth thesis, not a promise of price performance.</p></article>
+  </div>
+  <div class="note"><strong>Clarity is part of the culture.</strong> Label live, proposed, experimental and fictional material. Verify contracts and current status before interacting. Liquidity, bridge, smart-contract and market risks remain.</div>
+</section>
+
+<section id="build">
+  <div class="section-head">
+    <div class="kicker">09 · Turning belief into contribution</div>
+    <h2>Three vaults.<br><span class="orange">Five ways to build.</span></h2>
+    <p>The practical guide begins here. The aim is not simply to attract more buyers. It is to create more reasons for people to understand, participate, contribute and stay involved.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="num">01 · THE FRONT DOOR</div><h3>One clear way in</h3><p>Make the EROS Corpus the single starting point. From there, newcomers can find the Newcomer Dossier, technical books, the wider library and media. Help people orient themselves without sending them to a site index or leaving them to guess where to begin.</p></article>
+    <article class="card"><div class="num">02 · THE VOICE</div><h3>Explain and invite</h3><p>Create clear videos, explainers and conversations. Build bridges, not billboards. Avoid price promises. Give people enough context to investigate the project for themselves.</p></article>
+    <article class="card"><div class="num">03 · THE LIQUIDITY WEB</div><h3>Connect projects</h3><p>Explore useful bonded pairs and cross-ecosystem links. Make liquidity depth, volatility, fees, slippage and impermanent-loss risks visible. Never confuse a growing number of pairs with guaranteed liquidity or success.</p></article>
+    <article class="card"><div class="num">04 · THE PRODUCTION GUILD</div><h3>Make finished things</h3><p>Writers, artists, developers, educators and organisers can each create something tangible. A finished small contribution is more useful than a large unfinished announcement.</p></article>
+    <article class="card"><div class="num">05 · THE HONEST ECONOMY</div><h3>Experiment responsibly</h3><p>Keep proposed layers clearly labelled until they are designed, tested and verified. Explain who benefits, who carries risk and how participants can check the claims. Never put private keys into games or shared files.</p></article>
+    <article class="card"><div class="num">THE SHARED STANDARD</div><h3>Bonding, not extracting</h3><p>Connect communities. Add capability. Respect independence. A bridge creates a way across; it should not become a toll gate or a mechanism for extracting from the people who built the network.</p></article>
+  </div>
+  <div class="flow" aria-label="Community flywheel stages">
+    <div><b>1</b>Attention</div><div><b>2</b>Discovery</div><div><b>3</b>Understanding</div><div><b>4</b>Participation</div><div><b>5</b>Creation</div><div><b>6</b>Renewed attention</div>
+  </div>
+  <p class="pull">The token may open the conversation. <em>The community gives that conversation somewhere meaningful to go.</em></p>
+</section>
+
+<section id="roles">
+  <div class="section-head">
+    <div class="kicker">10 · Find your place</div>
+    <h2>You do not need to do everything.<br><span class="teal">Make the part you can make better.</span></h2>
+    <p>There is no single job description for belonging to EROS. Independent projects and individual contributions are welcome. Choose a direction that fits your skills, curiosity and capacity.</p>
+  </div>
+  <div class="pathways">
+    <div class="path"><h3>Liquidity & connection</h3><p>Explore bonded pairs, cross-ecosystem links and clear risk information. Help communities find useful ways to connect.</p></div>
+    <div class="path"><h3>Education & communication</h3><p>Write plain-language explainers, make videos and guides, and help people verify information independently.</p></div>
+    <div class="path"><h3>Creative worlds & media</h3><p>Make stories, art, characters, short films, music and games. Extend the mythology with original finished work.</p></div>
+    <div class="path"><h3>Tools & experiments</h3><p>Build dashboards, interfaces, prototypes and applications. Document what works, what is experimental and what remains an idea.</p></div>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="num">CREATOR</div><h3>Writer / storyteller</h3><p>Develop lore, scripts, character histories and explainers. Keep history, interpretation and fiction distinct.</p></article>
+    <article class="card"><div class="num">MAKER</div><h3>Artist / animator</h3><p>Illustrate, model, animate and create visual assets that make the EROS universe tangible.</p></article>
+    <article class="card"><div class="num">BUILDER</div><h3>Developer / designer</h3><p>Create tools, websites and interactive experiences. Document clearly and test openly.</p></article>
+    <article class="card"><div class="num">CONNECTOR</div><h3>Community organiser</h3><p>Welcome newcomers, coordinate contributions and connect people with projects and roles.</p></article>
+    <article class="card"><div class="num">GUIDE</div><h3>Educator / translator</h3><p>Make EROS understandable in other languages and for different audiences.</p></article>
+    <article class="card"><div class="num">PARTICIPANT</div><h3>Liquidity provider</h3><p>Learn how liquidity provision works, understand the risks and make independent decisions. No one should feel pressured to provide liquidity.</p></article>
+  </div>
+  <div class="media" style="margin-top: 40px;">
+    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_hard.jpg">
+      <source src="https://meaning-unconfounded.github.io/images/eros_hard.mp4" type="video/mp4">
+    </video>
+    <div class="media-copy">
+      <h3>Work that endures.</h3>
+      <p>The strongest foundations are built through steady effort. Every skill, every contribution, and every independent project adds to the resilience of the whole.</p>
+    </div>
+  </div>
+  <p class="pull">Bring your own vision. Build independently. <em>Find the connections that make the wider network stronger.</em></p>
+</section>
+
+<section id="90days">
+  <div class="section-head">
+    <div class="kicker">11 · A possible first 90 days</div>
+    <h2>Give the inspiration a beginning.<br><span class="orange">Finished work over announcements.</span></h2>
+    <p>This is a suggested starting rhythm, not a mandatory programme or a promise that every target will be met. The community can adapt it, improve it or choose a different pace.</p>
+  </div>
+  <div class="steps">
+    <div class="step"><h3>Days 1–30 · Open the door</h3><p>Make the Corpus the obvious entry point. Check links and current contract references. Publish the first explainers. Invite people to choose a role and complete one small contribution.</p></div>
+    <div class="step"><h3>Days 31–60 · Build rhythm</h3><p>Continue useful videos and explainers. Showcase creative work. Explore liquidity connections carefully, with plain-language risk notes. Invite collaboration across communities.</p></div>
+    <div class="step"><h3>Days 61–90 · Show what grew</h3><p>Publish a clear progress update. Showcase finished work and working prototypes. Review experiments openly. Ask contributors what should come next.</p></div>
+    <div class="step"><h3>Always · Keep integrity</h3><p>Measure understanding, participation, useful work and community health separately. Price alone is not a measure of whether the culture is succeeding.</p></div>
+  </div>
+  <div class="note">The original Community Build Plan included numerical output targets. This combined edition keeps the practical rhythm but does not turn those targets into promises or obligations. The purpose is to help people begin and sustain real work.</div>
+</section>
+
+<section id="future">
+<div class="section-head">
+<div class="kicker">08 · The hopeful future</div>
+<h2>What we make today<br><span class="orange">becomes the world others discover tomorrow.</span></h2>
+</div>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_power.jpg">
+<source src="https://meaning-unconfounded.github.io/images/eros_power.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>A world worth contributing to.</h3>
+<p>The Hopeful Future and the mythology books imagine a project whose life is not confined to a token chart. Its future can be shaped by writers, artists, developers, educators, musicians, storytellers, researchers, organisers and people who simply bring enthusiasm and care.</p>
+<p>Some contributions will be large. Many will be small. A page translated, a scene animated, a useful tool released, a new pool explained, a character illustrated, a video shared with care. Each finished piece gives the next person something real to build upon.</p>
+</div></div>
+<p class="statement">We do not have to wait for a perfect world to appear. <strong>We can begin making it real, one meaningful creation at a time.</strong></p>
+</section>
+
+<section id="call">
+<div class="quote-band">
+<div class="kicker" style="justify-content:center">The open call · TitanX · PulseChain · EROS</div>
+<h2>It is time to build.<br><span class="orange">Together, and in our own ways.</span></h2>
+<p>To the people who stayed. To the people who are arriving. To the builders across TitanX and PulseChain. To the holders who have ideas they have never shared. To the creators waiting for a world worth creating inside.</p>
+</div>
+<div class="prose">
+<p>You do not need to wait for an invitation from a founder. You do not need to wait for everyone to agree on one direction. You do not need to become someone else to contribute. Bring the skill you have. Bring the idea you cannot stop thinking about. Find the people who can help you make it real.</p>
+<p>Let the technical builders build. Let the storytellers tell stories. Let the liquidity thinkers experiment responsibly. Let the artists make the unseen visible. Let independent projects emerge and find their own communities. Let the work be judged by what it contributes and the integrity with which it is made.</p>
+<p>We have spent years explaining what EROS is, where it came from and what it might become. The next chapter belongs to the people who turn those ideas into something others can experience.</p>
+</div>
+<p class="pull">If you see something worth building, <em>build it.</em><br>If you see a way to connect, <em>make the connection.</em><br>If you can help someone else create, <em>open the door.</em></p>
+<div class="media">
+<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_sommi_moon.jpg">
+<source src="https://meaning-unconfounded.github.io/images/eros_sommi_moon.mp4" type="video/mp4">
+</video>
+<div class="media-copy">
+<h3>The next chapter is not waiting to be written.</h3>
+<p>It is waiting to be built — by people who choose to bring something to it.</p>
+<p><strong>Independent ideas. Shared standards. Bonding, not extracting.</strong></p>
+</div></div>
+<div class="quote-band" style="text-align:center">
+<h2>EROS · <span class="orange">Tenacity Through Integrity</span></h2>
+<p>Build freely. Connect honestly. Leave something worth building upon.</p>
+</div>
+<div class="links">
+<a class="corpus-cta" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Enter the EROS Corpus · Start here</a>
+<a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">The Corpus</a>
+<a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+<a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
+<a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
+<a href="https://meaning-unconfounded.github.io/The_Flywheel.html">The Flywheel</a>
+<a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
+<a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+</div>
+<div class="note"><strong>Read, explore and verify.</strong> This is an inspirational community invitation, not financial advice or a promise of returns. Token, bridge, liquidity and smart-contract risks remain. Historical claims and current technical status should be checked against the relevant books, official sources and on-chain data.</div>
+</section>
+
+</div>
+</main>
+
+<!-- Cinematic Book-End -->
+<section class="cinema-band accent-garden-end"
+         id="cinemaClose"
+         aria-label="The world is waiting"
+         data-cinema="book-end"
+         data-queue="eros_jump2.mp4|eros_jump3.mp4|eros_jump4.mp4|eros_bond.mp4|eros_bridging.mp4|eros_cant_exploit.mp4|eros_heaven_bridge.mp4|eros_grays1.mp4">
+  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
+  <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
+  <div class="cinema-shade" aria-hidden="true"></div>
+  <div class="cinema-grain" aria-hidden="true"></div>
+  <div class="cinema-top">
+    <span>THE OPEN GARDEN · THE CLOSE</span>
+    <span>The Time to Build</span>
+  </div>
+  <div class="cinema-copy">
+    <p class="cinema-kicker">The next chapter is not waiting to be written</p>
+    <h2 class="cinema-title">The world is waiting.</h2>
+    <p class="cinema-sub">It is waiting to be built — by people who choose to bring something to it. Independent ideas. Shared standards. Bonding, not extracting.</p>
+  </div>
+  <button type="button" class="cinema-vol is-muted" aria-label="Turn sound on" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9.5v5h3.6L12 18.5v-13L7.6 9.5z" fill="currentColor" stroke="none"></path>
+      <path class="vb-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"></path>
+      <path class="vb-off" d="M16 9.5l5 5M21 9.5l-5 5"></path>
+    </svg>
+  </button>
+  <div class="cinema-footer">
+    <span>EROS · Tenacity Through Integrity</span>
+    <span class="cinema-status" aria-live="polite">Scroll to play</span>
+  </div>
+  <div class="cinema-print">
+    <b>THE OPEN GARDEN · THE CLOSE</b>
+    <span>The Time to Build</span>
+    <strong>The world is waiting.</strong>
+    <p>It is waiting to be built — by people who choose to bring something to it. Independent ideas. Shared standards. Bonding, not extracting.</p>
+  </div>
+</section>
+
+<footer><div class="wrap">
+<strong>EROS · THE TIME TO BUILD</strong><br>
+For TitanX, PulseChain and the EROS community.<br>
+Independent ideas. Shared standards. Bonding, not extracting.<br>
+<a class="corpus-cta" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" style="margin-top: 20px;">Enter the EROS Corpus · Start here</a>
+</div></footer>
+
+<script id="eros-cinema-engine-v2">
+/* ═══ EROS CINEMA SYSTEM · ENGINE v2.0 ═══ */
+(function () {
+  "use strict";
+  var BASE = "https://meaning-unconfounded.github.io/images/";
+  var VOL = 0.22;
+  var VISUAL_FADE_MS = 1450;
+  var DEFAULT_AUDIO_FADE_MS = 400;
+  var READY_TIMEOUT_MS = 9000;
+  var HERO_HOLD_FRAME_SECONDS = 0.1;
+
+  var pref = window.__erosSoundPref;
+  if (!pref || typeof pref !== "object") pref = window.__erosSoundPref = { muted: true };
+  if (typeof pref.muted !== "boolean") pref.muted = true;
+
+  var reducedMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  function resolveSource(name) {
+    if (/^https?:\/\//i.test(name)) return name;
+    return BASE + name.split("/").map(encodeURIComponent).join("/");
+  }
+  function closestControl(t) { return t && t.closest ? t.closest("button,a,input,select,textarea") : null; }
+  function parseFiles(root) {
+    var v = root.getAttribute("data-queue") || root.getAttribute("data-videos") || "";
+    var sep = v.indexOf("|") >= 0 ? "|" : ",";
+    return v.split(sep).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  function getLayers(root) {
+    var sel = ".cinema-va,.cinema-vb";
+    var all = Array.prototype.slice.call(root.querySelectorAll(sel));
+    return all.filter(function (v, i) { return all.indexOf(v) === i; }).slice(0, 2);
+  }
+  function getSoundControl(root) { return root.querySelector(".cinema-vol"); }
+  function getStatus(root) { return root.querySelector(".cinema-status"); }
+  function getRole(root) {
+    var r = (root.getAttribute("data-cinema") || "").trim().toLowerCase();
+    if (r === "hero") return "hero";
+    if (r === "middle") return "middle";
+    if (r === "book-end") return "book-end";
+    if (root.classList.contains("cinema-hero")) return "hero";
+    return "middle";
+  }
+
+  var roots = Array.prototype.slice.call(document.querySelectorAll("[data-queue],[data-videos]"));
+  var states = [];
+  var owner = null;
+  var ratios = new Map();
+
+  function syncAudio() {
+    states.forEach(function (st) {
+      st.layers.forEach(function (v, i) {
+        v.volume = VOL;
+        var audible = !pref.muted && owner === st && st.active &&
+          (i === st.current || (st.switching && (i === st.current || i === 1 - st.current)));
+        if (!st.switching || owner !== st || pref.muted) {
+          v.muted = !(audible && i === st.current);
+        } else { v.muted = false; }
+      });
+      updateControl(st);
+    });
+  }
+  function updateControl(st) {
+    var b = st.sound; if (!b) return;
+    var m = pref.muted;
+    b.classList.toggle("is-muted", m);
+    b.setAttribute("aria-pressed", m ? "false" : "true");
+    b.setAttribute("aria-label", m ? "Turn sound on" : "Turn sound off");
+  }
+  function setStatus(st, msg) { if (st.status) st.status.textContent = msg; }
+  function setLayerOpacity(video, value) { video.style.opacity = String(value); }
+  function setSourceOnce(st, idx, video) {
+    if (idx < 0 || idx >= st.files.length) return false;
+    var src = resolveSource(st.files[idx]);
+    if (video.dataset.erosSource === src && video.getAttribute("src")) return true;
+    video.pause(); video.muted = true; video.volume = VOL;
+    video.removeAttribute("src");
+    while (video.firstChild) video.removeChild(video.firstChild);
+    video.src = src;
+    video.dataset.erosSource = src;
+    video.dataset.erosClipIndex = String(idx);
+    video.loop = false; video.removeAttribute("loop");
+    video.playsInline = true;
+    video.load();
+    return true;
+  }
+  function nextIndex(st, from) {
+    for (var s = 1; s <= st.files.length; s++) {
+      var c = (from + s) % st.files.length;
+      if (!st.allowLoop && c <= from) return -1;
+      if (!st.failed[c]) return c;
+    }
+    return -1;
+  }
+  function prepareNext(st) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    if (st.role === "hero" && !st.heroActivated) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) return;
+    var inc = st.layers[1 - st.current];
+    if (inc.dataset.erosClipIndex === String(ni) && inc.getAttribute("src") && inc.readyState >= 2) {
+      st.preparedIndex = ni; return;
+    }
+    inc.preload = "auto"; setSourceOnce(st, ni, inc);
+    st.preparedIndex = ni;
+  }
+  function playMuted(v) {
+    v.muted = true;
+    try { var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+  }
+  function startCurrent(st) {
+    if (!st || !st.active || owner !== st) return;
+    if (st.role === "hero" && !st.heroActivated) return;
+    var cur = st.layers[st.current];
+    cur.muted = pref.muted; cur.volume = VOL;
+    try {
+      var p = cur.play();
+      if (p && p.catch) p.catch(function () { setStatus(st, "Tap the film or sound control to resume"); });
+    } catch (e) { setStatus(st, "Tap the film or sound control to resume"); }
+    prepareNext(st);
+    syncAudio();
+  }
+  function clearTransition(st) {
+    if (st.transitionTimer) { clearTimeout(st.transitionTimer); st.transitionTimer = null; }
+    if (st.readyTimer) { clearTimeout(st.readyTimer); st.readyTimer = null; }
+    if (st.incoming && st.handlers) {
+      st.incoming.removeEventListener("canplay", st.handlers.ready);
+      st.incoming.removeEventListener("error", st.handlers.error);
+    }
+    if (st.fadeFrame) { cancelAnimationFrame(st.fadeFrame); st.fadeFrame = null; }
+    st.handlers = null;
+  }
+  function finishTransition(st, out, inc, ni) {
+    if (!st.switching) return;
+    clearTransition(st);
+    out.pause();
+    try { out.currentTime = 0; } catch (e) {}
+    out.muted = true; out.volume = VOL;
+    setLayerOpacity(out, 0); setLayerOpacity(inc, 1);
+    out.classList.remove("is-active"); inc.classList.add("is-active");
+    inc.volume = VOL;
+    inc.muted = pref.muted || owner !== st;
+    st.current = 1 - st.current;
+    st.index = ni;
+    st.preparedIndex = null;
+    st.switching = false;
+    st.incoming = null;
+    st.failed[ni] = false;
+    syncAudio();
+    setStatus(st, "Film " + (st.index + 1) + " of " + st.files.length + (pref.muted ? " · Sound off" : " · Sound on"));
+    prepareNext(st);
+  }
+  function failIncoming(st, ni, inc, out, msg) {
+    if (!st.switching) return;
+    clearTransition(st);
+    inc.pause(); inc.muted = true; inc.volume = VOL;
+    inc.removeAttribute("src");
+    delete inc.dataset.erosSource; delete inc.dataset.erosClipIndex;
+    setLayerOpacity(inc, 0);
+    st.failed[ni] = true;
+    st.switching = false; st.incoming = null; st.preparedIndex = null;
+    out.muted = pref.muted || owner !== st; out.volume = VOL;
+    setLayerOpacity(out, 1);
+    setStatus(st, msg || "A film could not load · continuing the loop");
+    if (st.active && owner === st) {
+      if (out.ended || out.paused) {
+        try { out.currentTime = 0; } catch (e) {}
+        playMuted(out);
+        out.muted = pref.muted || owner !== st;
+      }
+      var nxt = nextIndex(st, st.index);
+      if (nxt >= 0) {
+        window.setTimeout(function () {
+          if (st.active && !st.switching) switchClip(st);
+        }, 0);
+      } else { setStatus(st, "No playable films remain"); }
+    }
+    syncAudio();
+  }
+  function switchClip(st) {
+    if (!st.active || st.switching || st.files.length < 2) return;
+    if (st.role === "hero" && !st.heroActivated) return;
+    var ni = nextIndex(st, st.index);
+    if (ni < 0) { setStatus(st, "No playable films remain"); return; }
+    var out = st.layers[st.current];
+    var inc = st.layers[1 - st.current];
+    st.switching = true; st.incoming = inc;
+    setStatus(st, "Preparing next film");
+    if (inc.dataset.erosClipIndex !== String(ni) || !inc.getAttribute("src")) {
+      inc.preload = "auto"; setSourceOnce(st, ni, inc);
+    }
+    inc.muted = true; inc.volume = 0; inc.loop = false;
+    var settled = false;
+    function cleanup() {
+      if (st.readyTimer) { clearTimeout(st.readyTimer); st.readyTimer = null; }
+      inc.removeEventListener("canplay", onReady);
+      inc.removeEventListener("error", onError);
+    }
+    function onError() {
+      if (settled) return; settled = true; cleanup();
+      failIncoming(st, ni, inc, out, "A film could not load · skipping");
+    }
+    function onReady() {
+      if (settled || !st.switching || inc.readyState < 2) return;
+      settled = true; cleanup();
+      try { inc.currentTime = 0; } catch (e) {}
+      inc.muted = true; inc.volume = 0;
+      var pp;
+      try { pp = inc.play(); }
+      catch (e) { failIncoming(st, ni, inc, out, "Playback blocked · tap to resume"); return; }
+      function beginFade() {
+        if (!st.switching || !st.active || owner !== st) {
+          inc.pause(); inc.muted = true; st.switching = false;
+          setLayerOpacity(inc, 0); return;
+        }
+        st.failed[ni] = false;
+        setLayerOpacity(out, 0); setLayerOpacity(inc, 1);
+        inc.classList.add("is-active"); out.classList.remove("is-active");
+        var t0 = performance.now();
+        var outStart = out.volume;
+        var fadeMs = st.fadeMs;
+        function audioStep(now) {
+          if (!st.switching || st.incoming !== inc) return;
+          var p = Math.max(0, Math.min(1, (now - t0) / fadeMs));
+          if (!pref.muted && owner === st) {
+            out.muted = false; inc.muted = false;
+            out.volume = Math.max(0, outStart * (1 - p));
+            inc.volume = VOL * p;
+          } else {
+            out.muted = true; inc.muted = true;
+            out.volume = VOL * (1 - p); inc.volume = VOL * p;
+          }
+          if (p < 1) st.fadeFrame = requestAnimationFrame(audioStep);
+          else { out.volume = 0; inc.volume = VOL; st.fadeFrame = null; }
+        }
+        st.fadeFrame = requestAnimationFrame(audioStep);
+        st.transitionTimer = window.setTimeout(function () {
+          finishTransition(st, out, inc, ni);
+        }, VISUAL_FADE_MS);
+      }
+      if (pp && pp.then) pp.then(beginFade).catch(function () {
+        failIncoming(st, ni, inc, out, "Playback blocked");
+      });
+      else beginFade();
+    }
+    st.handlers = { ready: onReady, error: onError };
+    inc.addEventListener("canplay", onReady);
+    inc.addEventListener("error", onError);
+    st.readyTimer = window.setTimeout(function () {
+      if (inc.readyState >= 2) onReady(); else onError();
+    }, READY_TIMEOUT_MS);
+    if (inc.readyState >= 2) onReady();
+  }
+
+  function deactivate(st) {
+    if (!st) return;
+    st.active = false;
+    try { st.root && st.root.classList.remove("is-playing"); } catch (e) {}
+    if (st.switching) { clearTransition(st); st.switching = false; st.incoming = null; }
+    st.layers.forEach(function (v, i) {
+      v.muted = true; v.pause();
+      setLayerOpacity(v, i === st.current ? 1 : 0);
+      v.classList.toggle("is-active", i === st.current);
+    });
+    if (owner === st) owner = null;
+    syncAudio();
+  }
+  function activate(st) {
+    if (!st) return;
+    if (owner && owner !== st) deactivate(owner);
+    owner = st; st.active = true;
+    try {
+      if (st.root) st.root.classList.add("is-playing");
+      if (st.sound) { st.sound.classList.remove("is-cue"); void st.sound.offsetWidth; st.sound.classList.add("is-cue"); }
+    } catch (e) {}
+    st.layers.forEach(function (v, i) {
+      v.volume = VOL;
+      if (i !== st.current) { v.muted = true; if (!st.switching) v.pause(); }
+    });
+    syncAudio();
+    if (st.role === "hero" && !st.heroActivated) return;
+    startCurrent(st);
+  }
+  function toggleSound(st) {
+    pref.muted = !pref.muted;
+    syncAudio();
+    if (!pref.muted) {
+      if (!st.active || owner !== st) activate(st);
+      if (st.role === "hero") activateHero(st);
+      else startCurrent(st);
+      setStatus(st, "Sound enabled · active section only");
+    } else {
+      states.forEach(function (s) {
+        s.layers.forEach(function (v) { v.muted = true; v.volume = VOL; });
+      });
+      setStatus(st, "Sound muted");
+    }
+    syncAudio();
+  }
+  function activateHero(st) {
+    if (!st || st.role !== "hero" || st.heroActivated) return;
+    st.heroActivated = true;
+    if (!st.active || owner !== st) {
+      if (owner && owner !== st) deactivate(owner);
+      owner = st; st.active = true;
+    }
+    st.root.classList.add("is-open");
+    st.root.classList.remove("is-peeking");
+    st.root.setAttribute("aria-expanded", "true");
+    st.root.style.setProperty("--lens", "150%");
+    pref.muted = false;
+    var v = st.layers[st.current];
+    v.muted = false; v.volume = VOL;
+    try {
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {
+        v.muted = true; pref.muted = true; setStatus(st, "Tap the film to start");
+      });
+    } catch (e) {
+      v.muted = true; pref.muted = true; setStatus(st, "Tap the film to start");
+    }
+    syncAudio();
+    setStatus(st, "Sound on");
+    prepareNext(st);
+  }
+  function bindHeroInteraction(st) {
+    var root = st.root;
+    if (reducedMotion) {
+      root.addEventListener("click", function (e) {
+        if (closestControl(e.target)) return;
+        activateHero(st);
+      });
+      root.addEventListener("keydown", function (e) {
+        if ((e.key === "Enter" || e.key === " ") && !closestControl(e.target)) {
+          e.preventDefault(); activateHero(st);
+        }
+      });
+      return;
+    }
+    var moveRaf = null;
+    function pointAt(x, y) {
+      if (st.heroActivated) return;
+      var r = root.getBoundingClientRect();
+      var px = Math.max(0, Math.min(r.width, x - r.left));
+      var py = Math.max(0, Math.min(r.height, y - r.top));
+      root.style.setProperty("--px", px + "px");
+      root.style.setProperty("--py", py + "px");
+      var dx = px - r.width / 2, dy = py - r.height / 2;
+      var cap = Math.min(r.width, r.height) * 0.26;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var scale = dist > cap ? cap / dist : 1;
+      root.style.setProperty("--ring-tx", (dx * scale) + "px");
+      root.style.setProperty("--ring-ty", (dy * scale) + "px");
+    }
+    function throttledPointAt(x, y) {
+      if (moveRaf) return;
+      moveRaf = requestAnimationFrame(function () { moveRaf = null; pointAt(x, y); });
+    }
+    root.addEventListener("pointermove", function (e) {
+      if (st.heroActivated) return;
+      throttledPointAt(e.clientX, e.clientY);
+      root.classList.add("is-peeking");
+      var cur = root.style.getPropertyValue("--lens");
+      if (!cur || cur === "0px") root.style.setProperty("--lens", "clamp(120px, 16vw, 220px)");
+    }, { passive: true });
+    root.addEventListener("touchmove", function (e) {
+      if (st.heroActivated || !e.touches || !e.touches[0]) return;
+      throttledPointAt(e.touches[0].clientX, e.touches[0].clientY);
+      root.classList.add("is-peeking");
+      var cur = root.style.getPropertyValue("--lens");
+      if (!cur || cur === "0px") root.style.setProperty("--lens", "clamp(120px, 16vw, 220px)");
+    }, { passive: true });
+    root.addEventListener("pointerleave", function () {
+      if (st.heroActivated) return;
+      root.classList.remove("is-peeking");
+      root.style.setProperty("--px", "50%");
+      root.style.setProperty("--py", "50%");
+      root.style.setProperty("--lens", "0px");
+      root.style.setProperty("--ring-tx", "0px");
+      root.style.setProperty("--ring-ty", "0px");
+    });
+    root.addEventListener("click", function (e) {
+      if (closestControl(e.target)) return;
+      if (e.clientX || e.clientY) pointAt(e.clientX, e.clientY);
+      activateHero(st);
+    });
+    root.addEventListener("keydown", function (e) {
+      if ((e.key === "Enter" || e.key === " ") && !closestControl(e.target)) {
+        e.preventDefault(); activateHero(st);
+      }
+    });
+  }
+  function pauseHeroInit(st) {
+    var v = st.layers[st.current];
+    function onReady() {
+      if (st.heroActivated) return;
+      try { v.currentTime = HERO_HOLD_FRAME_SECONDS; } catch (e) {}
+      v.pause();
+      v.removeEventListener("canplay", onReady);
+      v.removeEventListener("loadeddata", onReady);
+    }
+    if (v.readyState >= 2) onReady();
+    else {
+      v.addEventListener("canplay", onReady);
+      v.addEventListener("loadeddata", onReady);
+    }
+  }
+  function makeState(root) {
+    var files = parseFiles(root);
+    var layers = getLayers(root);
+    if (!files.length || layers.length !== 2) return null;
+    var loopAttr = (root.getAttribute("data-loop") || "true").toLowerCase();
+    var allowLoop = loopAttr !== "false" && loopAttr !== "0" && loopAttr !== "no";
+    var fadeAttr = parseInt(root.getAttribute("data-fade"), 10);
+    var fadeMs = (!isNaN(fadeAttr) && fadeAttr > 0) ? fadeAttr : DEFAULT_AUDIO_FADE_MS;
+    var st = {
+      root: root, files: files, layers: layers,
+      sound: getSoundControl(root), status: getStatus(root),
+      role: getRole(root), heroActivated: false, allowLoop: allowLoop,
+      fadeMs: fadeMs,
+      index: 0, current: 0, active: false, switching: false,
+      failed: Object.create(null), preparedIndex: null,
+      incoming: null, handlers: null, readyTimer: null,
+      transitionTimer: null, fadeFrame: null, observerRatio: 0
+    };
+    layers.forEach(function (v, i) {
+      v.muted = true; v.volume = VOL;
+      v.loop = false; v.removeAttribute("loop");
+      v.playsInline = true;
+      setLayerOpacity(v, i === 0 ? 1 : 0);
+      v.addEventListener("timeupdate", function () {
+        if (!st.active || owner !== st || st.switching || st.layers[st.current] !== v) return;
+        if (st.role === "hero" && !st.heroActivated) return;
+        if (Number.isFinite(v.duration) && v.duration > 15 && v.duration - v.currentTime <= 1.5) {
+          if (!st.allowLoop && st.index >= st.files.length - 1) return;
+          switchClip(st);
+        }
+      });
+      v.addEventListener("ended", function () {
+        if (st.active && owner === st && st.layers[st.current] === v && !st.switching) {
+          if (st.role === "hero" && !st.heroActivated) return;
+          if (!st.allowLoop && st.index >= st.files.length - 1) { setStatus(st, "Sequence complete"); return; }
+          switchClip(st);
+        }
+      });
+    });
+    setSourceOnce(st, 0, layers[0]);
+    if (st.role === "hero") {
+      bindHeroInteraction(st);
+      pauseHeroInit(st);
+    }
+    if (st.sound) {
+      st.sound.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        toggleSound(st);
+      });
+    }
+    if (st.role !== "hero") {
+      root.addEventListener("pointerdown", function (event) {
+        if (closestControl(event.target)) return;
+        if (!pref.muted) {
+          if (!st.active || owner !== st) activate(st);
+          else if (st.layers[st.current].paused) startCurrent(st);
+          return;
+        }
+        pref.muted = false;
+        root.classList.add("is-open");
+        try { root.classList.add("is-playing"); } catch (e) {}
+        if (!st.active || owner !== st) activate(st);
+        else startCurrent(st);
+        syncAudio();
+        setStatus(st, "Sound enabled · active section only");
+      });
+    }
+    if (st.sound) updateControl(st);
+    return st;
+  }
+
+  roots.forEach(function (root) {
+    var st = makeState(root);
+    if (st) states.push(st);
+  });
+  if (!states.length) return;
+
+  if ("IntersectionObserver" in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var st = states.filter(function (x) { return x.root === entry.target; })[0];
+        if (!st) return;
+        st.observerRatio = entry.isIntersecting ? entry.intersectionRatio : 0;
+        ratios.set(st, st.observerRatio);
+      });
+      var cand = null, best = 0;
+      states.forEach(function (st) {
+        var r = ratios.get(st) || 0;
+        if (r >= 0.22 && r > best) { best = r; cand = st; }
+      });
+      if (cand) {
+        if (owner !== cand) activate(cand);
+      } else if (owner && (ratios.get(owner) || 0) < 0.22) {
+        deactivate(owner);
+      }
+    }, { threshold: [0, 0.06, 0.22, 0.5, 0.75] });
+    states.forEach(function (st) { obs.observe(st.root); });
+  } else {
+    if (states[0] && states[0].role !== "hero") activate(states[0]);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      states.forEach(function (st) {
+        st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+      });
+    } else if (owner && owner.active && !(owner.role === "hero" && !owner.heroActivated)) {
+      syncAudio(); startCurrent(owner);
+    }
+  });
+  window.addEventListener("pagehide", function () {
+    states.forEach(function (st) {
+      clearTransition(st);
+      st.layers.forEach(function (v) { v.muted = true; v.pause(); });
+    });
+  });
+  syncAudio();
+})();
+</script>
+
+</body>
+</html>
