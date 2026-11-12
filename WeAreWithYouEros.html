@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080b0d">
-<title>EROS · The Time to Build — Community Edition</title>
+<title>EROS · We Are With You — Community Edition</title>
 <meta name="description" content="The EROS community invitation and practical build guide for TitanX, PulseChain and EROS. Bonding, not extracting.">
+<meta name="eros-cinema-engine" content="v2.0-canonical">
 <style>
 :root{
  --bg:#080b0d;--bg2:#101719;--panel:#111c1f;--panel2:#152326;
@@ -37,8 +38,9 @@ section{padding:82px 0;border-bottom:1px solid var(--line);width:100%;max-width:
 .section-head{max-width:850px;margin-bottom:28px;overflow-wrap:break-word;}
 .section-head h2{font-size:clamp(2.1rem,5vw,3.8rem);font-weight:500;letter-spacing:-.035em;margin:12px 0 18px}
 .section-head p{color:var(--soft);font-size:1.08rem}
+.kicker{font:700 .68rem var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin:0 0 18px}
+.orange{color:var(--orange2)}.teal{color:var(--teal2)}
 
-/* Enhanced Colors */
 .statement{font-size:clamp(1.5rem,3.3vw,2.55rem);line-height:1.3;max-width:960px;margin:30px 0;text-shadow:0 2px 10px rgba(0,0,0,0.5);}
 .statement strong{color:var(--orange2);font-weight:600;text-shadow:0 0 20px rgba(255,138,54,0.3);}
 .prose{max-width:790px;color:var(--soft);overflow-wrap:break-word;}
@@ -49,26 +51,22 @@ section{padding:82px 0;border-bottom:1px solid var(--line);width:100%;max-width:
 .pull em{color:var(--teal2);font-style:normal;font-weight:600;}
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:28px 0}
+.grid.two{grid-template-columns:repeat(2,1fr)}
 .card{background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid rgba(98, 216, 208, 0.25);border-top:2px solid rgba(255, 138, 54, 0.6);border-radius:14px;padding:23px;min-height:185px;position:relative;overflow:hidden;transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;}
 .card:hover{transform:translateY(-3px);border-color:rgba(162,240,232,0.6);box-shadow:0 8px 24px rgba(0,0,0,0.4), 0 0 20px rgba(98,216,208,0.1);}
 .card .num{font:800 .66rem var(--sans);letter-spacing:.14em;color:var(--orange)}
 .card h3{font-size:1.35rem;color:var(--teal2);font-weight:500;margin:12px 0 9px;text-shadow:0 0 15px rgba(98,216,208,0.2);}
+.card h4{font-size:1.14rem;color:var(--teal2);font-weight:600;margin:0 0 9px}
 .card p{color:var(--soft);margin:0;font-size:.98rem}
+.card ul{color:var(--soft);font-size:.95rem;padding-left:1.2rem;margin:8px 0 0}
+.card li{margin:.35em 0}
 
-/* FIXED MEDIA CONTAINERS - Strict locking */
 .media{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center;margin:32px 0;width:100%;min-width:0;}
 .media video,.media img{
-    width:100%;
-    height:100%;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    background:#030506;
-    border-radius:13px;
-    border:2px solid rgba(98, 216, 208, 0.4);
+    width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;background:#030506;
+    border-radius:13px;border:2px solid rgba(98, 216, 208, 0.4);
     box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 15px rgba(255, 138, 54, 0.1);
-    max-width:100%;
-    display:block;
-    overflow:hidden;
+    max-width:100%;display:block;overflow:hidden;
 }
 .media-copy h3{font-size:1.7rem;color:var(--orange2);font-weight:500;margin:8px 0 12px}
 .media-copy p{color:var(--soft);overflow-wrap:break-word;}
@@ -107,17 +105,47 @@ section{padding:82px 0;border-bottom:1px solid var(--line);width:100%;max-width:
 .corpus-cta{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--orange)!important;border-radius:99px;padding:12px 20px;background:linear-gradient(110deg,rgba(255,138,54,0.15),rgba(98,216,208,0.15));color:var(--orange2)!important;font:800 .72rem var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(255,138,54,0.1);}
 .corpus-cta:hover{background:var(--gradient-primary);color:var(--bg)!important;box-shadow:0 0 25px rgba(98,216,208,0.5);border-color:var(--teal)!important;}
 
+/* Tables (grafted from Sublime) */
+table{border-collapse:collapse;width:100%;margin:24px 0;font-size:.94rem;font-family:var(--sans)}
+th,td{padding:13px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font:700 .68rem var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--orange2);background:rgba(255,138,54,0.05)}
+td{color:var(--soft);font-family:var(--serif);font-size:.96rem}
+td strong{color:var(--ink)}
+
+.callout{padding:24px 26px;border:1px solid var(--line2);border-radius:14px;background:linear-gradient(120deg,rgba(58,36,24,.55),rgba(16,43,42,.55));margin:28px 0;font-family:var(--sans);font-size:.95rem;line-height:1.7;color:var(--soft)}
+.callout p:last-child{margin-bottom:0}
+.callout strong{color:var(--ink)}
+
+.phase{display:grid;grid-template-columns:90px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
+.phase:last-child{border-bottom:0}
+.phase-no{font:800 .75rem var(--sans);letter-spacing:.12em;color:var(--orange)}
+.phase h4{font-size:1.3rem;color:var(--teal2);font-weight:500;margin:0 0 8px}
+.phase p{color:var(--soft);margin:0 0 .8em;font-size:.98rem}
+.phase ul{color:var(--soft);font-size:.95rem;padding-left:1.2rem;margin:.4em 0 .8em}
+.phase li{margin:.35em 0}
+.phase strong{color:var(--ink)}
+
+.small{font:.84rem/1.7 var(--sans);color:var(--muted)}
+.small a{color:var(--teal2)}
+.small li{margin:.5em 0}
+.sources ul{padding-left:1.3rem;margin:.6em 0}
+
 footer{padding:42px 0 60px;color:var(--muted);font:.85rem/1.7 var(--sans)}
 footer strong{color:var(--orange2)}
 
-/* Mobile Fixes */
 @media(max-width:760px){
  .nav{align-items:flex-start;flex-direction:column;padding:12px 0}
  .navlinks{gap:10px}
- .grid,.media,.video-grid{grid-template-columns:1fr;} /* FIX: video-grid added here */
+ .grid,.media,.video-grid{grid-template-columns:1fr;}
+ .grid.two{grid-template-columns:1fr}
  section{padding:58px 0}
- .pathways{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(2,1fr)}
+ .pathways{grid-template-columns:1fr}
+ .steps{grid-template-columns:repeat(2,1fr)}
+ .flow{grid-template-columns:repeat(2,1fr)}
  .media video, .media img {max-height: 300px;}
+ table{font-size:.82rem}
+ th,td{padding:10px 8px}
+ .phase{grid-template-columns:55px 1fr}
 }
 
 /* ═══ EROS CINEMA SYSTEM · CSS v2.0 ═══ */
@@ -133,7 +161,7 @@ footer strong{color:var(--orange2)}
 .cinema-hero.is-open .cinema-va,.cinema-hero.is-open .cinema-vb{clip-path:circle(150% at var(--px) var(--py));-webkit-clip-path:circle(150% at var(--px) var(--py))}
 
 .cinema-shade{position:absolute;inset:0;z-index:-2;pointer-events:none;transition:background .8s ease;background:linear-gradient(90deg,rgba(8,11,13,.82) 0%,rgba(8,11,13,.35) 55%,rgba(8,11,13,.12) 100%),linear-gradient(0deg,rgba(8,11,13,.94) 0%,rgba(8,11,13,.30) 42%,rgba(8,11,13,.05) 72%,rgba(8,11,13,.40) 100%)}
-.cinema-hero:not(.is-open) .cinema-shade,.cinema-band:not(.is-playing) .cinema-shade{background:linear-gradient(90deg,rgba(8,11,13,.94) 0%,rgba(8,11,13,.65) 55%,rgba(8,11,13,.38) 100%),linear-gradient(0deg,rgba(8,11,13,.97) 0%,rgba(8,11,13,.62) 42%,rgba(8,11,13,.28) 72%,rgba(8,11,13,.65) 100%)}
+.cinema-hero:not(.is-open) .cinema-shade,.cinema-band:not(.is-playing) .cinema-shade{background:linear-gradient(90deg,rgba(8,11,13,.78) 0%,rgba(8,11,13,.48) 55%,rgba(8,11,13,.25) 100%),linear-gradient(0deg,rgba(8,11,13,.85) 0%,rgba(8,11,13,.48) 42%,rgba(8,11,13,.18) 72%,rgba(8,11,13,.48) 100%)}
 .cinema-hero.is-open .cinema-shade,.cinema-band.is-playing .cinema-shade{background:linear-gradient(90deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.06) 50%,transparent 100%),linear-gradient(0deg,rgba(0,0,0,.38) 0%,rgba(0,0,0,.08) 38%,transparent 72%)}
 
 .cinema-copy{position:relative;width:min(940px,100%);padding:0 clamp(24px,7vw,100px) clamp(66px,8vw,94px);pointer-events:none;z-index:2;overflow-wrap:break-word;}
@@ -187,9 +215,16 @@ footer strong{color:var(--orange2)}
 </head>
 <body>
 <header><div class="wrap nav">
-<a class="brand" href="#top"><span class="sigil"></span> EROS · THE TIME TO BUILD</a>
+<a class="brand" href="#top"><span class="sigil"></span> EROS · WE ARE WITH YOU</a>
 <nav class="navlinks">
-<a href="#trust">Trust</a><a href="#bridge">The bridge</a><a href="#bond">Bonding</a><a href="#world">The world</a><a href="#flywheel">Flywheel</a><a href="#freedom">Build freely</a><a href="#live">What is live</a><a href="#build">What we build</a><a href="#roles">Your role</a><a href="#90days">First 90 days</a><a href="#call">The call</a>
+<a href="#trust">Trust</a>
+<a href="#alliance">Alliance</a>
+<a href="#houses">Houses</a>
+<a href="#flywheel">Flywheel</a>
+<a href="#build">Build</a>
+<a href="#90days">90 Days</a>
+<a href="#stewardship">Stewardship</a>
+<a href="#call">The Call</a>
 </nav></div></header>
 
 <main id="top">
@@ -201,7 +236,7 @@ footer strong{color:var(--orange2)}
          aria-label="The Time to Build — cinematic threshold"
          data-cinema="hero"
          data-queue="we_are_with_you_eros.mp4|eros_power.mp4|eros_bridging.mp4|eros_fight.mp4|eros_jump5.mp4|eros_heaven_bridge.mp4|eros_bond.mp4|eros_grays1.mp4">
-  <img class="cinema-hero-poster" src="https://meaning-unconfounded.github.io/images/frames/we_are_with_you_eros.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+  <img class="cinema-hero-poster" src="/images/frames/we_are_with_you_eros.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
   <video class="cinema-video cinema-va" playsinline muted preload="metadata" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
@@ -251,7 +286,7 @@ footer strong{color:var(--orange2)}
 <p>Not everyone needs the same vision. Not everyone needs the same role. Some will build liquidity. Some will create stories, films, art, games, tools, guides, music, applications or entirely new projects. Some will connect communities that have never worked together. The strength is not that we all do the same thing. It is that our work can connect.</p>
 </div>
 <p class="statement">The books explain the doors. <strong>The community decides what grows beyond them.</strong></p>
-<div class="links"><a class="corpus-cta" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Start at the EROS Corpus</a></div>
+<div class="links"><a class="corpus-cta" href="/The_Eros_Corpus.html">Start at the EROS Corpus</a></div>
 </section>
 
 <section id="trust">
@@ -261,8 +296,8 @@ footer strong{color:var(--orange2)}
 <p>The Newcomer Dossier puts its finger on a distinction that matters in crypto: words are easy to publish; time, behaviour and a visible record are harder to fake.</p>
 </div>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_grays1.jpg">
-  <source src="https://meaning-unconfounded.github.io/images/eros_grays1.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros_grays1.jpg">
+  <source src="/images/eros_grays1.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>Twenty-eight months of showing up.</h3>
@@ -276,7 +311,7 @@ footer strong{color:var(--orange2)}
 <article class="card"><div class="num">THE RECORD</div><h3>Survival is a signal</h3><p>Books, media, community history and ongoing work form a record. The strongest case is made by evidence and consistency, not by asking anyone to suspend judgement.</p></article>
 </div>
 <p class="prose">The Dossier's challenge is simple: look at what people do, not only what they say. Read the record. Check the contract. Explore the history. Make your own judgement. That is how trust is invited rather than demanded.</p>
-<div class="links"><a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a></div>
+<div class="links"><a href="/EROS_Newcomer_Dossier.html">Newcomer Dossier</a><a href="/The_Front_Door.html">The Front Door</a><a href="/The_Bridge.html">The Bridge</a></div>
 </section>
 
 <section id="bridge">
@@ -286,8 +321,8 @@ footer strong{color:var(--orange2)}
 <p>The Bridge and Front Door describe EROS as an extension of the TitanX ecosystem onto PulseChain — not a replacement for TitanX, and not a demand that every project abandon its roots.</p>
 </div>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_bridging.jpg">
-<source src="https://meaning-unconfounded.github.io/images/eros_bridging.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros_bridging.jpg">
+<source src="/images/eros_bridging.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>From one chain to a wider field of connection.</h3>
@@ -299,7 +334,7 @@ footer strong{color:var(--orange2)}
 <p>That is why the language of the books matters: extend the graph; do not replace the people who built it. TitanX remains part of the story. PulseChain becomes another place for that story to develop. EROS can help make the connection visible.</p>
 <p>Bridging and liquidity involve smart-contract, network, custody and market risks. The invitation is to understand the route and verify the official contracts and current bridge status before using it.</p>
 </div>
-<div class="links"><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge · technical field manual</a><a href="https://meaning-unconfounded.github.io/The_Front_Door.html">The Front Door</a><a href="https://meaning-unconfounded.github.io/media.html">Media Centre</a></div>
+<div class="links"><a href="/The_Bridge.html">The Bridge · technical field manual</a><a href="/The_Front_Door.html">The Front Door</a><a href="/media.html">Media Centre</a></div>
 </section>
 
 <section id="bond">
@@ -309,8 +344,8 @@ footer strong{color:var(--orange2)}
 <p>The liquidity-web idea is one of the strongest recurring themes in the EROS library. The ambition is not to make every asset identical or collapse every project into one identity. It is to create many useful connections.</p>
 </div>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_bond.jpg">
-  <source src="https://meaning-unconfounded.github.io/images/eros_bond.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros_bond.jpg">
+  <source src="/images/eros_bond.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>Every pair is another doorway.</h3>
@@ -324,38 +359,87 @@ footer strong{color:var(--orange2)}
 <article class="card"><div class="num">SHARED DISCOVERY</div><h3>Every community can invite</h3><p>A project can promote its own work and still help people discover the wider network. Cooperation need not mean surrendering independence.</p></article>
 </div>
 <p class="pull">Cohesion over competition. <em>Build bridges, not billboards. Allies, not islands.</em></p>
-<div class="links"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></div>
+<div class="links"><a href="/The_Platinum_Standard.html">The Platinum Standard</a><a href="/The_Bridge.html">The Bridge</a><a href="/SpaceEros.html">SpaceEros</a></div>
 </section>
 
-<section id="standard">
+<section id="alliance">
 <div class="section-head">
-<div class="kicker">04 · The standard beneath the instrument</div>
-<h2>Fixed foundations.<br><span class="orange">A living network above them.</span></h2>
-<p>The Platinum Standard explores the difference between the underlying EROS instrument and the new rails and experiments that may be built around it.</p>
+<div class="kicker">04 · The alliance</div>
+<h2>Three communities. Many identities.<br><span class="orange">A shared horizon.</span></h2>
+<p>The strongest invitation recognises what each community already is. EROS should not absorb, rename or speak on behalf of TitanX or PulseChain projects. It should create a shared creative and collaborative layer where independent communities can meet by choice.</p>
 </div>
-<div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_cant_exploit.jpg">
-  <source src="https://meaning-unconfounded.github.io/images/eros_cant_exploit.mp4" type="video/mp4">
-</video>
-<div class="media-copy">
-<h3>The rock and the rivers.</h3>
-<p>The books describe EROS as the fixed-supply foundation — the rock — while proposed extensions such as ErosX and 33EROS explore different forms of movement, participation and gamified activity. Their roles are not interchangeable, and proposed mechanisms should remain clearly labelled until deployed and verified.</p>
-<p>The positive idea is that one foundation can support many forms of experimentation. A community member does not need to reinvent the whole system to create a new use, a new connection or a new experience.</p>
-</div></div>
-<p class="pull">The foundation gives the ecosystem continuity. <em>The builders give it new directions.</em></p>
-<div class="note">Technical details, token permissions, fee splits, supply and deployment status can change or be misunderstood when repeated out of context. The Bridge and Platinum Standard are the technical references; check current on-chain state and official sources before relying on any specific mechanism.</div>
-<div class="links"><a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a><a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a></div>
+<div class="grid">
+<article class="card"><div class="num">TITANX · THE PROTOCOL FAMILY</div><h3>You built a network of builders.</h3><p>The TitanX ecosystem's own materials describe a community-built protocol family, with projects using TitanX in different ways and a distributed builder culture. EROS can offer a shared story and creative production framework without asking protocols to surrender their own purpose.</p></article>
+<article class="card"><div class="num">PULSECHAIN · THE WIDER LANDSCAPE</div><h3>You built a place to deploy and connect.</h3><p>PulseChain has a broad community project landscape spanning DeFi, tooling, NFTs, games and developer resources. EROS can become a cultural and creative meeting place that helps explain projects, connect contributors and produce experiences.</p></article>
+<article class="card"><div class="num">EROS · THE CREATIVE SPINE</div><h3>You can help give the network a world.</h3><p>EROS brings its books, mythology, cultural vault, proposed House model, creative pipeline and community invitation. It is a starting framework, not a claim to own the work of everyone who joins.</p></article>
+</div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">What the alliance is — and is not</h3>
+<table><thead><tr><th>It is</th><th>It is not</th></tr></thead><tbody>
+<tr><td>A voluntary network of independent communities and contributors.</td><td>A merger, takeover, endorsement or central authority over other projects.</td></tr>
+<tr><td>A shared creative language, open invitations and opportunities to collaborate.</td><td>A requirement to buy, hold, bridge, bond or provide liquidity.</td></tr>
+<tr><td>A way to create useful media, explainers, tools, stories and experiences together.</td><td>A promise that collaboration will increase token prices or guarantee returns.</td></tr>
+<tr><td>A framework for each project to keep its identity while participating in common work.</td><td>A claim that every proposed partnership or technical integration already exists.</td></tr>
+</tbody></table>
+<div class="callout"><p><strong>Important distinction about scale:</strong> the supplied EROS books refer to more than forty TitanX-family protocols. The TitanX official site and documentation currently describe "28+" protocols. These figures may reflect different dates, definitions or lists. The master project should maintain a live, dated protocol directory and avoid presenting a fixed count as verified until the list is reconciled with TitanXHub and the relevant project teams.</p></div>
+</section>
+
+<section id="houses">
+<div class="section-head">
+<div class="kicker">05 · The House model</div>
+<h2>One world. Many Houses.<br><span class="teal">No one loses their name.</span></h2>
+<p>A House is a voluntary place for a protocol community inside the wider EROS creative universe. It is a bridge for participation and storytelling, not a claim of ownership, endorsement or control.</p>
+</div>
+<p class="prose">Imagine a visitor entering the EROS world and discovering distinct Houses: each with its own people, visual identity, history, coin, community channels and creative voice. A House can tell its own story, host its own event, create its own characters and invite its own members to contribute. The shared world gives those stories somewhere to meet.</p>
+<div class="grid two">
+<div class="card"><div class="num">WHAT A HOUSE CAN RECEIVE</div><ul><li>A profile page linking first to its official website and community.</li><li>A place or region in the shared world, if the community wants one.</li><li>A quarterly chronicle: one short story, character sheet or visual set.</li><li>A community showcase or "House day" led by its own members.</li><li>A path into shared media, creative challenges and contributor teams.</li><li>Optional exploration of a token pair or technical collaboration, subject to independent review.</li></ul></div>
+<div class="card"><div class="num">WHAT A HOUSE KEEPS</div><ul><li>Its own name, token, leadership and independent roadmap.</li><li>Its own Telegram, Discord, website and community culture.</li><li>The right to decline any story, asset, pairing or integration.</li><li>Control over what it says publicly about its own project.</li><li>Credit for its creators and ownership of its original work under agreed terms.</li><li>The freedom to leave or pause participation.</li></ul></div>
+</div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">How a community joins</h3>
+<ol style="color:var(--soft);padding-left:1.3rem"><li><strong>Conversation:</strong> invite a community representative to an open discussion. Ask what it wants, not what EROS wants to extract.</li><li><strong>Consent:</strong> agree the scope in writing. Participation in storytelling does not imply token endorsement or technical integration.</li><li><strong>House brief:</strong> record its name, purpose, official links, contact, approved descriptions, creative interests and boundaries.</li><li><strong>First contribution:</strong> make one small piece with the community — an interview, explainer, profile, art card or short chronicle.</li><li><strong>Review and continue:</strong> publish only after the House approves its own representation. Continue only if the relationship creates value for both sides.</li></ol>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">The protocol participation ladder</h3>
+<table><thead><tr><th>Level</th><th>Participation</th><th>Commitment</th></tr></thead><tbody>
+<tr><td>Open Door</td><td>Listed as an independent ecosystem community with official links.</td><td>Permission to list and accurate description.</td></tr>
+<tr><td>Guest House</td><td>Joins a discussion, interview or showcase.</td><td>One representative and review of its profile.</td></tr>
+<tr><td>Creative House</td><td>Co-creates a story, character, art pack or media piece.</td><td>Named contributors, rights agreement and clear brief.</td></tr>
+<tr><td>Builder House</td><td>Joins a technical, educational or product workstream.</td><td>Named technical contact, scope, testing and risk review.</td></tr>
+<tr><td>Founding Partner</td><td>Commits to a recurring programme or shared production season.</td><td>Documented responsibilities, governance and resourcing.</td></tr>
+</tbody></table>
+</section>
+
+<section id="tokens">
+<div class="section-head">
+<div class="kicker">06 · The token and protocol layer</div>
+<h2>Give every coin a place in the conversation.<br><span class="orange">Not a forced role.</span></h2>
+<p>For a network of protocols to participate, the plan must be bigger than a single-token story. But it must also avoid pretending that every coin has the same mechanics or should be used in the same way.</p>
+</div>
+<p class="prose">The TitanX family already has a design language around community-built protocols, shared ecosystem relationships and TitanX-linked mechanics. PulseChain adds a much wider set of independent tokens, applications, liquidity venues, infrastructure projects and communities. EROS can connect these worlds culturally first, then explore technical connections only where they make sense.</p>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">A practical integration framework</h3>
+<table><thead><tr><th>Participation route</th><th>What it means</th><th>What must be checked</th></tr></thead><tbody>
+<tr><td>Identity and story</td><td>Each project has an accurate profile, House option, visual identity and story contribution.</td><td>Project consent, official links, factual accuracy and brand permission.</td></tr>
+<tr><td>Education and discovery</td><td>Community-made explainers, interviews, guides and ecosystem maps.</td><td>Claims verified, risks disclosed, no misleading price or endorsement language.</td></tr>
+<tr><td>Community events</td><td>House days, AMAs, creative challenges, developer sessions and showcases.</td><td>Named hosts, moderation, transparent sponsorship and recording consent.</td></tr>
+<tr><td>Liquidity exploration</td><td>Optional pairs or liquidity relationships where participants independently want them.</td><td>Contract verification, pool depth, fees, volatility, slippage, impermanent loss and concentration risk.</td></tr>
+<tr><td>Technical integration</td><td>APIs, dashboards, game assets, wallet connections, on-chain data or cross-project tools.</td><td>Technical ownership, security review, maintenance, permissions and clear status labels.</td></tr>
+<tr><td>Creative economy</td><td>Projects may sponsor a commission, fund a House chronicle or support a creator residency.</td><td>Real budget, written terms, IP rights, conflicts disclosure and delivery milestones.</td></tr>
+</tbody></table>
+<p class="pull">A coin should not be included merely to decorate the map. <em>It should be included because its people, purpose or technology bring something real.</em></p>
+<div class="prose">
+<p>Do not attempt to create forty separate token integrations on day one. Start with a protocol directory, then invite a small pilot cohort representing different protocol types. Each participating protocol can nominate one liaison and choose one of three first contributions: tell its story, make a useful explainer, or co-create a small piece of the world. A later round can expand the model to additional protocols.</p>
+<p>For each protocol, record: official name and ticker; official website and contract addresses; chain(s); purpose; protocol dependencies; current status; risks; community channels; representative; approved description; creative interests; possible technical connections; and the date each fact was checked.</p>
+<p>PulseChain participation should not be limited to token holders. Invite developers, tool makers, educators, validators, artists, NFT communities, game builders, liquidity researchers and independent project teams. The PulseChain ecosystem directory and developer resources provide useful discovery points, but every listing and integration must be verified with the project itself.</p>
+</div>
+<div class="callout"><p><strong>Three rules for token integration:</strong> no forced buying; no guaranteed utility; no implied endorsement. A House can exist without a token pair. A token pair can exist without a House. A technical integration can be proposed without being described as live. Keep those relationships distinct.</p></div>
 </section>
 
 <section id="world">
 <div class="section-head">
-<div class="kicker">05 · The cultural vault</div>
+<div class="kicker">07 · The cultural vault</div>
 <h2>The books are not just explanations.<br><span class="teal">They are the beginning of a world.</span></h2>
 <p>The Flywheel Thesis describes two connected foundations: the on-chain instrument and the cultural archive. The token can be examined. The archive can be explored. The community is the bridge between them.</p>
 </div>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_bridging.jpg">
-  <source src="https://meaning-unconfounded.github.io/images/eros_heaven_bridge.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros_bridging.jpg">
+  <source src="/images/eros_heaven_bridge.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>Mythology. Stories. Art. Media. Ideas.</h3>
@@ -364,40 +448,74 @@ footer strong{color:var(--orange2)}
 </div></div>
 <p class="pull">The mythology gives the world its identity. The books preserve its ideas. <em>The community expands it.</em> Technology gives it ways to move beyond the page.</p>
 <div class="video-grid">
-<article class="video-card"><video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/transform_eros.jpg"><source src="https://meaning-unconfounded.github.io/images/transform_eros.mp4" type="video/mp4"></video><div><h3>Transformation</h3><p>A cinematic expression of change and possibility.</p></div></article>
-<article class="video-card"><video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_humans.jpg"><source src="https://meaning-unconfounded.github.io/images/eros_humans.mp4" type="video/mp4"></video><div><h3>Human connection</h3><p>The world is made meaningful by the people who enter it.</p></div></article>
+<article class="video-card"><video controls playsinline preload="none" poster="/images/frames/transform_eros.jpg"><source src="/images/transform_eros.mp4" type="video/mp4"></video><div><h3>Transformation</h3><p>A cinematic expression of change and possibility.</p></div></article>
+<article class="video-card"><video controls playsinline preload="none" poster="/images/frames/eros_humans.jpg"><source src="/images/eros_humans.mp4" type="video/mp4"></video><div><h3>Human connection</h3><p>The world is made meaningful by the people who enter it.</p></div></article>
 </div>
-<div class="links"><a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">The EROS Corpus</a><a href="https://meaning-unconfounded.github.io/The_Garden_of_Eros.html">The Garden of Eros</a><a href="https://meaning-unconfounded.github.io/Gods_Of_Eros.html">Gods of Eros</a><a href="https://meaning-unconfounded.github.io/Living_Egg.html">Living Egg</a><a href="https://meaning-unconfounded.github.io/Eros_Stories.html">Eros Stories</a><a href="https://meaning-unconfounded.github.io/media.html">Media Centre</a></div>
+<div class="links"><a href="/The_Eros_Corpus.html">The EROS Corpus</a><a href="/The_Garden_of_Eros.html">The Garden of Eros</a><a href="/Gods_Of_Eros.html">Gods of Eros</a><a href="/Living_Egg.html">Living Egg</a><a href="/Eros_Stories.html">Eros Stories</a><a href="/media.html">Media Centre</a></div>
 </section>
 
 <section id="flywheel">
 <div class="section-head">
-<div class="kicker">06 · The flywheel</div>
+<div class="kicker">08 · The flywheel</div>
 <h2>Price can open the door.<br><span class="orange">Purpose gives people a reason to stay.</span></h2>
 <p>The Flywheel book connects two cycles: the market cycle that can bring attention, and the cultural cycle that can turn discovery into belonging and creation.</p>
 </div>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_chart2.jpg">
-  <source src="https://meaning-unconfounded.github.io/images/eros_chart2.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros_chart2.jpg">
+  <source src="/images/eros_chart2.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>From attention to creation — and back again.</h3>
 <p>A rising price can attract attention. Attention can lead people to research EROS. Research can reveal the history, tokenomics, books and wider universe. Discovery may become belonging. Belonging can inspire people to create and contribute. Those creations can introduce EROS to others and renew attention.</p>
 <p>That is the flywheel: not a guaranteed price machine, but a strategy for giving attention somewhere meaningful to go. A rising chart alone cannot build a lasting community. The world, the work and the people are what can make the attention matter.</p>
 </div></div>
+<div class="flow" aria-label="Community flywheel stages">
+  <div><b>01</b>Attention</div><div><b>02</b>Discovery</div><div><b>03</b>Understanding</div><div><b>04</b>Belonging</div><div><b>05</b>Participation</div><div><b>06</b>Creation</div>
+</div>
 <div class="grid">
 <article class="card"><div class="num">THE MARKET CYCLE</div><h3>Price → Attention</h3><p>Market activity can make people look. It creates an opening, not proof of adoption or a promise that price will keep rising.</p></article>
 <article class="card"><div class="num">THE CULTURAL CYCLE</div><h3>Discovery → Belonging</h3><p>People explore the project, understand its ideas, find others and discover reasons to participate beyond the chart.</p></article>
 <article class="card"><div class="num">THE COMMUNITY CYCLE</div><h3>Creation → New attention</h3><p>New work, useful tools, stories and genuine advocacy can bring fresh people into the world and give existing members reasons to return.</p></article>
 </div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Three vaults, one flywheel</h3>
+<div class="grid">
+<article class="card"><div class="num">VAULT ONE · ON-CHAIN</div><h3>The economic layer</h3><p>Token contracts, liquidity, bonding, staking and verified protocol mechanics. Explain what exists and what is proposed. Make risk visible. Never confuse activity with guaranteed value.</p></article>
+<article class="card"><div class="num">VAULT TWO · CULTURAL</div><h3>The meaning layer</h3><p>Books, mythology, stories, characters, art, music, short films, education, language and shared identity. This is how people discover a reason to care beyond a chart.</p></article>
+<article class="card"><div class="num">VAULT THREE · PARTICIPATION</div><h3>The making layer</h3><p>Roles, work cards, contributors, prototypes, finished pieces, credits, reusable assets and public progress. This is where a reader or holder can become a builder.</p></article>
+</div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Where price fits — and where it does not</h3>
+<div class="prose">
+<p>Price can create attention. A strong market period may bring visitors to the front door. That is a marketing opportunity, not proof of adoption. The project must be ready to turn curiosity into understanding, and understanding into voluntary participation.</p>
+<p>The community can pursue broader awareness, clearer token education, stronger market transparency, more useful ecosystem relationships and genuine product or cultural output. These may contribute to long-term demand if people find lasting value, but no community can control price, guarantee appreciation or promise that a particular activity will raise it.</p>
+<p>Do not build a campaign around artificial volume, coordinated buying, misleading scarcity claims, undisclosed promotion or pressure to provide liquidity. Build discoverability, usefulness and trust. The market is free to respond or not.</p>
+</div>
 <p class="pull">Price can start the conversation. <em>People and purpose determine whether there is a conversation worth continuing.</em></p>
 <div class="note">The flywheel is a strategic hypothesis, not a guaranteed market outcome. Price can fall as well as rise; attention can fade; participation is not automatic. The aim is to build a world that remains worth exploring in quiet markets too.</div>
-<div class="links"><a href="https://meaning-unconfounded.github.io/The_Flywheel.html">The Flywheel</a><a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a></div>
+<div class="links"><a href="/The_Flywheel.html">The Flywheel</a><a href="/The_Hopeful_Future.html">The Hopeful Future</a></div>
+</section>
+
+<section id="research">
+<div class="section-head">
+<div class="kicker">09 · Lessons from other large communities</div>
+<h2>Borrow the patterns.<br><span class="teal">Do not copy the costume.</span></h2>
+<p>EROS combines several difficult ambitions: a token ecosystem, a shared fictional universe, an open creative studio, a technical project and a distributed community. No single example solves all of that. The useful approach is to borrow one proven operating pattern from each.</p>
+</div>
+<div class="grid two">
+<div class="card"><div class="num">BLENDER · OPEN CREATIVE PIPELINE</div><h3>Many skills, one production standard.</h3><p>Blender welcomes developers, technical artists, documenters, translators, designers, educators and testers. Its public contribution structure shows that a creative technology project can offer many legitimate entry points, not just coding. The Foundation also makes the relationship between volunteer work and funded professional work visible.</p><p style="margin-top:10px"><strong>EROS lesson:</strong> organise specialist guilds around shared briefs, reusable assets, review standards and a common release calendar. Pay for defined work only when funding genuinely exists.</p><p class="small" style="margin-top:8px"><a href="https://www.blender.org/get-involved/">Blender: Get involved</a> · <a href="https://www.blender.org/about/foundation/">Blender Foundation</a></p></div>
+<div class="card"><div class="num">SCP FOUNDATION · SHARED FICTION</div><h3>Many authors, recognisable canon.</h3><p>SCP's canon hubs make it possible for different creative projects to share a discoverable universe without forcing every author into one linear storyline. Its hub criteria include a body of work, multiple authors, a searchable tag and an open contribution path.</p><p style="margin-top:10px"><strong>EROS lesson:</strong> build a World Bible, separate canon from alternate branches, give every series a hub and allow multiple creative teams to contribute without confusing the reader.</p><p class="small" style="margin-top:8px"><a href="https://scp-wiki.wikidot.com/canon-hub">SCP canon hub</a></p></div>
+<div class="card"><div class="num">NOUNS · OPEN CULTURE AND PROPOSALS</div><h3>Make it easy to build on the idea.</h3><p>Nouns combines distinctive open artwork, a shared identity and a proposal process. Its official materials describe CC0 artwork and a treasury-based funding mechanism. Proposal documentation shows staged review, sponsorship, voting and execution rather than informal promises.</p><p style="margin-top:10px"><strong>EROS lesson:</strong> publish asset permissions, create a simple proposal pathway and record decisions. But EROS must not pretend to have a Nouns-style treasury: no shared budget should be implied until one is actually established.</p><p class="small" style="margin-top:8px"><a href="https://www.nouns.world/">Nouns community</a> · <a href="https://docs.nouns.wtf/governance/proposals">Nouns proposals</a></p></div>
+<div class="card"><div class="num">PUDGY PENGUINS · IP TO EXPERIENCE</div><h3>One recognisable character can travel.</h3><p>Pudgy's model connects community identity, licensing, physical products and browser-based digital experiences. Its licensing materials distinguish ordinary project sharing from formal commercial rights, and its public updates describe toys as a bridge into digital experiences.</p><p style="margin-top:10px"><strong>EROS lesson:</strong> build recognisable characters and assets that can travel across books, clips, games, physical products and immersive experiences. But decide ownership, licences, approval and creator compensation before commercial reuse.</p><p class="small" style="margin-top:8px"><a href="https://www.pudgypenguins.com/pages/licensing">Pudgy licensing</a> · <a href="https://media.pudgypenguins.com/licensing-deals">Licensing deals</a></p></div>
+<div class="card"><div class="num">GITHUB · CONTRIBUTOR EXPERIENCE</div><h3>Make the first contribution obvious.</h3><p>GitHub's healthy-contribution guidance recommends clear contribution instructions, a code of conduct, support resources, licensing and well-labelled beginner issues. This lowers the social and practical cost of joining.</p><p style="margin-top:10px"><strong>EROS lesson:</strong> every workstream needs a one-page brief, a named contact, a small first task, a review path and a clear credit policy.</p><p class="small" style="margin-top:8px"><a href="https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions">GitHub contribution guidance</a></p></div>
+<div class="card"><div class="num">GITCOIN · COMMUNITY SIGNAL</div><h3>Many small voices can matter.</h3><p>Quadratic funding attempts to amplify broad participation rather than allowing a few large donors to dominate allocation. It depends on a matching pool, project vetting and strong Sybil-resistance measures; it is not a magic fairness machine.</p><p style="margin-top:10px"><strong>EROS lesson:</strong> if a real funding pool is ever created, explore transparent rounds that consider breadth of support, verified delivery and independent review. Do not launch token rewards before the rules and abuse controls are ready.</p><p class="small" style="margin-top:8px"><a href="https://gitcoin.co/mechanisms/quadratic-funding">Gitcoin: Quadratic funding</a></p></div>
+</div>
+<div class="callout"><p><strong>Two cautions from the research.</strong> First, open licensing is powerful but not automatic: permission to remix, commercialise or use a brand must be stated precisely. Second, play-to-earn economies can become dependent on continuous new entrants. Research on Axie Infinity's growth crisis describes how token incentives and entry costs became unsustainable when new-player inflows and token prices weakened.</p><p>EROS should build experiences people enjoy, learn from or value even when token prices are quiet. Any reward system must be funded transparently and must not rely on newcomers' deposits to pay earlier participants.</p></div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">What the successful patterns share</h3>
+<ol style="color:var(--soft);padding-left:1.3rem"><li>A front door that tells a newcomer where to begin.</li><li>Many contribution roles, with no single skill treated as the only valuable one.</li><li>Clear standards for quality, safety, rights and factual accuracy.</li><li>Visible credit and a public record of finished work.</li><li>Small, reviewable decisions before large or irreversible commitments.</li><li>Continuity through documentation, so the project does not depend on one person's memory.</li><li>A reason to participate that survives a quiet market.</li></ol>
 </section>
 
 <section id="freedom">
 <div class="section-head">
-<div class="kicker">07 · The freedom to build</div>
+<div class="kicker">10 · The freedom to build</div>
 <h2>One foundation.<br><span class="teal">A thousand possible directions.</span></h2>
 <p>This is where the explanation books hand the story to the community. EROS does not need to own every idea, direct every project or approve every experiment. Community members are free to build what they believe is useful.</p>
 </div>
@@ -406,8 +524,8 @@ footer strong{color:var(--orange2)}
 <p>The invitation is not to copy one blueprint. It is to create something that can connect with the wider ecosystem in a positive way. Independent does not have to mean isolated. Collaboration does not have to mean control.</p>
 </div>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros33_upgrade2.jpg">
-  <source src="https://meaning-unconfounded.github.io/images/eros33_upgrade2.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros33_upgrade2.jpg">
+  <source src="/images/eros33_upgrade2.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>Bring your own vision.</h3>
@@ -423,10 +541,9 @@ footer strong{color:var(--orange2)}
 <div class="note">The GAIA example is included as an illustration of community freedom, not as an endorsement. Nested LPs, fee-on-transfer mechanics, LP burns, holder distributions and redemption paths require detailed design, testing and independent review.</div>
 </section>
 
-
 <section id="live">
   <div class="section-head">
-    <div class="kicker">08 · The ground beneath the vision</div>
+    <div class="kicker">11 · The ground beneath the vision</div>
     <h2>Be clear about what exists.<br><span class="teal">Be honest about what comes next.</span></h2>
     <p>Inspiration gives people a reason to care. Clarity gives them a reason to trust what they are being invited into. Every project, feature and claim should be identified accurately.</p>
   </div>
@@ -438,9 +555,33 @@ footer strong{color:var(--orange2)}
   <div class="note"><strong>Clarity is part of the culture.</strong> Label live, proposed, experimental and fictional material. Verify contracts and current status before interacting. Liquidity, bridge, smart-contract and market risks remain.</div>
 </section>
 
+<section id="community">
+<div class="section-head">
+<div class="kicker">12 · Community architecture</div>
+<h2>One headquarters. Connected rooms.<br><span class="orange">A welcoming front door.</span></h2>
+<p>Community growth is not the same as creating more chat groups. Too many rooms too early create empty spaces, duplicated information and volunteer fatigue. Start with one headquarters and add rooms when people are actually working.</p>
+</div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">The recommended structure</h3>
+<table><thead><tr><th>Room / topic</th><th>Purpose</th><th>Who it serves</th></tr></thead><tbody>
+<tr><td>Start Here</td><td>Orientation, safety, official links, first actions.</td><td>Every newcomer.</td></tr>
+<tr><td>Community Square</td><td>General discussion, welcome, weekly updates.</td><td>All communities.</td></tr>
+<tr><td>Houses and Protocols</td><td>One topic per participating protocol community.</td><td>Protocol members and visitors.</td></tr>
+<tr><td>Story and Worldbuilding</td><td>Canon, characters, plotlines, lore and pitches.</td><td>Writers, editors, researchers.</td></tr>
+<tr><td>Art and Animation Studio</td><td>Concept art, character sheets, storyboards, 3D, VFX.</td><td>Artists, designers, animators.</td></tr>
+<tr><td>Film, Audio and Distribution</td><td>Scripts, clips, podcasts, editing, publishing.</td><td>Presenters, producers, editors.</td></tr>
+<tr><td>Rock and River</td><td>Technical explanations, token mechanics, code, data and risk review.</td><td>Developers, analysts, researchers.</td></tr>
+<tr><td>Build Showcase</td><td>Finished work, feedback, contributor credits.</td><td>Everyone.</td></tr>
+</tbody></table>
+<p class="prose">Use Telegram Topics if they are available and suitable. If structured project collaboration needs more than Telegram can comfortably provide, use one complementary workspace rather than scattering teams across multiple platforms. The Corpus or shared library remains the source of truth for finished work, briefs, decisions and credits.</p>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">When does a project deserve its own Telegram?</h3>
+<p class="prose">Open a separate group only when all four conditions are met:</p>
+<ol style="color:var(--soft);padding-left:1.3rem"><li>At least three people are actively working on it.</li><li>It has a defined output, not merely a topic of interest.</li><li>It has a named steward who will maintain it.</li><li>It needs daily discussion that cannot be handled in an existing topic.</li></ol>
+<p class="prose">A separate group is an operating tool, not a badge of importance. Every room needs a purpose, a host, a welcome message, safety rules and a weekly rhythm.</p>
+</section>
+
 <section id="build">
   <div class="section-head">
-    <div class="kicker">09 · Turning belief into contribution</div>
+    <div class="kicker">13 · Turning belief into contribution</div>
     <h2>Three vaults.<br><span class="orange">Five ways to build.</span></h2>
     <p>The practical guide begins here. The aim is not simply to attract more buyers. It is to create more reasons for people to understand, participate, contribute and stay involved.</p>
   </div>
@@ -452,15 +593,12 @@ footer strong{color:var(--orange2)}
     <article class="card"><div class="num">05 · THE HONEST ECONOMY</div><h3>Experiment responsibly</h3><p>Keep proposed layers clearly labelled until they are designed, tested and verified. Explain who benefits, who carries risk and how participants can check the claims. Never put private keys into games or shared files.</p></article>
     <article class="card"><div class="num">THE SHARED STANDARD</div><h3>Bonding, not extracting</h3><p>Connect communities. Add capability. Respect independence. A bridge creates a way across; it should not become a toll gate or a mechanism for extracting from the people who built the network.</p></article>
   </div>
-  <div class="flow" aria-label="Community flywheel stages">
-    <div><b>1</b>Attention</div><div><b>2</b>Discovery</div><div><b>3</b>Understanding</div><div><b>4</b>Participation</div><div><b>5</b>Creation</div><div><b>6</b>Renewed attention</div>
-  </div>
   <p class="pull">The token may open the conversation. <em>The community gives that conversation somewhere meaningful to go.</em></p>
 </section>
 
 <section id="roles">
   <div class="section-head">
-    <div class="kicker">10 · Find your place</div>
+    <div class="kicker">14 · Find your place</div>
     <h2>You do not need to do everything.<br><span class="teal">Make the part you can make better.</span></h2>
     <p>There is no single job description for belonging to EROS. Independent projects and individual contributions are welcome. Choose a direction that fits your skills, curiosity and capacity.</p>
   </div>
@@ -470,29 +608,46 @@ footer strong{color:var(--orange2)}
     <div class="path"><h3>Creative worlds & media</h3><p>Make stories, art, characters, short films, music and games. Extend the mythology with original finished work.</p></div>
     <div class="path"><h3>Tools & experiments</h3><p>Build dashboards, interfaces, prototypes and applications. Document what works, what is experimental and what remains an idea.</p></div>
   </div>
-  <div class="grid">
-    <article class="card"><div class="num">CREATOR</div><h3>Writer / storyteller</h3><p>Develop lore, scripts, character histories and explainers. Keep history, interpretation and fiction distinct.</p></article>
-    <article class="card"><div class="num">MAKER</div><h3>Artist / animator</h3><p>Illustrate, model, animate and create visual assets that make the EROS universe tangible.</p></article>
-    <article class="card"><div class="num">BUILDER</div><h3>Developer / designer</h3><p>Create tools, websites and interactive experiences. Document clearly and test openly.</p></article>
-    <article class="card"><div class="num">CONNECTOR</div><h3>Community organiser</h3><p>Welcome newcomers, coordinate contributions and connect people with projects and roles.</p></article>
-    <article class="card"><div class="num">GUIDE</div><h3>Educator / translator</h3><p>Make EROS understandable in other languages and for different audiences.</p></article>
-    <article class="card"><div class="num">PARTICIPANT</div><h3>Liquidity provider</h3><p>Learn how liquidity provision works, understand the risks and make independent decisions. No one should feel pressured to provide liquidity.</p></article>
+
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Seven teams</h3>
+<div class="grid two">
+<div class="card"><div class="num">TEAM 01</div><h3>Editorial and Canon</h3><p><strong>Owns:</strong> World Bible, continuity, canon labels, style guides and editorial review.<br><strong>First output:</strong> one-page World Bible and contribution template.</p></div>
+<div class="card"><div class="num">TEAM 02</div><h3>Research and Illumination</h3><p><strong>Owns:</strong> research briefs, source libraries, explainers and evidence review.<br><strong>First output:</strong> one sourced pilot that separates fact, interpretation and fiction.</p></div>
+<div class="card"><div class="num">TEAM 03</div><h3>Men of Renown and Characters</h3><p><strong>Owns:</strong> profiles, source notes, character concepts and narrative treatments.<br><strong>First output:</strong> one complete profile, character sheet and narrated version.</p></div>
+<div class="card"><div class="num">TEAM 04</div><h3>Visual Arts and Design</h3><p><strong>Owns:</strong> visual identity, illustration, symbols, covers, character sheets and asset packs.<br><strong>First output:</strong> reusable templates and a visual starter kit.</p></div>
+<div class="card"><div class="num">TEAM 05</div><h3>Film, Animation and Audio</h3><p><strong>Owns:</strong> storyboards, animatics, motion graphics, editing, sound, narration and delivery.<br><strong>First output:</strong> a 30–60 second proof-of-concept scene.</p></div>
+<div class="card"><div class="num">TEAM 06</div><h3>Rock and River: Finance, Code and Systems</h3><p><strong>Owns:</strong> technical explanations, token research, data, code, architecture review and risk register.<br><strong>First output:</strong> a verified map of live, proposed, experimental and fictional systems.</p></div>
+<div class="card"><div class="num">TEAM 07</div><h3>Community, Houses and Distribution</h3><p><strong>Owns:</strong> onboarding, weekly calls, social publishing, translations, partnerships and public progress.<br><strong>First output:</strong> newcomer path, weekly build call and public showcase.</p></div>
+</div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Sixteen contribution doors</h3>
+<div class="grid">
+<div class="card"><h3>Writer / storyteller</h3><p>Scenes, scripts, lore, character histories and explainers.</p></div><div class="card"><h3>Researcher / fact-checker</h3><p>Sources, technical facts, historical context and careful distinctions.</p></div><div class="card"><h3>Editor / Keeper</h3><p>Continuity, clarity, canon review and quality control.</p></div><div class="card"><h3>Illustrator / concept artist</h3><p>Characters, locations, symbols, covers and visual development.</p></div><div class="card"><h3>Graphic / UI designer</h3><p>Templates, websites, interfaces, layouts and accessibility.</p></div><div class="card"><h3>3D artist / modeller</h3><p>Objects, characters, environments and production-ready assets.</p></div><div class="card"><h3>Animator / storyboard artist</h3><p>Boards, animatics, motion tests and animated sequences.</p></div><div class="card"><h3>Film / audio producer</h3><p>Editing, sound, music, narration, production and delivery.</p></div><div class="card"><h3>Developer / engineer</h3><p>Web apps, game systems, dashboards, integrations and tooling.</p></div><div class="card"><h3>Game designer</h3><p>Rules, play loops, level design, prototyping and testing.</p></div><div class="card"><h3>Technical / security reviewer</h3><p>Architecture, smart-contract review, threat models and risk.</p></div><div class="card"><h3>Community host</h3><p>Welcome, moderation, calls, House liaison and events.</p></div><div class="card"><h3>Educator / translator</h3><p>Guides, onboarding, language versions and learning resources.</p></div><div class="card"><h3>Research analyst</h3><p>Token mechanics, liquidity data, protocol maps and documentation.</p></div><div class="card"><h3>Partnership connector</h3><p>Introductions, project relationships, creator outreach and collaboration.</p></div><div class="card"><h3>Supporter / participant</h3><p>Feedback, testing, sharing finished work and helping newcomers.</p></div>
+</div>
+
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Make it exciting to contribute — and sustainable to continue</h3>
+<div class="grid two">
+<div class="card"><div class="num">THE WEEKLY RHYTHM</div><h3>A dependable heartbeat</h3><ul><li><strong>Monday:</strong> publish a small challenge and the week's work cards.</li><li><strong>Wednesday:</strong> short check-in; remove blockers and pair people up.</li><li><strong>Friday:</strong> publish finished work and credit contributors.</li><li><strong>Monthly:</strong> premiere night, House showcase or creator interview.</li><li><strong>Quarterly:</strong> one creative season with a theme and a public release.</li></ul></div>
+<div class="card"><div class="num">THE CONTRIBUTOR LADDER</div><h3>Progress people can see</h3><ul><li><strong>Visitor:</strong> explores and asks questions.</li><li><strong>Reader:</strong> understands the library and community.</li><li><strong>Maker:</strong> completes a first contribution.</li><li><strong>Keeper:</strong> helps review quality, facts or canon.</li><li><strong>Host:</strong> runs a room, event or workstream.</li><li><strong>Steward:</strong> helps coordinate a team and develop new leaders.</li></ul></div>
+</div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Seven ways to keep people engaged</h3>
+<ol style="color:var(--soft);padding-left:1.3rem"><li><strong>Give every person one achievable first task.</strong> A first win is more powerful than a huge roadmap.</li><li><strong>Show the work.</strong> Public showcases, credits, progress logs and finished outputs make effort visible.</li><li><strong>Recognise contribution, not wallet size.</strong> The quality and usefulness of work should determine recognition.</li><li><strong>Let people own a small domain.</strong> A clear responsibility builds pride without requiring control over the whole project.</li><li><strong>Rotate leadership.</strong> Hosts and stewards need deputies, handover notes and rest periods.</li><li><strong>Celebrate milestones.</strong> Premiere nights, release days, community challenges and season finales make progress emotionally memorable.</li><li><strong>Protect volunteer time.</strong> Scope work realistically, document decisions, avoid unnecessary meetings and make it acceptable to pause.</li></ol>
+<div class="callout"><p><strong>Money, honestly:</strong> do not imply that volunteer work will later be paid unless that is a real, documented commitment. If funding exists, publish the budget and scope. Use milestone-based commissions for defined work. Never pay contributors from newcomers' deposits or design incentives that require constant new entrants to remain solvent.</p></div>
+
+<div class="media" style="margin-top: 40px;">
+  <video controls playsinline preload="none" poster="/images/frames/eros_hard.jpg">
+    <source src="/images/eros_hard.mp4" type="video/mp4">
+  </video>
+  <div class="media-copy">
+    <h3>Work that endures.</h3>
+    <p>The strongest foundations are built through steady effort. Every skill, every contribution, and every independent project adds to the resilience of the whole.</p>
   </div>
-  <div class="media" style="margin-top: 40px;">
-    <video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_hard.jpg">
-      <source src="https://meaning-unconfounded.github.io/images/eros_hard.mp4" type="video/mp4">
-    </video>
-    <div class="media-copy">
-      <h3>Work that endures.</h3>
-      <p>The strongest foundations are built through steady effort. Every skill, every contribution, and every independent project adds to the resilience of the whole.</p>
-    </div>
-  </div>
-  <p class="pull">Bring your own vision. Build independently. <em>Find the connections that make the wider network stronger.</em></p>
+</div>
+<p class="pull">Bring your own vision. Build independently. <em>Find the connections that make the wider network stronger.</em></p>
 </section>
 
 <section id="90days">
   <div class="section-head">
-    <div class="kicker">11 · A possible first 90 days</div>
+    <div class="kicker">15 · A possible first 90 days</div>
     <h2>Give the inspiration a beginning.<br><span class="orange">Finished work over announcements.</span></h2>
     <p>This is a suggested starting rhythm, not a mandatory programme or a promise that every target will be met. The community can adapt it, improve it or choose a different pace.</p>
   </div>
@@ -502,17 +657,88 @@ footer strong{color:var(--orange2)}
     <div class="step"><h3>Days 61–90 · Show what grew</h3><p>Publish a clear progress update. Showcase finished work and working prototypes. Review experiments openly. Ask contributors what should come next.</p></div>
     <div class="step"><h3>Always · Keep integrity</h3><p>Measure understanding, participation, useful work and community health separately. Price alone is not a measure of whether the culture is succeeding.</p></div>
   </div>
-  <div class="note">The original Community Build Plan included numerical output targets. This combined edition keeps the practical rhythm but does not turn those targets into promises or obligations. The purpose is to help people begin and sustain real work.</div>
+
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">The detailed phase breakdown</h3>
+<div class="phase"><div class="phase-no">DAYS 1–14</div><div><h4>Set the table</h4><ul><li>Appoint interim stewards for the seven teams.</li><li>Set up one headquarters with a small number of topic rooms.</li><li>Publish the newcomer page, safety rules and contribution guide.</li><li>Create the Guild Ledger and standard work card.</li><li>Invite a first group of TitanX and PulseChain community liaisons.</li></ul><p><strong>Proof:</strong> named owners, active rooms, clear first tasks and a public record of decisions.</p></div></div>
+<div class="phase"><div class="phase-no">DAYS 15–30</div><div><h4>Ship the first pieces</h4><ul><li>Publish one flywheel explainer and one newcomer guide.</li><li>Complete one research/Illumination pilot and one character/profile pilot.</li><li>Release five reusable visual templates.</li><li>Publish a technical status map: live, proposed, experimental, hypothesis or fiction.</li><li>Hold the first public showcase.</li></ul><p><strong>Proof:</strong> at least five finished assets, not five announcements.</p></div></div>
+<div class="phase"><div class="phase-no">DAYS 31–60</div><div><h4>Build the rhythm</h4><ul><li>Run a weekly build call and Friday showcase.</li><li>Publish a sustainable stream of short videos from more than one community voice.</li><li>Start the first short animation or motion-comic scene.</li><li>Invite translators, presenters and outside creative talent.</li><li>Launch the first House pilot with a willing protocol community.</li></ul><p><strong>Proof:</strong> repeat contributors, a working weekly rhythm and a House that has made something.</p></div></div>
+<div class="phase"><div class="phase-no">DAYS 61–90</div><div><h4>Show the system working</h4><ul><li>Release the short animated piece or a simple interactive prototype.</li><li>Publish the contributor catalogue and credits.</li><li>Share a transparent 90-day progress report and lessons learned.</li><li>Review the workload, team health and community feedback.</li><li>Choose the next quarter's creative season and priorities.</li></ul><p><strong>Proof:</strong> a small coherent body of work, active stewards, repeat contributors and a visible next chapter.</p></div></div>
+<div class="note">The original Community Build Plan included numerical output targets. This combined edition keeps the practical rhythm but does not turn those targets into promises or obligations. The purpose is to help people begin and sustain real work.</div>
+</section>
+
+<section id="stewardship">
+<div class="section-head">
+<div class="kicker">16 · Stewardship, trust and rights</div>
+<h2>Open doors need good foundations.</h2>
+<p>A creative universe can welcome many voices without becoming chaotic. A technical community can move quickly without sacrificing accuracy. The answer is lightweight stewardship, visible rules and a record of decisions.</p>
+</div>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Five content labels</h3>
+<table><thead><tr><th>Label</th><th>Meaning</th><th>How it is handled</th></tr></thead><tbody>
+<tr><td>Established canon</td><td>Accepted into the shared universe.</td><td>Keeper review; change recorded in the World Bible.</td></tr>
+<tr><td>Alternate / branch</td><td>A deliberate alternative storyline.</td><td>Clearly labelled; never silently overwrites canon.</td></tr>
+<tr><td>Research</td><td>Claims supported by sources or marked contested.</td><td>Sources attached; facts and uncertainty separated.</td></tr>
+<tr><td>Mythic interpretation</td><td>Symbolic or philosophical reading.</td><td>Presented as interpretation, not established history.</td></tr>
+<tr><td>Fiction / experiment</td><td>Creative exploration.</td><td>Open experimentation; may be adopted later.</td></tr>
+</tbody></table>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Steward roles</h3>
+<ul style="color:var(--soft);padding-left:1.3rem"><li><strong>Community coordinator:</strong> calendar, weekly call, cross-team connections and handovers.</li><li><strong>Workstream steward:</strong> brief, task board, review process and output quality.</li><li><strong>Editor / Keeper:</strong> continuity, factual accuracy, canon and publication review.</li><li><strong>Archivist:</strong> searchable library, source files, version history and credits.</li><li><strong>Moderators:</strong> respectful discussion, anti-scam safety and newcomer protection.</li><li><strong>Technical and security reviewers:</strong> independent review of code, contracts, data and operational risks.</li></ul>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Decision rules</h3>
+<ol style="color:var(--soft);padding-left:1.3rem"><li>Small, reversible decisions belong with the relevant steward after consulting contributors.</li><li>Cross-team decisions are discussed at the weekly build call and recorded in a decision log.</li><li>Spending, grants or token incentives require a separate transparent approval process, a disclosed budget and appropriate legal and tax review.</li><li>No single person should control community identity, source archive, treasury and technical deployment at once.</li><li>Every proposal should state purpose, scope, owner, cost, risks, milestones and what happens if the work stops.</li></ol>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Rights before production</h3>
+<p class="prose">Before inviting open contribution, decide whether work is all-rights-reserved, licensed for remix or released under a specific open licence. Obtain permission for music, fonts, images, voices and third-party material. Credit creators and state whether commercial reuse is allowed. Do not assume enthusiasm transfers copyright. Ownership of an asset, permission to use it and entitlement to revenue are separate questions.</p>
+<div class="callout"><p><strong>Wallet and security rule:</strong> never ask anyone to share a seed phrase or private key. Private keys never belong in a game world, game file, shared document or AI character. Wallet access must use appropriate wallet connection or custody practices. Verify contracts and official links independently. Beware unsolicited direct messages and impersonators.</p></div>
+</section>
+
+<section id="rock">
+<div class="section-head">
+<div class="kicker">17 · Rock and River</div>
+<h2>Technical truth is part of the culture.</h2>
+<p>The Rock and River workstream is a reference desk, not a promotion desk. It makes complex mechanisms understandable and gives the community a way to check claims.</p>
+</div>
+<div class="grid two">
+<div class="card"><div class="num">THE ROCK</div><h3>What can be checked</h3><p>Contract addresses, token supply, ownership and permissions, deployed code, published rules, verified pool data and source documentation.</p></div>
+<div class="card"><div class="num">THE RIVER</div><h3>What moves and interacts</h3><p>Liquidity flows, bonding, staking, bridging, transaction paths, proposed incentives and possible system connections.</p></div>
+</div>
+<table><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Live and verified</td><td>Deployed and checked against authoritative records.</td></tr>
+<tr><td>Proposed</td><td>Design work only; not a functioning mechanism.</td></tr>
+<tr><td>Experimental</td><td>Test environment or prototype with limitations stated.</td></tr>
+<tr><td>Hypothesis</td><td>An idea to test, not a demonstrated outcome.</td></tr>
+<tr><td>Fiction</td><td>Part of the creative universe, not a financial or technical claim.</td></tr>
+</tbody></table>
+<p class="prose">Maintain a public risk register covering volatility, liquidity depth, impermanent loss, bridge and smart-contract risk, wallet security, governance, concentration and the absence of an admin recovery path where relevant. Verify all live claims at the time they are published. A book is not a substitute for checking current chain data.</p>
+</section>
+
+<section id="measure">
+<div class="section-head">
+<div class="kicker">18 · Measure what matters</div>
+<h2>Measure the work.<br><span class="teal">Not just the noise.</span></h2>
+<p>Community size and token price are not enough to tell whether this plan is working. Track the health of each layer separately and report the weakest layer first.</p>
+</div>
+<table><thead><tr><th>Layer</th><th>Useful measures</th><th>Do not confuse it with</th></tr></thead><tbody>
+<tr><td>Attention</td><td>Qualified visits, video completion, referrals to the Corpus.</td><td>Impressions alone.</td></tr>
+<tr><td>Understanding</td><td>Newcomer feedback, explain-back tests, questions answered.</td><td>Downloads or views.</td></tr>
+<tr><td>Participation</td><td>First contributions, repeat contributors, completed tasks.</td><td>Member count.</td></tr>
+<tr><td>Culture</td><td>Finished works, quality, reuse, translations, coherent canon.</td><td>Raw file count.</td></tr>
+<tr><td>Utility</td><td>Working tools, prototypes, user tests and maintenance.</td><td>Roadmap announcements.</td></tr>
+<tr><td>Market</td><td>Verified liquidity, pool depth, on-chain activity and risk disclosure.</td><td>Price alone.</td></tr>
+<tr><td>Community health</td><td>Contributor retention, workload balance, host coverage and response times.</td><td>Constant online activity.</td></tr>
+</tbody></table>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">Risks that can weaken the plan</h3>
+<ul style="color:var(--soft);padding-left:1.3rem"><li><strong>Attention follows price and disappears:</strong> build useful work that remains worthwhile in quiet markets.</li><li><strong>Too many rooms too soon:</strong> keep one front door and open new groups only when activity justifies them.</li><li><strong>Burnout:</strong> rotate hosts, cap output, document tasks and make rest normal.</li><li><strong>Canon drift:</strong> maintain the World Bible, asset registry and Keeper review.</li><li><strong>Governance capture:</strong> separate roles, publish decisions and avoid concentration of control.</li><li><strong>Reward farming:</strong> pilot carefully, reward verified work only and do not depend on new entrants' money.</li><li><strong>Rights disputes:</strong> publish licence and credit rules before commercial use.</li><li><strong>Overpromising:</strong> label live, proposed, experimental, hypothesis and fiction consistently.</li></ul>
+<h3 style="color:var(--orange2);font-weight:500;margin:34px 0 12px;font-size:1.55rem">First-quarter suggested scorecard</h3>
+<ul style="color:var(--soft);padding-left:1.3rem"><li>Seven named interim stewards.</li><li>One newcomer page and one community map.</li><li>One flywheel explainer.</li><li>Two pilot creative/research pieces.</li><li>Five reusable visual templates.</li><li>One verified technical status map.</li><li>One participating House pilot, if a community volunteers.</li><li>One public showcase and one contributor ledger.</li><li>One 90-day report with successes, failures and next priorities.</li></ul>
+<p class="small">Targets are proposals, not guarantees. Adjust them to actual capacity and publish what was and was not achieved.</p>
 </section>
 
 <section id="future">
 <div class="section-head">
-<div class="kicker">08 · The hopeful future</div>
+<div class="kicker">19 · The hopeful future</div>
 <h2>What we make today<br><span class="orange">becomes the world others discover tomorrow.</span></h2>
 </div>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_power.jpg">
-<source src="https://meaning-unconfounded.github.io/images/eros_power.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros_power.jpg">
+<source src="/images/eros_power.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>A world worth contributing to.</h3>
@@ -535,8 +761,8 @@ footer strong{color:var(--orange2)}
 </div>
 <p class="pull">If you see something worth building, <em>build it.</em><br>If you see a way to connect, <em>make the connection.</em><br>If you can help someone else create, <em>open the door.</em></p>
 <div class="media">
-<video controls playsinline preload="metadata" poster="https://meaning-unconfounded.github.io/images/frames/eros_sommi_moon.jpg">
-<source src="https://meaning-unconfounded.github.io/images/eros_sommi_moon.mp4" type="video/mp4">
+<video controls playsinline preload="none" poster="/images/frames/eros_sommi_moon.jpg">
+<source src="/images/eros_sommi_moon.mp4" type="video/mp4">
 </video>
 <div class="media-copy">
 <h3>The next chapter is not waiting to be written.</h3>
@@ -548,16 +774,37 @@ footer strong{color:var(--orange2)}
 <p>Build freely. Connect honestly. Leave something worth building upon.</p>
 </div>
 <div class="links">
-<a class="corpus-cta" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">Enter the EROS Corpus · Start here</a>
-<a href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html">The Corpus</a>
-<a href="https://meaning-unconfounded.github.io/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
-<a href="https://meaning-unconfounded.github.io/The_Bridge.html">The Bridge</a>
-<a href="https://meaning-unconfounded.github.io/The_Platinum_Standard.html">The Platinum Standard</a>
-<a href="https://meaning-unconfounded.github.io/The_Flywheel.html">The Flywheel</a>
-<a href="https://meaning-unconfounded.github.io/The_Hopeful_Future.html">The Hopeful Future</a>
-<a href="https://meaning-unconfounded.github.io/The_Open_Call.html">The Open Call</a>
+<a class="corpus-cta" href="/The_Eros_Corpus.html">Enter the EROS Corpus · Start here</a>
+<a href="/The_Eros_Corpus.html">The Corpus</a>
+<a href="/EROS_Newcomer_Dossier.html">Newcomer Dossier</a>
+<a href="/The_Bridge.html">The Bridge</a>
+<a href="/The_Platinum_Standard.html">The Platinum Standard</a>
+<a href="/The_Flywheel.html">The Flywheel</a>
+<a href="/The_Hopeful_Future.html">The Hopeful Future</a>
+<a href="/The_Open_Call.html">The Open Call</a>
 </div>
 <div class="note"><strong>Read, explore and verify.</strong> This is an inspirational community invitation, not financial advice or a promise of returns. Token, bridge, liquidity and smart-contract risks remain. Historical claims and current technical status should be checked against the relevant books, official sources and on-chain data.</div>
+</section>
+
+<section id="sources" class="sources">
+<div class="section-head">
+<div class="kicker">Research notes and sources</div>
+<h2>Read. Verify. Improve.</h2>
+<p>The comparisons in this book are drawn from public project documentation and research. They demonstrate transferable practices, not proof that EROS will achieve the same results. Project facts and protocol counts change; check current official sources before publishing or acting on them.</p>
+</div>
+<ul class="small">
+<li><a href="https://www.titanx.win/">TitanX official website</a> and <a href="https://docs.titanx.win/titanx">TitanX core design documentation</a> — TitanX's stated community-built ecosystem model and current published protocol count.</li>
+<li><a href="https://www.gopulsechain.com/developers">PulseChain developer resources</a> and <a href="https://www.gopulsechain.com/ecosystem/dex">PulseChain ecosystem directory</a> — developer entry points and project discovery.</li>
+<li><a href="https://www.blender.org/get-involved/">Blender: Get involved</a> and <a href="https://www.blender.org/about/foundation/">Blender Foundation</a> — contribution roles, open pipeline and funding transparency.</li>
+<li><a href="https://scp-wiki.wikidot.com/canon-hub">SCP Canon Hub</a> — collaborative shared-universe practices.</li>
+<li><a href="https://www.nouns.world/">Nouns community</a> and <a href="https://docs.nouns.wtf/governance/proposals">Nouns proposals</a> — open assets and structured proposals.</li>
+<li><a href="https://www.pudgypenguins.com/pages/licensing">Pudgy Penguins licensing</a> and <a href="https://media.pudgypenguins.com/licensing-deals">licensing deals</a> — licensing and physical-to-digital experiences.</li>
+<li><a href="https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions">GitHub healthy contributions</a> — onboarding, contribution guidelines and community standards.</li>
+<li><a href="https://gitcoin.co/mechanisms/quadratic-funding">Gitcoin quadratic funding</a> — community allocation design and Sybil-resistance considerations.</li>
+<li><a href="https://opensource.googleblog.com/2023/09/showing-our-work-study-in-understanding-open-source-contributors.html">Google Open Source contributor study</a> — time, documentation, onboarding and burnout.</li>
+<li><a href="https://journals.sagepub.com/doi/10.1177/20539517251357296">Axie Infinity and growth crises research</a> — cautionary analysis of token incentives, entry costs and dependence on continuing player inflows.</li>
+</ul>
+<p class="small">This is a community strategy and creative production proposal. It is not financial, legal, tax or investment advice. Token prices are uncertain. Liquidity, bridging, smart-contract, custody and market risks remain. No proposed partnership, token utility, reward mechanism or technical integration should be described as live until it has been independently verified.</p>
 </section>
 
 </div>
@@ -569,7 +816,7 @@ footer strong{color:var(--orange2)}
          aria-label="The world is waiting"
          data-cinema="book-end"
          data-queue="eros_jump2.mp4|eros_jump3.mp4|eros_jump4.mp4|eros_bond.mp4|eros_bridging.mp4|eros_cant_exploit.mp4|eros_heaven_bridge.mp4|eros_grays1.mp4">
-  <video class="cinema-video cinema-va" playsinline muted preload="none" aria-hidden="true"></video>
+  <video class="cinema-video cinema-va" playsinline muted preload="metadata" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
   <div class="cinema-grain" aria-hidden="true"></div>
@@ -605,14 +852,14 @@ footer strong{color:var(--orange2)}
 <strong>EROS · THE TIME TO BUILD</strong><br>
 For TitanX, PulseChain and the EROS community.<br>
 Independent ideas. Shared standards. Bonding, not extracting.<br>
-<a class="corpus-cta" href="https://meaning-unconfounded.github.io/The_Eros_Corpus.html" style="margin-top: 20px;">Enter the EROS Corpus · Start here</a>
+<a class="corpus-cta" href="/The_Eros_Corpus.html" style="margin-top: 20px;">Enter the EROS Corpus · Start here</a>
 </div></footer>
 
 <script id="eros-cinema-engine-v2">
 /* ═══ EROS CINEMA SYSTEM · ENGINE v2.0 ═══ */
 (function () {
   "use strict";
-  var BASE = "https://meaning-unconfounded.github.io/images/";
+  var BASE = "/images/";
   var VOL = 0.22;
   var VISUAL_FADE_MS = 1450;
   var DEFAULT_AUDIO_FADE_MS = 400;
