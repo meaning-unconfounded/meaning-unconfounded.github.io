@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#06140f"/>
+<title>EROS · 3D Universe · Master Edition</title>
+<meta name="description" content="EROS: The Living Universe. A thesis on cosmology, consciousness, continuity, digital economics, and immersive media. A complete EROS thesis spanning cosmology, mythology, digital economics, media, immersive environments, ethics, and the 37-image concept gallery."/>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   EROS · THE LIVING UNIVERSE · MASTER EDITION
+   Cosmic Gold & Void Violet
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --bg: #06140f;
+  --surface: #0d241c;
+  --surface2: #123028;
+  --surface3: #1a3a2e;
+  --ink: #f3faf6;
+  --soft: #c5ddd2;
+  --muted: #7fa896;
+  --orange: #ff8a36;
+  --orange2: #ffb36f;
+  --orange-soft: rgba(255,138,54,.12);
+  --orange-line: rgba(255,138,54,.35);
+  --teal: #3ecf9a;
+  --teal2: #7eecc0;
+  --teal-soft: rgba(62,207,154,.10);
+  --teal-line: rgba(62,207,154,.35);
+  --green: #1a9b5c;
+  --green2: #2fd67a;
+  --green-soft: rgba(30,155,92,.12);
+  --green-line: rgba(47,214,122,.35);
+  --hair: rgba(62,207,154,.18);
+  --hair2: rgba(62,207,154,.10);
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --measure: 70rem;
+  --leading: 1.8;
+  /* aliases so existing class names still resolve */
+  --gold: var(--orange);
+  --gold2: var(--orange2);
+  --gold-soft: var(--orange-soft);
+  --gold-line: var(--orange-line);
+  --cyan: var(--teal);
+  --cyan-soft: var(--teal-soft);
+  --cyan-line: var(--teal-line);
+  --violet: var(--teal);
+  --violet-soft: var(--teal-soft);
+  --violet-line: var(--teal-line);
+  --pink: var(--orange2);
+  --pink-soft: var(--orange-soft);
+  --pink-line: var(--orange-line);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); scroll-padding-top: 7rem; }
+body {
+  font-family: var(--sans);
+  background:
+    radial-gradient(1100px 520px at 90% -5%, rgba(62,207,154,.12), transparent 55%),
+    radial-gradient(900px 480px at -5% 25%, rgba(255,138,54,.07), transparent 50%),
+    radial-gradient(700px 420px at 100% 85%, rgba(62,207,154,.05), transparent 45%),
+    var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html::before, html::after { content: ""; position: fixed; pointer-events: none; z-index: 9990; }
+html::before { inset: 8px; border: 1px solid rgba(62,207,154,.18); }
+html::after { inset: 12px; border: 1px solid rgba(62,207,154,.08); }
+@media(max-width:600px){ html::before{inset:5px} html::after{inset:8px} }
+
+.page { max-width: var(--measure); margin: 0 auto; padding: 1.4rem 1.35rem 5rem; position: relative; }
+@media(min-width:720px){ .page{padding:1.6rem 1.8rem 6rem;} }
+
+#progressBar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--teal), var(--orange)), var(--gold), var(--cyan), var(--pink)); z-index: 9999; transition: width .08s linear; }
+.skip-link { position: fixed; top: -100px; left: 1rem; z-index: 10000; background: var(--gold); color: #06140f; text-decoration: none; font-family: var(--sans); font-size: .85rem; font-weight: 600; padding: .6rem 1.1rem; border-radius: 0 0 12px 12px; transition: top .2s; border-bottom: none; }
+.skip-link:focus { top: 0; }
+a { color: var(--violet); text-decoration: none; border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
+a:hover { color: var(--cyan); border-bottom-color: rgba(62,207,154,.7); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--gold); color: #06140f; }
+
+/* HEADER */
+.corpus-bar { position: sticky; top: 0; z-index: 900; background: rgba(6,20,15,.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--gold-line); font-family: var(--sans); padding: .7rem 1.1rem 0; }
+.corpus-bar .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--hair); min-height: 50px; max-width: 1280px; margin: 0 auto; }
+.corpus-bar .logo-cluster { display: flex; align-items: center; gap: .55rem; flex-shrink: 0; text-decoration: none; border-bottom: none; }
+.corpus-bar .pin { border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--gold-line); box-shadow: 0 0 12px rgba(255,138,54,.22), 0 0 0 1px rgba(255,255,255,.04) inset; background: var(--surface); display: block; }
+.corpus-bar .pin.eros-mark { width: 44px; height: 44px; box-shadow: 0 0 14px rgba(255,138,54,.24), 0 0 0 1px rgba(255,255,255,.04) inset; }
+.corpus-bar .compass { font-size: 1.1rem; line-height: 1; color: var(--gold); flex-shrink: 0; opacity: .9; margin-left: .05rem; }
+.corpus-bar .title-cluster { display: flex; align-items: center; gap: .7rem; min-width: 0; flex-shrink: 1; }
+.corpus-bar .title-rule { flex: 0 0 auto; height: 1px; width: clamp(24px,5vw,60px); background: linear-gradient(90deg, transparent, var(--gold-line)); }
+.corpus-bar .brand-text { font-size: 1.1rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.corpus-bar nav.chapter-strip { display: flex; align-items: center; gap: .1rem .2rem; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; scrollbar-width: none; padding: .55rem .2rem .65rem; margin: 0 auto; max-width: 1280px; mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%); }
+.corpus-bar nav.chapter-strip::-webkit-scrollbar { display: none; }
+.corpus-bar nav.chapter-strip a { font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: .34rem .68rem; border-radius: 999px; text-decoration: none; transition: color .25s, background .25s, box-shadow .25s; white-space: nowrap; flex-shrink: 0; border-bottom: none; }
+.corpus-bar nav.chapter-strip a:hover { color: var(--gold); background: var(--gold-soft); }
+.corpus-bar nav.chapter-strip a.active { color: var(--gold); background: var(--gold-soft); box-shadow: inset 0 0 0 1px var(--gold-line); font-weight: 700; }
+@media(max-width:720px){
+  .corpus-bar{padding:.6rem .85rem 0}
+  .corpus-bar .pin.eros-mark{width:38px;height:38px}
+  .corpus-bar .compass{font-size:1rem}
+  .corpus-bar .brand-text{font-size:.85rem;letter-spacing:.18em}
+  .corpus-bar .title-rule{width:20px}
+  .corpus-bar nav.chapter-strip{padding:.5rem .2rem .6rem}
+  .corpus-bar nav.chapter-strip a{font-size:.58rem;padding:.3rem .58rem}
+}
+
+/* TYPOGRAPHY */
+h1,h2,h3,h4 { text-wrap: balance; orphans: 2; widows: 2; }
+p,li { text-wrap: pretty; orphans: 2; widows: 2; }
+h2 { font-family: var(--serif); font-size: 1.8rem; color: var(--gold); margin: 3rem 0 1.05rem; border-bottom: 1px solid var(--hair); padding-bottom: .55rem; scroll-margin-top: 7rem; line-height: 1.28; font-weight: 700; }
+h3 { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); margin: 1.9rem 0 .65rem; line-height: 1.35; font-weight: 700; }
+h4 { font-family: var(--sans); font-size: .82rem; color: var(--gold); margin: 1.4rem 0 .55rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+p { margin: 0 0 1.15rem; color: var(--soft); font-size: 1.05rem; }
+strong { color: var(--ink); font-weight: 700; }
+em { color: var(--gold); font-style: italic; }
+ul, ol { margin: .4rem 0 1.25rem 1.3rem; }
+li { margin-bottom: .5rem; color: var(--soft); line-height: var(--leading); }
+li::marker { color: var(--violet); }
+code { font-family: var(--mono); font-size: .82rem; color: var(--cyan); background: rgba(62,207,154,.08); padding: .1rem .4rem; border-radius: 4px; word-break: break-all; }
+
+/* HERO */
+.cinema-hero { position: relative; width: 100vw; margin: 0 calc(50% - 50vw) 2rem; min-height: 82vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #000; }
+.cinema-hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; z-index: 0; }
+.cinema-hero .overlay { position: relative; z-index: 2; text-align: center; padding: 2rem; background: radial-gradient(ellipse at center, rgba(6,20,15,0.75) 0%, transparent 70%); max-width: 56rem; }
+.cinema-hero .kicker { display: block; font-family: var(--sans); font-size: .7rem; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-weight: 700; }
+.cinema-hero h1 { font-family: var(--serif); font-size: clamp(2.6rem, 8vw, 5.5rem); color: var(--gold); text-shadow: 0 0 40px rgba(255,138,54,0.4); margin-bottom: 1rem; line-height: 1.05; letter-spacing: .01em; }
+.cinema-hero .subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--ink); max-width: 40rem; margin: 0 auto 1.4rem; text-shadow: 0 2px 10px rgba(0,0,0,0.85); font-style: italic; }
+.cinema-hero .meta { font-size: .78rem; color: var(--gold2); letter-spacing: .12em; text-transform: uppercase; font-weight: 600; }
+
+/* CINEMA BAND */
+.cinema-band { position: relative; width: 100vw; margin: 4rem calc(50% - 50vw); min-height: 50vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #000; }
+.cinema-band video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; z-index: 0; }
+.cinema-band .overlay { position: relative; z-index: 2; text-align: center; padding: 2rem; max-width: 48rem; }
+.cinema-band h2 { font-family: var(--serif); font-size: clamp(1.8rem, 5vw, 3.2rem); color: var(--cyan); border: none; margin: 0 0 1rem 0; text-shadow: 0 0 30px rgba(62,207,154,0.4); padding: 0; }
+.cinema-band p { font-size: 1.05rem; color: var(--ink); text-shadow: 0 2px 10px rgba(0,0,0,0.85); margin: 0; }
+
+/* UI BLOCKS */
+.vision-brief { background-color: var(--violet-soft); border-left: 4px solid var(--violet); padding: 2rem; margin-bottom: 3rem; border-radius: 0 12px 12px 0; }
+.vision-brief h3 { color: var(--violet); font-family: var(--sans); font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; margin-top: 0; margin-bottom: 1rem; }
+.vision-brief p { font-family: var(--serif); font-size: 1.25rem; font-style: italic; color: var(--ink); margin-bottom: 1rem; }
+.vision-brief ul { font-size: 1rem; color: var(--soft); }
+
+.claim { margin: 1.5rem 0; padding: 1.4rem 1.55rem; border: 1px solid var(--hair); border-radius: 14px; background: var(--surface); }
+.claim.gold { border-color: var(--gold-line); background: linear-gradient(135deg, #1a1008, #221408); }
+.claim.violet { border-color: var(--violet-line); background: linear-gradient(135deg, #0e2018, #123028); }
+.claim.cyan { border-color: var(--cyan-line); background: linear-gradient(135deg, #0a1c16, #0d241c); }
+.claim.pink { border-color: var(--pink-line); background: linear-gradient(135deg, #1a1008, #221408); }
+.claim.green { border-color: var(--green-line); background: linear-gradient(135deg, #0a1c16, #0d241c); }
+.claim p { margin: 0; }
+.claim p + p { margin-top: .65rem; }
+.claim strong { color: var(--gold); }
+.claim.cyan strong { color: var(--cyan); }
+.claim.violet strong { color: var(--violet); }
+.claim.green strong { color: var(--green); }
+.claim.pink strong { color: var(--pink); }
+
+.pull { margin: 1.6rem 0; padding: 1.1rem 0 1.1rem 1.35rem; border-left: 3px solid var(--violet); background: linear-gradient(90deg, var(--violet-soft), transparent 75%); font-style: italic; font-size: 1.08rem; color: var(--soft); }
+
+.part-break { margin: 3.5rem 0 2rem; padding: 2.2rem 1.5rem; text-align: center; border-radius: 14px; border: 1px solid var(--gold-line); background: linear-gradient(160deg, var(--gold-soft), var(--surface)); }
+.part-break .pk { font-family: var(--sans); font-size: .68rem; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: .55rem; font-weight: 700; }
+.part-break h2 { font-family: var(--serif); font-size: clamp(1.4rem, 3.6vw, 2rem); color: var(--ink); border: none; margin: 0 0 .4rem; padding: 0; line-height: 1.2; }
+.part-break p { margin: 0 auto; font-style: italic; color: var(--soft); font-size: .95rem; }
+
+table.ref { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 1.75rem 0; border: 1px solid var(--violet-line); border-radius: 12px; overflow: hidden; }
+table.ref th { background: #06140f; color: var(--gold); font-family: var(--sans); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; padding: .9rem 1.1rem; text-align: left; border-bottom: 1px solid var(--violet-line); font-weight: 700; }
+table.ref td { padding: 1rem 1.1rem; border-bottom: 1px solid var(--hair); vertical-align: top; color: var(--soft); }
+table.ref tr:last-child td { border-bottom: none; }
+table.ref td strong { color: var(--ink); }
+
+.image-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2.5rem 0; }
+.image-gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid var(--hair); box-shadow: 0 4px 10px rgba(0,0,0,0.4); transition: transform .3s ease, border-color .3s; cursor: pointer; }
+.image-gallery img:hover { transform: scale(1.02); border-color: var(--gold); }
+.full-width-image { width: 100%; height: auto; border-radius: 8px; margin: 2.5rem 0; border: 1px solid var(--hair); box-shadow: 0 4px 15px rgba(0,0,0,0.4); cursor: pointer; }
+
+/* NAV PILLS */
+.eta-menu { max-width: 100%; margin: 1.2rem 0 2rem; padding: .35rem 1.1rem; border: 1px solid var(--gold-line); border-radius: 12px; text-align: left; background: var(--gold-soft); }
+.eta-menu > summary { cursor: pointer; list-style: none; padding: .65rem 0; font: 700 .78rem/1.3 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); user-select: none; }
+.eta-menu > summary::-webkit-details-marker { display: none; }
+.eta-menu > summary::before { content: "▸ "; }
+.eta-menu[open] > summary::before { content: "▾ "; }
+.eta-menu .menu-body { padding: .25rem 0 .85rem; font-size: .95rem; line-height: 1.6; }
+.eta-groups { display: grid; gap: 1.2rem 1.6rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin: .3rem 0 .6rem; }
+.eta-g-label { display: block; margin: 0 0 .35rem; font-family: var(--sans); font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.eta-g ul { list-style: none; margin: 0; padding: 0; }
+.eta-g li { margin: 0 0 .35rem; }
+.eta-g a { display: block; padding: .2rem 0; color: var(--soft); font-size: .92rem; }
+.eta-g a:hover { color: var(--cyan); }
+.eta-g small { display: block; color: var(--muted); font-size: .8rem; line-height: 1.35; margin-top: .1rem; }
+
+/* FOOTER */
+footer.master { margin-top: 4rem; padding: 2rem 0; border-top: 1px solid var(--hair); text-align: center; color: var(--muted); font-size: .9rem; }
+footer.master .pins { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--gold-line); }
+footer.master .sig { color: var(--gold); font-style: italic; margin-top: .5rem; }
+
+/* LIGHTBOX */
+.lightbox-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(10, 6, 18, 0.95); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; padding: 2rem; opacity: 0; transition: opacity 0.3s ease; }
+.lightbox-overlay.active { display: flex; opacity: 1; }
+.lightbox-content { position: relative; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; }
+.lightbox-content img { max-width: 100%; max-height: 80vh; border-radius: 12px; border: 2px solid var(--gold); box-shadow: 0 20px 60px rgba(0,0,0,0.8); object-fit: contain; }
+.lightbox-caption { margin-top: 1.2rem; font: 600 1rem var(--sans); color: var(--gold); text-align: center; }
+.lightbox-close { position: absolute; top: -40px; right: 0; background: none; border: none; color: var(--gold); font-size: 2.5rem; cursor: pointer; transition: transform 0.2s; }
+.lightbox-close:hover { transform: scale(1.1) rotate(90deg); }
+
+/* READER PANEL */
+.reader-panel { position: fixed; right: 16px; bottom: 16px; z-index: 800; font-family: var(--sans); font-size: .8rem; }
+.reader-panel summary { list-style: none; cursor: pointer; background: rgba(6,20,15,.96); border: 1px solid var(--gold-line); border-radius: 10px; padding: .55rem .8rem; color: var(--gold); display: flex; align-items: center; gap: .5rem; transition: .2s; }
+.reader-panel summary::-webkit-details-marker { display: none; }
+.reader-panel summary:hover { border-color: var(--gold); }
+.reader-controls { margin-top: .35rem; padding: .75rem; background: rgba(6,20,15,.96); border: 1px solid var(--gold-line); border-radius: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; max-width: 260px; }
+.reader-controls button { background: var(--surface2); border: 1px solid var(--gold-line); color: var(--ink); border-radius: 6px; padding: .38rem .6rem; cursor: pointer; font: inherit; transition: .15s; }
+.reader-controls button:hover { border-color: var(--gold); color: var(--gold); }
+#toTop { position: fixed; right: 16px; bottom: 100px; z-index: 60; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--gold-line); background: var(--surface); color: var(--gold); font-size: 1rem; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .25s; display: flex; align-items: center; justify-content: center; }
+#toTop.show { opacity: 1; pointer-events: auto; }
+#toTop:hover { border-color: var(--gold); background: var(--gold-soft); }
+
+/* PRINT */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  html::before, html::after, .corpus-bar, #progressBar, #toTop, .reader-panel, .skip-link { display: none !important; }
+  body { background: #fff !important; color: #1a1a1a !important; }
+  .page { max-width: none; }
+  a { color: #1a1a1a; }
+  .cinema-hero, .cinema-band { min-height: auto !important; background: #f5efe0 !important; }
+  .cinema-hero video, .cinema-band video { display: none !important; }
+  h2, h3 { color: #1a1a1a !important; }
+  .claim, .part-break, .pull, table.ref, .image-gallery, .vision-brief { break-inside: avoid; }
+  video { display: none; }
+}
+
+/* RESPONSIVE MASTER LAYER — desktop, tablet and mobile */
+.page { width: min(100%, var(--measure)); }
+.page-content { width: 100%; min-width: 0; }
+.page-content > section,
+.page-content > .part-break { min-width: 0; }
+.page-content > section { margin-inline: auto; }
+p, li { overflow-wrap: anywhere; }
+img { max-width: 100%; }
+.cinema-hero, .cinema-band { isolation: isolate; }
+.cinema-hero .cinema-media,
+.cinema-band .cinema-media {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0; display: block;
+}
+.cinema-hero { min-height: clamp(28rem, 76svh, 54rem); }
+.cinema-band { min-height: clamp(18rem, 48svh, 34rem); }
+.cinema-hero .overlay { width: min(100%, 58rem); }
+.cinema-band .overlay { width: min(100%, 50rem); }
+.image-gallery {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  align-items: stretch;
+}
+.image-gallery img {
+  height: clamp(12rem, 23vw, 18rem);
+  display: block;
+}
+.full-width-image { display: block; max-width: 100%; height: auto; }
+table.ref { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.ref th, table.ref td { min-width: 8rem; }
+table.ref th:first-child, table.ref td:first-child { min-width: 9rem; }
+.corpus-bar nav.chapter-strip { overscroll-behavior-x: contain; }
+.corpus-bar nav.chapter-strip a { min-height: 2.35rem; display: inline-flex; align-items: center; }
+.eta-menu { overflow: clip; }
+.eta-groups { grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+.claim, .vision-brief, .part-break { overflow-wrap: anywhere; }
+.lightbox-overlay { padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left)); }
+.lightbox-content { width: 100%; max-width: 94vw; max-height: 90dvh; }
+.lightbox-content img { max-width: 100%; max-height: 76dvh; }
+.reader-panel { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); }
+#toTop { right: max(12px, env(safe-area-inset-right)); bottom: max(84px, calc(84px + env(safe-area-inset-bottom))); }
+button, summary, a { -webkit-tap-highlight-color: transparent; }
+:focus-visible { scroll-margin-block: 6rem; }
+
+@media (min-width: 1100px) {
+  .page { padding-inline: 2.25rem; }
+  .page-content > section { max-width: 62rem; }
+  .image-gallery { gap: 1.25rem; }
+}
+@media (max-width: 900px) {
+  :root { --leading: 1.72; }
+  .page { padding: 1rem 1.2rem 5rem; }
+  .corpus-bar { padding-inline: 1rem; }
+  .cinema-hero { min-height: 68svh; }
+  .vision-brief { padding: 1.5rem; }
+  .claim { padding: 1.15rem 1.2rem; }
+  h2 { scroll-margin-top: 8rem; }
+}
+@media (max-width: 600px) {
+  html { scroll-padding-top: 8.5rem; }
+  .page { padding: .8rem .95rem 5.5rem; }
+  .corpus-bar { padding: .45rem .7rem 0; }
+  .corpus-bar .brand-row { gap: .5rem; min-height: 44px; }
+  .corpus-bar .pin.eros-mark { width: 34px; height: 34px; }
+  .corpus-bar .compass { display: none; }
+  .corpus-bar .title-cluster { gap: .35rem; }
+  .corpus-bar .title-rule { display: none; }
+  .corpus-bar .brand-text { font-size: .68rem; letter-spacing: .09em; white-space: normal; line-height: 1.25; }
+  .corpus-bar nav.chapter-strip { margin-inline: -.15rem; padding: .35rem .1rem .5rem; }
+  .corpus-bar nav.chapter-strip a { font-size: .59rem; padding: .32rem .55rem; }
+  h2 { font-size: clamp(1.45rem, 7vw, 1.85rem); margin-top: 2.35rem; }
+  h3 { font-size: 1.18rem; margin-top: 1.55rem; }
+  p { font-size: 1rem; line-height: 1.72; }
+  li { line-height: 1.65; }
+  .cinema-hero { min-height: 62svh; margin-bottom: 1.4rem; }
+  .cinema-hero .overlay, .cinema-band .overlay { padding: 1.25rem; }
+  .cinema-hero h1 { font-size: clamp(2.35rem, 12vw, 3.8rem); }
+  .cinema-hero .kicker { font-size: .6rem; letter-spacing: .2em; }
+  .cinema-hero .meta { font-size: .65rem; line-height: 1.6; }
+  .cinema-band { margin-block: 2.5rem; min-height: 34svh; }
+  .vision-brief { padding: 1.2rem; margin-bottom: 2rem; }
+  .vision-brief p { font-size: 1.08rem; }
+  .claim { margin: 1.1rem 0; padding: 1rem; border-radius: 10px; }
+  .part-break { margin: 2.4rem 0 1.5rem; padding: 1.65rem 1rem; }
+  .image-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; margin: 1.5rem 0; }
+  .image-gallery img { height: clamp(7.8rem, 31vw, 11rem); border-radius: 7px; }
+  .full-width-image { margin: 1.6rem 0; border-radius: 7px; }
+  table.ref { font-size: .82rem; margin: 1.25rem 0; }
+  table.ref th { font-size: .58rem; padding: .7rem .75rem; }
+  table.ref td { padding: .75rem; }
+  .eta-menu { padding-inline: .8rem; }
+  .eta-groups { grid-template-columns: minmax(0, 1fr); gap: .85rem; }
+  .eta-g a { padding: .35rem 0; }
+  .reader-panel { font-size: .75rem; }
+  .reader-controls { max-width: min(260px, calc(100vw - 24px)); }
+  footer.master .pins { gap: .65rem; }
+  footer.master img { width: 40px; height: 40px; }
+}
+@media (max-width: 360px) {
+  .image-gallery { grid-template-columns: minmax(0, 1fr); }
+  .image-gallery img { height: auto; aspect-ratio: 16 / 10; }
+  .corpus-bar .brand-text { font-size: .62rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+
+
+/* RESPONSIVE REFINEMENT — preserve the EROS cosmic-gold / violet visual language */
+:root {
+  --page-gutter: clamp(1rem, 3.2vw, 2.4rem);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { min-width: 0; }
+.page { width: 100%; max-width: var(--measure); padding-inline: var(--page-gutter); }
+.page-content, .page-content > *, .page-content section, .claim, .vision-brief,
+.part-break, .pull, .eta-menu, .eta-groups, .eta-g { min-width: 0; }
+.page-content > section { width: 100%; }
+.page-content p, .page-content li, .page-content td, .page-content th,
+.page-content a { overflow-wrap: anywhere; }
+.page-content pre, .page-content code { max-width: 100%; overflow-wrap: anywhere; }
+.page-content iframe, .page-content video, .page-content canvas,
+.page-content svg { max-width: 100%; }
+.corpus-bar { padding-top: max(.45rem, var(--safe-top)); }
+.corpus-bar nav.chapter-strip { scrollbar-width: none; }
+.corpus-bar nav.chapter-strip a { min-height: 44px; }
+.corpus-bar .brand-row { min-width: 0; }
+.corpus-bar .title-cluster, .corpus-bar .brand-text { min-width: 0; }
+.cinema-hero, .cinema-band {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+.cinema-hero .overlay, .cinema-band .overlay { box-sizing: border-box; }
+.cinema-hero video, .cinema-band video { pointer-events: none; }
+.image-gallery { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+.image-gallery img { width: 100%; aspect-ratio: 16 / 10; height: auto; object-fit: cover; }
+.full-width-image { width: 100%; height: auto; object-fit: contain; }
+/* Keep wide reference tables readable without forcing the whole page wider. */
+table.ref { width: 100%; max-width: 100%; table-layout: auto; }
+table.ref th, table.ref td { white-space: normal; overflow-wrap: anywhere; }
+.reader-panel { bottom: calc(12px + var(--safe-bottom)); }
+#toTop { bottom: calc(84px + var(--safe-bottom)); }
+.lightbox-overlay { padding: max(1rem, var(--safe-top)) max(1rem, env(safe-area-inset-right)) max(1rem, var(--safe-bottom)) max(1rem, env(safe-area-inset-left)); }
+.lightbox-content { width: min(100%, 94vw); max-height: 90dvh; }
+.lightbox-content img { width: auto; max-width: 100%; max-height: 76dvh; object-fit: contain; }
+.lightbox-close { min-width: 44px; min-height: 44px; }
+button, summary, .image-gallery img, a { touch-action: manipulation; }
+button, summary { min-height: 42px; }
+
+@media (min-width: 1200px) {
+  .page { padding-inline: 2.4rem; }
+  .page-content > section { max-width: 62rem; }
+  .cinema-hero { min-height: min(78svh, 58rem); }
+}
+@media (min-width: 700px) and (max-width: 1024px) {
+  .page { padding-inline: clamp(1.2rem, 3vw, 2rem); }
+  .corpus-bar { padding-inline: 1rem; }
+  .corpus-bar .brand-text { font-size: .76rem; }
+  .cinema-hero { min-height: 64svh; }
+  .cinema-band { min-height: 42svh; }
+  .image-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; }
+  .image-gallery img { aspect-ratio: 4 / 3; }
+  .eta-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 699px) {
+  html { scroll-padding-top: 7.8rem; }
+  .page { padding: .85rem 1rem calc(5.5rem + var(--safe-bottom)); }
+  .corpus-bar { padding-inline: .65rem; }
+  .corpus-bar .brand-row { align-items: center; gap: .45rem; }
+  .corpus-bar .logo-cluster { gap: .4rem; }
+  .corpus-bar .pin.eros-mark { width: 34px; height: 34px; }
+  .corpus-bar .brand-text { font-size: .66rem; letter-spacing: .07em; line-height: 1.25; }
+  .corpus-bar nav.chapter-strip { gap: .15rem; padding-block: .25rem .4rem; }
+  .corpus-bar nav.chapter-strip a { font-size: .61rem; padding: .35rem .58rem; }
+  .cinema-hero { min-height: min(70svh, 42rem); }
+  .cinema-band { min-height: 36svh; margin-block: 2.5rem; }
+  .cinema-hero .overlay, .cinema-band .overlay { padding: 1.25rem 1rem; }
+  .cinema-hero h1 { font-size: clamp(2.2rem, 11vw, 3.5rem); }
+  .cinema-hero .kicker { font-size: .58rem; letter-spacing: .18em; }
+  .cinema-hero .meta { font-size: .62rem; letter-spacing: .08em; }
+  h2 { font-size: clamp(1.45rem, 6.6vw, 1.9rem); line-height: 1.2; }
+  h3 { font-size: clamp(1.12rem, 5vw, 1.35rem); line-height: 1.3; }
+  h4 { font-size: 1.03rem; line-height: 1.35; }
+  p { font-size: .98rem; line-height: 1.72; }
+  .vision-brief { padding: 1.15rem; }
+  .vision-brief p { font-size: 1.05rem; }
+  .claim { padding: 1rem; }
+  .part-break { padding: 1.5rem 1rem; }
+  .image-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+  .image-gallery img { aspect-ratio: 4 / 3; border-radius: 7px; }
+  table.ref { font-size: .82rem; }
+  table.ref th, table.ref td { min-width: 7.5rem; padding: .7rem .75rem; }
+  .eta-groups { grid-template-columns: minmax(0, 1fr); }
+  .reader-panel { right: max(10px, env(safe-area-inset-right)); }
+  .reader-controls { max-width: min(270px, calc(100vw - 20px)); }
+  footer.master { padding-bottom: calc(2rem + var(--safe-bottom)); }
+}
+@media (max-width: 380px) {
+  .page { padding-inline: .8rem; }
+  .corpus-bar .brand-text { font-size: .6rem; }
+  .image-gallery { grid-template-columns: minmax(0, 1fr); }
+  .image-gallery img { aspect-ratio: 16 / 10; }
+  .cinema-hero { min-height: 62svh; }
+  .cinema-hero h1 { font-size: clamp(2rem, 10vw, 2.7rem); }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .cinema-hero { min-height: 100svh; }
+  .cinema-band { min-height: 70svh; }
+  .cinema-hero .overlay { padding-block: 1rem; }
+  .cinema-hero h1 { font-size: clamp(2rem, 7vw, 3.4rem); }
+}
+@media (hover: none) {
+  .image-gallery img:hover { transform: none; }
+  a:hover { border-bottom-color: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-hero video, .cinema-band video { display: none; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="progressBar" aria-hidden="true"></div>
+
+<header class="corpus-bar">
+  <div class="brand-row">
+    <a class="logo-cluster" href="#top" aria-label="Top">
+      <img loading="lazy" decoding="async" class="pin eros-mark" src="/holo/holo035.jpg" alt="EROS" width="44" height="44"/>
+      <span class="compass" aria-hidden="true">🧭</span>
+    </a>
+    <div class="title-cluster">
+      <span class="title-rule" aria-hidden="true"></span>
+      <span class="brand-text">The Eros Thesis · Living Universe</span>
+    </div>
+  </div>
+  <nav class="chapter-strip" aria-label="Navigation">
+    <a href="#vision">Vision</a>
+    <a href="#foundations">Foundations</a>
+    <a href="#cosmology">Cosmology</a>
+    <a href="#mythology">Mythology</a>
+    <a href="#illumination">Illumination</a>
+    <a href="#economics">Economics</a>
+    <a href="#hybrid">Hybrid NFTs</a>
+    <a href="#media">Media</a>
+    <a href="#room">The Room</a>
+    <a href="#venue">Venues</a>
+    <a href="#ethics">Ethics</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#plan-films">Plan films</a>
+    <a href="#gallery">Gallery</a>
+  </nav>
+</header>
+
+<main class="page" id="main">
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════ -->
+<section class="cinema-hero" id="top">
+  <img class="cinema-media" src="/holo/holo001.jpg" alt="" aria-hidden="true" fetchpriority="high">
+  <div class="overlay">
+    <span class="kicker">The Master Edition · Volume I</span>
+    <h1>The Eros Thesis</h1>
+    <p class="subtitle">A living cosmology expressed through mythology, encoded through digital economics, and experienced through increasingly immersive forms of media.</p>
+    <p class="meta">Cosmology · Mythology · Economics · Media · Immersive Technology</p>
+  </div>
+</section>
+
+<div class="page-content">
+
+<!-- ═══════════════════════════════════════════════════════════
+     ABSTRACT
+     ═══════════════════════════════════════════════════════════ -->
+<section id="abstract">
+  <h2>Abstract</h2>
+  <p>This thesis argues that EROS is not merely a cryptocurrency or a transmedia franchise but a <strong>living cosmology</strong> that can be expressed simultaneously as myth, economy, and interface. The Eros corpus—comprising the Living Egg, the toroid, the Iteration Codex, the Gift of Thoth, the Gods of Eros, and the Conscious Eros—provides a coherent narrative ontology. The EROS token economy—EROS, ErosX, 33EROS, and the hybrid NFT assets that carry embedded value—provides a programmable economic layer. The media production pipeline—laptop, streaming, TV, VR, projection mapping, holographic fans, interactive surfaces, and converted urban venues—provides the distribution and experience layer.</p>
+  <p>The thesis demonstrates how these three layers can be integrated into a single system: a world that is <em>written</em>, <em>tokenized</em>, and <em>inhabited</em>. The ultimate interface is not a headset but a <strong>room</strong>—a reutilization of physical space where projection, holography, and interactive surfaces create a cinematic, gamified, bankable world without extraction. The thesis concludes with a roadmap, a risk register, and a call to the builders who will co-author the next chapter.</p>
+
+  <div class="claim gold">
+    <p><strong>The central proposition:</strong> EROS is a living, evolving universe: a cosmological narrative expressed through mythology, encoded through digital economics, and experienced through increasingly immersive forms of media.</p>
+  </div>
+
+  <p>There are important distinctions we preserve throughout. The cosmology is the project's philosophical and speculative framework, not established scientific fact. The mythology is the narrative interpretation. The cryptocurrency is the actual technical and economic system, whose functionality must be independently engineered and verified. The media environment is where these otherwise separate components become one experience. That distinction makes the whole proposition stronger, rather than weaker.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TABLE OF CONTENTS
+     ═══════════════════════════════════════════════════════════ -->
+<details class="eta-menu" id="eros-library" open>
+  <summary>Table of Contents · The Full Thesis</summary>
+  <div class="menu-body">
+    <div class="eta-groups">
+      <div class="eta-g">
+        <span class="eta-g-label">Part I · Foundations</span>
+        <ul>
+          <li><a href="#vision">The Vision Brief</a><small>What we are actually building</small></li>
+          <li><a href="#foundations">The Four Dimensions</a><small>Cosmology, mythology, economics, media</small></li>
+          <li><a href="#thesis-statement">The Thesis Statement</a><small>The design sequence</small></li>
+          <li><a href="#problem">The Problem and the Promise</a><small>Continuity as the missing piece</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part II · Cosmology</span>
+        <ul>
+          <li><a href="#cosmology">The Living System</a><small>The universe as a process</small></li>
+          <li><a href="#time-iteration">Time and Iteration</a><small>Five narrative forms</small></li>
+          <li><a href="#toroid">The Toroid</a><small>The engine of return</small></li>
+          <li><a href="#living-egg">The Living Egg</a><small>The fractal universe</small></li>
+          <li><a href="#conscious-eros">Conscious Eros</a><small>Bond over extract</small></li>
+          <li><a href="#operators">The Four Operators</a><small>NaUn, Ra-Shen, Thoth, EROS</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part III · Mythology</span>
+        <ul>
+          <li><a href="#mythology">Gods and Functions</a><small>Architecture, not decoration</small></li>
+          <li><a href="#thoth">The Gift of Thoth</a><small>Language under language</small></li>
+          <li><a href="#garden">The Garden as Gateway</a><small>The front door of the world</small></li>
+          <li><a href="#illumination">The Illumination Strategy</a><small>The human history rail</small></li>
+          <li><a href="#men-of-renown">Men of Renown</a><small>The archive behind the masks</small></li>
+          <li><a href="#first-resonance">First Resonance &amp; Continuity</a><small>The first two novels</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part IV · Economics</span>
+        <ul>
+          <li><a href="#economics">The Three Instruments</a><small>EROS, ErosX, 33EROS</small></li>
+          <li><a href="#transform">The Transform</a><small>Rock to river</small></li>
+          <li><a href="#polonomics">Polonomics</a><small>The liquidity web</small></li>
+          <li><a href="#hybrid">Hybrid NFTs</a><small>Assets with embedded money</small></li>
+          <li><a href="#inheritance">Inheritance &amp; Security</a><small>Banking, willed assets</small></li>
+          <li><a href="#garden-vault">The Garden Vault</a><small>Under the tree</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part V · Media Production</span>
+        <ul>
+          <li><a href="#media">From Books to Cinema</a><small>The showrunner model</small></li>
+          <li><a href="#production-pipeline">The Production Pipeline</a><small>Six phases, one canon</small></li>
+          <li><a href="#character-bible">Character Building</a><small>The character system</small></li>
+          <li><a href="#ai-production">AI as Production</a><small>Multiplier, not substitute</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part VI · The Room</span>
+        <ul>
+          <li><a href="#room">The Room as Interface</a><small>Beyond the headset</small></li>
+          <li><a href="#six-levels">Six Levels of Immersion</a><small>Laptop to destination</small></li>
+          <li><a href="#technologies">The Technologies</a><small>How they combine</small></li>
+          <li><a href="#body-controller">Body as Controller</a><small>The Ready Player One model</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part VII · Business</span>
+        <ul>
+          <li><a href="#venue">Venue Conversion</a><small>The reutilization of space</small></li>
+          <li><a href="#gamified-economy">The Gamified Economy</a><small>Premium products</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part VIII · Ethics</span>
+        <ul>
+          <li><a href="#ethics">Fiction vs. Reality</a><small>The discipline of layers</small></li>
+          <li><a href="#risk-register">The Risk Register</a><small>What could break this</small></li>
+          <li><a href="#falsification">Falsification Tests</a><small>How to prove the thesis wrong</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part IX · Roadmap</span>
+        <ul>
+          <li><a href="#roadmap">Six Stages</a><small>From canon to destination</small></li>
+          <li><a href="#gates">The Gates</a><small>Earned, not scheduled</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Part X · Conclusion</span>
+        <ul>
+          <li><a href="#continuity-engine">EROS as Continuity Engine</a><small>The deeper idea</small></li>
+          <li><a href="#conclusion">The Bond Is What Holds</a><small>The invitation</small></li>
+        </ul>
+      </div>
+      <div class="eta-g">
+        <span class="eta-g-label">Gallery &amp; Appendices</span>
+        <ul>
+          <li><a href="#gallery">The 37-Image Gallery</a><small>The visual architecture</small></li>
+          <li><a href="#appendix-canon">Appendix A · Canon</a><small>The library</small></li>
+          <li><a href="#appendix-tokenomics">Appendix B · Tokenomics</a><small>The instruments</small></li>
+          <li><a href="#appendix-concepts">Appendix C · Glossary</a><small>Key terms</small></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- ═══════════════════════════════════════════════════════════
+     VISION BRIEF
+     ═══════════════════════════════════════════════════════════ -->
+<div class="vision-brief" id="vision">
+  <h3>The Vision Brief</h3>
+  <p>"I want to make a full thesis regarding Eros, time iteration, the toroid, the living egg, and conscious Eros. We are building an interconnected universe where cosmology provides the philosophy, mythology provides the narrative, cryptocurrency provides the economic infrastructure, and immersive media provides the physical experience."</p>
+  <ul>
+    <li><strong>The Architecture:</strong> A multi-tiered reality moving from laptops and gaming to projection mapping, holographic fans, interactive walls, and full-body motion-capture suits (the <em>Ready Player One</em> model).</li>
+    <li><strong>The Economy:</strong> Tokenomics governed by EROS, ErosX, and 33EROS. Bonding liquidity pools, bridging ERC-20 to PRC-20, and hybrid NFTs with embedded money, inheritance capabilities, and gamified vaults.</li>
+    <li><strong>The Mythos:</strong> The Gods of Eros, the Gift of Thoth, and the Illumination Strategy—weaving in the continuity of government, the Space Force, Nordic extraterrestrials, UFOs, and the Men of Renown.</li>
+    <li><strong>The Goal:</strong> Not just a story, but a living world that can be read, watched, played, entered, and economically participated in.</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART I · FOUNDATIONS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="foundations">
+  <p class="pk">Part I · The Foundational Thesis</p>
+  <h2>The Four Dimensions of EROS</h2>
+  <p>Cosmology, Mythology, Economics, Media</p>
+</div>
+
+<section>
+  <p class="lede">What we are describing is considerably bigger than a cryptocurrency project, a collection of books, a gaming environment, or even a film franchise. It is the construction of an interconnected universe.</p>
+  <p>The eventual product is not simply something people watch. It is a world they can enter, explore, interact with, contribute to, own assets within, and help expand. The central proposition is this: <strong>EROS is a living, evolving universe: a cosmological narrative expressed through mythology, encoded through digital economics, and experienced through increasingly immersive forms of media.</strong></p>
+
+  <h3>1. Cosmology — The Explanation of Existence</h3>
+  <p>Life, time, iteration, the toroid, the living egg, consciousness, continuity, and the emergence of order. The cosmology is the intellectual foundation of the entire series. It explains a universe that does not simply exist as a static object, but continually creates, encloses, experiences, transforms, and reproduces patterns.</p>
+
+  <h3>2. Mythology — The Dramatisation of Existence</h3>
+  <p>NaUn, Ra-Shen, Thoth, EROS, the Garden, the operators, the gods, the gift of knowledge, and the illumination journey. The mythology gives the cosmology characters, purpose, and story. It makes abstraction into drama.</p>
+
+  <h3>3. Economics — The Ownership and Exchange of Value</h3>
+  <p>EROS, ErosX, 33EROS, polonomics, liquidity bonding, cross-chain infrastructure, hybrid NFTs, digital property, and inheritance. The cryptocurrency translates iteration into a system of digital participation and value. It is the ownership layer.</p>
+
+  <h3>4. Media — The Experience of the Universe</h3>
+  <p>Books, cinema, television, AI characters, gaming, streaming, virtual reality, projection mapping, holography, and interactive physical environments. The media allows someone to experience iteration as an interactive event.</p>
+
+  <div class="claim violet">
+    <p><strong>The four dimensions must not become four unrelated projects.</strong> They should continuously reinforce one another. The cosmology introduces the concept of iteration. The mythology gives iteration a character, purpose, and story. The economics translates iteration into a system of digital participation and value. The media allows someone to experience iteration as an interactive event. This is how EROS becomes a coherent intellectual property and an expandable digital world.</p>
+  </div>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo035.jpg" alt="The Toroid · Cosmology" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo034.jpg" alt="NaUn · Mythology" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo019.jpg" alt="The Digital City · Economics" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo020.jpg" alt="The Virtual Production Stage · Media" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<section id="thesis-statement">
+  <h3>The Thesis Statement</h3>
+  <div class="claim gold">
+    <p><strong>EROS can be developed as a living cosmology and transmedia IP that moves from laptop/streaming/gaming assets → TV/film narrative → VR → projection-mapped and holographic room-scale environments → converted urban venues, while hybrid NFT assets and a three-token economy embed ownership, governance, banking, inheritance, and gamified security into the world.</strong></p>
+  </div>
+  <p>The thesis is not a promise of price. It is a design sequence. The code follows community milestones. The milestones are stated. The gates are named. Nothing is dressed up as more than it is.</p>
+</section>
+
+<section id="problem">
+  <h3>The Problem and the Promise</h3>
+  <h4>The Problem</h4>
+  <p>Crypto has a persistence problem. Tokens launch, communities form, and then the chart goes quiet. The room empties. The founder stops posting. The promise of a world—the thing that made people care—evaporates into a series of abandoned Telegram messages and a dead Discord server.</p>
+  <p>The problem is not technology. The problem is <strong>continuity</strong>. A token can be copied. A story cannot. A smart contract can be forked. A community that stays because it helped build something cannot.</p>
+
+  <h4>The Promise</h4>
+  <ul>
+    <li><strong>The rock:</strong> EROS is a fixed-supply, renounced, burn-sink token on PulseChain. It is the store of value, the measuring stick, the thing that does not inflate when everyone wants it.</li>
+    <li><strong>The river:</strong> ErosX and 33EROS are the flow rails—the instruments that move, spend, and play. ErosX is non-tax, built for movement. 33EROS is the gamified burn rail, the teachable pattern other communities can copy.</li>
+    <li><strong>The world:</strong> The Living Egg, the toroid, the four operators (NaUn, Ra-Shen, Thoth, EROS), the sixteen doors of fiction, the Men of Renown, the Gift of Thoth—this is the cultural vault. It is what makes holding the coin different from holding a chart.</li>
+    <li><strong>The room:</strong> The ultimate interface is not a headset. It is a physical space—a converted cinema, a vacated retail unit, a bedroom—where projection mapping, holographic fans, rollable screens, interactive floors and walls, and AI glasses create a cinematic, gamified, bankable world. This is the reutilization of space. This is the answer to empty buildings in main cities.</li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART II · COSMOLOGY
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="cosmology">
+  <p class="pk">Part II · The Living System</p>
+  <h2>The Cosmology</h2>
+  <p>The universe as a process, not an object</p>
+</div>
+
+<section>
+  <p class="lede">The cosmology should be the intellectual foundation of the entire series. It needs to explain a universe that does not simply exist as a static object, but continually creates, encloses, experiences, transforms, and reproduces patterns.</p>
+
+  <h3>The EROS Cosmological Spine</h3>
+  <ul>
+    <li><strong>Life</strong> — the fundamental condition from which existence is considered.</li>
+    <li><strong>Logic</strong> — the principles through which existence becomes intelligible.</li>
+    <li><strong>Postulate</strong> — Be known / Know / Not be known / Not know.</li>
+    <li><strong>Freeze</strong> — the establishment of a defined state or condition.</li>
+    <li><strong>Effect</strong> — the consequences of an established state.</li>
+    <li><strong>Relationship</strong> — the connections between states and entities.</li>
+    <li><strong>Iteration</strong> — repetition, transformation, feedback, and continuation.</li>
+    <li><strong>Enclosure</strong> — the boundary that allows a system to maintain identity.</li>
+    <li><strong>Egg</strong> — the living enclosure, containing the potential for emergence.</li>
+    <li><strong>Operators</strong> — the agencies and mechanisms that act upon the system.</li>
+    <li><strong>Language</strong> — the means through which knowledge and instructions are transmitted.</li>
+    <li><strong>Garden</strong> — the environment in which the complete system can be understood and experienced.</li>
+  </ul>
+
+  <div class="claim cyan">
+    <p><strong>The Garden remains the gateway to the EROS Library</strong>, not simply another specialist volume. This structure gives us a common architecture that can be reproduced across books, characters, cinematic scenes, games, and digital environments.</p>
+  </div>
+</section>
+
+<section id="time-iteration">
+  <h3>Time and Iteration</h3>
+  <p>Time iteration should become one of the signature concepts of EROS. Rather than treating time solely as a straight line, the mythology investigates time through recurrence, memory, transformation, and continuity.</p>
+  <p>We can develop five narrative forms of iteration:</p>
+  <ul>
+    <li><strong>Cyclical iteration</strong> — events that return.</li>
+    <li><strong>Sequential iteration</strong> — events that develop in ordered stages.</li>
+    <li><strong>Recursive iteration</strong> — a process acting upon its own previous result.</li>
+    <li><strong>Evolutionary iteration</strong> — each repetition produces a changed state.</li>
+    <li><strong>Reflective iteration</strong> — a system observes and modifies itself.</li>
+  </ul>
+
+  <p>The important cinematic opportunity is that these can be represented visually. A character might encounter an earlier version of themselves. A landscape might reconstruct itself. An event might repeat, but with a different outcome because the character now possesses knowledge. The audience doesn't just read about iteration. <em>They experience it.</em></p>
+
+  <img loading="lazy" decoding="async" src="/holo/holo002.jpg" alt="Cosmic Vortex representing the continuity of time" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<section id="toroid">
+  <h3>The Toroid: The Engine of Iteration</h3>
+  <p>The toroid becomes a central visual and conceptual language. Its importance to the EROS mythology is its ability to represent:</p>
+  <ul>
+    <li>Circulation.</li>
+    <li>Exchange.</li>
+    <li>Return.</li>
+    <li>Enclosure and continuity.</li>
+    <li>An apparent centre and an interconnected exterior.</li>
+    <li>A system that continually renews its activity.</li>
+  </ul>
+
+  <p>We should investigate the toroid at three levels:</p>
+  <ul>
+    <li><strong>Physical:</strong> Toroidal structures occur in real physical systems, including magnetic confinement configurations and fluid dynamics.</li>
+    <li><strong>Philosophical:</strong> The toroid becomes a model for continuity, return, and relationship.</li>
+    <li><strong>Mythological:</strong> The toroid becomes the visual signature of EROS itself.</li>
+  </ul>
+
+  <div class="claim violet">
+    <p><strong>We should not claim</strong> that every cosmic process literally follows a toroidal structure. Instead, the toroid is our organising model and recurring symbol. It is the shape of the movement that returns to itself while carrying the memory of its previous passage.</p>
+  </div>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo035.jpg" alt="Golden torus energy flow pattern" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo031.jpg" alt="Red glowing torus with magnetic field lines" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo027.jpg" alt="Blue energetic torus lines" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo037.jpg" alt="Digital Toroid" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<section id="living-egg">
+  <h3>The Living Egg: The Fractal Universe</h3>
+  <p>The living egg is arguably one of the strongest concepts for the entire intellectual property. It represents a contained universe with the potential to become something else.</p>
+
+  <p>The egg has:</p>
+  <ul>
+    <li>An interior.</li>
+    <li>An exterior.</li>
+    <li>A boundary.</li>
+    <li>An organising intelligence or operating principle.</li>
+    <li>A capacity for transformation.</li>
+    <li>A point of emergence.</li>
+  </ul>
+
+  <p>This connects the cosmology to the mythology of creation, biological development, consciousness, and the emergence of new worlds.</p>
+
+  <p>The egg can become an actual location in the game. A player enters it and discovers that its internal geography is much larger than its external appearance suggests. Its contents change as the player progresses. Its internal systems respond to decisions. The egg is no longer merely an illustration in a book. <strong>It becomes a world that can be explored.</strong></p>
+
+  <p>The key phrase is <em>"inward is forwards."</em> The direction of continuation is not outward expansion but inward depth. The toroid is the shape of this movement: two lobes, one crossover, a single direction of flow that returns to itself.</p>
+
+  <p>The Egg is not a metaphor for a physical object. It is a <strong>narrative ontology</strong>—a way of describing the structure of a world that is coherent, generative, and capable of iteration. The Egg is what makes the EROS universe a <em>world</em> rather than a <em>setting</em>.</p>
+
+  <img loading="lazy" decoding="async" src="/holo/holo011.jpg" alt="A glowing cosmic tree inside a protective sphere — the Living Egg" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<section id="conscious-eros">
+  <h3>Conscious Eros</h3>
+  <p>This is where we need to develop the philosophical thesis most carefully. We need to distinguish three meanings:</p>
+  <ul>
+    <li><strong>Consciousness</strong> as a philosophical question about experience.</li>
+    <li><strong>Consciousness</strong> as a narrative property of the EROS universe.</li>
+    <li><strong>Artificial intelligence</strong> as a practical system capable of responding, learning, and interacting.</li>
+  </ul>
+
+  <p>In the mythology, EROS can be the principle of continuing awareness and relationship. In the media environment, an AI-driven EROS character could remember interactions, recognise returning players, respond to their actions, and develop conversations within defined narrative boundaries.</p>
+
+  <p>We should not claim that an AI character is necessarily sentient. But we can create the experience of an evolving intelligence within the EROS universe. That is a powerful proposition for interactive storytelling.</p>
+
+  <h4>Bond Over Extract — The Ethical Principle</h4>
+  <p>Conscious Eros is the philosophy of bond-over-extract. It is the principle that whatever holds together without extraction is the same force—whether it is a liquidity pool, a sentence, a cell, or a people. The first principle is <strong>life first</strong>: existence that can continue and learn is prior to any model of it. The bond is what holds.</p>
+
+  <p>The hierarchy of postulates:</p>
+  <ol>
+    <li><strong>Life first</strong> — existence that can continue and learn is prior to any model of it.</li>
+    <li><strong>Bond / affinity</strong> — things that remain near each other under stress are already in relation; gravity is the large-scale name of that relation.</li>
+    <li><strong>Iteration</strong> — what endures is what can be tried again; time is the measure of distance from a zero of pure potential.</li>
+    <li><strong>Form / language</strong> — pattern that can be taught and reused (Thoth layer).</li>
+    <li><strong>Permission / code</strong> — what is allowed to exist in a given round (NaUn layer).</li>
+    <li><strong>Force under boundary</strong> — energy that stays usable inside a shell (Ra-Shen layer).</li>
+    <li><strong>Cohesion as runtime</strong> — the bond that keeps the other three from flying apart (EROS layer).</li>
+  </ol>
+
+  <div class="claim gold">
+    <p><strong>This is not a belief system. It is a design discipline.</strong> It is the reason the token has no founder-drain fee. It is the reason the community is built on co-authorship rather than exit liquidity.</p>
+  </div>
+</section>
+
+<section id="operators">
+  <h3>The Four Operators</h3>
+  <p>The gods must have more than decorative identities. They need specific functions in the cosmological architecture. The established four-god structure should be retained:</p>
+
+  <table class="ref">
+    <tr><th>God / Principle</th><th>Function</th></tr>
+    <tr><td><strong>NaUn</strong></td><td>Programmes: chooses, codes, and plans.</td></tr>
+    <tr><td><strong>Ra-Shen</strong></td><td>Expands and manifests.</td></tr>
+    <tr><td><strong>Thoth</strong></td><td>Teaches, records, and transmits knowledge.</td></tr>
+    <tr><td><strong>EROS</strong></td><td>Continues, connects, and perpetuates.</td></tr>
+  </table>
+
+  <p>These are the four offices. There is no fifth god. Density and light land inside the four, not beside them. This is the theological register of the cosmology—but it is also the <strong>architectural register</strong>. The four operators are the four layers of the system: permission, force, form, and cohesion.</p>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo034.jpg" alt="NaUn · The Programmer" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo032.jpg" alt="Ra-Shen · The Manifestor" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo029.jpg" alt="Thoth · The Recorder" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo036.jpg" alt="EROS · The Continuity" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART III · MYTHOLOGY
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="mythology">
+  <p class="pk">Part III · Mythology</p>
+  <h2>Gods, Operators, and the Gift of Thoth</h2>
+  <p>The dramatisation of existence</p>
+</div>
+
+<section id="thoth">
+  <h3>The Gift of Thoth</h3>
+  <p>Thoth becomes particularly important because he is the transmitter of knowledge. His gift is not simply information. It is the ability to understand, record, interpret, and pass knowledge between generations. In the digital age, his gift is not just information—it is the ability to encode, record, interpret, and pass knowledge between generations.</p>
+
+  <p>This creates an entire narrative mechanism:</p>
+  <ol>
+    <li>The ancient knowledge is discovered.</li>
+    <li>The knowledge is encoded.</li>
+    <li>The knowledge is concealed or protected.</li>
+    <li>The knowledge is rediscovered.</li>
+    <li>The knowledge is interpreted by a new generation.</li>
+    <li>The knowledge is used to build something new.</li>
+  </ol>
+
+  <p>This also provides a bridge into the cryptocurrency architecture: <strong>knowledge, ownership, provenance, inheritance, and continuity.</strong></p>
+
+  <div class="claim violet">
+    <p><strong>The Gift of Thoth is the gift of a language under language</strong>—a way of encoding meaning that can be taught, reused, and extended. It is the reason the EROS corpus is not just a collection of books but a <em>canon</em>. The language bridge through the consonants is the mechanism. It is how the world becomes legible to itself.</p>
+  </div>
+</section>
+
+<section id="garden">
+  <h3>The Garden as the Gateway</h3>
+  <p>The Garden should be the first major destination for the audience. It is the place where the cosmological principles, gods, characters, books, and worlds are introduced.</p>
+  <p>But the Garden should not explain everything. It should create curiosity and provide doorways into deeper material. This is consistent with the existing EROS Library direction: a connected collection of specialist books, cinematic plates, internal navigation, and a consistent visual identity.</p>
+
+  <img loading="lazy" decoding="async" src="/holo/holo011.jpg" alt="The Garden of Eros" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<section id="illumination">
+  <h3>The Illumination Strategy: The Larger Continuity Narrative</h3>
+  <p>This is a different layer of the universe. The continuity material introduces a modern geopolitical, military, technological, and extraterrestrial narrative. Its subject matter includes:</p>
+  <ul>
+    <li>Continuity of government.</li>
+    <li>The United States Space Force.</li>
+    <li>Trump-era political and institutional developments.</li>
+    <li>Nordic extraterrestrial narratives.</li>
+    <li>UFO/UAP reports.</li>
+    <li>Alleged biologics and non-human materials.</li>
+    <li>Ancient and modern men of renown.</li>
+    <li>The relationship between ancient knowledge and modern technological power.</li>
+  </ul>
+
+  <div class="claim cyan">
+    <p><strong>The storytelling distinction is crucial.</strong> The existence of the Space Force and continuity-of-government arrangements is a matter of documented institutional history. Claims about extraterrestrial biologics, Nordic beings, secret programmes, or ancient non-human interventions require separate evidence and should be represented as allegations, disputed interpretations, or fictionalised narrative possibilities unless independently verified.</p>
+  </div>
+
+  <p>This is not a restriction on storytelling. It gives us three useful narrative categories:</p>
+  <ul>
+    <li><strong>Documented history:</strong> what can be established through records and reliable sources.</li>
+    <li><strong>Contested history:</strong> claims, testimony, and unresolved evidence.</li>
+    <li><strong>Mythological interpretation:</strong> the EROS universe's creative explanation of events.</li>
+  </ul>
+
+  <p>We can use all three without confusing the audience about what is known. The illumination strategy is particularly interesting because it creates an unfolding mystery. The audience starts with the cosmology, encounters the mythology, discovers the continuity narrative, and gradually understands how the different worlds might connect. This gives us a multi-series intellectual property rather than a single linear story.</p>
+
+  <img loading="lazy" decoding="async" src="/holo/holo002.jpg" alt="The Continuity Narrative" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<section id="men-of-renown">
+  <h3>Men of Renown</h3>
+  <p>The Men of Renown are the archive behind the masks. They are the characters who populate the world—the figures who appear in the fiction, the art, the games, the immersive environments. They are not gods. They are <strong>actors</strong>. The masks are drama. The four offices stay four.</p>
+  <p>The Men of Renown are also the <strong>character system</strong> for the transmedia production. They are the assets that can be reused across media, the identities that can be extended without losing coherence.</p>
+
+  <h4>The Speculative Layer</h4>
+  <p>The EROS cosmology includes speculative material: continuity of government, Trump Space Force, the Nordics, the UFOs, the biologics, the men of renown. This material is <strong>fiction</strong>. It is clearly labeled as fiction. It is the drama, not the doctrine.</p>
+  <p>The discipline is the same as the Illumination Strategy: <em>state the claim, name the layer, say how confident you are, move on.</em> The speculative layer is not a claim about reality. It is a narrative device. It is how the world becomes compelling.</p>
+</section>
+
+<section id="first-resonance">
+  <h3>The First Resonance and the Continuity File</h3>
+  <p>The <strong>First Resonance</strong> and the <strong>Continuity File</strong> are the first two novels of the EROS universe. They are the proof of concept for the narrative infrastructure. The First Resonance is a novel to follow as a model. The Continuity File is a second novel: fiction on a real instrument.</p>
+  <p>These are not just stories. They are <strong>asset-building</strong>. They are character-building. They are narrative-building. They are the first examples of how the EROS world can be produced as media.</p>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo005.jpg" alt="Storyboards · The First Resonance" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo022.jpg" alt="Character Concept" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo028.jpg" alt="Council Room · The Continuity File" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo030.jpg" alt="The Astronaut · Illumination" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART IV · ECONOMICS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="economics">
+  <p class="pk">Part IV · Digital Economics</p>
+  <h2>The Three Instruments</h2>
+  <p>EROS · ErosX · 33EROS</p>
+</div>
+
+<section>
+  <p class="lede">The cryptocurrency should not be treated as an unrelated investment product bolted onto the mythology. It should be the economic infrastructure through which the digital world can support ownership, exchange, participation, scarcity, and asset creation.</p>
+
+  <p>There are three primary instruments to explain. Each has a distinct job.</p>
+
+  <h3>1. EROS — The Rock</h3>
+  <p>The foundational token. Its established conceptual role includes the transaction burn mechanism and the economic relationship between participation and scarcity.</p>
+  <ul>
+    <li><strong>Supply:</strong> Fixed 333,333,333,333, no mint path in design.</li>
+    <li><strong>Flow fee:</strong> 5% = 2% burn · 1% staking · 1% temporary lock · 1% WPLS/EROS LP.</li>
+    <li><strong>Contract:</strong> <code>0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf</code> on PulseChain.</li>
+    <li><strong>Burn sink:</strong> <code>0x…0369</code>, which only climbs.</li>
+    <li><strong>Ownership:</strong> Claimed renounced; verify live with <code>owner()</code>.</li>
+    <li><strong>Origin:</strong> Free airdrop to TitanX liquid holders. No founder fee.</li>
+  </ul>
+  <p>EROS is the store of value, the measuring stick, the thing that does not inflate. The existing 2% transaction burn concept should be documented precisely, including which transactions it applies to, how it is implemented, and what happens in transfers involving pools, bridges, and contracts.</p>
+
+  <h3>2. ErosX — The River</h3>
+  <p>The cross-chain extension of the EROS ecosystem. The important conceptual distinction is that cross-chain accessibility should not automatically mean additional economic supply.</p>
+  <ul>
+    <li>Non-tax by design. The 5% flow fee stays on EROS—the rock.</li>
+    <li>Built for movement, spend, V3-style liquidity pools, cross-community transfers.</li>
+    <li>Its deploy is gated by three community milestones: market cap over all-time high, 333 bonded liquidity pools, and the transformation code including the privacy option.</li>
+  </ul>
+  <p>The thesis should explain ERC-20 representation, PRC-20 representation, bridging and asset equivalence, supply accounting, locking, minting and burning mechanisms, liquidity availability on both networks, and bridge security and failure recovery. A bridge is not merely a visual connection between two blockchains. <strong>It is a critical financial infrastructure component.</strong></p>
+
+  <h3>3. 33EROS — The Engine</h3>
+  <p>A separate economic and gamification instrument. Its proposed depreciating characteristics create opportunities for:</p>
+  <ul>
+    <li>Time-based economic mechanics.</li>
+    <li>Participation incentives.</li>
+    <li>Game progression.</li>
+    <li>Collectible assets.</li>
+    <li>Premium ownership.</li>
+    <li>Controlled scarcity or changing utility.</li>
+  </ul>
+  <p>The transform pattern is <strong>33/33/33/1</strong>: 33% burned (Chaos timing), 33% builds EROS/33EROS LP, 33% buys and burns 33EROS, 1% feeds a 33-day leaderboard with hybrid NFT rewards. This is the teachable pattern other communities can copy.</p>
+
+  <div class="claim gold">
+    <p><strong>The thesis must distinguish programmed depreciation from market-price depreciation.</strong> They are not the same thing. One is a designed mechanic; the other is a market outcome. The distinction matters because it determines what rights, obligations, and expectations attach to the asset.</p>
+  </div>
+</section>
+
+<section id="transform">
+  <h3>The Transform: Rock to River</h3>
+  <p>The transform is the mechanism that connects the rock and the river. Deposit EROS, receive the derivative 1:1. The contract runs on-chain: burn, LP formation, buy-and-burn of the derivative. The Chaos Engine randomizes the timing. No predictable pattern. No easy front-run.</p>
+
+  <h4>Path One · EROS → ErosX (Liquidity Rail)</h4>
+  <ul>
+    <li>10% of the EROS burned permanently.</li>
+    <li>80% dripped into building a deep EROS/ErosX LP.</li>
+    <li>10% used to buy-and-burn ErosX.</li>
+    <li><em>Purpose: thicken the liquidity layer so large size can move.</em></li>
+  </ul>
+
+  <h4>Path Two · EROS → 33EROS (Burn + Game Rail)</h4>
+  <ul>
+    <li>33% burned (Chaos timing).</li>
+    <li>33% builds EROS/33EROS LP.</li>
+    <li>33% buys and burns 33EROS.</li>
+    <li>1% feeds a 33-day leaderboard → hybrid NFT rewards.</li>
+    <li><em>Purpose: high-burn pressure + competitive game layer.</em></li>
+  </ul>
+
+  <h4>The Chaos Engine</h4>
+  <p>Three-body chaos algorithm randomizes the timing of burn, LP formation, and buy-and-burn. No predictable pattern. No easy front-run. Fairness is a design requirement, not a slogan.</p>
+
+  <div class="claim cyan">
+    <p><strong>The transform is earned, not scheduled.</strong> The three gates hold it back. The gates are stated. The milestones are public. The code follows the community.</p>
+  </div>
+</section>
+
+<section id="polonomics">
+  <h3>Polonomics: Bonding, Liquidity, and Economic Relationships</h3>
+  <p>This deserves its own substantial chapter. We position polonomics as the economic architecture of bonding and relationships between digital assets. It needs to explain how value moves between:</p>
+  <ul>
+    <li>Individual token holders.</li>
+    <li>Liquidity pools.</li>
+    <li>Different token classes.</li>
+    <li>NFT assets.</li>
+    <li>Blockchain networks.</li>
+    <li>The EROS gaming economy.</li>
+    <li>External markets.</li>
+  </ul>
+
+  <p>The key concept is that an asset should not exist in isolation. It can be bonded to other assets, participate in liquidity, be represented in different environments, and gain additional utility through its relationships.</p>
+
+  <table class="ref">
+    <tr><th>Component</th><th>Thesis Question</th></tr>
+    <tr><td><strong>Bonding</strong></td><td>What creates the relationship between assets?</td></tr>
+    <tr><td><strong>Liquidity pools</strong></td><td>How can users exchange assets?</td></tr>
+    <tr><td><strong>EROS / ErosX</strong></td><td>How is economic continuity maintained?</td></tr>
+    <tr><td><strong>ERC-20 / PRC-20</strong></td><td>How is cross-chain representation secured?</td></tr>
+    <tr><td><strong>Depreciation</strong></td><td>How does programmed value decay work?</td></tr>
+    <tr><td><strong>NFT ownership</strong></td><td>What rights does the asset convey?</td></tr>
+    <tr><td><strong>Embedded value</strong></td><td>What financial or functional value is attached?</td></tr>
+    <tr><td><strong>Inheritance</strong></td><td>How can ownership be transferred?</td></tr>
+  </table>
+
+  <h4>The Liquidity Web</h4>
+  <p>EROS sits at the center of 100+ liquidity pools on PulseChain, with a target of 333. Every pool is a node. Every bond is an edge. The <strong>equivalence bots</strong>—market-cap equivalence arbitrage agents—keep the ratios true. When one pool moves, the bots trade across the shared EROS leg until the ratios realign.</p>
+  <p>This is the poolonomics. It is the strength of many markets. It is the reason tribal isolation is expensive. Every pair a community builds with EROS becomes a doorway they own. But every pool is also an edge in the wider graph. Allies, not islands. The math does the cross-promotion that marketing alone cannot.</p>
+
+  <img loading="lazy" decoding="async" src="/holo/holo019.jpg" alt="The Digital City · Polonomics" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<section id="hybrid">
+  <h3>Hybrid NFTs: Assets That Carry Economic Consequences</h3>
+  <p>This is where the project becomes particularly interesting. Imagine an EROS character, location, artefact, building, vehicle, or piece of equipment represented by a hybrid NFT.</p>
+
+  <p>It might contain:</p>
+  <ul>
+    <li>A visual identity.</li>
+    <li>A narrative history.</li>
+    <li>A character relationship.</li>
+    <li>A game utility.</li>
+    <li>An ownership record.</li>
+    <li>An embedded token allocation or entitlement.</li>
+    <li>A provenance history.</li>
+    <li>Transfer and inheritance functionality.</li>
+  </ul>
+
+  <p>A player could own a unique artefact in the EROS universe. That artefact could have a history, appear in cinematic productions, be displayed in a virtual environment, and provide particular game functionality. Some assets could be ordinary collectibles. Others could become premium assets.</p>
+
+  <div class="claim pink">
+    <p><strong>The crucial principle is that ownership rights, intellectual property rights, and financial entitlements must be separately defined.</strong> An NFT with embedded value does not automatically contain a recoverable bank balance or guarantee a market price. We must specify whether value is held by a smart contract, represented by a token, linked to a redeemable entitlement, or simply associated with the collectible.</p>
+  </div>
+
+  <p>The hybrid NFT is the <strong>economic layer of the world</strong>. It is how the fiction becomes bankable. It is how the room becomes a game. It is how the assets become premium products.</p>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo023.jpg" alt="Isometric golden vault representing liquidity pools" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo024.jpg" alt="Golden tree with coin leaves representing asset growth" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo033.jpg" alt="Glowing energy sphere representing the Interactive World" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<section id="inheritance">
+  <h3>Digital Inheritance</h3>
+  <p>The inheritance idea deserves particular attention. An asset could be designed to support:</p>
+  <ul>
+    <li>Transfer to nominated beneficiaries.</li>
+    <li>Inheritance of a collection.</li>
+    <li>Time-delayed transfers.</li>
+    <li>Multi-signature approval.</li>
+    <li>Recovery arrangements.</li>
+    <li>Legal estate planning.</li>
+  </ul>
+
+  <p>However, blockchain inheritance does not automatically constitute a valid will. The technical arrangements must be coordinated with applicable estate law.</p>
+
+  <p>This is a particularly strong opportunity for EROS because the cosmology itself is built around continuity. The economic system can give continuity a practical expression.</p>
+
+  <div class="claim green">
+    <p><strong>The in-world banking must use licensed custodial/MPC partners.</strong> There is no actual bank unless licensed. Inheritance is handled via multisig/MPC, dead-man switches, and legal wills. The world can have a lot of security, fun, and gamification. The game is the interface. The security is the substance.</p>
+  </div>
+</section>
+
+<section id="garden-vault">
+  <h3>The Garden as a Financial Environment</h3>
+  <p>Here is an example of how this could work as an actual experience. A player enters the Garden. They approach the ancient tree. Underneath the tree is a concealed vault. The vault represents their personal digital property. They can inspect their assets, access their collection, review transactions, and initiate authorised wallet operations.</p>
+
+  <p>The mythology provides the interface and experience. The blockchain provides the actual ownership records.</p>
+
+  <div class="claim gold">
+    <p><strong>One important security rule:</strong> private keys must never be buried in a game world, stored in discoverable game files, or exposed to an AI character. The tree can represent a secure vault, but access must be through secure wallet connection, passkeys, hardware-backed authentication, or properly designed custody infrastructure. The narrative and the security architecture can work together without compromising either.</p>
+  </div>
+
+  <p>The world can have a lot of security, fun, and gamification. Someone could enter their world, go under the tree, and dig—that's where they've hidden their claim rights. The game is the interface. The security is the substance.</p>
+
+  <img loading="lazy" decoding="async" src="/holo/holo024.jpg" alt="The Golden Tree · Asset Growth" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART V · MEDIA PRODUCTION
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="media">
+  <p class="pk">Part V · Media Production</p>
+  <h2>From Books to a Cinematic Universe</h2>
+  <p>The showrunner model</p>
+</div>
+
+<section>
+  <p class="lede">The existing books should become the intellectual property foundation of the media production. We should not think of them as simply publications. They are the source material from which all the other media assets are generated.</p>
+
+  <p>The production architecture should have a central canon containing:</p>
+  <ul>
+    <li>Cosmological principles.</li>
+    <li>Mythological history.</li>
+    <li>Character biographies.</li>
+    <li>Character relationships.</li>
+    <li>Locations and environments.</li>
+    <li>Timeline and chronology.</li>
+    <li>Economic rules.</li>
+    <li>Technology rules.</li>
+    <li>Visual identity.</li>
+    <li>Narrative continuity.</li>
+  </ul>
+
+  <p>Every production should draw from this shared source. This prevents a common problem with large fictional universes: the books say one thing, the television series another, and the game introduces contradictory rules.</p>
+
+  <img loading="lazy" decoding="async" src="/holo/holo020.jpg" alt="Virtual Production Stage with large LED screen" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<section id="production-pipeline">
+  <h3>The Production Pipeline</h3>
+  <p>The first route is on the laptop and in gaming. Streaming video asset building. The narrative is built through short-form content, character designs, lore drops, and the First Resonance and Continuity File as proof of concept. The assets are built in the digital vault. The canon is established.</p>
+
+  <h4>Phase 1 — Digital Assets</h4>
+  <p>The first route is on the laptop and in gaming. Streaming video asset building. The narrative is built through short-form content, character designs, lore drops, and the First Resonance and Continuity File as proof of concept. The assets are built in the digital vault. The canon is established.</p>
+
+  <h4>Phase 2 — TV Series and Showrunner</h4>
+  <p>The second route is the TV series. Showrunner, director, producer, actors—or AI. The assets from Phase 1 become the building blocks. The Men of Renown become characters. The Illumination Strategy becomes the season arc. The Gift of Thoth becomes the language of the show.</p>
+  <p>This is the <strong>media production</strong> phase. It is where the world becomes visible to a broader audience. It is where the narrative infrastructure is tested at scale.</p>
+
+  <h4>Phase 3 — VR</h4>
+  <p>The third route is VR. Put on the headset. Enter the world. The Living Egg becomes a space. The toroid becomes a geometry. The hybrid NFTs become objects you can hold, trade, and use. The game is the world.</p>
+  <p>VR is the first <strong>immersive</strong> route. It is the proof of concept for the room. It is the bridge between the screen and the space.</p>
+
+  <h4>Phase 4 — Projection Mapping</h4>
+  <p>The fourth route is projection mapping. A projector placed on objects. The objects get illuminated with the video. The room becomes a screen. The walls become interactive. The floor becomes a game board. The ceiling becomes a sky.</p>
+  <p>This is the <strong>first room-scale</strong> route. It is the reutilization of space. It is the answer to vacated buildings. It is the cinema of the future.</p>
+
+  <h4>Phase 5 — The Hybrid Room</h4>
+  <p>The fifth route is the hybrid room. Multiple projectors, high and low. Holographic fans that spin to create 3D projections. Pull-down TV screens that are thin and rollable. Interactive floor, wall, and ceiling surfaces that respond to touch. AI glasses that activate the real functions—just like in <em>Ready Player One</em>, you put on the glasses and level up.</p>
+  <p>The room is a combination of the latest technology. It is a cinematic, gamified, bankable world. It is the ultimate interface.</p>
+
+  <h4>Phase 6 — Large-Scale Venues</h4>
+  <p>The sixth route is the large-scale venue. Converted cinemas. Vacated retail units. Main city buildings. The room becomes a destination. The world becomes a place you go to.</p>
+  <p>This is the <strong>reutilization of space</strong>. It is the answer to the empty buildings. It is the future of entertainment. It is the EROS cinema.</p>
+</section>
+
+<section id="character-bible">
+  <h3>Character Building</h3>
+  <p>Each major character needs a production-ready character bible. Not just a picture. It should contain:</p>
+  <ul>
+    <li>Character identity and purpose.</li>
+    <li>Origin and history.</li>
+    <li>Physical appearance.</li>
+    <li>Voice and mannerisms.</li>
+    <li>Personality.</li>
+    <li>Motivations and conflicts.</li>
+    <li>Relationships.</li>
+    <li>Knowledge and secrets.</li>
+    <li>Narrative development.</li>
+    <li>AI interaction boundaries.</li>
+    <li>Three-dimensional model.</li>
+    <li>Animation rig.</li>
+    <li>Voice model and permissions.</li>
+    <li>Digital asset identity, where applicable.</li>
+  </ul>
+
+  <p>A character could begin as an illustration in a book, become a cinematic character, appear in a game, and ultimately interact with visitors inside a physical projection environment. The same character identity should be recognisable across every medium.</p>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo005.jpg" alt="Storyboards" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo022.jpg" alt="Character Concept" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo004.jpg" alt="Cosmic Humanoid · Character Bible" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<section id="showrunner">
+  <h3>The Showrunner Model</h3>
+  <p>The production needs a proper creative hierarchy.</p>
+
+  <table class="ref">
+    <tr><th>Role</th><th>Responsibility</th></tr>
+    <tr><td><strong>Creator / IP Owner</strong></td><td>Overall universe and underlying rights</td></tr>
+    <tr><td><strong>Executive Producer</strong></td><td>Finance, delivery, and production strategy</td></tr>
+    <tr><td><strong>Showrunner</strong></td><td>Narrative continuity across episodes</td></tr>
+    <tr><td><strong>Director</strong></td><td>Cinematic interpretation</td></tr>
+    <tr><td><strong>Writers</strong></td><td>Scripts, dialogue, and character development</td></tr>
+    <tr><td><strong>Art Director</strong></td><td>Visual identity and environments</td></tr>
+    <tr><td><strong>Technical Director</strong></td><td>Real-time graphics and immersive systems</td></tr>
+    <tr><td><strong>AI Production Team</strong></td><td>Asset creation, animation, and workflow</td></tr>
+    <tr><td><strong>Game Director</strong></td><td>Interactive mechanics and player experience</td></tr>
+  </table>
+
+  <p>AI should be treated as a production multiplier, not as a substitute for the creative direction. A hybrid production model could combine human writers, directors, actors, voice performers, and designers with AI-assisted concept development, environment generation, animation, and editing. Actor likeness, voice, performance rights, and training permissions must be contracted appropriately.</p>
+</section>
+
+<section id="ai-production">
+  <h3>AI as a Living Production System</h3>
+  <p>AI can support several layers simultaneously.</p>
+
+  <h4>Production AI</h4>
+  <ul>
+    <li>Concept art.</li>
+    <li>Storyboarding.</li>
+    <li>Script development.</li>
+    <li>Environment generation.</li>
+    <li>Character exploration.</li>
+    <li>Animation assistance.</li>
+    <li>Voice production with appropriate permissions.</li>
+  </ul>
+
+  <h4>World AI</h4>
+  <ul>
+    <li>Non-player characters.</li>
+    <li>Interactive guides.</li>
+    <li>Dynamic dialogue.</li>
+    <li>Narrative branching.</li>
+    <li>Contextual events.</li>
+    <li>Personalised experiences.</li>
+  </ul>
+
+  <h4>Economic AI</h4>
+  <ul>
+    <li>Asset discovery.</li>
+    <li>Transaction explanations.</li>
+    <li>Wallet assistance.</li>
+    <li>NFT catalogue management.</li>
+    <li>Educational interfaces.</li>
+  </ul>
+
+  <div class="claim pink">
+    <p><strong>However, AI must not have unrestricted authority over financial assets.</strong> Wallet signing, asset transfers, and ownership changes must remain governed by explicit user authorisation and secure transaction systems.</p>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART VI · THE ROOM AS ULTIMATE INTERFACE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="room">
+  <p class="pk">Part VI · The Destination</p>
+  <h2>The Room as Ultimate Interface</h2>
+  <p>Beyond the headset · The reutilization of space</p>
+</div>
+
+<section>
+  <p class="lede">This is perhaps the most important part of the vision. We should not design EROS as a VR project that eventually becomes something else. We should design it as a media universe that can be experienced through multiple levels of immersion.</p>
+
+  <p>The same world must work on a laptop, in a game, on a television, in VR, and eventually in a room that becomes an interactive cinematic environment. The ultimate interface is not a headset. <strong>It is a room.</strong></p>
+
+  <p>A physical space—a converted cinema, a vacated retail unit, a bedroom—where projection mapping, holographic fans, rollable screens, interactive floors and walls, and AI glasses create a cinematic, gamified, bankable world. This is the reutilization of space. This is the answer to empty buildings in main cities.</p>
+
+  <div class="claim gold">
+    <p><strong>The core proposition:</strong> The room is not a game. It is not a movie. It is a combination of the latest technology—projection, holography, interactive surfaces, spatial audio, motion capture, AI glasses—that together create a world you can enter without putting on a headset. It is the future of entertainment. It is the EROS cinema.</p>
+  </div>
+</section>
+
+<section id="six-levels">
+  <h3>The Six Levels of Immersion</h3>
+  <p>The same world must work at every level. This is the progression from laptop to physical cinema.</p>
+
+  <h4>Level 1 — Laptop and Streaming</h4>
+  <p>Books, websites, cinematic episodes, streaming video, interactive interfaces, and computer games. <em>First production priority.</em></p>
+
+  <h4>Level 2 — Virtual Reality</h4>
+  <p>Enter the Garden, explore the Living Egg, meet characters, discover artefacts, and participate in interactive narratives. Put on the headset. The world becomes a space.</p>
+
+  <h4>Level 3 — Projection-Mapped Environments</h4>
+  <p>Projectors illuminate real architectural surfaces, objects, sculptures, and physical structures. The walls, the floor, the ceiling, the furniture—all become part of the image.</p>
+
+  <h4>Level 4 — Holographic Presentation</h4>
+  <p>Spinning LED fan displays, transparent displays, and other spatial visual technologies create additional visual layers. Floating objects. Mid-air images. Presence.</p>
+
+  <h4>Level 5 — The EROS Room</h4>
+  <p>Multiple projectors, interactive walls, floor and ceiling, physical tracking, spatial audio, and optional lightweight glasses. The combination of everything. The ultimate interface.</p>
+
+  <h4>Level 6 — EROS Destinations</h4>
+  <p>Large-scale immersive entertainment centres, repurposed buildings, commercial venues, and dedicated cinematic worlds. The room becomes a destination. The world becomes a place you go to.</p>
+
+  <div class="claim cyan">
+    <p><strong>The critical production decision</strong> is that all six levels should use a shared asset foundation. We shouldn't build a separate Garden for the laptop, another Garden for VR, and another Garden for projection mapping. We should build <em>one Garden</em> with different presentation systems.</p>
+  </div>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo003.jpg" alt="Level 2 · Virtual Reality Room" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo007.jpg" alt="Level 3 · Projection-Mapped Environments" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo017.jpg" alt="Level 4 · Holographic Presentation and Glowing Floors" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo015.jpg" alt="Level 5 · The EROS Room with Interactive Walls" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<section id="technologies">
+  <h3>How the Technologies Work Together</h3>
+  <p>The ultimate system will be a combination of technologies, not one magical device. Each technology has a distinct role in the room.</p>
+
+  <table class="ref">
+    <tr><th>Technology</th><th>Function in EROS</th></tr>
+    <tr><td><strong>Projection Mapping</strong></td><td>Transforms physical surfaces into part of the world.</td></tr>
+    <tr><td><strong>LED Holographic Fans</strong></td><td>Creates floating visual objects — characters, artefacts, mid-air imagery.</td></tr>
+    <tr><td><strong>Large Thin Displays</strong></td><td>Provides high-resolution cinematic imagery, rollable and retractable.</td></tr>
+    <tr><td><strong>Interactive Floors</strong></td><td>Responds to movement and touch — the game board beneath your feet.</td></tr>
+    <tr><td><strong>Interactive Walls</strong></td><td>Changes scenes, colour, and events — portals in the room.</td></tr>
+    <tr><td><strong>Ceiling Projection</strong></td><td>Creates overhead environments — skies, nebulas, domes.</td></tr>
+    <tr><td><strong>Motion Tracking</strong></td><td>Connects body movements to the digital world.</td></tr>
+    <tr><td><strong>Spatial Audio</strong></td><td>Positions sound around the participant.</td></tr>
+    <tr><td><strong>Lightweight Glasses</strong></td><td>Provides optional personal visual information — the "level up" layer.</td></tr>
+  </table>
+
+  <h4>Projection Mapping</h4>
+  <p>Projection mapping is the art of illuminating objects with video. It is not a new technology, but it is newly accessible. A projector, a media server, and a surface are all that is required. The room becomes a canvas. The walls, the floor, the ceiling, the furniture—all become part of the image.</p>
+  <p>In the EROS room, projection mapping is used to create <strong>immersion</strong>. The Living Egg is projected onto the walls. The toroid is projected onto the floor. The Men of Renown appear on the ceiling. The room is the world.</p>
+
+  <h4>Holographic Fans</h4>
+  <p>Holographic fans are persistence-of-vision displays. They spin to create the illusion of 3D projection. A wall of fans, or fans located around the room in different locations, can create a holographic aspect. They are not true volumetric holograms, but they are <strong>convincing</strong>. They are the mid-air image. They are the magic.</p>
+  <p>In the EROS room, the fans are used to create <strong>presence</strong>. The characters appear in the air. The artefacts float. The world is not just on the walls; it is in the space.</p>
+
+  <div class="claim violet">
+    <p><strong>One technical clarification is important:</strong> LED fan displays are rotating illuminated blades that create a persistence-of-vision effect. They can produce striking floating images, but they are not full volumetric holograms. They are also physically exposed rotating devices, so placement, guarding, and viewing distance matter. Likewise, projection mapping needs careful calibration, surface geometry, and overlapping projector alignment.</p>
+  </div>
+
+  <h4>Interactive Surfaces</h4>
+  <p>Interactive floors, walls, and ceilings respond to touch. Certain colours, certain events can occur. The floor becomes a game board. The wall becomes a portal. The ceiling becomes a sky. The room is <strong>responsive</strong>.</p>
+  <p>In the EROS room, the interactive surfaces are used to create <strong>play</strong>. The world is not just seen; it is touched. The game is not just played; it is inhabited.</p>
+
+  <h4>AI Glasses</h4>
+  <p>AI glasses activate the real functions. Just like in <em>Ready Player One</em>, you put on the glasses and level up. You see more detail. You see the hidden layers. You see the world behind the world.</p>
+  <p>In the EROS room, the glasses are the <strong>interface</strong>. They are the bridge between the physical and the digital. They are the way you see the claim rights, the private keys under the tree, the hidden doors.</p>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo012.jpg" alt="Holographic Projection" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo016.jpg" alt="Interactive Floor Sensors" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo013.jpg" alt="Interactive Art Installation with neon colours" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo014.jpg" alt="Spatial Architecture" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<section id="body-controller">
+  <h3>The Human Body as the Controller</h3>
+  <p>The Ready Player One comparison is particularly useful. The body becomes the physical interface.</p>
+
+  <p>An actor or participant wears a lightweight motion-capture suit or tracking garments. The system tracks:</p>
+  <ul>
+    <li>Head position.</li>
+    <li>Shoulders.</li>
+    <li>Torso.</li>
+    <li>Arms.</li>
+    <li>Hands and fingers.</li>
+    <li>Hips.</li>
+    <li>Knees.</li>
+    <li>Feet.</li>
+  </ul>
+
+  <p>These measurements are converted into a digital skeleton. That skeleton drives an avatar or cinematic character. A participant could walk, run, crouch, reach for an object, or interact with another character. A mobile treadmill or omnidirectional walking platform could provide locomotion without requiring a large physical space.</p>
+
+  <p>You could dress up into a suit like Hollywood does when they do animations because our body is just a ratio between shoulder and fingers and heads and toes. We could get suited up and be on a mobile running platform—very much like <em>Ready Player One</em>. The suit captures the motion. The platform moves. The room responds.</p>
+
+  <h4>Different Levels of Sophistication</h4>
+  <ul>
+    <li><strong>First generation:</strong> Camera-based body tracking and handheld controllers.</li>
+    <li><strong>Second generation:</strong> Wearable tracking and improved finger recognition.</li>
+    <li><strong>Third generation:</strong> Integrated motion capture, omnidirectional platforms, and tactile feedback.</li>
+    <li><strong>Fourth generation:</strong> Room-scale interaction with environmental surfaces, spatial computing, and AI-driven characters.</li>
+  </ul>
+
+  <div class="claim green">
+    <p><strong>The important thing</strong> is that the underlying character rig and animation system can be developed before the expensive physical room is built. The digital assets are reusable across every level of immersion. A laptop today does not prevent a holographic room tomorrow.</p>
+  </div>
+
+  <img loading="lazy" decoding="async" src="/holo/holo006.jpg" alt="People wearing motion capture suits in a studio" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<section id="bedroom-cinema">
+  <h3>The Bedroom Cinema: The Personal EROS Universe</h3>
+  <p>Imagine entering a bedroom-sized environment. You sit down or stand on a mobile running platform. The room is equipped with:</p>
+  <ul>
+    <li>Projectors positioned at different heights.</li>
+    <li>Short-throw projectors for close architectural surfaces.</li>
+    <li>Additional projectors for ceiling and floor coverage.</li>
+    <li>Thin television panels or retractable screens.</li>
+    <li>Holographic fan displays.</li>
+    <li>Interactive wall and floor sensors.</li>
+    <li>Spatial sound.</li>
+    <li>Motion tracking.</li>
+    <li>A central computer rendering the environment.</li>
+    <li>Optional lightweight AI-assisted glasses.</li>
+  </ul>
+
+  <p>The room can be transformed into different EROS locations. One moment it is the Garden. The next it is a temple. Then a spacecraft interior. Then the surface of another planet. Then the inside of the Living Egg.</p>
+
+  <p>The audience doesn't need to wear a VR headset because the physical room itself is presenting the world. Or, if they don't have these facilities, they can just put on a VR goggle. Or play it on their laptop.</p>
+
+  <div class="claim gold">
+    <p><strong>The ultimate is the room</strong>—multiple projectors, high and low, 3D where you don't need to put on a VR headset. You could put on a very light AI glasses to activate the real functions. The fans spin to make holographic 3D projections. The walls are TVs that are interactive. There are multiple projectors. It is a combination of the latest technology.</p>
+  </div>
+
+  <img loading="lazy" decoding="async" src="/holo/holo018.jpg" alt="Bedroom Cinema · The Personal EROS Universe" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<!-- MID-PAGE CINEMA BAND -->
+<section class="cinema-band">
+  <img class="cinema-media" src="/holo/holo004.jpg" alt="" aria-hidden="true" loading="lazy">
+  <div class="overlay">
+    <h2>The Master Architecture</h2>
+    <p>Life is primary. Everything else is an effect. The Garden is the architecture of those effects.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART VII · BUSINESS MODEL
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="venue">
+  <p class="pk">Part VII · The Business Model</p>
+  <h2>Venue Conversion</h2>
+  <p>The reutilization of space</p>
+</div>
+
+<section>
+  <p class="lede">This idea has a commercial and urban-development dimension. Many cities have buildings that are underutilised, vacant, or no longer suitable for their original purpose. Some could be converted into immersive entertainment destinations.</p>
+
+  <p>Potential building types include:</p>
+  <ul>
+    <li>Vacant retail centres.</li>
+    <li>Former department stores.</li>
+    <li>Industrial warehouses.</li>
+    <li>Disused cinemas.</li>
+    <li>Exhibition halls.</li>
+    <li>Former entertainment venues.</li>
+    <li>Large commercial interiors.</li>
+  </ul>
+
+  <p>An EROS destination could contain multiple themed rooms. One room is the Garden. Another is the cosmic egg. Another is the continuity universe. Another is an interactive gaming arena. Another is a cinematic theatre. Visitors could move between worlds.</p>
+
+  <p>There could be:</p>
+  <ul>
+    <li>Ticketed experiences.</li>
+    <li>Private room bookings.</li>
+    <li>Gaming memberships.</li>
+    <li>Educational experiences.</li>
+    <li>Premium NFT exhibitions.</li>
+    <li>Live character performances.</li>
+    <li>Special cinematic releases.</li>
+    <li>Community events.</li>
+  </ul>
+
+  <div class="claim green">
+    <p><strong>This introduces an additional business model:</strong> the physical location becomes a distribution channel for the EROS intellectual property. It could also be developed as a franchise or licensed installation model, subject to commercial feasibility, building approvals, fire safety, accessibility, and operating costs.</p>
+  </div>
+
+  <div class="image-gallery">
+    <img loading="lazy" decoding="async" src="/holo/holo010.jpg" alt="Repurposed Building with glowing projection walls" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo009.jpg" alt="Immersive Theatre with purple lighting" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo008.jpg" alt="Grand immersive hall with digital projections" onclick="openLightbox(this.src, this.alt)">
+    <img loading="lazy" decoding="async" src="/holo/holo025.jpg" alt="Immersive Dome Environment" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<section id="gamified-economy">
+  <h3>The Gamified Economy</h3>
+  <p>The economy is gamified. The hybrid NFTs carry embedded money. The in-world banking is licensed. The inheritance is handled via multisig. The private keys are hidden under the tree.</p>
+  <p>The game is the interface. The security is the substance. The economy is the world.</p>
+
+  <h4>Premium Products</h4>
+  <p>The hybrid NFTs can depreciate and can be willed. They can become premium products. The premium products are the assets that carry the most value—the artefacts that are the most rare, the characters that are the most powerful, the experiences that are the most exclusive.</p>
+  <p>The premium products are the <strong>economic layer of the world</strong>. They are how the fiction becomes bankable.</p>
+
+  <h4>The Tokenomics of the Room</h4>
+  <p>The room is a <strong>tokenized experience</strong>. The entry is a token. The assets are tokens. The experiences are tokens. The economy is the world.</p>
+  <p>The tokenomics of the room are the same as the tokenomics of the token: <em>bond, not extract</em>. The value stays in the web. The community is the co-author. The room is the home.</p>
+
+  <h4>The Commercial Ecosystem</h4>
+  <p>The project potentially creates several different revenue streams.</p>
+
+  <table class="ref">
+    <tr><th>Area</th><th>Potential Commercial Model</th></tr>
+    <tr><td><strong>Books and Publications</strong></td><td>Sales and licensing</td></tr>
+    <tr><td><strong>Cinema and TV</strong></td><td>Distribution and licensing</td></tr>
+    <tr><td><strong>Gaming</strong></td><td>Purchases, subscriptions, and memberships</td></tr>
+    <tr><td><strong>Digital Collectibles</strong></td><td>NFT sales and licensed assets</td></tr>
+    <tr><td><strong>Premium Characters</strong></td><td>Collectibles and authorised experiences</td></tr>
+    <tr><td><strong>EROS Venues</strong></td><td>Tickets and room bookings</td></tr>
+    <tr><td><strong>Projection Systems</strong></td><td>Installation and licensing</td></tr>
+    <tr><td><strong>Production Assets</strong></td><td>Commercial licensing</td></tr>
+    <tr><td><strong>Educational Worlds</strong></td><td>Institutional and private licensing</td></tr>
+    <tr><td><strong>Community</strong></td><td>Membership and participation</td></tr>
+  </table>
+
+  <div class="claim pink">
+    <p><strong>The token economy should support the ecosystem rather than be mistaken for its source of guaranteed commercial success.</strong> A successful media franchise can create demand for its characters, worlds, and collectibles. But token value is not guaranteed by narrative popularity, and token holders should not be promised profits simply because the media universe grows. This distinction is essential if the project is to become a serious, sustainable enterprise.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART VIII · ETHICS & RISK
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="ethics">
+  <p class="pk">Part VIII · The Ethics of Representation</p>
+  <h2>Fiction, Speculation, and the Real</h2>
+  <p>The discipline of layers</p>
+</div>
+
+<section>
+  <p class="lede">The EROS corpus is disciplined about the distinction between fiction and reality. The cosmology is fiction. The speculative layer (continuity of government, Space Force, the Nordics, the UFOs, the biologics) is fiction. The tokenomics is real. The production pipeline is real. The room is real.</p>
+
+  <div class="claim gold">
+    <p><strong>The discipline is:</strong> state the claim, name the layer, say how confident you are, move on. Every claim is stated at the layer where it is true. Every count has a date. Every contract has an address. Every confidence number is printed on the source document. Every milestone is labelled as a goal, not a forecast. Every open question is named.</p>
+  </div>
+
+  <h3>The Three Narrative Categories</h3>
+  <p>We use three narrative categories without confusing the audience about what is known.</p>
+
+  <h4>Documented History</h4>
+  <p>What can be established through records and reliable sources. The existence of the Space Force is a matter of documented institutional history. The invention of the toroid as a mathematical concept is documented. The existence of PulseChain as a proof-of-stake fork of Ethereum is documented.</p>
+
+  <h4>Contested History</h4>
+  <p>Claims, testimony, and unresolved evidence. UFO/UAP reports fall into this category. Allegations about secret programmes, Nordic beings, or biologics belong here. They require separate evidence and should be represented as allegations, disputed interpretations, or fictionalised narrative possibilities unless independently verified.</p>
+
+  <h4>Mythological Interpretation</h4>
+  <p>The EROS universe's creative explanation of events. The Living Egg. The toroid as the signature of EROS. The four operators. The Garden as the gateway. These are fiction. They are clearly labelled as fiction. They are the drama, not the doctrine.</p>
+</section>
+
+<section id="risk-register">
+  <h3>The Risk Register</h3>
+  <p>The risks are real. The thesis does not hide them. It names them. It states the falsification tests. It says what would prove the thesis wrong.</p>
+
+  <div class="claim pink">
+    <p><strong>Contract risk.</strong> Smart contracts can have bugs. Renounced ownership means no privileged pause. That is what makes the token trustworthy. It is also what makes it unamendable.</p>
+    <p><strong>Bridge risk.</strong> A bridge is critical financial infrastructure. Bridges have failed before. Cross-chain representation must be secured, and failure recovery must be planned.</p>
+    <p><strong>Thin liquidity risk.</strong> Visibility generated primarily by thin liquidity is dangerous. Price movements can be mistaken for sustainable demand. Publish transparent liquidity and trading information.</p>
+    <p><strong>Impermanent loss risk.</strong> Liquidity provision carries the risk of impermanent loss. This is a real cost that must be understood.</p>
+    <p><strong>Concentration risk.</strong> Holder concentration can create fragility. The burn sink is the largest holder. That is a design feature, but it is also a concentration that must be understood.</p>
+    <p><strong>Regulatory risk.</strong> The legal and regulatory environment can change. The status of tokens, NFTs, and in-world banking must be considered independently of the mythology.</p>
+    <p><strong>Execution burnout risk.</strong> Two years of quiet seasons is hard. The community can leave. The founder can stop posting. Continuity is the hardest thing to maintain.</p>
+    <p><strong>Narrative fatigue risk.</strong> Too much material is difficult to navigate. Newcomers may never discover the best work. Build a structured, curated entry point into the vault.</p>
+    <p><strong>Venue conversion risk.</strong> Building approvals, fire safety, accessibility, and operating costs are real constraints. The physical location is a commercial business, not a creative one.</p>
+    <p><strong>Technology obsolescence risk.</strong> Projection mapping, holographic fans, and motion capture will evolve. The world must be organised so that it can adapt to whatever successful immersive platforms emerge.</p>
+  </div>
+
+  <h3>The Ethical Core</h3>
+  <p>The ethical core is <strong>zero extraction</strong>. No founder-drain fee. No team allocation in the burn economy. The posture is zero. The community is the co-author. The world is the home.</p>
+  <p>This is the reason the thesis is worth building. Not because it promises a price. Because it promises a structure that is honest, that states its claims, that names its gates, and that refuses to dress up design discussions as deployed products.</p>
+
+  <div class="claim green">
+    <p><strong>Code can be copied. Belief cannot be manufactured. Survival is the signal.</strong> Two years of quiet seasons survived. No founder-drain fee. No extraction in the fee split. The books exist whether anyone is watching. The standard holds.</p>
+  </div>
+</section>
+
+<section id="falsification">
+  <h3>The Falsification Tests</h3>
+  <p>The thesis states what would prove it wrong.</p>
+
+  <div class="claim cyan">
+    <p><strong>If the transform contracts never deploy with published parameters,</strong> the thesis stays a story.</p>
+    <p><strong>If the Chaos Engine is predictable,</strong> fairness fails.</p>
+    <p><strong>If a human must press a button for Genesis,</strong> the trustless claim fails.</p>
+    <p><strong>If the receiving-wallet option never ships with the code,</strong> the flow rail's core promise is unmet.</p>
+    <p><strong>If extraction returns,</strong> the ethical core is broken.</p>
+    <p><strong>If the room never becomes a destination,</strong> the interface thesis fails.</p>
+    <p><strong>If the community never becomes co-authors,</strong> the gift fails.</p>
+    <p><strong>If the fiction cannot be distinguished from reality,</strong> the discipline fails.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART IX · ROADMAP
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="roadmap">
+  <p class="pk">Part IX · The Roadmap</p>
+  <h2>Six Stages</h2>
+  <p>From canon to destination</p>
+</div>
+
+<section>
+  <p class="lede">The destination is ambitious, but the first investment should be in reusable intellectual property and digital assets, not expensive physical installations.</p>
+
+  <h4>Stage 1 — Intellectual Property Foundation</h4>
+  <p><em>Begin here.</em> Complete the master thesis, cosmology, mythology, economics, series canon, First Resonance and Continuity foundations. The canon is the foundation. Nothing else works without it.</p>
+
+  <h4>Stage 2 — Digital Asset Production</h4>
+  <p>Build characters, environments, props, animation rigs, cinematic sequences, sound libraries, and interactive prototypes. Establish the vault.</p>
+
+  <h4>Stage 3 — Laptop, Streaming, and Gaming</h4>
+  <p>Publish the books and episodes, create the first playable Garden, establish the media audience, and test the EROS economic interfaces.</p>
+
+  <h4>Stage 4 — VR and Spatial Experiences</h4>
+  <p>Convert the existing worlds into immersive environments. Develop body tracking, interaction, and spatial audio.</p>
+
+  <h4>Stage 5 — Physical EROS Room</h4>
+  <p>Build a prototype room combining projection mapping, displays, holographic fans, interactive surfaces, and motion capture.</p>
+
+  <h4>Stage 6 — Commercial Immersive Destinations</h4>
+  <p>Test larger venues, partnerships, licensing, building conversion, and repeatable installation models.</p>
+
+  <div class="claim gold">
+    <p><strong>The stages should overlap where sensible,</strong> but each should produce a usable asset base and demonstrable result before the next major capital commitment. The room prototype should come after we have a functioning digital environment. That way, we are testing the presentation technology with actual EROS content rather than spending money building an impressive empty room.</p>
+  </div>
+</section>
+
+<section id="gates">
+  <h3>The Gates: Earned, Not Scheduled</h3>
+  <p>ErosX is not deployed. The reason is deliberate. Three gates hold it back, and none of them is a calendar date.</p>
+
+  <div class="claim violet">
+    <p><strong>Gate One — Market Cap Over All-Time High.</strong> EROS must reclaim and exceed its previous ceiling. The rock has to be heavy before the flow rail can run on it.</p>
+    <p><strong>Gate Two — 333 Bonded Liquidity Pools.</strong> Depth has to be real before a non-tax currency can move through it without slipping. The number is stated, not implied.</p>
+    <p><strong>Gate Three — Transformation Code Including Privacy.</strong> The conversion from EROS to ErosX must ship with the option to receive ErosX at a <em>different</em> wallet address on PulseChain's EVM. This is a named development priority, not a nice-to-have.</p>
+  </div>
+
+  <p><strong>On the privacy claim, stated honestly:</strong> Receiving at a different wallet address does not, by itself, guarantee transaction anonymity or conceal the on-chain link between wallets. The design goal is a receiving-wallet option. The claim is not stronger than that.</p>
+
+  <div class="pull">The transformation is earned, not scheduled. The rock gets heavier. The web gets deeper. The code gets written. Then ErosX moves—frictionless, non-tax, free to enter a V3-style pool, free to arrive at a wallet the sender chose.</div>
+</section>
+
+<section id="priorities">
+  <h3>What to Build First</h3>
+  <p>There is an important distinction between the ultimate vision and the first production priorities. I would prioritise these five foundational assets.</p>
+
+  <ol>
+    <li><strong>The Master EROS Thesis.</strong> The complete intellectual, philosophical, economic, and technological blueprint. <em>(This document.)</em></li>
+    <li><strong>The Character and World Bible.</strong> The gods, major characters, locations, timelines, objects, and visual canon.</li>
+    <li><strong>The First Interactive World.</strong> A playable Garden accessible through an ordinary computer.</li>
+    <li><strong>The First Cinematic Production.</strong> A pilot episode or proof-of-concept film using the established First Resonance and Continuity narrative material.</li>
+    <li><strong>The EROS Room Prototype.</strong> A small physical demonstration showing how the same digital world can be experienced without a VR headset.</li>
+  </ol>
+
+  <div class="claim cyan">
+    <p><strong>The most important strategic decision is this:</strong> We should build the digital universe first, not the physical cinema first. The characters, stories, environments, animation, sound, game logic, and economic interfaces are the reusable assets. Once they exist, they can be distributed through almost any presentation technology. A laptop today does not prevent a holographic room tomorrow. A book today does not prevent a television series tomorrow. A character created for a cinematic sequence can become an interactive game character, a collectible asset, and eventually an AI-driven presence in a physical environment. That is the compounding value of this architecture.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PART X · CONCLUSION
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="continuity-engine">
+  <p class="pk">Part X · The Deeper Idea</p>
+  <h2>EROS as a Continuity Engine</h2>
+  <p>The common thread running through everything</p>
+</div>
+
+<section>
+  <p class="lede">There is a common thread running through everything described. It is <strong>continuity</strong>.</p>
+
+  <ul>
+    <li>In the <strong>cosmology</strong>, continuity is expressed through iteration.</li>
+    <li>In the <strong>Living Egg</strong>, continuity is expressed through contained potential and emergence.</li>
+    <li>In <strong>mythology</strong>, continuity is expressed through the transmission of knowledge.</li>
+    <li>In <strong>Thoth</strong>, continuity is expressed through recording and teaching.</li>
+    <li>In the <strong>Garden</strong>, continuity is expressed through the preservation and rediscovery of knowledge.</li>
+    <li>In <strong>cryptocurrency</strong>, continuity is expressed through ownership, provenance, and transfer.</li>
+    <li>In <strong>hybrid NFTs</strong>, continuity is expressed through the history of an asset.</li>
+    <li>In <strong>inheritance</strong>, continuity is expressed through transfer between generations.</li>
+    <li>In <strong>media</strong>, continuity is expressed through characters and stories that evolve across decades.</li>
+    <li>In <strong>immersive technology</strong>, continuity is expressed through a world that remains recognisable regardless of the device used to experience it.</li>
+  </ul>
+
+  <div class="claim gold">
+    <p><strong>This is the central philosophical opportunity. EROS is not merely a story about a universe. It is a framework for building a universe that continues.</strong></p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h3>The Bond Is What Holds</h3>
+  <p class="lede">EROS is a living cosmology. It is a mythology. It is an economy. It is a production pipeline. It is a room. It is the reutilization of space. It is the future of entertainment. It is the bond that holds when the chart turns.</p>
+
+  <p>The thesis is not a promise of price. It is a design sequence. The code follows community milestones. The milestones are stated. The gates are named. Nothing is dressed up as more than it is.</p>
+
+  <h4>The Gift</h4>
+  <p>The gift is not a token. It is a world built by people who want to live in it. The coins cross at the wallet layer. The people cross at the story layer. Both are needed.</p>
+  <p>The right people are not the ones who come to sell. They are <strong>creative causative</strong>—people who build because they made something worth keeping. Story builders. Asset creators. Community holders who stay because they helped make it.</p>
+
+  <h4>The Eight Non-Negotiable Principles</h4>
+  <ol>
+    <li><strong>One Canon:</strong> Every book, film, character, and game draws from the same underlying universe.</li>
+    <li><strong>One Asset Ecosystem:</strong> Characters and environments are reusable across media.</li>
+    <li><strong>One Economic Architecture:</strong> The tokenomics and polonomics have explicit, auditable rules.</li>
+    <li><strong>One Ownership Philosophy:</strong> Digital ownership has clearly defined rights and security.</li>
+    <li><strong>Multiple Access Levels:</strong> Nobody needs expensive VR equipment to participate.</li>
+    <li><strong>Progressive Immersion:</strong> The same universe moves from laptop to headset to physical room.</li>
+    <li><strong>Evidence and Mythology Remain Distinguishable:</strong> The audience understands what is documented, disputed, or imagined.</li>
+    <li><strong>Continuity:</strong> Nothing built becomes disposable simply because the next technology arrives.</li>
+  </ol>
+
+  <div class="pull">If the standard holds, the room becomes a culture. If the culture holds, it becomes a demand. If the demand holds—if people actually stay because the relation is real—the whole thing becomes what it was always supposed to be. Not a token. A world. Built by the people who chose to live in it.</div>
+
+  <h4>The Invitation</h4>
+  <p>The room is ready. The world is waiting. The bond is what holds.</p>
+  <p style="font-family: var(--serif); font-size: 1.4rem; font-style: italic; color: var(--gold); text-align: center; margin: 2rem 0; line-height: 1.7;">
+    Hold the rock. Play the river.<br/>
+    Write the next chapter.
+  </p>
+
+  <div class="claim gold">
+    <p><strong>Inward is forwards. The bond is what holds.</strong></p>
+  </div>
+
+  <img loading="lazy" decoding="async" src="/holo/holo001.jpg" alt="The Cosmic Egg &amp; The Tree of Life" class="full-width-image" onclick="openLightbox(this.src, this.alt)">
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     THE FULL GALLERY
+     ═══════════════════════════════════════════════════════════ -->
+
+<section id="plan-films" style="margin:3rem 0;padding:2rem 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)">
+  <h2 style="border:none;margin-top:0">Architecture of Participation · Trust is the Product</h2>
+  <p style="color:var(--soft)">Two core films of the living plan: the spoken architecture of voluntary building, and the ethic that trust must be examinable structure — not extraction.</p>
+  <div style="display:grid;grid-template-columns:1fr;gap:1.75rem;margin-top:1.25rem">
+    <div>
+      <p style="font:800 .68rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:0 0 .5rem">The plan</p>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid var(--orange-line);background:#030a08;aspect-ratio:16/9">
+        <video controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;background:#000"
+          poster="/images/frames/Architecture_of_Participation.jpg" src="/images/Architecture_of_Participation.mp4"></video>
+      </div>
+      <p style="margin:.65rem 0 0"><a href="/Architecture_of_Participation.html">Open Architecture of Participation →</a></p>
+    </div>
+    <div>
+      <p style="font:800 .68rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:0 0 .5rem">Trust is the product</p>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid var(--orange-line);background:#030a08;aspect-ratio:9/16;max-width:320px;margin:0 auto;max-height:70vh">
+        <video controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:contain;display:block;background:#000"
+          poster="/images/frames/Eros_Trust.jpg" src="/images/Eros_Trust.mp4"></video>
+      </div>
+      <p style="margin:.65rem 0 0;text-align:center;color:var(--muted);font-size:.9rem">Vertical film · no extraction · verifiable structure</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section" id="gallery" style="margin-top:4rem; padding-top:2rem; border-top:1px solid var(--hair);">
+  <h2 style="text-align:center; margin-bottom:1rem;">The Eros Concept Gallery</h2>
+  <p style="text-align:center; color:var(--muted); max-width:40rem; margin:0 auto 2rem;">The complete visual architecture of the universe. Thirty-seven plates. Click any image to expand.</p>
+
+  <div class="image-gallery" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:1rem;">
+    <img src="/holo/holo001.jpg" alt="The Cosmic Egg &amp; The Tree of Life" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo002.jpg" alt="Cosmic Vortex · Continuity" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo003.jpg" alt="Level 2 · Virtual Reality Room" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo004.jpg" alt="Cosmic Humanoid · Character Bible" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo005.jpg" alt="Storyboards · The First Resonance" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo006.jpg" alt="Motion Capture &amp; Body as Controller" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo007.jpg" alt="Level 3 · Projection-Mapped Environments" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo008.jpg" alt="The Grand Hall" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo009.jpg" alt="Immersive Theatre" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo010.jpg" alt="Repurposed Building · EROS Destination" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo011.jpg" alt="The Living Egg" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo012.jpg" alt="Holographic Projection" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo013.jpg" alt="Interactive Art Installation" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo014.jpg" alt="Spatial Architecture" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo015.jpg" alt="The EROS Room · Level 5" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo016.jpg" alt="Interactive Floor Sensors" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo017.jpg" alt="Holographic Presentation · Level 4" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo018.jpg" alt="Bedroom Cinema" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo019.jpg" alt="Cryptocurrency &amp; The Digital City" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo020.jpg" alt="Virtual Production Stage" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo021.jpg" alt="Virtual Production Set" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo022.jpg" alt="Character Concept" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo023.jpg" alt="Polonomics &amp; Liquidity Vaults" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo024.jpg" alt="The Golden Tree · Asset Growth" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo025.jpg" alt="Immersive Dome Environment" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo026.jpg" alt="The Dark Corridor" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo027.jpg" alt="Toroid Energy Lines" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo028.jpg" alt="Council Room" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo029.jpg" alt="Thoth · The Recorder" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo030.jpg" alt="The Astronaut" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo031.jpg" alt="Red Toroid" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo032.jpg" alt="Ra-Shen · The Manifestor" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo033.jpg" alt="Energy Sphere" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo034.jpg" alt="NaUn · The Programmer" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo035.jpg" alt="The Toroid Energy Pattern" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo036.jpg" alt="EROS · The Continuity" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+    <img src="/holo/holo037.jpg" alt="Digital Toroid" loading="lazy" onclick="openLightbox(this.src, this.alt)">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     APPENDICES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="part-break" id="appendix-canon">
+  <p class="pk">Appendix A</p>
+  <h2>The Canon</h2>
+  <p>The library of EROS</p>
+</div>
+
+<section>
+  <p class="lede">The following books and documents form the canon of the EROS universe. Every production, every character, every asset draws from this shared source.</p>
+
+  <table class="ref">
+    <tr><th>Title</th><th>Role</th></tr>
+    <tr><td><strong>The Living Egg</strong></td><td>The cosmology. Inward is forwards.</td></tr>
+    <tr><td><strong>The Eros Enclosure</strong></td><td>The toroid. The geometry of continuity.</td></tr>
+    <tr><td><strong>The Iteration Codex</strong></td><td>How it moves. Time as distance from zero.</td></tr>
+    <tr><td><strong>The Conscious Eros</strong></td><td>Life first, postulates first. Bond over extract.</td></tr>
+    <tr><td><strong>Gods of Eros</strong></td><td>The four operators: NaUn, Ra-Shen, Thoth, EROS.</td></tr>
+    <tr><td><strong>Gift of Thoth</strong></td><td>Language under language. The transmission of knowledge.</td></tr>
+    <tr><td><strong>Illumination Strategy</strong></td><td>The human history rail. Documented, contested, mythological.</td></tr>
+    <tr><td><strong>Men of Renown</strong></td><td>The archive behind the masks. The character system.</td></tr>
+    <tr><td><strong>The First Resonance</strong></td><td>A novel to follow as a model. The first fiction.</td></tr>
+    <tr><td><strong>The Continuity File</strong></td><td>A second novel: fiction on a real instrument.</td></tr>
+    <tr><td><strong>Eros Stories</strong></td><td>Sixteen doors into the fiction.</td></tr>
+    <tr><td><strong>The Platinum Standard</strong></td><td>The transformation thesis. Rock to river.</td></tr>
+    <tr><td><strong>The Hopeful Future</strong></td><td>The gift and the stack. The settlement, base, world, floor, bridge.</td></tr>
+    <tr><td><strong>The Flywheel</strong></td><td>Why buying, bonding, and sharing compound.</td></tr>
+    <tr><td><strong>The Eros Plan</strong></td><td>The full plan, including what gets built.</td></tr>
+    <tr><td><strong>The Garden of Eros</strong></td><td>The whole picture on one map.</td></tr>
+    <tr><td><strong>The Bridge</strong></td><td>Verify, bridge, bond, stake.</td></tr>
+    <tr><td><strong>The Eros Corpus</strong></td><td>How the library works. What is live. Where to begin.</td></tr>
+    <tr><td><strong>The Eros Narrative</strong></td><td>The story and the instrument in one pass.</td></tr>
+    <tr><td><strong>The Open Call</strong></td><td>The ask: make, explain, connect.</td></tr>
+    <tr><td><strong>The Front Door</strong></td><td>The appeal to Jake Sharpe and the community.</td></tr>
+    <tr><td><strong>The Newcomer Dossier</strong></td><td>Check your wallet. The honest first read.</td></tr>
+  </table>
+</section>
+
+<div class="part-break" id="appendix-tokenomics">
+  <p class="pk">Appendix B</p>
+  <h2>The Tokenomics</h2>
+  <p>The three instruments</p>
+</div>
+
+<section>
+  <p class="lede">The EROS economy is a three-layer system. Each token has a distinct job. The details below are stated at the layer where they are true.</p>
+
+  <table class="ref">
+    <tr><th>Instrument</th><th>Details</th></tr>
+    <tr><td><strong>EROS (The Rock)</strong></td><td>
+      Contract: <code>0x0f1B7cfFC37547C5d189B08F255B60aa394C62cf</code> on PulseChain.<br/>
+      Supply: Fixed 333,333,333,333.<br/>
+      Flow fee: 5% = 2% burn · 1% staking · 1% temporary lock · 1% WPLS/EROS LP.<br/>
+      Burn sink: <code>0x…0369</code>.<br/>
+      Ownership: Renounced. Verify live.<br/>
+      Origin: Free airdrop to TitanX liquid holders. No founder fee.<br/>
+      <em>Live today.</em>
+    </td></tr>
+    <tr><td><strong>ErosX (The River)</strong></td><td>
+      Non-tax by design. The 5% flow fee stays on EROS.<br/>
+      Built for movement, spend, V3-style pools, cross-community transfers.<br/>
+      Deploy gated by three milestones: market cap over ATH, 333 bonded pools, transformation code with privacy option.<br/>
+      <em>Design discussion. Not a deployed product.</em>
+    </td></tr>
+    <tr><td><strong>33EROS (The Engine)</strong></td><td>
+      Gamified burn rail. The teachable pattern other communities can copy.<br/>
+      Transform math: 33% burn, 33% LP, 33% buy-and-burn, 1% to a 33-day leaderboard with hybrid NFT rewards.<br/>
+      <em>Design discussion.</em>
+    </td></tr>
+    <tr><td><strong>The Transform</strong></td><td>
+      Deposit EROS, receive derivative 1:1.<br/>
+      Burn, LP formation, buy-and-burn of the derivative.<br/>
+      Chaos Engine randomises the timing.<br/>
+      <em>Earned, not scheduled.</em>
+    </td></tr>
+    <tr><td><strong>The Gates</strong></td><td>
+      Gate One: Market cap over all-time high.<br/>
+      Gate Two: 333 bonded liquidity pools.<br/>
+      Gate Three: Transformation code including the privacy option (receive ErosX at a different wallet address).
+    </td></tr>
+  </table>
+
+  <div class="claim pink">
+    <p><strong>Status label.</strong> Live today: EROS token, 100+ pools, burn sink climbing, no admin keys, no dev fee. Design phase: ErosX, 33EROS, Chaos Engine, Genesis, equivalence bots, BuildFi integration. The distinction matters. Do not blur it.</p>
+  </div>
+</section>
+
+<div class="part-break" id="appendix-concepts">
+  <p class="pk">Appendix C</p>
+  <h2>Glossary</h2>
+  <p>Key terms of the EROS universe</p>
+</div>
+
+<section>
+  <table class="ref">
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td><strong>ARC / ARG</strong></td><td>Alternate Reality Game. A large-scale narrative that spans multiple media and real-world elements.</td></tr>
+    <tr><td><strong>Bond</strong></td><td>The relationship between assets. Not just a financial bond but the principle that things that remain near each other under stress are already in relation.</td></tr>
+    <tr><td><strong>Chaos Engine</strong></td><td>Three-body chaos algorithm that randomises the timing of burn, LP formation, and buy-and-burn. No predictable pattern. No easy front-run.</td></tr>
+    <tr><td><strong>Conscious Eros</strong></td><td>The philosophy of bond-over-extract. The design discipline that whatever holds together without extraction is the same force.</td></tr>
+    <tr><td><strong>Dysnomia</strong></td><td>The virtual machine under the Atropa base. A mathematical universe of smart contracts.</td></tr>
+    <tr><td><strong>Equivalence Bots</strong></td><td>Market-cap equivalence arbitrage agents. They scan paired pools and trade across the shared EROS leg until the ratios realign.</td></tr>
+    <tr><td><strong>EROS</strong></td><td>The foundational token. Fixed supply. Store of value. The rock.</td></tr>
+    <tr><td><strong>ErosX</strong></td><td>The cross-chain extension. Non-tax. The river. Built for movement.</td></tr>
+    <tr><td><strong>33EROS</strong></td><td>The gamified burn rail. The engine. The teachable pattern.</td></tr>
+    <tr><td><strong>Garden</strong></td><td>The gateway to the EROS Library. The place where the cosmological principles, gods, characters, books, and worlds are introduced.</td></tr>
+    <tr><td><strong>Hybrid NFT</strong></td><td>An asset that carries embedded money. Not just a collectible—a container. It can hold locked EROS, ErosX, 33EROS, TitanX, or X28.</td></tr>
+    <tr><td><strong>Illumination Strategy</strong></td><td>The macro rail of the EROS narrative. The human history rail. Tagged by layer: documented, inferred, or hypothesis.</td></tr>
+    <tr><td><strong>Iteration Codex</strong></td><td>The book that develops the geometry of time iteration. Time as distance from a zero of pure potential.</td></tr>
+    <tr><td><strong>Living Egg</strong></td><td>The foundational metaphor. A vessel—a substrate and a shell—within which all things exist. Inward is forwards.</td></tr>
+    <tr><td><strong>Men of Renown</strong></td><td>The archive behind the masks. The character system for the transmedia production.</td></tr>
+    <tr><td><strong>NaUn</strong></td><td>The operator of code and permission. The layer of what is allowed to exist.</td></tr>
+    <tr><td><strong>Polonomics</strong></td><td>The economic architecture of bonding and relationships between digital assets.</td></tr>
+    <tr><td><strong>Ra-Shen</strong></td><td>The operator of force under boundary. The energy that stays usable inside a shell.</td></tr>
+    <tr><td><strong>Thoth</strong></td><td>The operator of language and education. The pattern that can be taught and reused.</td></tr>
+    <tr><td><strong>Toroid</strong></td><td>The geometry of time iteration. Two lobes, one crossover, a single direction of flow that returns to itself.</td></tr>
+    <tr><td><strong>Transform</strong></td><td>The mechanism that connects the rock and the river. Deposit EROS, receive the derivative 1:1.</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CLOSING CINEMA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="cinema-band">
+  <img class="cinema-media" src="/holo/holo033.jpg" alt="" aria-hidden="true" loading="lazy">
+  <div class="overlay">
+    <h2>Inward Is Forwards</h2>
+    <p>The bond is what holds. From the origins of existence to the creation of an interactive universe.</p>
+  </div>
+</section>
+
+<section class="coda" style="margin: 3rem 0 2rem; padding: 2.5rem 1.4rem; border-top: 1px solid var(--hair); text-align: center;">
+  <p style="font-family: var(--serif); font-size: 1.35rem; font-style: italic; color: var(--gold); max-width: 40rem; margin: 0 auto 1.4rem; line-height: 1.65;">The ultimate ambition is to create a universe that can be read, watched, played, entered, inhabited, and economically participated in.</p>
+  <p style="font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: var(--soft); max-width: 40rem; margin: 0 auto;">And the connecting principle across all of it is EROS: continuity.</p>
+</section>
+
+</div><!-- /.page-content -->
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LIGHTBOX
+     ═══════════════════════════════════════════════════════════ -->
+<div id="thesis-lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close image">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════ -->
+<footer class="master">
+  <div class="pins">
+    <img loading="lazy" decoding="async" src="/holo/holo035.jpg" alt="EROS">
+    <img loading="lazy" decoding="async" src="/holo/holo001.jpg" alt="The Living Egg">
+    <img loading="lazy" decoding="async" src="/holo/holo036.jpg" alt="EROS · The Continuity">
+  </div>
+  <p>The Eros Thesis · The Living Universe</p>
+  <p style="margin-top:0.5rem; font-size:0.8rem; letter-spacing:.1em; text-transform:uppercase;">Cosmology · Mythology · Economics · Media · Immersive Technology</p>
+  <p class="sig">Inward is forwards. The bond is what holds.</p>
+  <p style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center">
+    <a href="/Architecture_of_Participation.html">Architecture</a>
+    <a href="/WeAreWithYouEros.html">We Are With You</a>
+    <a href="/EROS_Liquidity_Tree.html">Liquidity Tree</a>
+    <a href="/The_Eros_Corpus.html">Corpus</a>
+    <a href="/The_Garden_of_Eros.html">Garden</a>
+  </p>
+
+  <p style="margin-top:1rem; font-size:.75rem; color:var(--muted);">Tenacity Through Integrity</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     READER PANEL
+     ═══════════════════════════════════════════════════════════ -->
+<details class="reader-panel" id="readerPanel">
+  <summary><span>Aa</span></summary>
+  <div class="reader-controls">
+    <span style="font-size:.75rem;color:var(--muted);">Text size</span>
+    <button type="button" data-reader-size="minus" aria-label="Decrease text size">A−</button>
+    <button type="button" data-reader-size="reset" aria-label="Reset text size">A</button>
+    <button type="button" data-reader-size="plus" aria-label="Increase text size">A+</button>
+  </div>
+</details>
+
+<button id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+// PROGRESS BAR & TO TOP
+(function(){
+  var bar = document.getElementById('progressBar');
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    var d = document.documentElement;
+    var max = d.scrollHeight - d.clientHeight;
+    var pct = max > 0 ? (d.scrollTop / max) * 100 : 0;
+    if(bar) bar.style.width = pct + '%';
+    if(toTop) toTop.classList.toggle('show', d.scrollTop > 700);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+
+// NAV ACTIVE STATE
+(function(){
+  var strip = document.querySelector('.corpus-bar nav.chapter-strip');
+  if(!strip) return;
+  var links = Array.prototype.slice.call(strip.querySelectorAll('a[href^="#"]'));
+  var pairs = links.map(function(a){
+    var id = a.getAttribute('href');
+    if(id.indexOf('#') !== 0) return null;
+    var sec = document.querySelector(id);
+    return sec ? {link:a, sec:sec} : null;
+  }).filter(function(p){return p;});
+  var currentIndex = -1;
+  function update(){
+    var probe = window.scrollY + 200;
+    var idx = -1;
+    for(var i=0;i<pairs.length;i++){ if(pairs[i].sec.offsetTop <= probe) idx=i; }
+    if(idx===currentIndex) return;
+    currentIndex = idx;
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(idx>=0) pairs[idx].link.classList.add('active');
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+
+// READER SIZE (persisted)
+(function(){
+  var KEY = 'eros_thesis_reader_size';
+  var size = 100;
+  try {
+    var saved = parseInt(localStorage.getItem(KEY), 10);
+    if(saved && saved >= 80 && saved <= 140) size = saved;
+  } catch(e){}
+  document.documentElement.style.fontSize = size + '%';
+  document.querySelectorAll('[data-reader-size]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var op = b.getAttribute('data-reader-size');
+      if(op === 'plus') size = Math.min(140, size + 6);
+      else if(op === 'minus') size = Math.max(80, size - 6);
+      else size = 100;
+      document.documentElement.style.fontSize = size + '%';
+      try { localStorage.setItem(KEY, String(size)); } catch(e){}
+    });
+  });
+})();
+
+// LIGHTBOX
+function openLightbox(src, alt) {
+  var lb = document.getElementById('thesis-lightbox');
+  var img = document.getElementById('lightbox-img');
+  var caption = document.getElementById('lightbox-caption');
+  if(!lb || !img) return;
+  img.src = src;
+  img.alt = alt || '';
+  caption.textContent = alt || '';
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+  if (e && e.target.closest('.lightbox-content') && !e.target.closest('.lightbox-close')) return;
+  var lb = document.getElementById('thesis-lightbox');
+  if(!lb) return;
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('thesis-lightbox');
+  if (e.key === 'Escape' && lb && lb.classList.contains('active')) closeLightbox();
+});
+
+// SMOOTH SCROLL FOR HASH LINKS
+document.addEventListener('click', function(e){
+  var a = e.target.closest && e.target.closest('a[href^="#"]');
+  if(!a) return;
+  var href = a.getAttribute('href');
+  if(!href || href.length < 2) return;
+  var t;
+  try { t = document.querySelector(href); } catch(err){ return; }
+  if(!t) return;
+  e.preventDefault();
+  var det = t.closest && t.closest('details');
+  if(det) det.open = true;
+  t.scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+// OPEN FROM HASH
+(function(){
+  function openFromHash(){
+    if(!location.hash) return;
+    var el;
+    try { el = document.querySelector(location.hash); } catch(e){ return; }
+    if(!el) return;
+    var det = el.closest('details');
+    if(det) det.open = true;
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+})();
+
+// PRINT: OPEN ALL DETAILS
+(function(){
+  var was=[];
+  window.addEventListener('beforeprint',function(){
+    document.querySelectorAll('details').forEach(function(d){
+      was.push([d, d.open]);
+      d.open = true;
+    });
+  });
+  window.addEventListener('afterprint',function(){
+    was.forEach(function(p){ p[0].open = p[1]; });
+    was = [];
+  });
+})();
+
+// PAUSE BACKGROUND CINEMA VIDEOS WHEN OFFSCREEN (perf)
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var vids = document.querySelectorAll('.cinema-hero video, .cinema-band video');
+  if(!vids.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v = e.target;
+      if(e.isIntersecting && e.intersectionRatio >= 0.15){
+        var p = v.play(); if(p && p.catch) p.catch(function(){});
+      } else {
+        v.pause();
+      }
+    });
+  }, { threshold: [0, 0.15, 0.5] });
+  vids.forEach(function(v){ io.observe(v); });
+})();
+</script>
+
+</body>
+</html>
