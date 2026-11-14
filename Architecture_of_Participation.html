@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06140f">
+<title>EROS · The Architecture of Participation</title>
+<meta name="description" content="A comprehensive plan: deflationary economics, voluntary culture, bonding trees, rivers, and the flywheel from attention to infrastructure. Trust is the product. Participation is the engine.">
+<meta property="og:title" content="EROS · The Architecture of Participation">
+<meta property="og:description" content="The price movement is the doorway. The plan is what people discover when they walk through it.">
+<meta property="og:image" content="/images/frames/Architecture_of_Participation.jpg">
+<style>
+
+:root{
+  --bg:#06140f;--bg2:#0a1c16;--panel:#0d241c;--panel2:#123028;
+  --ink:#f3faf6;--soft:#c5ddd2;--muted:#7fa896;
+  --orange:#ff8a36;--orange2:#ffb36f;
+  --teal:#3ecf9a;--teal2:#7eecc0;
+  --green:#1a9b5c;--green2:#2fd67a;
+  --line:rgba(62,207,154,.18);--line2:rgba(255,138,54,.32);
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --max:840px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px;background:var(--bg)}
+body{
+  font:1.08rem/1.78 var(--serif);color:var(--ink);
+  background:
+    radial-gradient(ellipse at 90% -5%,rgba(255,138,54,.11),transparent 42%),
+    radial-gradient(ellipse at -5% 30%,rgba(30,155,92,.14),transparent 45%),
+    radial-gradient(ellipse at 50% 100%,rgba(62,207,154,.06),transparent 40%),
+    var(--bg);
+  min-height:100vh;
+}
+a{color:var(--teal2);text-decoration:none;border-bottom:1px solid rgba(62,207,154,.35)}
+a:hover{color:var(--orange2);border-color:var(--orange)}
+.wrap{width:min(var(--max),calc(100% - 36px));margin:0 auto}
+header{
+  position:sticky;top:0;z-index:40;
+  background:rgba(6,20,15,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  min-height:58px;font:700 .65rem var(--sans);letter-spacing:.1em;text-transform:uppercase;
+}
+.brand{border:0;color:var(--ink);display:flex;align-items:center;gap:10px}
+.sigil{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--orange);
+  box-shadow:0 0 14px rgba(255,138,54,.35);position:relative;
+}
+.sigil:after{content:"";position:absolute;inset:3px;border:1px solid var(--teal);border-radius:50%}
+.navlinks{display:flex;flex-wrap:wrap;gap:8px}
+.navlinks a{border:0;color:var(--muted);font-size:.6rem}
+.navlinks a:hover{color:var(--orange2)}
+
+.hero{padding:clamp(36px,8vw,72px) 0 32px}
+.kicker{
+  font:800 .7rem var(--sans);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange);display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.kicker:before{content:"";width:28px;height:1px;background:var(--teal)}
+.hero h1{
+  font-size:clamp(2rem,5.5vw,3.4rem);font-weight:600;line-height:1.12;
+  letter-spacing:-.02em;margin:0 0 14px;
+  background:linear-gradient(180deg,#fff 0%,var(--orange2) 48%,var(--green2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .sub{font-size:clamp(1.02rem,2.3vw,1.22rem);color:var(--soft);max-width:38rem;margin-bottom:18px}
+.motto{
+  display:grid;gap:6px;max-width:34rem;margin:18px 0 8px;
+  font:700 .78rem/1.5 var(--sans);letter-spacing:.04em;
+  color:var(--teal2);border-left:3px solid var(--orange);padding-left:16px;
+}
+
+.video-slot{
+  margin:24px 0 8px;border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);background:#030a08;aspect-ratio:16/9;
+}
+.video-slot video{width:100%;height:100%;object-fit:cover;display:block;background:#030a08}
+
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+section h2{
+  font-size:clamp(1.4rem,3.1vw,1.95rem);font-weight:600;line-height:1.22;
+  margin:0 0 14px;color:var(--ink);
+}
+section h2 span{color:var(--orange2)}
+section h3{font-size:1.15rem;color:var(--teal2);font-weight:600;margin:1.4em 0 .5em}
+.lede{color:var(--soft);margin:0 0 1.1em;font-size:1.05rem}
+p{color:var(--soft);margin:0 0 1em}
+strong{color:var(--ink)}
+em{color:var(--teal2);font-style:italic}
+ul,ol{color:var(--soft);margin:0 0 1em;padding-left:1.25rem}
+li{margin:.4em 0}
+
+.pull{
+  font-size:clamp(1.12rem,2.4vw,1.4rem);line-height:1.4;color:var(--ink);
+  border-left:3px solid var(--green2);padding:14px 18px;margin:22px 0;
+  background:linear-gradient(90deg,rgba(30,155,92,.12),rgba(255,138,54,.04),transparent);
+  border-radius:0 12px 12px 0;
+}
+.statement{
+  font-size:clamp(1.15rem,2.5vw,1.45rem);line-height:1.35;color:var(--ink);
+  margin:20px 0;
+}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:linear-gradient(155deg,var(--panel2),var(--panel));
+  border:1px solid var(--line);border-top:2px solid rgba(255,138,54,.55);
+  border-radius:14px;padding:16px;
+}
+.card .num{font:800 .62rem var(--sans);letter-spacing:.14em;color:var(--orange);display:block;margin-bottom:8px}
+.card h3{font-size:1rem;color:var(--teal2);font-weight:600;margin:0 0 6px}
+.card p{font-size:.9rem;margin:0}
+
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+.flow div{
+  text-align:center;border:1px solid var(--line);border-radius:12px;
+  padding:10px 6px;background:var(--panel);font:700 .66rem var(--sans);color:var(--muted);
+}
+.flow b{display:block;font:700 1rem var(--serif);color:var(--orange2);margin-bottom:3px}
+
+.stages{margin:14px 0}
+.stage{
+  display:grid;grid-template-columns:52px 1fr;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--line);
+}
+.stage:last-child{border-bottom:0}
+.stage-no{font:800 .7rem var(--sans);color:var(--orange)}
+.stage h3{font-size:1.05rem;color:var(--teal2);font-weight:600;margin:0 0 4px}
+.stage p{margin:0;font-size:.94rem}
+
+.callout{
+  margin:22px 0;padding:18px 20px;border-radius:14px;
+  border:1px solid var(--line2);
+  background:linear-gradient(120deg,rgba(40,24,12,.55),rgba(12,40,28,.55));
+}
+.callout p:last-child{margin-bottom:0}
+
+.win{
+  margin:28px 0;padding:clamp(20px,4vw,34px);
+  border-radius:16px;border:1px solid rgba(255,138,54,.4);
+  background:linear-gradient(135deg,rgba(40,22,10,.85),rgba(10,36,28,.9));
+}
+.win .line{font-size:clamp(1.1rem,2.4vw,1.35rem);color:var(--ink);margin:0 0 .65em;line-height:1.4}
+.win .final{
+  font:700 clamp(1.15rem,2.6vw,1.5rem)/1.35 var(--serif);color:var(--orange2);margin-top:14px;
+}
+
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.links a{
+  border:1px solid rgba(62,207,154,.4);border-radius:99px;padding:8px 14px;
+  font:700 .68rem var(--sans);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--teal2);background:rgba(62,207,154,.08);border-bottom:0;
+}
+.links a:hover{background:var(--orange);color:var(--bg);border-color:var(--orange)}
+
+footer{padding:36px 0 52px;font:.84rem/1.65 var(--sans);color:var(--muted)}
+footer strong{color:var(--orange2)}
+
+.motion-graphic{
+  width:100%; margin:22px 0 26px; padding:14px;
+  border:1px solid rgba(62,207,154,.22); border-radius:16px;
+  background:
+    radial-gradient(ellipse at 50% 45%,rgba(30,155,92,.13),transparent 62%),
+    linear-gradient(145deg,rgba(13,36,28,.88),rgba(3,12,9,.92));
+  overflow:hidden; position:relative;
+}
+.motion-graphic svg{display:block;width:100%;height:auto;max-height:420px}
+.motion-graphic figcaption{
+  font:.72rem/1.5 var(--sans);color:var(--muted);text-align:center;
+  letter-spacing:.06em;text-transform:uppercase;padding:8px 4px 2px;
+}
+.motion-graphic .svg-label{font-family:var(--sans);fill:#d8eee4;font-size:12px;letter-spacing:.06em}
+.motion-graphic .svg-small{font-size:10px;fill:#8fb9a6}
+.motion-graphic .svg-title{font-size:15px;font-weight:800;fill:#fff;letter-spacing:.12em}
+.motion-graphic .glow{filter:drop-shadow(0 0 7px rgba(62,207,154,.7))}
+.motion-graphic .gold-glow{filter:drop-shadow(0 0 7px rgba(255,138,54,.7))}
+.motion-graphic .orbit{transform-origin:center;animation:eros-orbit 24s linear infinite}
+.motion-graphic .orbit.reverse{animation-direction:reverse;animation-duration:32s}
+.motion-graphic .pulse{transform-box:fill-box;transform-origin:center;animation:eros-pulse 2.8s ease-in-out infinite}
+.motion-graphic .flow-dash{stroke-dasharray:7 12;animation:eros-dash 3.5s linear infinite}
+.motion-graphic .flow-dash.slower{animation-duration:6s}
+.motion-graphic .grow{stroke-dasharray:1;stroke-dashoffset:1;animation:eros-grow 3.5s ease-out forwards}
+.motion-graphic .node{animation:eros-pulse 3.2s ease-in-out infinite}
+.motion-graphic .flywheel-ring{transform-origin:300px 150px;animation:eros-orbit 34s linear infinite}
+.motion-graphic .flywheel-dot{animation:eros-pulse 1.8s ease-in-out infinite}
+@keyframes eros-orbit{to{transform:rotate(360deg)}}
+@keyframes eros-pulse{0%,100%{opacity:.58;transform:scale(.94)}50%{opacity:1;transform:scale(1.07)}}
+@keyframes eros-dash{to{stroke-dashoffset:-76}}
+@keyframes eros-grow{to{stroke-dashoffset:0}}
+@media(max-width:720px){
+  .grid,.grid.two,.flow{grid-template-columns:1fr 1fr}
+  .nav{flex-direction:column;align-items:flex-start;padding:12px 0}
+  section{padding:42px 0}
+}
+@media(max-width:420px){.grid,.flow{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){
+  .motion-graphic *{animation:none!important}
+  .motion-graphic .grow{stroke-dashoffset:0}
+}
+
+
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--teal),var(--orange));z-index:60}
+.navlinks a.on{color:var(--orange2)}
+.video-slot{position:relative}
+.video-slot .vplay{position:absolute;inset:0;width:100%;height:100%;border:0;background:rgba(3,10,8,.28);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.video-slot .vplay span{width:74px;height:74px;border-radius:50%;border:2px solid var(--orange);background:rgba(6,20,15,.7);box-shadow:0 0 26px rgba(255,138,54,.45);position:relative}
+.video-slot .vplay span:after{content:"";position:absolute;left:30px;top:21px;border-left:22px solid var(--orange2);border-top:15px solid transparent;border-bottom:15px solid transparent}
+.video-slot .vplay:hover span{box-shadow:0 0 36px rgba(255,138,54,.75)}
+.video-slot.playing .vplay{display:none}
+.minute{margin:26px 0 6px;padding:20px 22px;border-radius:16px;border:1px solid var(--line2);background:linear-gradient(135deg,rgba(40,22,10,.55),rgba(10,36,28,.7))}
+.minute .mk{font:800 .68rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin:0 0 10px}
+.minute ol{margin:0 0 12px;padding-left:1.3rem}
+.minute li{margin:.45em 0;color:var(--soft)}
+.minute .rn{font:.8rem/1.6 var(--sans);color:var(--muted);margin:0}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+@media(max-width:720px){
+  .navlinks{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:6px;scrollbar-width:none}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlinks a{white-space:nowrap}
+}
+@media print{
+  header,.progress,.vplay,.video-slot,.links{display:none!important}
+  body{background:#fff;color:#111}
+  p,li,.lede,.pull,.statement{color:#111!important}
+  .motion-graphic{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap nav">
+  <a class="brand" href="#top"><span class="sigil"></span> EROS · ARCHITECTURE</a>
+  <nav class="navlinks">
+    <a href="#proposition">Proposition</a>
+    <a href="#deflation">Deflation</a>
+    <a href="#culture">Culture</a>
+    <a href="#tree">Trees</a>
+    <a href="#trust">Trust</a>
+    <a href="#savings">Savings</a>
+    <a href="#rivers">Rivers</a>
+    <a href="#flywheel">Flywheel</a>
+    <a href="#vision">Vision</a>
+    <a href="#win">Why we win</a>
+  </nav>
+</div>
+</header>
+
+<main id="top">
+<div class="wrap">
+
+<section class="hero" style="border-bottom:1px solid var(--line)">
+  <p class="kicker">This is the plan · This is the structure · This is why we win</p>
+  <h1>The Architecture of Participation</h1>
+  <p class="sub">Eros is about something considerably bigger than a cryptocurrency token. The tokenomics matter and the deflationary mechanism matters, but the real opportunity is the culture, the community and the infrastructure that can be built around them.</p>
+  <div class="motto">
+    <span>Trust is the product.</span>
+    <span>Participation is the engine.</span>
+    <span>The community is the power.</span>
+  </div>
+
+  
+<div class="video-slot" id="planVideo">
+    <video controls playsinline preload="none"
+      poster="/images/frames/Architecture_of_Participation.jpg"
+      data-src="/images/Architecture_of_Participation.mp4"
+      aria-label="The Architecture of Participation, spoken plan"></video>
+    <button class="vplay" type="button" aria-label="Play the spoken plan"><span></span></button>
+    <noscript><video controls playsinline preload="none" poster="/images/frames/Architecture_of_Participation.jpg" src="/images/Architecture_of_Participation.mp4"></video></noscript>
+  </div>
+
+  
+<aside class="minute" aria-label="The thesis in one minute">
+    <p class="mk">The thesis in one minute</p>
+    <ol>
+      <li><strong>Deflation is the base.</strong> Activity across the liquidity pools burns supply.</li>
+      <li><strong>Participation is the point.</strong> Builders, not spectators, create the infrastructure.</li>
+      <li><strong>Trees and rivers multiply it.</strong> Any community can bond, build and open its own path.</li>
+      <li><strong>Price is the doorway.</strong> A rising chart sends people to the plan; building is what keeps them.</li>
+      <li><strong>Trust is the product.</strong> No extraction, verifiable code, nothing to take on faith.</li>
+    </ol>
+    <p class="rn">Read next: <a href="/The_Flywheel.html">The Flywheel</a> (price and perception in full) · <a href="/TheErosPlan.html">The Eros Plan</a> (the spine) · <a href="/The_Platinum_Standard.html">The Platinum Standard</a> (rock and river)</p>
+  </aside>
+<figure class="motion-graphic" aria-label="Eros foundation emblem">
+    <svg viewBox="0 0 640 250" role="img">
+      <defs>
+        <radialGradient id="heroCore"><stop stop-color="#7eecc0"/><stop offset=".58" stop-color="#1a9b5c"/><stop offset="1" stop-color="#06140f"/></radialGradient>
+        <linearGradient id="heroLine" x1="0" x2="1"><stop stop-color="#3ecf9a" stop-opacity=".15"/><stop offset=".5" stop-color="#ffb36f"/><stop offset="1" stop-color="#3ecf9a" stop-opacity=".15"/></linearGradient>
+      </defs>
+      <g fill="none" stroke="url(#heroLine)" stroke-width="1.4">
+        <ellipse cx="320" cy="120" rx="238" ry="76"/>
+        <ellipse cx="320" cy="120" rx="178" ry="104" transform="rotate(-25 320 120)"/>
+        <ellipse cx="320" cy="120" rx="178" ry="104" transform="rotate(25 320 120)"/>
+        <path d="M82 120H558M320 16V224"/>
+      </g>
+      <g class="orbit" fill="#ffb36f">
+        <circle cx="82" cy="120" r="5"/><circle cx="558" cy="120" r="4"/>
+        <circle cx="320" cy="16" r="4"/><circle cx="320" cy="224" r="5"/>
+      </g>
+      <g class="orbit reverse" fill="#3ecf9a">
+        <circle cx="160" cy="45" r="4"/><circle cx="480" cy="195" r="4"/>
+        <circle cx="480" cy="45" r="3"/><circle cx="160" cy="195" r="3"/>
+      </g>
+      <circle cx="320" cy="120" r="66" fill="url(#heroCore)" stroke="#ffb36f" stroke-width="2" class="pulse gold-glow"/>
+      <circle cx="320" cy="120" r="53" fill="none" stroke="#b9f7dc" stroke-opacity=".75"/>
+      <text x="320" y="130" text-anchor="middle" fill="#fff" font-size="34" font-family="Georgia,serif" font-weight="bold">E</text>
+      <text x="320" y="220" text-anchor="middle" class="svg-label">ONE FOUNDATION · MANY POSSIBILITIES</text>
+    </svg>
+    <figcaption>A common foundation for independent participation</figcaption>
+  </figure></section>
+
+<section id="proposition">
+  <h2>1 · Eros is <span>more than a token</span></h2>
+  <p class="lede">Cryptocurrency can become something more meaningful than a mechanism for speculation, trading and the accumulation of wealth.</p>
+  <p>Eros begins with deflationary tokenomics, but its defining characteristic is not simply the reduction of supply. Its defining characteristic is the culture, philosophy and infrastructure that can develop around it.</p>
+  <p>The intention is not to encourage people to purchase Eros, put it away and disappear. It is to encourage people to <strong>participate, contribute, create, collaborate and build</strong>.</p>
+  <p>A conventional cryptocurrency community can become little more than a collection of individuals waiting for somebody else to increase the price. Participants become spectators. They watch charts, wait for announcements and hope that another buyer will arrive.</p>
+  <p>Eros proposes a different relationship between ownership and participation. Owning Eros is an entry point into an ecosystem of possibilities. The objective is to encourage people to become contributors rather than spectators, builders rather than passive holders, and participants in an expanding economic and cultural network.</p>
+  <div class="pull">The token is the common economic foundation. The community is the human foundation. The infrastructure is what connects the two.</div>
+  <p>And the philosophy holding it together is simple:</p>
+  <div class="statement">Trust is the product. Participation is the engine. Decentralisation is the architecture.</div>
+</section>
+
+<section id="deflation">
+  <h2>2 · The deflationary <span>foundation</span></h2>
+  <p>Eros has a deflationary mechanism designed to operate across its liquidity infrastructure. Applicable transactions across supported pools contribute to the reduction of circulating supply through the protocol’s burn path. The design intent is that deflation is not confined to one isolated trading pair — it is embedded through the trading fabric.</p>
+
+  <figure class="motion-graphic" aria-label="Activity and burn illustration">
+    <svg viewBox="0 0 640 280" role="img">
+      <defs>
+        <linearGradient id="burnPipe"><stop stop-color="#3ecf9a"/><stop offset="1" stop-color="#ffb36f"/></linearGradient>
+        <radialGradient id="burnCore"><stop stop-color="#ffb36f"/><stop offset="1" stop-color="#8a3e18"/></radialGradient>
+      </defs>
+      <text x="320" y="28" text-anchor="middle" class="svg-title">ACTIVITY → BURN</text>
+      <g fill="#0d3024" stroke="#3ecf9a" stroke-width="1.5">
+        <rect x="34" y="70" width="132" height="60" rx="12"/>
+        <rect x="254" y="70" width="132" height="60" rx="12"/>
+        <rect x="474" y="70" width="132" height="60" rx="12"/>
+      </g>
+      <g class="svg-label" text-anchor="middle">
+        <text x="100" y="105">POOL A</text>
+        <text x="320" y="105">POOL B</text>
+        <text x="540" y="105">POOL C</text>
+      </g>
+      <g fill="none" stroke="url(#burnPipe)" stroke-width="3" stroke-linecap="round">
+        <path d="M166 100H254" class="flow-dash"/>
+        <path d="M386 100H474" class="flow-dash"/>
+        <path d="M100 130V185H320M320 130V185M540 130V185H320" class="flow-dash slower"/>
+        <path d="M320 185V210" class="flow-dash"/>
+      </g>
+      <circle cx="320" cy="235" r="22" fill="url(#burnCore)" stroke="#ffb36f" stroke-width="2" class="pulse gold-glow"/>
+      <text x="320" y="268" text-anchor="middle" class="svg-small">SUPPLY REDUCTION THROUGH PARTICIPATION</text>
+    </svg>
+    <figcaption>More activity can mean more permanent supply reduction</figcaption>
+  </figure>
+
+  <div class="grid">
+    <article class="card"><span class="num">SUPPLY</span><h3>Defined</h3><p>A known base of circulating units — not an open inflation faucet.</p></article>
+    <article class="card"><span class="num">ACTIVITY</span><h3>Burns</h3><p>Transaction activity across liquidity permanently reduces available supply.</p></article>
+    <article class="card"><span class="num">DEMAND</span><h3>Participation</h3><p>As more people use and bond into the system, demand can meet a thinner float.</p></article>
+  </div>
+  <p>The economic proposition is straightforward: defined supply; activity generates burns; burns permanently reduce available supply; increasing participation can increase demand; demand interacting with a progressively reduced supply can create upward price pressure.</p>
+  <div class="callout">
+    <p><strong>Burns shrink supply; price still depends on demand arriving.</strong> Eros does not need to rely on promotional promises or expanding issuance: its deflationary architecture makes participation itself part of the supply-reduction mechanism. The larger opportunity is what happens when that mechanism becomes the foundation for a wider network of economic activity.</p>
+    <p><strong>Technical note.</strong> Which transfers and which pools trigger a burn is defined by the contract itself, including pools that third parties create. Check that on-chain rather than taking this page’s word for it. That habit is the trust principle in practice.</p>
+  </div>
+</section>
+
+<section id="culture">
+  <h2>3 · From holding to <span>building</span></h2>
+  <p class="lede">The greatest opportunity for Eros is not necessarily the number of people who own it. It is the number of people who decide to do something with it.</p>
+  <p>A person who simply holds a token contributes ownership. A person who builds a liquidity pool, establishes a community, develops an application, creates educational material, produces media or introduces another community contributes <strong>infrastructure</strong>. These are fundamentally different forms of participation. The Eros philosophy should encourage the second.</p>
+  <p>We want people who voluntarily decide that the project is worth their time, effort, imagination and resources. Forced participation produces compliance. Voluntary participation produces commitment.</p>
+  <p>When someone freely gives their time to build something, they are expressing a belief that the activity has value beyond an immediate financial transaction. They are investing something that cannot simply be purchased: their effort, reputation, creativity and conviction.</p>
+  <div class="pull">Shared beliefs create identity. Identity produces belonging. Belonging encourages cooperation. Cooperation creates institutions that can survive the involvement of any individual founder.</div>
+  <p>This is what enduring cultures, religions and nations are born from: people who believe in something so fully that they become its ardent supporters. You cannot hire that. You cannot force it. It is volunteered, and volunteered work is the honest signal that people think the thing is worth working for.</p>
+  <p>Eros seeks to apply this principle to a decentralised economic environment — not by demanding allegiance, but by creating something that people independently find worth participating in.</p>
+</section>
+
+<section id="tree">
+  <h2>4 · The bonding tree — <span>multiplication of infrastructure</span></h2>
+  <p>Imagine that Eros does not simply have one liquidity structure, one application or one community. Instead, imagine an expanding network of bonding trees.</p>
+  <p>Different communities, projects, token holders and independent builders establish their own bonding structures and associated liquidity. Each structure becomes a point of participation. Each can develop its own identity, community, economic activity and purpose while connecting to the wider Eros ecosystem.</p>
+
+  <figure class="motion-graphic" aria-label="Bonding tree">
+    <svg viewBox="0 0 640 340" role="img">
+      <defs><linearGradient id="treeStroke" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#1a9b5c"/><stop offset="1" stop-color="#ffb36f"/></linearGradient></defs>
+      <g fill="none" stroke="url(#treeStroke)" stroke-width="3" stroke-linecap="round">
+        <path d="M320 290V230" class="grow"/>
+        <path d="M320 230C320 190 170 200 170 130" class="grow"/>
+        <path d="M320 230C320 190 470 200 470 130" class="grow"/>
+        <path d="M320 190C320 150 320 135 320 95" class="grow"/>
+        <path d="M170 130L95 75M170 130L245 75M470 130L395 75M470 130L545 75" class="grow"/>
+        <path d="M320 95L270 50M320 95L370 50" class="grow"/>
+      </g>
+      <g fill="#123b2c" stroke="#3ecf9a" stroke-width="1.5">
+        <rect x="258" y="278" width="124" height="40" rx="12"/>
+        <rect x="115" y="110" width="110" height="38" rx="10"/>
+        <rect x="265" y="72" width="110" height="38" rx="10"/>
+        <rect x="415" y="110" width="110" height="38" rx="10"/>
+        <rect x="42" y="38" width="106" height="36" rx="9"/>
+        <rect x="192" y="38" width="106" height="36" rx="9"/>
+        <rect x="342" y="38" width="106" height="36" rx="9"/>
+        <rect x="492" y="38" width="106" height="36" rx="9"/>
+      </g>
+      <g class="svg-label" text-anchor="middle">
+        <text x="320" y="303">EROS</text>
+        <text x="170" y="134">COMMUNITY</text><text x="320" y="96">APPLICATION</text><text x="470" y="134">LIQUIDITY</text>
+        <text x="95" y="60" class="svg-small">TOKEN A</text><text x="245" y="60" class="svg-small">PROJECT B</text>
+        <text x="395" y="60" class="svg-small">MEDIA</text><text x="545" y="60" class="svg-small">NEW IDEA</text>
+      </g>
+      <g fill="#ffb36f" class="node"><circle cx="320" cy="230" r="5"/><circle cx="170" cy="130" r="4"/><circle cx="470" cy="130" r="4"/></g>
+      <text x="320" y="332" text-anchor="middle" class="svg-small">ONE FOUNDATION · INDEPENDENT BRANCHES</text>
+    </svg>
+    <figcaption>Each branch can develop its own identity and purpose</figcaption>
+  </figure>
+
+  <p>There is no requirement for every community to operate under one centralised organisational structure or follow one identical economic model. One community might establish a bonding tree around a particular cryptocurrency. Another might create one around an application. Another might build around a media project, a gaming ecosystem, a digital asset or a cultural initiative. Another might establish a completely independent economic experiment.</p>
+  <p>The common connection is the infrastructure and economic relationship with Eros. The result could be thousands of independently developed bonding trees, each contributing activity, participation and potentially additional demand to the wider ecosystem.</p>
+  <div class="pull">The bonding tree is not merely a financial mechanism. It is a template for organising voluntary economic participation — a way to turn collective belief into practical economic infrastructure.</div>
+  <h3>Ethereum value and PulseChain</h3>
+  <p>Ethereum has an enormous ecosystem of tokens, communities, developers and established economic activity. Transaction costs and congestion can create barriers, especially for smaller holders and experimental projects. PulseChain offers an alternative environment with a different cost structure.</p>
+  <p>That creates an opportunity for Eros to become part of a bridge between ecosystems: communities discovering the bonding architecture, bringing compatible assets and liquidity into PulseChain, and developing a new economic relationship through Eros — voluntarily, with eyes open to bridge and contract risk. The point is not that every ERC-20 automatically becomes dollar value on PulseChain. Assets must be appropriately bridged or represented, and liquidity must be voluntarily supplied. The opportunity is a common economic foundation around which different communities organise that activity.</p>
+  <div class="links">
+    <a href="/EROS_Liquidity_Tree.html">Open the Liquidity Tree</a>
+    <a href="/WeAreWithYouEros.html">We Are With You</a>
+  </div>
+</section>
+
+<section id="trust">
+  <h2>5 · Trust is the <span>product</span></h2>
+  <p>The cryptocurrency industry has an enormous credibility problem. People have experienced extraction, hidden allocations, insider advantages, manipulated tokenomics, abandoned projects and promises that were never fulfilled. Too many projects have been designed around extracting value from participants rather than creating something participants collectively benefit from building.</p>
+  <p>Eros proposes a different philosophy. <strong>No extraction as a founding principle.</strong> Fairness, transparency, verifiable code and equitable participation should be central to the architecture.</p>
+  <p>Eros began as a free airdrop. That origin is part of the narrative: fair, equitable and without extraction, and it is the story its supporters expect history to vindicate. It is also why the revival of the wider TitanX family starts at <a href="/The_Front_Door.html">The Front Door</a>.</p>
+  <div class="grid">
+    <article class="card"><span class="num">TRUST</span><h3>The product</h3><p>Not dependent on a personality — examinable in the structure.</p></article>
+    <article class="card"><span class="num">ETHIC</span><h3>No extraction</h3><p>Treasury and DAO take removed from the design path we argue for.</p></article>
+    <article class="card"><span class="num">PROOF</span><h3>Verification</h3><p>Contracts, supply behaviour and mechanisms people can inspect.</p></article>
+  </div>
+  <p>The objective is an ecosystem in which trust is not dependent on somebody’s personality, reputation or promises. Trust should emerge from the structure itself. People should be able to examine contracts, understand mechanisms, verify supply characteristics and independently evaluate infrastructure.</p>
+  <p>Code does not eliminate every risk. Contracts require scrutiny, security practices must be maintained, and decentralisation must be demonstrated rather than merely claimed. But the philosophical direction is important: instead of asking people to trust a founder, create systems where trust can be independently established through transparency and verification.</p>
+  <div class="pull">If people believe an economic system is fair, transparent and not designed to extract from them, they have a reason to contribute beyond the expectation of short-term financial gain. Trust becomes the foundation upon which participation becomes possible.</div>
+</section>
+
+<section id="savings">
+  <h2>6 · Savings, capital and <span>human commitment</span></h2>
+  <p>Consider a person who wants to maintain savings and capital outside conventional institutions — an asset not dependent on a central bank deciding how much additional supply should be created, with transparent monetary rules and decentralised infrastructure, whose supply can decrease through its own transaction mechanics.</p>
+  <p>Eros presents an interesting proposition in that context: a deflationary supply mechanism with the potential for expanding economic participation. If available supply decreases while genuine demand increases, economic pressure on the asset can change. If participation also creates useful infrastructure, the asset may become connected to an expanding network of activity.</p>
+  <div class="pull">Imagine savings held in something code-verified, decentralised and deflationary: an asset that reduces its own supply as participation grows, and gets its security from volunteers rather than from force.</div>
+  <p>The design philosophy is to align the asset with participation rather than extraction. The mechanism does the supply side; liquidity depth and real demand do the rest.</p>
+  <p>Liquidity is usually discussed in purely financial terms — depth, slippage, capital available. Within the Eros philosophy, liquidity infrastructure can also represent something less visible: the accumulated commitment of people who voluntarily decided to contribute. Every person who builds a pool, a bonding mechanism, an application or a new community contributes time, effort, resources and belief. Infrastructure becomes an expression of collective commitment.</p>
+  <p>A thousand people who independently decide to build can create a remarkably different ecosystem from a thousand people who have merely been paid to perform a prescribed task. The first arrangement can generate ownership, identity, initiative and independent development. The second can disappear when the funding disappears.</p>
+</section>
+
+<section id="rivers">
+  <h2>7 · A thousand <span>rivers</span></h2>
+  <p>Eros should not become dependent on one particular development pathway. Eros X and 33 Eros are examples of possible extensions. They are not the only possibilities. <strong>Anybody can create another river.</strong></p>
+
+  <figure class="motion-graphic" aria-label="Thousand rivers">
+    <svg viewBox="0 0 640 280" role="img">
+      <defs><linearGradient id="riverGrad"><stop stop-color="#ffb36f"/><stop offset=".45" stop-color="#3ecf9a"/><stop offset="1" stop-color="#7eecc0"/></linearGradient></defs>
+      <path d="M320 255C320 210 320 195 320 165" stroke="#ffb36f" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <g fill="none" stroke="url(#riverGrad)" stroke-width="2.5" stroke-linecap="round">
+        <path d="M320 165C270 135 220 135 100 40" class="flow-dash"/>
+        <path d="M320 165C285 120 270 90 245 28" class="flow-dash slower"/>
+        <path d="M320 165V25" class="flow-dash"/>
+        <path d="M320 165C355 120 370 90 395 28" class="flow-dash slower"/>
+        <path d="M320 165C370 135 420 135 540 40" class="flow-dash"/>
+        <path d="M320 165C240 175 190 200 80 220" class="flow-dash slower"/>
+        <path d="M320 165C400 175 450 200 560 220" class="flow-dash"/>
+      </g>
+      <rect x="267" y="210" width="106" height="40" rx="11" fill="#123b2c" stroke="#ffb36f" stroke-width="1.5"/>
+      <text x="320" y="235" text-anchor="middle" class="svg-label">EROS</text>
+      <text x="320" y="272" text-anchor="middle" class="svg-small">ONE COMMON THREAD · MANY INDEPENDENT DIRECTIONS</text>
+    </svg>
+    <figcaption>Permissionless development paths</figcaption>
+  </figure>
+
+  <p>A river is an independent mechanism through which Eros can be utilised, developed, distributed or connected to additional economic activity — cross-chain infrastructure, bonding and liquidity, a particular token economy, gaming, digital media, intellectual property, community-based systems, or mechanisms not yet imagined.</p>
+  <div class="statement">There can be a thousand rivers. A thousand communities. A thousand different applications and economic models. Each can develop its own identity while contributing to a wider ecosystem.</div>
+  <p>One large project needs central planning. An environment in which thousands of projects can emerge needs only a foundation compelling enough that independent people want to build on it. Eros should aim to be that foundation.</p>
+  <p>Longer-horizon questions are worth asking without pretending they are promises: small nations such as Paraguay, or communities, exploring additional economic options beside fragile banking institutions; PulseChain as an accessible experimental environment; independent developers building trees, payments tools and local infrastructure. We are not talking about replacing an entire banking system overnight. We are talking about additional options, additional infrastructure and additional economic freedom where people choose to pursue them.</p>
+</section>
+
+<section id="flywheel">
+  <h2>8 · The flywheel — <span>attention into participation</span></h2>
+  <p class="lede">This is perhaps the most important mechanism in the entire Eros proposition. It explains how a relatively unknown project could develop into a much larger cultural and economic ecosystem. And it begins with something very familiar in cryptocurrency: price.</p>
+  <p>When a substantial buyer enters and the market price rises, the chart changes. Green candles appear. People notice. Traders notice. Existing holders notice. Communities begin discussing the movement. That is the first stage: <strong>attention</strong>.</p>
+  <p>In crypto, price is the scoreboard. A rising chart is read as evidence that something is working, and that reading is what sends people looking: why is it going up? They find the books, the plan, the bonding trees and the tokenomics, and in their minds the price went up <em>because</em> of the plan. So they study it, and some of them buy.</p>
+  <p>That perception is the ignition. It pulls the price further, and it brings the first builders in. <a href="/The_Flywheel.html">The Flywheel</a> tells the price side in full, with the charts.</p>
+  <div class="pull">The price movement is the doorway. The plan is what people discover when they walk through it.</div>
+  <figure class="motion-graphic" aria-label="Eight-stage flywheel">
+    <svg viewBox="0 0 640 320" role="img">
+      <defs>
+        <linearGradient id="wheelLine"><stop stop-color="#3ecf9a"/><stop offset="1" stop-color="#ffb36f"/></linearGradient>
+      </defs>
+      <ellipse cx="320" cy="155" rx="210" ry="105" fill="none" stroke="url(#wheelLine)" stroke-width="2.5" stroke-dasharray="8 10" class="flywheel-ring"/>
+      <g fill="#103326" stroke="#3ecf9a" stroke-width="1.4">
+        <rect x="270" y="22" width="100" height="40" rx="10"/>
+        <rect x="420" y="62" width="112" height="40" rx="10"/>
+        <rect x="460" y="135" width="112" height="40" rx="10"/>
+        <rect x="420" y="208" width="112" height="40" rx="10"/>
+        <rect x="270" y="248" width="100" height="40" rx="10"/>
+        <rect x="108" y="208" width="112" height="40" rx="10"/>
+        <rect x="68" y="135" width="112" height="40" rx="10"/>
+        <rect x="108" y="62" width="112" height="40" rx="10"/>
+      </g>
+      <g class="svg-label" text-anchor="middle">
+        <text x="320" y="46">PRICE</text><text x="476" y="86">ATTENTION</text>
+        <text x="516" y="159">CURIOSITY</text><text x="476" y="232">DISCOVERY</text>
+        <text x="320" y="272">CONVICTION</text><text x="164" y="232">PARTICIPATE</text>
+        <text x="124" y="159">BUILD</text><text x="164" y="86">RENEW</text>
+      </g>
+      <circle cx="320" cy="155" r="58" fill="#0d2b20" stroke="#ffb36f" stroke-width="2" class="pulse gold-glow"/>
+      <text x="320" y="150" text-anchor="middle" class="svg-title">EROS</text>
+      <text x="320" y="170" text-anchor="middle" class="svg-small">FLYWHEEL</text>
+      <text x="320" y="308" text-anchor="middle" class="svg-small">A POSSIBLE LOOP · NOT A GUARANTEE OF PRICE OR ADOPTION</text>
+    </svg>
+    <figcaption>Attention can become participation — participation can build infrastructure</figcaption>
+  </figure>
+
+  <div class="stages">
+    <div class="stage"><div class="stage-no">01</div><div><h3>Price movement creates attention</h3><p>A buyer enters. Demand increases. The chart turns green and people read it as the plan working.</p></div></div>
+    <div class="stage"><div class="stage-no">02</div><div><h3>Attention creates curiosity</h3><p>New people discover Eros and want to understand why it is attracting interest.</p></div></div>
+    <div class="stage"><div class="stage-no">03</div><div><h3>Curiosity creates discovery</h3><p>They read the books, examine tokenomics, investigate bonding architecture and explore the wider ecosystem.</p></div></div>
+    <div class="stage"><div class="stage-no">04</div><div><h3>Discovery creates conviction</h3><p>Some conclude the underlying proposition is worth participating in — infrastructure, not only a trade.</p></div></div>
+    <div class="stage"><div class="stage-no">05</div><div><h3>Conviction creates participation</h3><p>They purchase Eros, explore liquidity bonding, join communities and investigate ways to contribute.</p></div></div>
+    <div class="stage"><div class="stage-no">06</div><div><h3>Participation creates infrastructure</h3><p>Bonding trees, pools, applications, educational material, media, communities and new economic mechanisms.</p></div></div>
+    <div class="stage"><div class="stage-no">07</div><div><h3>Infrastructure creates further opportunities</h3><p>New projects and communities attract additional participants. The ecosystem becomes more substantial.</p></div></div>
+    <div class="stage"><div class="stage-no">08</div><div><h3>The cycle can renew</h3><p>More activity creates visibility. More people discover the ecosystem and potentially contribute.</p></div></div>
+  </div>
+  <div class="callout">
+    <p><strong>Price brings them. Building keeps them.</strong> Price is the scoreboard people read first, and a rising one is the most effective invitation the ecosystem has. It should be stated plainly and used. What makes the attention last is what the newcomers do next: when bonding trees appear, communities form, applications ship and independent projects create real activity. Trees, rivers, books, liquidity and communities are what carry the ecosystem through the quiet stretches of the chart.</p>
+  </div>
+</section>
+
+<section id="culture-doors">
+  <h2>9 · Many doors into one <span>ecosystem</span></h2>
+  <p>Not everybody wants to develop smart contracts. Not everybody wants to establish liquidity pools. Not everybody wants to analyse tokenomics. But many people want to create — stories, films, characters, digital assets, media companies, immersive environments.</p>
+  <p>The living egg universe, the novels, mythology, media concepts and broader creative architecture provide another way for people to enter the ecosystem. Someone might discover Eros through the token. Someone else through a story. Another through a media production. Another through a bonding tree or community application. They can all enter through different doors.</p>
+  <p>A genuinely expanding ecosystem should not depend on one particular type of participant. It should accommodate developers, economists, storytellers, artists, entrepreneurs, liquidity providers, educators and community builders. The economic architecture provides the foundation. The cultural architecture provides identity and meaning. Together they create the possibility of something larger than a cryptocurrency project.</p>
+</section>
+
+<section id="vision">
+  <h2>10 · From cryptocurrency to <span>civilisational experiment</span></h2>
+  <p>Ultimately, Eros is an experiment in a different way of organising economic participation. It begins with a token whose supply is designed to decrease through transaction burns. It develops through liquidity and bonding infrastructure. It expands through independent communities and applications. It gains cultural identity through shared philosophy, stories, media and creative work. It creates opportunities for developers, entrepreneurs and communities to establish their own economic mechanisms — potentially across chains, projects, geographical communities and, over a long horizon, jurisdictions exploring additional options.</p>
+  <p>The real ambition is not to have everybody simply buying Eros. It is to have people discovering Eros and then finding something meaningful to build. The token is the common economic thread. The bonding trees are the infrastructure of participation. The rivers are the independent expressions of development. The books and stories provide the narrative. The community provides the human commitment. The philosophy provides the reason to continue. The deflationary mechanism provides a consistent economic characteristic running through the foundation.</p>
+  <div class="pull">You are not trying to build every application, every community or every economic mechanism yourself. You are trying to establish the foundation upon which other people can build things you have not even imagined yet.</div>
+  <p>That is the much bigger proposition. The strongest form of decentralisation is not simply distributing tokens among thousands of wallets. It is distributing the capacity to create.</p>
+  <div class="grid two">
+    <article class="card"><span class="num">TOKEN</span><h3>Deflationary base</h3><p>Burns through activity across liquidity infrastructure.</p></article>
+    <article class="card"><span class="num">CHAIN</span><h3>PulseChain</h3><p>Alternative environment for accessible experimentation.</p></article>
+    <article class="card"><span class="num">TREES</span><h3>Bonding architecture</h3><p>Framework for voluntary economic participation.</p></article>
+    <article class="card"><span class="num">RIVERS</span><h3>Independent paths</h3><p>Anyone can open a new development stream.</p></article>
+    <article class="card"><span class="num">STORY</span><h3>Books &amp; universe</h3><p>Narrative and creative doors into the same foundation.</p></article>
+    <article class="card"><span class="num">PEOPLE</span><h3>Commitment</h3><p>Trust and no extraction — reasons to stay and build.</p></article>
+  </div>
+</section>
+
+<section id="win" style="border:0">
+  <div class="win">
+    <p class="kicker" style="margin-bottom:10px">This is why we win</p>
+    <h2>From speculation to an expanding ecosystem</h2>
+    <p class="line">From speculation to understanding.</p>
+    <p class="line">From understanding to conviction.</p>
+    <p class="line">From conviction to participation.</p>
+    <p class="line">From participation to creation.</p>
+    <p class="line">From creation to a decentralised ecosystem that multiplies without one choke-point.</p>
+    <p style="color:var(--soft);margin:14px 0 0">We do not want to build everything ourselves. We want to create something that makes thousands of other people want to build. The future of Eros will not be determined by one person, one application or one particular development. It will be determined by what people collectively choose to create.</p>
+    <p class="final">This is Eros. This is the architecture. And this is why Eros can win.</p>
+  </div>
+  <div class="links">
+    <a href="/WeAreWithYouEros.html">We Are With You</a>
+    <a href="/EROS_Liquidity_Tree.html">Liquidity Tree</a>
+    <a href="/The_Eros_Corpus.html">Corpus</a>
+    <a href="/The_Flywheel.html">Flywheel</a>
+    <a href="/The_Open_Call.html">Open Call</a>
+    <a href="/The_Front_Door.html">Front Door</a>
+    <a href="/TheErosPlan.html">The Eros Plan</a>
+  </div>
+  <div class="callout">
+    <p><strong>Verify everything on-chain.</strong> Bridges, contracts and liquidity carry technical risk, and proposed ideas are not live until independently confirmed. Price brings people to the plan; building is what makes it real.</p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+<div class="wrap">
+  <strong>EROS · The Architecture of Participation</strong><br>
+  Get involved. Build something. Create a river. Establish a community. Tell the story.<br>
+  <a href="/The_Eros_Corpus.html">Corpus</a> · <a href="/The_Flywheel.html">Flywheel</a> · <a href="/The_Open_Call.html">Open Call</a>
+</div>
+</footer>
+<div class="progress" id="progress"></div>
+<script>
+(function(){
+  var v=document.querySelector('#planVideo video'),btn=document.querySelector('#planVideo .vplay'),box=document.getElementById('planVideo');
+  if(v&&btn){btn.addEventListener('click',function(){
+    if(!v.getAttribute('src')){v.setAttribute('src',v.getAttribute('data-src'));v.load();}
+    box.classList.add('playing');
+    var p=v.play();if(p&&p.catch){p.catch(function(){box.classList.remove('playing');});}
+  });
+  v.addEventListener('play',function(){box.classList.add('playing');});}
+  var bar=document.getElementById('progress');
+  function onScroll(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?h.scrollTop/m*100:0)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  try{
+    var links={};document.querySelectorAll('.navlinks a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){Object.keys(links).forEach(function(k){links[k].classList.remove('on');});
+        var l=links[e.target.id];if(l)l.classList.add('on');}});},{rootMargin:'-35% 0px -60% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(sec){io.observe(sec);});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
