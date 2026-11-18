@@ -319,7 +319,7 @@ table.ref td strong{color:var(--gold2)}
 /* ═══ EROS CINEMA SYSTEM · CSS v2.0 ═══ */
 .cinema-hero,.cinema-band{position:relative;isolation:isolate;overflow:hidden;background:#080711;color:#f3eef9;font-family:var(--sans);text-align:left;--accent-color:#e0b84a;--accent-glow:rgba(224,184,74,.42);--lens:0px;--px:50%;--py:50%;--ring-tx:0px;--ring-ty:0px}
 .cinema-hero{width:100vw;margin:0 calc(50% - 50vw) 1.4rem;min-height:min(760px,82vh);min-height:min(760px,82svh);display:grid;align-items:end;cursor:pointer;touch-action:manipulation}
-.cinema-band{width:100vw;margin:2.5rem calc(50% - 50vw);min-height:min(560px,68vh);min-height:min(560px,82svh);display:grid;align-items:end}
+.cinema-band{width:100vw;margin:2.5rem calc(50% - 50vw);min-height:min(560px,68vh);min-height:min(560px,68svh);display:grid;align-items:end}
 .cinema-hero.accent-garden{--accent-color:#e0b84a;--accent-glow:rgba(224,184,74,.42)}
 .cinema-band.accent-garden-mid{--accent-color:#b79aff;--accent-glow:rgba(183,154,255,.42)}
 .cinema-band.accent-garden-end{--accent-color:#74e6e2;--accent-glow:rgba(116,230,226,.42)}
@@ -362,6 +362,11 @@ table.ref td strong{color:var(--gold2)}
 @media(max-width:850px){.corpus-bar{display:block;padding:.55rem 14px}.corpus-bar .brand-row{margin-bottom:.35rem}.corpus-bar nav.chapter-strip{margin:0;max-width:100%;padding-bottom:.1rem}.cover-card{padding:2.2rem 1rem 2.2rem}.cover-card .heroart{width:min(92vw,500px);margin-bottom:1.2rem}}
 @media(max-width:560px){.corpus-bar .brand-text{font-size:.62rem}.signal-grid,.library,.lib-stack{grid-template-columns:1fr}.footer-end{font-size:.55rem}.formula{font-size:.82rem;padding:1rem 1.1rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+/* EROS cinema band standard: full width, set height (one source) */
+.cinema-hero{min-height:min(680px,76vh);min-height:min(680px,76svh)}
+@media (max-width:700px){.cinema-hero{min-height:min(520px,68svh)!important}.cinema-band{min-height:min(340px,46svh)!important}.cinema-hero .cinema-title{font-size:clamp(40px,11vw,68px)!important}.cinema-band .cinema-title{font-size:clamp(24px,8vw,40px)!important}.cinema-copy,.cinema-band .cinema-copy{padding-left:1.1rem!important;padding-right:1.1rem!important}}
+.cinema-hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;z-index:-4;pointer-events:none;transition:opacity .6s ease}
+.cinema-hero.is-open .cinema-hero-poster{opacity:0}
 @media print{
   @page{size:A4;margin:14mm}
   html::before,html::after,.cinema-hero,.cinema-band,.corpus-bar,#progressBar,.reader-panel,#toTop,.skip-link,.native-carousel-wrap,.summary-series,.cinematic-finale{display:none!important}
@@ -390,6 +395,7 @@ details.toc-fold .toc-grid{padding:0 1.35rem 1.25rem;display:grid;grid-template-
 details.toc-fold .toc-grid a{display:block;padding:.38rem 0;color:var(--soft);border:none;font-size:.86rem;text-decoration:none}
 details.toc-fold .toc-grid a:hover{color:var(--gold2)}
 details.toc-fold .toc-grid em{font-style:normal;color:var(--muted);font-size:.72rem;margin-right:.45rem}
+
 </style>
 
 <!-- EROS LIBRARY LAYOUT POLISH v3: shared geometry; book palettes and bespoke components retained. -->
@@ -545,7 +551,6 @@ figure.plate:not(.operator-portrait) img,figure.plate:not(.operator-portrait) vi
          data-cinema="hero"
          data-queue="cell_cosmic.mp4|cell_water.mp4|cell_atlas.mp4|cell_similar.mp4|cell_facts.mp4|all_the_gods.mp4|cell_historic.mp4|cell_apple.mp4|Eros_LivingEgg.mp4|Eros_Conscious.mp4|Eros_Operators.mp4|Eros_Immune.mp4|cohesion.mp4|Eros_AIEthics.mp4|bondedEros1.mp4">
   <img class="cinema-hero-poster" src="images/frames/cell_cosmic.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
-
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
