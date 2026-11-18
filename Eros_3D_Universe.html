@@ -593,6 +593,11 @@ body.document-mode .image-gallery img:hover{border-color:#8A6D1F}
 body.document-mode code{color:#8A6D1F;background:rgba(232,194,90,.15)}
 
 /* PRINT */
+/* EROS cinema band standard: full width, set height (one source) */
+.cinema-hero{min-height:min(680px,76vh);min-height:min(680px,76svh)}
+@media (max-width:700px){.cinema-hero{min-height:min(520px,68svh)!important}.cinema-band{min-height:min(340px,46svh)!important}.cinema-hero .cinema-title{font-size:clamp(40px,11vw,68px)!important}.cinema-band .cinema-title{font-size:clamp(24px,8vw,40px)!important}.cinema-copy,.cinema-band .cinema-copy{padding-left:1.1rem!important;padding-right:1.1rem!important}}
+.cinema-hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;z-index:-4;pointer-events:none;transition:opacity .6s ease}
+.cinema-hero.is-open .cinema-hero-poster{opacity:0}
 @media print{
   @page{size:A4;margin:14mm}
   #progressBar,.corpus-bar,#rdBtn,#rdPanel,#toTop,.skip-link{display:none!important}
@@ -959,7 +964,6 @@ figure.plate:not(.operator-portrait) img,figure.plate:not(.operator-portrait) vi
 <!-- CINEMA HERO -->
 <section aria-expanded="false" aria-label="The Living Universe — cinematic threshold" class="cinema-hero accent-violet" data-cinema="hero" data-queue="Eros_Operators.mp4|Eros_Conscious.mp4|all_the_gods.mp4|Eros_Immune.mp4|Eros_LivingEgg.mp4|cohesion.mp4|Eros_AIEthics.mp4|cell_cosmic.mp4|cell_water.mp4|cell_similar.mp4|cell_facts.mp4|cell_atlas.mp4|cell_historic.mp4|cell_apple.mp4|bondedEros1.mp4" id="cinemaHero" role="button" tabindex="0">
   <img class="cinema-hero-poster" src="images/frames/Eros_Operators.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
-
 <video aria-hidden="true" class="cinema-video cinema-va" muted="" playsinline="" preload="auto"></video>
 <video aria-hidden="true" class="cinema-video cinema-vb" muted="" playsinline="" preload="none"></video>
 <div aria-hidden="true" class="cinema-shade"></div>

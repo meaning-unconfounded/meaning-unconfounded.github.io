@@ -263,7 +263,7 @@ footer strong{color:var(--orange2)}
   width: 100vw;
   margin: 2.5rem calc(50% - 50vw);
   min-height: min(560px, 68vh);
-  min-height:min(560px,82svh);
+  min-height: min(560px, 68svh);
   display: grid;
   align-items: end;
 }
@@ -508,7 +508,7 @@ footer strong{color:var(--orange2)}
 }
 .cinema-print { display: none; }
 @media (max-width: 700px) {
-  .cinema-hero{min-height:min(760px,82svh)}
+  .cinema-hero { min-height: min(760px, 78svh); }
   .cinema-band { min-height: min(500px, 62svh); }
   .cinema-hero .cinema-title { font-size: clamp(48px, 13.5vw, 78px); }
   .cinema-band .cinema-title { font-size: clamp(32px, 10vw, 52px); }
@@ -517,6 +517,8 @@ footer strong{color:var(--orange2)}
   .cinema-ring { width: 100px; height: 100px; margin: -50px 0 0 -50px; }
   .cinema-ring span { font-size: 8px; letter-spacing: .2em; }
 }
+.cinema-hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;z-index:-4;pointer-events:none;transition:opacity .6s ease}
+.cinema-hero.is-open .cinema-hero-poster{opacity:0}
 @media print {
   .cinema-hero,
   .cinema-band {
@@ -622,8 +624,12 @@ footer strong{color:var(--orange2)}
 .cinema-band .cinema-grain {
   opacity: .35 !important;
 }
-.cinema-hero{min-height:min(760px,82vh);min-height:min(760px,82svh)}
+.cinema-hero {
+  min-height: min(680px, 76vh);
+  min-height: min(680px, 76svh);
+}
 @media (max-width: 700px) {
+  .cinema-hero { min-height: min(520px, 68svh) !important; }
   .cinema-band { min-height: min(340px, 46svh) !important; }
   .cinema-hero .cinema-title { font-size: clamp(40px, 11vw, 68px) !important; }
   .cinema-band .cinema-title { font-size: clamp(24px, 8vw, 40px) !important; }
@@ -694,7 +700,6 @@ footer strong{color:var(--orange2)}
 <main id="top">
 <section class="cinema-hero accent-arch" id="cinemaHero" role="button" tabindex="0" aria-expanded="false" aria-label="The Architecture of Participation — cinematic threshold" data-cinema="hero" data-queue="Architecture_of_Participation.mp4|Eros_Trust.mp4">
   <img class="cinema-hero-poster" src="images/frames/Architecture_of_Participation.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
-
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div><div class="cinema-grain" aria-hidden="true"></div>
