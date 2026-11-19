@@ -179,6 +179,174 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 <meta property="og:image:alt" content="EROS · 3D Universe · Living Thesis">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+
+<style id="eros-share-styles">
+/* EROS share card styles — aligned with the existing library cards */
+.eros-share{--sa:#c6a15b;max-width:960px;margin:1.6rem auto;padding:0 1rem;box-sizing:border-box;color:inherit;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+.eros-share-in{display:grid;gap:1.1rem;padding:1rem;border:1px solid rgba(127,127,127,.4);border:1px solid color-mix(in srgb,var(--sa) 45%,transparent);border-radius:16px;background:rgba(127,127,127,.10)}
+@media(min-width:720px){.eros-share-in{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}}
+.eros-share img{width:100%;height:auto;display:block;border-radius:10px;aspect-ratio:1200/630;object-fit:cover}
+.eros-share .k{margin:0 0 .3rem;font-weight:800;font-size:1.15rem;color:var(--sa)}
+.eros-share .t{margin:0;font-size:1rem;opacity:.92}
+.eros-share .row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.eros-share .b{min-height:44px;padding:.5rem 1rem;border-radius:999px;border:1px solid var(--sa,#c6a15b);background:transparent;color:inherit;font:600 15px/1 system-ui,sans-serif;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center}
+.eros-share .b.p{background:var(--sa);color:#000}
+.eros-share .msg{min-height:1.3em;margin:.4rem 0 0;font-size:.85rem;opacity:.85}
+@media print{.eros-share{display:none!important}}
+</style>
+<style>
+
+/* EROS_CINEMA_RELEASE_1 — horizontal band + full width */
+section.cinema-hero,
+.cinema-hero {
+  box-sizing: border-box !important;
+  display: grid !important;
+  align-items: end !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.25rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  min-height: min(560px, 68svh) !important;
+  min-height: min(560px, 68dvh) !important;
+  max-height: none !important;
+  overflow: hidden !important;
+  position: relative !important;
+  left: auto !important;
+  transform: none !important;
+}
+@media (max-width: 700px) {
+  section.cinema-hero,
+  .cinema-hero {
+    min-height: min(480px, 62svh) !important;
+    min-height: min(480px, 62dvh) !important;
+  }
+}
+.cinema-hero .cinema-hero-poster,
+.cinema-hero > .cinema-hero-poster {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+  display: block !important;
+}
+.cinema-hero .cinema-video,
+.cinema-hero video.cinema-video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+.cinema-hero .cinema-ring { z-index: 5 !important; }
+.cinema-hero .cinema-copy,
+.cinema-hero .cinema-shade,
+.cinema-hero .cinema-grain,
+.cinema-hero .cinema-top,
+.cinema-hero .cinema-footer { position: relative; z-index: 4; }
+
+
+/* EROS_SHARE_UI */
+.eros-share-own {
+  max-width: 42rem;
+  margin: 0.5rem auto 1.75rem;
+  padding: 1rem 1.1rem 1.15rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  background: rgba(0,0,0,0.35);
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  text-align: center;
+}
+.eros-share-own img {
+  width: min(100%, 520px);
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+}
+.eros-share-own p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+.eros-share-own a.eros-share-link {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232,197,71,0.45);
+  color: #f0e6c0;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.eros-share-own a.eros-share-link:hover { background: rgba(232,197,71,0.12); }
+.eros-promo-strip {
+  margin: 2rem 0 1.5rem;
+  padding: 1.1rem 0 0.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.eros-promo-strip h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.eros-promo-row {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+}
+.eros-promo-row a {
+  flex: 0 0 auto;
+  width: min(200px, 70vw);
+  scroll-snap-align: start;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.25);
+}
+.eros-promo-row a img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+}
+.eros-promo-row a span {
+  display: block;
+  padding: 0.45rem 0.55rem 0.6rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+.eros-verse-link {
+  display: block;
+  margin: 1rem auto 1.5rem;
+  max-width: 42rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(232,197,71,0.35);
+  text-align: center;
+  text-decoration: none;
+  color: #f0e6c0;
+  font-weight: 600;
+}
+
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -187,7 +355,7 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 <header class="corpus-bar">
   <div class="brand-row">
     <a class="logo-cluster" href="#top" aria-label="Top">
-      <img class="pin eros-mark" src="/holo/holo035.jpg" alt="EROS" width="44" height="44"/>
+      <img class="pin eros-mark" src="https://meaning-unconfounded.github.io/holo/holo035.jpg" alt="EROS" width="44" height="44"/>
       <span class="compass" aria-hidden="true">🧭</span>
     </a>
     <div class="title-cluster">
@@ -211,12 +379,33 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 
 <!-- CINEMA 1: HERO -->
 <section class="cinema-hero">
-  <video src="/holo/holo001.jpg" poster="/holo/holo001.jpg" autoplay muted loop playsinline></video>
+  <video src="https://meaning-unconfounded.github.io/holo/holo001.jpg" poster="https://meaning-unconfounded.github.io/holo/holo001.jpg" autoplay muted loop playsinline></video>
   <div class="overlay">
     <h1>The Eros Thesis</h1>
     <p>From Living Cosmology to an Interactive Digital Universe. A framework for building a universe that continues.</p>
   </div>
 </section>
+<!-- EROS SOCIAL SHARE CARD: added for complete 30-page sharing coverage -->
+<div class="eros-share" style="--sa:#5fb8c8">
+  <div class="eros-share-in">
+    <img src="images/share/Basic_Eros_3D_Universe.jpg" alt="EROS · 3D Universe · Living Thesis" width="1200" height="630" loading="lazy" decoding="async">
+    <div>
+      <p class="k">Share this book</p>
+      <p class="t">The full Eros Thesis: cosmology, mythology, economics, and immersive media. Featuring the 37-image concept gallery.</p>
+      <div class="row">
+        <button type="button" class="b p" data-copy="https://meaning-unconfounded.github.io/Basic_Eros_3D_Universe.html">Copy link</button>
+        <button type="button" class="b" data-share data-title="EROS · 3D Universe · Living Thesis" data-text="EROS · 3D Universe · Living Thesis. The full Eros Thesis: cosmology, mythology, economics, and immersive media. Featuring the 37-image concept gallery." data-url="https://meaning-unconfounded.github.io/Basic_Eros_3D_Universe.html">Share</button>
+        <a class="b" href="https://t.me/share/url?url=https%3A%2F%2Fmeaning-unconfounded.github.io%2FBasic_Eros_3D_Universe.html&text=EROS%20%C2%B7%203D%20Universe%20%C2%B7%20Living%20Thesis.%20The%20full%20Eros%20Thesis%3A%20cosmology%2C%20mythology%2C%20economics%2C%20and%20immersive%20media.%20Featuring%20the%2037-image%20concept%20gallery.%20%23EROS%20%23PulseChain" target="_blank" rel="noopener">Telegram</a>
+        <a class="b" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmeaning-unconfounded.github.io%2FBasic_Eros_3D_Universe.html" target="_blank" rel="noopener">Facebook</a>
+        <a class="b" href="https://twitter.com/intent/tweet?text=EROS%20%C2%B7%203D%20Universe%20%C2%B7%20Living%20Thesis.%20The%20full%20Eros%20Thesis%3A%20cosmology%2C%20mythology%2C%20economics%2C%20and%20immersive%20media.%20Featuring%20the%2037-image%20concept%20gallery.%20%23EROS%20%23PulseChain&url=https%3A%2F%2Fmeaning-unconfounded.github.io%2FBasic_Eros_3D_Universe.html" target="_blank" rel="noopener">X</a>
+        <a class="b" href="https://wa.me/?text=EROS%20%C2%B7%203D%20Universe%20%C2%B7%20Living%20Thesis.%20The%20full%20Eros%20Thesis%3A%20cosmology%2C%20mythology%2C%20economics%2C%20and%20immersive%20media.%20Featuring%20the%2037-image%20concept%20gallery.%20%23EROS%20%23PulseChain%20https%3A%2F%2Fmeaning-unconfounded.github.io%2FBasic_Eros_3D_Universe.html" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="b" href="images/share/Basic_Eros_3D_Universe.jpg" download>Save card</a>
+      </div>
+      <p class="msg" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</div>
+
 
 <div class="page-content">
 
@@ -252,15 +441,15 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 
   <h3>The Toroid: The Engine of Iteration</h3>
   <div class="image-gallery">
-    <img src="/holo/holo035.jpg" alt="Golden torus energy flow pattern" onclick="openLightbox(this.src, this.alt)">
-    <img src="/holo/holo031.jpg" alt="Red glowing torus with magnetic field lines" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo027.jpg" alt="Blue energetic torus lines" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo035.jpg" alt="Golden torus energy flow pattern" onclick="openLightbox(this.src, this.alt)">
+    <img src="https://meaning-unconfounded.github.io/holo/holo031.jpg" alt="Red glowing torus with magnetic field lines" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo027.jpg" alt="Blue energetic torus lines" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   </div>
   <p>The toroid is our central visual and conceptual language. It represents circulation, exchange, return, enclosure, and continuity. It is an apparent center with an interconnected exterior—a system that continually renews its activity.</p>
   <p>We investigate the toroid at three levels: <strong>Physical</strong> (toroidal structures in magnetic confinement and fluid dynamics), <strong>Philosophical</strong> (a model for continuity and relationship), and <strong>Mythological</strong> (the visual signature of EROS itself).</p>
 
   <h3>The Living Egg: The Fractal Universe</h3>
-  <img src="/holo/holo011.jpg" alt="A glowing cosmic tree inside a protective sphere" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+  <img src="https://meaning-unconfounded.github.io/holo/holo011.jpg" alt="A glowing cosmic tree inside a protective sphere" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   <p>The living egg is one of the strongest concepts for the entire intellectual property. It represents a contained universe with the potential to become something else. It has an interior, an exterior, a boundary, an organizing intelligence, and a capacity for transformation.</p>
   <p>In the game, the egg becomes an actual location. A player enters it and discovers that its internal geography is much larger than its external appearance suggests (a fractal universe). Its contents change as the player progresses, and its internal systems respond to decisions.</p>
 
@@ -269,10 +458,10 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
   <p>The gods must have more than decorative identities. They need specific functions in the cosmological architecture.</p>
 
   <div class="image-gallery">
-    <img src="/holo/holo034.jpg" alt="NaUn - The Programmer" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo032.jpg" alt="Ra-Shen - The Manifestor" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo029.jpg" alt="Thoth - The Recorder" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo036.jpg" alt="EROS - The Continuity" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo034.jpg" alt="NaUn - The Programmer" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo032.jpg" alt="Ra-Shen - The Manifestor" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo029.jpg" alt="Thoth - The Recorder" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo036.jpg" alt="EROS - The Continuity" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   </div>
 
   <table class="ref">
@@ -288,7 +477,7 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 
   <!-- PART IV -->
   <h2>Part IV: The Illumination Strategy</h2>
-  <img src="/holo/holo002.jpg" alt="Cosmic vortex representing the continuity of time" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+  <img src="https://meaning-unconfounded.github.io/holo/holo002.jpg" alt="Cosmic vortex representing the continuity of time" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   <p>The continuity material introduces a modern geopolitical, military, technological, and extraterrestrial narrative. It is an Alternate Reality Game (ARG) at a global scale.</p>
   <p>Its subject matter includes the Continuity of Government, the United States Space Force, Trump-era institutional developments, Nordic extraterrestrial narratives, UFO/UAP reports, and the Men of Renown.</p>
   <p><strong>The storytelling distinction is crucial:</strong> The existence of the Space Force is a matter of documented history. Claims about extraterrestrial biologics require separate evidence and should be represented as allegations or fictionalized narrative possibilities unless independently verified.</p>
@@ -296,7 +485,7 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 
   <!-- PART V -->
   <h2 id="economics">Part V: Digital Economics & Polonomics</h2>
-  <img src="/holo/holo019.jpg" alt="Futuristic city with floating cryptocurrency coins" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+  <img src="https://meaning-unconfounded.github.io/holo/holo019.jpg" alt="Futuristic city with floating cryptocurrency coins" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   <p>The cryptocurrency is the economic infrastructure through which the digital world supports ownership, exchange, participation, scarcity, and asset creation.</p>
   
   <h3>The Three Instruments</h3>
@@ -308,8 +497,8 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 
   <h3>Polonomics: Bonding & Liquidity</h3>
   <div class="image-gallery">
-    <img src="/holo/holo023.jpg" alt="Isometric golden vault representing liquidity pools" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo024.jpg" alt="Golden tree with coin leaves representing asset growth" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo023.jpg" alt="Isometric golden vault representing liquidity pools" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo024.jpg" alt="Golden tree with coin leaves representing asset growth" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   </div>
   <p>An asset should not exist in isolation. It is bonded to other assets, participates in liquidity, and gains utility through relationships. Hybrid NFTs act as the bridge between economics and media.</p>
 
@@ -318,34 +507,34 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 
   <!-- PART VI -->
   <h2 id="media">Part VI: Media Production & Immersive Tech</h2>
-  <img src="/holo/holo020.jpg" alt="Virtual production stage with large LED screen" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+  <img src="https://meaning-unconfounded.github.io/holo/holo020.jpg" alt="Virtual production stage with large LED screen" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   <p>The existing books are the intellectual property foundation. Every production—whether a film, TV series, or game—draws from a shared central canon to prevent narrative contradictions.</p>
 
   <h3>Body as the Controller</h3>
-  <img src="/holo/holo006.jpg" alt="People wearing motion capture suits in a studio" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+  <img src="https://meaning-unconfounded.github.io/holo/holo006.jpg" alt="People wearing motion capture suits in a studio" class="full-width-image" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   <p>Following the <em>Ready Player One</em> paradigm, the body becomes the physical interface. Participants wear lightweight motion-capture suits. The system tracks head position, shoulders, torso, arms, hands, hips, knees, and feet. This skeleton drives an avatar or cinematic character in real-time, supported by omnidirectional walking platforms.</p>
 
   <h3>The Six Levels of Immersion</h3>
   <div class="image-gallery">
-    <img src="/holo/holo003.jpg" alt="Level 2: Virtual Reality room" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo007.jpg" alt="Level 3: Projection-mapped environments" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo017.jpg" alt="Level 4: Holographic presentation and glowing floors" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo015.jpg" alt="Level 5: The EROS room with interactive walls" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo003.jpg" alt="Level 2: Virtual Reality room" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo007.jpg" alt="Level 3: Projection-mapped environments" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo017.jpg" alt="Level 4: Holographic presentation and glowing floors" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo015.jpg" alt="Level 5: The EROS room with interactive walls" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   </div>
   <p>All levels use a shared asset foundation: <strong>Level 1</strong> (Laptop/Streaming), <strong>Level 2</strong> (VR), <strong>Level 3</strong> (Projection Mapping), <strong>Level 4</strong> (Holographic LED Fans), <strong>Level 5</strong> (The EROS Room combining projectors, interactive floors, and spatial audio), and <strong>Level 6</strong> (Large-scale EROS Destinations).</p>
 
   <h3>Repurposing Buildings: EROS Destinations</h3>
   <div class="image-gallery">
-    <img src="/holo/holo010.jpg" alt="Repurposed building with glowing projection walls" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo009.jpg" alt="Immersive theatre with purple lighting" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo008.jpg" alt="Grand immersive hall with digital projections" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo013.jpg" alt="Interactive art installation with neon colors" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo010.jpg" alt="Repurposed building with glowing projection walls" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo009.jpg" alt="Immersive theatre with purple lighting" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo008.jpg" alt="Grand immersive hall with digital projections" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo013.jpg" alt="Interactive art installation with neon colors" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   </div>
   <p>Many cities have vacant retail centres, industrial warehouses, and disused cinemas. These can be converted into immersive entertainment destinations. Ticketed experiences, private room bookings, premium NFT exhibitions, and live character performances transform physical locations into distribution channels for the EROS IP.</p>
 
   <!-- CINEMA 2: MID-PAGE -->
   <section class="cinema-band">
-    <video src="/holo/holo004.jpg" poster="/holo/holo004.jpg" autoplay muted loop playsinline></video>
+    <video src="https://meaning-unconfounded.github.io/holo/holo004.jpg" poster="https://meaning-unconfounded.github.io/holo/holo004.jpg" autoplay muted loop playsinline></video>
     <div class="overlay">
       <h2>The Master Architecture</h2>
       <p>Life is primary. Everything else is an effect. The Garden is the architecture of those effects.</p>
@@ -357,8 +546,8 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
   <p>The ultimate ambition is to create a universe that can be read, watched, played, entered, inhabited, and economically participated in.</p>
 
   <div class="image-gallery">
-    <img src="/holo/holo033.jpg" alt="Glowing energy sphere representing the Interactive World" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo005.jpg" alt="Storyboards representing the Cinematic Production" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo033.jpg" alt="Glowing energy sphere representing the Interactive World" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo005.jpg" alt="Storyboards representing the Cinematic Production" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   </div>
 
   <h3>The Eight Non-Negotiable Principles</h3>
@@ -389,15 +578,15 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
       <p style="font:800 .68rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:0 0 .5rem">The plan</p>
       <div style="border-radius:14px;overflow:hidden;border:1px solid var(--orange-line);background:#030a08;aspect-ratio:16/9">
         <video controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;background:#000"
-          poster="/images/frames/Architecture_of_Participation.jpg" src="/images/Architecture_of_Participation.mp4"></video>
+          poster="images/frames/Architecture_of_Participation.jpg" src="images/Architecture_of_Participation.mp4"></video>
       </div>
-      <p style="margin:.65rem 0 0"><a href="/Architecture_of_Participation.html">Open Architecture of Participation →</a></p>
+      <p style="margin:.65rem 0 0"><a href="Architecture_of_Participation.html">Open Architecture of Participation →</a></p>
     </div>
     <div>
       <p style="font:800 .68rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:0 0 .5rem">Trust is the product</p>
       <div style="border-radius:14px;overflow:hidden;border:1px solid var(--orange-line);background:#030a08;aspect-ratio:9/16;max-width:320px;margin:0 auto;max-height:70vh">
         <video controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:contain;display:block;background:#000"
-          poster="/images/frames/Eros_Trust.jpg" src="/images/Eros_Trust.mp4"></video>
+          poster="images/frames/Eros_Trust.jpg" src="images/Eros_Trust.mp4"></video>
       </div>
       <p style="margin:.65rem 0 0;text-align:center;color:var(--muted);font-size:.9rem">Vertical film · no extraction · verifiable structure</p>
     </div>
@@ -411,43 +600,43 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
   
   <div class="image-gallery" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:1rem;">
     <!-- Images 1 to 37 -->
-    <img src="/holo/holo001.jpg" alt="The Cosmic Egg & The Tree of Life" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo002.jpg" alt="Cosmic Vortex - Continuity" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo003.jpg" alt="Level 2: Virtual Reality room" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo004.jpg" alt="Cosmic Humanoid - Character Bible" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo005.jpg" alt="Storyboards - The First Resonance" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo006.jpg" alt="Motion Capture & Body as Controller" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo007.jpg" alt="Level 3: Projection-mapped environments" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo008.jpg" alt="The Grand Hall" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo009.jpg" alt="Immersive Theatre" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo010.jpg" alt="Repurposed Building - EROS Destination" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo011.jpg" alt="The Living Egg" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo012.jpg" alt="Holographic Projection" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo013.jpg" alt="Interactive Art Installation" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo014.jpg" alt="Spatial Architecture" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo015.jpg" alt="The EROS Room Level 5" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo016.jpg" alt="Interactive Floor Sensors" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo017.jpg" alt="Holographic Presentation Level 4" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo018.jpg" alt="Bedroom Cinema" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo019.jpg" alt="Cryptocurrency & The Digital City" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo020.jpg" alt="Virtual Production Stage" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo021.jpg" alt="Virtual Production Set" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo022.jpg" alt="Character Concept" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo023.jpg" alt="Polonomics & Liquidity Vaults" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo024.jpg" alt="The Golden Tree - Asset Growth" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo025.jpg" alt="Immersive Dome Environment" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo026.jpg" alt="The Dark Corridor" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo027.jpg" alt="Toroid Energy Lines" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo028.jpg" alt="Council Room" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo029.jpg" alt="Thoth - The Recorder" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo030.jpg" alt="The Astronaut" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo031.jpg" alt="Red Toroid" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo032.jpg" alt="Ra-Shen - The Manifestor" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo033.jpg" alt="Energy Sphere" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo034.jpg" alt="NaUn - The Programmer" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo035.jpg" alt="The Toroid Energy Pattern" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo036.jpg" alt="EROS - The Continuity" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
-    <img src="/holo/holo037.jpg" alt="Digital Toroid" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo001.jpg" alt="The Cosmic Egg & The Tree of Life" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo002.jpg" alt="Cosmic Vortex - Continuity" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo003.jpg" alt="Level 2: Virtual Reality room" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo004.jpg" alt="Cosmic Humanoid - Character Bible" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo005.jpg" alt="Storyboards - The First Resonance" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo006.jpg" alt="Motion Capture & Body as Controller" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo007.jpg" alt="Level 3: Projection-mapped environments" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo008.jpg" alt="The Grand Hall" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo009.jpg" alt="Immersive Theatre" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo010.jpg" alt="Repurposed Building - EROS Destination" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo011.jpg" alt="The Living Egg" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo012.jpg" alt="Holographic Projection" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo013.jpg" alt="Interactive Art Installation" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo014.jpg" alt="Spatial Architecture" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo015.jpg" alt="The EROS Room Level 5" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo016.jpg" alt="Interactive Floor Sensors" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo017.jpg" alt="Holographic Presentation Level 4" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo018.jpg" alt="Bedroom Cinema" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo019.jpg" alt="Cryptocurrency & The Digital City" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo020.jpg" alt="Virtual Production Stage" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo021.jpg" alt="Virtual Production Set" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo022.jpg" alt="Character Concept" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo023.jpg" alt="Polonomics & Liquidity Vaults" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo024.jpg" alt="The Golden Tree - Asset Growth" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo025.jpg" alt="Immersive Dome Environment" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo026.jpg" alt="The Dark Corridor" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo027.jpg" alt="Toroid Energy Lines" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo028.jpg" alt="Council Room" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo029.jpg" alt="Thoth - The Recorder" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo030.jpg" alt="The Astronaut" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo031.jpg" alt="Red Toroid" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo032.jpg" alt="Ra-Shen - The Manifestor" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo033.jpg" alt="Energy Sphere" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo034.jpg" alt="NaUn - The Programmer" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo035.jpg" alt="The Toroid Energy Pattern" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo036.jpg" alt="EROS - The Continuity" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo037.jpg" alt="Digital Toroid" onclick="openLightbox(this.src, this.alt)" loading="lazy" decoding="async">
   </div>
 </section>
 
@@ -462,16 +651,16 @@ footer.master img { width: 48px; height: 48px; border-radius: 50%; border: 2px s
 
 <footer class="master">
   <div class="pins">
-    <img src="/holo/holo035.jpg" alt="EROS" loading="lazy" decoding="async">
+    <img src="https://meaning-unconfounded.github.io/holo/holo035.jpg" alt="EROS" loading="lazy" decoding="async">
   </div>
   <p>The Eros Thesis · 3D Universe</p>
   <p style="margin-top:0.5rem; font-size:0.8rem;">Tenacity Through Integrity</p>
   <p style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center">
-    <a href="/Architecture_of_Participation.html">Architecture</a>
-    <a href="/WeAreWithYouEros.html">We Are With You</a>
-    <a href="/EROS_Liquidity_Tree.html">Liquidity Tree</a>
-    <a href="/The_Eros_Corpus.html">Corpus</a>
-    <a href="/The_Garden_of_Eros.html">Garden</a>
+    <a href="Architecture_of_Participation.html">Architecture</a>
+    <a href="WeAreWithYouEros.html">We Are With You</a>
+    <a href="EROS_Liquidity_Tree.html">Liquidity Tree</a>
+    <a href="The_Eros_Corpus.html">Corpus</a>
+    <a href="The_Garden_of_Eros.html">Garden</a>
   </p>
 
 </footer>
@@ -569,6 +758,16 @@ function closeLightbox(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape' && document.getElementById('thesis-lightbox').classList.contains('active')) closeLightbox();
 });
+</script>
+
+<script id="eros-share-interactions">
+(function(){
+function note(el,t){var m=el.closest('.eros-share'),s=m&&m.querySelector('.msg');if(s){s.textContent=t;window.setTimeout(function(){s.textContent=''},2500)}}
+function fallbackCopy(t,el){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy');note(el,'Link copied')}catch(e){note(el,'Copy was not available')}document.body.removeChild(a)}
+function copy(t,el){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){note(el,'Link copied')},function(){fallbackCopy(t,el)})}else fallbackCopy(t,el)}
+document.addEventListener('click',function(e){var c=e.target.closest('[data-copy]');if(c){e.preventDefault();copy(c.getAttribute('data-copy'),c);return}var s=e.target.closest('[data-share]');if(s&&navigator.share){e.preventDefault();navigator.share({title:s.getAttribute('data-title'),text:s.getAttribute('data-text'),url:s.getAttribute('data-url')}).catch(function(){})}});
+if(!navigator.share)document.querySelectorAll('[data-share]').forEach(function(b){b.hidden=true});
+})();
 </script>
 </body>
 </html>
