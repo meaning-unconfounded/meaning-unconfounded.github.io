@@ -1237,7 +1237,160 @@ details > *:not(summary) { margin-top: var(--space-sm); }
 }
 
 </style>
-<style>.arch{border:1px solid var(--border);border-radius:var(--radius);margin:var(--space-sm) 0;background:var(--bg-card)}.arch>summary{cursor:pointer;padding:.7rem 1rem;font-weight:600;list-style:none}.arch>summary::before{content:"\25B8  ";color:var(--gold)}.arch[open]>summary::before{content:"\25BE  "}.arch-body{padding:.2rem 1.2rem 1rem}.thr-fig{margin:1rem 0}.thr-fig img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border)}.thr-fig figcaption{font-size:.75rem;color:var(--text-muted)}.turn-you{border-left:3px solid var(--gold);padding-left:1rem}.turn-ai{border-left:3px solid var(--violet);padding-left:1rem}.note-small{font-size:.85rem;color:var(--text-muted)}</style><style>.cg-strip{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 12px;scroll-snap-type:x proximity}.cg-strip button{flex:0 0 auto;border:1px solid var(--border);border-radius:8px;padding:0;background:var(--bg-card);cursor:pointer;scroll-snap-align:start;overflow:hidden;position:relative}.cg-strip img{display:block;height:110px;width:auto;max-width:220px;object-fit:cover}.cg-strip span{position:absolute;left:4px;bottom:4px;font-size:10px;background:#000a;color:#fff;border-radius:4px;padding:0 5px}.thr-fig.cg-hit img{outline:3px solid var(--gold);outline-offset:3px}</style></head>
+<style>.arch{border:1px solid var(--border);border-radius:var(--radius);margin:var(--space-sm) 0;background:var(--bg-card)}.arch>summary{cursor:pointer;padding:.7rem 1rem;font-weight:600;list-style:none}.arch>summary::before{content:"\25B8  ";color:var(--gold)}.arch[open]>summary::before{content:"\25BE  "}.arch-body{padding:.2rem 1.2rem 1rem}.thr-fig{margin:1rem 0}.thr-fig img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border)}.thr-fig figcaption{font-size:.75rem;color:var(--text-muted)}.turn-you{border-left:3px solid var(--gold);padding-left:1rem}.turn-ai{border-left:3px solid var(--violet);padding-left:1rem}.note-small{font-size:.85rem;color:var(--text-muted)}</style><style>.cg-strip{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 12px;scroll-snap-type:x proximity}.cg-strip button{flex:0 0 auto;border:1px solid var(--border);border-radius:8px;padding:0;background:var(--bg-card);cursor:pointer;scroll-snap-align:start;overflow:hidden;position:relative}.cg-strip img{display:block;height:110px;width:auto;max-width:220px;object-fit:cover}.cg-strip span{position:absolute;left:4px;bottom:4px;font-size:10px;background:#000a;color:#fff;border-radius:4px;padding:0 5px}.thr-fig.cg-hit img{outline:3px solid var(--gold);outline-offset:3px}</style><style>
+
+/* EROS_CINEMA_RELEASE_1 — horizontal band + full width */
+section.cinema-hero,
+.cinema-hero {
+  box-sizing: border-box !important;
+  display: grid !important;
+  align-items: end !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.25rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  min-height: min(560px, 68svh) !important;
+  min-height: min(560px, 68dvh) !important;
+  max-height: none !important;
+  overflow: hidden !important;
+  position: relative !important;
+  left: auto !important;
+  transform: none !important;
+}
+@media (max-width: 700px) {
+  section.cinema-hero,
+  .cinema-hero {
+    min-height: min(480px, 62svh) !important;
+    min-height: min(480px, 62dvh) !important;
+  }
+}
+.cinema-hero .cinema-hero-poster,
+.cinema-hero > .cinema-hero-poster {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+  display: block !important;
+}
+.cinema-hero .cinema-video,
+.cinema-hero video.cinema-video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+.cinema-hero .cinema-ring { z-index: 5 !important; }
+.cinema-hero .cinema-copy,
+.cinema-hero .cinema-shade,
+.cinema-hero .cinema-grain,
+.cinema-hero .cinema-top,
+.cinema-hero .cinema-footer { position: relative; z-index: 4; }
+
+
+/* EROS_SHARE_UI */
+.eros-share-own {
+  max-width: 42rem;
+  margin: 0.5rem auto 1.75rem;
+  padding: 1rem 1.1rem 1.15rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  background: rgba(0,0,0,0.35);
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  text-align: center;
+}
+.eros-share-own img {
+  width: min(100%, 520px);
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+}
+.eros-share-own p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+.eros-share-own a.eros-share-link {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232,197,71,0.45);
+  color: #f0e6c0;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.eros-share-own a.eros-share-link:hover { background: rgba(232,197,71,0.12); }
+.eros-promo-strip {
+  margin: 2rem 0 1.5rem;
+  padding: 1.1rem 0 0.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.eros-promo-strip h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.eros-promo-row {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+}
+.eros-promo-row a {
+  flex: 0 0 auto;
+  width: min(200px, 70vw);
+  scroll-snap-align: start;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.25);
+}
+.eros-promo-row a img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+}
+.eros-promo-row a span {
+  display: block;
+  padding: 0.45rem 0.55rem 0.6rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+.eros-verse-link {
+  display: block;
+  margin: 1rem auto 1.5rem;
+  max-width: 42rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(232,197,71,0.35);
+  text-align: center;
+  text-decoration: none;
+  color: #f0e6c0;
+  font-weight: 600;
+}
+
+</style>
+</head>
 <body>
 <div class="progress-bar" aria-hidden="true"></div>
 
@@ -1421,6 +1574,18 @@ details > *:not(summary) { margin-top: var(--space-sm); }
      MAIN
      ============================================================ -->
 <main id="main" class="main" role="main">
+
+<nav class="eros-verse-out" style="max-width:920px;margin:1rem auto;padding:0.75rem 1rem;display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;font-size:0.85rem;">
+  <a href="The_Garden_of_Eros.html">Garden</a>
+  <a href="The_Eros_Corpus.html">Corpus</a>
+  <a href="Architecture_of_Participation.html">Architecture</a>
+  <a href="EROS_Liquidity_Tree.html">Liquidity Tree</a>
+  <a href="The_TitanX_Redemption.html">Redemption</a>
+  <a href="WeAreWithYouEros.html">We Are With You</a>
+  <a href="The_Bridge.html">Bridge</a>
+  <a href="media.html">Media</a>
+</nav>
+
 
 <!-- Anchor at very top -->
 <div id="top"></div>
