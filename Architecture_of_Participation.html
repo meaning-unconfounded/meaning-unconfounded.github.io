@@ -688,6 +688,14 @@ footer strong{color:var(--orange2)}
 .eros-promos .c span{display:block;padding:.5rem .7rem .2rem;font-weight:600;font-size:.95rem}
 .eros-promos .c .b{margin:.3rem .7rem .7rem;min-height:40px;font-size:14px;align-self:flex-start}
 @media print{.eros-share,.eros-promos{display:none!important}}
+.eros-lib{margin-top:3rem;padding:2rem 0 3rem;border-top:1px solid var(--border,rgba(127,127,127,.35));font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:.95rem;line-height:1.5}
+.eros-lib .in{max-width:1100px;margin:0 auto;padding:0 1rem}
+.eros-lib .lib-title{font-weight:800;font-size:1.1rem;margin:0 0 1rem}
+.eros-lib .lib-grid{display:grid;gap:1.4rem 2rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.eros-lib .lib-h{font-weight:700;margin:0 0 .5rem;color:var(--gold,inherit)}
+.eros-lib ul{list-style:none;margin:0;padding:0}.eros-lib li{margin:.3rem 0}
+.eros-lib a{color:inherit;text-underline-offset:3px}
+@media print{.eros-lib{display:none}}
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%2307090a' stroke='%235fb8c8' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%235fb8c8'/%3E%3C/svg%3E"/>
 <meta property="og:type" content="website">
@@ -701,159 +709,6 @@ footer strong{color:var(--orange2)}
 <meta property="og:image:alt" content="EROS · The Architecture of Participation">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<style>
-
-/* EROS_CINEMA_RELEASE_1 — horizontal band + full width */
-section.cinema-hero,
-.cinema-hero {
-  box-sizing: border-box !important;
-  display: grid !important;
-  align-items: end !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  margin-top: 0 !important;
-  margin-bottom: 1.25rem !important;
-  padding: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  min-height: min(560px, 68svh) !important;
-  min-height: min(560px, 68dvh) !important;
-  max-height: none !important;
-  overflow: hidden !important;
-  position: relative !important;
-  left: auto !important;
-  transform: none !important;
-}
-@media (max-width: 700px) {
-  section.cinema-hero,
-  .cinema-hero {
-    min-height: min(480px, 62svh) !important;
-    min-height: min(480px, 62dvh) !important;
-  }
-}
-.cinema-hero .cinema-hero-poster,
-.cinema-hero > .cinema-hero-poster {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  z-index: 1 !important;
-  margin: 0 !important;
-  display: block !important;
-}
-.cinema-hero .cinema-video,
-.cinema-hero video.cinema-video {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-}
-.cinema-hero .cinema-ring { z-index: 5 !important; }
-.cinema-hero .cinema-copy,
-.cinema-hero .cinema-shade,
-.cinema-hero .cinema-grain,
-.cinema-hero .cinema-top,
-.cinema-hero .cinema-footer { position: relative; z-index: 4; }
-
-
-/* EROS_SHARE_UI */
-.eros-share-own {
-  max-width: 42rem;
-  margin: 0.5rem auto 1.75rem;
-  padding: 1rem 1.1rem 1.15rem;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 14px;
-  background: rgba(0,0,0,0.35);
-  display: grid;
-  gap: 0.75rem;
-  justify-items: center;
-  text-align: center;
-}
-.eros-share-own img {
-  width: min(100%, 520px);
-  height: auto;
-  border-radius: 10px;
-  display: block;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-}
-.eros-share-own p {
-  margin: 0;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-.eros-share-own a.eros-share-link {
-  display: inline-block;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(232,197,71,0.45);
-  color: #f0e6c0;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-.eros-share-own a.eros-share-link:hover { background: rgba(232,197,71,0.12); }
-.eros-promo-strip {
-  margin: 2rem 0 1.5rem;
-  padding: 1.1rem 0 0.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-.eros-promo-strip h2 {
-  font-size: 1.05rem;
-  margin: 0 0 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-.eros-promo-row {
-  display: flex;
-  gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  scroll-snap-type: x mandatory;
-}
-.eros-promo-row a {
-  flex: 0 0 auto;
-  width: min(200px, 70vw);
-  scroll-snap-align: start;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(0,0,0,0.25);
-}
-.eros-promo-row a img {
-  width: 100%;
-  height: auto;
-  display: block;
-  aspect-ratio: 1200 / 630;
-  object-fit: cover;
-}
-.eros-promo-row a span {
-  display: block;
-  padding: 0.45rem 0.55rem 0.6rem;
-  font-size: 0.78rem;
-  line-height: 1.3;
-}
-.eros-verse-link {
-  display: block;
-  margin: 1rem auto 1.5rem;
-  max-width: 42rem;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(232,197,71,0.35);
-  text-align: center;
-  text-decoration: none;
-  color: #f0e6c0;
-  font-weight: 600;
-}
-
-</style>
 </head>
 <body>
 <header>
@@ -876,7 +731,7 @@ section.cinema-hero,
 
 <main id="top">
 <section class="cinema-hero accent-arch" id="cinemaHero" role="button" tabindex="0" aria-expanded="false" aria-label="The Architecture of Participation — cinematic threshold" data-cinema="hero" data-queue="Architecture_of_Participation.mp4|Eros_Trust.mp4">
-  <img class="cinema-hero-poster" src="images/frames/Architecture_of_Participation.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+  <img class="cinema-hero-poster" src="/images/frames/Architecture_of_Participation.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div><div class="cinema-grain" aria-hidden="true"></div>
@@ -898,7 +753,7 @@ section.cinema-hero,
 </section>
 <div class="eros-share" style="--sa:#2fd67a">
 <div class="eros-share-in">
-<img src="images/share/Architecture_of_Participation.jpg" alt="The Architecture of Participation share card" width="1200" height="630" loading="lazy" decoding="async">
+<img src="/images/share/Architecture_of_Participation.jpg" alt="The Architecture of Participation share card" width="1200" height="630" loading="lazy" decoding="async">
 <div>
 <p class="k">Share this book</p>
 <p class="t">Trust is the product. Participation is the engine. Pass it on with the link below.</p>
@@ -909,7 +764,7 @@ section.cinema-hero,
 <a class="b" href="https://twitter.com/intent/tweet?text=The%20Architecture%20of%20Participation.%20Trust%20is%20the%20product.%20Participation%20is%20the%20engine.%20%23EROS%20%23PulseChain&amp;url=https%3A%2F%2Fmeaning-unconfounded.github.io%2FArchitecture_of_Participation.html" target="_blank" rel="noopener">X</a>
 <a class="b" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmeaning-unconfounded.github.io%2FArchitecture_of_Participation.html" target="_blank" rel="noopener">Facebook</a>
 <a class="b" href="https://wa.me/?text=The%20Architecture%20of%20Participation.%20Trust%20is%20the%20product.%20Participation%20is%20the%20engine.%20%23EROS%20%23PulseChain%20https%3A%2F%2Fmeaning-unconfounded.github.io%2FArchitecture_of_Participation.html" target="_blank" rel="noopener">WhatsApp</a>
-<a class="b" href="images/share/Architecture_of_Participation.jpg" download>Save card</a>
+<a class="b" href="/images/share/Architecture_of_Participation.jpg" download>Save card</a>
 </div>
 <p class="msg" role="status" aria-live="polite"></p>
 </div>
@@ -932,11 +787,11 @@ section.cinema-hero,
   
 <div class="video-slot" id="planVideo">
     <video controls playsinline preload="none"
-      poster="images/frames/Architecture_of_Participation.jpg"
-      data-src="images/Architecture_of_Participation.mp4"
+      poster="/images/frames/Architecture_of_Participation.jpg"
+      data-src="/images/Architecture_of_Participation.mp4"
       aria-label="The Architecture of Participation, spoken plan"></video>
     <button class="vplay" type="button" aria-label="Play the spoken plan"><span></span></button>
-    <noscript><video controls playsinline preload="none" poster="images/frames/Architecture_of_Participation.jpg" src="images/Architecture_of_Participation.mp4"></video></noscript>
+    <noscript><video controls playsinline preload="none" poster="/images/frames/Architecture_of_Participation.jpg" src="/images/Architecture_of_Participation.mp4"></video></noscript>
   </div>
 
   
@@ -949,7 +804,7 @@ section.cinema-hero,
       <li><strong>Price is the doorway.</strong> A rising chart sends people to the plan; building is what keeps them.</li>
       <li><strong>Trust is the product.</strong> No extraction, verifiable code, nothing to take on faith.</li>
     </ol>
-    <p class="rn">Read next: <a href="The_Flywheel.html">The Flywheel</a> (price and perception in full) · <a href="TheErosPlan.html">The Eros Plan</a> (the spine) · <a href="The_Platinum_Standard.html">The Platinum Standard</a> (rock and river)</p>
+    <p class="rn">Read next: <a href="/The_Flywheel.html">The Flywheel</a> (price and perception in full) · <a href="/TheErosPlan.html">The Eros Plan</a> (the spine) · <a href="/The_Platinum_Standard.html">The Platinum Standard</a> (rock and river)</p>
   </aside>
 <figure class="motion-graphic" aria-label="Eros foundation emblem">
     <svg viewBox="0 0 640 250" role="img">
@@ -1092,8 +947,8 @@ section.cinema-hero,
   <p>Ethereum has an enormous ecosystem of tokens, communities, developers and established economic activity. Transaction costs and congestion can create barriers, especially for smaller holders and experimental projects. PulseChain offers an alternative environment with a different cost structure.</p>
   <p>That creates an opportunity for Eros to become part of a bridge between ecosystems: communities discovering the bonding architecture, bringing compatible assets and liquidity into PulseChain, and developing a new economic relationship through Eros — voluntarily, with eyes open to bridge and contract risk. The point is not that every ERC-20 automatically becomes dollar value on PulseChain. Assets must be appropriately bridged or represented, and liquidity must be voluntarily supplied. The opportunity is a common economic foundation around which different communities organise that activity.</p>
   <div class="links">
-    <a href="EROS_Liquidity_Tree.html">Open the Liquidity Tree</a>
-    <a href="WeAreWithYouEros.html">We Are With You</a>
+    <a href="/EROS_Liquidity_Tree.html">Open the Liquidity Tree</a>
+    <a href="/WeAreWithYouEros.html">We Are With You</a>
   </div>
 </section>
 
@@ -1101,7 +956,7 @@ section.cinema-hero,
   <h2>5 · Trust is the <span>product</span></h2>
   <p>The cryptocurrency industry has an enormous credibility problem. People have experienced extraction, hidden allocations, insider advantages, manipulated tokenomics, abandoned projects and promises that were never fulfilled. Too many projects have been designed around extracting value from participants rather than creating something participants collectively benefit from building.</p>
   <p>Eros proposes a different philosophy. <strong>No extraction as a founding principle.</strong> Fairness, transparency, verifiable code and equitable participation should be central to the architecture.</p>
-  <p>Eros began as a free airdrop. That origin is part of the narrative: fair, equitable and without extraction, and it is the story its supporters expect history to vindicate. It is also why the revival of the wider TitanX family starts at <a href="The_Front_Door.html">The Front Door</a>.</p>
+  <p>Eros began as a free airdrop. That origin is part of the narrative: fair, equitable and without extraction, and it is the story its supporters expect history to vindicate. It is also why the revival of the wider TitanX family starts at <a href="/The_Front_Door.html">The Front Door</a>.</p>
   <div class="grid">
     <article class="card"><span class="num">TRUST</span><h3>The product</h3><p>Not dependent on a personality — examinable in the structure.</p></article>
     <article class="card"><span class="num">ETHIC</span><h3>No extraction</h3><p>Treasury and DAO take removed from the design path we argue for.</p></article>
@@ -1157,7 +1012,7 @@ section.cinema-hero,
   <p class="lede">This is perhaps the most important mechanism in the entire Eros proposition. It explains how a relatively unknown project could develop into a much larger cultural and economic ecosystem. And it begins with something very familiar in cryptocurrency: price.</p>
   <p>When a substantial buyer enters and the market price rises, the chart changes. Green candles appear. People notice. Traders notice. Existing holders notice. Communities begin discussing the movement. That is the first stage: <strong>attention</strong>.</p>
   <p>In crypto, price is the scoreboard. A rising chart is read as evidence that something is working, and that reading is what sends people looking: why is it going up? They find the books, the plan, the bonding trees and the tokenomics, and in their minds the price went up <em>because</em> of the plan. So they study it, and some of them buy.</p>
-  <p>That perception is the ignition. It pulls the price further, and it brings the first builders in. <a href="The_Flywheel.html">The Flywheel</a> tells the price side in full, with the charts.</p>
+  <p>That perception is the ignition. It pulls the price further, and it brings the first builders in. <a href="/The_Flywheel.html">The Flywheel</a> tells the price side in full, with the charts.</p>
   <div class="pull">The price movement is the doorway. The plan is what people discover when they walk through it.</div>
   <figure class="motion-graphic" aria-label="Eight-stage flywheel">
     <svg viewBox="0 0 640 320" role="img">
@@ -1235,7 +1090,7 @@ section.cinema-hero,
     <p style="color:#c5ddd2;line-height:1.65;margin:0 0 16px">No extraction as ethic. Fairness, transparency and verifiable code as the foundation. Trust should not depend on a personality; it should emerge from what people can inspect and use.</p>
     <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(255,138,54,.35);background:#030a08;aspect-ratio:9/16;max-width:360px;margin:0 auto;max-height:72vh">
       <video controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:contain;display:block;background:#000"
-        poster="images/frames/Eros_Trust.jpg" src="images/Eros_Trust.mp4"></video>
+        poster="/images/frames/Eros_Trust.jpg" src="/images/Eros_Trust.mp4"></video>
     </div>
   </div>
 </section>
@@ -1247,8 +1102,8 @@ section.cinema-hero,
     <h2 style="font:600 1.35rem/1.25 Georgia,serif;margin:0 0 10px;color:#f3faf6">From thesis to a world you can enter</h2>
     <p style="color:#c5ddd2;line-height:1.65;margin:0 0 14px">The plan is not only tokenomics and trees. It is also a cosmology, a mythos, and an immersive media path — from laptop to room-scale experience. Two updated 3D Universe explainers map that vision in the same orange–teal standard as these books.</p>
     <p style="display:flex;flex-wrap:wrap;gap:10px;margin:0">
-      <a href="Basic_Eros_3D_Universe.html" style="border:1px solid rgba(62,207,154,.45);border-radius:99px;padding:8px 14px;font:700 .68rem system-ui;letter-spacing:.06em;text-transform:uppercase;color:#7eecc0;background:rgba(62,207,154,.08);text-decoration:none">Basic 3D Universe</a>
-      <a href="Full_Eros_3D_Universe.html" style="border:1px solid rgba(255,138,54,.45);border-radius:99px;padding:8px 14px;font:700 .68rem system-ui;letter-spacing:.06em;text-transform:uppercase;color:#ffb36f;background:rgba(255,138,54,.1);text-decoration:none">Full Master 3D Universe</a>
+      <a href="/Basic_Eros_3D_Universe.html" style="border:1px solid rgba(62,207,154,.45);border-radius:99px;padding:8px 14px;font:700 .68rem system-ui;letter-spacing:.06em;text-transform:uppercase;color:#7eecc0;background:rgba(62,207,154,.08);text-decoration:none">Basic 3D Universe</a>
+      <a href="/Full_Eros_3D_Universe.html" style="border:1px solid rgba(255,138,54,.45);border-radius:99px;padding:8px 14px;font:700 .68rem system-ui;letter-spacing:.06em;text-transform:uppercase;color:#ffb36f;background:rgba(255,138,54,.1);text-decoration:none">Full Master 3D Universe</a>
     </p>
   </div>
 </section>
@@ -1266,13 +1121,13 @@ section.cinema-hero,
     <p class="final">This is Eros. This is the architecture. And this is why Eros can win.</p>
   </div>
   <div class="links">
-    <a href="WeAreWithYouEros.html">We Are With You</a>
-    <a href="EROS_Liquidity_Tree.html">Liquidity Tree</a>
-    <a href="The_Eros_Corpus.html">Corpus</a>
-    <a href="The_Flywheel.html">Flywheel</a>
-    <a href="The_Open_Call.html">Open Call</a>
-    <a href="The_Front_Door.html">Front Door</a>
-    <a href="TheErosPlan.html">The Eros Plan</a>
+    <a href="/WeAreWithYouEros.html">We Are With You</a>
+    <a href="/EROS_Liquidity_Tree.html">Liquidity Tree</a>
+    <a href="/The_Eros_Corpus.html">Corpus</a>
+    <a href="/The_Flywheel.html">Flywheel</a>
+    <a href="/The_Open_Call.html">Open Call</a>
+    <a href="/The_Front_Door.html">Front Door</a>
+    <a href="/TheErosPlan.html">The Eros Plan</a>
   </div>
   <div class="callout">
     <p><strong>Verify everything on-chain.</strong> Bridges, contracts and liquidity carry technical risk, and proposed ideas are not live until independently confirmed. Price brings people to the plan; building is what makes it real.</p>
@@ -1285,14 +1140,14 @@ section.cinema-hero,
 
 <section class="eros-crosslink" style="padding:28px 20px;max-width:900px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1)">
 <p style="margin:0 0 8px;font:700 12px system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;opacity:.85">Related</p>
-<p style="margin:0;font:16px/1.5 system-ui,sans-serif"><a href="The_TitanX_Redemption.html"><strong>The TitanX Redemption</strong></a> — economic application of the expectation: 8% → X28 → Shogun buy-and-burn → reward the builders who stayed. Not a letter — a structure.</p>
+<p style="margin:0;font:16px/1.5 system-ui,sans-serif"><a href="/The_TitanX_Redemption.html"><strong>The TitanX Redemption</strong></a> — economic application of the expectation: 8% → X28 → Shogun buy-and-burn → reward the builders who stayed. Not a letter — a structure.</p>
 </section>
 
 <footer>
 <div class="wrap">
   <strong>EROS · The Architecture of Participation</strong><br>
   Get involved. Build something. Create a river. Establish a community. Tell the story.<br>
-  <a href="The_Eros_Corpus.html">Corpus</a> · <a href="The_Flywheel.html">Flywheel</a> · <a href="The_Open_Call.html">Open Call</a>
+  <a href="/The_Eros_Corpus.html">Corpus</a> · <a href="/The_Flywheel.html">Flywheel</a> · <a href="/The_Open_Call.html">Open Call</a>
 </div>
 </footer>
 <div class="progress" id="progress"></div>
@@ -1329,7 +1184,7 @@ section.cinema-hero,
 (function () {
   "use strict";
 
-  var BASE = "images/";
+  var BASE = "/images/";
   var VOL = 0.22;
   var VISUAL_FADE_MS = 1450;
   var DEFAULT_AUDIO_FADE_MS = 400;
@@ -1902,5 +1757,14 @@ var s=e.target.closest('[data-share]');if(s&&navigator.share){e.preventDefault()
 if(!navigator.share)document.querySelectorAll('[data-share]').forEach(function(b){b.hidden=true});
 })();
 </script>
+<div class="eros-lib" role="navigation" aria-label="The EROS library"><div class="in"><p class="lib-title">The EROS library</p><div class="lib-grid">
+<div><p class="lib-h">Entry</p><ul><li><a href="/The_Eros_Corpus.html">How the Corpus Works</a></li><li><a href="/The_Open_Call.html">The Open Call</a></li><li><a href="/The_Flywheel.html">The Flywheel</a></li><li><a href="/The_Garden_of_Eros.html">The Garden of Eros</a></li><li><a href="/Eros_3D_Universe.html">The Living Universe</a></li></ul></div>
+<div><p class="lib-h">Science</p><ul><li><a href="/The_Conscious_Eros.html">The Conscious Eros</a></li><li><a href="/Living_Egg.html">The Living Egg</a></li><li><a href="/The_Eros_Enclosure.html">The Eros Enclosure</a></li><li><a href="/The_Iteration_Codex.html">The Iteration Codex</a></li></ul></div>
+<div><p class="lib-h">System</p><ul><li><a href="/TheErosPlan.html">The Eros Plan</a></li><li><a href="/The_Bridge.html">The Bridge</a></li><li><a href="/The_Platinum_Standard.html">The Platinum Standard</a></li><li><a href="/The_Hopeful_Future.html">The Hopeful Future</a></li></ul></div>
+<div><p class="lib-h">Guides</p><ul><li><a href="/Architecture_of_Participation.html">Architecture of Participation</a></li><li><a href="/EROS_Liquidity_Tree.html">The Liquidity Tree</a></li><li><a href="/WeAreWithYouEros.html">We Are With You</a></li><li><a href="/The_TitanX_Redemption.html">The TitanX Redemption</a></li><li><a href="/The_ErosVerse.html">The ErosVerse</a></li></ul></div>
+<div><p class="lib-h">World</p><ul><li><a href="/Gods_Of_Eros.html">Gods of Eros</a></li><li><a href="/Gift_Of_Thoth.html">Gift of Thoth</a></li><li><a href="/Illumination_Strategy.html">Illumination Strategy</a></li><li><a href="/Men_Of_Renown.html">Men of Renown</a></li><li><a href="/The_Front_Door.html">The Front Door</a></li></ul></div>
+<div><p class="lib-h">Story</p><ul><li><a href="/EROS_Newcomer_Dossier.html">Newcomer Dossier</a></li><li><a href="/Eros_Narrative.html">Eros Narrative</a></li><li><a href="/The_First_Resonance.html">The First Resonance</a></li><li><a href="/Eros_Stories.html">Eros Stories</a></li><li><a href="/The_Continuity_File.html">The Continuity File</a></li></ul></div>
+<div><p class="lib-h">Tools</p><ul><li><a href="/SpaceEros.html">SpaceEros</a></li><li><a href="/media.html">Media Index</a></li><li><a href="https://erosrevival.win/" target="_blank" rel="noopener">Staking · erosrevival.win</a></li><li><a href="https://dexscreener.com/pulsechain/0xF416bE3434Edc01aD704B86f32cb8d0FBF22d1f2" target="_blank" rel="noopener">Chart · DexScreener</a></li><li><a href="https://x.com/ErosPulseChain" target="_blank" rel="noopener">X · @ErosPulseChain</a></li><li><a href="https://youtube.com/@eros_burn_baby_burn_062cf" target="_blank" rel="noopener">YouTube ▶</a></li><li><a href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">NotebookLM 📚</a></li><li><a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">Telegram 🖇️</a></li></ul></div>
+</div></div>
 </body>
 </html>
