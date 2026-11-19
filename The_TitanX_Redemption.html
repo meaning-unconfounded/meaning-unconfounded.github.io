@@ -570,6 +570,14 @@ html,body{overflow-x:hidden}
 .eros-promos .c span{display:block;padding:.5rem .7rem .2rem;font-weight:600;font-size:.95rem}
 .eros-promos .c .b{margin:.3rem .7rem .7rem;min-height:40px;font-size:14px;align-self:flex-start}
 @media print{.eros-share,.eros-promos{display:none!important}}
+.eros-lib{margin-top:3rem;padding:2rem 0 3rem;border-top:1px solid var(--border,rgba(127,127,127,.35));font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:.95rem;line-height:1.5}
+.eros-lib .in{max-width:1100px;margin:0 auto;padding:0 1rem}
+.eros-lib .lib-title{font-weight:800;font-size:1.1rem;margin:0 0 1rem}
+.eros-lib .lib-grid{display:grid;gap:1.4rem 2rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.eros-lib .lib-h{font-weight:700;margin:0 0 .5rem;color:var(--gold,inherit)}
+.eros-lib ul{list-style:none;margin:0;padding:0}.eros-lib li{margin:.3rem 0}
+.eros-lib a{color:inherit;text-underline-offset:3px}
+@media print{.eros-lib{display:none}}
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%2307090a' stroke='%235fb8c8' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%235fb8c8'/%3E%3C/svg%3E"/>
 <meta property="og:type" content="website">
@@ -583,165 +591,12 @@ html,body{overflow-x:hidden}
 <meta property="og:image:alt" content="The TitanX Redemption">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<style>
-
-/* EROS_CINEMA_RELEASE_1 — horizontal band + full width */
-section.cinema-hero,
-.cinema-hero {
-  box-sizing: border-box !important;
-  display: grid !important;
-  align-items: end !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  margin-top: 0 !important;
-  margin-bottom: 1.25rem !important;
-  padding: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  min-height: min(560px, 68svh) !important;
-  min-height: min(560px, 68dvh) !important;
-  max-height: none !important;
-  overflow: hidden !important;
-  position: relative !important;
-  left: auto !important;
-  transform: none !important;
-}
-@media (max-width: 700px) {
-  section.cinema-hero,
-  .cinema-hero {
-    min-height: min(480px, 62svh) !important;
-    min-height: min(480px, 62dvh) !important;
-  }
-}
-.cinema-hero .cinema-hero-poster,
-.cinema-hero > .cinema-hero-poster {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  z-index: 1 !important;
-  margin: 0 !important;
-  display: block !important;
-}
-.cinema-hero .cinema-video,
-.cinema-hero video.cinema-video {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-}
-.cinema-hero .cinema-ring { z-index: 5 !important; }
-.cinema-hero .cinema-copy,
-.cinema-hero .cinema-shade,
-.cinema-hero .cinema-grain,
-.cinema-hero .cinema-top,
-.cinema-hero .cinema-footer { position: relative; z-index: 4; }
-
-
-/* EROS_SHARE_UI */
-.eros-share-own {
-  max-width: 42rem;
-  margin: 0.5rem auto 1.75rem;
-  padding: 1rem 1.1rem 1.15rem;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 14px;
-  background: rgba(0,0,0,0.35);
-  display: grid;
-  gap: 0.75rem;
-  justify-items: center;
-  text-align: center;
-}
-.eros-share-own img {
-  width: min(100%, 520px);
-  height: auto;
-  border-radius: 10px;
-  display: block;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-}
-.eros-share-own p {
-  margin: 0;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-.eros-share-own a.eros-share-link {
-  display: inline-block;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(232,197,71,0.45);
-  color: #f0e6c0;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-.eros-share-own a.eros-share-link:hover { background: rgba(232,197,71,0.12); }
-.eros-promo-strip {
-  margin: 2rem 0 1.5rem;
-  padding: 1.1rem 0 0.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-.eros-promo-strip h2 {
-  font-size: 1.05rem;
-  margin: 0 0 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-.eros-promo-row {
-  display: flex;
-  gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  scroll-snap-type: x mandatory;
-}
-.eros-promo-row a {
-  flex: 0 0 auto;
-  width: min(200px, 70vw);
-  scroll-snap-align: start;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(0,0,0,0.25);
-}
-.eros-promo-row a img {
-  width: 100%;
-  height: auto;
-  display: block;
-  aspect-ratio: 1200 / 630;
-  object-fit: cover;
-}
-.eros-promo-row a span {
-  display: block;
-  padding: 0.45rem 0.55rem 0.6rem;
-  font-size: 0.78rem;
-  line-height: 1.3;
-}
-.eros-verse-link {
-  display: block;
-  margin: 1rem auto 1.5rem;
-  max-width: 42rem;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(232,197,71,0.35);
-  text-align: center;
-  text-decoration: none;
-  color: #f0e6c0;
-  font-weight: 600;
-}
-
-</style>
 </head>
 <body>
 <nav aria-label="Sections"><a href="#door">Doorway</a><a href="#statement">Statement</a><a href="#rewards">Rewards</a><a href="#origin">Origin</a><a href="#points">Main points</a><a href="#machine">Machine</a><a href="#domino">Domino</a><a href="#moves">Moves</a><a href="#pulse">PulseChain</a><a href="#receipts">Receipts</a></nav>
 
 <section class="cinema-hero accent-titanx" id="cinemaHero" role="button" tabindex="0" aria-expanded="false" aria-label="The TitanX Redemption — cinematic threshold" data-cinema="hero" data-queue="Titanx_Time.mp4|Jake8percent.mp4|migrate_titanX.mp4|Eros_Bonds_TitanX.mp4|titanxbridge1.mp4|Eros_TitanX_Revival.mp4|jake_richard_dancing.mp4|migrate_pulsechain.mp4">
-  <img class="cinema-hero-poster" src="images/frames/Titanx_Time.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+  <img class="cinema-hero-poster" src="/images/frames/Titanx_Time.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
   <video class="cinema-video cinema-va" playsinline muted preload="auto" aria-hidden="true"></video>
   <video class="cinema-video cinema-vb" playsinline muted preload="none" aria-hidden="true"></video>
   <div class="cinema-shade" aria-hidden="true"></div>
@@ -768,7 +623,7 @@ section.cinema-hero,
 </section>
 <div class="eros-share" style="--sa:#00FF55">
 <div class="eros-share-in">
-<img src="images/share/The_TitanX_Redemption.jpg" alt="The TitanX Redemption share card" width="1200" height="630" loading="lazy" decoding="async">
+<img src="/images/share/The_TitanX_Redemption.jpg" alt="The TitanX Redemption share card" width="1200" height="630" loading="lazy" decoding="async">
 <div>
 <p class="k">Share this book</p>
 <p class="t">Recognition is words. Redemption is buy-and-burn. Pass it on with the link below.</p>
@@ -779,7 +634,7 @@ section.cinema-hero,
 <a class="b" href="https://twitter.com/intent/tweet?text=The%20TitanX%20Redemption.%20Recognition%20is%20words.%20Redemption%20is%20buy-and-burn.%20%23TitanX%20%23EROS%20%23PulseChain&amp;url=https%3A%2F%2Fmeaning-unconfounded.github.io%2FThe_TitanX_Redemption.html" target="_blank" rel="noopener">X</a>
 <a class="b" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmeaning-unconfounded.github.io%2FThe_TitanX_Redemption.html" target="_blank" rel="noopener">Facebook</a>
 <a class="b" href="https://wa.me/?text=The%20TitanX%20Redemption.%20Recognition%20is%20words.%20Redemption%20is%20buy-and-burn.%20%23TitanX%20%23EROS%20%23PulseChain%20https%3A%2F%2Fmeaning-unconfounded.github.io%2FThe_TitanX_Redemption.html" target="_blank" rel="noopener">WhatsApp</a>
-<a class="b" href="images/share/The_TitanX_Redemption.jpg" download>Save card</a>
+<a class="b" href="/images/share/The_TitanX_Redemption.jpg" download>Save card</a>
 </div>
 <p class="msg" role="status" aria-live="polite"></p>
 </div>
@@ -812,7 +667,7 @@ section.cinema-hero,
 <p>The bottom is where selling runs out. What’s left is buying, and TitanX has a machine built for exactly that: more than 4,000 ETH, 62% of everything taken in, parked in a contract that buys TitanX and burns it. Price goes up. No sale ever follows.</p>
 <div class="vid-feature" id="film-titanx-time">
   <div class="bx">
-    <video class="v" controls playsinline preload="none" poster="images/frames/Titanx_Time.jpg" src="images/Titanx_Time.mp4"></video>
+    <video class="v" controls playsinline preload="none" poster="/images/frames/Titanx_Time.jpg" src="/images/Titanx_Time.mp4"></video>
     <div class="vid-kicker">The Opening Film</div>
     <h3>TitanX Time: The Builders Who Stayed</h3>
     <p>The revival story in one film: the 8% in the genesis wallet, X28, and the forty-plus coins that kept building through the bear market.</p>
@@ -851,7 +706,7 @@ section.cinema-hero,
 
 <div class="vid-feature" id="film-eight-percent">
   <div class="bx">
-    <video class="v" controls playsinline preload="none" poster="images/frames/Jake8percent.jpg" src="images/Jake8percent.mp4"></video>
+    <video class="v" controls playsinline preload="none" poster="/images/frames/Jake8percent.jpg" src="/images/Jake8percent.mp4"></video>
     <div class="vid-kicker">The Ethical Allocation</div>
     <h3>The 8%: Turning Founder Supply into Builder Rewards</h3>
     <p>What the genesis wallet’s 8% can do when it is transformed 1:1 into X28: buy-and-burn pressure that rewards the Mastermind members and protocol founders who stayed.</p>
@@ -907,7 +762,7 @@ section.cinema-hero,
 </div>
 <div class="vid-feature" id="film-eros-revival">
   <div class="bx">
-    <video class="v" controls playsinline preload="none" poster="images/frames/Eros_TitanX_Revival.jpg" src="images/Eros_TitanX_Revival.mp4"></video>
+    <video class="v" controls playsinline preload="none" poster="/images/frames/Eros_TitanX_Revival.jpg" src="/images/Eros_TitanX_Revival.mp4"></video>
     <div class="vid-kicker">The Ecosystem Lift</div>
     <h3>Lifting Every Built-on-TitanX Coin</h3>
     <p>How X28 buy-and-burn pressure travels through shared liquidity pools to every connected coin.</p>
@@ -939,7 +794,7 @@ section.cinema-hero,
 <g class="n" style="animation-delay:3.3s"><circle cx="89" cy="97" r="26"/><text x="89" y="101">Scale</text></g>
 </g></svg>
 <h3 style="font-family:system-ui,sans-serif">The burn</h3>
-<video class="v" controls playsinline preload="none" poster="images/frames/EROS_burn_baby_burn.jpg" src="images/EROS_burn_baby_burn.mp4"></video>
+<video class="v" controls playsinline preload="none" poster="/images/frames/EROS_burn_baby_burn.jpg" src="/images/EROS_burn_baby_burn.mp4"></video>
 <h3 style="font-family:system-ui,sans-serif;margin-top:34px">Feel the burn</h3>
 <p>Buy a share of a pool’s quote-side liquidity and burn what you bought.</p>
 <label for="burnRange" class="sl">Buy size: <b id="burnRangeVal">25</b>% of pool depth</label>
@@ -977,7 +832,7 @@ section.cinema-hero,
 <p>One base asset, many bonded pairs. Each coin paired with EROS becomes a new route between communities, so someone arriving for one project finds the others through the shared base. The LP token is a transferable receipt that can be nested into the next pool up.</p>
 <div class="vid-feature" id="film-eros-bonds">
   <div class="bx">
-    <video class="v" controls playsinline preload="none" poster="images/frames/Eros_Bonds_TitanX.jpg" src="images/Eros_Bonds_TitanX.mp4"></video>
+    <video class="v" controls playsinline preload="none" poster="/images/frames/Eros_Bonds_TitanX.jpg" src="/images/Eros_Bonds_TitanX.mp4"></video>
     <div class="vid-kicker">The Shared Web</div>
     <h3>EROS Bonds TitanX: One Web for the Builders</h3>
     <p>EROS pairs with each TitanX-built coin, so the Mastermind’s projects share one web of liquidity and demand.</p>
@@ -995,18 +850,18 @@ section.cinema-hero,
 <section id="media">
 <h2>Watch more</h2>
 <ul class="lk">
-<li><a href="images/eros_titanx_pulsechain.mp4">EROS, TitanX and PulseChain: the crypto plan</a></li>
-<li><a href="images/migrate_titanX.mp4">Where the community came from</a></li>
-<li><a href="images/Eros_Polonomics.mp4">The Gravity Web explained</a></li>
-<li><a href="images/best_way_buy_eros.mp4">The best way to buy EROS</a></li>
-<li><a href="media.html">The full EROS media library</a></li>
+<li><a href="/images/eros_titanx_pulsechain.mp4">EROS, TitanX and PulseChain: the crypto plan</a></li>
+<li><a href="/images/migrate_titanX.mp4">Where the community came from</a></li>
+<li><a href="/images/Eros_Polonomics.mp4">The Gravity Web explained</a></li>
+<li><a href="/images/best_way_buy_eros.mp4">The best way to buy EROS</a></li>
+<li><a href="/media.html">The full EROS media library</a></li>
 </ul>
 </section>
 
 <section id="close" style="text-align:center">
 <h2>The Mastermind. The Masterpiece.<br>The Liquidity Domino. The Reward.</h2>
 <p style="margin:0 auto 24px">The bear market tested everyone. The next chapter is about the people who stayed.</p>
-<video class="v" controls playsinline preload="none" poster="images/frames/Eros_Trillion.jpg" src="images/Eros_Trillion.mp4"></video>
+<video class="v" controls playsinline preload="none" poster="/images/frames/Eros_Trillion.jpg" src="/images/Eros_Trillion.mp4"></video>
 </section>
 
 
@@ -1014,11 +869,11 @@ section.cinema-hero,
 <h2>In the EROS series</h2>
 <p>This chapter is the TitanX-side economic application: redemption through structure, not recognition alone. It sits beside the participation and liquidity books.</p>
 <ul class="lk">
-<li><a href="Architecture_of_Participation.html">Architecture of Participation</a> — the plan spine</li>
-<li><a href="EROS_Liquidity_Tree.html">Liquidity Tree</a> — the doorway method</li>
-<li><a href="The_Bridge.html">The Bridge</a> — how assets cross</li>
-<li><a href="WeAreWithYouEros.html">We Are With You</a> — the stance of those who stayed</li>
-<li><a href="The_Eros_Corpus.html">The Corpus</a> — the library map</li>
+<li><a href="/Architecture_of_Participation.html">Architecture of Participation</a> — the plan spine</li>
+<li><a href="/EROS_Liquidity_Tree.html">Liquidity Tree</a> — the doorway method</li>
+<li><a href="/The_Bridge.html">The Bridge</a> — how assets cross</li>
+<li><a href="/WeAreWithYouEros.html">We Are With You</a> — the stance of those who stayed</li>
+<li><a href="/The_Eros_Corpus.html">The Corpus</a> — the library map</li>
 </ul>
 </section>
 
@@ -1040,13 +895,13 @@ section.cinema-hero,
 </section>
 
 <footer>
-<a href="The_Eros_Corpus.html">Corpus</a> ·
-<a href="The_Bridge.html">Bridge</a> ·
-<a href="Architecture_of_Participation.html">Architecture</a> ·
-<a href="EROS_Liquidity_Tree.html">Liquidity Tree</a> ·
-<a href="WeAreWithYouEros.html">We Are With You</a> ·
-<a href="The_Flywheel.html">Flywheel</a> ·
-<a href="media.html">Media</a> ·
+<a href="/The_Eros_Corpus.html">Corpus</a> ·
+<a href="/The_Bridge.html">Bridge</a> ·
+<a href="/Architecture_of_Participation.html">Architecture</a> ·
+<a href="/EROS_Liquidity_Tree.html">Liquidity Tree</a> ·
+<a href="/WeAreWithYouEros.html">We Are With You</a> ·
+<a href="/The_Flywheel.html">Flywheel</a> ·
+<a href="/media.html">Media</a> ·
 <a href="https://titanxhub.com/" target="_blank" rel="noopener">TitanX Hub</a> ·
 <a href="https://www.titanx.win/" target="_blank" rel="noopener">TitanX</a> ·
 <a href="https://docs.titanx.win/titanx/x28.win" target="_blank" rel="noopener">X28</a> ·
@@ -1058,7 +913,7 @@ section.cinema-hero,
 (function () {
   "use strict";
 
-  var BASE = "images/";
+  var BASE = "/images/";
   var VOL = 0.22;
   var VISUAL_FADE_MS = 1450;
   var DEFAULT_AUDIO_FADE_MS = 400;
@@ -1670,5 +1525,14 @@ var s=e.target.closest('[data-share]');if(s&&navigator.share){e.preventDefault()
 if(!navigator.share)document.querySelectorAll('[data-share]').forEach(function(b){b.hidden=true});
 })();
 </script>
+<div class="eros-lib" role="navigation" aria-label="The EROS library"><div class="in"><p class="lib-title">The EROS library</p><div class="lib-grid">
+<div><p class="lib-h">Entry</p><ul><li><a href="/The_Eros_Corpus.html">How the Corpus Works</a></li><li><a href="/The_Open_Call.html">The Open Call</a></li><li><a href="/The_Flywheel.html">The Flywheel</a></li><li><a href="/The_Garden_of_Eros.html">The Garden of Eros</a></li><li><a href="/Eros_3D_Universe.html">The Living Universe</a></li></ul></div>
+<div><p class="lib-h">Science</p><ul><li><a href="/The_Conscious_Eros.html">The Conscious Eros</a></li><li><a href="/Living_Egg.html">The Living Egg</a></li><li><a href="/The_Eros_Enclosure.html">The Eros Enclosure</a></li><li><a href="/The_Iteration_Codex.html">The Iteration Codex</a></li></ul></div>
+<div><p class="lib-h">System</p><ul><li><a href="/TheErosPlan.html">The Eros Plan</a></li><li><a href="/The_Bridge.html">The Bridge</a></li><li><a href="/The_Platinum_Standard.html">The Platinum Standard</a></li><li><a href="/The_Hopeful_Future.html">The Hopeful Future</a></li></ul></div>
+<div><p class="lib-h">Guides</p><ul><li><a href="/Architecture_of_Participation.html">Architecture of Participation</a></li><li><a href="/EROS_Liquidity_Tree.html">The Liquidity Tree</a></li><li><a href="/WeAreWithYouEros.html">We Are With You</a></li><li><a href="/The_TitanX_Redemption.html">The TitanX Redemption</a></li><li><a href="/The_ErosVerse.html">The ErosVerse</a></li></ul></div>
+<div><p class="lib-h">World</p><ul><li><a href="/Gods_Of_Eros.html">Gods of Eros</a></li><li><a href="/Gift_Of_Thoth.html">Gift of Thoth</a></li><li><a href="/Illumination_Strategy.html">Illumination Strategy</a></li><li><a href="/Men_Of_Renown.html">Men of Renown</a></li><li><a href="/The_Front_Door.html">The Front Door</a></li></ul></div>
+<div><p class="lib-h">Story</p><ul><li><a href="/EROS_Newcomer_Dossier.html">Newcomer Dossier</a></li><li><a href="/Eros_Narrative.html">Eros Narrative</a></li><li><a href="/The_First_Resonance.html">The First Resonance</a></li><li><a href="/Eros_Stories.html">Eros Stories</a></li><li><a href="/The_Continuity_File.html">The Continuity File</a></li></ul></div>
+<div><p class="lib-h">Tools</p><ul><li><a href="/SpaceEros.html">SpaceEros</a></li><li><a href="/media.html">Media Index</a></li><li><a href="https://erosrevival.win/" target="_blank" rel="noopener">Staking · erosrevival.win</a></li><li><a href="https://dexscreener.com/pulsechain/0xF416bE3434Edc01aD704B86f32cb8d0FBF22d1f2" target="_blank" rel="noopener">Chart · DexScreener</a></li><li><a href="https://x.com/ErosPulseChain" target="_blank" rel="noopener">X · @ErosPulseChain</a></li><li><a href="https://youtube.com/@eros_burn_baby_burn_062cf" target="_blank" rel="noopener">YouTube ▶</a></li><li><a href="https://notebooklm.link.google/67J7szcyZuaT" target="_blank" rel="noopener">NotebookLM 📚</a></li><li><a href="https://t.me/Eros_Revival" target="_blank" rel="noopener">Telegram 🖇️</a></li></ul></div>
+</div></div>
 </body>
 </html>
