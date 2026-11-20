@@ -10376,22 +10376,22 @@ Inwards is Forwards
   });
 
   /* ── LISTENING ROOM ────────────────────────────────────── */
+  /* Fixed: uses only the index-page media in /video/ and /audio/.
+     Does NOT fetch media-manifest.json (that file is the EROS catalogue). */
   (function() {
-    var videoExts = ['.mp4', '.webm', '.mov'];
-    var audioExts = ['.mp3', '.mpa', '.ogg', '.wav', '.m4a'];
-    var manifest = null;
+    var videos = [
+      'video/vid001.mp4','video/vid002.mp4','video/vid003.mp4','video/vid004.mp4','video/vid005.mp4',
+      'video/vid006.mp4','video/vid007.mp4','video/vid008.mp4','video/vid009.mp4','video/vid010.mp4',
+      'video/vid011.mp4','video/vid012.mp4','video/vid013.mp4','video/vid014.mp4','video/vid015.mp4'
+    ];
+    var audios = [
+      'audio/aud001.m4a','audio/aud002.m4a','audio/aud003.m4a','audio/aud004.m4a','audio/aud005.m4a',
+      'audio/aud006.m4a','audio/aud007.m4a','audio/aud008.m4a','audio/aud009.m4a','audio/aud010.m4a',
+      'audio/aud011.m4a','audio/aud012.m4a','audio/aud013.m4a','audio/aud014.m4a','audio/aud015.m4a',
+      'audio/aud016.m4a','audio/aud017.m4a','audio/aud018.m4a','audio/aud019.m4a','audio/aud020.m4a',
+      'audio/aud021.m4a','audio/aud022.m4a','audio/aud023.m4a'
+    ];
     var currentAudio = null;
-
-    async function loadManifest() {
-      try {
-        var res = await fetch('/media-manifest.json');
-        if (!res.ok) throw new Error('Manifest not found');
-        manifest = await res.json();
-        render();
-      } catch (e) {
-        showEmpty();
-      }
-    }
 
     function getRandom(arr, n) {
       var shuffled = arr.slice();
@@ -10420,14 +10420,6 @@ Inwards is Forwards
     }
 
     function render() {
-      if (!manifest) return;
-      var videos = manifest.filter(function(f) {
-        return videoExts.some(function(e) { return f.toLowerCase().endsWith(e); });
-      });
-      var audios = manifest.filter(function(f) {
-        return audioExts.some(function(e) { return f.toLowerCase().endsWith(e); });
-      });
-
       if (videos.length === 0 && audios.length === 0) {
         showEmpty();
         return;
@@ -10447,46 +10439,17 @@ Inwards is Forwards
             '<div class="lr-video-overlay">' +
             '<button class="lr-play-btn" data-index="' + i + '">▶</button>' +
             '</div>' +
-            '<div class="lr-video-label">' + src.replace(/^.*[\\\/]/, '') + '</div>' +
+            '<div class="lr-video-label">' + src.split('/').pop() + '</div>' +
             '</div>';
         }).join('');
-
-        videoContainer.querySelectorAll('.lr-video').forEach(function(wrapper) {
-          wrapper.addEventListener('click', function(e) {
-            var video = this.querySelector('video');
-            var btn = this.querySelector('.lr-play-btn');
-
-            if (video.paused) {
-              videoContainer.querySelectorAll('video').forEach(function(v) {
-                if (v !== video) {
-                  v.pause();
-                  v.currentTime = 0;
-                  var otherBtn = v.closest('.lr-video').querySelector('.lr-play-btn');
-                  if (otherBtn) otherBtn.textContent = '▶';
-                }
-              });
-              video.play();
-              if (btn) btn.textContent = '❚❚';
-            } else {
-              video.pause();
-              if (btn) btn.textContent = '▶';
-            }
-          });
-        });
 
         videoContainer.querySelectorAll('.lr-play-btn').forEach(function(btn) {
           btn.addEventListener('click', function(e) {
             e.stopPropagation();
             var video = this.closest('.lr-video').querySelector('video');
-
             if (video.paused) {
               videoContainer.querySelectorAll('video').forEach(function(v) {
-                if (v !== video) {
-                  v.pause();
-                  v.currentTime = 0;
-                  var otherBtn = v.closest('.lr-video').querySelector('.lr-play-btn');
-                  if (otherBtn) otherBtn.textContent = '▶';
-                }
+                if (v !== video) v.pause();
               });
               video.play();
               this.textContent = '❚❚';
@@ -10521,14 +10484,13 @@ Inwards is Forwards
         audioContainer.innerHTML =
           '<button class="lr-audio-play" id="lrAudioPlay">▶</button>' +
           '<div class="lr-audio-track">' +
-          '<div class="lr-audio-label">A word in passing — ' + pick.replace(/^.*[\\\/]/, '') + '</div>' +
+          '<div class="lr-audio-label">A word in passing — ' + pick.split('/').pop() + '</div>' +
           '<div class="lr-audio-progress" id="lrAudioProgress">' +
           '<div class="lr-audio-bar" id="lrAudioBar"></div>' +
-          '</div>' +
-          '</div>' +
+          '</div></div>' +
           '<div class="lr-audio-time" id="lrAudioTime">0:00 / 0:00</div>' +
           '<audio id="lrAudioEl" preload="metadata">' +
-          '<source src="' + pick + '" type="audio/mpeg">' +
+          '<source src="' + pick + '" type="audio/mp4">' +
           '</audio>';
 
         currentAudio = document.getElementById('lrAudioEl');
@@ -10541,16 +10503,14 @@ Inwards is Forwards
           if (currentAudio.paused) {
             currentAudio.play();
             this.textContent = '❚❚';
-            audioContainer.classList.add('playing');
           } else {
             currentAudio.pause();
             this.textContent = '▶';
-            audioContainer.classList.remove('playing');
           }
         });
 
         currentAudio.addEventListener('timeupdate', function() {
-          var pct = (this.currentTime / this.duration) * 100;
+          var pct = (this.currentTime / this.duration) * 100 || 0;
           bar.style.width = pct + '%';
           time.textContent = formatTime(this.currentTime) + ' / ' + formatTime(this.duration);
         });
@@ -10558,7 +10518,6 @@ Inwards is Forwards
         currentAudio.addEventListener('ended', function() {
           playBtn.textContent = '▶';
           bar.style.width = '0%';
-          audioContainer.classList.remove('playing');
         });
 
         currentAudio.addEventListener('loadedmetadata', function() {
@@ -10593,7 +10552,8 @@ Inwards is Forwards
       });
     }
 
-    loadManifest();
+    // No external fetch — this page only uses its own media
+    render();
   })();
 
   /* ── KEY SYSTEM (31 Interactive Keys, Sequential Queue) ── */
