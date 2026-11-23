@@ -1,0 +1,3114 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="EROS , One library. A world to enter. A community to build. Four doors. Fourteen shows. One Guild." name="description"/>
+<meta content="#0a0a0a" name="theme-color"/>
+<title>The ErosVerse · Quick preview (v2) · EROS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   EROS BLUEPRINT , DESIGN SYSTEM
+   ============================================================ */
+
+/* --- Custom Properties --- */
+:root {
+  /* Core palette */
+  --gold: #e8c547;
+  --gold-dim: #b89a2e;
+  --gold-bright: #f5d96a;
+  --gold-glow: rgba(232, 197, 71, 0.15);
+  --violet: #6b4c9a;
+  --violet-bright: #9b7bc9;
+  --violet-glow: rgba(107, 76, 154, 0.2);
+  --teal: #2a9d8f;
+  --teal-glow: rgba(42, 157, 143, 0.15);
+  --orange: #e76f51;
+  --orange-glow: rgba(231, 111, 81, 0.15);
+  --red: #d45d5d;
+  --green: #6bcf7f;
+
+  /* Dark theme (default) */
+  --bg: #0a0a0a;
+  --bg-elevated: #141414;
+  --bg-card: #1a1a1a;
+  --bg-card-hover: #222222;
+  --text: #f5f0e8;
+  --text-dim: #b8b0a0;
+  --text-muted: #8a8478;
+  --border: #2a2a2a;
+  --border-bright: #3a3a3a;
+  --border-gold: rgba(232, 197, 71, 0.3);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Layout */
+  --topbar-height: 64px;
+  --sidebar-width: 300px;
+  --content-max: 920px;
+  --content-wide: 1200px;
+
+  /* Effects */
+  --radius: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --shadow-gold: 0 0 24px rgba(232, 197, 71, 0.15);
+  --transition: 0.2s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg: #faf7f0;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f0e8;
+  --text: #1a1a1a;
+  --text-dim: #4a4a4a;
+  --text-muted: #7a7a7a;
+  --border: #e0dcd0;
+  --border-bright: #c0bbb0;
+  --border-gold: rgba(184, 154, 46, 0.4);
+  --gold: #b89a2e;
+  --gold-bright: #d4b84a;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232, 197, 71, 0.06), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(107, 76, 154, 0.04), transparent 70%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+img, svg { display: block; max-width: 100%; }
+a { color: var(--gold); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 3px; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+::selection { background: var(--gold); color: #0a0a0a; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* --- Skip link --- */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--gold);
+  color: #0a0a0a;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: top var(--transition);
+}
+.skip-link:focus { top: 1rem; }
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--topbar-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0 var(--space-md);
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-bottom: 1px solid var(--border);
+  transition: background-color var(--transition-slow), border-color var(--transition-slow);
+}
+[data-theme="light"] .topbar { background: rgba(250, 247, 240, 0.85); }
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  transition: background var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+.icon-btn:hover { background: var(--bg-card); color: var(--gold); }
+.icon-btn svg { width: 20px; height: 20px; }
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-dim));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-decoration: none;
+  flex-shrink: 0;
+  padding-right: var(--space-sm);
+  border-right: 1px solid var(--border);
+}
+.wordmark:hover { text-decoration: none; }
+
+.doors-nav {
+  display: flex;
+  gap: var(--space-xs);
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: var(--space-xs) 0;
+}
+.doors-nav::-webkit-scrollbar { display: none; }
+
+.door-pill {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+.door-pill:hover,
+.door-pill.active {
+  color: var(--gold);
+  border-color: var(--border-gold);
+  background: var(--gold-glow);
+}
+.door-pill[data-door="world"]:hover,
+.door-pill[data-door="world"].active { color: var(--violet-bright); border-color: rgba(155, 123, 201, 0.4); background: var(--violet-glow); }
+.door-pill[data-door="stories"]:hover,
+.door-pill[data-door="stories"].active { color: var(--orange); border-color: rgba(231, 111, 81, 0.4); background: var(--orange-glow); }
+.door-pill[data-door="applications"]:hover,
+.door-pill[data-door="applications"].active { color: var(--teal); border-color: rgba(42, 157, 143, 0.4); background: var(--teal-glow); }
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+.version-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  z-index: 90;
+  overflow-y: auto;
+  padding: var(--space-lg) var(--space-md);
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  transition: transform var(--transition-slow), background-color var(--transition-slow);
+}
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+
+.sidebar h2 {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-sm);
+}
+
+.toc { font-size: 0.85rem; }
+.toc ul { padding-left: 0; }
+.toc > ul > li { margin-bottom: var(--space-xs); }
+.toc ul ul {
+  padding-left: var(--space-md);
+  margin-top: var(--space-xs);
+  border-left: 1px solid var(--border);
+}
+.toc ul ul li { margin-bottom: 2px; }
+.toc a {
+  display: block;
+  padding: 0.35rem var(--space-sm);
+  color: var(--text-dim);
+  border-radius: 4px;
+  transition: all var(--transition);
+  line-height: 1.4;
+}
+.toc a:hover {
+  color: var(--gold);
+  background: var(--gold-glow);
+  text-decoration: none;
+}
+.toc a.active {
+  color: var(--gold);
+  background: var(--gold-glow);
+  border-left: 2px solid var(--gold);
+  padding-left: calc(var(--space-sm) - 2px);
+}
+.toc .toc-section {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   SEARCH OVERLAY
+   ============================================================ */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15vh var(--space-md) var(--space-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+.search-overlay.open { opacity: 1; visibility: visible; }
+
+.search-box {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  box-shadow: var(--shadow-gold);
+}
+.search-box svg { width: 22px; height: 22px; color: var(--gold); flex-shrink: 0; }
+.search-box input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  padding: var(--space-sm);
+  outline: none;
+}
+.search-box input::placeholder { color: var(--text-muted); }
+
+.search-results {
+  width: 100%;
+  max-width: 700px;
+  margin-top: var(--space-md);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.search-result {
+  display: block;
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  transition: background var(--transition);
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+.search-result:hover {
+  background: var(--bg-card);
+  border-color: var(--border);
+  text-decoration: none;
+}
+.search-result strong { color: var(--gold); display: block; margin-bottom: 0.25rem; }
+.search-result small { color: var(--text-muted); font-size: 0.8rem; }
+.search-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: var(--space-xl);
+  font-style: italic;
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main {
+  margin-left: var(--sidebar-width);
+  padding-top: var(--topbar-height);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+.container-wide {
+  max-width: var(--content-wide);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+/* --- Sections --- */
+.section {
+  padding: var(--space-2xl) 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-of-type { border-bottom: none; }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+
+.section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.01em;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+.section h4 {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.01em;
+}
+.section p { margin-bottom: var(--space-md); color: var(--text-dim); }
+.section p strong { color: var(--text); font-weight: 600; }
+.section p em { color: var(--text); }
+.section ul, .section ol { margin-bottom: var(--space-md); padding-left: var(--space-md); }
+.section ul li, .section ol li {
+  margin-bottom: var(--space-sm);
+  color: var(--text-dim);
+  position: relative;
+}
+.section ul li::before {
+  content: ",";
+  color: var(--gold-dim);
+  position: absolute;
+  left: -1.2rem;
+}
+.section ol { list-style: decimal; padding-left: var(--space-lg); }
+.section ol li::before { display: none; }
+.section ol li { list-style: decimal; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  overflow: hidden;
+}
+
+.mouth-sting {
+  width: 160px;
+  height: 96px;
+  margin-bottom: var(--space-lg);
+  filter: drop-shadow(0 0 20px rgba(232, 197, 71, 0.3));
+}
+.mouth-sting .lip {
+  stroke: var(--gold);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  animation: mouthOpen 4s ease-in-out infinite;
+  transform-origin: center;
+}
+.mouth-sting .lip-top { animation-delay: 0s; }
+.mouth-sting .lip-bottom { animation-delay: 0.05s; }
+
+@keyframes mouthOpen {
+  0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.85; }
+  45%, 55% { transform: translateY(0) scaleY(1.6); opacity: 1; }
+}
+
+.hero-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 14vw, 9rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 40%, var(--gold-dim) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-bottom: var(--space-sm);
+  padding-left: 0.2em;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  max-width: 720px;
+  line-height: 1.4;
+  margin-bottom: var(--space-lg);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+.hero-meta-item {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.hero-meta-item strong { color: var(--gold); font-weight: 500; }
+
+.hero-motto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+.hero-motto span {
+  padding: 0.5rem 1rem;
+  border-left: 2px solid var(--gold-dim);
+}
+.hero-motto span:first-child { border-left: none; padding-left: 0; }
+
+.scroll-hint {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: fadeInUp 1s ease 1s both;
+}
+.scroll-hint svg {
+  width: 24px;
+  height: 24px;
+  animation: bounce 2s ease-in-out infinite;
+  color: var(--gold);
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ============================================================
+   COMPONENTS (used across later chunks)
+   ============================================================ */
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+.card h3 { margin-top: 0; }
+
+/* Door cards */
+.door-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--text);
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.door-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+.door-card:hover::before { transform: scaleX(1); }
+.door-card:hover {
+  border-color: var(--border-gold);
+  background: var(--bg-card-hover);
+  text-decoration: none;
+  transform: translateY(-3px);
+}
+.door-card[data-door="instrument"]::before { background: var(--gold); }
+.door-card[data-door="world"]::before { background: var(--violet); }
+.door-card[data-door="stories"]::before { background: var(--orange); }
+.door-card[data-door="applications"]::before { background: var(--teal); }
+.door-card .door-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-glow);
+  color: var(--gold);
+  margin-bottom: var(--space-sm);
+}
+.door-card[data-door="world"] .door-icon { background: var(--violet-glow); color: var(--violet-bright); }
+.door-card[data-door="stories"] .door-icon { background: var(--orange-glow); color: var(--orange); }
+.door-card[data-door="applications"] .door-icon { background: var(--teal-glow); color: var(--teal); }
+.door-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: 0;
+}
+.door-card p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* Show cards */
+.show-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  text-decoration: none;
+  color: var(--text);
+}
+.show-card:hover {
+  border-color: var(--border-gold);
+  background: var(--bg-card-hover);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+.show-card .show-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.show-card .show-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+.show-card .show-hook {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Chips , evidence labels */
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+  vertical-align: middle;
+  margin: 0 0.15rem;
+  white-space: nowrap;
+}
+.chip-observed { color: var(--teal); }
+.chip-model { color: var(--violet-bright); }
+.chip-hypothesis { color: var(--gold); }
+.chip-pattern { color: var(--violet-bright); }
+.chip-objection { color: var(--red); }
+.chip-falsifier { color: var(--gold); border-style: dashed; }
+.chip-story { color: var(--orange); }
+.chip-documented { color: var(--teal); }
+.chip-inferred { color: var(--gold); }
+.chip-secondhand { color: var(--text-muted); }
+.chip-archive { color: var(--violet-bright); }
+
+/* Badges , mechanism labels */
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin: 0 0.15rem;
+  white-space: nowrap;
+}
+.badge-live { background: rgba(107, 207, 127, 0.15); color: var(--green); border: 1px solid var(--green); }
+.badge-design { background: rgba(232, 197, 71, 0.15); color: var(--gold); border: 1px solid var(--gold); }
+.badge-proposed { background: transparent; color: var(--violet-bright); border: 1px dashed var(--violet-bright); }
+
+/* Status pill */
+.status {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.status-complete { color: var(--green); border-color: rgba(107, 207, 127, 0.3); }
+.status-progress { color: var(--gold); border-color: var(--border-gold); }
+.status-pending { color: var(--text-muted); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: var(--space-md) 0; border-radius: var(--radius); border: 1px solid var(--border); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--bg-card);
+}
+th, td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--bg-elevated);
+  position: sticky;
+  top: 0;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg-card-hover); }
+td code, th code { font-family: var(--font-mono); font-size: 0.85em; color: var(--gold-bright); }
+
+/* Details / collapsible */
+details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-md) 0;
+  background: var(--bg-card);
+  transition: border-color var(--transition);
+}
+details[open] { border-color: var(--border-gold); }
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--gold);
+  list-style: none;
+  padding: var(--space-xs) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  user-select: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "▸";
+  display: inline-block;
+  transition: transform var(--transition);
+  color: var(--gold-dim);
+  font-size: 0.9em;
+}
+details[open] summary::before { transform: rotate(90deg); }
+details > *:not(summary) { margin-top: var(--space-sm); }
+
+/* Callout */
+.callout {
+  border-left: 3px solid var(--gold);
+  background: var(--gold-glow);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: var(--space-md) 0;
+}
+.callout-violet { border-left-color: var(--violet); background: var(--violet-glow); }
+.callout-teal { border-left-color: var(--teal); background: var(--teal-glow); }
+.callout-orange { border-left-color: var(--orange); background: var(--orange-glow); }
+.callout p:last-child { margin-bottom: 0; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  color: #0a0a0a;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+.btn:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-gold);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+}
+.btn-outline:hover { background: var(--gold-glow); color: var(--gold-bright); }
+
+/* Grid utilities */
+.grid { display: grid; gap: var(--space-md); }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.grid-doors { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.grid-shows { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+/* Cycle header */
+.cycle-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+.cycle-header h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text);
+}
+.cycle-header .cycle-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--violet), var(--teal));
+  opacity: 0.4;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--space-lg);
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-lg) + 2px);
+  top: 0.4rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--gold-glow);
+}
+.timeline-item h4 { margin-top: 0; }
+
+/* Empty column device */
+.empty-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: var(--space-md) 0;
+  background: var(--border);
+}
+.empty-column > div {
+  padding: var(--space-md);
+  background: var(--bg-card);
+  font-size: 0.85rem;
+}
+.empty-column > div:last-child {
+  background: var(--gold-glow);
+  border: 2px dashed var(--gold);
+  color: var(--gold);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 80px;
+}
+.empty-column .col-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+
+/* Footer (closed in chunk 12) */
+.footer {
+  margin-left: var(--sidebar-width);
+  padding: var(--space-xl) var(--space-lg);
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.footer-inner { max-width: var(--content-max); margin: 0 auto; }
+.footer a { color: var(--gold-dim); }
+.footer p { margin-bottom: var(--space-sm); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  .sidebar { transform: translateX(-100%); box-shadow: var(--shadow); }
+  .sidebar.open { transform: translateX(0); }
+  .main, .footer { margin-left: 0; }
+  .doors-nav { display: none; }
+}
+
+@media (max-width: 700px) {
+  :root { --space-xl: 2rem; --space-2xl: 3rem; }
+  body { font-size: 16px; }
+  .container, .container-wide { padding: var(--space-lg) var(--space-md); }
+  .topbar { padding: 0 var(--space-sm); gap: var(--space-sm); }
+  .wordmark { font-size: 1.2rem; }
+  .version-badge { display: none; }
+  .grid-doors, .grid-shows { grid-template-columns: 1fr; }
+  .empty-column { grid-template-columns: 1fr; }
+  .hero-motto { flex-direction: column; align-items: center; }
+  .hero-motto span { border-left: none; border-top: 1px solid var(--border); padding-top: var(--space-sm); padding-left: 0; }
+  .hero-motto span:first-child { border-top: none; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .mouth-sting .lip { animation: none; }
+  .scroll-hint svg { animation: none; }
+}
+
+/* Print */
+@media print {
+  .topbar, .sidebar, .search-overlay, .scroll-hint { display: none !important; }
+  .main, .footer { margin-left: 0; padding-top: 0; }
+  body { background: white; color: black; }
+  a { color: black; text-decoration: underline; }
+  .card, .show-card, .door-card { border: 1px solid #ccc; page-break-inside: avoid; }
+  details { open: true; }
+  details > summary { display: none; }
+}
+
+/* ============================================================
+   NAVIGATION & ORIENTATION UPGRADES (v1.3 restraint pass)
+   ============================================================ */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+  z-index: 101;
+  transition: width 0.08s linear;
+  pointer-events: none;
+}
+.topbar-current {
+  display: flex; align-items: center; gap: 0.5rem;
+  margin-left: auto;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  min-width: 0;
+  overflow: hidden;
+  max-width: 28ch;
+}
+.topbar-current-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.topbar-current-title {
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+@media (max-width: 900px) { .topbar-current { display: none; } }
+
+/* TOC filter + collapsible Parts */
+.toc-filter { padding: 0 0.5rem 1rem; }
+.toc-filter input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+}
+.toc-filter input:focus { outline: none; border-color: var(--border-gold); }
+.toc-filter input::placeholder { color: var(--text-muted); }
+
+.toc-part {
+  border: none; padding: 0; margin: 0 0 0.25rem;
+  background: transparent;
+}
+.toc-part[open] { background: transparent; }
+.toc-part > summary {
+  padding: 0.5rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-radius: 4px;
+  display: flex; align-items: center; gap: 0.6rem;
+  cursor: pointer;
+  list-style: none;
+}
+.toc-part > summary::-webkit-details-marker { display: none; }
+.toc-part > summary::before { content: none !important; }
+.toc-part > summary:hover { background: var(--bg-card); color: var(--text); }
+.toc-part-num {
+  font-family: var(--font-mono);
+  color: var(--gold-dim);
+  font-size: 0.7rem;
+  min-width: 1.4em;
+}
+.toc-part ul { padding-left: 0; border-left: none; margin: 0 0 0.5rem 0; list-style: none; }
+.toc-part li a {
+  padding-left: calc(0.5rem + 2rem);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  display: block;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  color: var(--text-dim);
+  border-radius: 4px;
+}
+.toc-part li a:hover,
+.toc-part li a.active {
+  color: var(--gold);
+  background: var(--gold-glow);
+  text-decoration: none;
+}
+
+/* Section prev/next */
+.section-nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.section-nav a {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: all var(--transition);
+  min-width: 0;
+}
+.section-nav a:hover { border-color: var(--border-gold); background: var(--gold-glow); text-decoration: none; }
+.section-nav-next { text-align: right; }
+.section-nav-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+.section-nav-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text);
+  font-weight: 600;
+  display: block;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--bg-card); border: 1px solid var(--border-gold);
+  color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: all var(--transition);
+  z-index: 80;
+  cursor: pointer;
+}
+.back-to-top.show { opacity: 1; visibility: visible; transform: none; }
+.back-to-top:hover { background: var(--gold-glow); color: var(--gold-bright); }
+
+/* Performance */
+.section,
+.cycle-block {
+  content-visibility: visible;
+  contain-intrinsic-size: auto 900px;
+}
+[id] { scroll-margin-top: calc(var(--topbar-height) + 1rem); }
+
+/* Visual discipline: quieter hovers */
+.card:hover,
+.sg-card:hover,
+.door-card:hover,
+.show-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--border-gold);
+  background: var(--bg-card-hover);
+}
+.door-card::before {
+  transform: none !important;
+  opacity: 0.6;
+}
+
+/* Hero trim */
+.hero {
+  min-height: 60vh !important;
+  padding: 3rem 1.5rem !important;
+}
+.hero-wordmark {
+  font-size: clamp(3.5rem, 10vw, 7rem) !important;
+  letter-spacing: 0.15em !important;
+}
+
+
+/* === Version switcher (3 positions) === */
+.eros-version-switch{display:flex;align-items:center;justify-content:center;gap:.65rem;box-sizing:border-box;max-width:min(420px,calc(100% - 2rem));margin:1.35rem auto;padding:.7rem 1.15rem;border-radius:999px;border:1px solid var(--gold-line,rgba(201,168,96,.35));background:rgba(201,168,96,.07);color:var(--gold2,#d8b878);font-family:system-ui,-apple-system,sans-serif;font-size:.92rem;font-weight:650;letter-spacing:.04em;text-decoration:none;transition:background .2s,border-color .2s,transform .15s}
+.eros-version-switch:hover,.eros-version-switch:focus-visible{background:rgba(201,168,96,.16);border-color:var(--gold,#c9a860);outline:none;transform:translateY(-1px)}
+.eros-version-switch svg{width:18px;height:18px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.eros-version-switch.top{font-size:1rem;padding:.8rem 1.3rem}
+.eros-version-switch.mid{opacity:.92}
+.eros-version-switch.low{opacity:.88;font-size:.88rem}
+
+</style>
+<style>.arch{border:1px solid var(--border);border-radius:var(--radius);margin:var(--space-sm) 0;background:var(--bg-card)}.arch>summary{cursor:pointer;padding:.7rem 1rem;font-weight:600;list-style:none}.arch>summary::before{content:"\25B8  ";color:var(--gold)}.arch[open]>summary::before{content:"\25BE  "}.arch-body{padding:.2rem 1.2rem 1rem}.thr-fig{margin:1rem 0}.thr-fig img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border)}.thr-fig figcaption{font-size:.75rem;color:var(--text-muted)}.turn-you{border-left:3px solid var(--gold);padding-left:1rem}.turn-ai{border-left:3px solid var(--violet);padding-left:1rem}.note-small{font-size:.85rem;color:var(--text-muted)}</style><style>.cg-strip{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 12px;scroll-snap-type:x proximity}.cg-strip button{flex:0 0 auto;border:1px solid var(--border);border-radius:8px;padding:0;background:var(--bg-card);cursor:pointer;scroll-snap-align:start;overflow:hidden;position:relative}.cg-strip img{display:block;height:110px;width:auto;max-width:220px;object-fit:cover}.cg-strip span{position:absolute;left:4px;bottom:4px;font-size:10px;background:#000a;color:#fff;border-radius:4px;padding:0 5px}.thr-fig.cg-hit img{outline:3px solid var(--gold);outline-offset:3px}</style><link href="https://eros-062cf.pages.dev/The_ErosVerse_v2.html" rel="canonical"/>
+<meta content="EROS , Master Project &amp; Guild Blueprint · v2" property="og:title"/>
+<meta content="EROS , One library. A world to enter. A community to build. Four doors. Fourteen shows. One Guild." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://eros-062cf.pages.dev/The_ErosVerse_v2.html" property="og:url"/>
+<meta content="EROS Library" property="og:site_name"/>
+<meta content="https://eros-062cf.pages.dev/images/share/The_ErosVerse_v2.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="The ErosVerse share card" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="EROS , Master Project &amp; Guild Blueprint" name="twitter:title"/>
+<meta content="EROS , One library. A world to enter. A community to build. Four doors. Fourteen shows. One Guild." name="twitter:description"/>
+<meta content="https://eros-062cf.pages.dev/images/share/The_ErosVerse_v2.jpg" name="twitter:image"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Ccircle cx='48' cy='48' r='44' fill='%2307090a' stroke='%235fb8c8' stroke-width='3'/%3E%3Ccircle cx='48' cy='48' r='14' fill='%235fb8c8'/%3E%3C/svg%3E" rel="icon"/>
+<style>.v-h1{display:block;font-size:2em;font-weight:700;margin:.67em 0}</style>
+<style id="eros-3room">
+/* === 3-room structure: Doorway / Main Room / Kitchen === */
+.eros-room{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0 auto;max-width:880px;padding:0 1.25rem}
+.eros-room-inner{padding:1.5rem 1.6rem;border-radius:14px}
+.eros-room-label{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:.32rem .7rem;border-radius:999px;margin-bottom:.7rem}
+
+/* Insights - gold (the master project's value), sits above the hero */
+.eros-doorway-top{margin:1.2rem auto 1.4rem}
+.eros-doorway-top .eros-room-inner{
+  border:1px solid rgba(232,197,71,.4);
+  background:linear-gradient(160deg,rgba(232,197,71,.08),rgba(10,10,10,.65));
+  box-shadow:0 0 22px rgba(232,197,71,.08);
+}
+.eros-doorway-top .eros-room-label{color:#0a0a0a;background:#e8c547}
+.eros-door-why{
+  font-family:Georgia,"Times New Roman",serif;font-size:1.18rem;line-height:1.55;
+  color:#e8e8e8;margin:0 0 .65rem;font-weight:500;
+}
+.eros-door-promise{
+  font-family:Georgia,"Times New Roman",serif;font-size:.98rem;line-height:1.6;
+  color:#999;margin:0;border-top:1px solid rgba(232,197,71,.25);padding-top:.6rem;
+}
+.eros-door-promise strong{color:#e8c547;font-weight:700;font-family:system-ui,sans-serif;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;display:inline-block;margin-right:.4rem}
+@media(max-width:720px){
+  .eros-doorway-top{margin:.8rem auto 1rem}
+  .eros-door-why{font-size:1.04rem}
+  .eros-door-promise{font-size:.9rem}
+}
+
+/* Main Room , a quiet divider marker */
+.eros-room-marker{
+  max-width:880px;margin:2.6rem auto 1.8rem;padding:0 1.25rem;
+  display:flex;align-items:center;gap:1rem;font-family:system-ui,sans-serif;
+}
+.eros-room-marker::before,.eros-room-marker::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(232,197,71,.3),transparent)}
+.eros-room-marker-label{font-size:.74rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#e8c547;white-space:nowrap}
+.eros-room-marker-sub{font-size:.82rem;color:#999;white-space:nowrap;font-style:italic}
+
+/* Kitchen , violet (the guild, the four doors) */
+.eros-kitchen{margin:3rem auto 2.2rem}
+.eros-kitchen .eros-room-inner{
+  border:1px solid rgba(107,76,154,.5);
+  background:linear-gradient(160deg,rgba(107,76,154,.1),rgba(10,10,10,.65));
+  box-shadow:0 0 22px rgba(107,76,154,.1);
+}
+.eros-kitchen .eros-room-label{color:#e8e8e8;background:#6b4c9a}
+.eros-kitchen-q{font-family:Georgia,"Times New Roman",serif;font-size:1.32rem;line-height:1.35;color:#e8e8e8;margin:0 0 1.1rem;font-weight:600}
+.eros-kitchen-conclusion{
+  font-family:Georgia,"Times New Roman",serif;font-size:1.06rem;line-height:1.6;
+  color:#e8e8e8;margin:0 0 1.2rem;padding:.8rem 1rem;border-left:3px solid #6b4c9a;
+  background:rgba(107,76,154,.06);border-radius:0 8px 8px 0;
+}
+.eros-kitchen-decisions{list-style:none;margin:0 0 1.2rem;padding:0;display:grid;gap:.6rem}
+.eros-kitchen-decisions li{padding:.6rem 0;border-top:1px solid rgba(107,76,154,.2)}
+.eros-kitchen-decisions li:first-child{border-top:none;padding-top:0}
+.eros-kitchen-decisions strong{color:#9b7bc9;font-family:system-ui,sans-serif;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:.2rem;font-weight:700}
+.eros-kitchen-decisions p{margin:0;font-family:Georgia,serif;font-size:.96rem;line-height:1.5;color:#e8e8e8}
+.eros-kitchen-decisions a{color:#e8c547;text-decoration:none;border-bottom:1px solid transparent}
+.eros-kitchen-decisions a:hover{border-bottom-color:#e8c547}
+.eros-kitchen-build{
+  font-family:Georgia,"Times New Roman",serif;font-size:1.02rem;line-height:1.6;
+  color:#e8e8e8;margin:0 0 1rem;padding:.8rem 1rem;border:1px dashed rgba(107,76,154,.4);
+  border-radius:8px;background:rgba(20,20,20,.6);
+}
+.eros-kitchen-build strong{color:#9b7bc9}
+.eros-kitchen-next{font-family:system-ui,sans-serif;font-size:.88rem;color:#999;margin:0;text-align:center}
+.eros-kitchen-next a{color:#6b4c9a;margin:0 .25rem;text-decoration:none;border-bottom:1px solid transparent}
+.eros-kitchen-next a:hover{border-bottom-color:#6b4c9a}
+@media print{
+  .eros-doorway-top,.eros-kitchen{break-inside:avoid}
+}
+</style>
+<style id="ghost-css">
+.ghost-bar{box-sizing:border-box;width:calc(100% - 2rem);max-width:760px;margin:1.1rem auto;padding:.75rem 1rem;border:1px solid currentColor;border-radius:10px;font:600 .84rem/1.55 system-ui,-apple-system,sans-serif;text-align:center}
+.ghost-bar a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+</style><meta name="robots" content="index,follow"/><style id="v2-overflow-guard">
+/* v2 layout guard: prevent horizontal overflow on mobile */
+html,body{overflow-x:hidden;max-width:100%}
+main,article,.eros-room,.eros-room-inner,section,.eta-next,.public-link{max-width:100%;box-sizing:border-box}
+p,li,h1,h2,h3,h4,blockquote{overflow-wrap:anywhere;word-wrap:break-word}
+img,svg,video{max-width:100%;height:auto}
+pre,code{max-width:100%;overflow-x:auto}
+</style>
+<style id="eros-v2-fix">.eros-room-marker{box-sizing:border-box;width:100%;flex-wrap:wrap;justify-content:center;gap:.35rem 1rem;overflow:hidden}.eros-room-marker-label,.eros-room-marker-sub{white-space:normal!important;min-width:0;max-width:100%;overflow-wrap:anywhere;text-align:center}@media(max-width:760px){.eros-room-marker::before,.eros-room-marker::after{display:none}}</style>
+<style id="eros-masters-css">
+.eros-masters{max-width:var(--measure-wide,52rem);margin:3.5rem auto;padding:0 var(--eros-page-pad,1.25rem);box-sizing:border-box;text-align:center}
+.eros-masters-kicker{display:block;font:600 .74rem/1 var(--mono,ui-monospace,monospace);letter-spacing:.2em;text-transform:uppercase;color:var(--gold,#c9a860);margin:0 0 .7rem}
+.eros-masters h2{margin:0 0 .5rem;font-family:var(--serif,Georgia,serif);font-weight:400;color:var(--ink,#eaeef2);font-size:clamp(1.5rem,5.2vw,2rem)}
+.eros-masters-lead{margin:0 auto 1.4rem;max-width:34rem;color:var(--soft,#b8bfc8);font-size:.98rem;line-height:1.6}
+.eros-masters-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.eros-vid{margin:0;text-align:left;min-width:0}
+.eros-vid:first-child{grid-column:1/-1}
+.eros-vid-btn{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:12px;border:1px solid var(--gold-line,rgba(201,168,96,.32));background:linear-gradient(135deg,#14161b,#1b1e25);text-decoration:none;color:inherit;box-sizing:border-box}
+.eros-vid-btn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;transition:opacity .2s,transform .4s}
+.eros-vid-btn:hover img,.eros-vid-btn:focus-visible img{opacity:1;transform:scale(1.02)}
+.eros-vid-btn:focus-visible{outline:2px solid var(--gold,#c9a860);outline-offset:3px}
+.eros-vid-play{position:absolute;left:50%;top:50%;width:3.6rem;height:3.6rem;margin:-1.8rem 0 0 -1.8rem;border-radius:50%;background:rgba(10,11,14,.72);border:1px solid var(--gold,#c9a860);color:var(--gold2,#d8b878);display:flex;align-items:center;justify-content:center;font-size:1.25rem;padding-left:.18rem;box-sizing:border-box}
+.eros-vid iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+.eros-vid figcaption{padding:.65rem .1rem 0;line-height:1.45}
+.eros-vid figcaption strong{display:block;font-weight:600;color:var(--ink,#eaeef2);font-size:.95rem}
+.eros-vid figcaption span{color:var(--muted,#7d858f);font-size:.84rem}
+@media(max-width:640px){.eros-masters-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.eros-vid-btn img{transition:none}}
+</style>
+</head>
+<body>
+<div aria-hidden="true" class="progress-bar"></div>
+<!-- Skip link -->
+<a class="skip-link" href="#main">Skip to content</a>
+<!-- ============================================================
+     TOP BAR
+     ============================================================ -->
+<header class="topbar" role="banner">
+<button aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation" class="icon-btn" id="navToggle">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polygon fill="currentColor" points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88" stroke="none"></polygon>
+</svg>
+</button>
+<a class="wordmark" href="#top">EROS</a>
+<nav aria-label="Four public doors" class="doors-nav">
+<a class="door-pill" data-door="instrument" href="#door-instrument">Instrument</a>
+<a class="door-pill" data-door="world" href="#door-world">World Model</a>
+<a class="door-pill" data-door="stories" href="#door-stories">Stories</a>
+<a class="door-pill" data-door="applications" href="#door-applications">Applications</a>
+<a class="door-pill" data-door="library" href="#library-links">📚 Library</a>
+</nav>
+<div class="topbar-right">
+<button aria-label="Toggle light or dark theme" class="icon-btn" id="themeToggle">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</svg>
+</button>
+<button aria-expanded="false" aria-label="Open search" class="icon-btn" id="searchToggle">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+</button>
+<div aria-live="polite" class="topbar-current">
+<span class="topbar-current-label">Now</span>
+<span class="topbar-current-title" id="topbarCurrentTitle">The Hook</span>
+</div>
+<span class="version-badge">v1.3 · 15 Nov 2026</span>
+</div>
+</header>
+<!-- ============================================================
+     SIDEBAR / TABLE OF CONTENTS
+     ============================================================ -->
+<aside aria-label="Table of contents" class="sidebar" id="sidebar">
+<div class="toc-filter">
+<input aria-label="Filter table of contents" autocomplete="off" id="tocFilter" placeholder="Filter sections…" type="search"/>
+</div>
+<nav class="toc">
+<details class="toc-part" open="">
+<summary><span class="toc-part-num">I</span> The Case</summary>
+<ul>
+
+<li><a href="#identity">Who We Are</a></li>
+<li><a href="#why-this-matters">Why This Matters</a></li>
+</ul>
+</details>
+<details class="toc-part">
+<summary><span class="toc-part-num">II</span> The Doors</summary>
+<ul>
+<li><a href="#four-doors">The Four Doors</a></li>
+<li><a href="#door-instrument">Instrument</a></li>
+<li><a href="#door-world">World Model</a></li>
+<li><a href="#door-stories">Stories</a></li>
+<li><a href="#door-applications">Applications</a></li>
+
+</ul>
+</details>
+<details class="toc-part">
+<summary><span class="toc-part-num">III</span> The Shows</summary>
+<ul>
+<li><a href="#fourteen-shows">Overview</a></li>
+
+
+
+
+
+
+
+</ul>
+</details>
+<details class="toc-part">
+<summary><span class="toc-part-num">IV</span> The Plan</summary>
+<ul>
+<li><a href="#mission">1 · Mission</a></li>
+<li><a href="#what-we-are-making">2 · What We Are Making</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="#open-questions">19 · Open Questions</a></li>
+</ul>
+</details>
+<details class="toc-part">
+<summary><span class="toc-part-num">V</span> The Invitation</summary>
+<ul>
+
+
+
+<li><a href="#pathways">Five Pathways</a></li>
+<li><a href="#canon-tiers">Four-Tier Canon</a></li>
+<li><a href="#brief-format">Contribution Brief</a></li>
+<li><a href="#first-tasks">First 10 Guild Tasks</a></li>
+<li><a href="#empty-column">The Empty Column</a></li>
+</ul>
+</details>
+<details class="toc-part">
+<summary><span class="toc-part-num">VI</span> The Archive</summary>
+<ul>
+<li><a href="#archive">The Archive (verbatim)</a></li>
+
+
+
+
+
+</ul>
+</details>
+</nav>
+<div class="toc-part" id="library-links" style="margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem;">
+<p class="toc-part-num" style="padding-left:0.5rem;display:block;">📚 Library</p>
+<ul>
+<li><a href="/The_Eros_Corpus.html" rel="noopener" target="_blank">The Corpus</a></li>
+<li><a href="/The_Garden_of_Eros.html" rel="noopener" target="_blank">The Garden of Eros</a></li>
+<li><a href="/The_Flywheel.html" rel="noopener" target="_blank">The Flywheel</a></li>
+<li><a href="/EROS_Liquidity_Tree.html" rel="noopener" target="_blank">Liquidity Tree</a></li>
+<li><a href="/Architecture_of_Participation.html" rel="noopener" target="_blank">Architecture of Participation</a></li>
+<li><a href="/WeAreWithYouEros.html" rel="noopener" target="_blank">We Are With You</a></li>
+<li><a href="/Basic_Eros_3D_Universe.html" rel="noopener" target="_blank">Basic 3D Universe</a></li>
+<li><a href="/Full_Eros_3D_Universe.html" rel="noopener" target="_blank">Full 3D Universe</a></li>
+<li><a href="https://t.me/Eros_Revival" rel="noopener" target="_blank">Telegram</a></li>
+<li><a href="https://eros-062cf.pages.dev/The_Front_Door_v2.html" rel="noopener" target="_blank">The Front Door</a></li>
+<li><a href="https://eros-062cf.pages.dev/The_Open_Call_v2.html" rel="noopener" target="_blank">The Open Call</a></li>
+<li><a href="https://eros-062cf.pages.dev/The_TitanX_Redemption_v2.html" rel="noopener" target="_blank">The TitanX Redemption</a></li>
+<li><a href="https://eros-062cf.pages.dev/EROS_Newcomer_Dossier_v2.html" rel="noopener" target="_blank">Newcomer Dossier</a></li>
+<li><a href="https://eros-062cf.pages.dev/The_Bridge_v2.html" rel="noopener" target="_blank">The Bridge</a></li>
+<li><a href="https://eros-062cf.pages.dev/TheErosPlan_v2.html" rel="noopener" target="_blank">The Eros Plan</a></li>
+<li><a href="https://eros-062cf.pages.dev/Eros_Narrative_v2.html" rel="noopener" target="_blank">Eros Narrative</a></li>
+<li><a href="https://eros-062cf.pages.dev/The_Platinum_Standard_v2.html" rel="noopener" target="_blank">The Platinum Standard</a></li>
+<li><a href="https://eros-062cf.pages.dev/media_v2.html" rel="noopener" target="_blank">Media Index</a></li>
+</ul>
+</div>
+<!-- LIBRARY-LINKS: keep in sync with footer -->
+</aside>
+<!-- EROS-STRUCTURE:INSIGHTS-END -->
+<!-- ============================================================
+     SEARCH OVERLAY
+     ============================================================ -->
+<div aria-hidden="true" aria-label="Search the blueprint" aria-modal="true" class="search-overlay" id="searchOverlay" role="dialog">
+<div class="search-box">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+<input aria-label="Search the blueprint" autocomplete="off" id="searchInput" placeholder="Search the blueprint…" type="search"/>
+<button aria-label="Close search" class="icon-btn" id="searchClose">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+</div>
+<div aria-live="polite" class="search-results" id="searchResults" role="listbox"></div>
+</div>
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main class="main" id="main" role="main">
+<!-- Anchor at very top -->
+<div id="top"></div>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<!-- INSIGHTS , 3-room structure: the invitation -->
+<!-- EROS-STRUCTURE:INSIGHTS-START -->
+
+<aside aria-label="Insights - why this page matters" class="eros-room eros-doorway-top">
+<div class="eros-room-inner">
+<span class="eros-room-label">Insights 💯</span>
+<p class="eros-door-why">Every part of the project (every book, every film, every mechanism) converges here. This page is the master blueprint: what is being built, who is building it, how the pieces connect, and where you enter.</p>
+<p class="eros-door-promise"><strong>By the end of this page, you will know</strong> the four doors, the fourteen shows, the source register, and the production engine.</p>
+</div>
+</aside>
+<!-- EROS-STRUCTURE:INSIGHTS-END -->
+<section aria-labelledby="hero-title" class="hero">
+<svg aria-hidden="true" class="mouth-sting" viewbox="0 0 200 120">
+<path class="lip lip-top" d="M 25 60 Q 100 38 175 60"></path>
+<path class="lip lip-bottom" d="M 25 60 Q 100 82 175 60"></path>
+</svg>
+<h1 class="hero-wordmark" id="hero-title">EROS</h1>
+<p class="hero-subtitle">Master Project &amp; Guild Blueprint</p>
+<p class="hero-tagline">One library. A world to enter.<br/>A community to build.</p>
+<div class="hero-meta">
+<span class="hero-meta-item">Version <strong>1.3</strong></span>
+<span class="hero-meta-item">15 <strong>November 2026</strong></span>
+<span class="hero-meta-item"><strong>14</strong> Shows</span>
+<span class="hero-meta-item"><strong>29</strong> Source Files</span>
+<span class="hero-meta-item"><strong>7</strong> Guild Studios</span>
+</div>
+<div class="hero-motto">
+<span>Crypto first.</span>
+<span>Story second.</span>
+<span>Extraction never.</span>
+<span>Inward is forwards.</span>
+</div>
+<div class="scroll-hint">
+<span>Scroll to explore</span>
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+</section>
+<div class="eros-share" style="--sa:#e8c547">
+<div class="eros-share-in">
+<img alt="The ErosVerse · v2 share card" decoding="async" height="630" loading="lazy" src="https://eros-062cf.pages.dev/images/share/The_ErosVerse_v2.jpg" width="1200"/>
+<div>
+<p class="k">Share this book</p>
+<p class="t">Master project and guild blueprint. A world to enter. Pass it on with the link below. · v2</p>
+<div class="row">
+<button class="b p" data-copy="https://eros-062cf.pages.dev/The_ErosVerse_v2.html" type="button">Copy link</button>
+<button class="b" data-share="" data-text="The ErosVerse. Master project and guild blueprint. A world to enter." data-title="The ErosVerse" data-url="https://eros-062cf.pages.dev/The_ErosVerse_v2.html" type="button">Share</button>
+<a class="b" href="https://t.me/share/url?url=https%3A%2F%2Feros-062cf.pages.dev%2FThe_ErosVerse_v2.html&amp;text=The%20ErosVerse.%20Master%20project%20and%20guild%20blueprint.%20A%20world%20to%20enter.%20%23EROS%20%23PulseChain" rel="noopener" target="_blank">Telegram</a>
+<a class="b" href="https://twitter.com/intent/tweet?text=The%20ErosVerse.%20Master%20project%20and%20guild%20blueprint.%20A%20world%20to%20enter.%20%23EROS%20%23PulseChain&amp;url=https%3A%2F%2Feros-062cf.pages.dev%2FThe_ErosVerse_v2.html" rel="noopener" target="_blank">X</a>
+<a class="b" href="https://wa.me/?text=The%20ErosVerse.%20Master%20project%20and%20guild%20blueprint.%20A%20world%20to%20enter.%20%23EROS%20%23PulseChain%20https%3A%2F%2Feros-062cf.pages.dev%2FThe_ErosVerse_v2.html" rel="noopener" target="_blank">WhatsApp</a>
+<a class="b" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Feros-062cf.pages.dev%2FThe_ErosVerse_v2.html" rel="noopener" target="_blank">Facebook</a>
+<a class="b" download="" href="https://eros-062cf.pages.dev/images/share/The_ErosVerse_v2.jpg">Save card</a>
+</div>
+<p aria-live="polite" class="msg" role="status"></p>
+</div>
+</div>
+</div>
+<a class="eros-version-switch top" href="https://meaning-unconfounded.github.io/The_ErosVerse.html" aria-label="Extensive version"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg><span>Extensive version</span></a>
+<!-- ===== COMMUNITY FRONT · START HERE ===== -->
+<!-- 🏛️ MAIN ROOM , 3-room structure: divider into the substance -->
+<div aria-label="Main Room begins" class="eros-room-marker">
+<!-- EROS-STRUCTURE:BODY-START -->
+<span class="eros-room-marker-label">🏛️ Main Room</span>
+<span class="eros-room-marker-sub">The blueprint, the four doors, the fourteen shows, the guild</span>
+</div>
+<section class="section" id="start-here-public" style="padding:2rem 0;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(232,197,71,0.05),transparent)">
+<div class="container">
+<p class="section-label">Enter</p>
+<h2 style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:0.5rem">Start here</h2>
+<p style="color:var(--text-dim);max-width:36rem">One path. Four doors. A Guild. Creation has only just begun.</p>
+<p style="margin:0.75rem 0 1rem;font-size:0.95rem;color:var(--text-muted)">Corpus → Garden → We Are With You → Architecture → Liquidity Tree</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem">
+<a href="/The_Eros_Corpus.html" style="padding:0.45rem 0.9rem;border-radius:999px;border:1px solid var(--border-gold);background:var(--gold-glow);color:var(--gold);font-weight:600;font-size:0.8rem;text-decoration:none">Corpus</a>
+<a href="/The_Garden_of_Eros.html" style="padding:0.45rem 0.9rem;border-radius:999px;border:1px solid var(--border);color:var(--text-dim);font-weight:600;font-size:0.8rem;text-decoration:none">Garden</a>
+<a href="/WeAreWithYouEros.html" style="padding:0.45rem 0.9rem;border-radius:999px;border:1px solid var(--border);color:var(--text-dim);font-weight:600;font-size:0.8rem;text-decoration:none">We Are With You</a>
+<a href="/Architecture_of_Participation.html" style="padding:0.45rem 0.9rem;border-radius:999px;border:1px solid var(--border);color:var(--text-dim);font-weight:600;font-size:0.8rem;text-decoration:none">Architecture</a>
+<a href="/EROS_Liquidity_Tree.html" style="padding:0.45rem 0.9rem;border-radius:999px;border:1px solid var(--border);color:var(--text-dim);font-weight:600;font-size:0.8rem;text-decoration:none">Liquidity Tree</a>
+<a href="https://t.me/Eros_Revival" style="padding:0.45rem 0.9rem;border-radius:999px;border:1px solid rgba(42,157,143,0.45);background:var(--teal-glow);color:var(--teal);font-weight:600;font-size:0.8rem;text-decoration:none">Telegram</a>
+</div>
+
+<h2 id="concept-gallery-title">Concept Art from the Development Thread</h2>
+<p class="lead">The development thread produced <strong><span id="cg-count">dozens of</span> concept images</strong>: visual ideas for the worlds and scenes of EROS. They live inside the Archive, so here they are up front. <strong>Tap any picture to jump to it in context.</strong></p>
+
+
+<noscript><p>Images are in <a href="The_ErosVerse.html#archive-thread">Archive B</a>, inside the Turn panels. Open a panel to see them.</p></noscript>
+</div></section>
+<!-- ===== /COMMUNITY FRONT ===== -->
+<section aria-labelledby="identity-title" class="section" id="identity">
+<div class="container">
+<div class="section-label">Who We Are</div>
+<h2 id="identity-title">Identity, Thesis and Motto</h2>
+<p class="lead" style="font-size:1.2rem;color:var(--text);line-height:1.6;">One library. A world to enter. A community to build. <strong>Inward is forwards.</strong> Crypto first. Story second. Extraction never.</p>
+<h3 id="id-0-1">Who we are <span style="color:var(--text-muted);font-weight:400"></span></h3>
+<p>EROS is a written body of work. It has cosmology, mythology, language, tokenomics, economic architecture, fiction, community philosophy, and immersive-world concepts. It has a website. It has a book library. It has a community that has, over time, produced a substantial archive of messages, video files, audio recordings, voice notes, animations, and stickers , much of it still sitting in Telegram, waiting to be catalogued and used.</p>
+
+
+
+<h3 id="id-0-2">The thesis <span style="color:var(--text-muted);font-weight:400"></span></h3>
+<p>Inward is forwards.</p>
+
+
+<h3 id="id-0-3">The motto <span style="color:var(--text-muted);font-weight:400"></span></h3>
+<p>Crypto first. Story second. Extraction never.</p>
+
+<h3 id="id-0-4">What we are making <span style="color:var(--text-muted);font-weight:400"></span></h3>
+<p><strong>We are making the EROS expression system:</strong> a way for the written library to become video, animation, documentary, comics, audio, interactive experiences, and community-created work, under a common identity, with common standards, and with a production pipeline that ordinary contributors can pick up and use.</p>
+
+<ul><li>The books. The 29-file source library. The canon. The thing everything else is downstream of.</li><li>The series. Fourteen shows, six cycles, one hub. The narrative architecture.</li><li>The media platforms. YouTube, Shorts, TikTok, Reels, audio, Telegram, the website. The distribution layer.</li><li>The Guild. Seven production studios. The community engine.</li><li>The website. The permanent home. The library that never disappears.</li></ul>
+
+<h3 id="id-0-5">Why now <span style="color:var(--text-muted);font-weight:400"></span></h3>
+<p>The books are written. That is the precondition. You cannot build an expression system for books that do not exist. The books exist. The website exists. The Telegram archive exists. The scripts for the first ten shows exist. The pilot treatments exist. The extraction database exists at version 0.3. The asset register exists at draft 0.1.</p>
+
+
+</div>
+</section>
+<!-- ============================================================
+     WHY THIS MATTERS , THE COMMUNITY CASE
+     ============================================================ -->
+<section aria-labelledby="why-title" class="section" id="why-this-matters">
+<div class="container">
+<div class="section-label">Part 1 · The Community Case</div>
+<h2 id="why-title">Why This Matters</h2>
+<p class="lead" style="font-size:1.2rem;color:var(--text);line-height:1.6;">
+      Most tokens launch loud and go quiet. The founders take their fees, their inflation, their exit , and they walk. The tickers are still there. Nobody is home. Value extracts. The community is left holding a chart that no longer means anything.
+    </p>
+<p>
+      EROS is built the other way round. The books are already written: cosmology, mythology, language, tokenomics, economic architecture, fiction, community philosophy, immersive-world concepts. The next task is not to write more. It is to give the existing library a life beyond the page , to turn it into a connected publishing, screen, digital-media and community-production system that the community itself can operate.
+    </p>
+<div class="callout">
+<p><strong>The central operating idea:</strong> one library, many doors, one creative Guild.</p>
+<p><strong>The core creative line:</strong> "If you do not own it, you're not in it."</p>
+<p><strong>The house motto:</strong> "Crypto first, story second, extraction never."</p>
+<p><strong>The core EROS thesis:</strong> "Inward is forwards."</p>
+</div>
+
+<h3>The problem we are solving</h3>
+<p>
+      A reader who picks up <em>The Living Egg</em> and reads it cover to cover knows what the EROS world model is. A person who has never heard of EROS and sees a twenty-minute video does not. The gap between those two states is the entire job of this project. The books are long. Many people will never read every volume. That is not a failure of the books. It is a fact about audiences.
+    </p>
+
+<h3>The EROS answer</h3>
+<p>
+      Build a universe people love <em>because they built it</em>. Not a universe handed down from a central studio. Not a universe that exists to extract value from its audience. A universe that people want to be part of, and that makes participation real. Ownership becomes participation, responsibility, contribution. The world is built by the people who show up to build it, and the people who show up are credited, respected, and able to see their work in the finished product.
+    </p>
+
+<h3>TitanX on PulseChain , the army is already here</h3>
+<p>
+      There are ten thousand TitanX holders who forgot they were given a uniform. The bear market took away the noise. It also gave time to build without anyone watching. The question is what happens when people start watching again.
+    </p>
+
+
+<h3>The effect at scale , what this build-out actually produces</h3>
+<p>
+      This is not a pitch. It is a slate. The scope is real, and it is measurable:
+    </p>
+
+
+
+<h3>The burn , how building the universe increases scarcity</h3>
+<p>
+      EROS is a fixed-supply token on PulseChain. <span class="badge badge-live">LIVE</span> The supply is 333,333,333,333 , set at birth. The contract has no administrator who can rewrite the rules. Every transfer splits four ways:
+    </p>
+
+
+
+<h3>The flywheel , attention becomes participation becomes creation</h3>
+<p>
+      Supply without attention dies. Attention without work leaves. Community without activity disappears. That is the autopsy report of most tickers that launched loud and went quiet. The flywheel is the answer. The cycle is a strategic hypothesis. Each transition needs to be built and demonstrated.
+    </p>
+
+
+
+<h3>What this is not</h3>
+<p>
+      This is not simply a television series. A television series is a single format, a single distribution channel, a single production pipeline. The EROS project is larger than that. It is a connected system that produces a television series as one of its outputs, alongside comics, audio, interactive fiction, tabletop scenarios, zines, short-form video, and community-created work.
+    </p>
+
+
+
+
+
+
+</div>
+</section>
+<!-- ============================================================
+     THE FOUR DOORS
+     ============================================================ -->
+<section aria-labelledby="doors-title" class="section" id="four-doors">
+<div class="container-wide">
+<div class="section-label">Part 2 · How to Enter</div>
+<h2 id="doors-title">The Four Doors</h2>
+<p style="max-width:720px;margin-bottom:var(--space-xl);">
+      A person can arrive at EROS through any of several doors. They might arrive through a cryptocurrency question , they heard about the token, they looked it up, they found a video, they followed it back. They might arrive through an unusual cosmological idea. They might arrive through a story. They might arrive through a visual experience. They might arrive through a community invitation.
+    </p>
+<p style="max-width:720px;margin-bottom:var(--space-xl);">
+      The job of the expression system is not to funnel everyone through a single entrance. It is to make every entrance a good entrance. Each one should give the visitor a reason to stop, something interesting to understand, something they can check, somewhere to go next, and something useful they can make if they choose to participate.
+    </p>
+
+
+
+<!-- ==================== DOOR 1: INSTRUMENT ==================== -->
+<article class="card" id="door-instrument" style="margin-bottom:var(--space-lg);border-color:var(--border-gold);">
+
+<h3 style="font-size:1.8rem;margin-top:0;color:var(--gold);">The Instrument</h3>
+<p style="font-size:1.05rem;color:var(--text);font-weight:500;">Understand the token, its architecture, and its economic mechanisms.</p>
+<h4>The main source material</h4>
+
+<h4>What this door holds</h4>
+
+<h4>What a visitor should understand after entering this door</h4>
+
+<h4>The tone of this door</h4>
+
+<h4>Mechanism badges used throughout</h4>
+
+<h4>The shows in this door</h4>
+
+</article>
+<!-- ==================== DOOR 2: WORLD MODEL ==================== -->
+<article class="card" id="door-world" style="margin-bottom:var(--space-lg);border-color:rgba(155,123,201,0.4);">
+
+<h3 style="font-size:1.8rem;margin-top:0;color:var(--violet-bright);">The World Model</h3>
+<p style="font-size:1.05rem;color:var(--text);font-weight:500;">Explore the EROS cosmology, existence, and conceptual architecture.</p>
+<h4>The main source material</h4>
+
+<h4>What this door holds</h4>
+
+<h4>What a visitor should understand after entering this door</h4>
+
+<h4>The tone of this door</h4>
+
+<h4>Evidence labels used throughout</h4>
+
+<h4>The shows in this door</h4>
+
+</article>
+<!-- ==================== DOOR 3: STORIES ==================== -->
+<article class="card" id="door-stories" style="margin-bottom:var(--space-lg);border-color:rgba(231,111,81,0.4);">
+
+<h3 style="font-size:1.8rem;margin-top:0;color:var(--orange);">The Stories</h3>
+<p style="font-size:1.05rem;color:var(--text);font-weight:500;">Experience the ideas through mythology, characters, and fiction.</p>
+<h4>The main source material</h4>
+
+<h4>What this door holds</h4>
+
+<h4>What a visitor should understand after entering this door</h4>
+
+<h4>The tone of this door</h4>
+
+<h4>The two rails used throughout</h4>
+
+
+<h4>The shows in this door</h4>
+
+</article>
+<!-- ==================== DOOR 4: APPLICATIONS ==================== -->
+<article class="card" id="door-applications" style="margin-bottom:var(--space-lg);border-color:rgba(42,157,143,0.4);">
+
+<h3 style="font-size:1.8rem;margin-top:0;color:var(--teal);">The Applications</h3>
+<p style="font-size:1.05rem;color:var(--text);font-weight:500;">Discover how the library becomes a living community and production system.</p>
+<h4>The main source material</h4>
+
+<h4>What this door holds</h4>
+
+<h4>What a visitor should understand after entering this door</h4>
+
+<h4>The tone of this door</h4>
+
+<h4>The contribution pathways used throughout</h4>
+
+<h4>The shows in this door</h4>
+
+</article>
+<div class="callout callout-teal" style="margin-top:var(--space-xl);">
+<p><strong>The public journey.</strong> Curiosity → Understanding → Investigation → Exploration → Participation → Creation. Each stage corresponds to a different kind of content. The journey is not linear. A person can arrive at Participation without going through Investigation. A person can arrive at Creation after a single piece of Curiosity. The stages are not gates. They are stations on a map, and the map should be visible from every station.</p>
+</div>
+
+</div>
+</section>
+<!-- ============================================================
+     THE 14-SHOW SLATE
+     ============================================================ -->
+<style>
+/* ============================================================
+   SHOW GRID ENHANCEMENTS (added for chunk 3)
+   ============================================================ */
+.sg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.sg-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition);
+  overflow: hidden;
+}
+.sg-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+.sg-card:hover::before { transform: scaleX(1); }
+.sg-card:hover {
+  border-color: var(--border-gold);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+.sg-card[data-door="instrument"]::before { background: var(--gold); }
+.sg-card[data-door="world"]::before { background: var(--violet); }
+.sg-card[data-door="stories"]::before { background: var(--orange); }
+.sg-card[data-door="applications"]::before { background: var(--teal); }
+
+.sg-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+.sg-num {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.sg-card[data-door="world"] .sg-num { color: var(--violet-bright); }
+.sg-card[data-door="stories"] .sg-num { color: var(--orange); }
+.sg-card[data-door="applications"] .sg-num { color: var(--teal); }
+
+.sg-door {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.15rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.sg-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.sg-hook {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.sg-purpose {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sg-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border);
+}
+
+.sg-src {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.sg-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: gap var(--transition);
+}
+.sg-link:hover {
+  text-decoration: none;
+  gap: 0.5rem;
+  color: var(--gold-bright);
+}
+.sg-card[data-door="world"] .sg-link { color: var(--violet-bright); }
+.sg-card[data-door="stories"] .sg-link { color: var(--orange); }
+.sg-card[data-door="applications"] .sg-link { color: var(--teal); }
+
+/* Cycle header enhancements */
+.cycle-block {
+  margin: var(--space-xl) 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+.cycle-block:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+.cycle-block[data-cycle="hub"] { border-top-color: var(--gold-dim); }
+.cycle-block[data-cycle="1"] { border-top-color: rgba(155,123,201,0.4); }
+.cycle-block[data-cycle="2"] { border-top-color: var(--gold-dim); }
+.cycle-block[data-cycle="3"] { border-top-color: rgba(42,157,143,0.4); }
+.cycle-block[data-cycle="4"] { border-top-color: rgba(155,123,201,0.4); }
+.cycle-block[data-cycle="5"] { border-top-color: rgba(231,111,81,0.4); }
+.cycle-block[data-cycle="6"] { border-top-color: rgba(42,157,143,0.4); }
+
+.cycle-block .cycle-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin: 0 0 var(--space-md);
+  padding: 0;
+  border-bottom: none;
+}
+.cycle-block .cycle-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+.cycle-block .cycle-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.cycle-block .cycle-desc {
+  width: 100%;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin: 0 0 var(--space-sm);
+}
+
+/* Hub special treatment */
+.hub-grid {
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
+.hub-grid .sg-card {
+  border-color: var(--border-gold);
+  background: linear-gradient(135deg, var(--bg-card), var(--gold-glow));
+}
+.hub-grid .sg-title {
+  font-size: 1.5rem;
+}
+
+/* Scope stat strip */
+.scope-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+  padding: var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scope-stat {
+  text-align: center;
+  padding: var(--space-sm);
+}
+.scope-stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+.scope-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (max-width: 700px) {
+  .sg-grid { grid-template-columns: 1fr; }
+  .cycle-block .cycle-header h3 { font-size: 1.3rem; }
+}
+</style>
+<!-- four-doors-full removed: duplicate of #four-doors -->
+
+<section aria-labelledby="shows-title" class="section" id="fourteen-shows">
+<div class="container-wide">
+<div class="section-label">Part 3 · The Scope</div>
+<h2 id="shows-title">The 14 Shows</h2>
+<p style="max-width:820px;font-size:1.1rem;color:var(--text);">
+      Fourteen shows across six cycles, anchored by one interactive hub. This is the working production architecture , the most developed and coherent structure in the source documents. It supersedes earlier provisional episode counts as the current working slate. The earlier four-strand concept remains the public navigation system. The earlier 22-episode proposal remains a historical development plan and a source of ideas. It is not a competing production slate.
+    </p>
+<div class="callout">
+<p><strong>This is not a pitch. It is a slate.</strong> Scripts and storyboards exist for Shows 00-09. Treatments exist for 10-13. Six books are fully extracted into a production database. The remaining 23 are indexed and mapped. The first public release is five pieces: a trailer, <em>The Map</em>, <em>Receipts</em>, <em>Inward Is Forwards</em>, and <em>The Open Call</em>. Everything else follows if those land.</p>
+</div>
+
+<p style="max-width:820px;margin-bottom:var(--space-xl);font-style:italic;color:var(--text-dim);">
+      The four doors are the public navigation system. The 14 shows are the narrative architecture. Each show maps to one of the four doors, and each show draws from a cluster of source books. The mapping is by subject and theme, not by file. Several books contribute to a single show. One book may support an entire serial.
+    </p>
+<!-- ==================== HUB · SHOW 00 ==================== -->
+
+<!-- ==================== CYCLE 1 ==================== -->
+
+<!-- ==================== CYCLE 2 ==================== -->
+
+<!-- ==================== CYCLE 3 ==================== -->
+
+<!-- ==================== CYCLE 4 ==================== -->
+
+<!-- ==================== CYCLE 5 ==================== -->
+
+<!-- ==================== CYCLE 6 ==================== -->
+
+<!-- ==================== CLOSING STATEMENT ==================== -->
+
+
+</div>
+</section>
+<!-- ============================================================
+     THE PLAN
+     ============================================================ -->
+<section aria-labelledby="plan-title" class="section" id="the-plan">
+<div class="container">
+<div class="section-label">Part 4 · The Plan</div>
+<h2 id="plan-title">The Plan</h2>
+<p style="font-size:1.1rem;color:var(--text);">
+      The Plan is the spine. It is written to be read end to end by the coordinating team and to be entered by section by contributors. It is not a summary. It is not a pitch. It is the operating document.
+    </p>
+<div class="callout">
+<p><strong>How to use this document.</strong> Read the Mission and What We Are Making as the argument. Read the Audience Journey and the Source Library as the navigation. Read the Show Architecture as the slate. Read Production Grammar and Canon Rules as the standards. Read the Book-to-Media Engine and Guild as the operating system. Read the First Release and 90-Day Plan as the launch. Read the Appendices as the reference shelf.</p>
+</div>
+
+</div>
+</section>
+<!-- ============================================================
+     SECTION 1 , THE MISSION
+     ============================================================ -->
+<section aria-labelledby="mission-title" class="section" id="mission">
+<div class="container">
+<div class="section-label">The Plan · §1</div>
+<h2 id="mission-title">1. The Mission</h2>
+<p style="font-size:1.15rem;color:var(--text);line-height:1.7;">
+      The EROS books have been written. The immediate task is no longer to keep adding material indiscriminately. It is to give the existing body of work a clear path of expression.
+    </p>
+<p>
+      We are building a system that can:
+    </p>
+
+<div class="callout">
+<p><strong>Central operating idea:</strong> one library, many doors, one creative Guild.</p>
+<p><strong>Core creative line:</strong> "If you do not own it / You're not in it."</p>
+<p><strong>House motto:</strong> "Crypto first, story second, extraction never."</p>
+<p><strong>Core EROS thesis:</strong> "Inward is forwards."</p>
+</div>
+
+<h3>The books exist. The gap is expression.</h3>
+<p>
+      EROS has a substantial body of written work. The first and most important fact is that the work is done: cosmology, mythology, language, tokenomics, economic architecture, fiction, community philosophy, immersive-world concepts. The books are written. They are not waiting to be written. They are waiting to be expressed.
+    </p>
+
+
+<h3>The seven objectives</h3>
+<p>
+      The Master Project and Guild Blueprint names seven objectives. They are worth stating in full because they are the criteria against which every production decision should be measured.
+    </p>
+
+<h3>What we are not doing</h3>
+<p>
+<strong>We are not simply making a television series.</strong> A television series is a single format, a single distribution channel, a single production pipeline. The EROS project is larger than that. It is a connected system that produces a television series as one of its outputs, alongside comics, audio, interactive fiction, tabletop scenarios, zines, short-form video, and community-created work.
+    </p>
+
+
+
+
+<h3>Our role and the Guild's role</h3>
+<p>
+<strong>Our role</strong> is to provide the architecture, the standards, the direction, the initial examples, and the editorial coordination. We are not the sole producers. We are the team that holds the shape.
+    </p>
+
+
+</div>
+</section>
+<!-- ============================================================
+     SECTION 2 , WHAT WE ARE MAKING
+     ============================================================ -->
+<section aria-labelledby="making-title" class="section" id="what-we-are-making">
+<div class="container">
+<div class="section-label">The Plan · §2</div>
+<h2 id="making-title">2. What We Are Making</h2>
+<p style="font-size:1.15rem;color:var(--text);line-height:1.7;">
+      This is not simply a television series. It is a connected EROS media and learning ecosystem, with a television-style editorial spine.
+    </p>
+<p>
+      The ecosystem has five mutually supporting parts:
+    </p>
+
+
+<h3>The expression system</h3>
+<p>
+      We are making the <strong>EROS expression system</strong>: a way for the written library to become video, animation, documentary, comics, audio, interactive experiences, and community-created work, under a common identity, with common standards, and with a production pipeline that ordinary contributors can pick up and use.
+    </p>
+
+<ul>
+<li><strong>The books.</strong> The 29-file source library. The canon. The thing everything else is downstream of.</li>
+<li><strong>The series.</strong> Fourteen shows, six cycles, one hub. The narrative architecture.</li>
+<li><strong>The media platforms.</strong> YouTube, Shorts, TikTok, Reels, audio, Telegram, the website. The distribution layer.</li>
+<li><strong>The Guild.</strong> Seven production studios. The community engine.</li>
+<li><strong>The website.</strong> The permanent home. The library that never disappears.</li>
+</ul>
+
+<div class="callout callout-violet">
+<p><strong>Why now.</strong> The books are written. That is the precondition. You cannot build an expression system for books that do not exist. The books exist. The website exists. The Telegram archive exists. The scripts for the first ten shows exist. The pilot treatments exist. The extraction database exists at version 0.3. The asset register exists at draft 0.1.</p>
+<p>What does not exist is the operational document that lets a contributor open a page, understand the whole plan, find a task, complete it, and see it become part of the larger project. This document is that page. It is not the last page. It is the first page of the production era.</p>
+</div>
+<h3>The seven-layer mission in one sentence</h3>
+<p>
+      Give each book a natural place within a larger EROS universe, create a permanent navigable online home for the material, use modern distribution platforms to reach new audiences, give the EROS community a practical structure for making its own productions, and build a growing archive of work that can be reused, expanded and improved , so that every production makes the next production easier.
+    </p>
+</div>
+</section>
+<!-- ============================================================
+     SECTION 3 , AUDIENCE JOURNEY
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 4 , THE 29-FILE SOURCE LIBRARY
+     ============================================================ -->
+
+
+<!-- ============================================================
+     SECTION 5 , THE 14-SHOW ARCHITECTURE
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 6 , PRODUCTION GRAMMAR & CREATIVE IDENTITY
+     ============================================================ -->
+
+
+<!-- ============================================================
+     SECTION 7 , EDITORIAL & CANON RULES
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 8 , TECHNICAL & ECONOMIC EXPLANATION RULES
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 9 , DISTRIBUTION STRATEGY
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 10 , THE BOOK-TO-MEDIA PRODUCTION ENGINE
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 11 , THE CREATIVE GUILD
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 12 , PARALLEL CREATION & FRACTAL BRANCHING
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 13 , FIRST RELEASE SEQUENCE
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 14 , THE FIRST 90 DAYS
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 15 , MEASURES OF PROGRESS
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 16 , ASSET REGISTER
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 17 , EXTRACTION FRAMEWORK
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 18 , APPENDICES
+     ============================================================ -->
+
+<!-- ============================================================
+     SECTION 19 , OPEN QUESTIONS
+     ============================================================ -->
+<section aria-labelledby="questions-title" class="section" id="open-questions">
+<div class="container">
+<div class="section-label">The Plan · §19</div>
+<h2 id="questions-title">19. Open Questions</h2>
+<p style="font-size:1.1rem;color:var(--text);">
+      These are the questions the source material leaves open. They are not problems with this document. They are the decisions that must be made before the production system is fully locked.
+    </p>
+<h3>D.1 The 14-show slate versus the 22-episode map</h3>
+<p>The Unified Bible treats the 14-show slate as the working master. The Master Series Bible R contains a 22-episode structure. The relationship between the two has not been fully reconciled.</p>
+
+<div class="callout">
+<p><strong>Recommendation:</strong> present 14 as the master, and treat the 22-episode map as an extension , the 14 shows are the containers, the 22 episodes are the contents. This preserves both without creating a false conflict.</p>
+</div>
+<h3>D.2 The six-book versus 29-book extraction discrepancy</h3>
+<p>The Master Series Bible R claims all 29 books have been fully extracted. The Unified Bible says only six have. The PDFs flag this as a reconciliation issue.</p>
+
+<h3>D.3 The evidence ledger visibility</h3>
+<p>The MD is the source of truth. The HTML is its visual expression. But the "maximum content" instruction pulls toward exposing everything, including the claim ledger and the contradiction log.</p>
+
+
+<h3>D.4 The relationship between the books and the expression system</h3>
+<p>The books are the source of truth. The expression system is downstream. But the expression system will, over time, produce new canon , new characters, new scenes, new facts about the world that were not in the books.</p>
+
+
+<h3>D.5 The measure of success</h3>
+<p>The measures in Section 15 are a starting point. But the question of what "success" means for the EROS project is not fully answered.</p>
+
+<h3>D.6 The First Resonance continuity flag</h3>
+<p><strong>The issue:</strong> Chapter 06 says Cal has been going to the canal since he was twelve, "since the first Saturday after his father's funeral." Chapter 07 says his father died when Cal was eight. One of these has to change, or the canal visits have to begin four years after the funeral.</p>
+
+<h3>D.7 The Show 08 source-pass items</h3>
+<p>The following items are still unverified. They must be resolved before any Show 08 shot that depends on them is cut:</p>
+
+
+
+
+
+</div>
+</section>
+
+<!-- ============================================================
+     THE SCRIPTS
+     ============================================================ -->
+
+<!-- ============================================================
+     SERIES TRAILER
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 00 · THE MAP
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 05 · RECEIPTS
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 06 · THE WEB
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 07 · ROCK, RIVER, GATES
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 01 · INWARD IS FORWARDS
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 02 · THE FOUR
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 03 · THE MOUTH
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 04 · LIFE FIRST
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 08 · FOOTPRINTS
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 09 · MASKS
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 10 · THE FIRST RESONANCE
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 11 · SIXTEEN DOORS
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 12 · THE CONTINUITY FILE
+     ============================================================ -->
+
+<!-- ============================================================
+     SHOW 13 · THE OPEN CALL
+     ============================================================ -->
+
+<!-- ============================================================
+     12 MASTER SHORTS
+     ============================================================ -->
+
+<!-- ============================================================
+     SOURCE-PASS CORRECTIONS
+     ============================================================ -->
+
+
+<!-- ============================================================
+     THE INVITATION
+     ============================================================ -->
+<section aria-labelledby="invite-title" class="section" id="the-invitation">
+<div class="container-wide">
+<div class="section-label">Part 6 · The Invitation</div>
+<h2 id="invite-title">The Invitation</h2>
+<p style="font-size:1.25rem;color:var(--text);line-height:1.7;max-width:820px;">
+      This is the section that answers the only question that matters: <em>what can I do?</em>
+</p>
+<p style="font-size:1.1rem;color:var(--text);line-height:1.7;max-width:820px;">
+      You do not have to wait for a central team to finish a show. You can take a source, a concept, a character, a visual, or a task and begin developing something in parallel, while keeping the relationship to the larger EROS project clear. That is the central community invitation of the project. It is what makes the Guild a production network rather than a fan club.
+    </p>
+<div class="callout callout-teal" style="max-width:820px;">
+<p style="font-size:1.15rem;margin-bottom:0;"><strong>We create. We expect the community to parallel work with us or fractally branch off from our inspiration.</strong></p>
+</div>
+<!-- ==================== FIVE PATHWAYS ==================== -->
+<h3 id="pathways">Five Contribution Pathways</h3>
+<p style="max-width:820px;">
+      There are several pathways a parallel contributor can take. The pathways are not mutually exclusive. You can start with a single task, move to a personal project, form a studio cell, and eventually produce a branch. The system is designed to let contribution grow.
+    </p>
+
+<!-- ==================== THE FOUR-TIER CANON ==================== -->
+<h3 id="canon-tiers">The Four-Tier Canon</h3>
+<p style="max-width:820px;">
+      Parallel work does not automatically become canon. It is classified by tier. The tiers are not a hierarchy of quality. They are a hierarchy of authority. A Tier 4 work can be better than a Tier 2 work and still not be part of the canon.
+    </p>
+
+
+<!-- ==================== THE CONTRIBUTION BRIEF ==================== -->
+<h3 id="brief-format">The Contribution Brief</h3>
+<p style="max-width:820px;">
+      Every task brief must contain twelve fields. This is the smallest practical production unit. A contributor should be able to open a brief and know exactly what to make, in what format, and to what standard, without needing to read the rest of the project documentation.
+    </p>
+
+<!-- ==================== FIRST 10 GUILD TASKS ==================== -->
+<h3 id="first-tasks">The First 10 Guild Tasks</h3>
+<p style="max-width:820px;">
+      These are the kind of tasks that can be picked up by a contributor on day one. Each is bounded, completable, and meaningful enough to matter. The first ten are the starter kit for the Guild task board.
+    </p>
+
+
+<!-- ==================== THE EMPTY COLUMN ==================== -->
+<h3 id="empty-column">The Empty Column</h3>
+<p style="max-width:820px;">
+      The Atlas 8F source-pass finding handed the production an original device that the rest of the slate can use. Whenever an episode touches a primary record, a three-column card appears. The third column is always blank and always lit.
+    </p>
+
+
+
+<!-- ==================== WHAT YOU GET ==================== -->
+
+
+<!-- ==================== THE CLOSING IMAGE ==================== -->
+
+<!-- ==================== THE COMMUNITY CALL ==================== -->
+
+</div>
+</section>
+</main>
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<a class="eros-version-switch mid" href="https://meaning-unconfounded.github.io/The_ErosVerse.html" aria-label="Read the full book"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg><span>Read the full book</span></a>
+<section aria-labelledby="archive-title" class="section" id="archive"><div class="container">
+<div class="section-label">The Archive · Verbatim</div>
+<h2 id="archive-title">The Archive: every source, in full</h2>
+<p class="lead">Everything that fed this page, kept whole. Open any panel to read the original text exactly as it was written. Nothing here is a summary.</p>
+<div class="table-wrap"><table><thead><tr><th>Archive</th><th>Approx. words</th></tr></thead><tbody><tr><td>Series Bible, Part 1 (17 sections)</td><td>30,268</td></tr><tr><td>session thread (87 pages, 21 turns, 77 images)</td><td>16,143</td></tr><tr><td>Master Project &amp; Guild Blueprint v1.0 (original HTML)</td><td>3,968</td></tr><tr><td>Blueprint expansion transcript (Parts 0-16, Appendices A-D)</td><td>25,660</td></tr><tr><td>Telegram-length summary page</td><td>1,655</td></tr><tr><td><strong>Total archived</strong></td><td><strong>77,694</strong></td></tr></tbody></table></div>
+<p class="note-small">The uploaded file The_ErosVerse_1.html is byte-identical to The_ErosVerse.html, so it appears once, as the main page above.</p>
+</div></section>
+
+
+
+
+
+<!-- 🍳 KITCHEN , 3-room structure: the four doors -->
+<!-- EROS-STRUCTURE:BODY-END -->
+<!-- EROS-STRUCTURE:MASTER-VIDEOS-START -->
+<section class="eros-masters" aria-labelledby="eros-masters-h">
+<span class="eros-masters-kicker">▶ Watch</span>
+<h2 id="eros-masters-h">The three masters</h2>
+<p class="eros-masters-lead">The whole EROS story, told three ways. Press play on any of them.</p>
+<div class="eros-masters-grid">
+<figure class="eros-vid" data-yt="5vyXO3Kwyzc"><a class="eros-vid-btn" href="https://youtu.be/5vyXO3Kwyzc" target="_blank" rel="noopener" aria-label="Play video: The NotebookLM Masters"><img src="https://i.ytimg.com/vi/5vyXO3Kwyzc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>The NotebookLM Masters</strong><span>Every NotebookLM video, in one film.</span></figcaption></figure>
+<figure class="eros-vid" data-yt="z4ScJfgvWyE"><a class="eros-vid-btn" href="https://youtu.be/z4ScJfgvWyE" target="_blank" rel="noopener" aria-label="Play video: The Shorts Master"><img src="https://i.ytimg.com/vi/z4ScJfgvWyE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>The Shorts Master</strong><span>Every short, in one continuous reel.</span></figcaption></figure>
+<figure class="eros-vid" data-yt="XTHAEsG2-44"><a class="eros-vid-btn" href="https://youtu.be/XTHAEsG2-44" target="_blank" rel="noopener" aria-label="Play video: The Long Master"><img src="https://i.ytimg.com/vi/XTHAEsG2-44/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>The Long Master</strong><span>Every long-form video, in one film.</span></figcaption></figure>
+</div>
+</section>
+<!-- EROS-STRUCTURE:MASTER-VIDEOS-END -->
+<!-- EROS-STRUCTURE:KITCHEN-START -->
+<aside aria-label="Kitchen , four doors" class="eros-room eros-kitchen">
+<div class="eros-room-inner">
+<span class="eros-room-label">🍳 Kitchen</span>
+<h2 class="eros-kitchen-q">Four doors</h2>
+<p class="eros-kitchen-conclusion">
+      The ErosVerse is the master blueprint. Four doors. Fourteen shows. One
+      guild. The source register is the 29-file library. The production engine
+      is the book-to-media pipeline. Pick a door. Enter.
+    </p>
+<ol class="eros-kitchen-decisions">
+<li>
+<strong>The instrument</strong>
+<p>Go to <a href="https://eros-062cf.pages.dev/The_Bridge_v2.html">The Bridge</a>. Tokenomics, Poolonomics, the playbook. The field manual.</p>
+</li>
+<li>
+<strong>The demand</strong>
+<p>Go to <a href="https://eros-062cf.pages.dev/The_Flywheel_v2.html">The Flywheel</a>. The two vaults, the demand equation. Attention into belonging.</p>
+</li>
+<li>
+<strong>The story</strong>
+<p>Go to <a href="https://eros-062cf.pages.dev/Eros_Stories_v2.html">Eros Stories</a>. Sixteen doors. Pure fiction. The company above it is real.</p>
+</li>
+<li>
+<strong>The production</strong>
+<p>Go to <a href="https://eros-062cf.pages.dev/media_v2.html">The Media Index</a>. Fifteen studios, the visual atlas, the complete archive.</p>
+</li>
+</ol>
+<p class="eros-kitchen-build">
+<strong>The carry-forward:</strong> the ErosVerse is the convergence. Every book in the library is a facet of this. The four doors are the ways in. The fourteen shows are the media. The guild is the community. Pick a door. Enter. Build.
+    </p>
+<p class="eros-kitchen-next">
+      The spine and the map:
+      <a href="https://eros-062cf.pages.dev/TheErosPlan_v2.html">The Eros Plan</a> ·
+      <a href="https://eros-062cf.pages.dev/The_Eros_Corpus_v2.html">The Corpus</a> ·
+      <a href="https://eros-062cf.pages.dev/The_Garden_of_Eros_v2.html">The Garden of Eros</a>
+</p>
+</div>
+</aside>
+<!-- EROS-STRUCTURE:KITCHEN-END -->
+<a class="eros-version-switch low" href="https://meaning-unconfounded.github.io/The_ErosVerse.html" aria-label="Go to full archive"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg><span>Go to full archive</span></a>
+<footer class="footer" role="contentinfo">
+<div class="footer-inner">
+<div class="grid grid-3" style="margin-bottom:var(--space-lg);">
+<div>
+<p style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;letter-spacing:0.15em;background:linear-gradient(135deg,var(--gold-bright),var(--gold),var(--gold-dim));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;margin-bottom:var(--space-sm);">EROS · v2</p>
+<p style="margin:0 0 var(--space-xs);font-size:0.85rem;color:var(--text-dim);">Master Project &amp; Guild Blueprint</p>
+<p style="margin:0 0 var(--space-xs);font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">Version <strong>1.3</strong> · 15 November 2026</p>
+<p style="margin:0;font-size:0.8rem;color:var(--text-muted);font-style:italic;">One library. A world to enter. A community to build.</p>
+</div>
+<div>
+<p style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--space-sm);">The Four Doors</p>
+<ul style="list-style:none;padding:0;margin:0;font-size:0.85rem;">
+<li style="margin-bottom:var(--space-xs);"><a href="#door-instrument">Instrument</a></li>
+<li style="margin-bottom:var(--space-xs);"><a href="#door-world">World Model</a></li>
+<li style="margin-bottom:var(--space-xs);"><a href="#door-stories">Stories</a></li>
+<li style="margin-bottom:var(--space-xs);"><a href="#door-applications">Applications</a></li>
+</ul>
+</div>
+<div>
+<p style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--space-sm);">The Invitation</p>
+<ul style="list-style:none;padding:0;margin:0;font-size:0.85rem;">
+<li style="margin-bottom:var(--space-xs);"><a href="#pathways">Five Pathways</a></li>
+<li style="margin-bottom:var(--space-xs);"><a href="#canon-tiers">The Four-Tier Canon</a></li>
+<li style="margin-bottom:var(--space-xs);"><a href="#brief-format">The Contribution Brief</a></li>
+<li style="margin-bottom:var(--space-xs);"><a href="#first-tasks">First 10 Guild Tasks</a></li>
+<li style="margin-bottom:var(--space-xs);"><a href="#empty-column">The Empty Column</a></li>
+</ul>
+</div>
+</div>
+<div style="border-top:1px solid var(--border);padding-top:var(--space-md);display:flex;flex-wrap:wrap;gap:var(--space-md);justify-content:space-between;align-items:center;">
+<div style="font-size:0.8rem;color:var(--text-muted);">
+<p style="margin:0 0 var(--space-xs);"><strong style="color:var(--text-dim);">House motto:</strong> Crypto first. Story second. Extraction never.</p>
+<p style="margin:0;"><strong style="color:var(--text-dim);">Core thesis:</strong> Inward is forwards.</p>
+</div>
+<div style="font-size:0.8rem;color:var(--text-muted);text-align:right;">
+<p style="margin:0 0 var(--space-xs);"><a href="#top">↑ Back to top</a></p>
+<p style="margin:0;"><a href="https://t.me/Eros_Revival" rel="noopener noreferrer" target="_blank">Telegram · t.me/Eros_Revival</a></p>
+</div>
+</div>
+<div style="border-top:1px solid var(--border);margin-top:var(--space-md);padding-top:var(--space-md);font-size:0.75rem;color:var(--text-muted);text-align:center;">
+<p style="margin:0 0 var(--space-xs);">EROS Master Project &amp; Guild Blueprint v2.3 · This is a working production document, not a completed product. The scripts and storyboards are development assets. A written script is not a completed episode. A storyboard is not rendered animation. A proposed asset is not an existing production asset.</p>
+<p style="margin:0;">Every claim in this document carries an epistemic label or a mechanism badge. Fiction, myth, models, hypotheses and observed facts remain distinguishable. If you do not own it, you're not in it.</p>
+</div>
+</div>
+</footer>
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  // ============================================================
+  // THEME TOGGLE
+  // ============================================================
+  var html = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    try { sessionStorage.setItem('eros-theme', theme); } catch (e) {}
+  }
+
+  // Restore saved theme
+  try {
+    var saved = sessionStorage.getItem('eros-theme');
+    if (saved === 'light' || saved === 'dark') {
+      setTheme(saved);
+    }
+  } catch (e) {}
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var current = html.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
+
+  // Respect prefers-color-scheme on first visit (no saved theme)
+  try {
+    if (!sessionStorage.getItem('eros-theme') && window.matchMedia) {
+      var mq = window.matchMedia('(prefers-color-scheme: light)');
+      if (mq.matches) setTheme('light');
+    }
+  } catch (e) {}
+
+  // ============================================================
+  // SIDEBAR TOGGLE
+  // ============================================================
+  var sidebar = document.getElementById('sidebar');
+  var navToggle = document.getElementById('navToggle');
+
+  function toggleSidebar(open) {
+    if (!sidebar) return;
+    var willOpen = open !== undefined ? open : !sidebar.classList.contains('open');
+    sidebar.classList.toggle('open', willOpen);
+    if (navToggle) navToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  }
+
+  if (navToggle) {
+    navToggle.addEventListener('click', function () { toggleSidebar(); });
+  }
+
+  // Close sidebar when a TOC link is clicked (mobile)
+  if (sidebar) {
+    sidebar.addEventListener('click', function (e) {
+      if (e.target.closest('a') && window.innerWidth <= 1100) {
+        toggleSidebar(false);
+      }
+    });
+  }
+
+  // Close sidebar on outside click (mobile)
+  document.addEventListener('click', function (e) {
+    if (window.innerWidth > 1100) return;
+    if (!sidebar || !sidebar.classList.contains('open')) return;
+    if (sidebar.contains(e.target)) return;
+    if (navToggle && navToggle.contains(e.target)) return;
+    toggleSidebar(false);
+  });
+
+  // ============================================================
+  // SEARCH OVERLAY
+  // ============================================================
+  var searchOverlay = document.getElementById('searchOverlay');
+  var searchInput = document.getElementById('searchInput');
+  var searchResults = document.getElementById('searchResults');
+  var searchToggle = document.getElementById('searchToggle');
+  var searchClose = document.getElementById('searchClose');
+
+  // Build a search index from all sections with IDs
+  var searchIndex = [];
+  function buildSearchIndex() {
+    var sections = document.querySelectorAll('section[id], article[id], div[id^="show-"], div[id^="cycle-"], div[id^="door-"]');
+    sections.forEach(function (el) {
+      var id = el.id;
+      if (!id) return;
+      var heading = el.querySelector('h2, h3, h4, .sg-title');
+      var title = heading ? heading.textContent.trim() : id;
+      var text = (el.textContent || '').toLowerCase();
+      searchIndex.push({ id: id, title: title, text: text });
+    });
+  }
+  buildSearchIndex();
+
+  function openSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.add('open');
+    searchOverlay.hidden = false;
+    if (searchToggle) searchToggle.setAttribute('aria-expanded', 'true');
+    setTimeout(function () { if (searchInput) searchInput.focus(); }, 100);
+  }
+
+  function closeSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.remove('open');
+    searchOverlay.hidden = true;
+    if (searchToggle) searchToggle.setAttribute('aria-expanded', 'false');
+    if (searchInput) searchInput.value = '';
+    if (searchResults) searchResults.innerHTML = '';
+  }
+
+  if (searchToggle) searchToggle.addEventListener('click', openSearch);
+  if (searchClose) searchClose.addEventListener('click', closeSearch);
+
+  // Escape closes search and sidebar
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (searchOverlay && searchOverlay.classList.contains('open')) closeSearch();
+      if (sidebar && sidebar.classList.contains('open')) toggleSidebar(false);
+    }
+    // "/" opens search
+    if (e.key === '/' && !searchOverlay.classList.contains('open')) {
+      var tag = (e.target.tagName || '').toLowerCase();
+      if (tag !== 'input' && tag !== 'textarea') {
+        e.preventDefault();
+        openSearch();
+      }
+    }
+  });
+
+  // Live search
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      var q = this.value.trim().toLowerCase();
+      if (!searchResults) return;
+      if (q.length < 2) {
+        searchResults.innerHTML = '';
+        return;
+      }
+      var matches = searchIndex.filter(function (item) {
+        return item.title.toLowerCase().indexOf(q) !== -1 || item.text.indexOf(q) !== -1;
+      }).slice(0, 20);
+
+      if (matches.length === 0) {
+        searchResults.innerHTML = '<div class="search-empty">No matches. Try a different word.</div>';
+        return;
+      }
+
+      var html = matches.map(function (m) {
+        // Snippet: first 120 chars around the match
+        var idx = m.text.indexOf(q);
+        var snippet = '';
+        if (idx !== -1) {
+          var start = Math.max(0, idx - 40);
+          var end = Math.min(m.text.length, idx + q.length + 80);
+          snippet = '…' + m.text.substring(start, end).replace(/\s+/g, ' ').trim() + '…';
+        } else {
+          snippet = m.text.substring(0, 120).replace(/\s+/g, ' ').trim() + '…';
+        }
+        return '<a class="search-result" href="#' + m.id + '" data-search-link>' +
+               '<strong>' + m.title + '</strong>' +
+               '<small>' + snippet + '</small>' +
+               '</a>';
+      }).join('');
+
+      searchResults.innerHTML = html;
+    });
+
+    // Click a result closes search
+    searchResults.addEventListener('click', function (e) {
+      if (e.target.closest('[data-search-link]')) closeSearch();
+    });
+  }
+
+  // ============================================================
+  // DOOR PILLS , now simple anchors; no opacity filter
+  // (kept for compatibility; pills scroll via href)
+
+// ============================================================
+  // TOC ACTIVE STATE ON SCROLL
+  // ============================================================
+  var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+  var tocMap = {};
+  tocLinks.forEach(function (link) {
+    var id = link.getAttribute('href').slice(1);
+    if (id) tocMap[id] = link;
+  });
+
+  var sectionIds = Object.keys(tocMap);
+  var sectionEls = sectionIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+
+  function updateTocActive() {
+    if (sectionEls.length === 0) return;
+    var scrollPos = window.scrollY + 120; // offset for topbar
+    var current = null;
+    for (var i = 0; i < sectionEls.length; i++) {
+      var el = sectionEls[i];
+      if (el.offsetTop <= scrollPos) {
+        current = el.id;
+      } else {
+        break;
+      }
+    }
+    // If near bottom, highlight the last
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100) {
+      current = sectionEls[sectionEls.length - 1].id;
+    }
+    tocLinks.forEach(function (l) { l.classList.remove('active'); });
+    if (current && tocMap[current]) {
+      tocMap[current].classList.add('active');
+    }
+  }
+
+  var tocScrollTimer;
+  window.addEventListener('scroll', function () {
+    if (tocScrollTimer) return;
+    tocScrollTimer = setTimeout(function () {
+      updateTocActive();
+      tocScrollTimer = null;
+    }, 100);
+  }, { passive: true });
+
+  updateTocActive();
+
+  // ============================================================
+  // SMOOTH ANCHOR SCROLL (with topbar offset)
+  // ============================================================
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (href === '#' || href === '#top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    var target = document.getElementById(href.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    var offset = 80;
+    var top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+    // Close sidebar on mobile
+    if (window.innerWidth <= 1100) toggleSidebar(false);
+    // Update URL hash without jumping
+    if (history.pushState) history.pushState(null, '', href);
+  });
+
+  // ============================================================
+  // EXPAND / COLLAPSE ALL DETAILS
+  // ============================================================
+  // Inject controls into the topbar-right area
+  var topbarRight = document.querySelector('.topbar-right');
+  if (topbarRight) {
+    var expandBtn = document.createElement('button');
+    expandBtn.className = 'icon-btn';
+    expandBtn.setAttribute('aria-label', 'Expand all collapsible sections');
+    expandBtn.setAttribute('title', 'Expand all');
+    expandBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>';
+    expandBtn.addEventListener('click', function () {
+      var all = document.querySelectorAll('details');
+      var anyClosed = Array.prototype.some.call(all, function (d) { return !d.open; });
+      all.forEach(function (d) { d.open = anyClosed; });
+      expandBtn.setAttribute('title', anyClosed ? 'Collapse all' : 'Expand all');
+    });
+    topbarRight.insertBefore(expandBtn, topbarRight.firstChild);
+  }
+
+  // ============================================================
+  // READING MODE (strip visual chrome)
+  // ============================================================
+  // Inject reading mode toggle into topbar
+  if (topbarRight) {
+    var readBtn = document.createElement('button');
+    readBtn.className = 'icon-btn';
+    readBtn.setAttribute('aria-label', 'Toggle reading mode');
+    readBtn.setAttribute('title', 'Reading mode');
+    readBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>';
+    readBtn.addEventListener('click', function () {
+      document.body.classList.toggle('reading-mode');
+      var on = document.body.classList.contains('reading-mode');
+      readBtn.style.color = on ? 'var(--gold)' : '';
+      readBtn.setAttribute('title', on ? 'Exit reading mode' : 'Reading mode');
+    });
+    topbarRight.insertBefore(readBtn, topbarRight.firstChild);
+  }
+
+  // ============================================================
+  // KEYBOARD SHORTCUTS
+  // ============================================================
+  // t = theme, / = search, Esc = close
+  document.addEventListener('keydown', function (e) {
+    var tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    if (e.key === 't' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      var current = html.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    }
+  });
+
+  // ============================================================
+  // EASTER EGG: KONAMI for the mouth sting
+  // ============================================================
+  var konami = [38,38,40,40,37,39,37,39,66,65];
+  var konamiIdx = 0;
+  document.addEventListener('keydown', function (e) {
+    if (e.keyCode === konami[konamiIdx]) {
+      konamiIdx++;
+      if (konamiIdx === konami.length) {
+        var sting = document.querySelector('.mouth-sting');
+        if (sting) {
+          sting.style.transition = 'transform 0.3s ease';
+          sting.style.transform = 'scale(1.4)';
+          setTimeout(function () { sting.style.transform = 'scale(1)'; }, 300);
+        }
+        document.body.style.transition = 'filter 0.3s ease';
+        document.body.style.filter = 'brightness(1.2)';
+        setTimeout(function () { document.body.style.filter = ''; }, 400);
+        konamiIdx = 0;
+      }
+    } else {
+      konamiIdx = 0;
+    }
+  });
+
+  // ============================================================
+  // LOG: the system is alive
+  // ============================================================
+  console.log('%cEROS', 'font-family:serif;font-size:24px;font-weight:700;color:#e8c547;letter-spacing:0.2em;');
+  console.log('%cMaster Project & Guild Blueprint v2.3', 'color:#b8b0a0;font-style:italic;');
+  console.log('%cOne library. Many doors. One Guild.', 'color:#2a9d8f;');
+  console.log('%cInward is forwards. If you do not own it, you\'re not in it.', 'color:#6b4c9a;font-style:italic;');
+
+})();
+</script>
+<!-- ============================================================
+     READING MODE STYLES
+     (Injected as style tag at end so it can override)
+     ============================================================ -->
+<style>
+body.reading-mode .topbar { transform: translateY(-100%); }
+body.reading-mode .sidebar { transform: translateX(-100%); }
+body.reading-mode .main { margin-left: 0; padding-top: 0; }
+body.reading-mode .footer { margin-left: 0; }
+body.reading-mode .hero { min-height: 60vh; }
+body.reading-mode .scroll-hint { display: none; }
+body.reading-mode .section { border-bottom: none; padding: var(--space-xl) 0; }
+body.reading-mode .callout { background: transparent; border-left-width: 2px; }
+body.reading-mode .card { background: transparent; border-color: var(--border); }
+body.reading-mode .container,
+body.reading-mode .container-wide { max-width: 720px; }
+body.reading-mode .grid { display: block; }
+body.reading-mode .grid > * { margin-bottom: var(--space-lg); }
+body.reading-mode .timeline::before { opacity: 0.2; }
+body.reading-mode .empty-column { grid-template-columns: 1fr; }
+body.reading-mode .empty-column > div:last-child { display: none; }
+/* EROS share block + promo strip */
+.eros-share{--sa:#c6a15b;max-width:960px;margin:1.6rem auto;padding:0 1rem;box-sizing:border-box;color:inherit;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+.eros-share-in{display:grid;gap:1.1rem;padding:1rem;border:1px solid rgba(127,127,127,.4);border:1px solid color-mix(in srgb,var(--sa) 45%,transparent);border-radius:16px;background:rgba(127,127,127,.10)}
+@media(min-width:720px){.eros-share-in{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}}
+.eros-share img{width:100%;height:auto;display:block;border-radius:10px;aspect-ratio:1200/630;object-fit:cover}
+.eros-share .k{margin:0 0 .3rem;font-weight:800;font-size:1.15rem;color:var(--sa)}
+.eros-share .t{margin:0;font-size:1rem;opacity:.92}
+.eros-share .row,.eros-promos .row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.eros-share .b,.eros-promos .b{min-height:44px;padding:.5rem 1rem;border-radius:999px;border:1px solid var(--sa,#c6a15b);background:transparent;color:inherit;font:600 15px/1 system-ui,sans-serif;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center}
+.eros-share .b.p{background:var(--sa);color:#000}
+.eros-share .msg,.eros-promos .msg{min-height:1.3em;margin:.4rem 0 0;font-size:.85rem;opacity:.85}
+.eros-promos{max-width:1100px;margin:2.2rem auto;padding:0 1rem;box-sizing:border-box;color:inherit;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.eros-promos h2{font-size:1.35rem;margin:0 0 .3rem}
+.eros-promos .sub{margin:0 0 .9rem;opacity:.85;font-size:.95rem}
+.eros-promos .g{display:grid;gap:.8rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:760px){.eros-promos .g{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}
+.eros-promos .c{border:1px solid rgba(127,127,127,.35);border-radius:12px;overflow:hidden;background:rgba(127,127,127,.08);display:flex;flex-direction:column}
+.eros-promos .c a{color:inherit;text-decoration:none;display:block}
+.eros-promos .c img{width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;display:block}
+.eros-promos .c span{display:block;padding:.5rem .7rem .2rem;font-weight:600;font-size:.95rem}
+.eros-promos .c .b{margin:.3rem .7rem .7rem;min-height:40px;font-size:14px;align-self:flex-start}
+@media print{.eros-share,.eros-promos{display:none!important}}
+.eros-lib{margin-top:3rem;padding:2rem 0 3rem;border-top:1px solid var(--border,rgba(127,127,127,.35));font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:.95rem;line-height:1.5}
+.eros-lib .in{max-width:1100px;margin:0 auto;padding:0 1rem}
+.eros-lib .lib-title{font-weight:800;font-size:1.1rem;margin:0 0 1rem}
+.eros-lib .lib-grid{display:grid;gap:1.4rem 2rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.eros-lib .lib-h{font-weight:700;margin:0 0 .5rem;color:var(--gold,inherit)}
+.eros-lib ul{list-style:none;margin:0;padding:0}.eros-lib li{margin:.3rem 0}
+.eros-lib a{color:inherit;text-underline-offset:3px}
+@media print{.eros-lib{display:none}}
+</style>
+<script>
+
+  // ============================================================
+  // ORIENTATION LAYER (progress, scroll-spy, TOC filter, prev/next)
+  // ============================================================
+  (function () {
+    var progressBar  = document.querySelector('.progress-bar');
+    var backToTop    = document.getElementById('backToTop');
+    var currentTitle = document.getElementById('topbarCurrentTitle');
+    var tocFilter    = document.getElementById('tocFilter');
+    var tocLinks     = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+    var targets      = tocLinks
+      .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+      .filter(Boolean);
+
+    // ---- Scroll-spy via IntersectionObserver ----
+    var activeId = null;
+    function setActive(id) {
+      if (id === activeId) return;
+      activeId = id;
+      tocLinks.forEach(function (a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+      var link = tocLinks.find(function (a) { return a.getAttribute('href') === '#' + id; });
+      if (link) {
+        // open parent details
+        var d = link.closest('details');
+        while (d) {
+          d.open = true;
+          d = d.parentElement ? d.parentElement.closest('details') : null;
+        }
+        if (currentTitle) currentTitle.textContent = link.textContent.trim();
+      }
+    }
+
+    if ('IntersectionObserver' in window && targets.length) {
+      var spy = new IntersectionObserver(function (entries) {
+        var visible = entries.filter(function (e) { return e.isIntersecting; });
+        if (visible.length) {
+          // deepest / last intersecting
+          setActive(visible[visible.length - 1].target.id);
+        }
+      }, { rootMargin: '-25% 0px -55% 0px', threshold: 0 });
+      targets.forEach(function (t) { spy.observe(t); });
+    }
+
+    // ---- Progress bar + back-to-top ----
+    function onScroll() {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      if (progressBar) progressBar.style.width = pct + '%';
+      if (backToTop) backToTop.classList.toggle('show', h.scrollTop > 800);
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    if (backToTop) {
+      backToTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // ---- TOC filter ----
+    if (tocFilter) {
+      tocFilter.addEventListener('input', function (e) {
+        var q = e.target.value.trim().toLowerCase();
+        document.querySelectorAll('.toc-part').forEach(function (part) {
+          var anyMatch = false;
+          part.querySelectorAll('li').forEach(function (li) {
+            var match = !q || li.textContent.toLowerCase().indexOf(q) !== -1;
+            li.style.display = match ? '' : 'none';
+            if (match) anyMatch = true;
+          });
+          part.style.display = anyMatch ? '' : 'none';
+          if (q && anyMatch) part.open = true;
+        });
+      });
+    }
+
+    // ---- Auto prev/next at end of major sections ----
+    // Only attach to top-level section[id] elements that appear in the TOC
+    tocLinks.forEach(function (a, i) {
+      var href = a.getAttribute('href');
+      if (!href || href === '#top') return;
+      var target = document.querySelector(href);
+      if (!target || target.tagName.toLowerCase() !== 'section') return;
+      // Avoid double-injection
+      if (target.querySelector('.section-nav')) return;
+
+      var prev = null, next = null;
+      for (var j = i - 1; j >= 0; j--) {
+        var p = document.querySelector(tocLinks[j].getAttribute('href'));
+        if (p && p.tagName.toLowerCase() === 'section') { prev = tocLinks[j]; break; }
+      }
+      for (var k = i + 1; k < tocLinks.length; k++) {
+        var n = document.querySelector(tocLinks[k].getAttribute('href'));
+        if (n && n.tagName.toLowerCase() === 'section') { next = tocLinks[k]; break; }
+      }
+      if (!prev && !next) return;
+
+      var nav = document.createElement('nav');
+      nav.className = 'section-nav';
+      nav.setAttribute('aria-label', 'Section navigation');
+      var prevHtml = prev
+        ? '<a class="section-nav-prev" href="' + prev.getAttribute('href') + '"><span class="section-nav-label">← Previous</span><span class="section-nav-title">' + prev.textContent.trim() + '</span></a>'
+        : '<span></span>';
+      var nextHtml = next
+        ? '<a class="section-nav-next" href="' + next.getAttribute('href') + '"><span class="section-nav-label">Next →</span><span class="section-nav-title">' + next.textContent.trim() + '</span></a>'
+        : '<span></span>';
+      nav.innerHTML = prevHtml + nextHtml;
+      target.appendChild(nav);
+    });
+  })();
+
+</script>
+<button aria-label="Back to top" class="back-to-top" id="backToTop">
+<svg aria-hidden="true" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20">
+<polyline points="18 15 12 9 6 15"></polyline>
+</svg>
+</button>
+<script>(function(){function init(){var figs=[].slice.call(document.querySelectorAll('.thr-fig'));var strip=document.getElementById('cg-strip');if(!strip)return;if(!figs.length){var sec=document.getElementById('concept-gallery');if(sec)sec.style.display='none';return}
+document.getElementById('cg-count').textContent=figs.length;
+figs.forEach(function(f,i){var im=f.querySelector('img');if(!im)return;var b=document.createElement('button');b.type='button';b.setAttribute('role','listitem');b.setAttribute('aria-label','Open concept image '+(i+1));var t=document.createElement('img');t.src=im.src;t.alt=im.alt||'';var n=document.createElement('span');n.textContent=i+1;b.appendChild(t);b.appendChild(n);
+b.onclick=function(){var d=f.closest('details');while(d){d.open=true;d=d.parentElement&&d.parentElement.closest('details')}
+f.scrollIntoView({behavior:'smooth',block:'center'});f.classList.add('cg-hit');setTimeout(function(){f.classList.remove('cg-hit')},2500)};strip.appendChild(b)})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script>
+<div aria-label="The EROS library" class="eros-lib" role="navigation"><div class="in"><p class="lib-title">The EROS library</p><div class="lib-grid">
+<div><p class="lib-h">Entry</p><ul><li><a href="https://eros-062cf.pages.dev/The_Eros_Corpus_v2.html">How the Corpus Works</a></li><li><a href="https://eros-062cf.pages.dev/The_Open_Call_v2.html">The Open Call</a></li><li><a href="https://eros-062cf.pages.dev/The_Flywheel_v2.html">The Flywheel</a></li><li><a href="https://eros-062cf.pages.dev/The_Garden_of_Eros_v2.html">The Garden of Eros</a></li><li><a href="https://eros-062cf.pages.dev/Eros_3D_Universe_v2.html">The Living Universe</a></li></ul></div>
+<div><p class="lib-h">Science</p><ul><li><a href="https://eros-062cf.pages.dev/The_Conscious_Eros_v2.html">The Conscious Eros</a></li><li><a href="https://eros-062cf.pages.dev/Living_Egg_v2.html">The Living Egg</a></li><li><a href="https://eros-062cf.pages.dev/The_Eros_Enclosure_v2.html">The Eros Enclosure</a></li><li><a href="https://eros-062cf.pages.dev/The_Iteration_Codex_v2.html">The Iteration Codex</a></li></ul></div>
+<div><p class="lib-h">System</p><ul><li><a href="https://eros-062cf.pages.dev/TheErosPlan_v2.html">The Eros Plan</a></li><li><a href="https://eros-062cf.pages.dev/The_Bridge_v2.html">The Bridge</a></li><li><a href="https://eros-062cf.pages.dev/The_Platinum_Standard_v2.html">The Platinum Standard</a></li><li><a href="https://eros-062cf.pages.dev/The_Hopeful_Future_v2.html">The Hopeful Future</a></li></ul></div>
+<div><p class="lib-h">Guides</p><ul><li><a href="https://eros-062cf.pages.dev/Architecture_of_Participation_v2.html">Architecture of Participation</a></li><li><a href="https://eros-062cf.pages.dev/EROS_Liquidity_Tree_v2.html">The Liquidity Tree</a></li><li><a href="https://eros-062cf.pages.dev/WeAreWithYouEros_v2.html">We Are With You</a></li><li><a href="https://eros-062cf.pages.dev/The_TitanX_Redemption_v2.html">The TitanX Redemption</a></li><li><a href="https://eros-062cf.pages.dev/The_ErosVerse_v2.html">The ErosVerse</a></li></ul></div>
+<div><p class="lib-h">World</p><ul><li><a href="https://eros-062cf.pages.dev/Gods_Of_Eros_v2.html">Gods of Eros</a></li><li><a href="https://eros-062cf.pages.dev/Gift_Of_Thoth_v2.html">Gift of Thoth</a></li><li><a href="https://eros-062cf.pages.dev/Illumination_Strategy_v2.html">Illumination Strategy</a></li><li><a href="https://eros-062cf.pages.dev/Men_Of_Renown_v2.html">Men of Renown</a></li><li><a href="https://eros-062cf.pages.dev/The_Front_Door_v2.html">The Front Door</a></li></ul></div>
+<div><p class="lib-h">Story</p><ul><li><a href="https://eros-062cf.pages.dev/EROS_Newcomer_Dossier_v2.html">Newcomer Dossier</a></li><li><a href="https://eros-062cf.pages.dev/Eros_Narrative_v2.html">Eros Narrative</a></li><li><a href="https://eros-062cf.pages.dev/The_First_Resonance_v2.html">The First Resonance</a></li><li><a href="https://eros-062cf.pages.dev/Eros_Stories_v2.html">Eros Stories</a></li><li><a href="https://eros-062cf.pages.dev/The_Continuity_File_v2.html">The Continuity File</a></li></ul></div>
+<div><p class="lib-h">Tools</p><ul><li><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></li><li><a href="https://eros-062cf.pages.dev/media_v2.html">Media Index</a></li><li><a href="https://erosrevival.win/" rel="noopener" target="_blank">Staking · erosrevival.win</a></li><li><a href="https://dexscreener.com/pulsechain/0xF416bE3434Edc01aD704B86f32cb8d0FBF22d1f2" rel="noopener" target="_blank">Chart · DexScreener</a></li><li><a href="https://x.com/ErosPulseChain" rel="noopener" target="_blank">X · @ErosPulseChain</a></li><li><a href="https://youtube.com/@eros_burn_baby_burn_062cf" rel="noopener" target="_blank">YouTube ▶</a></li><li><a href="https://notebooklm.link.google/67J7szcyZuaT" rel="noopener" target="_blank">NotebookLM 📚</a></li><li><a href="https://t.me/Eros_Revival" rel="noopener" target="_blank">Telegram 🖇️</a></li></ul></div>
+</div></div>
+<script>
+(function(){
+function note(el,t){var m=el.closest('.eros-share,.eros-promos'),s=m&&m.querySelector('.msg');if(s){s.textContent=t;setTimeout(function(){s.textContent=''},2500)}}
+function fb(t,el){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy');note(el,'Link copied')}catch(e){note(el,t)}document.body.removeChild(a)}
+function copy(t,el){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){note(el,'Link copied')},function(){fb(t,el)})}else fb(t,el)}
+document.addEventListener('click',function(e){var c=e.target.closest('[data-copy]');if(c){e.preventDefault();copy(c.getAttribute('data-copy'),c);return}
+var s=e.target.closest('[data-share]');if(s&&navigator.share){e.preventDefault();navigator.share({title:s.getAttribute('data-title'),text:s.getAttribute('data-text'),url:s.getAttribute('data-url')}).catch(function(){})}});
+if(!navigator.share)document.querySelectorAll('[data-share]').forEach(function(b){b.hidden=true});
+})();
+</script>
+</div><script id="eros-masters-js">(function(){document.querySelectorAll(".eros-vid[data-yt]").forEach(function(f){var a=f.querySelector(".eros-vid-btn");if(!a)return;a.addEventListener("click",function(e){e.preventDefault();var t=(f.querySelector("figcaption strong")||{}).textContent||"EROS video";var i=document.createElement("iframe");i.src="https://www.youtube-nocookie.com/embed/"+f.dataset.yt+"?autoplay=1&rel=0&playsinline=1";i.title=t;i.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";i.allowFullscreen=true;i.setAttribute("referrerpolicy","strict-origin-when-cross-origin");a.replaceWith(i);i.focus();});});})();</script>
+</body>
+</html>
