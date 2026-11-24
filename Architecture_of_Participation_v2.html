@@ -898,9 +898,22 @@ html{scrollbar-color:rgba(198,161,91,.5) transparent}
 ::-webkit-scrollbar-thumb{background:rgba(198,161,91,.45);border-radius:8px}
 ::-webkit-scrollbar-track{background:transparent}
 @media print{.eros-id-strip{display:none}}
+
+#progressBar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#8a6d2f,#c6a15b,#ecd9a8);z-index:9999;transition:width .08s linear}
+
+/* reader-experience: next-book pointer */
+.eros-next{max-width:680px;margin:2rem auto;padding:1.05rem 1.25rem;border:1px solid rgba(198,161,91,.38);border-radius:12px;background:rgba(198,161,91,.06);text-align:center}
+.eros-next .nx-k{display:block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#c6a15b;margin-bottom:.4rem}
+.eros-next .nx-link{display:inline-flex;align-items:center;gap:.45rem;font-size:1.12rem;color:inherit;text-decoration:none;border-bottom:1px solid rgba(198,161,91,.45)}
+.eros-next .nx-link:hover,.eros-next .nx-link:focus-visible{color:#c6a15b;border-color:#c6a15b}
+.eros-next .nx-link svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.eros-next .nx-alt{display:block;font-size:.8rem;opacity:.75;margin-top:.5rem}
+.eros-next .nx-alt a{color:inherit}
 </style>
 </head>
 <body>
+<div aria-hidden="true" id="progressBar"></div>
+
 <header class="eros-id-strip"><span class="id-mark"><img src="https://meaning-unconfounded.github.io/images/Eros_pink2.jpg" alt="" width="26" height="26"/></span><span class="id-series">EROS &#183; Ghost Edition</span><span class="id-sep" aria-hidden="true"></span><span class="id-book">The Architecture of Participation</span><a class="id-library" href="https://eros-062cf.pages.dev/The_Eros_Corpus_v2.html">Library</a></header>
 
 <header>
@@ -1187,7 +1200,13 @@ html{scrollbar-color:rgba(198,161,91,.5) transparent}
 </p>
 </div>
 </aside>
-<!-- EROS-STRUCTURE:KITCHEN-END -->
+<!-- EROS-STRUCTURE:<!-- EROS-STRUCTURE:NEXT-BOOK-START -->
+<div class="eros-next">
+<span class="nx-k">Where next?</span>
+<a class="nx-link" href="https://eros-062cf.pages.dev/The_Eros_Corpus_v2.html">Back to the library<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+</div>
+<!-- EROS-STRUCTURE:NEXT-BOOK-END -->
+KITCHEN-END -->
 <a class="eros-version-switch low" href="https://meaning-unconfounded.github.io/Architecture_of_Participation.html" aria-label="Go to full archive"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg><span>Go to full archive</span></a>
 <footer>
 <div class="wrap">
@@ -1813,5 +1832,20 @@ if(!navigator.share)document.querySelectorAll('[data-share]').forEach(function(b
 <div><p class="lib-h">Tools</p><ul><li><a href="https://meaning-unconfounded.github.io/SpaceEros.html">SpaceEros</a></li><li><a href="https://eros-062cf.pages.dev/media_v2.html">Media Index</a></li><li><a href="https://erosrevival.win/" rel="noopener" target="_blank">Staking · erosrevival.win</a></li><li><a href="https://dexscreener.com/pulsechain/0xF416bE3434Edc01aD704B86f32cb8d0FBF22d1f2" rel="noopener" target="_blank">Chart · DexScreener</a></li><li><a href="https://x.com/ErosPulseChain" rel="noopener" target="_blank">X · @ErosPulseChain</a></li><li><a href="https://youtube.com/@eros_burn_baby_burn_062cf" rel="noopener" target="_blank">YouTube ▶</a></li><li><a href="https://notebooklm.link.google/67J7szcyZuaT" rel="noopener" target="_blank">NotebookLM 📚</a></li><li><a href="https://t.me/Eros_Revival" rel="noopener" target="_blank">Telegram 🖇️</a></li></ul></div>
 </div></div>
 </div><script id="eros-masters-js">(function(){document.querySelectorAll(".eros-vid[data-yt]").forEach(function(f){var a=f.querySelector(".eros-vid-btn");if(!a)return;a.addEventListener("click",function(e){e.preventDefault();var t=(f.querySelector("figcaption strong")||{}).textContent||"EROS video";var i=document.createElement("iframe");i.src="https://www.youtube-nocookie.com/embed/"+f.dataset.yt+"?autoplay=1&rel=0&playsinline=1";i.title=t;i.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";i.allowFullscreen=true;i.setAttribute("referrerpolicy","strict-origin-when-cross-origin");a.replaceWith(i);i.focus();});});})();</script>
+
+<script>
+(function(){
+"use strict";
+var bar = document.getElementById('progressBar');
+function onScrollProgress(){
+  var h = document.documentElement;
+  var max = h.scrollHeight - h.clientHeight;
+  var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  if(bar) bar.style.width = pct + '%';
+}
+window.addEventListener('scroll', onScrollProgress, {passive:true});
+onScrollProgress();
+})();
+</script>
 </body>
 </html>
