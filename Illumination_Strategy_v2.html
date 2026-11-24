@@ -273,8 +273,6 @@ details.doorway .door-body strong{color:var(--steel2);font-weight:700}
 .chapter-nav a.next .cn-kick{color:var(--steel2)}
 @media(max-width:560px){.chapter-nav{flex-direction:column}.chapter-nav a.next{text-align:left}}
 
-.read-time{display:inline-block;vertical-align:middle;font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--hair);border-radius:100px;padding:.16rem .65rem;margin-left:.75rem;white-space:nowrap;background:var(--surface)}
-
 .skip-link{position:fixed;top:-100px;left:1rem;z-index:200;background:var(--steel);color:var(--bg);text-decoration:none;font-family:var(--sans);font-size:.85rem;font-weight:600;padding:.6rem 1.1rem;border-radius:0 0 12px 12px;transition:top .2s ease;border-bottom:none}
 .skip-link:focus{top:0;border-bottom:none;color:var(--bg)}
 
@@ -1177,6 +1175,81 @@ pre,code{max-width:100%;overflow-x:auto}
 @media(max-width:640px){.eros-masters-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.eros-vid-btn img{transition:none}}
 </style>
+<style id="eros-ghost-pass">
+/* === EROS GHOST PASS A — inflow films, compact share, polish === */
+.eros-vid-inflow{max-width:36rem;margin:2.8rem auto;padding:0 var(--eros-page-pad,1.25rem);box-sizing:border-box}
+.eros-vid-inflow .eros-vid-btn{border-radius:10px}
+.eros-vid-inflow .eros-vid figcaption strong{font-size:.98rem}
+.eros-vid-inflow .eros-vid figcaption span{font-size:.86rem}
+/* Compact share strip: replaces the oversized 1200x630 card */
+.eros-share.ghost-compact{max-width:680px;margin:1.6rem auto}
+.eros-share.ghost-compact .eros-share-in{grid-template-columns:1fr!important;gap:.15rem;padding:1rem 1.1rem}
+.eros-share.ghost-compact .k{font-size:1rem;margin:0}
+.eros-share.ghost-compact .t{font-size:.88rem;margin:.15rem 0 .1rem}
+.eros-share.ghost-compact .row{margin-top:.55rem}
+.eros-share.ghost-compact .row .b{min-height:0;padding:.42rem .78rem;font-size:.83rem}
+/* Consistent card geometry across the library */
+section{scroll-margin-top:5.5rem}
+.section,.eros-room-inner{box-sizing:border-box}
+figure[style*="border"],.card,.panel{border-radius:var(--radius-box,12px)}
+@media print{.eros-vid-inflow{display:none}}
+</style>
+<!-- EROS-GHOST-PASS-A applied: videos in flow, compact share, menus trimmed -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&amp;display=swap"/>
+<style id="eros-ghost-c">
+/* === EROS GHOST PASS C - the gilt layer === */
+:root{--sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+/* -- Gilt titles -- */
+h1.eros-gilt,#hero-title.eros-gilt{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif!important;font-weight:700!important;color:var(--gold,#c6a15b)!important}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+h1.eros-gilt,#hero-title.eros-gilt{
+background-image:linear-gradient(115deg,rgba(255,246,220,0) 41%,rgba(255,246,220,.55) 50%,rgba(255,246,220,0) 59%),linear-gradient(180deg,var(--gold2,#ecd9a8),var(--gold,#c6a15b) 58%,var(--crimson,#a35648))!important;
+background-size:220% 100%,100% 100%!important;
+background-position:130% 0,0 0!important;
+background-repeat:no-repeat!important;
+-webkit-background-clip:text!important;background-clip:text!important;
+-webkit-text-fill-color:transparent!important;color:transparent!important;
+animation:eros-gilt-sweep 7.5s ease-in-out infinite!important;
+}}
+@keyframes eros-gilt-sweep{0%,55%{background-position:130% 0,0 0}85%,100%{background-position:-30% 0,0 0}}
+@media (prefers-reduced-motion:reduce){h1.eros-gilt,#hero-title.eros-gilt{animation:none!important}}
+/* -- Gallery frames (corner ticks) -- */
+figure.eros-frame{
+border:1px solid var(--gold-line,rgba(198,161,91,.32));
+border-radius:var(--radius-box,10px);
+padding:.45rem;
+background-image:
+linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b)),linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b)),
+linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b)),linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b)),
+linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b)),linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b)),
+linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b)),linear-gradient(var(--gold,#c6a15b),var(--gold,#c6a15b));
+background-repeat:no-repeat;
+background-size:16px 2px,2px 16px,16px 2px,2px 16px,16px 2px,2px 16px,16px 2px,2px 16px;
+background-position:left top,left top,right top,right top,left bottom,left bottom,right bottom,right bottom;
+transition:border-color .3s ease,box-shadow .3s ease;
+}
+figure.eros-frame:hover{border-color:var(--gold,#c6a15b);box-shadow:0 10px 30px -16px var(--gold-glow,rgba(198,161,91,.4))}
+@media (prefers-reduced-motion:reduce){figure.eros-frame{transition:none}}
+/* -- Identity strip (books without corpus-bar) -- */
+.eros-id-strip{display:flex;align-items:center;gap:.75rem;padding:.5rem 1.15rem;border-bottom:1px solid var(--gold-line,rgba(198,161,91,.32));font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;background:var(--bg,#141311);background:color-mix(in srgb,var(--bg,#141311) 92%,transparent)}
+.eros-id-strip .id-mark img{display:block;width:26px;height:26px;border-radius:6px}
+.eros-id-strip .id-series{color:var(--gold,#c6a15b);font-weight:600;white-space:nowrap}
+.eros-id-strip .id-sep{width:1px;height:14px;background:var(--gold-line,rgba(198,161,91,.32));flex:none}
+.eros-id-strip .id-book{color:var(--ink,#f0ebe0);opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eros-id-strip .id-library{margin-left:auto;color:var(--gold,#c6a15b);text-decoration:none;border:1px solid var(--gold-line,rgba(198,161,91,.32));border-radius:999px;padding:.3rem .75rem;white-space:nowrap;transition:border-color .3s ease}
+.eros-id-strip .id-library:hover{border-color:var(--gold,#c6a15b)}
+/* -- Library chip (books with corpus-bar) -- */
+a.eros-liblink{font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold,#c6a15b);text-decoration:none;border:1px solid var(--gold-line,rgba(198,161,91,.32));border-radius:999px;padding:.32rem .8rem;white-space:nowrap;transition:border-color .3s ease}
+a.eros-liblink:hover{border-color:var(--gold,#c6a15b)}
+/* -- Micro-polish -- */
+::selection{background:rgba(198,161,91,.32)}
+:focus-visible{outline:2px solid var(--gold,#c6a15b);outline-offset:2px}
+html{scrollbar-color:rgba(198,161,91,.5) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:rgba(198,161,91,.45);border-radius:8px}
+::-webkit-scrollbar-track{background:transparent}
+@media print{.eros-id-strip{display:none}}
+</style>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -1191,7 +1264,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <div class="title-cluster">
 <span aria-hidden="true" class="title-rule"></span>
 <span class="brand-text">Illumination Strategy · v2</span>
-</div>
+<a class="eros-liblink" href="https://eros-062cf.pages.dev/The_Eros_Corpus_v2.html" title="The EROS Corpus - main library">Library</a></div>
 </div>
 </header>
 <div aria-label="Layer legend" class="layer-key-bar" role="note">
@@ -1254,9 +1327,9 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 </section>
 <!-- EROS-STRUCTURE:CINEMA-HERO-END -->
-<div class="eros-share" style="--sa:#7da3c8">
+<div class="eros-share ghost-compact" style="--sa:#7da3c8">
 <div class="eros-share-in">
-<img alt="Illumination Strategy · v2 share card" decoding="async" height="630" loading="lazy" src="https://eros-062cf.pages.dev/images/share/Illumination_Strategy_v2.jpg" width="1200"/>
+
 <div>
 <p class="k">Share this book</p>
 <p class="t">Footprints over hype. Pass it on with the link below. · v2</p>
@@ -1276,7 +1349,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <a class="eros-version-switch top" href="https://meaning-unconfounded.github.io/Illumination_Strategy.html" aria-label="Extensive version"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg><span>Extensive version</span></a>
 <header class="cover">
 <p class="kick">The EROS Universe · Operational Companion</p>
-<h1 role="presentation">EROS ILLUMINATION STRATEGY</h1>
+<h1 class="eros-gilt" role="presentation">EROS ILLUMINATION STRATEGY</h1>
 <p class="sub">Power · Money · Energy · Perimeter · AI · Military</p>
 <div class="rule"></div>
 <p style="margin:1rem 0 1.2rem"><img alt="Illumination Strategy" data-sized="" decoding="async" height="784" loading="lazy" onerror="(this.closest('p')||this).style.display='none'" src="https://meaning-unconfounded.github.io/images/eros-illumination-banner.jpg" style="max-width:100%;border-radius:12px;border:1px solid rgba(125,163,200,.25)" width="1168"/></p>
@@ -1306,7 +1379,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <p><strong>Sources and layers.</strong> Public executive orders carry dates and numbers. Continuity doctrine is cited by manual. The EO chain in Book II is drawn from named public instruments on the Federal Register. Field notes from Dar Johnson (RattleTrap1776.com, retired Army) are identified as his claims unless independently sourced. The source trail and layer tags let readers distinguish the record from interpretation and the operational hypotheses built upon it.</p>
 <p><strong>Who this is for / what this is not.</strong> For holders, builders, and readers who want the human continuity rail stated cleanly. It is <strong>not</strong> the breakaway Archive (Nordic residual, under-ice lore). That is <a href="https://eros-062cf.pages.dev/Men_Of_Renown_v2.html">Men of Renown</a>, hinge only. It is <strong>not</strong> the four operators as theology. That is <a href="https://eros-062cf.pages.dev/Gods_Of_Eros_v2.html">Gods of Eros</a>. It is <strong>not</strong> the Egg cosmology. That is <a href="https://eros-062cf.pages.dev/Living_Egg_v2.html">Living Egg</a>. Token surface: <a href="https://eros-062cf.pages.dev/The_Bridge_v2.html">The Bridge</a>. Door to the ecosystem: <a href="https://eros-062cf.pages.dev/The_Front_Door_v2.html">The Front Door</a>. This volume is only the human macro footprints.</p>
 </div>
-<figure class="illum-fig">
+<figure class="illum-fig eros-frame">
 <img alt="Footprints over confession: power, money, energy, perimeter, AI, military" data-sized="" height="784" loading="lazy" onerror="(this.closest('figure')||this).style.display='none'" src="https://meaning-unconfounded.github.io/images/eros-illumination-footprints.jpg" width="1168"/>
 <div class="cap">Footprints over confession · the strategic stack</div>
 </figure>
@@ -1341,7 +1414,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <span class="eros-room-marker-sub">The ledger, the repricing, the architecture, the continuity apparatus</span>
 </div>
 <section>
-<h2>Prologue · The Operating System Beneath the Interface <span class="read-time">≈ 4 min</span></h2>
+<h2>Prologue · The Operating System Beneath the Interface</h2>
 <p class="oracle">The visible government is not the primary decision-making architecture. Beneath the elections, the Congress, and the media spectacle lies a continuity structure rooted in military intelligence, unconventional warfare doctrine, and Continuity of Government planning.</p>
 
 
@@ -1356,7 +1429,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <section id="bookI">
 
 </section>
-<figure class="illum-fig">
+<figure class="illum-fig eros-frame">
 <img alt="The Ledger spine: 1913, 1971, 2008, Reprice" data-sized="" height="1168" loading="lazy" onerror="(this.closest('figure')||this).style.display='none'" src="https://meaning-unconfounded.github.io/images/eros-illumination-ledger.jpg" width="784"/>
 <figcaption class="cap">Book I · The master ledger · Four seals on one spine</figcaption>
 </figure>
@@ -1364,7 +1437,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <p><strong>Method.</strong> Read the instruments, not only the explanations. Follow the money, authority, personnel, facilities and technical capability. A missing press conference does not erase a documented footprint; neither does silence prove a hypothesis. The news is often the set. The continuous strategic process is the script. <em>What if</em> belongs in Layer 3 until a footprint moves it. Structure over sideshow.</p>
 </div>
 <section>
-<h2>1913 · The Financial Foundation <span class="read-time">≈ 2 min</span></h2>
+<h2>1913 · The Financial Foundation</h2>
 <p>The Sixteenth Amendment (federal income tax) and the Federal Reserve Act arrived within months of each other. Together they gave the federal government an unprecedented capacity to tax, spend, borrow, and regulate. World War I followed almost immediately. The new machinery was stress-tested and expanded.<span class="tag-chip layer1">Layer 1</span></p>
 
 <div class="footprint">
@@ -1375,7 +1448,7 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 </section>
 <section>
-<h2>1947 · The National Security State <span class="read-time">≈ 2 min</span></h2>
+<h2>1947 · The National Security State</h2>
 <p>The National Security Act of 1947 created the National Security Council, the Central Intelligence Agency, and the framework of a permanent peacetime intelligence and command architecture. The Department of Defense consolidated military authority. The United States did not demobilize the strategic mind of World War II; it institutionalized it.<span class="tag-chip layer1">Layer 1</span></p>
 
 <div class="footprint">
@@ -1386,7 +1459,7 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 </section>
 <section id="tagalongs">
-<h2>1962 · The Tagalongs <span class="read-time">≈ 4 min</span></h2>
+<h2>1962 · The Tagalongs</h2>
 <p>In September 1962, in the lead-up to the Cuban Missile Crisis, the United States conducted the Atlas 8F missile test from Cape Canaveral. A dummy re-entry vehicle was filmed by a specialized KC-135 aircraft. As the RV descended at Mach 18, an object materialized alongside it, paced it for ninety seconds, then phased out of existence. The Pentagon's own UAP office (AARO) has since deemed the footage a real UAP and placed it in the National Archives. The post-flight test report states that the object's origin or identification could not be determined.<span class="tag-chip layer1">Layer 1</span></p>
 
 
@@ -1402,7 +1475,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <div class="pull">The instruments of state are not only financial. They are also material. Both grew through the same decades, both preserved essential functions, and both waited in silence for the disclosure tempo to change.</div>
 </section>
 <section>
-<h2>1971 · The Monetary Break <span class="read-time">≈ 2 min</span></h2>
+<h2>1971 · The Monetary Break</h2>
 <p>In August 1971 the United States suspended dollar convertibility into gold for foreign official holders. The Bretton Woods gold window closed. The global monetary system shifted onto pure fiat and managed exchange.<span class="tag-chip layer1">Layer 1</span></p>
 
 <div class="footprint">
@@ -1413,7 +1486,7 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 </section>
 <section>
-<h2>2008 · Financial Continuity of Government <span class="read-time">≈ 2 min</span></h2>
+<h2>2008 · Financial Continuity of Government</h2>
 <p>The global financial crisis produced emergency facilities, bailouts, and a standing expectation that the central bank and Treasury would backstop the core of the system. Balance sheets of major authorities expanded. "Too big to fail" moved from insult to operating doctrine.<span class="tag-chip layer1">Layer 1</span></p>
 
 <div class="footprint">
@@ -1424,23 +1497,23 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 </section>
 <section>
-<h2>2011-2013 · The Platinum Coin Loophole <span class="read-time">≈ 1 min</span></h2>
+<h2>2011-2013 · The Platinum Coin Loophole</h2>
 <p>During the debt-ceiling standoffs of 2011 and 2013, a proposed workaround surfaced: the Treasury could mint a $1 trillion platinum coin, deposit it at the Federal Reserve, and spend the balance, sidestepping the debt ceiling entirely.<span class="tag-chip layer1">Layer 1</span></p>
 
 <div class="pull">The joke and the loophole are the same idea: <strong>reprice the ledger, don't pay the debt.</strong> What was fringe in 2013 is public policy language in 2026.</div>
 </section>
 <section>
-<h2>2022 · Basel III and the Quiet Restoration <span class="read-time">≈ 1 min</span></h2>
+<h2>2022 · Basel III and the Quiet Restoration</h2>
 <p>Allocated gold reclassified as Tier 1 bank capital: the top of the balance-sheet hierarchy, beside cash and sovereign debt.<span class="tag-chip layer1">Layer 1</span></p>
 
 </section>
 <section>
-<h2>2022-Now · The Official Gold Bid <span class="read-time">≈ 1 min</span></h2>
+<h2>2022-Now · The Official Gold Bid</h2>
 <p>Central banks have been accumulating gold at a record pace, the largest official bid in generations, while the public is sold the "pet rock" era story. Formal gold reserves are climbing at the official sector's slow, deliberate cadence, and the private commentary cycle keeps calling the metal irrelevant. The two layers are not the same ledger.<span class="tag-chip layer1">Layer 1</span></p>
 <div class="pull">The official sector votes with its balance sheet. Ratios first, explanations later.</div>
 </section>
 <section>
-<h2>The Reprice <span class="read-time">≈ 2 min</span></h2>
+<h2>The Reprice</h2>
 <div class="reprice-box">
 <span class="rb-label">Definition · one word for a family of moves</span>
 <p><strong>The Reprice</strong> is this book's term for a recurring sovereign manoeuvre: <em>collect the metal, revalue the ledger, never pay the debt</em>. It is not a tax, not a haircut, not a default. It is a change to the measuring stick itself, the unit in which debt is denominated, executed by the sovereign that issues the unit.</p>
@@ -1457,7 +1530,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Gold Trigger <span class="read-time">≈ 3 min</span></h2>
+<h2>The Gold Trigger</h2>
 <p>The U.S. Treasury still carries its gold reserves (~261.5 million troy ounces) on the books at the statutory price of <strong>$42.2222 per fine troy ounce</strong>, a number fixed in 1973. At market prices the same metal is worth more than a trillion dollars. The book value remains approximately $11 billion.<span class="tag-chip layer1">Layer 1</span></p>
 
 
@@ -1465,7 +1538,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Goldsmiths' Fraud · The Origin Point <span class="read-time">≈ 3 min</span></h2>
+<h2>The Goldsmiths' Fraud · The Origin Point</h2>
 <p class="lede">The platinum coin loophole, the $35 trillion crypto joke, the gold revaluation: these are not new inventions. They are modern expressions of a pattern that begins with the goldsmiths of seventeenth-century London.<span class="tag-chip layer2">Layer 2</span></p>
 
 <div class="footprint">
@@ -1479,7 +1552,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Tax-and-Bond Architecture <span class="read-time">≈ 2 min</span></h2>
+<h2>The Tax-and-Bond Architecture</h2>
 <p>A related structural question, one of the signature anomalies of the entire architecture: <strong>if the Federal Reserve can create (print) the money, why do they need taxes?</strong><span class="tag-chip layer2">Layer 2</span></p>
 
 
@@ -1489,7 +1562,7 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 </section>
 <section>
-<h2>The Empirical Proof · What the Banks Admitted <span class="read-time">≈ 4 min</span></h2>
+<h2>The Empirical Proof · What the Banks Admitted</h2>
 <p>For most of the twentieth century, three theories of banking competed for the mantle of truth. Only one of them described what actually happens.<span class="tag-chip layer1">Layer 1</span></p>
 
 
@@ -1510,7 +1583,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Wall Street Paradox <span class="read-time">≈ 3 min</span></h2>
+<h2>The Wall Street Paradox</h2>
 <p>Despite enormous political conflict, anti-establishment rhetoric, and monetary uncertainty, Wall Street remains strong and equities continue rising.<span class="tag-chip layer1">Layer 1</span></p>
 
 <div class="pull">The market can reach all-time highs while the underlying purchasing power of the currency is debased. Political chaos keeps investors fearful and under-positioned, allowing asset concentration to continue until the reset is triggered.</div>
@@ -1522,8 +1595,13 @@ pre,code{max-width:100%;overflow-x:auto}
 
 
 </section>
+
+<!-- EROS-GHOST:VID-25 -->
+<aside aria-label="EROS master film" class="eros-vid-inflow">
+<figure class="eros-vid eros-frame" data-yt="5vyXO3Kwyzc"><a class="eros-vid-btn" href="https://youtu.be/5vyXO3Kwyzc" target="_blank" rel="noopener" aria-label="Play video: The Entire EROS Story — Every Film in One Epic Video"><img src="https://i.ytimg.com/vi/5vyXO3Kwyzc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>The Entire EROS Story — Every Film in One Epic Video</strong><span>The NotebookLM collection: the whole story, bridge, bond and PulseChain, in one film.</span></figcaption></figure>
+</aside>
 <section>
-<h2>2025-2026 · Quantum.gov and America.gov · The Digital Layer <span class="read-time">≈ 3 min</span></h2>
+<h2>2025-2026 · Quantum.gov and America.gov · The Digital Layer</h2>
 <p class="lede">Two government digital-front-door programs matter more than any single executive order in this window. Both are Layer 1 documented. Both are the surface of the strategic stack's coordination layer.</p>
 
 
@@ -1544,7 +1622,7 @@ pre,code{max-width:100%;overflow-x:auto}
   The 33/33/33 transform, the market-cap equivalence bots, the Genesis phase, and the path to omnichain (the mechanism that turns the store rail into a live flow rail) is drawn in full at <a href="https://eros-062cf.pages.dev/The_Platinum_Standard_v2.html">The Platinum Standard</a>. This book ends at the money ledger; that one picks up at the instrument.
 </div>
 <section id="method-demo">
-<h2>Method Demonstrated · Worked Examples <span class="read-time">≈ 5 min</span></h2>
+<h2>Method Demonstrated · Worked Examples</h2>
 <p class="lede">Tools only work when you see them used. Three short runs: method, layers, falsification.</p>
 <h3>1 · The method on one event (2008)</h3>
 <div class="footprint">
@@ -1568,7 +1646,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Continuity Apparatus <span class="read-time">≈ 4 min</span></h2>
+<h2>The Continuity Apparatus</h2>
 
 <p>Official COG doctrine covers preservation of essential functions under "all hazards." The hypothesis asks: what if those "essential functions" have gradually become the <em>primary</em> functions?<span class="tag-chip layer2">Layer 2</span></p>
 <div class="footprint">
@@ -1590,7 +1668,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <div class="pull">The claim is not "a secret doctrine." The claim is: the doctrine is public, and the operational pattern matches it.</div>
 </section>
 <section>
-<h2>Public Instruments &amp; the 45-47 Window <span class="read-time">≈ 6 min</span></h2>
+<h2>Public Instruments &amp; the 45-47 Window</h2>
 
 <p class="lede">The continuity apparatus is not only hardware. It rides on a stack of public instruments. The operational window has a name in open discourse: <strong>45-47</strong>. The face of the operation is visible; the full depth of military action is not required to be voiced.</p>
 
@@ -1644,7 +1722,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section id="oap">
-<h2>The OAP Program · One Specific Instrument <span class="read-time">≈ 5 min</span></h2>
+<h2>The OAP Program · One Specific Instrument</h2>
 <p class="lede">One documented program shows the shape of the instrument: a classified Pentagon research program, funded through a private contractor, that existed to receive material - not to study the phenomenon.</p>
 
 
@@ -1663,8 +1741,12 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 
 </section>
+<!-- EROS-GHOST:VID-50 -->
+<aside aria-label="EROS master film" class="eros-vid-inflow">
+<figure class="eros-vid eros-frame" data-yt="z4ScJfgvWyE"><a class="eros-vid-btn" href="https://youtu.be/z4ScJfgvWyE" target="_blank" rel="noopener" aria-label="Play video: Explore the EROS Universe — The Shorts"><img src="https://i.ytimg.com/vi/z4ScJfgvWyE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>Explore the EROS Universe — The Shorts</strong><span>Every short in one continuous reel.</span></figcaption></figure>
+</aside>
 <section>
-<h2>The Studio · Multi-Domain Coordination <span class="read-time">≈ 4 min</span></h2>
+<h2>The Studio · Multi-Domain Coordination</h2>
 
 <div class="claim cyan">
 <p><strong>Definition (status of the term).</strong> In this book <em>the Studio</em> is a <strong>named pattern</strong>, not a single building and not a proven org chart. It names the recurring coordination across military intelligence, Treasury/monetary levers, AI infrastructure, and media/psychological operations that appears in the record as synchronized language, personnel crossover, and permanence after crisis. Treat it as Layer 2-3: useful as an analytic frame; not as a claim that a door exists with that word on it.</p>
@@ -1705,14 +1787,14 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 <a class="eros-version-switch mid" href="https://meaning-unconfounded.github.io/Illumination_Strategy.html" aria-label="Read the full book"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg><span>Read the full book</span></a>
 <section>
-<h2>Personnel Convergence · The Recurring Operators <span class="read-time">≈ 3 min</span></h2>
+<h2>Personnel Convergence · The Recurring Operators</h2>
 <p>Count recurrence across domains: the same operators, contractors, doctrine authors, and intermediary firms appearing in supposedly unrelated theaters. Party labels are noise. Continuity of function is signal.<span class="tag-chip layer2">Layer 2</span></p>
 
 <div class="pull">When the credential is the argument, the credential is being laundered.</div>
 </section>
 
 <section>
-<h2>Executive Signal · The Direct Language Chapter <span class="read-time">≈ 7 min</span></h2>
+<h2>Executive Signal · The Direct Language Chapter</h2>
 <p class="lede">Footprints are stronger than confessions. But when a sitting executive says the quiet part in public, the confession itself becomes a footprint. This chapter is where the boundary between covert and open is thinnest.</p>
 
 <h3>The $35 Trillion Crypto Line</h3>
@@ -1779,7 +1861,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Two Treasuries <span class="read-time">≈ 3 min</span></h2>
+<h2>The Two Treasuries</h2>
 <p>Two private balance sheets have grown into strategic reserves. This is where the human macro rail meets the digital-asset rail: corporate treasury strategy, capital markets and crypto accumulation begin to occupy the same field of play.<span class="tag-chip layer1">Layer 1</span></p>
 <div class="claim gold">
 <p><strong>Strategy (formerly MicroStrategy)</strong>, under Michael Saylor, has accumulated approximately <strong>846,000 BTC</strong>, more than 4% of the 21 million supply. The company funds acquisition through equity issuance, convertible debt, and preferred instruments: machinery that treats the asset as the reserve and the corporate vehicle as the wrapper.<span class="tag-chip layer1">Layer 1</span></p>
@@ -1794,7 +1876,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Government-Corporate Convergence <span class="read-time">≈ 3 min</span></h2>
+<h2>The Government-Corporate Convergence</h2>
 <p>In the same window, the U.S. government has moved toward direct participation in strategic private corporations.<span class="tag-chip layer1">Layer 1</span></p>
 <div class="footprint">
 <div class="fp-title">The Equity Portfolio</div>
@@ -1809,7 +1891,7 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 </section>
 <section>
-<h2>Western Hemisphere · The Resource Fortress Doctrine <span class="read-time">≈ 5 min</span></h2>
+<h2>Western Hemisphere · The Resource Fortress Doctrine</h2>
 <p class="lede">The United States is not expanding a global empire in this window. It is contracting into a resource-and-energy fortress that can survive the coming monetary stress and the multipolar realignment. The war rhetoric is the set. The resource acquisition is the script.</p>
 <div class="table-wrap">
 <table class="ref">
@@ -1854,8 +1936,12 @@ pre,code{max-width:100%;overflow-x:auto}
 </div>
 
 </section>
+<!-- EROS-GHOST:VID-75 -->
+<aside aria-label="EROS master film" class="eros-vid-inflow">
+<figure class="eros-vid eros-frame" data-yt="XTHAEsG2-44"><a class="eros-vid-btn" href="https://youtu.be/XTHAEsG2-44" target="_blank" rel="noopener" aria-label="Play video: Welcome to EROS — The Bigger Picture"><img src="https://i.ytimg.com/vi/XTHAEsG2-44/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>Welcome to EROS — The Bigger Picture</strong><span>The long-form masters, all in one film.</span></figcaption></figure>
+</aside>
 <section>
-<h2>The Strategic Stack <span class="read-time">≈ 4 min</span></h2>
+<h2>The Strategic Stack</h2>
 
 <p class="lede">Continuity of government becomes continuity of technology. The stage is larger than any single administration. The studio is already in production.</p>
 
@@ -1885,12 +1971,12 @@ pre,code{max-width:100%;overflow-x:auto}
 <section id="bookIV">
 
 </section>
-<figure class="illum-fig">
+<figure class="illum-fig eros-frame">
 <figcaption class="cap">Book IV · The three branches · The reset maps the arc · Layer 3 until each phase is tested</figcaption>
 </figure>
 
 <section>
-<h2>The Three Capitals <span class="read-time">≈ 2 min</span></h2>
+<h2>The Three Capitals</h2>
 <p>Three historical centers of global authority are simultaneously undergoing restructuring:<span class="tag-chip layer2">Layer 2</span></p>
 <ul>
 <li><strong>The City of London</strong>: Financial and banking power. The old offshore nexus, derivatives clearing, and sovereign debt architecture are being bypassed or absorbed.</li>
@@ -1900,17 +1986,17 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>AI as the Strategic Layer <span class="read-time">≈ 3 min</span></h2>
+<h2>AI as the Strategic Layer</h2>
 
 <p>The public AI systems (chatbots, image generators, large language models) are the lowest tier of the capability stack. The military and intelligence community possess advanced decision-support AI that operates in classified environments, modeling millions of scenario branches across military, economic, political, and informational domains simultaneously.<span class="tag-chip layer2">Layer 2</span></p>
 
 <div class="pull">The result is a governance architecture that appears chaotic on the surface but is statistically coherent underneath. <strong>The chaos is the method. The ambiguity is the strategy.</strong></div>
 <h3>Super Intelligence · Terminology as Policy</h3>
-<p>In September 2026 the executive branch directed use of the term <strong>Super Intelligence (SI)</strong> in place of "Artificial Intelligence" and "AI" in official non-statutory communications. Terminology is not decoration. When the state renames the frontier, it is claiming the stack: science missions, data-center permitting, national SI frameworks, and the cognitive layer treated like energy and territory.<span class="tag-chip layer1">Layer 1</span></p>
+<p>The September 2026 rename — <strong>Super Intelligence (SI)</strong> in place of “AI” — is covered in the Direct Language chapter. The point for strategy: when the state renames the frontier, it is claiming the stack — science missions, data-center permitting, national SI frameworks, the cognitive layer treated like energy and territory.<span class="tag-chip layer1">Layer 1</span></p>
 
 </section>
 <section>
-<h2>PURSUE · The 2026 Disclosure Acceleration <span class="read-time">≈ 3 min</span></h2>
+<h2>PURSUE · The 2026 Disclosure Acceleration</h2>
 <p class="lede">The single most important UAP development in 2026 is not a hearing or a witness. It is an executive directive that made disclosure an operational mandate, not a matter of debate.</p>
 
 
@@ -1921,7 +2007,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Ontological Reset <span class="read-time">≈ 3 min</span></h2>
+<h2>The Ontological Reset</h2>
 <p>UAP has progressed from fringe subject to official government priority. The Pentagon released Navy videos. AARO was established. Congressional hearings were held. David Grusch testified under oath. The terminology has shifted from UFO to UAP to <em>non-human intelligence</em> (NHI). Congress defined NHI as "any sentient intelligent non-human lifeform regardless of nature or ultimate origin."<span class="tag-chip layer1">Layer 1</span></p>
 
 <div class="math">The managed sequence:<br/>1. UFOs exist as unexplained phenomena.<br/>2. Government acknowledges some incidents are genuine.<br/>3. Military and intelligence officials discuss anomalous capabilities.<br/>4. Terminology shifts to "non-human intelligence."<br/>5. Subject moves beyond spacecraft to consciousness, dimensions, and ontology.<br/>6. Humanity is confronted with a broader question about its place in reality.</div>
@@ -1931,7 +2017,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Freedom Paradox <span class="read-time">≈ 3 min</span></h2>
+<h2>The Freedom Paradox</h2>
 <p>The new system will not look like traditional totalitarianism. It will offer:</p>
 <ul>
 <li>More individual freedom</li>
@@ -1955,7 +2041,7 @@ pre,code{max-width:100%;overflow-x:auto}
 
 </section>
 <section>
-<h2>The Four Models <span class="read-time">≈ 2 min</span></h2>
+<h2>The Four Models</h2>
 <div class="table-wrap">
 <table class="ref">
 <thead><tr><th>Model</th><th>Description</th><th>Evidence Level</th></tr></thead>
@@ -1970,7 +2056,7 @@ pre,code{max-width:100%;overflow-x:auto}
 <p><strong>Model D is not a conspiracy in the ordinary sense.</strong> It does not require coordination meetings, hidden councils, or secret oaths. It requires only what already exists: banks with the legal privilege of creating money out of nothing, and a state whose interest is served by taxation paid in that money. The fraud is structural. The permanence is architectural. The bond between the two is the operating principle.</p>
 </section>
 <section id="falsification-4">
-<h2>Falsification Criteria <span class="read-time">≈ 2 min</span></h2>
+<h2>Falsification Criteria</h2>
 <p>A hypothesis that cannot die is not operational. It is theology. This one dies, or weakens, if the footprints fail to appear.</p>
 <ul>
 <li>Federal Reserve independence survives the next debt crisis intact.</li>
@@ -1987,7 +2073,7 @@ pre,code{max-width:100%;overflow-x:auto}
 </ul>
 </section>
 <section>
-<h2>How to Use This Framework <span class="read-time">≈ 2 min</span></h2>
+<h2>How to Use This Framework</h2>
 <p class="lede">Treat the entire construct as a lens and a research program, not a finished map or a belief system.</p>
 <ol>
 <li><strong>Anomaly-first scanning.</strong> When a major event occurs, suspend both the official narrative and the most dramatic alternative. Record the raw physical facts, the immediate institutional responses, who gained durable authority or resources, and whether the same personnel, contractors, or doctrinal language reappear.</li>
@@ -2098,18 +2184,7 @@ table { max-width: 100%; }
 <!-- 🍳 KITCHEN , 3-room structure: conclusions, where this connects, the method -->
 <!-- EROS-STRUCTURE:BODY-END -->
 <!-- single NotebookLM card (consolidated) -->
-<!-- EROS-STRUCTURE:MASTER-VIDEOS-START -->
-<section class="eros-masters" aria-labelledby="eros-masters-h">
-<span class="eros-masters-kicker">▶ Watch</span>
-<h2 id="eros-masters-h">The three masters</h2>
-<p class="eros-masters-lead">The whole EROS story, told three ways. Press play on any of them.</p>
-<div class="eros-masters-grid">
-<figure class="eros-vid" data-yt="5vyXO3Kwyzc"><a class="eros-vid-btn" href="https://youtu.be/5vyXO3Kwyzc" target="_blank" rel="noopener" aria-label="Play video: The NotebookLM Masters"><img src="https://i.ytimg.com/vi/5vyXO3Kwyzc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>The NotebookLM Masters</strong><span>Every NotebookLM video, in one film.</span></figcaption></figure>
-<figure class="eros-vid" data-yt="z4ScJfgvWyE"><a class="eros-vid-btn" href="https://youtu.be/z4ScJfgvWyE" target="_blank" rel="noopener" aria-label="Play video: The Shorts Master"><img src="https://i.ytimg.com/vi/z4ScJfgvWyE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>The Shorts Master</strong><span>Every short, in one continuous reel.</span></figcaption></figure>
-<figure class="eros-vid" data-yt="XTHAEsG2-44"><a class="eros-vid-btn" href="https://youtu.be/XTHAEsG2-44" target="_blank" rel="noopener" aria-label="Play video: The Long Master"><img src="https://i.ytimg.com/vi/XTHAEsG2-44/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" onerror="this.style.display='none'"/><span class="eros-vid-play" aria-hidden="true">▶</span></a><figcaption><strong>The Long Master</strong><span>Every long-form video, in one film.</span></figcaption></figure>
-</div>
-</section>
-<!-- EROS-STRUCTURE:MASTER-VIDEOS-END -->
+
 <aside class="public-link">
 <span class="pl-k">🖇️ Public Studio · Live</span>
 <p class="pl-t">Explore this file in NotebookLM 📚</p>
